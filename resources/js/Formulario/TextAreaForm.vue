@@ -1,5 +1,5 @@
 <template>
-    <textarea cols="30" rows="5" class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3" :value="value" ></textarea>
+    <textarea cols="30" rows="5" class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"></textarea>
 </template>
 
 <script>
@@ -8,7 +8,7 @@
 
         methods: {
             focus() {
-                this.$refs.input.focus()
+                this.$refs.textarea.focus()
             }
         }
     }

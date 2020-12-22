@@ -2,7 +2,6 @@
 
 namespace App\Models\Instituciones;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Institucion extends Model

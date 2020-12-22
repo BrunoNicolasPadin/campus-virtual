@@ -1970,30 +1970,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Formulario/TextAreaForm.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Formulario/TextAreaForm.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value'],
-  methods: {
-    focus: function focus() {
-      this.$refs.input.focus();
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Jetstream/ActionMessage.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Jetstream/ActionMessage.vue?vue&type=script&lang=js& ***!
@@ -3527,9 +3503,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Formulario_EstructuraForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Formulario/EstructuraForm.vue */ "./resources/js/Formulario/EstructuraForm.vue");
 /* harmony import */ var _Formulario_LabelForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Formulario/LabelForm.vue */ "./resources/js/Formulario/LabelForm.vue");
 /* harmony import */ var _Formulario_InputForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Formulario/InputForm.vue */ "./resources/js/Formulario/InputForm.vue");
-/* harmony import */ var _Formulario_TextAreaForm_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Formulario/TextAreaForm.vue */ "./resources/js/Formulario/TextAreaForm.vue");
-/* harmony import */ var _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Formulario/Info.vue */ "./resources/js/Formulario/Info.vue");
-/* harmony import */ var _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Botones/Guardar.vue */ "./resources/js/Botones/Guardar.vue");
+/* harmony import */ var _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Formulario/Info.vue */ "./resources/js/Formulario/Info.vue");
+/* harmony import */ var _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Botones/Guardar.vue */ "./resources/js/Botones/Guardar.vue");
 //
 //
 //
@@ -3662,7 +3637,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
 
 
 
@@ -3675,11 +3652,10 @@ __webpack_require__.r(__webpack_exports__);
     EstructuraForm: _Formulario_EstructuraForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     LabelForm: _Formulario_LabelForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     InputForm: _Formulario_InputForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    TextAreaForm: _Formulario_TextAreaForm_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    Info: _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    Guardar: _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    Info: _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Guardar: _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
-  props: ['errors', 'successMessage'],
+  props: ['errors'],
   data: function data() {
     return {
       form: {
@@ -3694,6 +3670,159 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submit: function submit() {
       this.$inertia.post(this.route('instituciones.store'), this.form);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Instituciones/Edit.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Instituciones/Edit.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Formulario_EstructuraForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Formulario/EstructuraForm.vue */ "./resources/js/Formulario/EstructuraForm.vue");
+/* harmony import */ var _Formulario_LabelForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Formulario/LabelForm.vue */ "./resources/js/Formulario/LabelForm.vue");
+/* harmony import */ var _Formulario_InputForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Formulario/InputForm.vue */ "./resources/js/Formulario/InputForm.vue");
+/* harmony import */ var _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Formulario/Info.vue */ "./resources/js/Formulario/Info.vue");
+/* harmony import */ var _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Botones/Guardar.vue */ "./resources/js/Botones/Guardar.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    EstructuraForm: _Formulario_EstructuraForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    LabelForm: _Formulario_LabelForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    InputForm: _Formulario_InputForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Info: _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Guardar: _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  },
+  props: {
+    errors: Object,
+    successMessage: String,
+    institucion: Object
+  },
+  data: function data() {
+    return {
+      form: {
+        numero: this.institucion.numero,
+        fundacion: this.institucion.fundacion,
+        historia: this.institucion.historia
+      }
+    };
+  },
+  methods: {
+    submit: function submit() {
+      this.$inertia.put(this.route('instituciones.update', this.institucion.id), this.form);
     }
   }
 });
@@ -45065,35 +45194,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Formulario/TextAreaForm.vue?vue&type=template&id=4f20ecad&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Formulario/TextAreaForm.vue?vue&type=template&id=4f20ecad& ***!
-  \***************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("textarea", {
-    staticClass:
-      "appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3",
-    attrs: { cols: "30", rows: "5" },
-    domProps: { value: _vm.value }
-  })
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Jetstream/ActionMessage.vue?vue&type=template&id=bcb26626&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Jetstream/ActionMessage.vue?vue&type=template&id=bcb26626& ***!
@@ -48185,6 +48285,402 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
+          _c("estructura-form", {
+            scopedSlots: _vm._u([
+              {
+                key: "formulario",
+                fn: function() {
+                  return [
+                    _c(
+                      "form",
+                      {
+                        attrs: { method: "post" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submit($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "-mx-3 md:flex mb-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "md:w-1/2 px-3 mb-6 md:mb-0" },
+                            [
+                              _c("label-form", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "label-value",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    Numero\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("input-form", {
+                                attrs: { type: "text" },
+                                model: {
+                                  value: _vm.form.numero,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.form, "numero", $$v)
+                                  },
+                                  expression: "form.numero"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("info", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "info",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    No es obligatorio\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "md:w-1/2 px-3" },
+                            [
+                              _c("label-form", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "label-value",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    Fundación\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("input-form", {
+                                attrs: { type: "text" },
+                                model: {
+                                  value: _vm.form.fundacion,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.form, "fundacion", $$v)
+                                  },
+                                  expression: "form.fundacion"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("info", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "info",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    No es obligatorio\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "-mx-3 md:flex mb-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "md:w-full px-3" },
+                            [
+                              _c("label-form", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "label-value",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    Historia\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.historia,
+                                    expression: "form.historia"
+                                  }
+                                ],
+                                staticClass:
+                                  "appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3",
+                                attrs: { cols: "30", rows: "5" },
+                                domProps: { value: _vm.form.historia },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "historia",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("info", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "info",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    No es obligatorio\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "-mx-3 md:flex mb-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "md:w-1/2 px-3 mb-6 md:mb-0" },
+                            [
+                              _c("label-form", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "label-value",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    Clave de acceso\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("input-form", {
+                                attrs: { required: "", type: "password" },
+                                model: {
+                                  value: _vm.form.claveDeAcceso,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.form, "claveDeAcceso", $$v)
+                                  },
+                                  expression: "form.claveDeAcceso"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("info", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "info",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    Es obligatorio y debe tener entre 8 y 32 caracteres. Es la clave que deberan ingresar los alumnos, docentes, padres y directivos para poder anotarse en tu instituto.\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "md:w-1/2 px-3" },
+                            [
+                              _c("label-form", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "label-value",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    Confirmar clave de acceso\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("input-form", {
+                                attrs: { required: "", type: "password" },
+                                model: {
+                                  value: _vm.form.claveDeAcceso_confirmation,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.form,
+                                      "claveDeAcceso_confirmation",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "form.claveDeAcceso_confirmation"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("info", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "info",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    Vuelva a ingresar la clave de acceso.\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("guardar")
+                      ],
+                      1
+                    )
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Instituciones/Edit.vue?vue&type=template&id=ec6db86a&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Instituciones/Edit.vue?vue&type=template&id=ec6db86a& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [_vm._v("\n            Editar institución\n        ")]
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "py-12" },
+        [
+          Object.keys(_vm.errors).length > 0
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "bg-red-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center container mx-auto w-full"
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "text-red-600 w-5 h-5 sm:w-5 sm:h-5 mr-3",
+                      attrs: { viewBox: "0 0 24 24" }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          fill: "currentColor",
+                          d:
+                            "M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-red-800" }, [
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.errors[Object.keys(_vm.errors)[0]][0]) +
+                        " "
+                    )
+                  ])
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
           _vm.successMessage
             ? _c(
                 "div",
@@ -48358,13 +48854,30 @@ var render = function() {
                                 ])
                               }),
                               _vm._v(" "),
-                              _c("text-area-form", {
-                                model: {
-                                  value: _vm.form.historia,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.form, "historia", $$v)
-                                  },
-                                  expression: "form.historia"
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.historia,
+                                    expression: "form.historia"
+                                  }
+                                ],
+                                staticClass:
+                                  "appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3",
+                                attrs: { cols: "30", rows: "5" },
+                                domProps: { value: _vm.form.historia },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "historia",
+                                      $event.target.value
+                                    )
+                                  }
                                 }
                               }),
                               _vm._v(" "),
@@ -48376,112 +48889,6 @@ var render = function() {
                                       return [
                                         _vm._v(
                                           "\n                                    No es obligatorio\n                                "
-                                        )
-                                      ]
-                                    },
-                                    proxy: true
-                                  }
-                                ])
-                              })
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "-mx-3 md:flex mb-6" }, [
-                          _c(
-                            "div",
-                            { staticClass: "md:w-1/2 px-3 mb-6 md:mb-0" },
-                            [
-                              _c("label-form", {
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "label-value",
-                                    fn: function() {
-                                      return [
-                                        _vm._v(
-                                          "\n                                    Clave de acceso\n                                "
-                                        )
-                                      ]
-                                    },
-                                    proxy: true
-                                  }
-                                ])
-                              }),
-                              _vm._v(" "),
-                              _c("input-form", {
-                                attrs: { required: "", type: "password" },
-                                model: {
-                                  value: _vm.form.claveDeAcceso,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.form, "claveDeAcceso", $$v)
-                                  },
-                                  expression: "form.claveDeAcceso"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("info", {
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "info",
-                                    fn: function() {
-                                      return [
-                                        _vm._v(
-                                          "\n                                    Es obligatorio y debe tener entre 8 y 32 caracteres. Es la clave que deberan ingresar los alumnos, docentes, padres y directivos para poder anotarse en tu instituto.\n                                "
-                                        )
-                                      ]
-                                    },
-                                    proxy: true
-                                  }
-                                ])
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "md:w-1/2 px-3" },
-                            [
-                              _c("label-form", {
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "label-value",
-                                    fn: function() {
-                                      return [
-                                        _vm._v(
-                                          "\n                                    Confirmar clave de acceso\n                                "
-                                        )
-                                      ]
-                                    },
-                                    proxy: true
-                                  }
-                                ])
-                              }),
-                              _vm._v(" "),
-                              _c("input-form", {
-                                attrs: { required: "", type: "password" },
-                                model: {
-                                  value: _vm.form.claveDeAcceso_confirmation,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      _vm.form,
-                                      "claveDeAcceso_confirmation",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "form.claveDeAcceso_confirmation"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("info", {
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "info",
-                                    fn: function() {
-                                      return [
-                                        _vm._v(
-                                          "\n                                    Vuelva a ingresar la clave de acceso.\n                                "
                                         )
                                       ]
                                     },
@@ -62462,75 +62869,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Formulario/TextAreaForm.vue":
-/*!**************************************************!*\
-  !*** ./resources/js/Formulario/TextAreaForm.vue ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TextAreaForm_vue_vue_type_template_id_4f20ecad___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextAreaForm.vue?vue&type=template&id=4f20ecad& */ "./resources/js/Formulario/TextAreaForm.vue?vue&type=template&id=4f20ecad&");
-/* harmony import */ var _TextAreaForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TextAreaForm.vue?vue&type=script&lang=js& */ "./resources/js/Formulario/TextAreaForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _TextAreaForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TextAreaForm_vue_vue_type_template_id_4f20ecad___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TextAreaForm_vue_vue_type_template_id_4f20ecad___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Formulario/TextAreaForm.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Formulario/TextAreaForm.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/Formulario/TextAreaForm.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TextAreaForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TextAreaForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Formulario/TextAreaForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TextAreaForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/Formulario/TextAreaForm.vue?vue&type=template&id=4f20ecad&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/Formulario/TextAreaForm.vue?vue&type=template&id=4f20ecad& ***!
-  \*********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextAreaForm_vue_vue_type_template_id_4f20ecad___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TextAreaForm.vue?vue&type=template&id=4f20ecad& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Formulario/TextAreaForm.vue?vue&type=template&id=4f20ecad&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextAreaForm_vue_vue_type_template_id_4f20ecad___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextAreaForm_vue_vue_type_template_id_4f20ecad___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/Jetstream/ActionMessage.vue":
 /*!**************************************************!*\
   !*** ./resources/js/Jetstream/ActionMessage.vue ***!
@@ -64070,6 +64408,8 @@ var map = {
 	"./Dashboard.vue": "./resources/js/Pages/Dashboard.vue",
 	"./Instituciones/Create": "./resources/js/Pages/Instituciones/Create.vue",
 	"./Instituciones/Create.vue": "./resources/js/Pages/Instituciones/Create.vue",
+	"./Instituciones/Edit": "./resources/js/Pages/Instituciones/Edit.vue",
+	"./Instituciones/Edit.vue": "./resources/js/Pages/Instituciones/Edit.vue",
 	"./Profile/DeleteUserForm": "./resources/js/Pages/Profile/DeleteUserForm.vue",
 	"./Profile/DeleteUserForm.vue": "./resources/js/Pages/Profile/DeleteUserForm.vue",
 	"./Profile/LogoutOtherBrowserSessionsForm": "./resources/js/Pages/Profile/LogoutOtherBrowserSessionsForm.vue",
@@ -64377,6 +64717,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_5903277d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_5903277d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Instituciones/Edit.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/Pages/Instituciones/Edit.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Edit_vue_vue_type_template_id_ec6db86a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Edit.vue?vue&type=template&id=ec6db86a& */ "./resources/js/Pages/Instituciones/Edit.vue?vue&type=template&id=ec6db86a&");
+/* harmony import */ var _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Edit.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Instituciones/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Edit_vue_vue_type_template_id_ec6db86a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Edit_vue_vue_type_template_id_ec6db86a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Instituciones/Edit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Instituciones/Edit.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/Pages/Instituciones/Edit.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Instituciones/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Instituciones/Edit.vue?vue&type=template&id=ec6db86a&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/Pages/Instituciones/Edit.vue?vue&type=template&id=ec6db86a& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_ec6db86a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=template&id=ec6db86a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Instituciones/Edit.vue?vue&type=template&id=ec6db86a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_ec6db86a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_ec6db86a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

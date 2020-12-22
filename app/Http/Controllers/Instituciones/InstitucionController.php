@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Instituciones;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Instituciones\StoreInstitucion;
+use App\Http\Requests\Instituciones\UpdateInstitucion;
 use App\Models\Instituciones\Institucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,11 @@ use Inertia\Inertia;
 
 class InstitucionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente')->only('edit', 'update', 'destroy');
+    }
     public function index()
     {
         //
@@ -35,23 +41,27 @@ class InstitucionController extends Controller
         return back()->with(['successMessage' => 'Institucion cargada con exito!']);
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
-        //
+        return Inertia::render('Instituciones/Edit', [
+            'institucion' => Institucion::find($id),
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateInstitucion $request, $id)
     {
-        //
+        Institucion::where('id', $id)
+            ->update([
+                'numero' => $request->numero,
+                'fundacion' => $request->fundacion,
+                'historia' => $request->historia,
+            ]);
+        return back()->with(['successMessage' => 'Institucion actualizada con exito!']);
     }
 
     public function destroy($id)
     {
-        //
+        Institucion::destroy($id);
+        return back();
     }
 }
