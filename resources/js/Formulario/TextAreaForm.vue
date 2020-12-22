@@ -1,5 +1,5 @@
 <template>
-    <input class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3" :value="value" @input="$emit('input', $event.target.value)" ref="input">
+    <textarea cols="30" rows="5" class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3" :value="value" ></textarea>
 </template>
 
 <script>
