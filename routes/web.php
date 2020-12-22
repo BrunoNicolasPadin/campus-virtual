@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\Instituciones\InstitucionController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('instituciones', InstitucionController::class);
+Route::prefix('instituciones/{institucion_id}')->group(function () {
+    
+    Route::resource('ciclos-lectivos', CicloLectivoController::class);
+});
