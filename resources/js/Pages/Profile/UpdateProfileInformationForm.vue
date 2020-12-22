@@ -1,11 +1,11 @@
 <template>
     <jet-form-section @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Datos del perfil
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Actualiza tu información.
         </template>
 
         <template #form>
@@ -43,7 +43,7 @@
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Name" />
+                <jet-label for="name" value="Nombre" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
                 <jet-input-error :message="form.error('name')" class="mt-2" />
             </div>
@@ -54,15 +54,68 @@
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
                 <jet-input-error :message="form.error('email')" class="mt-2" />
             </div>
+
+            <!-- Tipo de cuenta -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="tipo" value="Tipo" />
+                <select required v-model="form.tipo" class="form-select mt-1 block w-full">
+                    <option value="">-</option>
+                    <option value="Institución">Institución</option>
+                    <option value="Persona">Persona</option>
+                </select>
+                <jet-input-error :message="form.error('tipo')" class="mt-2" />
+            </div>
+
+            <!-- Pais -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="pais" value="Pais" />
+                <jet-input id="pais" type="text" class="mt-1 block w-full" v-model="form.pais" />
+                <jet-input-error :message="form.error('pais')" class="mt-2" />
+            </div>
+
+            <!-- Provincia -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="provincia" value="Provincia" />
+                <jet-input id="provincia" type="text" class="mt-1 block w-full" v-model="form.provincia" />
+                <jet-input-error :message="form.error('provincia')" class="mt-2" />
+            </div>
+
+            <!-- Ciudad -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="ciudad" value="Ciudad" />
+                <jet-input id="ciudad" type="text" class="mt-1 block w-full" v-model="form.ciudad" />
+                <jet-input-error :message="form.error('ciudad')" class="mt-2" />
+            </div>
+
+            <!-- Direccion -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="direccion" value="Direccion" />
+                <jet-input id="direccion" type="text" class="mt-1 block w-full" v-model="form.direccion" />
+                <jet-input-error :message="form.error('direccion')" class="mt-2" />
+            </div>
+
+            <!-- Celular -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="celular" value="Celular" />
+                <jet-input id="celular" type="text" class="mt-1 block w-full" v-model="form.celular" />
+                <jet-input-error :message="form.error('celular')" class="mt-2" />
+            </div>
+
+            <!-- Telefono -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="telefono" value="Telefono" />
+                <jet-input id="telefono" type="text" class="mt-1 block w-full" v-model="form.telefono" />
+                <jet-input-error :message="form.error('telefono')" class="mt-2" />
+            </div>
         </template>
 
         <template #actions>
             <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Guardado.
             </jet-action-message>
 
             <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Guardar
             </jet-button>
         </template>
     </jet-form-section>
@@ -96,6 +149,13 @@
                     '_method': 'PUT',
                     name: this.user.name,
                     email: this.user.email,
+                    tipo: this.user.tipo,
+                    pais: this.user.pais,
+                    provincia: this.user.provincia,
+                    ciudad: this.user.ciudad,
+                    direccion: this.user.direccion,
+                    celular: this.user.celular,
+                    telefono: this.user.telefono,
                     photo: null,
                 }, {
                     bag: 'updateProfileInformation',

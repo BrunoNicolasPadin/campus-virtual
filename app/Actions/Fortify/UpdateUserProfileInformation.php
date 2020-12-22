@@ -21,7 +21,14 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'tipo' => ['required', 'string', 'max:11'],
             'photo' => ['nullable', 'image', 'max:1024'],
+            'pais' => ['nullable', 'string', 'max:100'],
+            'provincia' => ['nullable', 'string', 'max:100'],
+            'ciudad' => ['nullable', 'string', 'max:100'],
+            'direccion' => ['nullable', 'string', 'max:100'],
+            'celular' => ['nullable', 'string', 'max:100'],
+            'telefono' => ['nullable', 'string', 'max:100'],
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
@@ -35,6 +42,13 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'tipo' => $input['tipo'],
+                'pais' => $input['pais'],
+                'provincia' => $input['provincia'],
+                'ciudad' => $input['ciudad'],
+                'direccion' => $input['direccion'],
+                'celular' => $input['celular'],
+                'telefono' => $input['telefono'],
             ])->save();
         }
     }
@@ -51,6 +65,13 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         $user->forceFill([
             'name' => $input['name'],
             'email' => $input['email'],
+            'tipo' => $input['tipo'],
+            'pais' => $input['pais'],
+            'provincia' => $input['provincia'],
+            'ciudad' => $input['ciudad'],
+            'direccion' => $input['direccion'],
+            'celular' => $input['celular'],
+            'telefono' => $input['telefono'],
             'email_verified_at' => null,
         ])->save();
 

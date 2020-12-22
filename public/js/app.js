@@ -4162,6 +4162,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4186,6 +4239,13 @@ __webpack_require__.r(__webpack_exports__);
         '_method': 'PUT',
         name: this.user.name,
         email: this.user.email,
+        tipo: this.user.tipo,
+        pais: this.user.pais,
+        provincia: this.user.provincia,
+        ciudad: this.user.ciudad,
+        direccion: this.user.direccion,
+        celular: this.user.celular,
+        telefono: this.user.telefono,
         photo: null
       }, {
         bag: 'updateProfileInformation',
@@ -47620,14 +47680,14 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Delete Account\n    ")]
+          return [_vm._v("\n        Eliminar cuenta\n    ")]
         },
         proxy: true
       },
       {
         key: "description",
         fn: function() {
-          return [_vm._v("\n        Permanently delete your account.\n    ")]
+          return [_vm._v("\n        Eliminar tu cuenta permanentemente.\n    ")]
         },
         proxy: true
       },
@@ -47637,7 +47697,7 @@ var render = function() {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
-                "\n            Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.\n        "
+                "\n            Una vez que tu cuenta es eliminada, todos sus datos seran permanentemente eliminados. Antes de eliminar tu cuenta, por favor descargar cualquier Información o datos que deseas retener.\n        "
               )
             ]),
             _vm._v(" "),
@@ -47654,7 +47714,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Delete Account\n            ")]
+                  [_vm._v("\n                Eliminar cuenta\n            ")]
                 )
               ],
               1
@@ -47672,7 +47732,7 @@ var render = function() {
                   key: "title",
                   fn: function() {
                     return [
-                      _vm._v("\n                Delete Account\n            ")
+                      _vm._v("\n                Eliminar cuenta\n            ")
                     ]
                   },
                   proxy: true
@@ -47682,7 +47742,7 @@ var render = function() {
                   fn: function() {
                     return [
                       _vm._v(
-                        "\n                Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.\n\n                "
+                        "\n                Estas seguro de que deseas eliminar tu cuenta? Una vez que tu cuenta es eliminada, todos sus datos seran permanentemente eliminados. Antes de eliminar tu cuenta, por favor descargar cualquier Información o datos que deseas retener. Por favor ingresa tu contraseña para eliminar tu cuenta definitivamente.\n\n                "
                       ),
                       _c(
                         "div",
@@ -47693,7 +47753,7 @@ var render = function() {
                             staticClass: "mt-1 block w-3/4",
                             attrs: {
                               type: "password",
-                              placeholder: "Password"
+                              placeholder: "Contraseña"
                             },
                             nativeOn: {
                               keyup: function($event) {
@@ -47747,7 +47807,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Nevermind\n                "
+                            "\n                    No importa\n                "
                           )
                         ]
                       ),
@@ -47766,7 +47826,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Delete Account\n                "
+                            "\n                    Eliminar cuenta\n                "
                           )
                         ]
                       )
@@ -48188,27 +48248,6 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm.$page.jetstream.canManageTwoFactorAuthentication
-              ? _c(
-                  "div",
-                  [
-                    _c("two-factor-authentication-form", {
-                      staticClass: "mt-10 sm:mt-0"
-                    }),
-                    _vm._v(" "),
-                    _c("jet-section-border")
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c("logout-other-browser-sessions-form", {
-              staticClass: "mt-10 sm:mt-0",
-              attrs: { sessions: _vm.sessions }
-            }),
-            _vm._v(" "),
-            _c("jet-section-border"),
-            _vm._v(" "),
             _c("delete-user-form", { staticClass: "mt-10 sm:mt-0" })
           ],
           1
@@ -48476,7 +48515,7 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Update Password\n    ")]
+          return [_vm._v("\n        Actualiza tu contraseña.\n    ")]
         },
         proxy: true
       },
@@ -48485,7 +48524,7 @@ var render = function() {
         fn: function() {
           return [
             _vm._v(
-              "\n        Ensure your account is using a long, random password to stay secure.\n    "
+              "\n        Asegura tu cuenta utilizando una contraseña segura y fuerte.\n    "
             )
           ]
         },
@@ -48500,7 +48539,7 @@ var render = function() {
               { staticClass: "col-span-6 sm:col-span-4" },
               [
                 _c("jet-label", {
-                  attrs: { for: "current_password", value: "Current Password" }
+                  attrs: { for: "current_password", value: "Contraseña actual" }
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -48533,7 +48572,7 @@ var render = function() {
               { staticClass: "col-span-6 sm:col-span-4" },
               [
                 _c("jet-label", {
-                  attrs: { for: "password", value: "New Password" }
+                  attrs: { for: "password", value: "Contraseña nueva" }
                 }),
                 _vm._v(" "),
                 _c("jet-input", {
@@ -48567,7 +48606,7 @@ var render = function() {
                 _c("jet-label", {
                   attrs: {
                     for: "password_confirmation",
-                    value: "Confirm Password"
+                    value: "Confirma tu nueva contraseña"
                   }
                 }),
                 _vm._v(" "),
@@ -48608,7 +48647,7 @@ var render = function() {
                 staticClass: "mr-3",
                 attrs: { on: _vm.form.recentlySuccessful }
               },
-              [_vm._v("\n            Saved.\n        ")]
+              [_vm._v("\n            Guardado.\n        ")]
             ),
             _vm._v(" "),
             _c(
@@ -48617,7 +48656,7 @@ var render = function() {
                 class: { "opacity-25": _vm.form.processing },
                 attrs: { disabled: _vm.form.processing }
               },
-              [_vm._v("\n            Save\n        ")]
+              [_vm._v("\n            Guardar\n        ")]
             )
           ]
         },
@@ -48654,18 +48693,14 @@ var render = function() {
       {
         key: "title",
         fn: function() {
-          return [_vm._v("\n        Profile Information\n    ")]
+          return [_vm._v("\n        Datos del perfil\n    ")]
         },
         proxy: true
       },
       {
         key: "description",
         fn: function() {
-          return [
-            _vm._v(
-              "\n        Update your account's profile information and email address.\n    "
-            )
-          ]
+          return [_vm._v("\n        Actualiza tu información.\n    ")]
         },
         proxy: true
       },
@@ -48836,6 +48871,230 @@ var render = function() {
                 })
               ],
               1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-span-6 sm:col-span-4" },
+              [
+                _c("jet-label", { attrs: { for: "tipo", value: "Tipo" } }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.tipo,
+                        expression: "form.tipo"
+                      }
+                    ],
+                    staticClass: "form-select mt-1 block w-full",
+                    attrs: { required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.form,
+                          "tipo",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [_vm._v("-")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Institución" } }, [
+                      _vm._v("Institución")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Persona" } }, [
+                      _vm._v("Persona")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("jet-input-error", {
+                  staticClass: "mt-2",
+                  attrs: { message: _vm.form.error("tipo") }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-span-6 sm:col-span-4" },
+              [
+                _c("jet-label", { attrs: { for: "pais", value: "Pais" } }),
+                _vm._v(" "),
+                _c("jet-input", {
+                  staticClass: "mt-1 block w-full",
+                  attrs: { id: "pais", type: "text" },
+                  model: {
+                    value: _vm.form.pais,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "pais", $$v)
+                    },
+                    expression: "form.pais"
+                  }
+                }),
+                _vm._v(" "),
+                _c("jet-input-error", {
+                  staticClass: "mt-2",
+                  attrs: { message: _vm.form.error("pais") }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-span-6 sm:col-span-4" },
+              [
+                _c("jet-label", {
+                  attrs: { for: "provincia", value: "Provincia" }
+                }),
+                _vm._v(" "),
+                _c("jet-input", {
+                  staticClass: "mt-1 block w-full",
+                  attrs: { id: "provincia", type: "text" },
+                  model: {
+                    value: _vm.form.provincia,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "provincia", $$v)
+                    },
+                    expression: "form.provincia"
+                  }
+                }),
+                _vm._v(" "),
+                _c("jet-input-error", {
+                  staticClass: "mt-2",
+                  attrs: { message: _vm.form.error("provincia") }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-span-6 sm:col-span-4" },
+              [
+                _c("jet-label", { attrs: { for: "ciudad", value: "Ciudad" } }),
+                _vm._v(" "),
+                _c("jet-input", {
+                  staticClass: "mt-1 block w-full",
+                  attrs: { id: "ciudad", type: "text" },
+                  model: {
+                    value: _vm.form.ciudad,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "ciudad", $$v)
+                    },
+                    expression: "form.ciudad"
+                  }
+                }),
+                _vm._v(" "),
+                _c("jet-input-error", {
+                  staticClass: "mt-2",
+                  attrs: { message: _vm.form.error("ciudad") }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-span-6 sm:col-span-4" },
+              [
+                _c("jet-label", {
+                  attrs: { for: "direccion", value: "Direccion" }
+                }),
+                _vm._v(" "),
+                _c("jet-input", {
+                  staticClass: "mt-1 block w-full",
+                  attrs: { id: "direccion", type: "text" },
+                  model: {
+                    value: _vm.form.direccion,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "direccion", $$v)
+                    },
+                    expression: "form.direccion"
+                  }
+                }),
+                _vm._v(" "),
+                _c("jet-input-error", {
+                  staticClass: "mt-2",
+                  attrs: { message: _vm.form.error("direccion") }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-span-6 sm:col-span-4" },
+              [
+                _c("jet-label", {
+                  attrs: { for: "celular", value: "Celular" }
+                }),
+                _vm._v(" "),
+                _c("jet-input", {
+                  staticClass: "mt-1 block w-full",
+                  attrs: { id: "celular", type: "text" },
+                  model: {
+                    value: _vm.form.celular,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "celular", $$v)
+                    },
+                    expression: "form.celular"
+                  }
+                }),
+                _vm._v(" "),
+                _c("jet-input-error", {
+                  staticClass: "mt-2",
+                  attrs: { message: _vm.form.error("celular") }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-span-6 sm:col-span-4" },
+              [
+                _c("jet-label", {
+                  attrs: { for: "telefono", value: "Telefono" }
+                }),
+                _vm._v(" "),
+                _c("jet-input", {
+                  staticClass: "mt-1 block w-full",
+                  attrs: { id: "telefono", type: "text" },
+                  model: {
+                    value: _vm.form.telefono,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "telefono", $$v)
+                    },
+                    expression: "form.telefono"
+                  }
+                }),
+                _vm._v(" "),
+                _c("jet-input-error", {
+                  staticClass: "mt-2",
+                  attrs: { message: _vm.form.error("telefono") }
+                })
+              ],
+              1
             )
           ]
         },
@@ -48851,7 +49110,7 @@ var render = function() {
                 staticClass: "mr-3",
                 attrs: { on: _vm.form.recentlySuccessful }
               },
-              [_vm._v("\n            Saved.\n        ")]
+              [_vm._v("\n            Guardado.\n        ")]
             ),
             _vm._v(" "),
             _c(
@@ -48860,7 +49119,7 @@ var render = function() {
                 class: { "opacity-25": _vm.form.processing },
                 attrs: { disabled: _vm.form.processing }
               },
-              [_vm._v("\n            Save\n        ")]
+              [_vm._v("\n            Guardar\n        ")]
             )
           ]
         },
