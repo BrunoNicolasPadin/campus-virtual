@@ -108,9 +108,9 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('ciclos-lectivos.destroy', [cicloLectivo.institucion_id, cicloLectivo.id])">
-                                            <eliminar></eliminar>
-                                        </inertia-link>
+                                        <button @click="destroy(cicloLectivo.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                            Eliminar
+                                        </button>
                                     </template>
                                 </table-data>
                             </tr>
@@ -153,5 +153,13 @@
             institucion_id: String,
             ciclosLectivos: Array,
         },
+
+        methods: {
+            destroy(id) {
+                if (confirm('Estas seguro de que dese eliminar este ciclo lectivo?')) {
+                    this.$inertia.delete(this.route('ciclos-lectivos.destroy', [this.institucion_id, id]))
+                }
+            },
+        }
     }
 </script>

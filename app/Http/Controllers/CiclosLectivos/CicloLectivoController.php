@@ -22,7 +22,9 @@ class CicloLectivoController extends Controller
     {
         return Inertia::render('CiclosLectivos/Index', [
             'institucion_id' => $institucion_id,
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get(),
+            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
+            ->orderBy('comienzo')
+            ->get(),
         ]);
     }
 
@@ -47,16 +49,27 @@ class CicloLectivoController extends Controller
 
     public function edit($institucion_id, $id)
     {
-        //
+        return Inertia::render('CiclosLectivos/Edit', [
+            'institucion_id' => $institucion_id,
+            'cicloLectivo' => CicloLectivo::find($id),
+        ]);
     }
 
     public function update(Request $request, $institucion_id, $id)
     {
-        //
+        CicloLectivo::where('id', $id)
+            ->update([
+                'comienzo' => $this->formatoService->cambiarFormatoParaGuardar($request->comienzo),
+                'final' => $this->formatoService->cambiarFormatoParaGuardar($request->final),
+                'activado' => $request->activado,
+            ]);
+
+        return redirect(route('ciclos-lectivos.index', $institucion_id))->with(['successMessage' => 'Ciclo lectivo actualizado con exito!']);
     }
 
     public function destroy($institucion_id, $id)
     {
-        //
+        CicloLectivo::destroy($id);
+        return redirect(route('ciclos-lectivos.index', $institucion_id))->with(['successMessage' => 'Ciclo lectivo eliminado con exito!']);
     }
 }

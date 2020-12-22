@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Crear ciclo lectivo
+                Editar ciclo lectivo
             </h2>
         </template>
 
@@ -70,6 +70,25 @@
                             </div>
                         </div>
 
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Activado
+                                    </template>
+                                </label-form>
+                                
+                                <input type="checkbox" v-model="form.activado" />
+                                
+                                <info>
+                                    <template #info>
+                                        Antes de activar un ciclo lectivo asegurese de que no tenga activado otro.
+                                    </template>
+                                </info>
+                            </div>
+                        </div>
+
                         <guardar></guardar>
 
                     </form>
@@ -103,20 +122,22 @@
         props: {
             errors: Object,
             institucion_id: String,
+            cicloLectivo: Object,
         },
 
         data() {
             return {
                 form: {
-                    comienzo: null,
-                    final: null,
+                    comienzo: this.cicloLectivo.comienzo,
+                    final: this.cicloLectivo.final,
+                    activado: this.cicloLectivo.activado,
                 },
             }
         },
 
         methods: {
             submit() {
-                this.$inertia.post(this.route('ciclos-lectivos.store', this.institucion_id), this.form)
+                this.$inertia.put(this.route('ciclos-lectivos.update', [this.institucion_id, this.cicloLectivo.id]), this.form)
             },
         },
     }
