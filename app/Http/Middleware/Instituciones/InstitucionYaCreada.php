@@ -7,13 +7,13 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class InstitucionCorrespondiente
+class InstitucionYaCreada
 {
     public function handle(Request $request, Closure $next)
     {
         if (Institucion::where('user_id', Auth::id())
             ->exists()) {
-            return $next($request);
+            abort(403, 'Usted ya esta registrado como institucion.');
         }
     }
 }
