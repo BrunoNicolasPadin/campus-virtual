@@ -69,16 +69,33 @@ class EstructuraController extends Controller
 
     public function edit($institucion_id, $id)
     {
-        //
+        return Inertia::render('Estructuras/Edit', [
+            'institucion_id' => $institucion_id,
+            'niveles' => Nivel::all(),
+            'orientaciones' => Orientacion::all(),
+            'cursos' => Curso::all(),
+            'periodos' => Periodo::all(),
+            'division' => Division::find($id),
+        ]);
     }
 
     public function update(Request $request, $institucion_id, $id)
     {
-        //
+        Division::where('id', $id)
+            ->update([
+                'nivel_id' => $request->nivel_id,
+                'orientacion_id' => $request->orientacion_id,
+                'curso_id' => $request->curso_id,
+                'division' => strtoupper($request->division),
+                'periodo_id' => $request->periodo_id,
+                'claveDeAcceso' => Hash::make($request->claveDeAcceso),
+            ]);
+        return redirect(route('divisiones.index', $institucion_id))->with(['successMessage' => 'Division editada con exito!']); 
     }
 
     public function destroy($institucion_id, $id)
     {
-        //
+        Division::destroy($id);
+        return redirect(route('divisiones.index', $institucion_id))->with(['successMessage' => 'Division eliminada con exito!']); 
     }
 }
