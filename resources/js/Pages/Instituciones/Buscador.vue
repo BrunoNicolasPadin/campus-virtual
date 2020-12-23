@@ -130,7 +130,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('roles.index', user.instituciones)" class="cursor-pointer hover:underline">
+                                        <inertia-link :href="route('roles.anotarse', user.instituciones)" class="cursor-pointer hover:underline">
                                             Anotarme
                                         </inertia-link>
                                     </template>

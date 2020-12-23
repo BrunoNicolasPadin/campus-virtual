@@ -13,4 +13,11 @@ class RolController extends Controller
             'institucion_id' => $institucion_id,
         ]);
     }
+
+    public function anotarse($institucion_id)
+    {
+        return Inertia::render('Roles/Anotarse', [
+            'institucion_id' => $institucion_id,
+        ]);
+    }
 }

@@ -33,6 +33,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     
     Route::resource('ciclos-lectivos', CicloLectivoController::class);
     Route::resource('divisiones', EstructuraController::class);
+    Route::get('anotarse', [RolController::class, 'anotarse'])->name('roles.anotarse');
     Route::resource('roles', RolController::class);
     Route::resource('docentes', DocenteController::class);
 });
