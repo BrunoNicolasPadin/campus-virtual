@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Estructuras;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Estructuras\StoreDivision;
+use App\Http\Requests\Estructuras\UpdateDivision;
 use App\Models\Estructuras\Curso;
 use App\Models\Estructuras\Division;
 use App\Models\Estructuras\Nivel;
@@ -39,7 +41,7 @@ class EstructuraController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id)
+    public function store(StoreDivision $request, $institucion_id)
     {
         $div = strtoupper($request->division);
         $divisiones = explode (",", $div);
@@ -79,7 +81,7 @@ class EstructuraController extends Controller
         ]);
     }
 
-    public function update(Request $request, $institucion_id, $id)
+    public function update(UpdateDivision $request, $institucion_id, $id)
     {
         Division::where('id', $id)
             ->update([
@@ -88,8 +90,15 @@ class EstructuraController extends Controller
                 'curso_id' => $request->curso_id,
                 'division' => strtoupper($request->division),
                 'periodo_id' => $request->periodo_id,
-                'claveDeAcceso' => Hash::make($request->claveDeAcceso),
             ]);
+
+        if (! $request->claveDeAcceso == '') {
+            Division::where('id', $id)
+                ->update([
+                    'claveDeAcceso' => Hash::make($request->claveDeAcceso),
+                ]);
+        }
+        
         return redirect(route('divisiones.index', $institucion_id))->with(['successMessage' => 'Division editada con exito!']); 
     }
 
