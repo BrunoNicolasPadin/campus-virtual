@@ -35,7 +35,7 @@ class InstitucionController extends Controller
             'claveDeAcceso' => Hash::make($request->claveDeAcceso),
         ]);
 
-        return back()->with(['successMessage' => 'Institucion cargada con exito!']);
+        return redirect(route('ciclos-lectivos.index'))->with(['successMessage' => 'Institucion cargada con exito!']);
     }
 
     public function edit($id)

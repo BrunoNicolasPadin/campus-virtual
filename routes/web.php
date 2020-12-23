@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\Estructuras\EstructuraController;
+use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
+Route::get('buscador-de-instituciones', [BuscadorDeInstitucionesController::class, 'buscar'])->name('buscador-de-instituciones');
 Route::resource('instituciones', InstitucionController::class);
 Route::prefix('instituciones/{institucion_id}')->group(function () {
     
