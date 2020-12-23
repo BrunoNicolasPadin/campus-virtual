@@ -3493,12 +3493,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Formulario_EstructuraForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Formulario/EstructuraForm.vue */ "./resources/js/Formulario/EstructuraForm.vue");
 /* harmony import */ var _Formulario_LabelForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Formulario/LabelForm.vue */ "./resources/js/Formulario/LabelForm.vue");
-/* harmony import */ var _Formulario_InputForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Formulario/InputForm.vue */ "./resources/js/Formulario/InputForm.vue");
-/* harmony import */ var _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Formulario/Info.vue */ "./resources/js/Formulario/Info.vue");
-/* harmony import */ var _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Botones/Guardar.vue */ "./resources/js/Botones/Guardar.vue");
-/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/index.esm.js");
-/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue2-datepicker/index.css */ "./node_modules/vue2-datepicker/index.css");
-/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Formulario/Info.vue */ "./resources/js/Formulario/Info.vue");
+/* harmony import */ var _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Botones/Guardar.vue */ "./resources/js/Botones/Guardar.vue");
+/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/index.esm.js");
+/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue2-datepicker/index.css */ "./node_modules/vue2-datepicker/index.css");
+/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_6__);
 //
 //
 //
@@ -3581,7 +3580,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 
@@ -3594,10 +3592,9 @@ __webpack_require__.r(__webpack_exports__);
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     EstructuraForm: _Formulario_EstructuraForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     LabelForm: _Formulario_LabelForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    InputForm: _Formulario_InputForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Info: _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    Guardar: _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    DatePicker: vue2_datepicker__WEBPACK_IMPORTED_MODULE_6__["default"]
+    Info: _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Guardar: _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    DatePicker: vue2_datepicker__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: {
     errors: Object,
@@ -5033,7 +5030,7 @@ __webpack_require__.r(__webpack_exports__);
     TableData: _Tabla_TableData__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: {
-    instituciones: Array
+    usuarios: Array
   },
   data: function data() {
     return {
@@ -6221,6 +6218,237 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         _this2.photoPreview = null;
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Roles/Index.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Roles/Index.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Tabla_EstructuraTabla__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Tabla/EstructuraTabla */ "./resources/js/Tabla/EstructuraTabla.vue");
+/* harmony import */ var _Tabla_TableHeadEstructura__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Tabla/TableHeadEstructura */ "./resources/js/Tabla/TableHeadEstructura.vue");
+/* harmony import */ var _Tabla_TableHead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Tabla/TableHead */ "./resources/js/Tabla/TableHead.vue");
+/* harmony import */ var _Tabla_TableBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Tabla/TableBody */ "./resources/js/Tabla/TableBody.vue");
+/* harmony import */ var _Tabla_TableData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Tabla/TableData */ "./resources/js/Tabla/TableData.vue");
+/* harmony import */ var _Formulario_EstructuraForm_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Formulario/EstructuraForm.vue */ "./resources/js/Formulario/EstructuraForm.vue");
+/* harmony import */ var _Formulario_LabelForm_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Formulario/LabelForm.vue */ "./resources/js/Formulario/LabelForm.vue");
+/* harmony import */ var _Formulario_InputForm_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Formulario/InputForm.vue */ "./resources/js/Formulario/InputForm.vue");
+/* harmony import */ var _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Formulario/Info.vue */ "./resources/js/Formulario/Info.vue");
+/* harmony import */ var _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Botones/Guardar.vue */ "./resources/js/Botones/Guardar.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    EstructuraTabla: _Tabla_EstructuraTabla__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TableHeadEstructura: _Tabla_TableHeadEstructura__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TableHead: _Tabla_TableHead__WEBPACK_IMPORTED_MODULE_3__["default"],
+    TableBody: _Tabla_TableBody__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TableData: _Tabla_TableData__WEBPACK_IMPORTED_MODULE_5__["default"],
+    EstructuraForm: _Formulario_EstructuraForm_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    LabelForm: _Formulario_LabelForm_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    InputForm: _Formulario_InputForm_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    Info: _Formulario_Info_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    Guardar: _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+  },
+  props: {
+    institucion_id: String
+  },
+  data: function data() {
+    return {
+      form: {
+        tipo: false,
+        claveDeAcceso: null
+      }
+    };
+  },
+  methods: {
+    submit: function submit() {
+      if (this.form.tipo == 'Directivo') {
+        alert('Directivo');
+      }
+
+      if (this.form.tipo == 'Docente') {
+        this.$inertia.post(this.route('docentes.store', this.institucion_id), this.form);
+      }
+
+      if (this.form.tipo == 'Alumno') {
+        alert('Alumno');
+      }
+
+      if (this.form.tipo == 'Padre') {
+        alert('Padre');
+      }
     }
   }
 });
@@ -54698,13 +54926,10 @@ var render = function() {
                         {
                           key: "tr",
                           fn: function() {
-                            return _vm._l(_vm.instituciones, function(
-                              institucion,
-                              index
-                            ) {
+                            return _vm._l(_vm.usuarios, function(user, index) {
                               return _c(
                                 "tr",
-                                { key: institucion.id },
+                                { key: user.id },
                                 [
                                   _c("table-data", {
                                     scopedSlots: _vm._u(
@@ -54737,7 +54962,7 @@ var render = function() {
                                             return [
                                               _vm._v(
                                                 "\n                                    " +
-                                                  _vm._s(institucion.name) +
+                                                  _vm._s(user.name) +
                                                   "\n                                "
                                               )
                                             ]
@@ -54779,7 +55004,7 @@ var render = function() {
                                             return [
                                               _vm._v(
                                                 "\n                                    " +
-                                                  _vm._s(institucion.pais) +
+                                                  _vm._s(user.pais) +
                                                   "\n                                "
                                               )
                                             ]
@@ -54801,9 +55026,7 @@ var render = function() {
                                             return [
                                               _vm._v(
                                                 "\n                                    " +
-                                                  _vm._s(
-                                                    institucion.provincia
-                                                  ) +
+                                                  _vm._s(user.provincia) +
                                                   "\n                                "
                                               )
                                             ]
@@ -54825,7 +55048,7 @@ var render = function() {
                                             return [
                                               _vm._v(
                                                 "\n                                    " +
-                                                  _vm._s(institucion.ciudad) +
+                                                  _vm._s(user.ciudad) +
                                                   "\n                                "
                                               )
                                             ]
@@ -54847,9 +55070,7 @@ var render = function() {
                                             return [
                                               _vm._v(
                                                 "\n                                    " +
-                                                  _vm._s(
-                                                    institucion.direccion
-                                                  ) +
+                                                  _vm._s(user.direccion) +
                                                   "\n                                "
                                               )
                                             ]
@@ -54877,7 +55098,7 @@ var render = function() {
                                                   attrs: {
                                                     href: _vm.route(
                                                       "roles.index",
-                                                      _vm.instituciones.id
+                                                      user.instituciones
                                                     )
                                                   }
                                                 },
@@ -57109,6 +57330,546 @@ var render = function() {
       }
     ])
   })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Roles/Index.vue?vue&type=template&id=2d6b9872&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Roles/Index.vue?vue&type=template&id=2d6b9872& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [_vm._v("\n            Roles\n        ")]
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "py-6" },
+        [
+          _c("estructura-tabla", {
+            scopedSlots: _vm._u([
+              {
+                key: "tabla",
+                fn: function() {
+                  return [
+                    _c("table-head-estructura", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "th",
+                          fn: function() {
+                            return [
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                #\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Nombre\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Seleccionar\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("table-body", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "tr",
+                          fn: function() {
+                            return [
+                              _c(
+                                "tr",
+                                [
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              "\n                                    1\n                                "
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              "\n                                    Directivo\n                                "
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.tipo,
+                                                  expression: "form.tipo"
+                                                }
+                                              ],
+                                              attrs: {
+                                                type: "radio",
+                                                value: "Directivo"
+                                              },
+                                              domProps: {
+                                                checked: _vm._q(
+                                                  _vm.form.tipo,
+                                                  "Directivo"
+                                                )
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  return _vm.$set(
+                                                    _vm.form,
+                                                    "tipo",
+                                                    "Directivo"
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "tr",
+                                [
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              "\n                                    2\n                                "
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              "\n                                    Docente\n                                "
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.tipo,
+                                                  expression: "form.tipo"
+                                                }
+                                              ],
+                                              attrs: {
+                                                type: "radio",
+                                                value: "Docente"
+                                              },
+                                              domProps: {
+                                                checked: _vm._q(
+                                                  _vm.form.tipo,
+                                                  "Docente"
+                                                )
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  return _vm.$set(
+                                                    _vm.form,
+                                                    "tipo",
+                                                    "Docente"
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "tr",
+                                [
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              "\n                                    3\n                                "
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              "\n                                    Alumno\n                                "
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.tipo,
+                                                  expression: "form.tipo"
+                                                }
+                                              ],
+                                              attrs: {
+                                                type: "radio",
+                                                value: "Alumno"
+                                              },
+                                              domProps: {
+                                                checked: _vm._q(
+                                                  _vm.form.tipo,
+                                                  "Alumno"
+                                                )
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  return _vm.$set(
+                                                    _vm.form,
+                                                    "tipo",
+                                                    "Alumno"
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "tr",
+                                [
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              "\n                                    4\n                                "
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              "\n                                    Padre, madre o tutor\n                                "
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "td",
+                                        fn: function() {
+                                          return [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.tipo,
+                                                  expression: "form.tipo"
+                                                }
+                                              ],
+                                              attrs: {
+                                                type: "radio",
+                                                value: "Padre"
+                                              },
+                                              domProps: {
+                                                checked: _vm._q(
+                                                  _vm.form.tipo,
+                                                  "Padre"
+                                                )
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  return _vm.$set(
+                                                    _vm.form,
+                                                    "tipo",
+                                                    "Padre"
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    })
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("estructura-form", {
+            scopedSlots: _vm._u([
+              {
+                key: "formulario",
+                fn: function() {
+                  return [
+                    _c(
+                      "form",
+                      {
+                        attrs: { method: "post" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submit($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "-mx-3 md:flex mb-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "md:w-full px-3 mb-6 md:mb-0" },
+                            [
+                              _c("label-form", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "label-value",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    Clave de acceso\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("input-form", {
+                                attrs: { required: "", type: "password" },
+                                model: {
+                                  value: _vm.form.claveDeAcceso,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.form, "claveDeAcceso", $$v)
+                                  },
+                                  expression: "form.claveDeAcceso"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("info", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "info",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                    Ingrese la clave de acceso que el instituto le dio.\n                                "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("guardar")
+                      ],
+                      1
+                    )
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -75367,7 +76128,9 @@ var map = {
 	"./Profile/UpdatePasswordForm": "./resources/js/Pages/Profile/UpdatePasswordForm.vue",
 	"./Profile/UpdatePasswordForm.vue": "./resources/js/Pages/Profile/UpdatePasswordForm.vue",
 	"./Profile/UpdateProfileInformationForm": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
-	"./Profile/UpdateProfileInformationForm.vue": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue"
+	"./Profile/UpdateProfileInformationForm.vue": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
+	"./Roles/Index": "./resources/js/Pages/Roles/Index.vue",
+	"./Roles/Index.vue": "./resources/js/Pages/Roles/Index.vue"
 };
 
 
@@ -76698,6 +77461,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateProfileInformationForm_vue_vue_type_template_id_f38ebb82___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateProfileInformationForm_vue_vue_type_template_id_f38ebb82___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Roles/Index.vue":
+/*!********************************************!*\
+  !*** ./resources/js/Pages/Roles/Index.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Index_vue_vue_type_template_id_2d6b9872___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=2d6b9872& */ "./resources/js/Pages/Roles/Index.vue?vue&type=template&id=2d6b9872&");
+/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Roles/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Index_vue_vue_type_template_id_2d6b9872___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Index_vue_vue_type_template_id_2d6b9872___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Roles/Index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Roles/Index.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/Pages/Roles/Index.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Roles/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Roles/Index.vue?vue&type=template&id=2d6b9872&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/Pages/Roles/Index.vue?vue&type=template&id=2d6b9872& ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_2d6b9872___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=template&id=2d6b9872& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Roles/Index.vue?vue&type=template&id=2d6b9872&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_2d6b9872___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_2d6b9872___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

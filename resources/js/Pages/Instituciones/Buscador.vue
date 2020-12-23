@@ -85,7 +85,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(institucion, index) in instituciones" :key="institucion.id">
+                            <tr v-for="(user, index) in usuarios" :key="user.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -94,7 +94,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ institucion.name }}
+                                        {{ user.name }}
                                     </template>
                                 </table-data>
 
@@ -106,31 +106,31 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ institucion.pais }}
+                                        {{ user.pais }}
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        {{ institucion.provincia }}
+                                        {{ user.provincia }}
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        {{ institucion.ciudad }}
+                                        {{ user.ciudad }}
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        {{ institucion.direccion }}
+                                        {{ user.direccion }}
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('roles.index', instituciones.id)" class="cursor-pointer hover:underline">
+                                        <inertia-link :href="route('roles.index', user.instituciones)" class="cursor-pointer hover:underline">
                                             Anotarme
                                         </inertia-link>
                                     </template>
@@ -165,7 +165,7 @@
         },
 
         props:{ 
-            instituciones: Array,
+            usuarios: Array,
         },
 
         data() {

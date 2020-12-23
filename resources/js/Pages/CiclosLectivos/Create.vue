@@ -84,7 +84,6 @@
     import AppLayout from '@/Layouts/AppLayout'
     import EstructuraForm from '@/Formulario/EstructuraForm.vue'
     import LabelForm from '@/Formulario/LabelForm.vue'
-    import InputForm from '@/Formulario/InputForm.vue'
     import Info from '@/Formulario/Info.vue'
     import Guardar from '@/Botones/Guardar.vue'
     import DatePicker from 'vue2-datepicker'
@@ -95,7 +94,6 @@
             AppLayout,
             EstructuraForm,
             LabelForm,
-            InputForm,
             Info,
             Guardar,
             DatePicker,

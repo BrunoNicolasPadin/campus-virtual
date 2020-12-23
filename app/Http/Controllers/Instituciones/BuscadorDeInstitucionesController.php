@@ -12,7 +12,8 @@ class BuscadorDeInstitucionesController extends Controller
     public function buscar(Request $request)
     {
         return Inertia::render('Instituciones/Buscador', [
-            'instituciones' => User::where('tipo', 'Institucion')
+            'usuarios' => User::where('tipo', 'Institucion')
+                ->with('instituciones')
                 ->when($request->nombre, function($query, $nombre) {
                     $query->where('name', 'LIKE', '%'.$nombre.'%');
                 })

@@ -4,6 +4,8 @@ use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
+use App\Http\Controllers\Roles\DocenteController;
+use App\Http\Controllers\Roles\RolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +33,6 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     
     Route::resource('ciclos-lectivos', CicloLectivoController::class);
     Route::resource('divisiones', EstructuraController::class);
+    Route::resource('roles', RolController::class);
+    Route::resource('docentes', DocenteController::class);
 });
