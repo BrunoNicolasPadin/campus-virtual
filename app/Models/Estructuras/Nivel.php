@@ -8,6 +8,6 @@ class Nivel extends Model
 {
     protected $table = 'niveles';
     protected $fillable = [
-        'nivel',
+        'nombre',
     ];
 }

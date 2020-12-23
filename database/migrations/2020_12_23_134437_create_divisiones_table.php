@@ -20,6 +20,7 @@ class CreateDivisionesTable extends Migration
             $table->foreignId('orientacion_id')->nullable()->constrained('orientaciones')->onDelete('cascade');
             $table->foreignId('curso_id')->constrained('cursos')->onDelete('cascade');
             $table->string('division');
+            $table->foreignId('periodo_id')->constrained('periodos')->onDelete('cascade');
             $table->string('claveDeAcceso');
             $table->timestamps();
         });

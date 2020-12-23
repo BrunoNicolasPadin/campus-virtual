@@ -15,7 +15,7 @@ class OrientacionSeeder extends Seeder
 
         for ($i=0; $i < count($ori); $i++) { 
             Orientacion::create([
-                'orientacion' => $ori[$i],
+                'nombre' => $ori[$i],
             ]);
         }
     }

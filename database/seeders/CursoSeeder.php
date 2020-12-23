@@ -14,7 +14,7 @@ class CursoSeeder extends Seeder
 
         for ($i=0; $i < count($curso); $i++) { 
             Curso::create([
-                'curso' => $curso[$i],
+                'nombre' => $curso[$i],
             ]);
         }
     }

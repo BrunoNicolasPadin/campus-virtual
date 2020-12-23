@@ -10,15 +10,15 @@ class NivelSeeder extends Seeder
     public function run()
     {
         Nivel::create([
-            'nivel' => 'Inicial',
+            'nombre' => 'Inicial',
         ]);
 
         Nivel::create([
-            'nivel' => 'Primaria',
+            'nombre' => 'Primaria',
         ]);
 
         Nivel::create([
-            'nivel' => 'Secundaria',
+            'nombre' => 'Secundaria',
         ]);
     }
 }

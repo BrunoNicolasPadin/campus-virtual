@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             NivelSeeder::class,
             OrientacionSeeder::class,
             CursoSeeder::class,
+            PeriodoSeeder::class,
         ]);
     }
 }

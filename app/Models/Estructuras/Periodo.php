@@ -4,9 +4,9 @@ namespace App\Models\Estructuras;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Orientacion extends Model
+class Periodo extends Model
 {
-    protected $table = 'orientaciones';
+    protected $table = 'periodos';
     protected $fillable = [
         'nombre',
     ];

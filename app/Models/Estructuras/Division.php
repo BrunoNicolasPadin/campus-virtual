@@ -13,6 +13,7 @@ class Division extends Model
         'orientacion_id',
         'curso_id',
         'division',
+        'periodo_id',
         'claveDeAcceso',
     ];
 }

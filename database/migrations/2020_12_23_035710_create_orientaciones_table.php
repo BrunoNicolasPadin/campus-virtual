@@ -15,7 +15,7 @@ class CreateOrientacionesTable extends Migration
     {
         Schema::create('orientaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('orientacion');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
