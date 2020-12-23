@@ -42,7 +42,10 @@ class DocenteController extends Controller
 
     public function show($institucion_id, $id)
     {
-        //
+        return Inertia::render('Docentes/Show', [
+            'institucion_id' => $institucion_id,
+            'docente' => Docente::with('user')->find($id),
+        ]);
     }
 
     public function destroy($institucion_id, $id)
