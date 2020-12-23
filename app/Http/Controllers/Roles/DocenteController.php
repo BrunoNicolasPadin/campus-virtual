@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Docentes\StoreDocente;
 use App\Models\Roles\Docente;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class DocenteController extends Controller
 
     public function __construct(VerificarInstitucion $claveDeAccesoService)
     {
+        $this->middleware('auth');
+        $this->middleware('soloInstitucionDirectivo');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('docenteCorrespondiente')->only('show', 'destroy');
+
         $this->claveDeAccesoService = $claveDeAccesoService;
     }
 
@@ -28,7 +34,7 @@ class DocenteController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id)
+    public function store(StoreDocente $request, $institucion_id)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
             Docente::create([

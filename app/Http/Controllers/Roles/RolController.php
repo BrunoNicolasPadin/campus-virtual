@@ -7,6 +7,13 @@ use Inertia\Inertia;
 
 class RolController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('soloInstitucionDirectivo');
+        $this->middleware('institucionCorrespondiente');
+    }
+
     public function index($institucion_id)
     {
         return Inertia::render('Roles/Index', [
