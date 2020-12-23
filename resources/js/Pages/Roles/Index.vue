@@ -57,6 +57,7 @@
                                 <table-data>
                                     <template #td>
                                         Directivo
+                                        <!-- <inertia-link :href="route('directivos.index', institucion_id)" class="hover:underline">Directivo</inertia-link> -->
                                     </template>
                                 </table-data>
 
@@ -76,7 +77,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        Docente
+                                        <inertia-link :href="route('docentes.index', institucion_id)" class="hover:underline">Docente</inertia-link>
                                     </template>
                                 </table-data>
 
@@ -97,6 +98,7 @@
                                 <table-data>
                                     <template #td>
                                         Alumno
+                                        <!-- <inertia-link :href="route('alumnos.index', institucion_id)" class="hover:underline">Alumno</inertia-link> -->
                                     </template>
                                 </table-data>
 
@@ -117,6 +119,7 @@
                                 <table-data>
                                     <template #td>
                                         Padre, madre o tutor
+                                        <!-- <inertia-link :href="route('padres.index', institucion_id)" class="hover:underline">Padre, madre o tutor</inertia-link> -->
                                     </template>
                                 </table-data>
 
