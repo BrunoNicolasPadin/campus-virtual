@@ -2,7 +2,8 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Armar estructura
+                <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
+                 > Armar estructura
             </h2>
         </template>
 

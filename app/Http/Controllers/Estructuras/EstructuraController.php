@@ -16,7 +16,16 @@ class EstructuraController extends Controller
 {
     public function index($institucion_id)
     {
-        //
+        return Inertia::render('Estructuras/Index', [
+            'institucion_id' => $institucion_id,
+            'divisiones' => Division::where('institucion_id', $institucion_id)
+                ->with(['nivel', 'orientacion', 'curso'])
+                ->orderBy('nivel_id')
+                ->orderBy('orientacion_id')
+                ->orderBy('curso_id')
+                ->orderBy('division')
+                ->get(),
+        ]);
     }
 
     public function create($institucion_id)

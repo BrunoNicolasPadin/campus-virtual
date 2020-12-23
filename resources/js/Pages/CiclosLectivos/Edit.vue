@@ -2,7 +2,8 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Editar ciclo lectivo
+                <inertia-link :href="route('ciclos-lectivos.index', institucion_id)">Ciclos lectivos</inertia-link>
+                 > Editar ciclo lectivo
             </h2>
         </template>
 

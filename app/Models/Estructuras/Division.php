@@ -16,4 +16,19 @@ class Division extends Model
         'periodo_id',
         'claveDeAcceso',
     ];
+
+    public function nivel()
+    {
+        return $this->belongsTo(Nivel::class);
+    }
+
+    public function orientacion()
+    {
+        return $this->belongsTo(Orientacion::class);
+    }
+
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class);
+    }
 }
