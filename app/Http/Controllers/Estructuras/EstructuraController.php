@@ -10,12 +10,18 @@ use App\Models\Estructuras\Division;
 use App\Models\Estructuras\Nivel;
 use App\Models\Estructuras\Orientacion;
 use App\Models\Estructuras\Periodo;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class EstructuraController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
+    }
+
     public function index($institucion_id)
     {
         return Inertia::render('Estructuras/Index', [

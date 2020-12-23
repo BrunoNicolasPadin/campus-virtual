@@ -64,5 +64,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'institucionCorrespondiente' => \App\Http\Middleware\Instituciones\InstitucionCorrespondiente::class,
         'institucionYaCreada' => \App\Http\Middleware\Instituciones\InstitucionYaCreada::class,
+        'divisionCorrespondiente' => \App\Http\Middleware\Estructuras\DivisionCorrespondiente::class,
     ];
 }
