@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models\Asignaturas;
+
+use Illuminate\Database\Eloquent\Model;
+
+class AsignaturaDocente extends Model
+{
+    protected $table = 'asignaturas_docentes';
+    protected $fillable = [
+        'asignatura_id',
+        'docente_id',
+    ];
+}
