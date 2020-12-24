@@ -11,4 +11,9 @@ class AsignaturaDocente extends Model
         'asignatura_id',
         'docente_id',
     ];
+
+    public function docente()
+    {
+        return $this->belongsTo(Docente::class);
+    }
 }

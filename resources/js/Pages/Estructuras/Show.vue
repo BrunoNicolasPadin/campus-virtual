@@ -61,8 +61,7 @@
                             Asignaturas
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <!-- <inertia-link :href="route('asignaturas.index', [institucion_id, division.id])">Ver</inertia-link> -->
-                            Ver
+                            <inertia-link :href="route('asignaturas.index', [institucion_id, division.id])">Ver</inertia-link>
                         </dd>
                     </div>
 
