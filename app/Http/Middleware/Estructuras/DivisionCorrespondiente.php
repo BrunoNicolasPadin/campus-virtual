@@ -23,7 +23,7 @@ class DivisionCorrespondiente
         $link = $this->ruta->obtenerRoute();
         $tipo = Auth::user()->tipo;
 
-        if ($tipo == 'Institucion') {
+        if ($tipo == 'Institución') {
             return $this->verificarInstitucion($next, $request, $link);
         }
 
