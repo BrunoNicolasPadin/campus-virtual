@@ -3,83 +3,42 @@
 namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
+use App\Models\Asignaturas\Asignatura;
+use App\Models\Asignaturas\AsignaturaHorario;
+use App\Models\Estructuras\Division;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AsignaturaHorarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function create($institucion_id, $division_id, $asignatura_id)
     {
-        //
+        $dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+
+        return Inertia::render('Asignaturas/Horarios/Create', [
+            'institucion_id' => $institucion_id,
+            'dias' => $dias,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'asignatura'  => Asignatura::find($asignatura_id),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request, $institucion_id, $division_id, $asignatura_id)
     {
-        //
+        for ($i=0; $i < count($request->diaHorario); $i++) { 
+            AsignaturaHorario::create([
+                'asignatura_id' => $asignatura_id,
+                'dia' => $request->diaHorario[$i]['dia'],
+                'horaDesde' => $request->diaHorario[$i]['horaDesde']['HH'] . ':' . $request->diaHorario[$i]['horaDesde']['mm'] . ':00',
+                'horaHasta' => $request->diaHorario[$i]['horaHasta']['HH'] . ':' . $request->diaHorario[$i]['horaHasta']['mm'] . ':00',
+            ]);
+        }
+        return redirect(route('asignaturas.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Horarios agregados con exito!']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        AsignaturaHorario::destroy($id);
+        return back();
     }
 }

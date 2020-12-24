@@ -17,8 +17,8 @@ class DocenteController extends Controller
     public function __construct(VerificarInstitucion $claveDeAccesoService)
     {
         $this->middleware('auth');
-        $this->middleware('soloInstitucionDirectivo');
-        $this->middleware('institucionCorrespondiente');
+        $this->middleware('soloInstitucionDirectivo')->except('store');
+        $this->middleware('institucionCorrespondiente')->except('store');
         $this->middleware('docenteCorrespondiente')->only('show', 'destroy');
 
         $this->claveDeAccesoService = $claveDeAccesoService;
@@ -43,7 +43,7 @@ class DocenteController extends Controller
             ]);
             return redirect('/dashboard');
         }
-        return redirect(route('roles.index', $institucion_id))->withErrors('Clave de acceso incorrecta.');
+        return redirect(route('roles.anotarse', $institucion_id))->withErrors('Clave de acceso incorrecta.');
     }
 
     public function show($institucion_id, $id)

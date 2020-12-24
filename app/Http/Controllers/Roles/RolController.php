@@ -10,8 +10,8 @@ class RolController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('soloInstitucionDirectivo');
-        $this->middleware('institucionCorrespondiente');
+        $this->middleware('soloInstitucionDirectivo')->only('index');
+        $this->middleware('institucionCorrespondiente')->only('index');
     }
 
     public function index($institucion_id)

@@ -2,6 +2,7 @@
 
 namespace App\Models\Asignaturas;
 
+use App\Models\Roles\Docente;
 use Illuminate\Database\Eloquent\Model;
 
 class AsignaturaDocente extends Model

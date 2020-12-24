@@ -3,83 +3,42 @@
 namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
+use App\Models\Asignaturas\Asignatura;
+use App\Models\Asignaturas\AsignaturaDocente;
+use App\Models\Asignaturas\AsignaturaHorario;
+use App\Models\Estructuras\Division;
+use App\Models\Roles\Docente;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AsignaturaDocenteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function create($institucion_id, $division_id, $asignatura_id)
     {
-        //
+        return Inertia::render('Asignaturas/Docentes/Create', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'asignatura'  => Asignatura::find($asignatura_id),
+            'docentes' => Docente::where('institucion_id', $institucion_id)
+                ->with('user')
+                ->get()
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request, $institucion_id, $division_id, $asignatura_id)
     {
-        //
+        for ($i=0; $i < count($request->docente); $i++) { 
+            AsignaturaDocente::create([
+                'asignatura_id' => $asignatura_id,
+                'docente_id' => $request->docente[$i]['docente_id'],
+            ]);
+        }
+        return redirect(route('asignaturas.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Docente/s agregados con exito!']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        AsignaturaDocente::destroy($id);
+        return back();
     }
 }

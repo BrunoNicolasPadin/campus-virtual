@@ -16,7 +16,6 @@ class CreateAsignaturasTable extends Migration
         Schema::create('asignaturas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('division_id')->constrained('divisiones')->onDelete('cascade');
-            $table->foreignId('docente_id')->constrained('docentes')->onDelete('cascade');
             $table->string('nombre');
             $table->timestamps();
         });

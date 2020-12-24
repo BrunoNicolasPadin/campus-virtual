@@ -17,8 +17,8 @@ class CreateAsignaturasHorariosTable extends Migration
             $table->id();
             $table->foreignId('asignatura_id')->constrained('asignaturas')->onDelete('cascade');
             $table->string('dia');
-            $table->string('horaDesde');
-            $table->string('horaHasta');
+            $table->time('horaDesde');
+            $table->time('horaHasta');
             $table->timestamps();
         });
     }
