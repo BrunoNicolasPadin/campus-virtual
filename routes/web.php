@@ -7,6 +7,7 @@ use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
+use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DocenteController;
 use App\Http\Controllers\Roles\RolController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,8 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::resource('asignaturas-docentes', AsignaturaDocenteController::class);
             Route::resource('asignaturas-horarios', AsignaturaHorarioController::class);
         });
+
+        Route::resource('alumnos', AlumnoController::class);
         
     });
 });
