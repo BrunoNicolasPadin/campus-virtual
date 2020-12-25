@@ -1,0 +1,75 @@
+<template>
+    <app-layout>
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link :href="route('roles.index', institucion_id)">Roles</inertia-link>
+                 > 
+                <inertia-link :href="route('alumnos.index', institucion_id)">Alumnos</inertia-link>
+                 > 
+                {{ alumno.user.name }}
+            </h2>
+        </template>
+
+        <div class="py-12">
+            <estructura-informacion>
+                <template #cabecera-info>
+                    Datos
+                </template>
+
+                <template #dl-contenido>
+                    
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Nombre
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            {{ alumno.user.name }}
+                        </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Division
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <span v-if="alumno.division.orientacion">
+                                <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, alumno.division_id])">
+                                    {{ alumno.division.nivel.nombre }} - 
+                                    {{ alumno.division.orientacion.nombre }} - 
+                                    {{ alumno.division.curso.nombre }} - 
+                                    {{ alumno.division.division }}
+                                </inertia-link>
+                            </span>
+                            <span v-else>
+                                <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, alumno.division_id])">
+                                    {{ alumno.division.nivel.nombre }} - 
+                                    {{ alumno.division.curso.nombre }} - 
+                                    {{ alumno.division.division }}
+                                </inertia-link>
+                            </span>
+                        </dd>
+                    </div>
+
+                </template>
+            </estructura-informacion>
+            
+        </div>
+    </app-layout>
+</template>
+
+<script>
+    import AppLayout from '@/Layouts/AppLayout'
+    import EstructuraInformacion from '@/Datos/EstructuraInformacion.vue'
+
+    export default {
+        components: {
+            AppLayout,
+            EstructuraInformacion,
+        },
+
+        props: {
+            institucion_id: String,
+            alumno: Object,
+        },
+    }
+</script>

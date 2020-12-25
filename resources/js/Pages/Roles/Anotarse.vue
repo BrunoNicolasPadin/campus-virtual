@@ -57,13 +57,12 @@
                                 <table-data>
                                     <template #td>
                                         Directivo
-                                        <!-- <inertia-link :href="route('directivos.index', institucion_id)" class="hover:underline">Directivo</inertia-link> -->
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        <input type="radio" value="Directivo" v-model="form.tipo" />
+                                        <input @change="aparecerClaveDeAcceso()" type="radio" value="Directivo" v-model="form.tipo" />
                                     </template>
                                 </table-data>
                             </tr>
@@ -77,13 +76,13 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('docentes.index', institucion_id)" class="hover:underline">Docente</inertia-link>
+                                        Docente
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        <input type="radio" value="Docente" v-model="form.tipo" />
+                                        <input @change="aparecerClaveDeAcceso()" type="radio" value="Docente" v-model="form.tipo" />
                                     </template>
                                 </table-data>
                             </tr>
@@ -98,13 +97,12 @@
                                 <table-data>
                                     <template #td>
                                         Alumno
-                                        <!-- <inertia-link :href="route('alumnos.index', institucion_id)" class="hover:underline">Alumno</inertia-link> -->
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        <input type="radio" value="Alumno" v-model="form.tipo" />
+                                        <input @change="desaparecerClaveDeAcceso()" type="radio" value="Alumno" v-model="form.tipo" />
                                     </template>
                                 </table-data>
                             </tr>
@@ -119,13 +117,12 @@
                                 <table-data>
                                     <template #td>
                                         Padre, madre o tutor
-                                        <!-- <inertia-link :href="route('padres.index', institucion_id)" class="hover:underline">Padre, madre o tutor</inertia-link> -->
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        <input type="radio" value="Padre" v-model="form.tipo" />
+                                        <input @change="aparecerClaveDeAcceso()" type="radio" value="Padre" v-model="form.tipo" />
                                     </template>
                                 </table-data>
                             </tr>
@@ -134,7 +131,7 @@
                 </template>
             </estructura-tabla>
 
-            <estructura-form>
+            <estructura-form v-if="mostrar">
                 <template #formulario>
                     <form method="post" @submit.prevent="submit">
                         <div class="-mx-3 md:flex mb-6">
@@ -159,6 +156,14 @@
                     </form>
                 </template>
             </estructura-form>
+
+            <estructura-form v-else>
+                <template #formulario>
+                    <button type="button" class="border border-yellow-200 bg-yellow-200 text-black rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-yellow-400 focus:outline-none focus:shadow-outline">
+                        <inertia-link :href="route('alumnos.create', institucion_id)">Registrarse como alumno</inertia-link>
+                    </button>
+                </template>
+            </estructura-form>
         </div>
     </app-layout>
 </template>
@@ -175,6 +180,7 @@
     import InputForm from '@/Formulario/InputForm.vue'
     import Info from '@/Formulario/Info.vue'
     import Guardar from '@/Botones/Guardar.vue'
+    import Primary from '@/Botones/Primary.vue'
 
     export default {
         components: {
@@ -189,6 +195,7 @@
             InputForm,
             Info,
             Guardar,
+            Primary,
         },
 
         props:{ 
@@ -202,10 +209,23 @@
                     tipo: false,
                     claveDeAcceso: null,
                 },
+                mostrar: true,
             }
         },
 
         methods: {
+            desaparecerClaveDeAcceso() {
+                if (this.form.tipo == 'Alumno') {
+                    this.mostrar = false;
+                }
+            },
+
+            aparecerClaveDeAcceso() {
+                if (this.form.tipo != 'Alumno') {
+                    this.mostrar = true;
+                }
+            },
+
             submit() {
                 if (this.form.tipo == 'Directivo') {
                     alert('Directivo');
@@ -214,7 +234,7 @@
                     this.$inertia.post(this.route('docentes.store', this.institucion_id), this.form)
                 }
                 if (this.form.tipo == 'Alumno') {
-                    alert('Alumno');
+                    this.$inertia.post(this.route('alumnos.create', this.institucion_id), this.form)
                 }
                 if (this.form.tipo == 'Padre') {
                     alert('Padre');

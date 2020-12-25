@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Docentes\StoreDocente;
 use App\Models\Roles\Docente;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -19,6 +18,7 @@ class DocenteController extends Controller
         $this->middleware('auth');
         $this->middleware('soloInstitucionDirectivo')->except('store');
         $this->middleware('institucionCorrespondiente')->except('store');
+        $this->middleware('docenteYaCreado')->only('store');
         $this->middleware('docenteCorrespondiente')->only('show', 'destroy');
 
         $this->claveDeAccesoService = $claveDeAccesoService;

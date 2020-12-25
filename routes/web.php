@@ -39,6 +39,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::get('anotarse', [RolController::class, 'anotarse'])->name('roles.anotarse');
     Route::resource('roles', RolController::class);
     Route::resource('docentes', DocenteController::class);
+    Route::resource('alumnos', AlumnoController::class);
     Route::resource('divisiones', EstructuraController::class);
     Route::prefix('divisiones/{division_id}')->group(function () {
         
@@ -48,8 +49,6 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::resource('asignaturas-docentes', AsignaturaDocenteController::class);
             Route::resource('asignaturas-horarios', AsignaturaHorarioController::class);
         });
-
-        Route::resource('alumnos', AlumnoController::class);
         
     });
 });
