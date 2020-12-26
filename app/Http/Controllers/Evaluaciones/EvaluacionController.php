@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\StoreEvaluacion;
+use App\Http\Requests\Evaluaciones\UpdateEvaluacion;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Roles\Docente;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -71,14 +71,31 @@ class EvaluacionController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function edit($institucion_id, $division_id, $id)
     {
-        //
+        $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+    
+        return Inertia::render('Evaluaciones/Edit', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])->with('asignatura')->get(),
+            'evaluacion' => Evaluacion::find($id),
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateEvaluacion $request, $institucion_id, $division_id, $id)
     {
-        //
+        Evaluacion::where('id', $id)
+            ->update([
+                'asignatura_id' => $request->asignatura_id,
+                'titulo' => $request->titulo,
+                'tipo' => $request->tipo,
+                'fechaHoraRealizacion' => $request->fechaHoraRealizacion,
+                'fechaHoraFinalizacion' => $request->fechaHoraFinalizacion,
+                'comentario' => $request->comentario,
+            ]);
+
+        return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $id]));
     }
 
     public function destroy($institucion_id, $division_id, $id)
