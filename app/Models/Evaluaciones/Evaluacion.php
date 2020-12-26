@@ -2,6 +2,7 @@
 
 namespace App\Models\Evaluaciones;
 
+use App\Models\Asignaturas\Asignatura;
 use Illuminate\Database\Eloquent\Model;
 
 class Evaluacion extends Model
@@ -15,4 +16,9 @@ class Evaluacion extends Model
         'fechaHoraFinalizacion',
         'comentario',
     ];
+
+    public function asignatura()
+    {
+        return $this->belongsTo(Asignatura::class);
+    }
 }

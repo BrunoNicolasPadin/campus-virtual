@@ -31,7 +31,7 @@
                             Muro
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <!-- <inertia-link :href="route('muro.index', [institucion_id, division.id])">Ver</inertia-link> -->
+                            <!-- <inertia-link class="hover:underline" :href="route('muro.index', [institucion_id, division.id])">Ver</inertia-link> -->
                             Ver
                         </dd>
                     </div>
@@ -41,8 +41,7 @@
                             Evaluaciones
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <!-- <inertia-link :href="route('evaluaciones.index', [institucion_id, division.id])">Ver</inertia-link> -->
-                            Ver
+                            <inertia-link  class="hover:underline" :href="route('evaluaciones.index', [institucion_id, division.id])">Ver</inertia-link>
                         </dd>
                     </div>
 
@@ -51,7 +50,7 @@
                             Materiales
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <!-- <inertia-link :href="route('materiales.index', [institucion_id, division.id])">Ver</inertia-link> -->
+                            <!-- <inertia-link class="hover:underline" :href="route('materiales.index', [institucion_id, division.id])">Ver</inertia-link> -->
                             Ver
                         </dd>
                     </div>
@@ -61,7 +60,7 @@
                             Asignaturas
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <inertia-link :href="route('asignaturas.index', [institucion_id, division.id])">Ver</inertia-link>
+                            <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Ver</inertia-link>
                         </dd>
                     </div>
 
@@ -70,7 +69,7 @@
                             Alumnos
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <!-- <inertia-link :href="route('alumnos.index', [institucion_id, division.id])">Ver</inertia-link> -->
+                            <!-- <inertia-link class="hover:underline" :href="route('alumnos.index', [institucion_id, division.id])">Ver</inertia-link> -->
                             Ver
                         </dd>
                     </div>
@@ -80,7 +79,7 @@
                             Docentes
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <!-- <inertia-link :href="route('docentes.index', [institucion_id, division.id])">Ver</inertia-link> -->
+                            <!-- <inertia-link class="hover:underline" :href="route('docentes.index', [institucion_id, division.id])">Ver</inertia-link> -->
                             Ver
                         </dd>
                     </div>

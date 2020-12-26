@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estructuras\Division;
+use App\Models\Evaluaciones\Evaluacion;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class EvaluacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index($institucion_id, $division_id)
     {
-        //
+        return Inertia::render('Evaluaciones/Index', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'evaluaciones' => Evaluacion::where('division_id', $division_id)
+                ->with('asignatura')
+                ->orderBy('fechaHoraRealizacion')
+                ->get(),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
