@@ -76,26 +76,15 @@ class EvaluacionController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($institucion_id, $division_id, $id)
     {
-        //
+        Evaluacion::destroy($id);
+        return redirect(route('evaluaciones.index', $institucion_id, $division_id))
+            ->with(['successMessage' => 'Evaluacion eliminada con exito!']);
     }
 }
