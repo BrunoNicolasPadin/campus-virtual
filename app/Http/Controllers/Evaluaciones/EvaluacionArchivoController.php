@@ -53,6 +53,8 @@ class EvaluacionArchivoController extends Controller
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
     {
-        //
+        Archivo::destroy($id);
+        return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
+            ->with(['successMessage' => 'Archivo eliminado con exito!']);
     }
 }

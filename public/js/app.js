@@ -7471,7 +7471,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     destroy: function destroy(id) {
       if (confirm('Estas seguro de que desea eliminar esta evaluacion?')) {
-        this.$inertia["delete"](this.route('evaluacion.destroy', [this.institucion_id, this.division.id, id]));
+        this.$inertia["delete"](this.route('evaluaciones.destroy', [this.institucion_id, this.division.id, id]));
       }
     }
   }
@@ -7628,6 +7628,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7642,6 +7662,7 @@ __webpack_require__.r(__webpack_exports__);
     Eliminar: _Botones_Eliminar_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   props: {
+    successMessage: String,
     institucion_id: String,
     division: Object,
     evaluacion: Object,
@@ -7651,6 +7672,11 @@ __webpack_require__.r(__webpack_exports__);
     destroy: function destroy(evaluacion_id) {
       if (confirm('Estas seguro de que desea eliminar esta evaluacion?')) {
         this.$inertia["delete"](this.route('evaluaciones.destroy', [this.institucion_id, this.division.id, evaluacion_id]));
+      }
+    },
+    destroyArchivo: function destroyArchivo(archivo_id) {
+      if (confirm('Estas seguro de que desea eliminar este archivo?')) {
+        this.$inertia["delete"](this.route('evaluaciones-archivos.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, archivo_id]));
       }
     }
   }
@@ -67006,6 +67032,38 @@ var render = function() {
     },
     [
       _vm._v(" "),
+      _vm.successMessage
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-green-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center container mx-auto w-full"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "text-green-600 w-5 h-5 sm:w-5 sm:h-5 mr-3",
+                  attrs: { viewBox: "0 0 24 24" }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      fill: "currentColor",
+                      d:
+                        "M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-green-800" }, [
+                _vm._v(_vm._s(_vm.successMessage) + " ")
+              ])
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "py-12" },
@@ -67363,21 +67421,54 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ml-4 flex-shrink-0" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "font-medium text-indigo-600 hover:text-indigo-500",
-                          attrs: { href: "#" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        Download\n                        "
-                          )
-                        ]
-                      )
-                    ])
+                    _c(
+                      "div",
+                      { staticClass: "ml-4 flex-shrink-0" },
+                      [
+                        _c(
+                          "inertia-link",
+                          {
+                            staticClass:
+                              "font-medium text-indigo-600 hover:text-indigo-500",
+                            attrs: {
+                              href: _vm.route("evaluaciones-archivos.destroy", [
+                                _vm.institucion_id,
+                                _vm.division.id,
+                                _vm.evaluacion.id,
+                                archivo.id
+                              ])
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Editar\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(
+                          "\n                        -\n                        "
+                        ),
+                        _c(
+                          "span",
+                          {
+                            staticClass:
+                              "font-medium text-red-600 hover:text-red-500 cursor-pointer",
+                            attrs: { type: "submit" },
+                            on: {
+                              click: function($event) {
+                                return _vm.destroyArchivo(archivo.id)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Eliminar\n                        "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
                   ]
                 )
               }),

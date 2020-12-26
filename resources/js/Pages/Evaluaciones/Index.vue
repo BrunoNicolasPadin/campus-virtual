@@ -189,7 +189,7 @@
         methods: {
             destroy(id) {
                 if (confirm('Estas seguro de que desea eliminar esta evaluacion?')) {
-                    this.$inertia.delete(this.route('evaluacion.destroy', [this.institucion_id, this.division.id, id]))
+                    this.$inertia.delete(this.route('evaluaciones.destroy', [this.institucion_id, this.division.id, id]))
                 }
             },
         }
