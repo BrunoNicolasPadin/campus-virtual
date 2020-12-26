@@ -3,82 +3,55 @@
 namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estructuras\Division;
+use App\Models\Evaluaciones\Archivo;
+use App\Models\Evaluaciones\Evaluacion;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class EvaluacionArchivoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function create($institucion_id, $division_id, $evaluacion_id)
+    {
+        return Inertia::render('Evaluaciones/Archivos/Create', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'evaluacion' => Evaluacion::find($evaluacion_id),
+        ]);
+    }
+
+    public function store(Request $request, $institucion_id, $division_id, $evaluacion_id)
+    {
+        if ($request->hasFile('archivo')) {
+            $archivo = $request->file('archivo');
+            $archivoStore = $archivo->getClientOriginalName();
+            $archivo->storeAs('public/Evaluaciones/Archivos', $archivo->getClientOriginalName());
+
+            Archivo::create([
+                'evaluacion_id' => $evaluacion_id,
+                'titulo' => $request->titulo,
+                'archivo' => $archivoStore,
+                'visibilidad'  => $request->visibilidad,
+            ]);
+
+            return redirect(route('evaluaciones-archivos.create', [$institucion_id, $division_id, $evaluacion_id]))
+                ->with(['successMessage' => 'Archivo cargado con exito!']);
+        }
+
+        return redirect(route('evaluaciones-archivos.create', [$institucion_id, $division_id, $evaluacion_id]))->withErrors('No hay ningun archivo');
+    }
+
+    public function edit($institucion_id, $division_id, $evaluacion_id, $id)
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update(Request $request, $institucion_id, $division_id, $evaluacion_id, $id)
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
     {
         //
     }
