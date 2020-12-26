@@ -17,9 +17,9 @@ class EstructuraController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        /* $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('divisionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
+        $this->middleware('divisionCorrespondiente')->only('show', 'edit', 'update', 'destroy'); */
     }
 
     public function index($institucion_id)
