@@ -126,13 +126,15 @@
                     <li v-for="archivo in archivos" :key="archivo.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
-                            {{ archivo.titulo }}
+                                <a :href="'/storage/evaluaciones/archivos/' + archivo.archivo" target="_blank" rel="noopener noreferrer">
+                                    {{ archivo.titulo }}
+                                </a>
                             </span>
                         </div>
 
                         <div class="ml-4 flex-shrink-0">
                             <inertia-link
-                            :href="route('evaluaciones-archivos.destroy', [institucion_id, division.id, evaluacion.id, archivo.id])"
+                            :href="route('evaluaciones-archivos.edit', [institucion_id, division.id, evaluacion.id, archivo.id])"
                             class="font-medium text-indigo-600 hover:text-indigo-500">
                                 Editar
                             </inertia-link>
