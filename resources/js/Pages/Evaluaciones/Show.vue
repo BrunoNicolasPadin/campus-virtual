@@ -126,9 +126,17 @@
                     <li v-for="archivo in archivos" :key="archivo.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
-                                <a :href="'/storage/evaluaciones/archivos/' + archivo.archivo" target="_blank" rel="noopener noreferrer">
+                                <a 
+                                v-if="archivo.visibilidad" 
+                                :href="'/storage/evaluaciones/archivos/' + archivo.archivo" 
+                                target="_blank" 
+                                class="text-blue-500"
+                                rel="noopener noreferrer">
                                     {{ archivo.titulo }}
                                 </a>
+                                <span v-else class="text-gray-500">
+                                    {{ archivo.titulo }}
+                                </span>
                             </span>
                         </div>
 

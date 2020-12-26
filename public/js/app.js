@@ -7819,6 +7819,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -67988,25 +67996,34 @@ var render = function() {
                   [
                     _c("div", { staticClass: "w-0 flex-1 flex items-center" }, [
                       _c("span", { staticClass: "ml-2 flex-1 w-0 truncate" }, [
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href:
-                                "/storage/evaluaciones/archivos/" +
-                                archivo.archivo,
-                              target: "_blank",
-                              rel: "noopener noreferrer"
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(archivo.titulo) +
-                                "\n                            "
+                        archivo.visibilidad
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "text-blue-500",
+                                attrs: {
+                                  href:
+                                    "/storage/evaluaciones/archivos/" +
+                                    archivo.archivo,
+                                  target: "_blank",
+                                  rel: "noopener noreferrer"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(archivo.titulo) +
+                                    "\n                            "
+                                )
+                              ]
                             )
-                          ]
-                        )
+                          : _c("span", { staticClass: "text-gray-500" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(archivo.titulo) +
+                                  "\n                            "
+                              )
+                            ])
                       ])
                     ]),
                     _vm._v(" "),
