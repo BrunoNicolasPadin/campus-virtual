@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\StoreEvaluacion;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Estructuras\Division;
+use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Roles\Docente;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
@@ -47,7 +48,7 @@ class EvaluacionController extends Controller
 
     public function store(StoreEvaluacion $request, $institucion_id, $division_id)
     {
-        Evaluacion::create([
+        $eva = Evaluacion::create([
             'division_id' => $division_id,
             'asignatura_id' => $request->asignatura_id,
             'titulo' => $request->titulo,
@@ -57,26 +58,19 @@ class EvaluacionController extends Controller
             'comentario' => $request->comentario,
         ]);
 
-        echo "Nice!";
+        return redirect(route('evaluaciones.show', $institucion_id, $division_id, $eva->id));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($institucion_id, $division_id, $id)
     {
-        //
+        return Inertia::render('Evaluaciones/Show', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'evaluacion' => Evaluacion::find($id),
+            'archivos' => Archivo::where('evaluacion_id', $id)->orderBy('titulo')->get(),
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
