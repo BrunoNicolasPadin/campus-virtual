@@ -17,4 +17,9 @@ class AsignaturaDocente extends Model
     {
         return $this->belongsTo(Docente::class);
     }
+
+    public function asignatura()
+    {
+        return $this->belongsTo(Asignatura::class);
+    }
 }

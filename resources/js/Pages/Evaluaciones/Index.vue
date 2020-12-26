@@ -99,7 +99,9 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ evaluacion.titulo }}
+                                        <inertia-link class="hover:underline" :href="route('evaluaciones.show', [institucion_id, division.id, evaluacion.id])">
+                                            {{ evaluacion.titulo }}
+                                        </inertia-link>
                                     </template>
                                 </table-data>
 
@@ -129,7 +131,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('evaluaciones.edit', [evaluacion.institucion_id, division.id, evaluacion.id])">
+                                        <inertia-link :href="route('evaluaciones.edit', [institucion_id, division.id, evaluacion.id])">
                                             <editar></editar>
                                         </inertia-link>
                                     </template>
