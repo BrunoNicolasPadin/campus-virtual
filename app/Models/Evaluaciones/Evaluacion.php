@@ -11,6 +11,7 @@ class Evaluacion extends Model
     protected $fillable = [
         'division_id',
         'asignatura_id',
+        'titulo',
         'tipo',
         'fechaHoraRealizacion',
         'fechaHoraFinalizacion',

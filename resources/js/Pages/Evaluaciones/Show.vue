@@ -75,7 +75,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                             Comentario/Temas
                         </dt>
-                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2 whitespace-pre-wrap">
                             {{ evaluacion.comentario }}
                         </dd>
                     </div>

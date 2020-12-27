@@ -17,8 +17,8 @@ class CreateEntregasTable extends Migration
             $table->id();
             $table->foreignId('evaluacion_id')->constrained('evaluaciones')->onDelete('cascade');
             $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
-            $table->string('calificacion');
-            $table->text('comentario');
+            $table->string('calificacion')->nullable();
+            $table->text('comentario')->nullable();
             $table->timestamps();
         });
     }

@@ -58,7 +58,7 @@ class EvaluacionController extends Controller
             'comentario' => $request->comentario,
         ]);
 
-        return redirect(route('evaluaciones.show', $institucion_id, $division_id, $eva->id));
+        return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $eva->id]));
     }
 
     public function show($institucion_id, $division_id, $id)
@@ -101,7 +101,7 @@ class EvaluacionController extends Controller
     public function destroy($institucion_id, $division_id, $id)
     {
         Evaluacion::destroy($id);
-        return redirect(route('evaluaciones.index', $institucion_id, $division_id))
+        return redirect(route('evaluaciones.index', [$institucion_id, $division_id]))
             ->with(['successMessage' => 'Evaluacion eliminada con exito!']);
     }
 }
