@@ -75,9 +75,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                             Comentario/Temas
                         </dt>
-                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2 whitespace-pre-wrap">
-                            {{ evaluacion.comentario }}
-                        </dd>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2 whitespace-pre-wrap">{{ evaluacion.comentario }}</dd>
                     </div>
 
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -85,8 +83,7 @@
                             Entregas
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            Ver
-                            <!-- <inertia-link class="hover:underline" :href="route('entregas.index', [institucion_id, division.id, evaluacion.id])">Ver</inertia-link> -->
+                            <inertia-link class="hover:underline" :href="route('entregas.index', [institucion_id, division.id, evaluacion.id])">Ver</inertia-link>
                         </dd>
                     </div>
 
