@@ -10,5 +10,6 @@ class EntregaArchivo extends Model
     protected $fillable = [
         'entrega_id',
         'archivo',
+        'fechaHoraEntrega',
     ];
 }

@@ -3,83 +3,53 @@
 namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estructuras\Division;
+use App\Models\Evaluaciones\Entrega;
+use App\Models\Evaluaciones\EntregaArchivo;
+use App\Models\Evaluaciones\Evaluacion;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class EntregaArchivoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function create($institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
-        //
+        return Inertia::render('Evaluaciones/EntregasArchivos/Create', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'evaluacion' => Evaluacion::find($evaluacion_id),
+            'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($entrega_id),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
-        //
+        if ($request->hasFile('archivo')) {
+            $archivo = $request->file('archivo');
+            $archivoStore = $archivo->getClientOriginalName();
+            $archivo->storeAs('public/Evaluaciones/Entregas', $archivo->getClientOriginalName());
+
+            $d = new DateTime('now');
+            $d->setTimezone(new DateTimeZone('America/Argentina/Buenos_Aires'));
+            $fechaHoraEntrega = $d->format('Y-m-d H:i:s');
+
+            EntregaArchivo::create([
+                'entrega_id' => $entrega_id,
+                'archivo' => $archivoStore,
+                'fechaHoraEntrega' => $fechaHoraEntrega,
+            ]);
+
+            return back()->with(['successMessage' => 'Archivo cargado con exito!']);
+        }
+
+        return back()->withErrors('No hay ningun archivo');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function destroy($institucion_id, $division_id, $evaluacion_id, $entrega_id, $id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        EntregaArchivo::destroy($id);
+        return back()->with(['successMessage' => 'Archivo eliminado con exito!']);
     }
 }

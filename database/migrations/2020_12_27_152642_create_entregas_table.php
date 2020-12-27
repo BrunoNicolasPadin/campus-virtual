@@ -19,7 +19,6 @@ class CreateEntregasTable extends Migration
             $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
             $table->string('calificacion')->nullable();
             $table->text('comentario')->nullable();
-            $table->dateTime('fechaHoraEntrega')->nullable();
             $table->timestamps();
         });
     }

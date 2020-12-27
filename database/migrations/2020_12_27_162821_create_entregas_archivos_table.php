@@ -17,6 +17,7 @@ class CreateEntregasArchivosTable extends Migration
             $table->id();
             $table->foreignId('entrega_id')->constrained('entregas')->onDelete('cascade');
             $table->binary('archivo');
+            $table->dateTime('fechaHoraEntrega');
             $table->timestamps();
         });
     }
