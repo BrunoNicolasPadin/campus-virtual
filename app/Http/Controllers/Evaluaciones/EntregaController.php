@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Evaluaciones;
 use App\Http\Controllers\Controller;
 use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Entrega;
+use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\Evaluacion;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -23,7 +24,13 @@ class EntregaController extends Controller
 
     public function show($institucion_id, $division_id, $evaluacion_id, $id)
     {
-        //
+        return Inertia::render('Evaluaciones/Entregas/Show', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'evaluacion' => Evaluacion::find($evaluacion_id),
+            'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
+            'archivos' => EntregaArchivo::where('entrega_id', $id)->get(),
+        ]);
     }
 
     public function edit($institucion_id, $division_id, $evaluacion_id, $id)
