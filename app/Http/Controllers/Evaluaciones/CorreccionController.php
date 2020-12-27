@@ -4,19 +4,17 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Models\Estructuras\Division;
+use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
-use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\Evaluacion;
-use DateTime;
-use DateTimeZone;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class EntregaArchivoController extends Controller
+class CorreccionController extends Controller
 {
     public function create($institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
-        return Inertia::render('Evaluaciones/EntregasArchivos/Create', [
+        return Inertia::render('Evaluaciones/Correcciones/Create', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
@@ -29,27 +27,22 @@ class EntregaArchivoController extends Controller
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
             $archivoStore = $archivo->getClientOriginalName();
-            $archivo->storeAs('public/Evaluaciones/Entregas', $archivo->getClientOriginalName());
+            $archivo->storeAs('public/Evaluaciones/Correcciones', $archivo->getClientOriginalName());
 
-            $d = new DateTime('now');
-            $d->setTimezone(new DateTimeZone('America/Argentina/Buenos_Aires'));
-            $fechaHoraEntrega = $d->format('Y-m-d H:i:s');
-
-            EntregaArchivo::create([
+            Correccion::create([
                 'entrega_id' => $entrega_id,
                 'archivo' => $archivoStore,
-                'fechaHoraEntrega' => $fechaHoraEntrega,
             ]);
 
-            return back()->with(['successMessage' => 'Archivo cargado con exito! Apriete en el boton "Eliminar" para cargar otro archivo.']);
+            return back()->with(['successMessage' => 'Correccion cargado con exito! Apriete en el boton "Eliminar" para cargar otro archivo.']);
         }
 
-        return back()->withErrors('No hay ningun archivo');
+        return back()->withErrors('No hay ningun archivo seleccionado');
     }
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $entrega_id, $id)
     {
-        EntregaArchivo::destroy($id);
-        return back()->with(['successMessage' => 'Archivo eliminado con exito!']);
+        Correccion::destroy($id);
+        return back()->with(['successMessage' => 'Correccion eliminado con exito!']);
     }
 }

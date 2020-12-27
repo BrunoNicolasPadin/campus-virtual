@@ -126,6 +126,42 @@
                     </li>
                 </ul>
             </div>
+
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <div class="flex">
+                    <div class="w-1/2">
+                        <h2 class="text-2xl font-semibold leading-tight">Correcciones</h2>
+                    </div>
+                    <div class="w-1/2">
+                        <primary class="float-right">
+                            <template #boton-primary>
+                                <inertia-link :href="route('correcciones.create', [institucion_id, division.id, evaluacion.id, entrega.id])">
+                                    Agregar
+                                </inertia-link>
+                            </template>
+                        </primary>
+                    </div>
+                </div>
+
+                <ul class="my-2 bg-white border border-blue-100 rounded-md divide-y divide-gray-200">
+
+                    <li v-for="correccion in correcciones" :key="correccion.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                        <div class="w-0 flex-1 flex items-center">
+                            <span class="ml-2 flex-1 w-0 truncate">
+                                <a :href="'/storage/evaluaciones/correcciones/' + correccion.archivo" target="_blank" class="text-blue-500" rel="noopener noreferrer">
+                                    {{ correccion.archivo }}
+                                </a>
+                            </span>
+                        </div>
+
+                        <div class="ml-4 flex-shrink-0">
+                            <span @click="destroyCorreccion(correccion.id)" class="font-medium text-red-600 hover:text-red-500 cursor-pointer" type="submit">
+                                Eliminar
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </app-layout>
 </template>
@@ -153,12 +189,20 @@
             evaluacion: Object,
             entrega: Object,
             archivos: Array,
+            correcciones: Array,
         },
 
         methods: {
+            
             destroyArchivo(archivo_id) {
                 if (confirm('Estas seguro de que desea eliminar este archivo?')) {
                     this.$inertia.delete(this.route('entregas-archivos.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id, archivo_id]))
+                }
+            },
+
+            destroyCorreccion(archivo_id) {
+                if (confirm('Estas seguro de que desea eliminar esta correccion?')) {
+                    this.$inertia.delete(this.route('correcciones.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id, archivo_id]))
                 }
             },
         },

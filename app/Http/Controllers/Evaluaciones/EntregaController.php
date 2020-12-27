@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Models\Estructuras\Division;
+use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\Evaluacion;
@@ -30,6 +31,7 @@ class EntregaController extends Controller
             'evaluacion' => Evaluacion::find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
             'archivos' => EntregaArchivo::where('entrega_id', $id)->get(),
+            'correcciones' => Correccion::where('entrega_id', $id)->get(),
         ]);
     }
 

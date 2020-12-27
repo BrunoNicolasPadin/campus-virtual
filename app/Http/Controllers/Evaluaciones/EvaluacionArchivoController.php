@@ -34,8 +34,7 @@ class EvaluacionArchivoController extends Controller
                 'visibilidad'  => $request->visibilidad,
             ]);
 
-            return redirect(route('evaluaciones-archivos.create', [$institucion_id, $division_id, $evaluacion_id]))
-                ->with(['successMessage' => 'Archivo cargado con exito!']);
+            return back()->with(['successMessage' => 'Archivo cargado con exito! Apriete en el boton "Eliminar" para cargar otro archivo.']);
         }
 
         return redirect(route('evaluaciones-archivos.create', [$institucion_id, $division_id, $evaluacion_id]))->withErrors('No hay ningun archivo');
