@@ -13,6 +13,7 @@ class Entrega extends Model
         'alumno_id',
         'calificacion',
         'comentario',
+        'fechaHoraEntrega',
     ];
 
     public function alumno()

@@ -63,8 +63,8 @@
                             Fecha y hora de entrega
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <span v-if="entrega.updated_at == evaluacion.created_at">Sin entregar</span>
-                            <span v-else>{{ entrega.updated_at }}</span>
+                            <span v-if="entrega.fechaHoraEntrega">{{ entrega.fechaHoraEntrega }}</span>
+                            <span v-else>Sin entregar</span>
                         </dd>
                     </div>
 
@@ -75,6 +75,17 @@
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <span v-if="entrega.comentario">{{ entrega.comentario }}</span>
                             <span v-else>Sin  comentarios</span>
+                        </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Calificar y comentar
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <inertia-link :href="route('entregas.edit', [institucion_id, division.id, evaluacion.id, entrega.id])">
+                                <editar></editar>
+                            </inertia-link>
                         </dd>
                     </div>
                 </template>
@@ -113,7 +124,6 @@
                             </span>
                         </div>
                     </li>
-
                 </ul>
             </div>
         </div>
