@@ -5,6 +5,7 @@ use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
 use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\Estructuras\EstructuraController;
+use App\Http\Controllers\Evaluaciones\EntregaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionArchivoController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
@@ -56,6 +57,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
             
                 Route::resource('evaluaciones-archivos', EvaluacionArchivoController::class);
+                Route::resource('entregas', EntregaController::class);
             });
         
     });
