@@ -15,6 +15,11 @@ class CreateLibretasTable extends Migration
     {
         Schema::create('libretas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
+            $table->foreignId('ciclo_lectivo_id')->constrained('ciclos_lectivos')->onDelete('cascade');
+            $table->foreignId('asignatura_id')->constrained('asignaturas')->onDelete('cascade');
+            $table->string('periodo');
+            $table->string('calificacion')->nullable();
             $table->timestamps();
         });
     }

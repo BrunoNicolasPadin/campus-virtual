@@ -15,6 +15,10 @@ class CreateNotasFinalesTable extends Migration
     {
         Schema::create('notas_finales', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
+            $table->foreignId('ciclo_lectivo_id')->constrained('ciclos_lectivos')->onDelete('cascade');
+            $table->foreignId('asignatura_id')->constrained('asignaturas')->onDelete('cascade');
+            $table->string('calificacion')->nullable();
             $table->timestamps();
         });
     }
