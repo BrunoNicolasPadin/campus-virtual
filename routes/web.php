@@ -14,6 +14,8 @@ use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Libretas\LibretaController;
 use App\Http\Controllers\Libretas\NotaFinalController;
+use App\Http\Controllers\Materiales\GrupoController;
+use App\Http\Controllers\Materiales\MaterialController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DocenteController;
 use App\Http\Controllers\Roles\RolController;
@@ -72,6 +74,13 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
                 Route::resource('entregas-archivos', EntregaArchivoController::class);
                 Route::resource('correcciones', CorreccionController::class);
             });
+        });
+
+        Route::resource('materiales', GrupoController::class);
+        Route::prefix('materiales/{grupo_id}')->group(function () {
+        
+            Route::resource('material-archivo', MaterialController::class);
+            
         });
     });
 });
