@@ -66,7 +66,7 @@ class EvaluacionController extends Controller
         return Inertia::render('Evaluaciones/Show', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'evaluacion' => Evaluacion::find($id),
+            'evaluacion' => Evaluacion::with('asignatura')->find($id),
             'archivos' => Archivo::where('evaluacion_id', $id)->orderBy('titulo')->get(),
         ]);
     }

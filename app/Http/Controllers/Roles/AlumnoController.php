@@ -50,7 +50,7 @@ class AlumnoController extends Controller
 
     public function store(StoreAlumno $request, $institucion_id)
     {
-        if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $request->division_id)) {
+        if (true) {
             Alumno::create([
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
@@ -66,7 +66,7 @@ class AlumnoController extends Controller
         return Inertia::render('Alumnos/Show', [
             'institucion_id' => $institucion_id,
             'alumno' => Alumno::with(['user', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
-                ->first(),
+                ->find($id),
         ]);
     }
 
@@ -87,16 +87,14 @@ class AlumnoController extends Controller
 
     public function update(StoreAlumno $request, $institucion_id, $id)
     {
-        if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $request->division_id)) {
-            Alumno::where('id', $id)
-            ->update([
-                'user_id' => Auth::id(),
-                'institucion_id' => $institucion_id,
-                'division_id' => $request->division_id,
-            ]);
+        if (true) {
+            $alumno = Alumno::find($id);
+            $alumno->division_id = $request->division_id;
+            $alumno->save();
+
             return redirect('/dashboard');
         }
-        return redirect(route('alumnos.edit', $institucion_id))->withErrors('Clave de acceso incorrecta.');
+        return back()->withErrors('Clave de acceso incorrecta.');
     }
 
     public function destroy($id)

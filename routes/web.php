@@ -47,6 +47,11 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::resource('roles', RolController::class);
     Route::resource('docentes', DocenteController::class);
     Route::resource('alumnos', AlumnoController::class);
+    Route::prefix('alumnos/{alumno_id}')->group(function () {
+            
+        Route::resource('libretas', LibretaController::class);
+    });
+
     Route::resource('divisiones', EstructuraController::class);
     Route::prefix('divisiones/{division_id}')->group(function () {
         
@@ -58,17 +63,15 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         });
 
         Route::resource('evaluaciones', EvaluacionController::class);
-            Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
-            
-                Route::resource('evaluaciones-archivos', EvaluacionArchivoController::class);
-                Route::resource('entregas', EntregaController::class);
-                Route::prefix('entregas/{entrega_id}')->group(function () {
-            
-                    Route::resource('entregas-archivos', EntregaArchivoController::class);
-                    Route::resource('correcciones', CorreccionController::class);
-                });
+        Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
+        
+            Route::resource('evaluaciones-archivos', EvaluacionArchivoController::class);
+            Route::resource('entregas', EntregaController::class);
+            Route::prefix('entregas/{entrega_id}')->group(function () {
+        
+                Route::resource('entregas-archivos', EntregaArchivoController::class);
+                Route::resource('correcciones', CorreccionController::class);
             });
-        Route::resource('libretas', LibretaController::class);
-        Route::resource('notas-finales', NotaFinalController::class);
+        });
     });
 });

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Evaluaciones\Evaluacion;
+use App\Models\Roles\Alumno;
+use App\Observers\AlumnoObserver;
 use App\Observers\EvaluacionObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -29,5 +31,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Evaluacion::observe(EvaluacionObserver::class);
+        Alumno::observe(AlumnoObserver::class);
     }
 }
