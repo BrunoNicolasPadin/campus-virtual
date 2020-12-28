@@ -12,6 +12,8 @@ use App\Http\Controllers\Evaluaciones\EvaluacionArchivoController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
+use App\Http\Controllers\Libretas\LibretaController;
+use App\Http\Controllers\Libretas\NotaFinalController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DocenteController;
 use App\Http\Controllers\Roles\RolController;
@@ -66,6 +68,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
                     Route::resource('correcciones', CorreccionController::class);
                 });
             });
-        
+        Route::resource('libretas', LibretaController::class);
+        Route::resource('notas-finales', NotaFinalController::class);
     });
 });
