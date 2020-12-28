@@ -14,7 +14,6 @@ class Libreta extends Model
         'ciclo_lectivo_id',
         'asignatura_id',
         'periodo',
-        'calificacion',
     ];
 
     public function cicloLectivo()
@@ -25,5 +24,10 @@ class Libreta extends Model
     public function asignatura()
     {
         return $this->belongsTo(Asignatura::class);
+    }
+
+    public function calificaciones()
+    {
+        return $this->hasMany(Calificacion::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models\Roles;
 
 use App\Models\Estructuras\Division;
+use App\Models\Instituciones\Institucion;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,11 @@ class Alumno extends Model
         'institucion_id',
         'division_id',
     ];
+
+    public function institucion()
+    {
+        return $this->belongsTo(Institucion::class);
+    }
 
     public function user()
     {

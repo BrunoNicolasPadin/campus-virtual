@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLibretasTable extends Migration
+class CreateCalificacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateLibretasTable extends Migration
      */
     public function up()
     {
-        Schema::create('libretas', function (Blueprint $table) {
+        Schema::create('calificaciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
-            $table->foreignId('ciclo_lectivo_id')->constrained('ciclos_lectivos')->onDelete('cascade');
+            $table->foreignId('libreta_id')->constrained('libretas')->onDelete('cascade');
             $table->string('periodo');
+            $table->string('calificacion')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateLibretasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('libretas');
+        Schema::dropIfExists('calificaciones');
     }
 }

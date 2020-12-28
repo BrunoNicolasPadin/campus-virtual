@@ -2,6 +2,7 @@
 
 namespace App\Models\Asignaturas;
 
+use App\Models\Estructuras\Division;
 use Illuminate\Database\Eloquent\Model;
 
 class Asignatura extends Model
@@ -11,6 +12,11 @@ class Asignatura extends Model
         'division_id',
         'nombre',
     ];
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
 
     public function horarios()
     {

@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
+use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
 
@@ -29,26 +30,33 @@ class AlumnoObserver
         $division = Division::find($alumno->division_id);
 
         if ($division->periodo_id == 1) {
+            $periodo = 'Bimestre';
             $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
         }
 
         if ($division->periodo_id == 2) {
+            $periodo = 'Trimestre';
             $periodos = ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
         }
 
         if ($division->periodo_id == 1) {
+            $periodo = 'Cuatrimestre';
             $periodos = ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
         }
 
         foreach ($asignaturas as $asignatura) {
 
-            for ($i=0; $i < count($periodos); $i++) { 
+            $libreta = Libreta::create([
+                'alumno_id' => $alumno->id,
+                'ciclo_lectivo_id' => $cicloLectivo->id,
+                'asignatura_id' => $asignatura->id,
+                'periodo' => $periodo,
+            ]);
 
-                Libreta::create([
-                    'alumno_id' => $alumno->id,
-                    'ciclo_lectivo_id' => $cicloLectivo->id,
-                    'asignatura_id' => $asignatura->id,
-                    'periodo' => $periodos[$i],
+            for ($k=0; $k < count($periodos); $k++) { 
+                Calificacion::create([
+                    'libreta_id' => $libreta->id,
+                    'periodo' => $periodos[$k],
                 ]);
             }
         }

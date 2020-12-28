@@ -2,7 +2,6 @@
 
 namespace App\Models\CiclosLectivos;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class CicloLectivo extends Model
