@@ -50,8 +50,7 @@
                             Materiales
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <!-- <inertia-link class="hover:underline" :href="route('materiales.index', [institucion_id, division.id])">Ver</inertia-link> -->
-                            Ver
+                            <inertia-link class="hover:underline" :href="route('materiales.index', [institucion_id, division.id])">Ver</inertia-link>
                         </dd>
                     </div>
 

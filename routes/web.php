@@ -79,7 +79,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         Route::resource('materiales', GrupoController::class);
         Route::prefix('materiales/{grupo_id}')->group(function () {
         
-            Route::resource('material-archivo', MaterialController::class);
+            Route::resource('materiales-archivos', MaterialController::class);
             
         });
     });

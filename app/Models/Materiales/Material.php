@@ -10,6 +10,7 @@ class Material extends Model
     protected $fillable = [
         'grupo_id',
         'nombre',
+        'visibilidad',
         'archivo',
     ];
 }

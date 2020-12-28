@@ -37,7 +37,7 @@ class EvaluacionArchivoController extends Controller
             return back()->with(['successMessage' => 'Archivo cargado con exito! Apriete en el boton "Eliminar" para cargar otro archivo.']);
         }
 
-        return redirect(route('evaluaciones-archivos.create', [$institucion_id, $division_id, $evaluacion_id]))->withErrors('No hay ningun archivo');
+        return back()->withErrors('No hay ningun archivo');
     }
 
     public function edit($institucion_id, $division_id, $evaluacion_id, $id)
