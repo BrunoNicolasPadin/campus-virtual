@@ -9,6 +9,7 @@ use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
+use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Roles\Docente;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
@@ -68,6 +69,7 @@ class EvaluacionController extends Controller
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::with('asignatura')->find($id),
             'archivos' => Archivo::where('evaluacion_id', $id)->orderBy('titulo')->get(),
+            'comentarios' => EvaluacionComentario::where('evaluacion_id', $id)->with('user')->orderBy('updated_at', 'DESC')->paginate(10),
         ]);
     }
 
