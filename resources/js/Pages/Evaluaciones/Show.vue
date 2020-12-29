@@ -217,7 +217,15 @@
                         <button class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" @click="editar(comentario)">Editar</button>
                     </div>
                     <div class="text-grey-dark leading-normal text-sm">
-                        <p>{{ comentario.user.name }} <span class="mx-1 text-xs">&bull;</span> {{ comentario.updated_at}}</p>
+                        <p>
+                            {{ comentario.user.name }} <span class="mx-1 text-xs">&bull;</span> 
+                            {{ comentario.updated_at }} <span class="mx-1 text-xs">&bull;</span>
+                        <inertia-link 
+                            class="hover:underline" 
+                            :href="route('evaluaciones-respuestas.index', [institucion_id, division.id, evaluacion.id, comentario.id])">
+                            Ver resupuestas
+                        </inertia-link>
+                        </p>
                     </div>
                 </div>
 

@@ -2,13 +2,14 @@
 
 namespace App\Models\Evaluaciones;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class EvaluacionRespuesta extends Model
 {
     protected $table = 'evaluaciones_respuestas';
     protected $fillable = [
-        'respuesta_id',
+        'comentario_id',
         'user_id',
         'respuesta',
     ];
