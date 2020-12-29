@@ -58,16 +58,32 @@ class GrupoController extends Controller
 
     public function edit($institucion_id, $division_id, $id)
     {
-        //
+        $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+
+        return Inertia::render('Materiales/Grupos/Edit', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
+                ->with('asignatura')
+                ->get(),
+            'grupo' => Grupo::find($id),
+        ]);
     }
 
     public function update(Request $request, $institucion_id, $division_id, $id)
     {
-        //
+        Grupo::where('id', $id)
+            ->update([
+                'division_id' => $division_id,
+                'asignatura_id' => $request->asignatura_id,
+                'nombre' => $request->nombre,
+            ]);
+        return redirect(route('materiales.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Editado con exito!']);
     }
 
-    public function destroy($id)
+    public function destroy($institucion_id, $division_id, $id)
     {
-        //
+        Grupo::destroy($id);
+        return redirect(route('materiales.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Eliminado con exito!']);
     }
 }

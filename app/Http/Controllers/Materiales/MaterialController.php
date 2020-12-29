@@ -39,12 +39,12 @@ class MaterialController extends Controller
         return back()->withErrors('No hay ningun archivo');
     }
 
-    public function edit($id)
+    public function edit($institucion_id, $division_id, $grupo_id, $id)
     {
-        //
+        
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $institucion_id, $division_id, $grupo_id, $id)
     {
         //
     }
