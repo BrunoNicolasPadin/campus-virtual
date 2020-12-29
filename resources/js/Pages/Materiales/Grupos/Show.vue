@@ -99,7 +99,7 @@
         },
 
         methods: {
-            destroy(id) {
+            destroyArchivo(id) {
                 if (confirm('Estas seguro de que desea eliminar este archivo?')) {
                     this.$inertia.delete(this.route('materiales-archivos.destroy', [this.institucion_id, this.division.id, this.grupo.id, id]))
                 }

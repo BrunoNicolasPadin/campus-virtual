@@ -41,16 +41,46 @@ class MaterialController extends Controller
 
     public function edit($institucion_id, $division_id, $grupo_id, $id)
     {
-        
+        return Inertia::render('Materiales/Edit', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'grupo' => Grupo::find($grupo_id),
+            'archivo' => Material::find($id),
+        ]);
     }
 
     public function update(Request $request, $institucion_id, $division_id, $grupo_id, $id)
     {
-        //
+        if ($request->hasFile('archivo')) {
+            $archivo = $request->file('archivo');
+            $archivoStore = $archivo->getClientOriginalName();
+            $archivo->storeAs('public/Materiales', $archivo->getClientOriginalName());
+
+            Material::where('id', $id)
+                ->update([
+                'nombre' => $request->nombre,
+                'visibilidad'  => $request->visibilidad,
+                'archivo' => $archivoStore,
+            ]);
+
+            return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
+                ->with(['successMessage' => 'Archivo editado con exito!']);
+        }
+
+        Material::where('id', $id)
+            ->update([
+            'nombre' => $request->nombre,
+            'visibilidad'  => $request->visibilidad,
+        ]);
+
+        return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
+                ->with(['successMessage' => 'Archivo editado con exito!']);
     }
 
-    public function destroy($id)
+    public function destroy($institucion_id, $division_id, $grupo_id, $id)
     {
-        //
+        Material::destroy($id);
+        return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
+                ->with(['successMessage' => 'Archivo eliminado con exito!']);
     }
 }
