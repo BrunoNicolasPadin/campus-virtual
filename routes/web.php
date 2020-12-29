@@ -9,11 +9,12 @@ use App\Http\Controllers\Evaluaciones\CorreccionController;
 use App\Http\Controllers\Evaluaciones\EntregaArchivoController;
 use App\Http\Controllers\Evaluaciones\EntregaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionArchivoController;
+use App\Http\Controllers\Evaluaciones\EvaluacionComentarioController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
+use App\Http\Controllers\Evaluaciones\EvaluacionRespuestaController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Libretas\LibretaController;
-use App\Http\Controllers\Libretas\NotaFinalController;
 use App\Http\Controllers\Materiales\GrupoController;
 use App\Http\Controllers\Materiales\MaterialController;
 use App\Http\Controllers\Roles\AlumnoController;
@@ -73,6 +74,11 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         
                 Route::resource('entregas-archivos', EntregaArchivoController::class);
                 Route::resource('correcciones', CorreccionController::class);
+            });
+
+            Route::resource('evaluaciones-comentarios', EvaluacionComentarioController::class);
+            Route::prefix('evaluaciones-comentarios/{comentario_id}')->group(function () {
+                Route::resource('evaluaciones-respuestas', EvaluacionRespuestaController::class);
             });
         });
 
