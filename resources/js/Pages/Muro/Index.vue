@@ -79,7 +79,13 @@
                         <inertia-link 
                             class="hover:underline" 
                             :href="route('muro-respuestas.index', [institucion_id, division.id, publicacion.id])">
-                            Ver resupuestas
+                            Resupuestas
+                        </inertia-link>
+                        <span class="mx-1 text-xs">&bull;</span>
+                        <inertia-link 
+                            class="hover:underline" 
+                            :href="route('muro-archivos.index', [institucion_id, division.id, publicacion.id])">
+                            Archivos
                         </inertia-link>
                         </p>
                     </div>
