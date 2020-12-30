@@ -18,6 +18,9 @@ use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Libretas\LibretaController;
 use App\Http\Controllers\Materiales\GrupoController;
 use App\Http\Controllers\Materiales\MaterialController;
+use App\Http\Controllers\Muro\MuroArchivoController;
+use App\Http\Controllers\Muro\MuroController;
+use App\Http\Controllers\Muro\MuroRespuestaController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DocenteController;
 use App\Http\Controllers\Roles\RolController;
@@ -89,6 +92,13 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         
             Route::resource('materiales-archivos', MaterialController::class);
             
+        });
+
+        Route::resource('muro', MuroController::class);
+        Route::prefix('muro/{publicacion_id}')->group(function () {
+        
+            Route::resource('muro-archivos', MuroArchivoController::class);
+            Route::resource('muro-respuestas', MuroRespuestaController::class);
         });
     });
 });
