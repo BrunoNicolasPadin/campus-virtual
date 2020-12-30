@@ -7862,6 +7862,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Botones_Primary_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Botones/Primary.vue */ "./resources/js/Botones/Primary.vue");
 /* harmony import */ var _Botones_Editar_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Botones/Editar.vue */ "./resources/js/Botones/Editar.vue");
 /* harmony import */ var _Botones_Eliminar_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Botones/Eliminar.vue */ "./resources/js/Botones/Eliminar.vue");
+/* harmony import */ var _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Botones/Guardar.vue */ "./resources/js/Botones/Guardar.vue");
+/* harmony import */ var _Pagination_Pagination_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Pagination/Pagination.vue */ "./resources/js/Pagination/Pagination.vue");
 //
 //
 //
@@ -8030,6 +8032,69 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -8041,7 +8106,9 @@ __webpack_require__.r(__webpack_exports__);
     EstructuraInformacion: _Datos_EstructuraInformacion_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Primary: _Botones_Primary_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     Editar: _Botones_Editar_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Eliminar: _Botones_Eliminar_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    Eliminar: _Botones_Eliminar_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Guardar: _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Pagination: _Pagination_Pagination_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   props: {
     successMessage: String,
@@ -8050,7 +8117,20 @@ __webpack_require__.r(__webpack_exports__);
     evaluacion: Object,
     entrega: Object,
     archivos: Array,
-    correcciones: Array
+    correcciones: Array,
+    comentarios: Object
+  },
+  data: function data() {
+    return {
+      form: {
+        comentario: null
+      },
+      updateForm: {
+        id: null,
+        comentario: null
+      },
+      state: 'default'
+    };
   },
   methods: {
     destroyArchivo: function destroyArchivo(archivo_id) {
@@ -8061,6 +8141,28 @@ __webpack_require__.r(__webpack_exports__);
     destroyCorreccion: function destroyCorreccion(archivo_id) {
       if (confirm('Estas seguro de que desea eliminar esta correccion?')) {
         this.$inertia["delete"](this.route('correcciones.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id, archivo_id]));
+      }
+    },
+    submit: function submit() {
+      this.$inertia.post(this.route('entregas-comentarios.store', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id]), this.form);
+    },
+    editar: function editar(comentario) {
+      this.state = 'editing';
+      this.updateForm.id = comentario.id;
+      this.updateForm.comentario = comentario.comentario;
+    },
+    updateComentario: function updateComentario() {
+      this.cancelarEdicion();
+      var entregas_comentario = this.updateForm.id;
+      this.$inertia.put(this.route('entregas-comentarios.update', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id, entregas_comentario]), this.updateForm);
+    },
+    cancelarEdicion: function cancelarEdicion() {
+      this.state = 'default';
+    },
+    destroyComentario: function destroyComentario(comentario_id) {
+      if (confirm('Estas seguro de que desea eliminar este comentario?')) {
+        this.cancelarEdicion();
+        this.$inertia["delete"](this.route('entregas-comentarios.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id, comentario_id]));
       }
     }
   }
@@ -70977,7 +71079,246 @@ var render = function() {
               }),
               0
             )
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "container mx-auto px-4 sm:px-8 my-6" },
+            [
+              _c(
+                "h2",
+                { staticClass: "text-2xl font-semibold leading-tight" },
+                [_vm._v("Comentarios")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "bg-white rounded shadow-sm p-8 mb-4 my-4" },
+                [
+                  _c(
+                    "form",
+                    {
+                      attrs: { method: "post" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.submit($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.comentario,
+                            expression: "form.comentario"
+                          }
+                        ],
+                        staticClass:
+                          "appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3",
+                        attrs: { placeholder: "Escriba aqui su comentario" },
+                        domProps: { value: _vm.form.comentario },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "comentario",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-3" }, [_c("guardar")], 1)
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.state === "editing",
+                      expression: "state === 'editing'"
+                    }
+                  ]
+                },
+                [
+                  _c(
+                    "h2",
+                    { staticClass: "text-2xl font-semibold leading-tight" },
+                    [_vm._v("Actualizar comentario")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "bg-white rounded shadow-sm p-8 mb-4 my-4" },
+                    [
+                      _c(
+                        "form",
+                        {
+                          attrs: { method: "post" },
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.updateComentario($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.updateForm.comentario,
+                                expression: "updateForm.comentario"
+                              }
+                            ],
+                            staticClass:
+                              "appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3",
+                            domProps: { value: _vm.updateForm.comentario },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.updateForm,
+                                  "comentario",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-3" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex flex-col md:flex-row items-center mt-2"
+                              },
+                              [
+                                _c("guardar"),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "border border-indigo-500 bg-indigo-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-700 focus:outline-none focus:shadow-outline",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.cancelarEdicion()
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Cancelar\n                                "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "form",
+                                  {
+                                    attrs: { method: "post" },
+                                    on: {
+                                      submit: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.destroyComentario(
+                                          _vm.updateForm.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("eliminar")],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.comentarios.data, function(comentario) {
+                return _c(
+                  "div",
+                  {
+                    key: comentario.id,
+                    staticClass: "bg-white rounded shadow-sm p-8 my-2"
+                  },
+                  [
+                    _c("div", { staticClass: "flex justify-between mb-1" }, [
+                      _c(
+                        "p",
+                        {
+                          staticClass:
+                            "text-grey-darkest leading-normal text-lg whitespace-pre-wrap"
+                        },
+                        [_vm._v(_vm._s(comentario.comentario))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "ml-2 mt-1 mb-auto text-blue hover:underline text-sm",
+                          on: {
+                            click: function($event) {
+                              return _vm.editar(comentario)
+                            }
+                          }
+                        },
+                        [_vm._v("Editar")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "text-grey-dark leading-normal text-sm" },
+                      [
+                        _c("p", [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(comentario.user.name) +
+                              " "
+                          ),
+                          _c("span", { staticClass: "mx-1 text-xs" }, [
+                            _vm._v("•")
+                          ]),
+                          _vm._v(
+                            " \n                        " +
+                              _vm._s(comentario.updated_at) +
+                              "\n                    "
+                          )
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _c("pagination", { attrs: { links: _vm.comentarios.links } })
+            ],
+            2
+          )
         ],
         1
       )

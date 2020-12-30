@@ -20,7 +20,7 @@ class EvaluacionRespuestaController extends Controller
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
             'comentario' => EvaluacionComentario::with('user')->find($comentario_id),
-            'respuestas' => EvaluacionRespuesta::with('user')->where('comentario_id', $comentario_id)->get(),
+            'respuestas' => EvaluacionRespuesta::with('user')->where('comentario_id', $comentario_id)->orderBy('created_at', 'DESC')->get(),
         ]);
     }
 

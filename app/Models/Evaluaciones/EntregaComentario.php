@@ -9,7 +9,7 @@ class EntregaComentario extends Model
 {
     protected $table = 'entregas_comentarios';
     protected $fillable = [
-        'evaluacion_id',
+        'entrega_id',
         'user_id',
         'comentario',
     ];

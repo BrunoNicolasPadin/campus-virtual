@@ -162,6 +162,67 @@
                     </li>
                 </ul>
             </div>
+
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+
+                <h2 class="text-2xl font-semibold leading-tight">Comentarios</h2>
+
+                <div class="bg-white rounded shadow-sm p-8 mb-4 my-4">
+                    <form method="post" @submit.prevent="submit">
+                        <textarea
+                            v-model="form.comentario"
+                            placeholder="Escriba aqui su comentario"
+                            class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3">
+                        </textarea>
+                        <div class="mt-3">
+                            <guardar></guardar>
+                        </div>
+                    </form>
+                </div>
+
+                <div v-show="state === 'editing'">
+                    <h2 class="text-2xl font-semibold leading-tight">Actualizar comentario</h2>
+
+                    <div class="bg-white rounded shadow-sm p-8 mb-4 my-4">
+                        <form method="post" @submit.prevent="updateComentario">
+                            <textarea
+                                v-model="updateForm.comentario"
+                                class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3">
+                            </textarea>
+                            <div class="mt-3">
+                                <div class="flex flex-col md:flex-row items-center mt-2">
+                                    <guardar></guardar>
+                                    <button 
+                                    type="button"
+                                    @click="cancelarEdicion()"
+                                    class="border border-indigo-500 bg-indigo-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-700 focus:outline-none focus:shadow-outline">
+                                        Cancelar
+                                    </button>
+                                    <form method="post" @submit.prevent="destroyComentario(updateForm.id)">
+                                        <eliminar></eliminar>
+                                    </form>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="bg-white rounded shadow-sm p-8 my-2" v-for="comentario in comentarios.data" :key="comentario.id">
+                    <div class="flex justify-between mb-1">
+                        <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ comentario.comentario }}</p>
+                        <button class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" @click="editar(comentario)">Editar</button>
+                    </div>
+                    <div class="text-grey-dark leading-normal text-sm">
+                        <p>
+                            {{ comentario.user.name }} <span class="mx-1 text-xs">&bull;</span> 
+                            {{ comentario.updated_at }}
+                        </p>
+                    </div>
+                </div>
+
+                 <pagination :links="comentarios.links" />
+            </div>
         </div>
     </app-layout>
 </template>
@@ -172,6 +233,8 @@
     import Primary from '@/Botones/Primary.vue'
     import Editar from '@/Botones/Editar.vue'
     import Eliminar from '@/Botones/Eliminar.vue'
+    import Guardar from '@/Botones/Guardar.vue'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -180,6 +243,8 @@
             Primary,
             Editar,
             Eliminar,
+            Guardar,
+            Pagination,
         },
 
         props: {
@@ -190,6 +255,20 @@
             entrega: Object,
             archivos: Array,
             correcciones: Array,
+            comentarios: Object,
+        },
+
+        data() {
+            return {
+                form: {
+                    comentario: null,
+                },
+                updateForm: {
+                    id: null,
+                    comentario: null,
+                },
+                state: 'default',
+            }
         },
 
         methods: {
@@ -203,6 +282,33 @@
             destroyCorreccion(archivo_id) {
                 if (confirm('Estas seguro de que desea eliminar esta correccion?')) {
                     this.$inertia.delete(this.route('correcciones.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id, archivo_id]))
+                }
+            },
+
+            submit() {
+                this.$inertia.post(this.route('entregas-comentarios.store', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id]), this.form)
+            },
+
+            editar(comentario) {
+                this.state = 'editing';
+                this.updateForm.id = comentario.id;
+                this.updateForm.comentario = comentario.comentario;
+            },
+
+            updateComentario() {
+                this.cancelarEdicion();
+                var entregas_comentario = this.updateForm.id;
+                this.$inertia.put(this.route('entregas-comentarios.update', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id, entregas_comentario]), this.updateForm)
+            },
+
+            cancelarEdicion() {
+                this.state = 'default';
+            },
+
+            destroyComentario(comentario_id) {
+                if (confirm('Estas seguro de que desea eliminar este comentario?')) {
+                    this.cancelarEdicion();
+                    this.$inertia.delete(this.route('entregas-comentarios.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, this.entrega.id, comentario_id]))
                 }
             },
         },

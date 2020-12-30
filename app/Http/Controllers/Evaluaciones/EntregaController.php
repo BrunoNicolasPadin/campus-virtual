@@ -7,6 +7,7 @@ use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
+use App\Models\Evaluaciones\EntregaComentario;
 use App\Models\Evaluaciones\Evaluacion;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -32,6 +33,7 @@ class EntregaController extends Controller
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
             'archivos' => EntregaArchivo::where('entrega_id', $id)->get(),
             'correcciones' => Correccion::where('entrega_id', $id)->get(),
+            'comentarios' => EntregaComentario::where('entrega_id', $id)->with('user')->orderBy('created_at', 'DESC')->paginate(2),
         ]);
     }
 
