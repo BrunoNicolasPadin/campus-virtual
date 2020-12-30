@@ -7,6 +7,7 @@ use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Evaluaciones\CorreccionController;
 use App\Http\Controllers\Evaluaciones\EntregaArchivoController;
+use App\Http\Controllers\Evaluaciones\EntregaComentarioController;
 use App\Http\Controllers\Evaluaciones\EntregaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionArchivoController;
 use App\Http\Controllers\Evaluaciones\EvaluacionComentarioController;
@@ -74,6 +75,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         
                 Route::resource('entregas-archivos', EntregaArchivoController::class);
                 Route::resource('correcciones', CorreccionController::class);
+                Route::resource('entregas-comentarios', EntregaComentarioController::class);
             });
 
             Route::resource('evaluaciones-comentarios', EvaluacionComentarioController::class);
