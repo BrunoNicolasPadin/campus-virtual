@@ -11011,6 +11011,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Botones_Primary_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Botones/Primary.vue */ "./resources/js/Botones/Primary.vue");
 /* harmony import */ var _Botones_Eliminar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Botones/Eliminar.vue */ "./resources/js/Botones/Eliminar.vue");
 /* harmony import */ var _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Botones/Guardar.vue */ "./resources/js/Botones/Guardar.vue");
+/* harmony import */ var _Pagination_Pagination_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Pagination/Pagination.vue */ "./resources/js/Pagination/Pagination.vue");
 //
 //
 //
@@ -11112,6 +11113,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -11121,14 +11127,15 @@ __webpack_require__.r(__webpack_exports__);
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     Primary: _Botones_Primary_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Eliminar: _Botones_Eliminar_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Guardar: _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    Guardar: _Botones_Guardar_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Pagination: _Pagination_Pagination_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   props: {
     successMessage: String,
     institucion_id: String,
     division: Object,
     publicacion: Object,
-    respuestas: Array
+    respuestas: Object
   },
   data: function data() {
     return {
@@ -11154,7 +11161,7 @@ __webpack_require__.r(__webpack_exports__);
     updateRespuesta: function updateRespuesta() {
       this.cancelarEdicion();
       var respuesta_id = this.updateForm.id;
-      this.$inertia.put(this.route('muro.update', [this.institucion_id, this.division.id, this.publicacion.id, respuesta_id]), this.updateForm);
+      this.$inertia.put(this.route('muro-respuestas.update', [this.institucion_id, this.division.id, this.publicacion.id, respuesta_id]), this.updateForm);
     },
     cancelarEdicion: function cancelarEdicion() {
       this.state = 'default';
@@ -78635,7 +78642,8 @@ var render = function() {
                       }
                     },
                     [_vm._v("Muro")]
-                  )
+                  ),
+                  _vm._v("\n             > \n            Respuestas\n        ")
                 ],
                 1
               )
@@ -78889,7 +78897,7 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm._l(_vm.respuestas, function(respuesta) {
+            _vm._l(_vm.respuestas.data, function(respuesta) {
               return _c(
                 "div",
                 {
@@ -78945,7 +78953,9 @@ var render = function() {
                   )
                 ]
               )
-            })
+            }),
+            _vm._v(" "),
+            _c("pagination", { attrs: { links: _vm.respuestas.links } })
           ],
           2
         )

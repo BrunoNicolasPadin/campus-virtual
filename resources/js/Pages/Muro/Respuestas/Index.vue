@@ -10,6 +10,8 @@
                 </inertia-link>
                 > 
                 <inertia-link :href="route('muro.index', [institucion_id, division.id])">Muro</inertia-link>
+                 > 
+                Respuestas
             </h2>
         </template>
 
@@ -82,7 +84,7 @@
                 </div>
 
 
-                <div class="bg-white rounded shadow-sm p-8 my-2" v-for="respuesta in respuestas" :key="respuesta.id">
+                <div class="bg-white rounded shadow-sm p-8 my-2" v-for="respuesta in respuestas.data" :key="respuesta.id">
                     <div class="flex justify-between mb-1">
                         <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ respuesta.respuesta }}</p>
                         <button class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" @click="editar(respuesta)">Editar</button>
@@ -94,6 +96,8 @@
                         </p>
                     </div>
                 </div>
+
+                <pagination :links="respuestas.links" />
             </div>
         </div>
     </app-layout>
@@ -104,6 +108,7 @@
     import Primary from '@/Botones/Primary.vue'
     import Eliminar from '@/Botones/Eliminar.vue'
     import Guardar from '@/Botones/Guardar.vue'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -111,6 +116,7 @@
             Primary,
             Eliminar,
             Guardar,
+            Pagination,
         },
 
         props: {
@@ -118,7 +124,7 @@
             institucion_id: String,
             division: Object,
             publicacion: Object,
-            respuestas: Array,
+            respuestas: Object,
         },
 
         data() {
@@ -148,7 +154,7 @@
             updateRespuesta() {
                 this.cancelarEdicion();
                 var respuesta_id = this.updateForm.id;
-                this.$inertia.put(this.route('muro.update', [this.institucion_id, this.division.id, this.publicacion.id, respuesta_id]), this.updateForm)
+                this.$inertia.put(this.route('muro-respuestas.update', [this.institucion_id, this.division.id, this.publicacion.id, respuesta_id]), this.updateForm)
             },
 
             cancelarEdicion() {

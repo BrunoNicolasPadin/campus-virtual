@@ -14,7 +14,7 @@ class MuroRespuestaController extends Controller
 {
     public function index($institucion_id, $division_id, $muro_id)
     {
-        return Inertia::render('Muro/Respuesta/Index', [
+        return Inertia::render('Muro/Respuestas/Index', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'publicacion' => Muro::with('user')->find($muro_id),

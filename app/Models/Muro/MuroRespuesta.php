@@ -2,6 +2,7 @@
 
 namespace App\Models\Muro;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class MuroRespuesta extends Model
