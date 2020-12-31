@@ -5679,9 +5679,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -6521,6 +6518,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Datos_EstructuraInformacion_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Datos/EstructuraInformacion.vue */ "./resources/js/Datos/EstructuraInformacion.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9022,6 +9026,105 @@ __webpack_require__.r(__webpack_exports__);
         this.$inertia["delete"](this.route('evaluaciones-comentarios.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, comentario_id]));
       }
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Horarios/Mostrar.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Horarios/Mostrar.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Tabla_EstructuraTabla_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Tabla/EstructuraTabla.vue */ "./resources/js/Tabla/EstructuraTabla.vue");
+/* harmony import */ var _Tabla_TableHeadEstructura_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Tabla/TableHeadEstructura.vue */ "./resources/js/Tabla/TableHeadEstructura.vue");
+/* harmony import */ var _Tabla_TableHead_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Tabla/TableHead.vue */ "./resources/js/Tabla/TableHead.vue");
+/* harmony import */ var _Tabla_TableBody_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Tabla/TableBody.vue */ "./resources/js/Tabla/TableBody.vue");
+/* harmony import */ var _Tabla_TableData_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Tabla/TableData.vue */ "./resources/js/Tabla/TableData.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    EstructuraTabla: _Tabla_EstructuraTabla_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TableHeadEstructura: _Tabla_TableHeadEstructura_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TableHead: _Tabla_TableHead_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    TableBody: _Tabla_TableBody_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TableData: _Tabla_TableData_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  },
+  props: {
+    successMessage: String,
+    institucion_id: String,
+    division: Object,
+    semanas: Object,
+    dias: Array
   }
 });
 
@@ -12675,6 +12778,251 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     institucion_id: String
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Tabla_EstructuraTabla_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Tabla/EstructuraTabla.vue */ "./resources/js/Tabla/EstructuraTabla.vue");
+/* harmony import */ var _Tabla_TableHeadEstructura_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Tabla/TableHeadEstructura.vue */ "./resources/js/Tabla/TableHeadEstructura.vue");
+/* harmony import */ var _Tabla_TableHead_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Tabla/TableHead.vue */ "./resources/js/Tabla/TableHead.vue");
+/* harmony import */ var _Tabla_TableBody_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Tabla/TableBody.vue */ "./resources/js/Tabla/TableBody.vue");
+/* harmony import */ var _Tabla_TableData_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Tabla/TableData.vue */ "./resources/js/Tabla/TableData.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    EstructuraTabla: _Tabla_EstructuraTabla_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TableHeadEstructura: _Tabla_TableHeadEstructura_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TableHead: _Tabla_TableHead_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    TableBody: _Tabla_TableBody_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TableData: _Tabla_TableData_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  },
+  props: {
+    successMessage: String,
+    institucion_id: String,
+    division: Object,
+    alumnos: Array
+  },
+  methods: {
+    destroy: function destroy(alumno_id) {
+      if (confirm('Estas seguro de que desea sacar de la division a este alumno?')) {
+        this.$inertia.get(this.route('alumnosDivision.sacarlo', [this.institucion_id, this.division.id, alumno_id]));
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Tabla_EstructuraTabla_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Tabla/EstructuraTabla.vue */ "./resources/js/Tabla/EstructuraTabla.vue");
+/* harmony import */ var _Tabla_TableHeadEstructura_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Tabla/TableHeadEstructura.vue */ "./resources/js/Tabla/TableHeadEstructura.vue");
+/* harmony import */ var _Tabla_TableHead_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Tabla/TableHead.vue */ "./resources/js/Tabla/TableHead.vue");
+/* harmony import */ var _Tabla_TableBody_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Tabla/TableBody.vue */ "./resources/js/Tabla/TableBody.vue");
+/* harmony import */ var _Tabla_TableData_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Tabla/TableData.vue */ "./resources/js/Tabla/TableData.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    EstructuraTabla: _Tabla_EstructuraTabla_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TableHeadEstructura: _Tabla_TableHeadEstructura_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TableHead: _Tabla_TableHead_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    TableBody: _Tabla_TableBody_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TableData: _Tabla_TableData_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  },
+  props: {
+    successMessage: String,
+    institucion_id: String,
+    division: Object,
+    docentes: Array
   }
 });
 
@@ -67871,6 +68219,49 @@ var render = function() {
                           { staticClass: "text-sm font-medium text-gray-500" },
                           [
                             _vm._v(
+                              "\n                        Horarios\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "dd",
+                          {
+                            staticClass:
+                              "text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2"
+                          },
+                          [
+                            _c(
+                              "inertia-link",
+                              {
+                                staticClass: "hover:underline",
+                                attrs: {
+                                  href: _vm.route("horarios.mostrar", [
+                                    _vm.institucion_id,
+                                    _vm.division.id
+                                  ])
+                                }
+                              },
+                              [_vm._v("Ver")]
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                      },
+                      [
+                        _c(
+                          "dt",
+                          { staticClass: "text-sm font-medium text-gray-500" },
+                          [
+                            _vm._v(
                               "\n                        Alumnos\n                    "
                             )
                           ]
@@ -67883,10 +68274,21 @@ var render = function() {
                               "text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2"
                           },
                           [
-                            _vm._v(
-                              "\n                        Ver\n                    "
+                            _c(
+                              "inertia-link",
+                              {
+                                staticClass: "hover:underline",
+                                attrs: {
+                                  href: _vm.route("alumnosDivision.mostrar", [
+                                    _vm.institucion_id,
+                                    _vm.division.id
+                                  ])
+                                }
+                              },
+                              [_vm._v("Ver")]
                             )
-                          ]
+                          ],
+                          1
                         )
                       ]
                     ),
@@ -67895,7 +68297,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                          "bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
                       },
                       [
                         _c(
@@ -67915,10 +68317,21 @@ var render = function() {
                               "text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2"
                           },
                           [
-                            _vm._v(
-                              "\n                        Ver\n                    "
+                            _c(
+                              "inertia-link",
+                              {
+                                staticClass: "hover:underline",
+                                attrs: {
+                                  href: _vm.route("docentesDivision.mostrar", [
+                                    _vm.institucion_id,
+                                    _vm.division.id
+                                  ])
+                                }
+                              },
+                              [_vm._v("Ver")]
                             )
-                          ]
+                          ],
+                          1
                         )
                       ]
                     )
@@ -74153,6 +74566,241 @@ var render = function() {
             ],
             2
           )
+        ],
+        1
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Horarios/Mostrar.vue?vue&type=template&id=097c770b&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Horarios/Mostrar.vue?vue&type=template&id=097c770b& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: _vm.route("divisiones.index", _vm.institucion_id)
+                      }
+                    },
+                    [_vm._v("Estructura")]
+                  ),
+                  _vm._v("\n            > \n            "),
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: _vm.route("divisiones.show", [
+                          _vm.institucion_id,
+                          _vm.division.id
+                        ])
+                      }
+                    },
+                    [
+                      _vm.division.orientacion
+                        ? _c("span", [
+                            _vm._v(
+                              _vm._s(_vm.division.nivel.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.orientacion.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.curso.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.division)
+                            )
+                          ])
+                        : _c("span", [
+                            _vm._v(
+                              _vm._s(_vm.division.nivel.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.curso.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.division)
+                            )
+                          ])
+                    ]
+                  ),
+                  _vm._v("\n            > \n            Horarios\n        ")
+                ],
+                1
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "py-12" },
+        [
+          _c("estructura-tabla", {
+            scopedSlots: _vm._u([
+              {
+                key: "tabla",
+                fn: function() {
+                  return [
+                    _c("table-head-estructura", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "th",
+                          fn: function() {
+                            return [
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Horas\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _vm._l(_vm.dias, function(dia) {
+                                return _c("table-head", {
+                                  key: dia.index,
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "th-titulo",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              "\n                                " +
+                                                _vm._s(dia) +
+                                                "\n                            "
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ],
+                                    null,
+                                    true
+                                  )
+                                })
+                              })
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("table-body", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "tr",
+                          fn: function() {
+                            return _vm._l(_vm.semanas, function(semana) {
+                              return _c(
+                                "tr",
+                                { key: semana.index },
+                                [
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _vm._v(
+                                                "\n                                    " +
+                                                  _vm._s(semana.horaDesde) +
+                                                  " - " +
+                                                  _vm._s(semana.horaHasta) +
+                                                  "\n                                "
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.dias, function(dia) {
+                                    return _c("table-data", {
+                                      key: dia.index,
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "td",
+                                            fn: function() {
+                                              return [
+                                                _vm._v(
+                                                  "\n                                    " +
+                                                    _vm._s(semana.asignatura) +
+                                                    "\n                                "
+                                                )
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      )
+                                    })
+                                  })
+                                ],
+                                2
+                              )
+                            })
+                          },
+                          proxy: true
+                        }
+                      ])
+                    })
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          })
         ],
         1
       )
@@ -82219,6 +82867,614 @@ var render = function() {
                                 1
                               )
                             ]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    })
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=template&id=efbf4b1e&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=template&id=efbf4b1e& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: _vm.route("divisiones.index", _vm.institucion_id)
+                      }
+                    },
+                    [_vm._v("Estructura")]
+                  ),
+                  _vm._v("\n            > \n            "),
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: _vm.route("divisiones.show", [
+                          _vm.institucion_id,
+                          _vm.division.id
+                        ])
+                      }
+                    },
+                    [
+                      _vm.division.orientacion
+                        ? _c("span", [
+                            _vm._v(
+                              _vm._s(_vm.division.nivel.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.orientacion.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.curso.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.division)
+                            )
+                          ])
+                        : _c("span", [
+                            _vm._v(
+                              _vm._s(_vm.division.nivel.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.curso.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.division)
+                            )
+                          ])
+                    ]
+                  ),
+                  _vm._v("\n            > \n            Alumnos\n        ")
+                ],
+                1
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "py-12" },
+        [
+          _c("estructura-tabla", {
+            scopedSlots: _vm._u([
+              {
+                key: "tabla",
+                fn: function() {
+                  return [
+                    _c("table-head-estructura", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "th",
+                          fn: function() {
+                            return [
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                #\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Foto de perfil\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Nombre\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Acciones\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("table-body", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "tr",
+                          fn: function() {
+                            return _vm._l(_vm.alumnos, function(alumno, index) {
+                              return _c(
+                                "tr",
+                                { key: alumno.index },
+                                [
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _vm._v(
+                                                "\n                                    " +
+                                                  _vm._s(index) +
+                                                  "\n                                "
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _vm._v(
+                                                "\n                                    -\n                                "
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _c(
+                                                "a",
+                                                {
+                                                  staticClass:
+                                                    "hover:underline",
+                                                  attrs: {
+                                                    href: _vm.route(
+                                                      "alumnos.show",
+                                                      [
+                                                        _vm.institucion_id,
+                                                        alumno.id
+                                                      ]
+                                                    )
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        " +
+                                                      _vm._s(alumno.user.name) +
+                                                      "\n                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline",
+                                                  attrs: { type: "submit" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.destroy(
+                                                        alumno.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        Eliminar\n                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  })
+                                ],
+                                1
+                              )
+                            })
+                          },
+                          proxy: true
+                        }
+                      ])
+                    })
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=template&id=76a7808f&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=template&id=76a7808f& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: _vm.route("divisiones.index", _vm.institucion_id)
+                      }
+                    },
+                    [_vm._v("Estructura")]
+                  ),
+                  _vm._v("\n            > \n            "),
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: _vm.route("divisiones.show", [
+                          _vm.institucion_id,
+                          _vm.division.id
+                        ])
+                      }
+                    },
+                    [
+                      _vm.division.orientacion
+                        ? _c("span", [
+                            _vm._v(
+                              _vm._s(_vm.division.nivel.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.orientacion.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.curso.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.division)
+                            )
+                          ])
+                        : _c("span", [
+                            _vm._v(
+                              _vm._s(_vm.division.nivel.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.curso.nombre) +
+                                " - " +
+                                _vm._s(_vm.division.division)
+                            )
+                          ])
+                    ]
+                  ),
+                  _vm._v("\n            > \n            Doceentes\n        ")
+                ],
+                1
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "py-12" },
+        [
+          _c("estructura-tabla", {
+            scopedSlots: _vm._u([
+              {
+                key: "tabla",
+                fn: function() {
+                  return [
+                    _c("table-head-estructura", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "th",
+                          fn: function() {
+                            return [
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                #\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Foto de perfil\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Nombre\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("table-body", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "tr",
+                          fn: function() {
+                            return _vm._l(_vm.docentes, function(
+                              docente,
+                              index
+                            ) {
+                              return _c(
+                                "tr",
+                                { key: docente.index },
+                                [
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _vm._v(
+                                                "\n                                    " +
+                                                  _vm._s(index) +
+                                                  "\n                                "
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _vm._v(
+                                                "\n                                    -\n                                "
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _c(
+                                                "a",
+                                                {
+                                                  staticClass:
+                                                    "hover:underline",
+                                                  attrs: {
+                                                    href: _vm.route(
+                                                      "docentes.show",
+                                                      [
+                                                        _vm.institucion_id,
+                                                        docente.id
+                                                      ]
+                                                    )
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        " +
+                                                      _vm._s(
+                                                        docente.user.name
+                                                      ) +
+                                                      "\n                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  })
+                                ],
+                                1
+                              )
+                            })
                           },
                           proxy: true
                         }
@@ -107998,6 +109254,8 @@ var map = {
 	"./Evaluaciones/Respuestas/Index.vue": "./resources/js/Pages/Evaluaciones/Respuestas/Index.vue",
 	"./Evaluaciones/Show": "./resources/js/Pages/Evaluaciones/Show.vue",
 	"./Evaluaciones/Show.vue": "./resources/js/Pages/Evaluaciones/Show.vue",
+	"./Horarios/Mostrar": "./resources/js/Pages/Horarios/Mostrar.vue",
+	"./Horarios/Mostrar.vue": "./resources/js/Pages/Horarios/Mostrar.vue",
 	"./Instituciones/Buscador": "./resources/js/Pages/Instituciones/Buscador.vue",
 	"./Instituciones/Buscador.vue": "./resources/js/Pages/Instituciones/Buscador.vue",
 	"./Instituciones/Create": "./resources/js/Pages/Instituciones/Create.vue",
@@ -108045,7 +109303,11 @@ var map = {
 	"./Roles/Anotarse": "./resources/js/Pages/Roles/Anotarse.vue",
 	"./Roles/Anotarse.vue": "./resources/js/Pages/Roles/Anotarse.vue",
 	"./Roles/Index": "./resources/js/Pages/Roles/Index.vue",
-	"./Roles/Index.vue": "./resources/js/Pages/Roles/Index.vue"
+	"./Roles/Index.vue": "./resources/js/Pages/Roles/Index.vue",
+	"./RolesDivision/Alumnos": "./resources/js/Pages/RolesDivision/Alumnos.vue",
+	"./RolesDivision/Alumnos.vue": "./resources/js/Pages/RolesDivision/Alumnos.vue",
+	"./RolesDivision/Docentes": "./resources/js/Pages/RolesDivision/Docentes.vue",
+	"./RolesDivision/Docentes.vue": "./resources/js/Pages/RolesDivision/Docentes.vue"
 };
 
 
@@ -110347,6 +111609,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Horarios/Mostrar.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/Pages/Horarios/Mostrar.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Mostrar_vue_vue_type_template_id_097c770b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Mostrar.vue?vue&type=template&id=097c770b& */ "./resources/js/Pages/Horarios/Mostrar.vue?vue&type=template&id=097c770b&");
+/* harmony import */ var _Mostrar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Mostrar.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Horarios/Mostrar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Mostrar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Mostrar_vue_vue_type_template_id_097c770b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Mostrar_vue_vue_type_template_id_097c770b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Horarios/Mostrar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Horarios/Mostrar.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/Pages/Horarios/Mostrar.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Mostrar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Mostrar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Horarios/Mostrar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Mostrar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Horarios/Mostrar.vue?vue&type=template&id=097c770b&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Horarios/Mostrar.vue?vue&type=template&id=097c770b& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Mostrar_vue_vue_type_template_id_097c770b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Mostrar.vue?vue&type=template&id=097c770b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Horarios/Mostrar.vue?vue&type=template&id=097c770b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Mostrar_vue_vue_type_template_id_097c770b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Mostrar_vue_vue_type_template_id_097c770b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Instituciones/Buscador.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/Pages/Instituciones/Buscador.vue ***!
@@ -111998,6 +113329,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_2d6b9872___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_2d6b9872___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/RolesDivision/Alumnos.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/Pages/RolesDivision/Alumnos.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Alumnos_vue_vue_type_template_id_efbf4b1e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Alumnos.vue?vue&type=template&id=efbf4b1e& */ "./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=template&id=efbf4b1e&");
+/* harmony import */ var _Alumnos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Alumnos.vue?vue&type=script&lang=js& */ "./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Alumnos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Alumnos_vue_vue_type_template_id_efbf4b1e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Alumnos_vue_vue_type_template_id_efbf4b1e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/RolesDivision/Alumnos.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Alumnos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Alumnos.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Alumnos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=template&id=efbf4b1e&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=template&id=efbf4b1e& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Alumnos_vue_vue_type_template_id_efbf4b1e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Alumnos.vue?vue&type=template&id=efbf4b1e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/RolesDivision/Alumnos.vue?vue&type=template&id=efbf4b1e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Alumnos_vue_vue_type_template_id_efbf4b1e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Alumnos_vue_vue_type_template_id_efbf4b1e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/RolesDivision/Docentes.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/Pages/RolesDivision/Docentes.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Docentes_vue_vue_type_template_id_76a7808f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Docentes.vue?vue&type=template&id=76a7808f& */ "./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=template&id=76a7808f&");
+/* harmony import */ var _Docentes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Docentes.vue?vue&type=script&lang=js& */ "./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Docentes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Docentes_vue_vue_type_template_id_76a7808f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Docentes_vue_vue_type_template_id_76a7808f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/RolesDivision/Docentes.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Docentes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Docentes.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Docentes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=template&id=76a7808f&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=template&id=76a7808f& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Docentes_vue_vue_type_template_id_76a7808f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Docentes.vue?vue&type=template&id=76a7808f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/RolesDivision/Docentes.vue?vue&type=template&id=76a7808f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Docentes_vue_vue_type_template_id_76a7808f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Docentes_vue_vue_type_template_id_76a7808f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

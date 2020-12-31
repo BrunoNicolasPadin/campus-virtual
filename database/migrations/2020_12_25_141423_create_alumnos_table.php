@@ -17,7 +17,7 @@ class CreateAlumnosTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('institucion_id')->constrained('instituciones')->onDelete('cascade');
-            $table->foreignId('division_id')->constrained('divisiones')->onDelete('cascade');
+            $table->foreignId('division_id')->nullable()->constrained('divisiones')->onDelete('cascade');
             $table->timestamps();
         });
     }

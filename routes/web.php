@@ -3,6 +3,7 @@
 use App\Http\Controllers\Asignaturas\AsignaturaController;
 use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
+use App\Http\Controllers\Asignaturas\HorarioController;
 use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Evaluaciones\CorreccionController;
@@ -24,6 +25,8 @@ use App\Http\Controllers\Muro\MuroRespuestaController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DocenteController;
 use App\Http\Controllers\Roles\RolController;
+use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
+use App\Http\Controllers\RolesDivision\DocenteDivisionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,6 +71,13 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::resource('asignaturas-docentes', AsignaturaDocenteController::class);
             Route::resource('asignaturas-horarios', AsignaturaHorarioController::class);
         });
+
+        Route::get('horarios', [HorarioController::class, 'mostrarHorarios'])->name('horarios.mostrar');
+
+        Route::get('alumnos', [AlumnoDivisionController::class, 'mostrarAlumnos'])->name('alumnosDivision.mostrar');
+        Route::get('{alumno_id}/sacarlo', [AlumnoDivisionController::class, 'sacarloDeLaDivision'])->name('alumnosDivision.sacarlo');
+
+        Route::get('docentes', [DocenteDivisionController::class, 'mostrarDocentes'])->name('docentesDivision.mostrar');
 
         Route::resource('evaluaciones', EvaluacionController::class);
         Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
