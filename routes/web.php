@@ -23,6 +23,7 @@ use App\Http\Controllers\Muro\MuroArchivoController;
 use App\Http\Controllers\Muro\MuroController;
 use App\Http\Controllers\Muro\MuroRespuestaController;
 use App\Http\Controllers\Roles\AlumnoController;
+use App\Http\Controllers\Roles\DirectivoController;
 use App\Http\Controllers\Roles\DocenteController;
 use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
@@ -55,6 +56,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::resource('ciclos-lectivos', CicloLectivoController::class);
     Route::get('anotarse', [RolController::class, 'anotarse'])->name('roles.anotarse');
     Route::resource('roles', RolController::class);
+    Route::resource('directivos', DirectivoController::class);
     Route::resource('docentes', DocenteController::class);
     Route::resource('alumnos', AlumnoController::class);
     Route::prefix('alumnos/{alumno_id}')->group(function () {

@@ -5580,6 +5580,200 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Directivos/Index.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Directivos/Index.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Tabla_EstructuraTabla__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Tabla/EstructuraTabla */ "./resources/js/Tabla/EstructuraTabla.vue");
+/* harmony import */ var _Tabla_TableHeadEstructura__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Tabla/TableHeadEstructura */ "./resources/js/Tabla/TableHeadEstructura.vue");
+/* harmony import */ var _Tabla_TableHead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Tabla/TableHead */ "./resources/js/Tabla/TableHead.vue");
+/* harmony import */ var _Tabla_TableBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Tabla/TableBody */ "./resources/js/Tabla/TableBody.vue");
+/* harmony import */ var _Tabla_TableData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Tabla/TableData */ "./resources/js/Tabla/TableData.vue");
+/* harmony import */ var _Botones_Eliminar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Botones/Eliminar */ "./resources/js/Botones/Eliminar.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    EstructuraTabla: _Tabla_EstructuraTabla__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TableHeadEstructura: _Tabla_TableHeadEstructura__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TableHead: _Tabla_TableHead__WEBPACK_IMPORTED_MODULE_3__["default"],
+    TableBody: _Tabla_TableBody__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TableData: _Tabla_TableData__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Eliminar: _Botones_Eliminar__WEBPACK_IMPORTED_MODULE_6__["default"]
+  },
+  props: {
+    successMessage: String,
+    institucion_id: String,
+    directivos: Array
+  },
+  methods: {
+    destroy: function destroy(id) {
+      if (confirm('Estas seguro de que desea eliminar a este directivo?')) {
+        this.$inertia["delete"](this.route('directivos.destroy', [this.institucion_id, id]));
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Directivos/Show.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Directivos/Show.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Datos_EstructuraInformacion_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Datos/EstructuraInformacion.vue */ "./resources/js/Datos/EstructuraInformacion.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    EstructuraInformacion: _Datos_EstructuraInformacion_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    institucion_id: String,
+    directivo: Object
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Docentes/Index.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Docentes/Index.vue?vue&type=script&lang=js& ***!
@@ -12628,7 +12822,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     submit: function submit() {
       if (this.form.tipo == 'Directivo') {
-        alert('Directivo');
+        this.$inertia.post(this.route('directivos.store', this.institucion_id), this.form);
       }
 
       if (this.form.tipo == 'Docente') {
@@ -12663,7 +12857,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Tabla_TableHead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Tabla/TableHead */ "./resources/js/Tabla/TableHead.vue");
 /* harmony import */ var _Tabla_TableBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Tabla/TableBody */ "./resources/js/Tabla/TableBody.vue");
 /* harmony import */ var _Tabla_TableData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Tabla/TableData */ "./resources/js/Tabla/TableData.vue");
-//
 //
 //
 //
@@ -65577,6 +65770,438 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Directivos/Index.vue?vue&type=template&id=54e53cc6&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Directivos/Index.vue?vue&type=template&id=54e53cc6& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: _vm.route("roles.index", _vm.institucion_id)
+                      }
+                    },
+                    [_vm._v("Roles")]
+                  ),
+                  _vm._v("\n             > Directivos\n        ")
+                ],
+                1
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "py-12" },
+        [
+          _c("estructura-tabla", {
+            scopedSlots: _vm._u([
+              {
+                key: "tabla",
+                fn: function() {
+                  return [
+                    _c("table-head-estructura", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "th",
+                          fn: function() {
+                            return [
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                #\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Nombre\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Foto de perfil\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("table-head", {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "th-titulo",
+                                    fn: function() {
+                                      return [
+                                        _vm._v(
+                                          "\n                                Acciones\n                            "
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              })
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("table-body", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "tr",
+                          fn: function() {
+                            return _vm._l(_vm.directivos, function(
+                              directivo,
+                              index
+                            ) {
+                              return _c(
+                                "tr",
+                                { key: directivo.id },
+                                [
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _vm._v(
+                                                "\n                                    " +
+                                                  _vm._s(index + 1) +
+                                                  "\n                                "
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _c(
+                                                "inertia-link",
+                                                {
+                                                  staticClass:
+                                                    "hover:underline",
+                                                  attrs: {
+                                                    href: _vm.route(
+                                                      "directivos.show",
+                                                      [
+                                                        _vm.institucion_id,
+                                                        directivo.id
+                                                      ]
+                                                    )
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        " +
+                                                      _vm._s(
+                                                        directivo.user.name
+                                                      ) +
+                                                      "\n                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _vm._v(
+                                                "\n                                    -\n                                "
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("table-data", {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "td",
+                                          fn: function() {
+                                            return [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline",
+                                                  attrs: { type: "submit" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.destroy(
+                                                        directivo.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        Eliminar\n                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          },
+                                          proxy: true
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  })
+                                ],
+                                1
+                              )
+                            })
+                          },
+                          proxy: true
+                        }
+                      ])
+                    })
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Directivos/Show.vue?vue&type=template&id=0f6c1d8e&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Directivos/Show.vue?vue&type=template&id=0f6c1d8e& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: _vm.route("roles.index", _vm.institucion_id)
+                      }
+                    },
+                    [_vm._v("Roles")]
+                  ),
+                  _vm._v("\n             > \n            "),
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: _vm.route("directivos.index", _vm.institucion_id)
+                      }
+                    },
+                    [_vm._v("Directivos")]
+                  ),
+                  _vm._v(
+                    "\n             > \n            " +
+                      _vm._s(_vm.directivo.user.name) +
+                      "\n        "
+                  )
+                ],
+                1
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "py-12" },
+        [
+          _c("estructura-informacion", {
+            scopedSlots: _vm._u([
+              {
+                key: "cabecera-info",
+                fn: function() {
+                  return [_vm._v("\n                Datos\n            ")]
+                },
+                proxy: true
+              },
+              {
+                key: "dl-contenido",
+                fn: function() {
+                  return [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                      },
+                      [
+                        _c(
+                          "dt",
+                          { staticClass: "text-sm font-medium text-gray-500" },
+                          [
+                            _vm._v(
+                              "\n                        Nombre\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "dd",
+                          {
+                            staticClass:
+                              "text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2"
+                          },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(_vm.directivo.user.name) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Docentes/Index.vue?vue&type=template&id=55ea79ad&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Docentes/Index.vue?vue&type=template&id=55ea79ad& ***!
@@ -82720,8 +83345,18 @@ var render = function() {
                                         key: "td",
                                         fn: function() {
                                           return [
-                                            _vm._v(
-                                              "\n                                    Directivo\n                                    "
+                                            _c(
+                                              "inertia-link",
+                                              {
+                                                staticClass: "hover:underline",
+                                                attrs: {
+                                                  href: _vm.route(
+                                                    "directivos.index",
+                                                    _vm.institucion_id
+                                                  )
+                                                }
+                                              },
+                                              [_vm._v("Directivos")]
                                             )
                                           ]
                                         },
@@ -82769,7 +83404,7 @@ var render = function() {
                                                   )
                                                 }
                                               },
-                                              [_vm._v("Docente")]
+                                              [_vm._v("Docentes")]
                                             )
                                           ]
                                         },
@@ -82817,7 +83452,7 @@ var render = function() {
                                                   )
                                                 }
                                               },
-                                              [_vm._v("Alumno")]
+                                              [_vm._v("Alumnos")]
                                             )
                                           ]
                                         },
@@ -82855,7 +83490,7 @@ var render = function() {
                                         fn: function() {
                                           return [
                                             _vm._v(
-                                              "\n                                    Padre, madre o tutor\n                                    "
+                                              "\n                                    Padres, madres o tutores\n                                    "
                                             )
                                           ]
                                         },
@@ -109218,6 +109853,10 @@ var map = {
 	"./CiclosLectivos/Index.vue": "./resources/js/Pages/CiclosLectivos/Index.vue",
 	"./Dashboard": "./resources/js/Pages/Dashboard.vue",
 	"./Dashboard.vue": "./resources/js/Pages/Dashboard.vue",
+	"./Directivos/Index": "./resources/js/Pages/Directivos/Index.vue",
+	"./Directivos/Index.vue": "./resources/js/Pages/Directivos/Index.vue",
+	"./Directivos/Show": "./resources/js/Pages/Directivos/Show.vue",
+	"./Directivos/Show.vue": "./resources/js/Pages/Directivos/Show.vue",
 	"./Docentes/Index": "./resources/js/Pages/Docentes/Index.vue",
 	"./Docentes/Index.vue": "./resources/js/Pages/Docentes/Index.vue",
 	"./Docentes/Show": "./resources/js/Pages/Docentes/Show.vue",
@@ -110362,6 +111001,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_097ba13b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_097ba13b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Directivos/Index.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/Pages/Directivos/Index.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Index_vue_vue_type_template_id_54e53cc6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=54e53cc6& */ "./resources/js/Pages/Directivos/Index.vue?vue&type=template&id=54e53cc6&");
+/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Directivos/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Index_vue_vue_type_template_id_54e53cc6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Index_vue_vue_type_template_id_54e53cc6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Directivos/Index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Directivos/Index.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/Pages/Directivos/Index.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Directivos/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Directivos/Index.vue?vue&type=template&id=54e53cc6&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Directivos/Index.vue?vue&type=template&id=54e53cc6& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_54e53cc6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=template&id=54e53cc6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Directivos/Index.vue?vue&type=template&id=54e53cc6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_54e53cc6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_54e53cc6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Directivos/Show.vue":
+/*!************************************************!*\
+  !*** ./resources/js/Pages/Directivos/Show.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Show_vue_vue_type_template_id_0f6c1d8e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Show.vue?vue&type=template&id=0f6c1d8e& */ "./resources/js/Pages/Directivos/Show.vue?vue&type=template&id=0f6c1d8e&");
+/* harmony import */ var _Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Directivos/Show.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Show_vue_vue_type_template_id_0f6c1d8e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Show_vue_vue_type_template_id_0f6c1d8e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Directivos/Show.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Directivos/Show.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/Pages/Directivos/Show.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Show.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Directivos/Show.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Directivos/Show.vue?vue&type=template&id=0f6c1d8e&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/Pages/Directivos/Show.vue?vue&type=template&id=0f6c1d8e& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_template_id_0f6c1d8e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Show.vue?vue&type=template&id=0f6c1d8e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Directivos/Show.vue?vue&type=template&id=0f6c1d8e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_template_id_0f6c1d8e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Show_vue_vue_type_template_id_0f6c1d8e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -228,7 +228,7 @@
 
             submit() {
                 if (this.form.tipo == 'Directivo') {
-                    alert('Directivo');
+                    this.$inertia.post(this.route('directivos.store', this.institucion_id), this.form)
                 }
                 if (this.form.tipo == 'Docente') {
                     this.$inertia.post(this.route('docentes.store', this.institucion_id), this.form)
