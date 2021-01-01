@@ -35,6 +35,12 @@
 
                             <table-head>
                                 <template #th-titulo>
+                                    Padres
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
                                     Acciones
                                 </template>
                             </table-head>
@@ -63,6 +69,17 @@
                                 <table-data>
                                     <template #td>
                                         -
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <span v-for="(padre, key, index) in alumno.padres" :key="padre.id">
+                                            <inertia-link class="hover:underline" :href="route('padres.show', [institucion_id, padre.id])">
+                                                {{ padre.user.name }}
+                                            </inertia-link>
+                                            <span v-if="index != Object.keys(alumno.padres).length - 1">, </span>
+                                        </span>
                                     </template>
                                 </table-data>
 

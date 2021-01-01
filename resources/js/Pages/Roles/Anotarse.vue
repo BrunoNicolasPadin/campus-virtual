@@ -237,7 +237,7 @@
                     this.$inertia.post(this.route('alumnos.create', this.institucion_id), this.form)
                 }
                 if (this.form.tipo == 'Padre') {
-                    alert('Padre');
+                    this.$inertia.get(this.route('padres.verificarClave', this.institucion_id), this.form)
                 }
             },
         },

@@ -82,8 +82,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        Padres, madres o tutores
-                                        <!-- <inertia-link :href="route('padres.index', institucion_id)" class="hover:underline">Padre, madre o tutor</inertia-link> -->
+                                        Padre, madre o tutor
                                     </template>
                                 </table-data>
                             </tr>

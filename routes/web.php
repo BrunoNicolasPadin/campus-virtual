@@ -25,6 +25,7 @@ use App\Http\Controllers\Muro\MuroRespuestaController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DirectivoController;
 use App\Http\Controllers\Roles\DocenteController;
+use App\Http\Controllers\Roles\PadreController;
 use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
 use App\Http\Controllers\RolesDivision\DocenteDivisionController;
@@ -59,6 +60,8 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::resource('directivos', DirectivoController::class);
     Route::resource('docentes', DocenteController::class);
     Route::resource('alumnos', AlumnoController::class);
+    Route::resource('padres', PadreController::class);
+    Route::get('verificar-clave', [PadreController::class, 'verificarClave'])->name('padres.verificarClave');
     Route::prefix('alumnos/{alumno_id}')->group(function () {
             
         Route::resource('libretas', LibretaController::class);

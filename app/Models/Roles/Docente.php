@@ -11,6 +11,7 @@ class Docente extends Model
     protected $fillable = [
         'user_id',
         'institucion_id',
+        'activado',
     ];
 
     public function user()

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDirectivosTable extends Migration
+class CreatePadresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDirectivosTable extends Migration
      */
     public function up()
     {
-        Schema::create('directivos', function (Blueprint $table) {
+        Schema::create('padres', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('institucion_id')->constrained('instituciones')->onDelete('cascade');
+            $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
             $table->boolean('activado');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateDirectivosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('directivos');
+        Schema::dropIfExists('padres');
     }
 }

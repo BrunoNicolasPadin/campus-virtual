@@ -36,6 +36,7 @@ class DirectivoController extends Controller
             Directivo::create([
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
+                'activado' => 0,
             ]);
             return redirect('/dashboard');
         }

@@ -30,4 +30,9 @@ class Alumno extends Model
     {
         return $this->belongsTo(Division::class);
     }
+
+    public function padres()
+    {
+        return $this->hasMany(Padre::class);
+    }
 }

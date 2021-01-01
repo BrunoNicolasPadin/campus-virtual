@@ -17,6 +17,7 @@ class CreateDocentesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('institucion_id')->constrained('instituciones')->onDelete('cascade');
+            $table->boolean('activado');
             $table->timestamps();
         });
     }
