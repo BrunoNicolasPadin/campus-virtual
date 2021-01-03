@@ -22,11 +22,13 @@ use App\Http\Controllers\Materiales\MaterialController;
 use App\Http\Controllers\Muro\MuroArchivoController;
 use App\Http\Controllers\Muro\MuroController;
 use App\Http\Controllers\Muro\MuroRespuestaController;
+use App\Http\Controllers\Roles\ActivarCuentaController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DirectivoController;
 use App\Http\Controllers\Roles\DocenteController;
 use App\Http\Controllers\Roles\PadreController;
 use App\Http\Controllers\Roles\RolController;
+use App\Http\Controllers\Roles\TipoCuentaController;
 use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
 use App\Http\Controllers\RolesDivision\DocenteDivisionController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +51,11 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::get('tipos-de-cuentas', [TipoCuentaController::class, 'mostrarCuentas'])->name('roles.mostrarCuentas');
+Route::get('activar-docente/{id}', [ActivarCuentaController::class, 'activarDocente'])->name('roles.activarDocente');
+Route::get('activar-directivo/{id}', [ActivarCuentaController::class, 'activarDirectivo'])->name('roles.activarDirectivo');
+Route::get('activar-padre/{id}', [ActivarCuentaController::class, 'activarPadre'])->name('roles.activarPadre');
 
 Route::get('buscador-de-instituciones', [BuscadorDeInstitucionesController::class, 'buscar'])->name('buscador-de-instituciones');
 Route::resource('instituciones', InstitucionController::class);

@@ -2,6 +2,7 @@
 
 namespace App\Models\Roles;
 
+use App\Models\Instituciones\Institucion;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,5 +18,10 @@ class Docente extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function institucion()
+    {
+        return $this->belongsTo(Institucion::class);
     }
 }
