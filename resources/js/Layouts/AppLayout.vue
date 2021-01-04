@@ -13,10 +13,52 @@
                         </div>
 
                         <!-- Navigation Links -->
+                        
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <jet-nav-link :href="route('inicio')" :active="route().current('inicio')">
+                                Inicio
+                            </jet-nav-link>
                             <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                 Dashboard
                             </jet-nav-link>
+                            <jet-nav-link :href="route('buscador-de-instituciones')" :active="route().current('buscador-de-instituciones')">
+                                Buscador de colegios
+                            </jet-nav-link>
+                            <jet-nav-link>
+                                Mi division (Mejorar)
+                            </jet-nav-link>
+                            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                                <div class="ml-3 relative">
+                                    <jet-dropdown align="right">
+                                        <template #trigger>
+                                            <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                                <div>Institucional</div>
+
+                                                <div class="ml-1">
+                                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </template>
+
+                                        <template #content>
+                                            <jet-dropdown-link :href="route('divisiones.index', 1)" :active="route().current('divisiones.index', 1)">
+                                                Divisiones
+                                            </jet-dropdown-link>
+                                            <jet-dropdown-link :href="route('ciclos-lectivos.index', 1)" :active="route().current('ciclos-lectivos.index', 1)">
+                                                Ciclos lectivos
+                                            </jet-dropdown-link>
+                                            <jet-dropdown-link :href="route('roles.index', 1)" :active="route().current('roles.index', 1)">
+                                                Roles
+                                            </jet-dropdown-link>
+                                            <jet-dropdown-link>
+                                                Perfil institucional (Mejorar)
+                                            </jet-dropdown-link>
+                                        </template>
+                                    </jet-dropdown>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -43,11 +85,11 @@
                                 <template #content>
                                     <!-- Account Management -->
                                     <div class="block px-4 py-2 text-xs text-gray-400">
-                                        Manage Account
+                                        Configuracion
                                     </div>
 
                                     <jet-dropdown-link :href="route('profile.show')">
-                                        Profile
+                                        Perfil
                                     </jet-dropdown-link>
 
                                     <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
@@ -95,7 +137,7 @@
                                     <!-- Authentication -->
                                     <form @submit.prevent="logout">
                                         <jet-dropdown-link as="button">
-                                            Logout
+                                            Salir
                                         </jet-dropdown-link>
                                     </form>
                                 </template>
@@ -118,9 +160,38 @@
             <!-- Responsive Navigation Menu -->
             <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                 <div class="pt-2 pb-3 space-y-1">
+                    <jet-responsive-nav-link :href="route('inicio')" :active="route().current('inicio')">
+                        Inicio
+                    </jet-responsive-nav-link>
                     <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                         Dashboard
                     </jet-responsive-nav-link>
+                    <jet-responsive-nav-link :href="route('buscador-de-instituciones')" :active="route().current('buscador-de-instituciones')">
+                        Buscador de instituciones
+                    </jet-responsive-nav-link>
+                    <jet-responsive-nav-link :href="route('roles.mostrarCuentas')" :active="route().current('roles.mostrarCuentas')">
+                        Cuentas
+                    </jet-responsive-nav-link>
+                    <div class="flex items-center px-4">
+                        <div class="ml-3">
+                            <div class="font-medium text-base text-gray-800">Institucional</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 space-y-1">
+                        <jet-responsive-nav-link :href="route('divisiones.index', 1)" :active="route().current('divisiones.index', 1)">
+                            Divisiones
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('ciclos-lectivos.index', 1)" :active="route().current('ciclos-lectivos.index', 1)">
+                            Ciclos lectivos
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('roles.index', 1)" :active="route().current('roles.index', 1)">
+                            Roles
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link>
+                            Perfil institucional (Mejorar)
+                        </jet-responsive-nav-link>
+                    </div>
                 </div>
 
                 <!-- Responsive Settings Options -->
@@ -138,7 +209,7 @@
 
                     <div class="mt-3 space-y-1">
                         <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                            Profile
+                            Perfil
                         </jet-responsive-nav-link>
 
                         <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
@@ -148,7 +219,7 @@
                         <!-- Authentication -->
                         <form method="POST" @submit.prevent="logout">
                             <jet-responsive-nav-link as="button">
-                                Logout
+                                Salir
                             </jet-responsive-nav-link>
                         </form>
 
