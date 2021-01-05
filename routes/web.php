@@ -5,6 +5,7 @@ use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
 use App\Http\Controllers\Asignaturas\HorarioController;
 use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Evaluaciones\CorreccionController;
 use App\Http\Controllers\Evaluaciones\EntregaArchivoController;
@@ -48,9 +49,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'mostrarDashboard'])->name('dashboard');
 
 Route::get('tipos-de-cuentas', [TipoCuentaController::class, 'mostrarCuentas'])->name('roles.mostrarCuentas');
 Route::get('activar-docente/{id}', [ActivarCuentaController::class, 'activarDocente'])->name('roles.activarDocente');
