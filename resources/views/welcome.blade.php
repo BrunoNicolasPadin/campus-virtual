@@ -24,10 +24,10 @@
                         @auth
                             <a href="{{ route('dashboard') }}" class="text-sm text-indigo-800 font-bold hover:underline">Dashboard</a>
                             @else
-                                <a href="{{ route('login') }}" class="text-sm text-indigo-800 font-bold hover:underline">Login</a>
+                                <a href="{{ route('login') }}" class="text-sm text-indigo-800 font-bold hover:underline">Ingresar</a>
 
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="ml-4 text-sm text-indigo-800 font-bold hover:underline">Register</a>
+                                    <a href="{{ route('register') }}" class="ml-4 text-sm text-indigo-800 font-bold hover:underline">Registrarse</a>
                                 @endif
                             @endif
                         @endauth

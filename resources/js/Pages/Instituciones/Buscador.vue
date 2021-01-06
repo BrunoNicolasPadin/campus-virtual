@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="py-2">
+        <div>
 
             <estructura-tabla>
                 <template #tabla>

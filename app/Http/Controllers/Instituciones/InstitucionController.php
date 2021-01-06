@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Instituciones\StoreInstitucion;
 use App\Http\Requests\Instituciones\UpdateInstitucion;
 use App\Models\Instituciones\Institucion;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
@@ -27,7 +26,7 @@ class InstitucionController extends Controller
 
     public function store(StoreInstitucion $request)
     {
-        Institucion::create([
+        $institucion = Institucion::create([
             'user_id' => Auth::id(),
             'numero' => $request->numero,
             'fundacion' => $request->fundacion,
@@ -35,13 +34,20 @@ class InstitucionController extends Controller
             'claveDeAcceso' => Hash::make($request->claveDeAcceso),
         ]);
 
-        return redirect(route('ciclos-lectivos.index'))->with(['successMessage' => 'Institucion cargada con exito!']);
+        return redirect(route('ciclos-lectivos.index', $institucion->id))->with(['successMessage' => 'Institución cargada con éxito!']);
+    }
+
+    public function show($id)
+    {
+        return Inertia::render('Instituciones/Show', [
+            'institucion' => Institucion::with('user')->find($id),
+        ]);
     }
 
     public function edit($id)
     {
         return Inertia::render('Instituciones/Edit', [
-            'institucion' => Institucion::find($id),
+            'institucion' => Institucion::with('user')->find($id),
         ]);
     }
 
@@ -53,7 +59,7 @@ class InstitucionController extends Controller
                 'fundacion' => $request->fundacion,
                 'historia' => $request->historia,
             ]);
-        return back()->with(['successMessage' => 'Institucion actualizada con exito!']);
+        return back()->with(['successMessage' => 'Institución actualizada con éxito!']);
     }
 
     public function destroy($id)

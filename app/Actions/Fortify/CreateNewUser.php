@@ -11,12 +11,6 @@ class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
 
-    /**
-     * Validate and create a newly registered user.
-     *
-     * @param  array  $input
-     * @return \App\Models\User
-     */
     public function create(array $input)
     {
         Validator::make($input, [
@@ -25,6 +19,10 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'tipo' => 'required',
         ])->validate();
+
+        if ($input['tipo'] == 'Institucion') {
+            session(['tipo' => 'Institucion']);
+        }
 
         return User::create([
             'name' => $input['name'],

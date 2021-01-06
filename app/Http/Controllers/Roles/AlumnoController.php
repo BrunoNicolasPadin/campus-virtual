@@ -50,13 +50,18 @@ class AlumnoController extends Controller
 
     public function store(StoreAlumno $request, $institucion_id)
     {
-        if (true) {
+        if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
             Alumno::create([
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
                 'division_id' => $request->division_id,
             ]);
-            return redirect('/dashboard');
+
+            session(['tipo' => 'Alumno']);
+            session(['institucion_id' => $institucion_id]);
+            session(['division_id' => $request->division_id]);
+
+            return redirect(route('divisiones.show', [$institucion_id, $request->division_id]));
         }
         return redirect(route('alumnos.create', $institucion_id))->withErrors('Clave de acceso incorrecta.');
     }
@@ -87,7 +92,7 @@ class AlumnoController extends Controller
 
     public function update(StoreAlumno $request, $institucion_id, $id)
     {
-        if (true) {
+        if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
             $alumno = Alumno::find($id);
             $alumno->division_id = $request->division_id;
             $alumno->save();

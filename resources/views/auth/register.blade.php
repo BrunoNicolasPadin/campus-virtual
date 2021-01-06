@@ -31,8 +31,8 @@
             <div class="mt-4">
                 <x-jet-label for="tipo" value="{{ __('Tipo de cuenta') }}" />
                 <select required name="tipo" class="form-select mt-1 block w-full">
-                    <option value="">-</option>
-                    <option value="Institución">Institución</option>
+                    <option value="" disabled>-</option>
+                    <option value="Institucion">Institución</option>
                     <option value="Persona">Persona</option>
               </select>
             </div>
