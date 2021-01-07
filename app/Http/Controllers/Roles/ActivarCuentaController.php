@@ -21,6 +21,10 @@ class ActivarCuentaController extends Controller
         $docente = Docente::find($id);
         $docente->activado = 1;
         $docente->save();
+
+        session(['tipo' => 'Docente']);
+        session(['institucion_id' => $docente->institucion_id]);
+
         return back()->with(['successMessage' => 'Docente activado']);
     }
 
@@ -32,9 +36,13 @@ class ActivarCuentaController extends Controller
         $this->desactivarDirectivos($user_id);
         $this->desactivarPadres($user_id);
 
-        $direcitvo = Directivo::find($id);
-        $direcitvo->activado = 1;
-        $direcitvo->save();
+        $directivo = Directivo::find($id);
+        $directivo->activado = 1;
+        $directivo->save();
+
+        session(['tipo' => 'Directivo']);
+        session(['institucion_id' => $directivo->institucion_id]);
+    
         return back()->with(['successMessage' => 'Directivo activado']);
     }
 
@@ -49,6 +57,12 @@ class ActivarCuentaController extends Controller
         $padre = Padre::find($id);
         $padre->activado = 1;
         $padre->save();
+
+        session(['tipo' => 'Padre']);
+        session(['institucion_id' => $padre->hijos->institucion_id]);
+        session(['division_id' => $padre->hijos->division_id]);
+        session(['alumno_id' => $padre->alumno_id]);
+
         return back()->with(['successMessage' => 'Padre activado']);
     }
 

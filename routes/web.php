@@ -18,6 +18,7 @@ use App\Http\Controllers\Evaluaciones\EvaluacionRespuestaController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Libretas\LibretaController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Materiales\GrupoController;
 use App\Http\Controllers\Materiales\MaterialController;
 use App\Http\Controllers\Muro\MuroArchivoController;
@@ -48,6 +49,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
+
+Route::post('/login', [LoginController::class, 'authenticate'])->name('loginNuevo');
 
 Route::get('/dashboard', [DashboardController::class, 'mostrarDashboard'])->name('dashboard');
 

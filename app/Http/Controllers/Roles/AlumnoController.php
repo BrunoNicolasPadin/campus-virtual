@@ -51,13 +51,14 @@ class AlumnoController extends Controller
     public function store(StoreAlumno $request, $institucion_id)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
-            Alumno::create([
+            $alumno = Alumno::create([
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
                 'division_id' => $request->division_id,
             ]);
 
             session(['tipo' => 'Alumno']);
+            session(['alumno_id' => $alumno->id]);
             session(['institucion_id' => $institucion_id]);
             session(['division_id' => $request->division_id]);
 

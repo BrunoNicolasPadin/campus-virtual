@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Asignaturas;
 use App\Http\Controllers\Controller;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
-use App\Models\Asignaturas\AsignaturaHorario;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Docente;
 use Illuminate\Http\Request;

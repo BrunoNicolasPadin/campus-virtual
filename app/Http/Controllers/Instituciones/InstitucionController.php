@@ -33,6 +33,9 @@ class InstitucionController extends Controller
             'historia' => $request->historia,
             'claveDeAcceso' => Hash::make($request->claveDeAcceso),
         ]);
+                
+        session(['tipo' => 'Institucion']);
+        session(['institucion_id' => $institucion->id]);
 
         return redirect(route('ciclos-lectivos.index', $institucion->id))->with(['successMessage' => 'Institución cargada con éxito!']);
     }
