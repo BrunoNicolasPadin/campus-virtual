@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Muro;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Muro\StoreArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroArchivo;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class MuroArchivoController extends Controller
@@ -30,7 +30,7 @@ class MuroArchivoController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id, $muro_id)
+    public function store(StoreArchivo $request, $institucion_id, $division_id, $muro_id)
     {
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');

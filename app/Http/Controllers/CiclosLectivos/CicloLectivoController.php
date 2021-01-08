@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CiclosLectivos\StoreCicloLectivo;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Services\FechaHora\CambiarFormatoFecha;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CicloLectivoController extends Controller
@@ -55,7 +54,7 @@ class CicloLectivoController extends Controller
         ]);
     }
 
-    public function update(Request $request, $institucion_id, $id)
+    public function update(StoreCicloLectivo $request, $institucion_id, $id)
     {
         CicloLectivo::where('id', $id)
             ->update([

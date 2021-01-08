@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Asignaturas\StoreDocente;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Docente;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AsignaturaDocenteController extends Controller
@@ -24,7 +24,7 @@ class AsignaturaDocenteController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id, $asignatura_id)
+    public function store(StoreDocente $request, $institucion_id, $division_id, $asignatura_id)
     {
         for ($i=0; $i < count($request->docente); $i++) { 
             AsignaturaDocente::create([

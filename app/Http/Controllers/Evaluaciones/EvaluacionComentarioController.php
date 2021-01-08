@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Evaluaciones\StoreComentario;
 use App\Models\Evaluaciones\EvaluacionComentario;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EvaluacionComentarioController extends Controller
 {
-    public function store(Request $request, $institucion_id, $division_id, $evaluacion_id)
+    public function store(StoreComentario $request, $institucion_id, $division_id, $evaluacion_id)
     {
         EvaluacionComentario::create([
             'evaluacion_id' => $evaluacion_id,
@@ -19,7 +19,7 @@ class EvaluacionComentarioController extends Controller
         return back();
     }
 
-    public function update(Request $request, $institucion_id, $division_id, $evaluacion_id, $id)
+    public function update(StoreComentario $request, $institucion_id, $division_id, $evaluacion_id, $id)
     {
         EvaluacionComentario::where('id', $id)
             ->update([

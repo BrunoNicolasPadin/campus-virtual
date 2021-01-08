@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Muro;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Muro\StorePublicacion;
 use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -20,7 +20,7 @@ class MuroController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id)
+    public function store(StorePublicacion $request, $institucion_id, $division_id)
     {
         Muro::create([
             'division_id' => $division_id,
@@ -30,7 +30,7 @@ class MuroController extends Controller
         return back()->with(['successMessage' => 'Publicacion realizada con exito!']);
     }
 
-    public function update(Request $request, $institucion_id, $division_id, $id)
+    public function update(StorePublicacion $request, $institucion_id, $division_id, $id)
     {
         Muro::where('id', $id)
             ->update([

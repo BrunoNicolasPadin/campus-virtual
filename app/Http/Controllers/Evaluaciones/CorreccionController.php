@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Muro\StoreArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CorreccionController extends Controller
@@ -22,7 +22,7 @@ class CorreccionController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id)
+    public function store(StoreArchivo $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');

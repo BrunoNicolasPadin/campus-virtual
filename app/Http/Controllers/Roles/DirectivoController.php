@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Roles\StoreDirectivo;
 use App\Models\Roles\Directivo;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class DirectivoController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id)
+    public function store(StoreDirectivo $request, $institucion_id)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
             Directivo::create([

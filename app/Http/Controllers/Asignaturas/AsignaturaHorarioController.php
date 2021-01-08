@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Asignaturas\StoreHorario;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaHorario;
 use App\Models\Estructuras\Division;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AsignaturaHorarioController extends Controller
@@ -23,7 +23,7 @@ class AsignaturaHorarioController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id, $asignatura_id)
+    public function store(StoreHorario $request, $institucion_id, $division_id, $asignatura_id)
     {
         for ($i=0; $i < count($request->diaHorario); $i++) { 
             AsignaturaHorario::create([

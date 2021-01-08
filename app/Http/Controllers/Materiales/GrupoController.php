@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Materiales;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Materiales\StoreGrupo;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
 use App\Models\Roles\Docente;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -36,7 +36,7 @@ class GrupoController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id)
+    public function store(StoreGrupo $request, $institucion_id, $division_id)
     {
         $grupo = Grupo::create([
             'division_id' => $division_id,
@@ -70,7 +70,7 @@ class GrupoController extends Controller
         ]);
     }
 
-    public function update(Request $request, $institucion_id, $division_id, $id)
+    public function update(StoreGrupo $request, $institucion_id, $division_id, $id)
     {
         Grupo::where('id', $id)
             ->update([

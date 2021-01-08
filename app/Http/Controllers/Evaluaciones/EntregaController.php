@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Evaluaciones\UpdateEntrega;
 use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\EntregaComentario;
 use App\Models\Evaluaciones\Evaluacion;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class EntregaController extends Controller
@@ -47,7 +47,7 @@ class EntregaController extends Controller
         ]);
     }
 
-    public function update(Request $request, $institucion_id, $division_id, $evaluacion_id, $id)
+    public function update(UpdateEntrega $request, $institucion_id, $division_id, $evaluacion_id, $id)
     {
         Entrega::where('id', $id)
             ->update([

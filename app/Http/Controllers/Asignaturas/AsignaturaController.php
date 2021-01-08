@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Asignaturas\StoreAsignatura;
+use App\Http\Requests\Asignaturas\UpdateAsignatura;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Asignaturas\AsignaturaHorario;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Docente;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AsignaturaController extends Controller
@@ -39,7 +40,7 @@ class AsignaturaController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id)
+    public function store(StoreAsignatura $request, $institucion_id, $division_id)
     {
         $asig = Asignatura::create([
             'division_id' => $division_id,
@@ -80,7 +81,7 @@ class AsignaturaController extends Controller
         ]);
     }
 
-    public function update(Request $request, $institucion_id, $division_id, $id)
+    public function update(UpdateAsignatura $request, $institucion_id, $division_id, $id)
     {
         Asignatura::where('id', $id)
             ->update([

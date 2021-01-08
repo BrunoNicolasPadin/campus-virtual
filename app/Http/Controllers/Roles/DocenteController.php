@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Docentes\StoreDocente;
+use App\Http\Requests\Roles\StoreDocente;
 use App\Models\Roles\Docente;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
 use Illuminate\Support\Facades\Auth;

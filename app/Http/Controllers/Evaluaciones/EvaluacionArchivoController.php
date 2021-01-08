@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Evaluaciones\StoreEvaluacionArchivo;
+use App\Http\Requests\Evaluaciones\UpdateEvaluacionArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class EvaluacionArchivoController extends Controller
@@ -20,7 +21,7 @@ class EvaluacionArchivoController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id, $evaluacion_id)
+    public function store(StoreEvaluacionArchivo $request, $institucion_id, $division_id, $evaluacion_id)
     {
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
@@ -50,7 +51,7 @@ class EvaluacionArchivoController extends Controller
         ]);
     }
 
-    public function update(Request $request, $institucion_id, $division_id, $evaluacion_id, $id)
+    public function update(UpdateEvaluacionArchivo $request, $institucion_id, $division_id, $evaluacion_id, $id)
     {
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');

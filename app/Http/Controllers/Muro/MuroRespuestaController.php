@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Muro;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Muro\StoreRespuesta;
 use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroRespuesta;
@@ -22,7 +23,7 @@ class MuroRespuestaController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id, $muro_id)
+    public function store(StoreRespuesta $request, $institucion_id, $division_id, $muro_id)
     {
         MuroRespuesta::create([
             'muro_id' => $muro_id,
@@ -32,7 +33,7 @@ class MuroRespuestaController extends Controller
         return back()->with(['successMessage' => 'Respuesta realizada con exito!']);
     }
 
-    public function update(Request $request, $institucion_id, $division_id, $muro_id, $id)
+    public function update(StoreRespuesta $request, $institucion_id, $division_id, $muro_id, $id)
     {
         MuroRespuesta::where('id', $id)
             ->update([

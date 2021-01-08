@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Materiales;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Materiales\StoreMaterial;
 use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class MaterialController extends Controller
@@ -20,7 +20,7 @@ class MaterialController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id, $grupo_id)
+    public function store(StoreMaterial $request, $institucion_id, $division_id, $grupo_id)
     {
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
@@ -49,7 +49,7 @@ class MaterialController extends Controller
         ]);
     }
 
-    public function update(Request $request, $institucion_id, $division_id, $grupo_id, $id)
+    public function update(StoreMaterial $request, $institucion_id, $division_id, $grupo_id, $id)
     {
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');

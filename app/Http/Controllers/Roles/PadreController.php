@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Roles\StoreDirectivo;
+use App\Http\Requests\Roles\StorePadre;
 use App\Models\Roles\Alumno;
 use App\Models\Roles\Padre;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
@@ -21,7 +23,7 @@ class PadreController extends Controller
         $this->claveDeAccesoService = $claveDeAccesoService;
     }
 
-    public function verificarClave($institucion_id, Request $request)
+    public function verificarClave($institucion_id, StoreDirectivo $request)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
             return redirect(route('padres.create', $institucion_id));
@@ -41,15 +43,18 @@ class PadreController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id)
+    public function store(StorePadre $request, $institucion_id)
     {
-        Padre::create([
-            'user_id' => Auth::id(),
-            'alumno_id' => $request->alumno_id,
-            'activado' => 0,
-        ]);
-
-        return back()->with(['successMessage' => 'Hijo registrado con  exito! Seleccione a otro si desea cargarlo.']);
+        if (Alumno::where('id', $request->alumno_id)->where('institucion_id', $institucion_id)->exists()) {
+            Padre::create([
+                'user_id' => Auth::id(),
+                'alumno_id' => $request->alumno_id,
+                'activado' => 0,
+            ]);
+    
+            return back()->with(['successMessage' => 'Hijo registrado con  exito! Seleccione a otro si desea cargarlo.']);
+        }
+        return back()->withErrors('Este alumno no existe en esta institucion.');
     }
 
     public function show($institucion_id, $id)

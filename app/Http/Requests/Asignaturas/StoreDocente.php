@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Docentes;
+namespace App\Http\Requests\Asignaturas;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,14 +14,14 @@ class StoreDocente extends FormRequest
     public function rules()
     {
         return [
-            'claveDeAcceso' => 'required',
+            'docente.*.docente_id' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'claveDeAcceso.required' => 'Debe ingresar una clave de acceso.',
+            'docente.*.docente_id.required' => 'Debe seleccionar un docente.',
         ];
     }
 }

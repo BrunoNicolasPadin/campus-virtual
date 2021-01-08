@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Libretas;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Libretas\UpdateLibreta;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class LibretaController extends Controller
@@ -63,7 +63,7 @@ class LibretaController extends Controller
         ]);
     }
 
-    public function update(Request $request, $institucion_id, $alumno_id, $id)
+    public function update(UpdateLibreta $request, $institucion_id, $alumno_id, $id)
     {
         $libreta = Libreta::find($id);
 

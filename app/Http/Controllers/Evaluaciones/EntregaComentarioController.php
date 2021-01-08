@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Evaluaciones\StoreComentario;
 use App\Models\Evaluaciones\EntregaComentario;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EntregaComentarioController extends Controller
 {
-    public function store(Request $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id)
+    public function store(StoreComentario $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
         EntregaComentario::create([
             'entrega_id' => $entrega_id,
@@ -19,7 +19,7 @@ class EntregaComentarioController extends Controller
         return back();
     }
 
-    public function update(Request $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id, $id)
+    public function update(StoreComentario $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id, $id)
     {
         EntregaComentario::where('id', $id)
             ->update([
