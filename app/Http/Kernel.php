@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'soloInstituciones' => \App\Http\Middleware\Instituciones\SoloInstituciones::class,
         'cicloCorrespondiente' => \App\Http\Middleware\CiclosLectivos\CicloCorrespondiente::class,
         'soloInstitucionesDirectivos' => \App\Http\Middleware\CiclosLectivos\SoloInstitucionesDirectivos::class,
+        'divisionCorrespondiente' => \App\Http\Middleware\Divisiones\DivisionCorrespondiente::class,
     ];
 }
