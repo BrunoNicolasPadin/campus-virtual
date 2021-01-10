@@ -13,6 +13,16 @@ use Inertia\Inertia;
 
 class EvaluacionRespuestaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('evaluacionCorrespondiente');
+        $this->middleware('verRespuestasEvaluacionCorrespondiente')->only('index', 'store');
+        $this->middleware('respuestaEvaluacionCorrespondiente')->only('update', 'destroy');
+    }
+
     public function index($institucion_id, $division_id, $evaluacion_id, $comentario_id)
     {
         return Inertia::render('Evaluaciones/Respuestas/Index', [

@@ -14,6 +14,11 @@ class EvaluacionComentario extends Model
         'comentario',
     ];
 
+    public function evaluacion()
+    {
+        return $this->belongsTo(Evaluacion::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

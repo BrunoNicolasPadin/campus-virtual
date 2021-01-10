@@ -12,6 +12,17 @@ use Inertia\Inertia;
 
 class CorreccionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('evaluacionCorrespondiente');
+        $this->middleware('entregaCorrespondiente');
+        $this->middleware('soloDocentes');
+        $this->middleware('correccionCorrespondiente')->only('destroy');
+    }
+
     public function create($institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
         return Inertia::render('Evaluaciones/Correcciones/Create', [

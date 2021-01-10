@@ -12,4 +12,9 @@ class EntregaArchivo extends Model
         'archivo',
         'fechaHoraEntrega',
     ];
+
+    public function entrega()
+    {
+        return $this->belongsTo(Entrega::class);
+    }
 }

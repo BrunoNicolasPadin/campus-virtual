@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class EntregaComentarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('evaluacionCorrespondiente');
+        $this->middleware('entregaCorrespondiente');
+        $this->middleware('entregaComentarioCorrespondiente')->only('update', 'destroy');
+    }
+
     public function store(StoreComentario $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
         EntregaComentario::create([

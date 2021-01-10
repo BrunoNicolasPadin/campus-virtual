@@ -21,6 +21,12 @@ class EvaluacionController extends Controller
 
     public function __construct(CambiarFormatoFechaHora $formatoService)
     {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('soloDocentes')->except('index', 'show');
+        $this->middleware('evaluacionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
+
         $this->formatoService = $formatoService;
     }
 

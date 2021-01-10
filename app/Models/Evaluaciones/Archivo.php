@@ -13,4 +13,9 @@ class Archivo extends Model
         'archivo',
         'visibilidad',
     ];
+
+    public function evaluacion()
+    {
+        return $this->belongsTo(Evaluacion::class);
+    }
 }

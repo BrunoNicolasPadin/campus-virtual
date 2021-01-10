@@ -14,6 +14,17 @@ use Inertia\Inertia;
 
 class EntregaArchivoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('evaluacionCorrespondiente');
+        $this->middleware('entregaCorrespondiente');
+        $this->middleware('soloAlumnos');
+        $this->middleware('entregaArchivoCorrespondiente')->only('destroy');
+    }
+
     public function create($institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
         return Inertia::render('Evaluaciones/EntregasArchivos/Create', [

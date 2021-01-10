@@ -15,6 +15,11 @@ class Entrega extends Model
         'comentario',
     ];
 
+    public function evaluacion()
+    {
+        return $this->belongsTo(Evaluacion::class);
+    }
+
     public function alumno()
     {
         return $this->belongsTo(Alumno::class);

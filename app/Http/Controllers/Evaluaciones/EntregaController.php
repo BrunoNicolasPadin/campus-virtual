@@ -14,6 +14,16 @@ use Inertia\Inertia;
 
 class EntregaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('evaluacionCorrespondiente');
+        $this->middleware('soloDocentes')->only('edit', 'update');
+        $this->middleware('entregaCorrespondiente')->only('show', 'edit', 'update');
+    }
+
     public function index($institucion_id, $division_id, $evaluacion_id)
     {
         return Inertia::render('Evaluaciones/Entregas/Index', [

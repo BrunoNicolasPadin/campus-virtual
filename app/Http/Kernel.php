@@ -75,5 +75,16 @@ class Kernel extends HttpKernel
         'alumnoYaCreado' => \App\Http\Middleware\Alumnos\AlumnoYaCreado::class,
         'soloInstitucionesDirectivosAlumnos' => \App\Http\Middleware\Alumnos\SoloInstitucionesDirectivosAlumnos::class,
         'alumnoCorrespondiente' => \App\Http\Middleware\Alumnos\AlumnoCorrespondiente::class,
+        'soloDocentes' => \App\Http\Middleware\Evaluaciones\SoloDocentes::class,
+        'evaluacionCorrespondiente' => \App\Http\Middleware\Evaluaciones\EvaluacionCorrespondiente::class,
+        'archivoCorrespondiente' => \App\Http\Middleware\Evaluaciones\ArchivoCorrespondiente::class,
+        'comentarioEvaluacionCorrespondiente' => \App\Http\Middleware\Evaluaciones\ComentarioCorrespondiente::class,
+        'verRespuestasEvaluacionCorrespondiente' => \App\Http\Middleware\Evaluaciones\VerRespuestasEvaluacionCorrespondiente::class,
+        'respuestaEvaluacionCorrespondiente' => \App\Http\Middleware\Evaluaciones\RespuestaEvaluacionCorrespondiente::class,
+        'entregaCorrespondiente' => \App\Http\Middleware\Evaluaciones\EntregaCorrespondiente::class,
+        'soloAlumnos' => \App\Http\Middleware\Evaluaciones\SoloAlumnos::class,
+        'entregaArchivoCorrespondiente' => \App\Http\Middleware\Evaluaciones\EntregaArchivoCorrespondiente::class,
+        'correccionCorrespondiente' => \App\Http\Middleware\Evaluaciones\CorreccionCorrespondiente::class,
+        'entregaComentarioCorrespondiente' => \App\Http\Middleware\Evaluaciones\EntregaComentarioCorrespondiente::class,
     ];
 }

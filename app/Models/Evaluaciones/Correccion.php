@@ -11,4 +11,9 @@ class Correccion extends Model
         'entrega_id',
         'archivo',
     ];
+
+    public function entrega()
+    {
+        return $this->belongsTo(Entrega::class);
+    }
 }

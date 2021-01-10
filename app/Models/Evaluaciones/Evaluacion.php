@@ -3,6 +3,7 @@
 namespace App\Models\Evaluaciones;
 
 use App\Models\Asignaturas\Asignatura;
+use App\Models\Estructuras\Division;
 use Illuminate\Database\Eloquent\Model;
 
 class Evaluacion extends Model
@@ -17,6 +18,11 @@ class Evaluacion extends Model
         'fechaHoraFinalizacion',
         'comentario',
     ];
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
 
     public function asignatura()
     {

@@ -12,6 +12,16 @@ use Inertia\Inertia;
 
 class EvaluacionArchivoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('soloDocentes');
+        $this->middleware('evaluacionCorrespondiente');
+        $this->middleware('archivoCorrespondiente')->only('edit', 'update', 'destroy');
+    }
+
     public function create($institucion_id, $division_id, $evaluacion_id)
     {
         return Inertia::render('Evaluaciones/Archivos/Create', [
