@@ -19,7 +19,7 @@ class EvaluacionRespuestaController extends Controller
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
         $this->middleware('evaluacionCorrespondiente');
-        $this->middleware('verRespuestasEvaluacionCorrespondiente')->only('index', 'store');
+        $this->middleware('verRespuestasEvaluacionCorrespondiente');
         $this->middleware('respuestaEvaluacionCorrespondiente')->only('update', 'destroy');
     }
 

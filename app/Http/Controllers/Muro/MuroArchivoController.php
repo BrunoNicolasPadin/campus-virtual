@@ -11,6 +11,16 @@ use Inertia\Inertia;
 
 class MuroArchivoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('verArchivosMuroCorrespondiente')->only('index', 'destroy');
+        $this->middleware('publicacionCorrespondiente')->only('create', 'store');
+        $this->middleware('archivoMuroCorrespondiente')->only('destroy');
+    }
+
     public function index($institucion_id, $division_id, $muro_id)
     {
         return Inertia::render('Muro/Archivos/Index', [

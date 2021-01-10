@@ -11,4 +11,9 @@ class MuroArchivo extends Model
         'muro_id',
         'archivo',
     ];
+
+    public function muro()
+    {
+        return $this->belongsTo(Muro::class);
+    }
 }

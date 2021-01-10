@@ -11,6 +11,14 @@ use Inertia\Inertia;
 
 class MuroController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('publicacionCorrespondiente')->only('update', 'destroy');
+    }
+
     public function index($institucion_id, $division_id)
     {
         return Inertia::render('Muro/Index', [

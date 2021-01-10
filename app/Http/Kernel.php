@@ -90,5 +90,10 @@ class Kernel extends HttpKernel
         'libretaCorrespondiente' => \App\Http\Middleware\Libretas\LibretaCorrespondiente::class,
         'grupoCorrespondiente' => \App\Http\Middleware\Materiales\GrupoCorrespondiente::class,
         'materialCorrespondiente' => \App\Http\Middleware\Materiales\MaterialCorrespondiente::class,
+        'publicacionCorrespondiente' => \App\Http\Middleware\Muro\PublicacionCorrespondiente::class,
+        'verRespuestasMuroCorrespondiente' => \App\Http\Middleware\Muro\VerRespuestasMuroCorrespondiente::class,
+        'respuestaMuroCorrespondiente' => \App\Http\Middleware\Muro\RespuestaMuroCorrespondiente::class,
+        'verArchivosMuroCorrespondiente' => \App\Http\Middleware\Muro\VerArchivosMuroCorrespondiente::class,
+        'archivoMuroCorrespondiente' => \App\Http\Middleware\Muro\ArchivoMuroCorrespondiente::class,
     ];
 }

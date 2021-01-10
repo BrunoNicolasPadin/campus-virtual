@@ -13,6 +13,15 @@ use Inertia\Inertia;
 
 class MuroRespuestaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('verRespuestasMuroCorrespondiente');
+        $this->middleware('respuestaMuroCorrespondiente')->only('update', 'destroy');
+    }
+
     public function index($institucion_id, $division_id, $muro_id)
     {
         return Inertia::render('Muro/Respuestas/Index', [
