@@ -14,6 +14,15 @@ use Inertia\Inertia;
 
 class AsignaturaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('soloInstitucionesDirectivos')->except('index');
+        $this->middleware('asignaturaCorrespondiente')->only('edit', 'update', 'destroy');
+    }
+
     public function index($institucion_id, $division_id)
     {
         return Inertia::render('Asignaturas/Index', [

@@ -11,6 +11,15 @@ use Inertia\Inertia;
 
 class AsignaturaHorarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('soloInstitucionesDirectivos');
+        $this->middleware('asignaturaCorrespondiente');
+    }
+
     public function create($institucion_id, $division_id, $asignatura_id)
     {
         $dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];

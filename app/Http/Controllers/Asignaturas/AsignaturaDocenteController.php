@@ -12,6 +12,15 @@ use Inertia\Inertia;
 
 class AsignaturaDocenteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('soloInstitucionesDirectivos');
+        $this->middleware('asignaturaCorrespondiente');
+    }
+
     public function create($institucion_id, $division_id, $asignatura_id)
     {
         return Inertia::render('Asignaturas/Docentes/Create', [
