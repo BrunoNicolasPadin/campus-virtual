@@ -14,6 +14,15 @@ use Inertia\Inertia;
 
 class GrupoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('soloDocentes')->except('index', 'show');
+        $this->middleware('grupoCorrespondiente')->only('show', 'edit', 'update', 'destroy');
+    }
+
     public function index($institucion_id, $division_id)
     {
         return Inertia::render('Materiales/Grupos/Index', [

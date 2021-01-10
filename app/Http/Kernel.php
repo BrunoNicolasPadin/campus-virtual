@@ -88,5 +88,7 @@ class Kernel extends HttpKernel
         'entregaComentarioCorrespondiente' => \App\Http\Middleware\Evaluaciones\EntregaComentarioCorrespondiente::class,
         'libretaCicloCorrespondiente' => \App\Http\Middleware\Libretas\LibretaCicloCorrespondiente::class,
         'libretaCorrespondiente' => \App\Http\Middleware\Libretas\LibretaCorrespondiente::class,
+        'grupoCorrespondiente' => \App\Http\Middleware\Materiales\GrupoCorrespondiente::class,
+        'materialCorrespondiente' => \App\Http\Middleware\Materiales\MaterialCorrespondiente::class,
     ];
 }

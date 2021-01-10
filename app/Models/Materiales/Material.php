@@ -13,4 +13,9 @@ class Material extends Model
         'visibilidad',
         'archivo',
     ];
+
+    public function grupo()
+    {
+        return $this->belongsTo(Grupo::class);
+    }
 }
