@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Middleware\CiclosLectivos;
+namespace App\Http\Middleware\Docentes;
 
-use App\Models\CiclosLectivos\CicloLectivo;
+use App\Models\Roles\Docente;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CicloCorrespondiente
+class DocenteYaCreado
 {
     protected $ruta;
 
@@ -20,11 +21,11 @@ class CicloCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $cicloLectivo = CicloLectivo::find($link[6]);
-
-        if ($cicloLectivo->institucion_id  == session('institucion_id')) {
+        if (Docente::where('user_id', Auth::id())
+            ->where('institucion_id', $link[4])
+            ->exists()) {
             return $next($request);
         }
-        abort(403, 'Este ciclo lectivo no es de tu institucion.');
+        abort(403, 'Ya estas registrado como docente para esta institucion.');
     }
 }
