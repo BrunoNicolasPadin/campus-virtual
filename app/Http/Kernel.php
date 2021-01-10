@@ -72,5 +72,8 @@ class Kernel extends HttpKernel
         'soloInstitucionesDirectivosDocentes' => \App\Http\Middleware\Docentes\SoloInstitucionesDirectivosDocentes::class,
         'docenteCorrespondiente' => \App\Http\Middleware\Docentes\DocenteCorrespondiente::class,
         'asignaturaCorrespondiente' => \App\Http\Middleware\Asignaturas\AsignaturaCorrespondiente::class,
+        'alumnoYaCreado' => \App\Http\Middleware\Alumnos\AlumnoYaCreado::class,
+        'soloInstitucionesDirectivosAlumnos' => \App\Http\Middleware\Alumnos\SoloInstitucionesDirectivosAlumnos::class,
+        'alumnoCorrespondiente' => \App\Http\Middleware\Alumnos\AlumnoCorrespondiente::class,
     ];
 }
