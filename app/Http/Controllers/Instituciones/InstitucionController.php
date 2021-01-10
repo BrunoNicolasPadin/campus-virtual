@@ -15,6 +15,9 @@ class InstitucionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente')->except('create', 'store');
+        $this->middleware('soloInstituciones')->except('create', 'store');
+        $this->middleware('institucionYaCreada')->only('create', 'store');
     }
 
     public function create()

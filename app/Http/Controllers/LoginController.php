@@ -37,7 +37,7 @@ class LoginController extends Controller
 
             if (Institucion::where('user_id', $user['id'])->exists()) {
                 $institucion = Institucion::where('user_id', $user['id'])->first();
-                session(['institucion_id' => $institucion['id']]);
+                session(['tipo_id' => $institucion['id']]);
                 return redirect(route('divisiones.index', $institucion['id']));
             }
             return redirect(route('instituciones.create'));
@@ -53,7 +53,7 @@ class LoginController extends Controller
     {
         $alumno = Alumno::where('user_id', $user['id'])->first();
         session(['tipo' => 'Alumno']);
-        session(['alumno_id' => $alumno['id']]);
+        session(['tipo_id' => $alumno['id']]);
         session(['institucion_id' => $alumno['institucion_id']]);
         session(['division_id' => $alumno['division_id']]);
         return redirect(route('divisiones.show', [$alumno['institucion_id'], $alumno['division_id']]));

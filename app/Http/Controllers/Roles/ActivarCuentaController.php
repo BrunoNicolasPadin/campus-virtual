@@ -23,6 +23,7 @@ class ActivarCuentaController extends Controller
         $docente->save();
 
         session(['tipo' => 'Docente']);
+        session(['tipo_id' => $docente->id]);
         session(['institucion_id' => $docente->institucion_id]);
 
         return back()->with(['successMessage' => 'Docente activado']);
@@ -41,6 +42,7 @@ class ActivarCuentaController extends Controller
         $directivo->save();
 
         session(['tipo' => 'Directivo']);
+        session(['tipo_id' => $directivo->id]);
         session(['institucion_id' => $directivo->institucion_id]);
     
         return back()->with(['successMessage' => 'Directivo activado']);
@@ -59,6 +61,7 @@ class ActivarCuentaController extends Controller
         $padre->save();
 
         session(['tipo' => 'Padre']);
+        session(['tipo_id' => $padre->id]);
         session(['institucion_id' => $padre->hijos->institucion_id]);
         session(['division_id' => $padre->hijos->division_id]);
         session(['alumno_id' => $padre->alumno_id]);
