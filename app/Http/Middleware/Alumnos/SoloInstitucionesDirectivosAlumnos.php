@@ -13,17 +13,19 @@ class SoloInstitucionesDirectivosAlumnos
 {
     public function handle(Request $request, Closure $next)
     {
-        if (session('tipo') == 'Institucion' && Institucion::where('user_id', Auth::id())
+        $user_id = Auth::id();
+
+        if (session('tipo') == 'Institucion' && Institucion::where('user_id', $user_id)
             ->exists()) {
             return $next($request);
         }
 
-        if (session('tipo') == 'Directivo' && Directivo::where('user_id', Auth::id())
+        if (session('tipo') == 'Directivo' && Directivo::where('user_id', $user_id)
             ->exists()) {
             return $next($request);
         }
 
-        if (session('tipo') == 'Alumno' && Alumno::where('user_id', Auth::id())
+        if (session('tipo') == 'Alumno' && Alumno::where('user_id', $user_id)
             ->exists()) {
             return $next($request);
         }

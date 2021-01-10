@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Middleware\Docentes;
+namespace App\Http\Middleware\Padres;
 
 use App\Models\Instituciones\Institucion;
 use App\Models\Roles\Directivo;
-use App\Models\Roles\Docente;
+use App\Models\Roles\Padre;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SoloInstitucionesDirectivosDocentes
+class SoloInstitucionesDirectivosPadres
 {
     public function handle(Request $request, Closure $next)
     {
@@ -25,11 +25,11 @@ class SoloInstitucionesDirectivosDocentes
             return $next($request);
         }
 
-        if (session('tipo') == 'Docente' && Docente::where('user_id', $user_id)
+        if (session('tipo') == 'Padre' && Padre::where('user_id', $user_id)
             ->exists()) {
             return $next($request);
         }
 
-        return abort(403, 'Usted no es una institucion o un directivo o un docente como para realizar tal accion.');
+        return abort(403, 'Usted no es una institucion o un directivo o un padre como para realizar tal accion.');
     }
 }

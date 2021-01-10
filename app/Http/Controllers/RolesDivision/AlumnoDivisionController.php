@@ -9,6 +9,13 @@ use Inertia\Inertia;
 
 class AlumnoDivisionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+    }
+
     public function mostrarAlumnos($institucion_id, $division_id)
     {
         return Inertia::render('RolesDivision/Alumnos', [

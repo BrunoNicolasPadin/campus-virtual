@@ -8,7 +8,6 @@ use App\Http\Requests\Roles\StorePadre;
 use App\Models\Roles\Alumno;
 use App\Models\Roles\Padre;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -19,6 +18,10 @@ class PadreController extends Controller
     public function __construct(VerificarInstitucion $claveDeAccesoService)
     {
         $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente')->only('show', 'destroy');
+        $this->middleware('padreYaCreado')->only('store');
+        $this->middleware('soloInstitucionesDirectivosPadres')->only('show', 'destroy');
+        $this->middleware('padreCorrespondiente')->only('show', 'destroy');
 
         $this->claveDeAccesoService = $claveDeAccesoService;
     }

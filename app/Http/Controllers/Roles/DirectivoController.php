@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreDirectivo;
 use App\Models\Roles\Directivo;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -17,6 +16,10 @@ class DirectivoController extends Controller
     public function __construct(VerificarInstitucion $claveDeAccesoService)
     {
         $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente')->except('store');
+        $this->middleware('soloInstitucionesDirectivos')->except('store');
+        $this->middleware('directivoYaCreado')->only('store');
+        $this->middleware('directivoCorrespondiente')->only('show', 'destroy');
 
         $this->claveDeAccesoService = $claveDeAccesoService;
     }

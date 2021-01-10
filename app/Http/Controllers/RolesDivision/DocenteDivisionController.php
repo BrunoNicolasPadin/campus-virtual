@@ -9,6 +9,13 @@ use Inertia\Inertia;
 
 class DocenteDivisionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+    }
+
     public function mostrarDocentes($institucion_id, $division_id)
     {
         $docentes = collect();

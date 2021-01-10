@@ -95,5 +95,10 @@ class Kernel extends HttpKernel
         'respuestaMuroCorrespondiente' => \App\Http\Middleware\Muro\RespuestaMuroCorrespondiente::class,
         'verArchivosMuroCorrespondiente' => \App\Http\Middleware\Muro\VerArchivosMuroCorrespondiente::class,
         'archivoMuroCorrespondiente' => \App\Http\Middleware\Muro\ArchivoMuroCorrespondiente::class,
+        'directivoYaCreado' => \App\Http\Middleware\Directivos\DirectivoYaCreado::class,
+        'directivoCorrespondiente' => \App\Http\Middleware\Directivos\DirectivoCorrespondiente::class,
+        'padreYaCreado' => \App\Http\Middleware\Padres\PadreYaCreado::class,
+        'soloInstitucionesDirectivosPadres' => \App\Http\Middleware\Padres\SoloInstitucionesDirectivosPadres::class,
+        'padreCorrespondiente' => \App\Http\Middleware\Padres\PadreCorrespondiente::class,
     ];
 }
