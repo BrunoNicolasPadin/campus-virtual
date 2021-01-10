@@ -17,9 +17,6 @@ class AlumnoController extends Controller
     public function __construct(VerificarDIvision $claveDeAccesoService)
     {
         $this->middleware('auth');
-        /* $this->middleware('soloInstitucionDirectivo')->only('index', );
-        $this->middleware('alumnoYaCreado')->only('create', 'store');
-        $this->middleware('alumnoCorrespondiente')->only('show', 'edit', 'update', 'destroy'); */
 
         $this->claveDeAccesoService = $claveDeAccesoService;
     }

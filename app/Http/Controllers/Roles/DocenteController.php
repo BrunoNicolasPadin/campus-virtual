@@ -16,10 +16,6 @@ class DocenteController extends Controller
     public function __construct(VerificarInstitucion $claveDeAccesoService)
     {
         $this->middleware('auth');
-        /* $this->middleware('soloInstitucionDirectivo')->except('store');
-        $this->middleware('institucionCorrespondiente')->except('store');
-        $this->middleware('docenteYaCreado')->only('store');
-        $this->middleware('docenteCorrespondiente')->only('show', 'destroy'); */
 
         $this->claveDeAccesoService = $claveDeAccesoService;
     }
