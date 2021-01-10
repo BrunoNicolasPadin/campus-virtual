@@ -50,6 +50,7 @@ class AlumnoCorrespondiente
             }
             abort(403, 'Este alumno no es tu hijo/a.');
         }
+        abort(403, 'No puedes estar aqui.');
 
     }
 }

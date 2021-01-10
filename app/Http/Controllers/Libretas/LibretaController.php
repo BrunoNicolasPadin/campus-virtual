@@ -12,6 +12,15 @@ use Inertia\Inertia;
 
 class LibretaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('alumnoCorrespondiente');
+        $this->middleware('libretaCicloCorrespondiente')->only('show');
+        $this->middleware('libretaCorrespondiente')->only('edit', 'update');
+    }
+
     public function index($institucion_id, $alumno_id)
     {
         return Inertia::render('Libretas/Index', [
