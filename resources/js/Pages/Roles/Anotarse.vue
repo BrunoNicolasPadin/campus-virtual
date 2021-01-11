@@ -62,7 +62,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <input @change="aparecerClaveDeAcceso()" type="radio" value="Directivo" v-model="form.tipo" />
+                                        <input type="radio" value="Directivo" v-model="form.tipo" />
                                     </template>
                                 </table-data>
                             </tr>
@@ -82,7 +82,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <input @change="aparecerClaveDeAcceso()" type="radio" value="Docente" v-model="form.tipo" />
+                                        <input type="radio" value="Docente" v-model="form.tipo" />
                                     </template>
                                 </table-data>
                             </tr>
@@ -102,7 +102,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <input @change="desaparecerClaveDeAcceso()" type="radio" value="Alumno" v-model="form.tipo" />
+                                        <input type="radio" value="Alumno" v-model="form.tipo" />
                                     </template>
                                 </table-data>
                             </tr>
@@ -122,7 +122,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <input @change="aparecerClaveDeAcceso()" type="radio" value="Padre" v-model="form.tipo" />
+                                        <input type="radio" value="Padre" v-model="form.tipo" />
                                     </template>
                                 </table-data>
                             </tr>
@@ -214,18 +214,6 @@
         },
 
         methods: {
-            desaparecerClaveDeAcceso() {
-                if (this.form.tipo == 'Alumno') {
-                    this.mostrar = false;
-                }
-            },
-
-            aparecerClaveDeAcceso() {
-                if (this.form.tipo != 'Alumno') {
-                    this.mostrar = true;
-                }
-            },
-
             submit() {
                 if (this.form.tipo == 'Directivo') {
                     this.$inertia.post(this.route('directivos.store', this.institucion_id), this.form)
@@ -234,7 +222,7 @@
                     this.$inertia.post(this.route('docentes.store', this.institucion_id), this.form)
                 }
                 if (this.form.tipo == 'Alumno') {
-                    this.$inertia.post(this.route('alumnos.create', this.institucion_id), this.form)
+                    this.$inertia.get(this.route('alumnos.verificarClaveInstitucion', this.institucion_id), this.form)
                 }
                 if (this.form.tipo == 'Padre') {
                     this.$inertia.get(this.route('padres.verificarClave', this.institucion_id), this.form)

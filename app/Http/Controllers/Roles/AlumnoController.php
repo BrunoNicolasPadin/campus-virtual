@@ -4,26 +4,34 @@ namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreAlumno;
+use App\Http\Requests\Roles\StoreDirectivo;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
 use App\Services\ClaveDeAcceso\VerificarDIvision;
+use App\Services\ClaveDeAcceso\VerificarInstitucion;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AlumnoController extends Controller
 {
     protected $claveDeAccesoService;
+    protected $claveInstitucion;
 
-    public function __construct(VerificarDIvision $claveDeAccesoService)
+    public function __construct(
+        VerificarDivision $claveDeAccesoService,
+        VerificarInstitucion $claveInstitucion
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('soloInstitucionesDirectivos')->only('index');
-        $this->middleware('alumnoYaCreado')->only('create', 'store');
-        $this->middleware('institucionCorrespondiente')->except('create', 'store');
+        $this->middleware('alumnoYaCreado')->only('verificarClave', 'create', 'store');
+        $this->middleware('institucionCorrespondiente')->except('verificarClave', 'create', 'store');
         $this->middleware('soloInstitucionesDirectivosAlumnos')->only('show', 'edit', 'update', 'destroy');
         $this->middleware('alumnoCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
         $this->claveDeAccesoService = $claveDeAccesoService;
+        $this->claveInstitucion = $claveInstitucion;
     }
 
     public function index($institucion_id)
@@ -34,6 +42,14 @@ class AlumnoController extends Controller
                 ->with('user', 'padres', 'padres.user')
                 ->get()
         ]);
+    }
+
+    public function verificarClave($institucion_id, StoreDirectivo $request)
+    {
+        if ($this->claveInstitucion->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
+            return redirect(route('alumnos.create', $institucion_id));
+        }
+        return redirect(route('roles.anotarse', $institucion_id))->withErrors('Clave de acceso incorrecta.');
     }
 
     public function create($institucion_id)

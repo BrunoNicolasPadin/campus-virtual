@@ -70,6 +70,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::resource('directivos', DirectivoController::class);
     Route::resource('docentes', DocenteController::class);
     Route::resource('alumnos', AlumnoController::class);
+    Route::get('verificar-clave-institucion', [AlumnoController::class, 'verificarClave'])->name('alumnos.verificarClaveInstitucion');
     Route::resource('padres', PadreController::class);
     Route::get('verificar-clave', [PadreController::class, 'verificarClave'])->name('padres.verificarClave');
     Route::prefix('alumnos/{alumno_id}')->group(function () {
