@@ -18,7 +18,7 @@ class BuscadorDeInstitucionesController extends Controller
                     $query->where('name', 'LIKE', '%'.$nombre.'%');
                 })
                 ->orderBy('name')
-                ->get()
+                ->paginate(20)
         ]);
     }
 }

@@ -23,8 +23,6 @@
             </div>
         </div>
 
-        <div>
-
             <estructura-tabla>
                 <template #tabla>
 
@@ -85,7 +83,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(user, index) in usuarios" :key="user.id">
+                            <tr v-for="(user, index) in usuarios.data" :key="user.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -138,11 +136,11 @@
                             </tr>
                         </template>
                     </table-body>
-                    
-
                 </template>
             </estructura-tabla>
-        </div>
+            <div class="container mx-auto px-4 sm:px-8">
+                <pagination :links="usuarios.links" />
+            </div>
     </app-layout>
 </template>
 
@@ -153,6 +151,7 @@
     import TableHead from '@/Tabla/TableHead'
     import TableBody from '@/Tabla/TableBody'
     import TableData from '@/Tabla/TableData'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -162,10 +161,11 @@
             TableHead,
             TableBody,
             TableData,
+            Pagination,
         },
 
         props:{ 
-            usuarios: Array,
+            usuarios: Object,
         },
 
         data() {
