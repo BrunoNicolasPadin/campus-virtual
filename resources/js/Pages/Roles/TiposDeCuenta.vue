@@ -10,13 +10,24 @@
 
             <!-- Success Message -->
 
-            <div v-if="successMessage" class="bg-green-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center container mx-auto w-full">
-                <svg viewBox="0 0 24 24" class="text-green-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
-                    <path fill="currentColor" d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
-                        ></path>
-                </svg>
-                <span class="text-green-800">{{ successMessage }} </span>
-            </div>
+            <transition name="fade">
+                <div v-if="successMessage" class="bg-green-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center container mx-auto w-full">
+                    <div class="w-1/12">
+                        <svg viewBox="0 0 24 24" class="text-green-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                            <path fill="currentColor" d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
+
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="w-9/12">
+                        <span class="text-green-800 float-left">{{ successMessage }} </span>
+                    </div>
+                    <div class="w-2/12">
+                        <span class="text-black font-bold float-right text-2xl cursor-pointer" @click="cerrarAlerta()">&times;</span> 
+                    </div>
+                    
+                </div>
+            </transition>
 
             <div v-if="directivos">   
                 <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Directivos</h2>
@@ -86,8 +97,6 @@
                     </template>
                 </estructura-tabla>
             </div>
-
-
 
             <div v-if="docentes">   
                 <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Docentes</h2>
@@ -338,6 +347,9 @@
             activarPadre(padre_id) {
                 this.$inertia.get(this.route('roles.activarPadre', padre_id))
             },
+            cerrarAlerta() {
+                this.successMessage = false;
+            }
         },
     }
 </script>

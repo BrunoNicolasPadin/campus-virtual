@@ -27,11 +27,20 @@ class InstitucionController extends Controller
 
     public function store(StoreInstitucion $request)
     {
+        $archivoStore = null;
+
+        if ($request->hasFile('archivo')) {
+            $archivo = $request->file('archivo');
+            $archivoStore = $archivo->getClientOriginalName();
+            $archivo->storeAs('public/PlanesDeEstudio', $archivo->getClientOriginalName());
+        }
+
         $institucion = Institucion::create([
             'user_id' => Auth::id(),
             'numero' => $request->numero,
             'fundacion' => $request->fundacion,
             'historia' => $request->historia,
+            'planDeEstudio' => $archivoStore,
             'claveDeAcceso' => Hash::make($request->claveDeAcceso),
         ]);
                 
@@ -57,13 +66,31 @@ class InstitucionController extends Controller
 
     public function update(UpdateInstitucion $request, $id)
     {
+        $archivoStore = null;
+
+        if ($request->hasFile('archivo')) {
+            $archivo = $request->file('archivo');
+            $archivoStore = $archivo->getClientOriginalName();
+            $archivo->storeAs('public/PlanesDeEstudio', $archivo->getClientOriginalName());
+
+            Institucion::where('id', $id)
+                ->update([
+                    'numero' => $request->numero,
+                    'fundacion' => $request->fundacion,
+                    'historia' => $request->historia,
+                    'planDeEstudio' => $archivoStore,
+                ]);
+
+            return redirect(route('instituciones.show', $id))->with(['successMessage' => 'Institución actualizada con éxito!']);
+        }
+
         Institucion::where('id', $id)
             ->update([
                 'numero' => $request->numero,
                 'fundacion' => $request->fundacion,
                 'historia' => $request->historia,
             ]);
-        return back()->with(['successMessage' => 'Institución actualizada con éxito!']);
+        return redirect(route('instituciones.show', $id))->with(['successMessage' => 'Institución actualizada con éxito!']);
     }
 
     public function destroy($id)

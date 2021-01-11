@@ -40,7 +40,10 @@ class InstitucionCorrespondiente
         if (session('tipo') === 'Padre') {
             return $this->verificarPadre($request, $next, $link);
         }
-        abort(403, 'No estas registrado en ninguna institucion.');
+        if ($link[4] == 0) {
+            return $next($request);
+        }
+        abort(403, 'No puedes estar aqui.');
     }
 
     public function verificarInstitucion($request, $next, $link)
@@ -48,6 +51,9 @@ class InstitucionCorrespondiente
         if (Institucion::where('user_id', Auth::id())
             ->where('id', $link[4])
             ->exists()) {
+            return $next($request);
+        }
+        if ($link[4] == 0) {
             return $next($request);
         }
         abort(403, 'No es tu institucion.');

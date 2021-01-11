@@ -60,7 +60,7 @@
                 <jet-label for="tipo" value="Tipo" />
                 <select required v-model="form.tipo" class="form-select mt-1 block w-full">
                     <option value="">-</option>
-                    <option value="Institución">Institución</option>
+                    <option value="Institucion">Institución</option>
                     <option value="Persona">Persona</option>
                 </select>
                 <jet-input-error :message="form.error('tipo')" class="mt-2" />

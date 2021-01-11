@@ -81,6 +81,24 @@
                             </div>
                         </div>
 
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3 mb-6 md:mb-0">
+                                <label-form>
+                                    <template #label-value>
+                                        Plan de estudio
+                                    </template>
+                                </label-form>
+                                
+                                <file-input v-model="form.planDeEstudio" type="file" />
+                                
+                                <info>
+                                    <template #info>
+                                        No es obligatorio. Solo puede subir uno.
+                                    </template>
+                                </info>
+                            </div>
+                        </div>
+
                         <guardar></guardar>
 
                     </form>
@@ -97,6 +115,7 @@
     import InputForm from '@/Formulario/InputForm.vue'
     import Info from '@/Formulario/Info.vue'
     import Guardar from '@/Botones/Guardar.vue'
+    import FileInput from '@/Formulario/FileInput.vue'
 
     export default {
         components: {
@@ -105,7 +124,8 @@
             LabelForm,
             InputForm,
             Info,
-            Guardar
+            Guardar,
+            FileInput,
        },
 
         props: {
@@ -120,13 +140,21 @@
                     numero: this.institucion.numero,
                     fundacion: this.institucion.fundacion,
                     historia: this.institucion.historia,
+                    planDeEstudio: null,
                 },
             }
         },
 
         methods: {
             submit() {
-                this.$inertia.put(this.route('instituciones.update', this.institucion.id), this.form)
+                var data = new FormData();
+                data.append('numero', this.form.numero);
+                data.append('fundacion', this.form.fundacion);
+                data.append('historia', this.form.historia);
+                data.append('archivo', this.form.planDeEstudio);
+                data.append('_method', 'put');
+
+                this.$inertia.post(this.route('instituciones.update', this.institucion.id), data)
             },
         },
     }

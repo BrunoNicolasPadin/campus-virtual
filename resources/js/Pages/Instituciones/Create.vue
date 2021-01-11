@@ -80,6 +80,24 @@
                         </div>
 
                         <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3 mb-6 md:mb-0">
+                                <label-form>
+                                    <template #label-value>
+                                        Plan de estudio
+                                    </template>
+                                </label-form>
+                                
+                                <file-input v-model="form.planDeEstudio" type="file" />
+                                
+                                <info>
+                                    <template #info>
+                                        No es obligatorio. Solo puede subir uno.
+                                    </template>
+                                </info>
+                            </div>
+                        </div>
+
+                        <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
@@ -130,6 +148,7 @@
     import InputForm from '@/Formulario/InputForm.vue'
     import Info from '@/Formulario/Info.vue'
     import Guardar from '@/Botones/Guardar.vue'
+    import FileInput from '@/Formulario/FileInput.vue'
 
     export default {
         components: {
@@ -139,6 +158,7 @@
             InputForm,
             Info,
             Guardar,
+            FileInput,
         },
 
         props: ['errors'],
@@ -149,6 +169,7 @@
                     numero: null,
                     fundacion: null,
                     historia: null,
+                    planDeEstudio: null,
                     claveDeAcceso: null,
                     claveDeAcceso_confirmation: null,
                 },
@@ -157,7 +178,14 @@
 
         methods: {
             submit() {
-                this.$inertia.post(this.route('instituciones.store'), this.form)
+                var data = new FormData();
+                data.append('numero', this.form.numero);
+                data.append('fundacion', this.form.fundacion);
+                data.append('historia', this.form.historia);
+                data.append('archivo', this.form.planDeEstudio);
+                data.append('claveDeAcceso', this.form.claveDeAcceso);
+                data.append('claveDeAcceso_confirmation', this.form.claveDeAcceso_confirmation);
+                this.$inertia.post(this.route('instituciones.store'), data)
             },
         },
     }
