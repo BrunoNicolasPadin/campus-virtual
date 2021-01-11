@@ -37,15 +37,15 @@ class LoginController extends Controller
 
             if (Institucion::where('user_id', $user['id'])->exists()) {
                 $institucion = Institucion::where('user_id', $user['id'])->first();
-                session(['tipo_id' => $institucion['id']]);
+                session(['institucion_id' => $institucion['id']]);
                 return redirect(route('divisiones.index', $institucion['id']));
             }
             return redirect(route('instituciones.create'));
         }
 
-        if (Alumno::where('user_id', $user['id'])->exists()) {
+        /* if (Alumno::where('user_id', $user['id'])->exists()) {
             return $this->sessionesAlumnos($user);
-        }
+        } */
         return $this->desactivarCuentas($user);
     }
 
@@ -67,6 +67,11 @@ class LoginController extends Controller
         ]);
 
         Docente::where('user_id', $user['id'])
+        ->update([
+            'activado' => 0,
+        ]);
+
+        Alumno::where('user_id', $user['id'])
         ->update([
             'activado' => 0,
         ]);

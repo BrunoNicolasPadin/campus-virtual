@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
+use App\Models\Roles\Alumno;
 use App\Models\Roles\Directivo;
 use App\Models\Roles\Docente;
 use App\Models\Roles\Padre;
@@ -15,6 +16,7 @@ class ActivarCuentaController extends Controller
         $user_id = Auth::id();
 
         $this->desactivarDocentes($user_id);
+        $this->desactivarAlumnos($user_id);
         $this->desactivarDirectivos($user_id);
         $this->desactivarPadres($user_id);
 
@@ -34,6 +36,7 @@ class ActivarCuentaController extends Controller
         $user_id = Auth::id();
 
         $this->desactivarDocentes($user_id);
+        $this->desactivarAlumnos($user_id);
         $this->desactivarDirectivos($user_id);
         $this->desactivarPadres($user_id);
 
@@ -48,11 +51,33 @@ class ActivarCuentaController extends Controller
         return back()->with(['successMessage' => 'Directivo activado']);
     }
 
+    public function activarAlumno($id)
+    {
+        $user_id = Auth::id();
+
+        $this->desactivarAlumnos($user_id);
+        $this->desactivarDocentes($user_id);
+        $this->desactivarDirectivos($user_id);
+        $this->desactivarPadres($user_id);
+
+        $alumno = Alumno::find($id);
+        $alumno->activado = 1;
+        $alumno->save();
+
+        session(['tipo' => 'Alumno']);
+        session(['tipo_id' => $alumno->id]);
+        session(['institucion_id' => $alumno->institucion_id]);
+        session(['division_id' => $alumno->division_id]);
+
+        return back()->with(['successMessage' => 'Alumno activado']);
+    }
+
     public function activarPadre($id)
     {
         $user_id = Auth::id();
 
         $this->desactivarDocentes($user_id);
+        $this->desactivarAlumnos($user_id);
         $this->desactivarDirectivos($user_id);
         $this->desactivarPadres($user_id);
 
@@ -72,6 +97,14 @@ class ActivarCuentaController extends Controller
     public function desactivarDocentes($user_id)
     {
         Docente::where('user_id', $user_id)
+            ->update([
+                'activado' => 0,
+            ]);
+    }
+
+    public function desactivarAlumnos($user_id)
+    {
+        Alumno::where('user_id', $user_id)
             ->update([
                 'activado' => 0,
             ]);

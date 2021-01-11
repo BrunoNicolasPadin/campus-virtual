@@ -75,7 +75,7 @@ class InstitucionCorrespondiente
 
     public function verificarAlumno($request, $next, $link)
     {
-        if (Alumno::where('user_id', Auth::id())
+        if (Alumno::where('id', session('tipo_id'))
             ->where('institucion_id', $link[4])
             ->exists()) {
             return $next($request);

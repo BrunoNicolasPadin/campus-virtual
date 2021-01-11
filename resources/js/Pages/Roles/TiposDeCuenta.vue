@@ -158,7 +158,74 @@
                 </estructura-tabla>
             </div>
 
+            <div v-if="alumnos">   
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Alumnos</h2>
+                <estructura-tabla>
+                    <template #tabla>
+                        <table-head-estructura>
+                            <template #th>
 
+                                <table-head>
+                                    <template #th-titulo>
+                                        #
+                                    </template>
+                                </table-head>
+
+                                <table-head>
+                                    <template #th-titulo>
+                                        Institucion
+                                    </template>
+                                </table-head>
+
+                                <table-head colspan="2">
+                                    <template #th-titulo>
+                                        Acciones
+                                    </template>
+                                </table-head>
+
+                            </template>
+                        </table-head-estructura>
+
+                        <table-body>
+                            <template #tr>
+                                <tr v-for="(alumno, index) in alumnos" :key="alumno.id">
+                                    <table-data>
+                                        <template #td>
+                                            {{ index + 1 }}
+                                        </template>
+                                    </table-data>
+
+                                    <table-data>
+                                        <template #td>
+                                            {{ alumno.institucion.user.name }}
+                                        </template>
+                                    </table-data>
+
+                                    <table-data>
+                                        <template #td>
+                                            <button v-if="alumno.activado" type="button" class="border border-green-500 bg-green-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-700 focus:outline-none focus:shadow-outline">
+                                                Activado
+                                            </button>
+
+                                            <button v-else @click="activarAlumno(alumno.id)" type="button" class="border border-green-500 bg-green-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-700 focus:outline-none focus:shadow-outline">
+                                                Activar
+                                            </button>
+                                        </template>
+                                    </table-data>
+
+                                    <table-data>
+                                        <template #td>
+                                            <button @click="destroy(alumno.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                                Eliminar
+                                            </button>
+                                        </template>
+                                    </table-data>
+                                </tr>
+                            </template>
+                        </table-body>
+                    </template>
+                </estructura-tabla>
+            </div>
 
             <div v-if="padres">   
                 <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Padres</h2>
@@ -254,12 +321,16 @@
             successMessage: String,
             directivos: Array,
             docentes: Array,
+            alumnos: Array,
             padres: Array,
         },
 
          methods: {
             activarDocente(docente_id) {
                 this.$inertia.get(this.route('roles.activarDocente', docente_id))
+            },
+            activarAlumno(docente_id) {
+                this.$inertia.get(this.route('roles.activarAlumno', docente_id))
             },
             activarDirectivo(directivo_id) {
                 this.$inertia.get(this.route('roles.activarDirectivo', directivo_id))

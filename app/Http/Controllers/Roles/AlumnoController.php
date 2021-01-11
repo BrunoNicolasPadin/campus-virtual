@@ -52,7 +52,7 @@ class AlumnoController extends Controller
 
     public function store(StoreAlumno $request, $institucion_id)
     {
-        if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
+        if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $request->division_id)) {
             $alumno = Alumno::create([
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
@@ -95,7 +95,7 @@ class AlumnoController extends Controller
 
     public function update(StoreAlumno $request, $institucion_id, $id)
     {
-        if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
+        if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $request->division_id)) {
             $alumno = Alumno::find($id);
             $alumno->division_id = $request->division_id;
             $alumno->save();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
+use App\Models\Roles\Alumno;
 use App\Models\Roles\Directivo;
 use App\Models\Roles\Docente;
 use App\Models\Roles\Padre;
@@ -16,6 +17,7 @@ class TipoCuentaController extends Controller
         $user_id = Auth::id();
         $directivos = null;
         $docentes = null;
+        $alumnos = null;
         $padres = null;
 
         if (Directivo::where('user_id', $user_id)->exists()) {
@@ -24,6 +26,9 @@ class TipoCuentaController extends Controller
         if (Docente::where('user_id', $user_id)->exists()) {
             $docentes = $this->obtenerCuentasDocente($user_id);
         }
+        if (Alumno::where('user_id', $user_id)->exists()) {
+            $alumnos = $this->obtenerCuentasAlumno($user_id);
+        }
         if (Padre::where('user_id', $user_id)->exists()) {
             $padres = $this->obtenerCuentasPadre($user_id);
         }
@@ -31,6 +36,7 @@ class TipoCuentaController extends Controller
         return Inertia::render('Roles/TiposDeCuenta', [
             'directivos' => $directivos,
             'docentes' => $docentes,
+            'alumnos' => $alumnos,
             'padres' => $padres,
         ]);
     }
@@ -43,6 +49,11 @@ class TipoCuentaController extends Controller
     public function obtenerCuentasDocente($user_id)
     {
         return Docente::where('user_id', $user_id)->with(['institucion', 'institucion.user'])->get();
+    }
+
+    public function obtenerCuentasAlumno($user_id)
+    {
+        return Alumno::where('user_id', $user_id)->with(['institucion', 'institucion.user'])->get();
     }
 
     public function obtenerCuentasPadre($user_id)

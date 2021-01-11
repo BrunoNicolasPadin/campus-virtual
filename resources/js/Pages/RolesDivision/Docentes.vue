@@ -44,7 +44,7 @@
                             <tr v-for="(docente, index) in docentes" :key="docente.index">
                                 <table-data>
                                     <template #td>
-                                        {{ index }}
+                                        {{ index + 1 }}
                                     </template>
                                 </table-data>
 

@@ -24,8 +24,8 @@ class DocenteYaCreado
         if (Docente::where('user_id', Auth::id())
             ->where('institucion_id', $link[4])
             ->exists()) {
-            return $next($request);
+            abort(403, 'Ya estas registrado como docente para esta institucion.');
         }
-        abort(403, 'Ya estas registrado como docente para esta institucion.');
+        return $next($request);
     }
 }

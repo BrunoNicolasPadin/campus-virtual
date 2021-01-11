@@ -50,7 +50,7 @@
                             <tr v-for="(alumno, index) in alumnos" :key="alumno.index">
                                 <table-data>
                                     <template #td>
-                                        {{ index }}
+                                        {{ index + 1 }}
                                     </template>
                                 </table-data>
 
