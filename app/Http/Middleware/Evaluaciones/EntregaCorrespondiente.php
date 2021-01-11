@@ -34,11 +34,18 @@ class EntregaCorrespondiente
             abort(403, 'Esta entrega de una evaluacion no es de una asignatura en la que eres docente.');
         }
 
-        if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
+        if (session('tipo') == 'Alumno') {
+            if ($entrega->alumno_id == session('tipo_id')) {
+                return $next($request);
+            }
+            abort(403, 'Esta entrega no es tuya.');
+        }
+
+        if (session('tipo') == 'Padre') {
             if ($entrega->alumno_id == session('alumno_id')) {
                 return $next($request);
             }
-            abort(403, 'Esta entrega no es tuya o de tu hijo.');
+            abort(403, 'Esta entrega no es de tu hijo.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
