@@ -17,6 +17,9 @@ class UpdateInstitucion extends FormRequest
             'numero' => 'nullable',
             'fundacion' => 'nullable|string',
             'historia' => 'nullable|string',
+            'claveDeAccesoActual' => 'nullable',
+            'claveDeAccesoNueva' => 'exclude_if:claveDeAccesoActual,null|nullable|min:8|max:32',
+            'claveDeAccesoNuevaConfirmation' => 'exclude_if:claveDeAccesoActual,null|nullable|same:claveDeAccesoNueva',
         ];
     }
 
@@ -25,7 +28,9 @@ class UpdateInstitucion extends FormRequest
         return [
             'fundacion.string' => 'Debe ingresar solo caracteres en la fundacion.',
             'historia.string' => 'Debe ingresar solo caracteres en la historia.',
-            
+            'claveDeAccesoNueva.min' => 'La clave de acceso debe tener como minimo 8 caracteres.',
+            'claveDeAccesoNueva.max' => 'La clave de acceso debe tener como maximo 32 caracteres.',
+            'claveDeAccesoNuevaConfirmation.same' => 'Las claves de acceso no coinciden.',
         ];
     }
 }

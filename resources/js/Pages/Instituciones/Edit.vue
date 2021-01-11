@@ -99,6 +99,59 @@
                             </div>
                         </div>
 
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3 mb-6 md:mb-0">
+                                <label-form>
+                                    <template #label-value>
+                                        Clave de acceso actual
+                                    </template>
+                                </label-form>
+                                
+                                <input-form type="password" v-model="form.claveDeAccesoActual" />
+                                
+                                <info>
+                                    <template #info>
+                                        Es obligatorio solo si quiere cambiar la clave de acceso.
+                                    </template>
+                                </info>
+                            </div>
+                        </div>
+
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label-form>
+                                    <template #label-value>
+                                        Clave de acceso nueva
+                                    </template>
+                                </label-form>
+                                
+                                <input-form type="password" v-model="form.claveDeAccesoNueva" />
+                                
+                                <info>
+                                    <template #info>
+                                        Es obligatorio solo si quiere cambiar la clave de acceso y debe tener entre 8 y 32 caracteres. Es la clave que deberan ingresar los alumnos, docentes, padres y directivos para poder anotarse en tu instituto.
+                                    </template>
+                                </info>
+                            </div>
+
+                            <div class="md:w-1/2 px-3">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Confirmar clave de acceso nueva
+                                    </template>
+                                </label-form>
+                                
+                                <input-form type="password" v-model="form.claveDeAccesoNuevaConfirmation" />
+                                
+                                <info>
+                                    <template #info>
+                                        Vuelva a ingresar la clave de acceso.
+                                    </template>
+                                </info>
+                            </div>
+                        </div>
+
                         <guardar></guardar>
 
                     </form>
@@ -141,6 +194,9 @@
                     fundacion: this.institucion.fundacion,
                     historia: this.institucion.historia,
                     planDeEstudio: null,
+                    claveDeAccesoActual: null,
+                    claveDeAccesoNueva: null,
+                    claveDeAccesoNuevaConfirmation: null,
                 },
             }
         },
@@ -152,6 +208,9 @@
                 data.append('fundacion', this.form.fundacion);
                 data.append('historia', this.form.historia);
                 data.append('archivo', this.form.planDeEstudio);
+                data.append('claveDeAccesoActual', this.form.claveDeAccesoActual);
+                data.append('claveDeAccesoNueva', this.form.claveDeAccesoNueva);
+                data.append('claveDeAccesoNuevaConfirmation', this.form.claveDeAccesoNuevaConfirmation);
                 data.append('_method', 'put');
 
                 this.$inertia.post(this.route('instituciones.update', this.institucion.id), data)

@@ -67,7 +67,7 @@
                             <a 
                             :href="'/storage/planesDeEstudio/' + institucion.planDeEstudio" 
                             target="_blank" 
-                            class="text-blue-500"
+                            class="text-blue-500 hover:cursor-pointer"
                             rel="noopener noreferrer">
                                 Ver
                             </a>
