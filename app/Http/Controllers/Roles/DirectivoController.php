@@ -37,11 +37,14 @@ class DirectivoController extends Controller
     public function store(StoreDirectivo $request, $institucion_id)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
-            Directivo::create([
+            $directivo = Directivo::create([
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
                 'activado' => 0,
             ]);
+            session(['tipo' => 'Directivo']);
+            session(['tipo_id' => $directivo->id]);
+            session(['institucion_id' => $institucion_id]);
             return redirect('/dashboard');
         }
         return redirect(route('roles.anotarse', $institucion_id))->withErrors('Clave de acceso incorrecta.');

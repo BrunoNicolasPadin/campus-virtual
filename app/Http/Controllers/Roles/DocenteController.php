@@ -38,11 +38,14 @@ class DocenteController extends Controller
     public function store(StoreDocente $request, $institucion_id)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
-            Docente::create([
+            $docente = Docente::create([
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
                 'activado' => 0,
             ]);
+            session(['tipo' => 'Directivo']);
+            session(['tipo_id' => $docente->id]);
+            session(['institucion_id' => $institucion_id]);
             return redirect('/dashboard');
         }
         return redirect(route('roles.anotarse', $institucion_id))->withErrors('Clave de acceso incorrecta.');

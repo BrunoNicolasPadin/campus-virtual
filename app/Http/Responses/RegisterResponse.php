@@ -21,6 +21,10 @@ class RegisterResponse implements RegisterResponseContract
 
             return $request->wantsJson() ? new JsonResponse('', 201) : redirect(route('dashboard'));
         }
+
+        if (session('tipo') == 'Persona') {
+            return $request->wantsJson() ? new JsonResponse('', 201) : redirect(route('buscador-de-instituciones'));
+        }
         
         return $request->wantsJson() ? new JsonResponse('', 201) : redirect(route('dashboard'));
     }

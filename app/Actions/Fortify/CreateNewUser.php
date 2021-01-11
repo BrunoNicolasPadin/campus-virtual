@@ -23,6 +23,9 @@ class CreateNewUser implements CreatesNewUsers
         if ($input['tipo'] == 'Institucion') {
             session(['tipo' => 'Institucion']);
         }
+        else {
+            session(['tipo' => 'Persona']);
+        }
 
         return User::create([
             'name' => $input['name'],

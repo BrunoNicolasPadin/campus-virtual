@@ -43,9 +43,6 @@ class LoginController extends Controller
             return redirect(route('instituciones.create'));
         }
 
-        /* if (Alumno::where('user_id', $user['id'])->exists()) {
-            return $this->sessionesAlumnos($user);
-        } */
         return $this->desactivarCuentas($user);
     }
 
