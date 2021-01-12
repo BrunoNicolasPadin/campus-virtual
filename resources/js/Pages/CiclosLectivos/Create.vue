@@ -32,14 +32,14 @@
                                     </template>
                                 </label-form>
                                 
-                                <date-picker
+                                <datepicker
                                 required
-                                valueType="format"
                                 v-model="form.comienzo"
-                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"
-                                lang="es">
+                                :language="es"
+                                :format="format"
+                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3" >
 
-                                </date-picker>
+                                </datepicker>
                                 
                                 <info>
                                     <template #info>
@@ -56,13 +56,15 @@
                                     </template>
                                 </label-form>
                                 
-                                <date-picker
+                                <datepicker
                                 required
-                                valueType="format"
                                 v-model="form.final"
-                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"
-                                lang="es"></date-picker>
-                                
+                                :language="es"
+                                :format="format"
+                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3" >
+
+                                </datepicker>
+
                                 <info>
                                     <template #info>
                                         Es obligatorio
@@ -86,8 +88,8 @@
     import LabelForm from '@/Formulario/LabelForm.vue'
     import Info from '@/Formulario/Info.vue'
     import Guardar from '@/Botones/Guardar.vue'
-    import DatePicker from 'vue2-datepicker'
-    import 'vue2-datepicker/index.css'
+    import Datepicker from 'vuejs-datepicker'
+    import {es} from 'vuejs-datepicker/dist/locale'
 
     export default {
         components: {
@@ -96,7 +98,7 @@
             LabelForm,
             Info,
             Guardar,
-            DatePicker,
+            Datepicker,
         },
 
         props: {
@@ -110,6 +112,8 @@
                     comienzo: null,
                     final: null,
                 },
+                es: es,
+                format: "d MMMM yyyy",
             }
         },
 

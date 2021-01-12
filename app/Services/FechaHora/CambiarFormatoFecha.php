@@ -11,4 +11,10 @@ class CambiarFormatoFecha
         $date = new DateTime($fecha);
         return $date->format('Y-m-d');
     }
+
+    public function cambiarFormatoParaMostrar($fecha)
+    {
+            $date = new DateTime($fecha);
+            return $date->format('d-m-Y');
+    }
 }

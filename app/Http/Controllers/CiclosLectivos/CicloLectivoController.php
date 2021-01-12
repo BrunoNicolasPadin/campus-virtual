@@ -27,7 +27,16 @@ class CicloLectivoController extends Controller
             'institucion_id' => $institucion_id,
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
             ->orderBy('comienzo')
-            ->get(),
+            ->get()
+            ->map(function ($ciclo) {
+                return [
+                    'id' => $ciclo->id,
+                    'institucion_id' => $ciclo->institucion_id,
+                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
+                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
+                    'activado' => $ciclo->activado,
+                ];
+            }),
         ]);
     }
 
@@ -60,6 +69,15 @@ class CicloLectivoController extends Controller
 
     public function update(StoreCicloLectivo $request, $institucion_id, $id)
     {
+        if ($request->activado == true || $request->activado == 1) {
+            CicloLectivo::where('institucion_id', $institucion_id)
+            ->where('id', '<>', $id)
+            ->update([
+                'activado' => '0',
+            ]);
+        }
+        
+
         CicloLectivo::where('id', $id)
             ->update([
                 'comienzo' => $this->formatoService->cambiarFormatoParaGuardar($request->comienzo),
