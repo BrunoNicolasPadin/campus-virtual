@@ -50,18 +50,15 @@ class EstructuraController extends Controller
 
     public function store(StoreDivision $request, $institucion_id)
     {
-        $div = strtoupper($request->division);
-        $divisiones = explode (",", $div);
-
-        for ($i=0; $i < count($divisiones); $i++) { 
+        for ($i=0; $i < count($request->divisiones); $i++) { 
             Division::create([
                 'institucion_id' => $institucion_id,
                 'nivel_id' => $request->nivel_id,
                 'orientacion_id' => $request->orientacion_id,
                 'curso_id' => $request->curso_id,
-                'division' => trim($divisiones[$i], " "),
+                'division' => $request->divisiones[$i]['division'],
                 'periodo_id' => $request->periodo_id,
-                'claveDeAcceso' => Hash::make('division' . $divisiones[$i]),
+                'claveDeAcceso' => Hash::make($request->divisiones[$i]['claveDeAcceso']),
             ]);
         }
 

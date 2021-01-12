@@ -156,7 +156,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio y debe tener entre 8 y 32 caracteres. Es la clave que deberan ingresar los alumnos para poder anotarse en la division.
+                                        Es obligatoria solo si desea cambiarla y debe tener entre 8 y 32 caracteres. Es la clave que deberan ingresar los alumnos para poder anotarse en la division.
                                     </template>
                                 </info>
                             </div>

@@ -136,77 +136,80 @@
                             </div>
                         </div>
 
-                        <div class="-mx-3 md:flex mb-6">
-                            <div class="md:w-full px-3">
-                                <label-form>
-                                    <template #label-value>
-                                        Division: si quiere ingresar varias para el mismo curso debe ingresarlas separadas por comas (","). EJ: A, B, C, D
-                                    </template>
-                                </label-form>
-                                
-                                <input-form required type="text" v-model="form.division" placeholder="EJ: A, B, C, D" />
-                                
-                                <info>
-                                    <template #info>
-                                        Es obligatorio
-                                    </template>
-                                </info>
+                        <div v-for="(div, index) in form.divisiones" :key="index">
+                            <div class="-mx-3 md:flex mb-6">
+                                <div class="md:w-10/12 px-3">
+                                    <label-form>
+                                        <template #label-value>
+                                            Division
+                                        </template>
+                                    </label-form>
+                                    
+                                    <input-form required type="text" v-model="div.division" placeholder="EJ: A, a, b, c, B" />
+                                    
+                                    <info>
+                                        <template #info>
+                                            Es obligatorio
+                                        </template>
+                                    </info>
+                                </div>
+
+                                <div class="md:w-2/12 px-3 mb-6 md:mb-0">
+                                    <button 
+                                    @click="eliminarOtraDivision(index)"
+                                    type="button" 
+                                    class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 my-8 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                        Eliminar division
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="-mx-3 md:flex mb-6">
+                                <div class="md:w-1/2 px-3">
+                                    <label-form>
+                                        <template #label-value>
+                                            Clave de acceso.
+                                        </template>
+                                    </label-form>
+
+                                    <input-form required type="password" v-model="div.claveDeAcceso" />
+                                    
+                                    <info>
+                                        <template #info>
+                                            Es obligatorio y debe tener como minimo 8 caracteres y como maximo 32.
+                                        </template>
+                                    </info>
+                                </div>
+
+                                <div class="md:w-1/2 px-3">
+                                    <label-form>
+                                        <template #label-value>
+                                            Repetir clave de acceso para confirmar.
+                                        </template>
+                                    </label-form>
+
+                                    <input-form required type="password" v-model="div.claveDeAccesoConfirmation" />
+                                    
+                                    <info>
+                                        <template #info>
+                                            Es obligatorio.
+                                        </template>
+                                    </info>
+                                </div>
                             </div>
                         </div>
 
                         <div class="-mx-3 md:flex mb-6">
-                            <div class="md:w-full px-3">
-                                <label-form>
-                                    <template #label-value>
-                                        Clave de acceso.
-                                    </template>
-                                </label-form>
-                                
-                                <info>
-                                    <template #info>
-                                        La clave de acceso se creara sola y usted luego podra modificarla. Sera "divisionA", "divisionB" y asi dependiendo
-                                        del nombre que le puso la division y todas seran en mayusculas (se pondra automaticamente la letra en mayusculas)
-                                        Lo mismo ocurrira si es un numero, la clave sera: "division1", "division2" y asi. Solo cambia segun el nombre de la
-                                        division que usted le de y siempre que haya letras estaran todas en mayuscula.
-                                    </template>
-                                </info>
+                            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                                <button 
+                                @click="agregarOtraDivision()"
+                                type="button" 
+                                class="border border-gray-500 bg-gray-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-700 focus:outline-none focus:shadow-outline">
+                                    Agregar otra division
+                                </button>
                             </div>
                         </div>
 
-                        <!-- <div class="-mx-3 md:flex mb-6">
-                            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label-form>
-                                    <template #label-value>
-                                        Clave de acceso
-                                    </template>
-                                </label-form>
-                                
-                                <input-form required type="password" v-model="form.claveDeAcceso" />
-                                
-                                <info>
-                                    <template #info>
-                                        Es obligatorio y debe tener entre 8 y 32 caracteres. Es la clave que deberan ingresar los alumnos para poder anotarse en la division.
-                                    </template>
-                                </info>
-                            </div>
-
-                            <div class="md:w-1/2 px-3">
-                                
-                                <label-form>
-                                    <template #label-value>
-                                        Confirmar clave de acceso
-                                    </template>
-                                </label-form>
-                                
-                                <input-form required type="password" v-model="form.claveDeAcceso_confirmation" />
-                                
-                                <info>
-                                    <template #info>
-                                        Vuelva a ingresar la clave de acceso.
-                                    </template>
-                                </info>
-                            </div>
-                        </div> -->
 
                         <guardar></guardar>
 
@@ -252,9 +255,12 @@
                     orientacion_id: null,
                     curso_id: null,
                     periodo_id: null,
-                    division: null,
-                    /* claveDeAcceso: null,
-                    claveDeAcceso_confirmation: null, */
+                    divisiones: [{
+                        division: null,
+                        claveDeAcceso: null,
+                        claveDeAccesoConfirmation: null,
+                    }],
+                    
                 },
             }
         },
@@ -263,6 +269,18 @@
             submit() {
                 this.$inertia.post(this.route('divisiones.store', this.institucion_id), this.form)
             },
+
+            agregarOtraDivision() {
+                this.form.divisiones.push({
+                    division: null,
+                    claveDeAcceso: null,
+                    claveDeAccesoConfirmation: null,
+                });
+            },
+
+            eliminarOtraDivision(index) {
+                this.form.divisiones.splice(index, 1);
+            }
         },
     }
 </script>
