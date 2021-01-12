@@ -7,28 +7,48 @@ use App\Http\Requests\Muro\StoreRespuesta;
 use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroRespuesta;
-use Illuminate\Http\Request;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class MuroRespuestaController extends Controller
 {
-    public function __construct()
+    public function __construct(CambiarFormatoFechaHora $formatoService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
         $this->middleware('verRespuestasMuroCorrespondiente');
         $this->middleware('respuestaMuroCorrespondiente')->only('update', 'destroy');
+
+        $this->formatoService = $formatoService;
     }
 
     public function index($institucion_id, $division_id, $muro_id)
     {
+        $muro = Muro::with('user')->findOrFail($muro_id);
+
         return Inertia::render('Muro/Respuestas/Index', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'publicacion' => Muro::with('user')->find($muro_id),
-            'respuestas' => MuroRespuesta::where('muro_id', $muro_id)->with('user')->orderBy('created_at', 'DESC')->paginate(10),
+            'publicacion' => [
+                'id' => $muro->id,
+                'publicacion' => $muro->publicacion,
+                'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($muro->updated_at),
+                'user' => $muro->user,
+            ],
+            'respuestas' => MuroRespuesta::where('muro_id', $muro->id)
+                ->with('user')
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(10)
+                ->transform(function ($respuesta) {
+                    return [
+                        'id' => $respuesta->id,
+                        'respuesta' => $respuesta->respuesta,
+                        'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($respuesta->updated_at),
+                        'user' => $respuesta->user->only('name'),
+                    ];
+                }),
         ]);
     }
 

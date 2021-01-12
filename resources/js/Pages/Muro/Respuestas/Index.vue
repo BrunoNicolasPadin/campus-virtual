@@ -25,7 +25,7 @@
                 <span class="text-green-800">{{ successMessage }} </span>
             </div>
 
-        <div class="py-12">
+        <div class="py-5">
 
             <div class="container mx-auto px-4 sm:px-8 my-6">
 
@@ -38,7 +38,7 @@
                     <div class="text-grey-dark leading-normal text-sm">
                         <p>
                             {{ publicacion.user.name }} <span class="mx-1 text-xs">&bull;</span> 
-                            {{ publicacion.created_at }}
+                            {{ publicacion.updated_at }}
                         </p>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <div class="text-grey-dark leading-normal text-sm">
                         <p>
                             {{ respuesta.user.name }} <span class="mx-1 text-xs">&bull;</span> 
-                            {{ respuesta.created_at }}
+                            {{ respuesta.updated_at }}
                         </p>
                     </div>
                 </div>

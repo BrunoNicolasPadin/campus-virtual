@@ -75,7 +75,7 @@
                     <div class="text-grey-dark leading-normal text-sm">
                         <p>
                             {{ publicacion.user.name }} <span class="mx-1 text-xs">&bull;</span> 
-                            {{ publicacion.created_at }} <span class="mx-1 text-xs">&bull;</span>
+                            {{ publicacion.updated_at }} <span class="mx-1 text-xs">&bull;</span>
                         <inertia-link 
                             class="hover:underline" 
                             :href="route('muro-respuestas.index', [institucion_id, division.id, publicacion.id])">

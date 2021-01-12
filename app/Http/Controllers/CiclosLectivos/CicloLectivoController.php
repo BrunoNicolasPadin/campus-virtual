@@ -14,11 +14,12 @@ class CicloLectivoController extends Controller
 
     public function __construct(CambiarFormatoFecha $formatoService)
     {
-        $this->formatoService = $formatoService;
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos');
         $this->middleware('cicloCorrespondiente')->only('edit', 'update', 'destroy');
+
+        $this->formatoService = $formatoService;
     }
 
     public function index($institucion_id)

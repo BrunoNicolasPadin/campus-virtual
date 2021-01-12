@@ -19,7 +19,7 @@ class CambiarFormatoFechaHora
     {
         if (! $fechaHora == '') {
             $date = new DateTime($fechaHora);
-            return $date->format('d-m-Y H:i:s');
+            return $date->format('d-m-Y | H:i:s');
         }
         return $fechaHora;
     }

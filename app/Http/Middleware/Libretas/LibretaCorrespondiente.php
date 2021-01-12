@@ -23,7 +23,7 @@ class LibretaCorrespondiente
 
         $libreta = Libreta::find($link[8]);
 
-        if ($libreta->institucion_id == session('institucion_id')) {
+        if ($libreta->cicloLectivo->institucion_id == session('institucion_id')) {
             
             if (session('tipo') == 'Docente') {
                 $asignaturasDocentes = AsignaturaDocente::where('asignatura_id', $libreta->asignatura_id)->get();

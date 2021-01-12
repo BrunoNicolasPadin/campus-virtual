@@ -38,7 +38,7 @@
                     <div class="text-grey-dark leading-normal text-sm">
                         <p>
                             {{ publicacion.user.name }} <span class="mx-1 text-xs">&bull;</span> 
-                            {{ publicacion.created_at }}
+                            {{ publicacion.updated_at }}
                         </p>
                     </div>
                 </div>
