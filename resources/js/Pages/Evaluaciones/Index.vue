@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <div class="flex">
-                <div class="w-1/2">
+                <div class="w-9/12">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
                         > 
@@ -13,7 +13,7 @@
                         > Evaluaciones
                     </h2>
                 </div>
-                <div class="w-1/2">
+                <div class="w-3/12">
                     <primary class="float-right">
                         <template #boton-primary>
                             <inertia-link :href="route('evaluaciones.create', [institucion_id, division.id])">Agregar</inertia-link>
@@ -24,7 +24,7 @@
             
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
 
             <!-- Success Message -->
 
@@ -90,7 +90,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(evaluacion, index) in evaluaciones" :key="evaluacion.id">
+                            <tr v-for="(evaluacion, index) in evaluaciones.data" :key="evaluacion.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -147,10 +147,12 @@
                             </tr>
                         </template>
                     </table-body>
-                    
-
                 </template>
             </estructura-tabla>
+
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <pagination :links="evaluaciones.links" />
+            </div>
         </div>
     </app-layout>
 </template>
@@ -165,6 +167,7 @@
     import Editar from '@/Botones/Editar'
     import Eliminar from '@/Botones/Eliminar'
     import Primary from '@/Botones/Primary.vue'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -177,13 +180,14 @@
             Editar,
             Eliminar,
             Primary,
+            Pagination,
         },
 
         props:{ 
             successMessage: String,
             institucion_id: String,
             division: Object,
-            evaluaciones: Array,
+            evaluaciones: Object,
         },
 
         methods: {

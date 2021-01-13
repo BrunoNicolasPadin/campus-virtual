@@ -30,7 +30,7 @@ class MuroController extends Controller
             'publicaciones' => Muro::where('division_id', $division_id)
                 ->with('user')
                 ->orderBy('updated_at', 'DESC')
-                ->paginate(2)
+                ->paginate(10)
                 ->transform(function ($muro) {
                     return [
                         'id' => $muro->id,

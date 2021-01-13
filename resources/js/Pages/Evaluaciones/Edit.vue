@@ -113,7 +113,8 @@
                                 <datetime
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
                                 required
-                                format="YYYY-MM-DD H:i:s"
+                                format="DD-MM-YYYY H:i:s"
+                                language=es
                                 v-model="form.fechaHoraRealizacion"></datetime>
                                 
                                 <info>
@@ -133,7 +134,7 @@
                                 <datetime
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
                                 required
-                                format="YYYY-MM-DD H:i:s"
+                                format="DD-MM-YYYY H:i:s"
                                 v-model="form.fechaHoraFinalizacion"></datetime>
                                 
                                 <info>
