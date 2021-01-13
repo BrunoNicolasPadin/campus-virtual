@@ -42,22 +42,34 @@
             <estructura-form>
                 <template #formulario>
                     <form method="post" @submit.prevent="submit" enctype="multipart/form-data">
-                        
+                        <div v-for="(arc, index) in form.archivos" :key="index">
+                            <div class="-mx-3 md:flex mb-6">
+                                <div class="md:w-full px-3 mb-6 md:mb-0">
+                                    <label-form>
+                                        <template #label-value>
+                                            Archivo
+                                        </template>
+                                    </label-form>
+                                    
+                                    <file-input v-model="arc.archivo" type="file" />
+                                    
+                                    <info>
+                                        <template #info>
+                                            Es obligatorio. Solo puede subir de a uno.
+                                        </template>
+                                    </info>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="-mx-3 md:flex mb-6">
-                            <div class="md:w-full px-3 mb-6 md:mb-0">
-                                <label-form>
-                                    <template #label-value>
-                                        Archivo
-                                    </template>
-                                </label-form>
-                                
-                                <file-input v-model="form.archivo" type="file" />
-                                
-                                <info>
-                                    <template #info>
-                                        Es obligatorio. Solo puede subir de a uno.
-                                    </template>
-                                </info>
+                            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                                <button 
+                                @click="agregarOtroArchivo()"
+                                type="button" 
+                                class="border border-gray-500 bg-gray-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-700 focus:outline-none focus:shadow-outline">
+                                    Agregar otro archivo
+                                </button>
                             </div>
                         </div>
 
@@ -99,7 +111,9 @@
         data() {
             return {
                 form: {
-                    archivo: null,
+                    archivos: [{
+                        archivo: null,
+                    }],
                 },
             }
         },
@@ -107,9 +121,19 @@
         methods: {
             submit() {
                 var data = new FormData();
-                data.append('archivo', this.form.archivo);
+                var archivos = [];
+
+                for (let i = 0; i < this.form.archivos.length; i++) {
+                    data.append('archivos[]', this.form.archivos[i].archivo);
+                }
 
                 this.$inertia.post(this.route('muro-archivos.store', [this.institucion_id, this.division.id, this.publicacion.id]), data)
+            },
+
+            agregarOtroArchivo() {
+                this.form.archivos.push({
+                    archivo: null,
+                });
             },
         }
     }

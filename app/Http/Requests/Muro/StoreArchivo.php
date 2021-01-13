@@ -14,14 +14,14 @@ class StoreArchivo extends FormRequest
     public function rules()
     {
         return [
-            'archivo' => 'required',
+            'archivos.*' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'archivo.required' => 'Debe ingresar un archivo.',
+            'archivos.*.required' => 'Debe ingresar un archivo.',
         ];
     }
 }

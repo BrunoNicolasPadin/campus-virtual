@@ -52,17 +52,21 @@ class MuroArchivoController extends Controller
 
     public function store(StoreArchivo $request, $institucion_id, $division_id, $muro_id)
     {
-        if ($request->hasFile('archivo')) {
-            $archivo = $request->file('archivo');
-            $archivoStore = $archivo->getClientOriginalName();
-            $archivo->storeAs('public/Muro', $archivo->getClientOriginalName());
+        if ($request->hasFile('archivos')) {
+            $archivos = $request->file('archivos');
 
-            MuroArchivo::create([
-                'muro_id' => $muro_id,
-                'archivo' => $archivoStore,
-            ]);
+            foreach ($archivos as $archivo) {
+                $archivoStore = $archivo->getClientOriginalName();
+                $archivo->storeAs('public/Muro', $archivo->getClientOriginalName());
 
-            return back()->with(['successMessage' => 'Archivo cargado con exito! Apriete en el boton "Eliminar" para cargar otro archivo.']);
+                MuroArchivo::create([
+                    'muro_id' => $muro_id,
+                    'archivo' => $archivoStore,
+                ]);
+            }
+
+            return redirect(route('muro-archivos.index', [$institucion_id, $division_id, $muro_id]))
+                ->with(['successMessage' => 'Archivos cargados con exito!']);
         }
 
         return back()->withErrors('No hay ningun archivo seleccionado');
