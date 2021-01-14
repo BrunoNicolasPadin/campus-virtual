@@ -44,8 +44,22 @@ class EntregaController extends Controller
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
-            'archivos' => EntregaArchivo::where('entrega_id', $id)->get(),
-            'correcciones' => Correccion::where('entrega_id', $id)->get(),
+            'archivos' => EntregaArchivo::where('entrega_id', $id)->orderBy('created_at', 'DESC')->get()
+                ->map(function ($archivo) {
+                    return [
+                        'id' => $archivo->id,
+                        'archivo' => $archivo->archivo,
+                        'created_at' => $this->formatoService->cambiarFormatoParaMostrar($archivo->created_at),
+                    ];
+                }),
+            'correcciones' => Correccion::where('entrega_id', $id)->orderBy('created_at', 'DESC')->get()
+                ->map(function ($correccion) {
+                    return [
+                        'id' => $correccion->id,
+                        'archivo' => $correccion->archivo,
+                        'created_at' => $this->formatoService->cambiarFormatoParaMostrar($correccion->created_at),
+                    ];
+                }),
             'comentarios' => EntregaComentario::where('entrega_id', $id)
                 ->with('user')
                 ->orderBy('updated_at', 'DESC')

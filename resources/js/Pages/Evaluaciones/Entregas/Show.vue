@@ -138,8 +138,8 @@
                     <li v-for="correccion in correcciones" :key="correccion.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
-                                <a :href="'/storage/evaluaciones/correcciones/' + correccion.archivo" target="_blank" class="text-blue-500" rel="noopener noreferrer">
-                                    {{ correccion.archivo }}
+                                <a :href="'/storage/evaluaciones/correcciones/' + correccion.archivo" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline" rel="noopener noreferrer">
+                                    {{ correccion.archivo }} - {{ correccion.created_at }}
                                 </a>
                             </span>
                         </div>
