@@ -10,11 +10,12 @@ use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\EntregaComentario;
 use App\Models\Evaluaciones\Evaluacion;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
 
 class EntregaController extends Controller
 {
-    public function __construct()
+    public function __construct(CambiarFormatoFechaHora $formatoService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -22,6 +23,8 @@ class EntregaController extends Controller
         $this->middleware('evaluacionCorrespondiente');
         $this->middleware('soloDocentes')->only('edit', 'update');
         $this->middleware('entregaCorrespondiente')->only('show', 'edit', 'update');
+
+        $this->formatoService = $formatoService;
     }
 
     public function index($institucion_id, $division_id, $evaluacion_id)
@@ -43,7 +46,19 @@ class EntregaController extends Controller
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
             'archivos' => EntregaArchivo::where('entrega_id', $id)->get(),
             'correcciones' => Correccion::where('entrega_id', $id)->get(),
-            'comentarios' => EntregaComentario::where('entrega_id', $id)->with('user')->orderBy('created_at', 'DESC')->paginate(2),
+            'comentarios' => EntregaComentario::where('entrega_id', $id)
+                ->with('user')
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(10)
+                ->transform(function ($comentario) {
+                    return [
+                        'id' => $comentario->id,
+                        'division_id' => $comentario->entrega_id,
+                        'comentario' => $comentario->comentario,
+                        'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($comentario->updated_at),
+                        'user' => $comentario->user->only('name'),
+                    ];
+                }),
         ]);
     }
 

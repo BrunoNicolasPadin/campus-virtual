@@ -154,20 +154,20 @@
             </div>
 
             <div class="container mx-auto px-4 sm:px-8 my-6">
-
-                <h2 class="text-2xl font-semibold leading-tight">Comentarios</h2>
-
-                <div class="bg-white rounded shadow-sm p-8 mb-4 my-4">
-                    <form method="post" @submit.prevent="submit">
-                        <textarea
-                            v-model="form.comentario"
-                            placeholder="Escriba aqui su comentario"
-                            class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3">
-                        </textarea>
-                        <div class="mt-3">
-                            <guardar></guardar>
-                        </div>
-                    </form>
+                <div v-show="state === 'default'">
+                    <h2 class="text-2xl font-semibold leading-tight">Comentarios</h2>
+                    <div class="bg-white rounded shadow-sm p-8 mb-4 my-4">
+                        <form method="post" @submit.prevent="submit">
+                            <textarea
+                                v-model="form.comentario"
+                                placeholder="Escriba aqui su comentario"
+                                class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3">
+                            </textarea>
+                            <div class="mt-3">
+                                <guardar></guardar>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <div v-show="state === 'editing'">
