@@ -14,5 +14,6 @@ class SoloDocentes
         if (session('tipo') == 'Docente' && Docente::where('user_id', Auth::id())->exists()) {
             return $next($request);
         }
+        abort(403, 'Solo los docentes pueden realizar esta accion.');
     }
 }

@@ -49,7 +49,6 @@ class EntregaArchivoController extends Controller
             EntregaArchivo::create([
                 'entrega_id' => $entrega_id,
                 'archivo' => $archivoStore,
-                'fechaHoraEntrega' => $fechaHoraEntrega,
             ]);
 
             return back()->with(['successMessage' => 'Archivo cargado con exito! Apriete en el boton "Eliminar" para cargar otro archivo.']);

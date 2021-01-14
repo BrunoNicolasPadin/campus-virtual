@@ -60,16 +60,6 @@
 
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Fecha y hora de entrega
-                        </dt>
-                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <span v-if="entrega.fechaHoraEntrega">{{ entrega.fechaHoraEntrega }}</span>
-                            <span v-else>Sin entregar</span>
-                        </dd>
-                    </div>
-
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
                             Comentario
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
@@ -78,7 +68,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Calificar y comentar
                         </dt>
@@ -112,8 +102,8 @@
                     <li v-for="archivo in archivos" :key="archivo.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
-                                <a :href="'/storage/evaluaciones/entregas/' + archivo.archivo" target="_blank" class="text-blue-500" rel="noopener noreferrer">
-                                    {{ archivo.archivo }}
+                                <a :href="'/storage/evaluaciones/entregas/' + archivo.archivo" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline" rel="noopener noreferrer">
+                                    {{ archivo.archivo }} - {{ archivo.created_at }}
                                 </a>
                             </span>
                         </div>
