@@ -15,6 +15,7 @@ class UpdateEvaluacionArchivo extends FormRequest
     {
         return [
             'titulo' => 'required|string',
+            'visibilidad' => 'required',
         ];
     }
 
@@ -23,7 +24,7 @@ class UpdateEvaluacionArchivo extends FormRequest
         return [
             'titulo.required' => 'Debe ingresar un titulo.',
             'titulo.string' => 'El titulo debe  ser una cadena de caracteres o numeros, no otra cosa.',
-            'archivo.required' => 'Debe ingresar un archivo.',
+            'visibilidad.required' => 'Debe seleccionar una visibilidad.',
         ];
     }
 }

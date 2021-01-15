@@ -8,7 +8,6 @@ use App\Http\Requests\Evaluaciones\UpdateEvaluacionArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class EvaluacionArchivoController extends Controller
@@ -32,7 +31,7 @@ class EvaluacionArchivoController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $division_id, $evaluacion_id)
+    public function store(StoreEvaluacionArchivo $request, $institucion_id, $division_id, $evaluacion_id)
     {
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
@@ -72,18 +71,19 @@ class EvaluacionArchivoController extends Controller
     {
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
+
             $archivoStore = $archivo->getClientOriginalName();
             $archivo->storeAs('public/Evaluaciones/Archivos', $archivo->getClientOriginalName());
 
             Archivo::where('id', $id)
                 ->update([
-                'titulo' => $request->titulo,
-                'archivo' => $archivoStore,
-                'visibilidad'  => $request->visibilidad,
-            ]);
+                    'titulo' => $request->titulo,
+                    'archivo' => $archivoStore,
+                    'visibilidad'  => $request->visibilidad,
+                ]);
 
             return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
-                ->with(['successMessage' => 'Archivo editado con exito!']);
+                ->with(['successMessage' => 'Archivos actualizados con exito!']);
         }
 
         Archivo::where('id', $id)
@@ -93,7 +93,7 @@ class EvaluacionArchivoController extends Controller
         ]);
 
         return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
-            ->with(['successMessage' => 'Titulo y/o visibilidad del archivo editadas con exito!']);
+            ->with(['successMessage' => 'Titulo y/o visibilidad del archivo actualizadas con exito!']);
     }
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
