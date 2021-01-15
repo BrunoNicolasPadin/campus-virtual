@@ -8,12 +8,15 @@ use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Evaluaciones\EvaluacionRespuesta;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class EvaluacionRespuestaController extends Controller
 {
-    public function __construct()
+    protected $formatoService;
+
+    public function __construct(CambiarFormatoFechaHora $formatoService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -21,16 +24,33 @@ class EvaluacionRespuestaController extends Controller
         $this->middleware('evaluacionCorrespondiente');
         $this->middleware('verRespuestasEvaluacionCorrespondiente');
         $this->middleware('respuestaEvaluacionCorrespondiente')->only('update', 'destroy');
+
+        $this->formatoService = $formatoService;
     }
 
     public function index($institucion_id, $division_id, $evaluacion_id, $comentario_id)
     {
+        $comentario = EvaluacionComentario::with('user')->find($comentario_id);
+
         return Inertia::render('Evaluaciones/Respuestas/Index', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
-            'comentario' => EvaluacionComentario::with('user')->find($comentario_id),
-            'respuestas' => EvaluacionRespuesta::with('user')->where('comentario_id', $comentario_id)->orderBy('created_at', 'DESC')->get(),
+            'comentario' => [
+                'id' => $comentario->id,
+                'user' => $comentario->user->only('name'),
+                'comentario' => $comentario->comentario,
+                'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($comentario->updated_at),
+            ],
+            'respuestas' => EvaluacionRespuesta::with('user')->where('comentario_id', $comentario_id)->orderBy('created_at', 'DESC')->paginate(1)
+                ->transform(function ($respuesta) {
+                    return [
+                        'id' => $respuesta->id,
+                        'user' => $respuesta->user->only('name'),
+                        'respuesta' => $respuesta->respuesta,
+                        'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($respuesta->updated_at),
+                    ];
+                }),
         ]);
     }
 

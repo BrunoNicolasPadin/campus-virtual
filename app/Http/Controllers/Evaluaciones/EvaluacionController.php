@@ -84,7 +84,15 @@ class EvaluacionController extends Controller
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::with('asignatura')->find($id),
             'archivos' => Archivo::where('evaluacion_id', $id)->orderBy('titulo')->get(),
-            'comentarios' => EvaluacionComentario::where('evaluacion_id', $id)->with('user')->orderBy('created_at', 'DESC')->paginate(10),
+            'comentarios' => EvaluacionComentario::where('evaluacion_id', $id)->with('user')->orderBy('created_at', 'DESC')->paginate(10)
+                ->transform(function ($comentario) {
+                    return [
+                        'id' => $comentario->id,
+                        'user' => $comentario->user->only('name'),
+                        'comentario' => $comentario->comentario,
+                        'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($comentario->updated_at),
+                    ];
+                }),
         ]);
     }
 

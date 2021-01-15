@@ -28,7 +28,7 @@
                 <span class="text-green-800">{{ successMessage }} </span>
             </div>
 
-        <div class="py-8">
+        <div class="py-4">
 
             <div class="container mx-auto px-4 sm:px-8 my-6">
 
@@ -46,9 +46,8 @@
                     </div>
                 </div>
 
-                <div class="py-5">
+                <div class="my-6" v-show="state === 'default'">
                     <h2 class="text-2xl font-semibold leading-tight">Respuestas</h2>
-
                     <div class="bg-white rounded shadow-sm p-8 mb-4 my-4">
                         <form method="post" @submit.prevent="submit">
                             <textarea
@@ -63,9 +62,7 @@
                     </div>
                 </div>
 
-                
-
-                <div v-show="state === 'editing'">
+                <div class="my-6" v-show="state === 'editing'">
                     <h2 class="text-2xl font-semibold leading-tight">Actualizar respuesta</h2>
 
                     <div class="bg-white rounded shadow-sm p-8 mb-4 my-4">
@@ -93,7 +90,7 @@
                 </div>
 
 
-                <div class="bg-white rounded shadow-sm p-8 my-2" v-for="respuesta in respuestas" :key="respuesta.id">
+                <div class="bg-white rounded shadow-sm p-8 my-2" v-for="respuesta in respuestas.data" :key="respuesta.id">
                     <div class="flex justify-between mb-1">
                         <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ respuesta.respuesta }}</p>
                         <button class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" @click="editar(respuesta)">Editar</button>
@@ -104,6 +101,8 @@
                         </p>
                     </div>
                 </div>
+
+                <pagination :links="respuestas.links" />
             </div>
         </div>
     </app-layout>
@@ -114,6 +113,7 @@
     import Primary from '@/Botones/Primary.vue'
     import Eliminar from '@/Botones/Eliminar.vue'
     import Guardar from '@/Botones/Guardar.vue'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -121,6 +121,7 @@
             Primary,
             Eliminar,
             Guardar,
+            Pagination,
         },
 
         props: {
@@ -129,7 +130,7 @@
             division: Object,
             evaluacion: Object,
             comentario: Object,
-            respuestas: Array,
+            respuestas: Object,
         },
 
         data() {
