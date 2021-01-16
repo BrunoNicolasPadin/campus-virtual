@@ -33,6 +33,7 @@ use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\TipoCuentaController;
 use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
 use App\Http\Controllers\RolesDivision\DocenteDivisionController;
+use App\Http\Controllers\TopNavController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,11 @@ Route::get('/', function () {
 Route::post('/login', [LoginController::class, 'authenticate'])->name('loginNuevo');
 
 Route::get('/dashboard', [DashboardController::class, 'mostrarDashboard'])->name('dashboard');
+
+Route::get('/top-divisiones', [TopNavController::class, 'mostrarDivisiones'])->name('topNav.divisiones');
+Route::get('/top-ciclos-lectivos', [TopNavController::class, 'mostrarCiclosLectivos'])->name('topNav.ciclos-lectivos');
+Route::get('/top-roles', [TopNavController::class, 'mostrarRoles'])->name('topNav.roles');
+Route::get('/top-institucion', [TopNavController::class, 'mostrarPerfilInstitucional'])->name('topNav.institucion');
 
 Route::get('tipos-de-cuentas', [TipoCuentaController::class, 'mostrarCuentas'])->name('roles.mostrarCuentas');
 Route::get('activar-docente/{id}', [ActivarCuentaController::class, 'activarDocente'])->name('roles.activarDocente');

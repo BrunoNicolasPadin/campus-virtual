@@ -18,14 +18,14 @@
                             <jet-nav-link :href="route('inicio')" :active="route().current('inicio')">
                                 Inicio
                             </jet-nav-link>
-                            <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                Dashboard
+                            <jet-nav-link :href="route('topNav.divisiones')" :active="route().current('divisiones.index')">
+                                Divisiones
+                            </jet-nav-link>
+                            <jet-nav-link :href="route('roles.mostrarCuentas')" :active="route().current('roles.mostrarCuentas')">
+                                Cuentas
                             </jet-nav-link>
                             <jet-nav-link :href="route('buscador-de-instituciones')" :active="route().current('buscador-de-instituciones')">
                                 Buscador de colegios
-                            </jet-nav-link>
-                            <jet-nav-link>
-                                Mi division (Mejorar)
                             </jet-nav-link>
                             <div class="hidden sm:flex sm:items-center sm:ml-6">
                                 <div class="ml-3 relative">
@@ -43,17 +43,14 @@
                                         </template>
 
                                         <template #content>
-                                            <jet-dropdown-link :href="route('divisiones.index', 1)" :active="route().current('divisiones.index', 1)">
-                                                Divisiones
-                                            </jet-dropdown-link>
-                                            <jet-dropdown-link :href="route('ciclos-lectivos.index', 1)" :active="route().current('ciclos-lectivos.index', 1)">
+                                            <jet-dropdown-link :href="route('topNav.ciclos-lectivos')" :active="route().current('ciclos-lectivos.index')">
                                                 Ciclos lectivos
                                             </jet-dropdown-link>
-                                            <jet-dropdown-link :href="route('roles.index', 1)" :active="route().current('roles.index', 1)">
+                                            <jet-dropdown-link :href="route('topNav.roles')" :active="route().current('roles.index')">
                                                 Roles
                                             </jet-dropdown-link>
-                                            <jet-dropdown-link>
-                                                Perfil institucional (Mejorar)
+                                            <jet-dropdown-link :href="route('topNav.institucion')" :active="route().current('instituciones.show')">
+                                                Perfil institucional
                                             </jet-dropdown-link>
                                         </template>
                                     </jet-dropdown>
@@ -163,11 +160,11 @@
                     <jet-responsive-nav-link :href="route('inicio')" :active="route().current('inicio')">
                         Inicio
                     </jet-responsive-nav-link>
-                    <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                        Dashboard
+                    <jet-responsive-nav-link :href="route('topNav.divisiones')" :active="route().current('divisiones.index')">
+                        Divisiones
                     </jet-responsive-nav-link>
                     <jet-responsive-nav-link :href="route('buscador-de-instituciones')" :active="route().current('buscador-de-instituciones')">
-                        Buscador de instituciones
+                        Buscador de colegios
                     </jet-responsive-nav-link>
                     <jet-responsive-nav-link :href="route('roles.mostrarCuentas')" :active="route().current('roles.mostrarCuentas')">
                         Cuentas
@@ -179,17 +176,14 @@
                     </div>
 
                     <div class="mt-3 space-y-1">
-                        <jet-responsive-nav-link :href="route('divisiones.index', 1)" :active="route().current('divisiones.index', 1)">
-                            Divisiones
-                        </jet-responsive-nav-link>
-                        <jet-responsive-nav-link :href="route('ciclos-lectivos.index', 1)" :active="route().current('ciclos-lectivos.index', 1)">
+                        <jet-responsive-nav-link :href="route('topNav.ciclos-lectivos')" :active="route().current('ciclos-lectivos.index')">
                             Ciclos lectivos
                         </jet-responsive-nav-link>
-                        <jet-responsive-nav-link :href="route('roles.index', 1)" :active="route().current('roles.index', 1)">
+                        <jet-responsive-nav-link :href="route('topNav.roles')" :active="route().current('roles.index')">
                             Roles
                         </jet-responsive-nav-link>
-                        <jet-responsive-nav-link>
-                            Perfil institucional (Mejorar)
+                        <jet-responsive-nav-link :href="route('topNav.institucion')" :active="route().current('instituciones.show')">
+                            Perfil institucional
                         </jet-responsive-nav-link>
                     </div>
                 </div>
