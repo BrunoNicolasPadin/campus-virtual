@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Materiales;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Materiales\StoreMaterial;
+use App\Http\Requests\Evaluaciones\StoreEvaluacionArchivo;
+use App\Http\Requests\Evaluaciones\UpdateEvaluacionArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
@@ -30,23 +31,30 @@ class MaterialController extends Controller
         ]);
     }
 
-    public function store(StoreMaterial $request, $institucion_id, $division_id, $grupo_id)
+    public function store(StoreEvaluacionArchivo $request, $institucion_id, $division_id, $grupo_id)
     {
-        if ($request->hasFile('archivo')) {
-            $archivo = $request->file('archivo');
-            $archivoStore = $archivo->getClientOriginalName();
-            $archivo->storeAs('public/Materiales', $archivo->getClientOriginalName());
+        if ($request->hasFile('archivos')) {
+            $archivos = $request->file('archivos');
+            $i = 0;
 
-            Material::create([
-                'grupo_id' => $grupo_id,
-                'nombre' => $request->nombre,
-                'visibilidad' => $request->visibilidad,
-                'archivo' => $archivoStore,
-            ]);
+            foreach ($archivos as $archivo) {
+                $archivoStore = $archivo->getClientOriginalName();
+                $archivo->storeAs('public/Materiales', $archivo->getClientOriginalName());
 
-            return back()->with(['successMessage' => 'Archivo cargado con exito! Apriete en el boton "Eliminar" para cargar otro archivo.']);
+                Material::create([
+                    'grupo_id' => $grupo_id,
+                    'nombre' => $request['nombre'][$i],
+                    'archivo' => $archivoStore,
+                    'visibilidad'  => $request['visibilidad'][$i],
+                ]);
+                $i++;
+            }
+
+            return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
+                ->with(['successMessage' => 'Archivos cargados con exito!']);
         }
-        return back()->withErrors('No hay ningun archivo');
+
+        return back()->withErrors('No hay ningun archivo seleccionado');
     }
 
     public function edit($institucion_id, $division_id, $grupo_id, $id)
@@ -59,22 +67,23 @@ class MaterialController extends Controller
         ]);
     }
 
-    public function update(StoreMaterial $request, $institucion_id, $division_id, $grupo_id, $id)
+    public function update(UpdateEvaluacionArchivo $request, $institucion_id, $division_id, $grupo_id, $id)
     {
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
+
             $archivoStore = $archivo->getClientOriginalName();
             $archivo->storeAs('public/Materiales', $archivo->getClientOriginalName());
 
             Material::where('id', $id)
                 ->update([
-                'nombre' => $request->nombre,
-                'visibilidad'  => $request->visibilidad,
-                'archivo' => $archivoStore,
-            ]);
+                    'nombre' => $request->nombre,
+                    'archivo' => $archivoStore,
+                    'visibilidad'  => $request->visibilidad,
+                ]);
 
             return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
-                ->with(['successMessage' => 'Archivo editado con exito!']);
+                ->with(['successMessage' => 'Archivos actualizados con exito!']);
         }
 
         Material::where('id', $id)
@@ -84,7 +93,7 @@ class MaterialController extends Controller
         ]);
 
         return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
-                ->with(['successMessage' => 'Archivo editado con exito!']);
+            ->with(['successMessage' => 'Nombre y/o visibilidad del archivo actualizadas con exito!']);
     }
 
     public function destroy($institucion_id, $division_id, $grupo_id, $id)

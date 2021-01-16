@@ -12,7 +12,7 @@
                 <inertia-link :href="route('evaluaciones.index', [institucion_id, division.id])">Evaluaciones</inertia-link>
                  > 
                 <inertia-link :href="route('evaluaciones.show', [institucion_id, division.id, evaluacion.id])">{{ evaluacion.titulo }}</inertia-link>
-                 > {{ archivo.titulo }}
+                 > {{ archivo.nombre }}
                  > Editar archivo
             </h2>
         </template>
@@ -37,11 +37,11 @@
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Titulo
+                                        Nombre
                                     </template>
                                 </label-form>
                                 
-                                <input-form required type="text" v-model="form.titulo" />
+                                <input-form required type="text" v-model="form.nombre" />
                                 
                                 <info>
                                     <template #info>
@@ -136,7 +136,7 @@
         data() {
             return {
                 form: {
-                    titulo: this.archivo.titulo,
+                    nombre: this.archivo.nombre,
                     visibilidad: this.archivo.visibilidad,
                     archivo: null,
                 },
@@ -146,7 +146,7 @@
         methods: {
             submit() {
                 var data = new FormData();
-                data.append('titulo', this.form.titulo);
+                data.append('nombre', this.form.nombre);
                 data.append('visibilidad', this.form.visibilidad);
                 data.append('archivo', this.form.archivo);
                 data.append('_method', 'put');

@@ -43,7 +43,7 @@ class EvaluacionArchivoController extends Controller
 
                 Archivo::create([
                     'evaluacion_id' => $evaluacion_id,
-                    'titulo' => $request['titulo'][$i],
+                    'nombre' => $request['nombre'][$i],
                     'archivo' => $archivoStore,
                     'visibilidad'  => $request['visibilidad'][$i],
                 ]);
@@ -77,7 +77,7 @@ class EvaluacionArchivoController extends Controller
 
             Archivo::where('id', $id)
                 ->update([
-                    'titulo' => $request->titulo,
+                    'nombre' => $request->nombre,
                     'archivo' => $archivoStore,
                     'visibilidad'  => $request->visibilidad,
                 ]);
@@ -88,12 +88,12 @@ class EvaluacionArchivoController extends Controller
 
         Archivo::where('id', $id)
             ->update([
-            'titulo' => $request->titulo,
+            'nombre' => $request->nombre,
             'visibilidad'  => $request->visibilidad,
         ]);
 
         return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
-            ->with(['successMessage' => 'Titulo y/o visibilidad del archivo actualizadas con exito!']);
+            ->with(['successMessage' => 'Nombre y/o visibilidad del archivo actualizadas con exito!']);
     }
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)

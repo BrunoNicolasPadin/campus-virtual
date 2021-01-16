@@ -138,10 +138,10 @@
                                 target="_blank" 
                                 class="text-blue-500"
                                 rel="noopener noreferrer">
-                                    {{ archivo.titulo }}
+                                    {{ archivo.nombre }}
                                 </a>
                                 <span v-else class="text-gray-500">
-                                    {{ archivo.titulo }}
+                                    {{ archivo.nombre }}
                                 </span>
                             </span>
                         </div>

@@ -42,70 +42,80 @@
             <estructura-form>
                 <template #formulario>
                     <form method="post" @submit.prevent="submit" enctype="multipart/form-data">
-                        
-                        <div class="-mx-3 md:flex mb-6">
-                            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label-form>
-                                    <template #label-value>
-                                        Nombre
-                                    </template>
-                                </label-form>
-                                
-                                <input-form required type="text" v-model="form.nombre" />
-                                
-                                <info>
-                                    <template #info>
-                                        Es obligatorio.
-                                    </template>
-                                </info>
+                        <div v-for="(arc, index) in form.archivos" :key="index">
+                            <div class="-mx-3 md:flex mb-6">
+                                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                                    <label-form>
+                                        <template #label-value>
+                                            Nombre
+                                        </template>
+                                    </label-form>
+                                    
+                                    <input-form required type="text" v-model="arc.nombre" />
+                                    
+                                    <info>
+                                        <template #info>
+                                            Es obligatorio.
+                                        </template>
+                                    </info>
+                                </div>
+
+                                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                                    <label-form>
+                                        <template #label-value>
+                                            Visibilidad
+                                        </template>
+                                    </label-form>
+                                    
+                                    <select
+                                    class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                    required
+                                    v-model="arc.visibilidad">
+                                        
+                                        <option value="" disabled selected>-</option>
+                                        <option value="1">Si</option>
+                                        <option value="0">No</option>
+
+                                    </select>
+                                    
+                                    <info>
+                                        <template #info>
+                                            Es obligatorio y se refiere a si el archivo lo pueden ver los alumnos o no.
+                                        </template>
+                                    </info>
+                                </div>
                             </div>
 
-                            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label-form>
-                                    <template #label-value>
-                                        Visibilidad
-                                    </template>
-                                </label-form>
-                                
-                                <select
-                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
-                                required
-                                v-model="form.visibilidad">
+                            <div class="-mx-3 md:flex mb-6">
+                                <div class="md:w-full px-3 mb-6 md:mb-0">
+                                    <label-form>
+                                        <template #label-value>
+                                            Archivo
+                                        </template>
+                                    </label-form>
                                     
-                                    <option value="" disabled selected>-</option>
-                                    <option value="1">Si</option>
-                                    <option value="0">No</option>
-
-                                </select>
-                                
-                                <info>
-                                    <template #info>
-                                        Es obligatorio y se refiere a si el archivo lo pueden ver los alumnos o no.
-                                    </template>
-                                </info>
+                                    <file-input v-model="arc.archivo" type="file" />
+                                    
+                                    <info>
+                                        <template #info>
+                                            Es obligatorio. Solo puede subir de a uno.
+                                        </template>
+                                    </info>
+                                </div>
                             </div>
                         </div>
 
                         <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-full px-3 mb-6 md:mb-0">
-                                <label-form>
-                                    <template #label-value>
-                                        Archivo
-                                    </template>
-                                </label-form>
-                                
-                                <file-input v-model="form.archivo" type="file" />
-                                
-                                <info>
-                                    <template #info>
-                                        Es obligatorio. Solo puede subir de a uno.
-                                    </template>
-                                </info>
+                                <button 
+                                @click="agregarOtroArchivo()"
+                                type="button" 
+                                class="border border-gray-500 bg-gray-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-700 focus:outline-none focus:shadow-outline">
+                                    Agregar otro archivo
+                                </button>
                             </div>
                         </div>
-
                         <guardar></guardar>
-
                     </form>
                 </template>
             </estructura-form>
@@ -145,9 +155,11 @@
         data() {
             return {
                 form: {
-                    nombre: null,
-                    visibilidad: null,
-                    archivo: null,
+                    archivos: [{
+                        nombre: null,
+                        visibilidad: null,
+                        archivo: null,
+                    }],
                 },
             }
         },
@@ -155,11 +167,23 @@
         methods: {
             submit() {
                 var data = new FormData();
-                data.append('nombre', this.form.nombre);
-                data.append('visibilidad', this.form.visibilidad);
-                data.append('archivo', this.form.archivo);
+                var archivos = [];
+
+                for (let i = 0; i < this.form.archivos.length; i++) {
+                    data.append('nombre[]', this.form.archivos[i].nombre);
+                    data.append('visibilidad[]', this.form.archivos[i].visibilidad);
+                    data.append('archivos[]', this.form.archivos[i].archivo);
+                }
 
                 this.$inertia.post(this.route('materiales-archivos.store', [this.institucion_id, this.division.id, this.grupo.id]), data)
+            },
+
+            agregarOtroArchivo() {
+                this.form.archivos.push({
+                    nombre: null,
+                    visibilidad: null,
+                    archivo: null,
+                });
             },
         }
     }

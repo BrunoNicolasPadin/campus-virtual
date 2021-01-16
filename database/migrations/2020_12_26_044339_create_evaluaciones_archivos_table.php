@@ -16,7 +16,7 @@ class CreateEvaluacionesArchivosTable extends Migration
         Schema::create('evaluaciones_archivos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('evaluacion_id')->constrained('evaluaciones')->onDelete('cascade');
-            $table->string('titulo');
+            $table->string('nombre');
             $table->binary('archivo');
             $table->boolean('visibilidad');
             $table->timestamps();

@@ -9,7 +9,7 @@ class Archivo extends Model
     protected $table = 'evaluaciones_archivos';
     protected $fillable = [
         'evaluacion_id',
-        'titulo',
+        'nombre',
         'archivo',
         'visibilidad',
     ];

@@ -14,7 +14,7 @@ class StoreEvaluacionArchivo extends FormRequest
     public function rules()
     {
         return [
-            'titulo.*' => 'required|string',
+            'nombre.*' => 'required|string',
             'visibilidad.*' => 'required',
             'archivos.*' => 'required',
         ];
@@ -23,8 +23,8 @@ class StoreEvaluacionArchivo extends FormRequest
     public function messages()
     {
         return [
-            'titulo.*.required' => 'Debe ingresar un titulo.',
-            'titulo.string' => 'El titulo debe  ser una cadena de caracteres o numeros, no otra cosa.',
+            'nombre.*.required' => 'Debe ingresar un nombre.',
+            'nombre.string' => 'El nombre debe  ser una cadena de caracteres o numeros, no otra cosa.',
             'visibilidad.*.required' => 'Debe seleccionar una visibilidad.',
             'archivos.*.required' => 'Debe ingresar un archivo.',
         ];

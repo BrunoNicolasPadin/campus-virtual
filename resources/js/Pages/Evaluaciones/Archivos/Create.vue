@@ -46,11 +46,11 @@
                                 <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                     <label-form>
                                         <template #label-value>
-                                            Titulo
+                                            Nombre
                                         </template>
                                     </label-form>
                                     
-                                    <input-form required type="text" v-model="arc.titulo" />
+                                    <input-form required type="text" v-model="arc.nombre" />
                                     
                                     <info>
                                         <template #info>
@@ -155,7 +155,7 @@
             return {
                 form: {
                     archivos: [{
-                        titulo: null,
+                        nombre: null,
                         visibilidad: null,
                         archivo: null,
                     }],
@@ -169,7 +169,7 @@
                 var archivos = [];
 
                 for (let i = 0; i < this.form.archivos.length; i++) {
-                    data.append('titulo[]', this.form.archivos[i].titulo);
+                    data.append('nombre[]', this.form.archivos[i].nombre);
                     data.append('visibilidad[]', this.form.archivos[i].visibilidad);
                     data.append('archivos[]', this.form.archivos[i].archivo);
                 }
@@ -177,10 +177,11 @@
                 this.$inertia.post(this.route('evaluaciones-archivos.store', [this.institucion_id, this.division.id, this.evaluacion.id]), data)
             },
 
-
             agregarOtroArchivo() {
                 this.form.archivos.push({
-                    archivo: null,
+                    nombre: null,
+                        visibilidad: null,
+                        archivo: null,
                 });
             },
         }
