@@ -40,7 +40,14 @@ class AlumnoController extends Controller
             'institucion_id' => $institucion_id,
             'alumnos' => Alumno::where('institucion_id', $institucion_id)
                 ->with('user', 'padres', 'padres.user')
-                ->get()
+                ->paginate(25)
+                ->transform(function ($alumno) {
+                    return [
+                        'id' => $alumno->id,
+                        'user'  => $alumno->user->only('name'),
+                        'padres' => $alumno->padres,
+                    ];
+                }),
         ]);
     }
 
@@ -124,6 +131,14 @@ class AlumnoController extends Controller
     public function destroy($id)
     {
         Alumno::destroy($id);
-        return back();
+
+        $message = 'Alumno eliminado con exito!';
+
+        if (session('tipo') == 'Alumno') {
+            $message = 'Te eliminaste con exito!';
+            session()->forget(['tipo', 'alumno_id', 'division_id', 'institucion_id']);
+        }
+
+        return back()->with(['successMessage' => $message]);
     }
 }

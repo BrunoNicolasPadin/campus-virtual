@@ -74,6 +74,13 @@ class PadreController extends Controller
     public function destroy($institucion_id, $id)
     {
         Padre::destroy($id);
-        return redirect(route('padres.index', $institucion_id))->with(['successMessage' => 'Se ha eliminado el padre con exito!']);
+        $message = 'Padre eliminado con exito!';
+
+        if (session('tipo') == 'Padre') {
+            $message = 'Te eliminaste con exito!';
+            session()->forget(['tipo', 'tipo_id', 'alumno_id', 'division_id', 'institucion_id']);
+        }
+
+        return back()->with(['successMessage' => $message]);
     }
 }

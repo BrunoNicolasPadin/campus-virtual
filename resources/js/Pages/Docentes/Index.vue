@@ -44,7 +44,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(docente, index) in docentes" :key="docente.id">
+                            <tr v-for="(docente, index) in docentes.data" :key="docente.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -77,6 +77,9 @@
                     </table-body>
                 </template>
             </estructura-tabla>
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <pagination :links="docentes.links" />
+            </div>
         </div>
     </app-layout>
 </template>
@@ -89,6 +92,7 @@
     import TableBody from '@/Tabla/TableBody'
     import TableData from '@/Tabla/TableData'
     import Eliminar from '@/Botones/Eliminar'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -99,6 +103,7 @@
             TableBody,
             TableData,
             Eliminar,
+            Pagination,
         },
 
         props:{ 

@@ -31,7 +31,13 @@ class DocenteController extends Controller
             'institucion_id' => $institucion_id,
             'docentes' => Docente::where('institucion_id', $institucion_id)
                 ->with('user')
-                ->get(),
+                ->paginate(20)
+                ->transform(function ($docente) {
+                    return [
+                        'id' => $docente->id,
+                        'user'  => $docente->user->only('name'),
+                    ];
+                }),
         ]);
     }
 
@@ -62,6 +68,13 @@ class DocenteController extends Controller
     public function destroy($institucion_id, $id)
     {
         Docente::destroy($id);
-        return redirect(route('docentes.index', $institucion_id))->with(['successMessage' => 'Se ha eliminado el docente con exito!']);
+        $message = 'Docente eliminado con exito!';
+
+        if (session('tipo') == 'Docente') {
+            $message = 'Te eliminaste con exito!';
+            session()->forget(['tipo', 'tipo_id', 'institucion_id']);
+        }
+
+        return back()->with(['successMessage' => $message]);
     }
 }

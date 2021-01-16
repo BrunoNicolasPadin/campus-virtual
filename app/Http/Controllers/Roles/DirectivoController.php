@@ -30,7 +30,13 @@ class DirectivoController extends Controller
             'institucion_id' => $institucion_id,
             'directivos' => Directivo::where('institucion_id', $institucion_id)
                 ->with('user')
-                ->get(),
+                ->paginate(20)
+                ->transform(function ($directivo) {
+                    return [
+                        'id' => $directivo->id,
+                        'user'  => $directivo->user->only('name'),
+                    ];
+                }),
         ]);
     }
 
@@ -61,6 +67,13 @@ class DirectivoController extends Controller
     public function destroy($institucion_id, $id)
     {
         Directivo::destroy($id);
-        return redirect(route('directivos.index', $institucion_id))->with(['successMessage' => 'Se ha eliminado el directivo con exito!']);
+        $message = 'Directivo eliminado con exito!';
+
+        if (session('tipo') == 'Directivo') {
+            $message = 'Te eliminaste con exito!';
+            session()->forget(['tipo', 'tipo_id', 'institucion_id']);
+        }
+
+        return back()->with(['successMessage' => $message]);
     }
 }
