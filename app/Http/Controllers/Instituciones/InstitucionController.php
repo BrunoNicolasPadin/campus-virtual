@@ -102,6 +102,6 @@ class InstitucionController extends Controller
     public function destroy($id)
     {
         Institucion::destroy($id);
-        return back();
+        return redirect(route('instituciones.create'));
     }
 }

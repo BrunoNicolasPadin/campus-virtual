@@ -82,6 +82,9 @@
                             <inertia-link :href="route('instituciones.edit', institucion.id)">
                                 <editar></editar>
                             </inertia-link>
+                            <button @click="destroy()" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                Eliminar
+                            </button>
                         </dd>
                     </div>
 
@@ -108,5 +111,13 @@
             institucion: Object,
             successMessage: String,
         },
+
+        methods: {
+            destroy() {
+                if (confirm('Estas seguro de que desea eliminar la institucion?')) {
+                    this.$inertia.delete(this.route('instituciones.destroy', [this.institucion_id]))
+                }
+            },
+        }
     }
 </script>
