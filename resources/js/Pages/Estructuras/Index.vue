@@ -78,7 +78,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(division, index) in divisiones" :key="division.id">
+                            <tr v-for="(division, index) in divisiones.data" :key="division.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -136,10 +136,11 @@
                             </tr>
                         </template>
                     </table-body>
-                    
-
                 </template>
             </estructura-tabla>
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <pagination :links="divisiones.links" />
+            </div>
         </div>
     </app-layout>
 </template>
@@ -154,6 +155,7 @@
     import Editar from '@/Botones/Editar'
     import Eliminar from '@/Botones/Eliminar'
     import Primary from '@/Botones/Primary.vue'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -166,12 +168,13 @@
             Editar,
             Eliminar,
             Primary,
+            Pagination,
         },
 
         props:{ 
             successMessage: String,
             institucion_id: String,
-            divisiones: Array,
+            divisiones: Object,
         },
 
         methods: {

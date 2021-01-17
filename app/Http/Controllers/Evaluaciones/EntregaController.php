@@ -33,7 +33,7 @@ class EntregaController extends Controller
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
-            'entregas' => Entrega::where('evaluacion_id', $evaluacion_id)->with(['alumno', 'alumno.user'])->get(),
+            'entregas' => Entrega::where('evaluacion_id', $evaluacion_id)->with(['alumno', 'alumno.user'])->paginate(20),
         ]);
     }
 
@@ -63,7 +63,7 @@ class EntregaController extends Controller
             'comentarios' => EntregaComentario::where('entrega_id', $id)
                 ->with('user')
                 ->orderBy('updated_at', 'DESC')
-                ->paginate(10)
+                ->paginate(20)
                 ->transform(function ($comentario) {
                     return [
                         'id' => $comentario->id,

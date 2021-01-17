@@ -40,7 +40,7 @@ class MuroRespuestaController extends Controller
             'respuestas' => MuroRespuesta::where('muro_id', $muro->id)
                 ->with('user')
                 ->orderBy('updated_at', 'DESC')
-                ->paginate(10)
+                ->paginate(20)
                 ->transform(function ($respuesta) {
                     return [
                         'id' => $respuesta->id,

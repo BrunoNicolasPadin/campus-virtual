@@ -28,7 +28,7 @@ class GrupoController extends Controller
         return Inertia::render('Materiales/Grupos/Index', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'grupos' => Grupo::where('division_id', $division_id)->with('asignatura')->get(),
+            'grupos' => Grupo::where('division_id', $division_id)->with('asignatura')->paginate(20),
         ]);
     }
 

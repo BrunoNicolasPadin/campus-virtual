@@ -47,7 +47,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(alumno, index) in alumnos" :key="alumno.index">
+                            <tr v-for="(alumno, index) in alumnos.data" :key="alumno.index">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -80,6 +80,9 @@
                     </table-body>
                 </template>
             </estructura-tabla>
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <pagination :links="alumnos.links" />
+            </div>
         </div>
     </app-layout>
 </template>
@@ -91,6 +94,7 @@
     import TableHead from '@/Tabla/TableHead.vue'
     import TableBody from '@/Tabla/TableBody.vue'
     import TableData from '@/Tabla/TableData.vue'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -100,13 +104,14 @@
             TableHead,
             TableBody,
             TableData,
+            Pagination,
         },
 
         props: {
             successMessage: String,
             institucion_id: String,
             division: Object,
-            alumnos: Array,
+            alumnos: Object,
         },
 
         methods: {

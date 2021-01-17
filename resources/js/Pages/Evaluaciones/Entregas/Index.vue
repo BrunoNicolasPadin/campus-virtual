@@ -54,7 +54,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(entrega, index) in entregas" :key="entrega.id">
+                            <tr v-for="(entrega, index) in entregas.data" :key="entrega.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -86,6 +86,9 @@
                     </table-body>
                 </template>
             </estructura-tabla>
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <pagination :links="entregas.links" />
+            </div>
         </div>
     </app-layout>
 </template>
@@ -97,6 +100,7 @@
     import TableHead from '@/Tabla/TableHead'
     import TableBody from '@/Tabla/TableBody'
     import TableData from '@/Tabla/TableData'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -106,13 +110,14 @@
             TableHead,
             TableBody,
             TableData,
+            Pagination,
         },
 
         props:{ 
             institucion_id: String,
             division: Object,
             evaluacion: Object,
-            entregas: Array,
+            entregas: Object,
         },
     }
 </script>

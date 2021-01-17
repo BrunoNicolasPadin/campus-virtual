@@ -40,7 +40,7 @@ class AlumnoController extends Controller
             'institucion_id' => $institucion_id,
             'alumnos' => Alumno::where('institucion_id', $institucion_id)
                 ->with('user', 'padres', 'padres.user')
-                ->paginate(25)
+                ->paginate(20)
                 ->transform(function ($alumno) {
                     return [
                         'id' => $alumno->id,
