@@ -62,12 +62,9 @@ class PadreController extends Controller
 
     public function show($institucion_id, $id)
     {
-        $padre = Padre::with('user')->find($id);
-
         return Inertia::render('Padres/Show', [
             'institucion_id' => $institucion_id,
-            'padre' => $padre,
-            'padres' => Padre::with('user', 'hijos', 'hijos.user')->where('user_id', $padre->user_id)->get(),
+            'padre' => Padre::with('user', 'hijos', 'hijos.user')->find($id),
         ]);
     }
 
@@ -76,11 +73,14 @@ class PadreController extends Controller
         Padre::destroy($id);
         $message = 'Padre eliminado con exito!';
 
-        if (session('tipo') == 'Padre') {
+        if (session('tipo') == 'Padre' && session('tipo_id') == $id) {
             $message = 'Te eliminaste con exito!';
             session()->forget(['tipo', 'tipo_id', 'alumno_id', 'division_id', 'institucion_id']);
         }
+        else {
+            return back()->withErrors('Debe tener activado la cuenta que desea eliminar.');
+        }
 
-        return back()->with(['successMessage' => $message]);
+        return redirect(route('roles.index', $institucion_id))->with(['successMessage' => $message]);
     }
 }
