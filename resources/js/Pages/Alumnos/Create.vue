@@ -116,6 +116,8 @@
             divisiones: Array,
         },
 
+        title: 'Anotarse como alumno',
+
         data() {
             return {
                 form: {

@@ -48,5 +48,7 @@
             institucion_id: String,
             directivo: Object,
         },
+
+        title: 'Perfil directivo',
     }
 </script>

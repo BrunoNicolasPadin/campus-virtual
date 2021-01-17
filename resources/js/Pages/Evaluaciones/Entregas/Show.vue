@@ -258,6 +258,8 @@
             comentarios: Object,
         },
 
+        title: 'Ver entrega',
+
         data() {
             return {
                 form: {

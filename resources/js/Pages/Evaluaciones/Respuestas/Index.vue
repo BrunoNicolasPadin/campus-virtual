@@ -143,6 +143,8 @@
             respuestas: Object,
         },
 
+        title: 'Respuestas',
+
         data() {
             return {
                 form: {

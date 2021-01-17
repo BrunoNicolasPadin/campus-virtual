@@ -203,6 +203,8 @@
             institucion_id: String,
         },
 
+        title: 'Anotarse',
+
         data() {
             return {
                 form: {

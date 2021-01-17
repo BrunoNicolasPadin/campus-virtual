@@ -149,6 +149,8 @@
             alumnos: Array,
         },
 
+        title: 'Alumnos',
+
         methods: {
             destroy(id) {
                 if (confirm('Estas seguro de que desea eliminar a este alumno?')) {

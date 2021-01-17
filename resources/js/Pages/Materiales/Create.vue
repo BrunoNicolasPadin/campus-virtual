@@ -150,6 +150,8 @@
             grupo: Object,
         },
 
+        title: 'Agregar materiales',
+
         data() {
             return {
                 form: {

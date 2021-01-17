@@ -61,5 +61,7 @@
             padre: Object,
             padres: Array,
         },
+
+        title: 'Perfil de padre/madre/tutor',
     }
 </script>

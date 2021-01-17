@@ -115,6 +115,8 @@
             institucion_id: String,
         },
 
+        title: 'Agregar ciclo lectivo',
+
         data() {
             return {
                 form: {

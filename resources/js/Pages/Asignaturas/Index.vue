@@ -147,6 +147,8 @@
             asignaturas: Array,
         },
 
+        title: 'Asignaturas',
+
         methods: {
             destroy(asignatura_id) {
                 if (confirm('Estas seguro de que desea eliminar esta asignatura?')) {

@@ -164,6 +164,8 @@
             grupos: Object,
         },
 
+        title: 'Grupos',
+
         methods: {
             destroy(id) {
                 if (confirm('Estas seguro de que desea eliminar este grupo?')) {

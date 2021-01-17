@@ -181,6 +181,8 @@
             Pagination,
         },
 
+        title: 'Estructura',
+
         props:{ 
             successMessage: String,
             institucion_id: String,

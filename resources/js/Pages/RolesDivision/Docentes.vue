@@ -88,6 +88,8 @@
             TableData,
         },
 
+        title: 'Docentes de la division',
+
         props: {
             successMessage: String,
             institucion_id: String,

@@ -132,6 +132,8 @@
             libretas: Array,
         },
 
+        title: 'Ver libreta',
+
         data() {
             return {
                 form: {

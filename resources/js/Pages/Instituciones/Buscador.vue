@@ -168,6 +168,8 @@
             usuarios: Object,
         },
 
+        title: 'Buscador de instituciones',
+
         data() {
             return {
                 nombre: ''

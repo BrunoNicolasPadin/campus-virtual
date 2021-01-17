@@ -273,6 +273,8 @@
             comentarios: Object,
         },
 
+        title: 'Ver evaluacion',
+
         data() {
             return {
                 form: {

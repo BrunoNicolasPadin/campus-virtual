@@ -117,6 +117,8 @@
             id: String,
         },
 
+        title: 'Editar alumno',
+
         data() {
             return {
                 form: {

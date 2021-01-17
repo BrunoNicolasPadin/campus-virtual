@@ -220,6 +220,8 @@
             docentes: Array,
         },
 
+        title: 'Registrar asignatura',
+
         data() {
             return {
                 form: {

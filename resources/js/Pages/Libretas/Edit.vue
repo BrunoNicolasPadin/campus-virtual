@@ -86,6 +86,8 @@
             libretas: Object,
         },
 
+        title: 'Editar libreta',
+
         data() {
             return {
                 form: {

@@ -99,5 +99,7 @@
             institucion_id: String,
             alumno: Object,
         },
+
+        title: 'Perfil alumno',
     }
 </script>

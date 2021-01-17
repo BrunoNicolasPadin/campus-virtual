@@ -200,6 +200,8 @@
             evaluaciones: Object,
         },
 
+        title: 'Evaluaciones',
+
         methods: {
             destroy(id) {
                 if (confirm('Estas seguro de que desea eliminar esta evaluacion?')) {

@@ -195,6 +195,8 @@
             institucion: Object,
         },
 
+        title: 'Editar institucion',
+
         data() {
             return {
                 form: {

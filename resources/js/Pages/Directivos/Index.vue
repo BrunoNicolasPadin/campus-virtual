@@ -130,6 +130,8 @@
             directivos: Array,
         },
 
+        title: 'Directivos',
+
         methods: {
             destroy(id) {
                 if (confirm('Estas seguro de que desea eliminar a este directivo?')) {

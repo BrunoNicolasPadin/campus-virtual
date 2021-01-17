@@ -123,6 +123,8 @@
             asignatura: Object,
         },
 
+        title: 'Agregar  docente',
+
         data() {
             return {
                 form: {

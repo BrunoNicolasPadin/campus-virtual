@@ -141,6 +141,8 @@
             archivo: Object,
         },
 
+        title: 'Editar archivo',
+
         data() {
             return {
                 form: {

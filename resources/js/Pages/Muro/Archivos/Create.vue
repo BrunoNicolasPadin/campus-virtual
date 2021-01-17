@@ -106,6 +106,8 @@
             publicacion: Object,
         },
 
+        title: 'Agregar archivos a la publicacion',
+
         data() {
             return {
                 form: {

@@ -82,6 +82,8 @@
             ciclosLectivos: Array,
         },
 
+        title: 'Libreta',
+
         data() {
             return {
                 form: {

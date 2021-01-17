@@ -130,6 +130,8 @@
             docentes: Array,
         },
 
+        title: 'Docentes',
+
         methods: {
             destroy(id) {
                 if (confirm('Estas seguro de que desea eliminar a este docente?')) {

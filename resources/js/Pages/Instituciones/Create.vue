@@ -172,6 +172,8 @@
 
         props: ['errors'],
 
+        title: 'Registrar institucion',
+
         data() {
             return {
                 form: {

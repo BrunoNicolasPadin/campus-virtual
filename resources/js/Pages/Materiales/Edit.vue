@@ -131,7 +131,6 @@
             Guardar,
             FileInput,
         },
-
    
         props: {
             errors: Object,
@@ -140,6 +139,8 @@
             grupo: Object,
             archivo: Object,
         },
+
+        title: 'Editar grupo',
 
         data() {
             return {

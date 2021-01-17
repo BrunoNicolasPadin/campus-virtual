@@ -149,6 +149,8 @@
             evaluacion: Object,
         },
 
+        title: 'Agregar archivos',
+
         data() {
             return {
                 form: {

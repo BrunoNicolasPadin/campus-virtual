@@ -150,6 +150,8 @@
             publicaciones: Object,
         },
 
+        title: 'Muro de la division',
+
         data() {
             return {
                 form: {

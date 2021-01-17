@@ -135,6 +135,8 @@
             cicloLectivo: Object,
         },
 
+        title: 'Editar ciclo lectivo',
+
         data() {
             return {
                 form: {

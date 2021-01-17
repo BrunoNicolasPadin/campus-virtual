@@ -119,6 +119,8 @@
             grupo: Object,
         },
 
+        title: 'Editar grupo',
+
         data() {
             return {
                 form: {

@@ -160,6 +160,8 @@
             asignatura: Object,
         },
 
+        title: 'Agregar horario',
+
         data() {
             return {
                 form: {

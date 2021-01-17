@@ -119,5 +119,7 @@
             division: Object,
             successMessage: String,
         },
+
+        title: 'Ver division',
     }
 </script>

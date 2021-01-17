@@ -115,5 +115,7 @@
         props:{ 
             institucion_id: String,
         },
+
+        title: 'Roles',
     }
 </script>

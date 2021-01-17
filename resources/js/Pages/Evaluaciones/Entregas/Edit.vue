@@ -118,6 +118,8 @@
             entrega: Object,
         },
 
+        title: 'Calificar entrega',
+
         data() {
             return {
                 form: {

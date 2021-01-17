@@ -208,6 +208,8 @@
             asignaturasDocentes: Array,
         },
 
+        title: 'Registrar evaluacion',
+
         data() {
             return {
                 form: {

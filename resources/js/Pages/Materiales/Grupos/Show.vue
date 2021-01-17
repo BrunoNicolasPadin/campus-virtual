@@ -108,6 +108,8 @@
             archivos: Array,
         },
 
+        title: 'Grupo',
+
         methods: {
             destroyArchivo(id) {
                 if (confirm('Estas seguro de que desea eliminar este archivo?')) {

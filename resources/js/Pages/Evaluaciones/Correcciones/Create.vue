@@ -100,6 +100,8 @@
             entrega: Object,
         },
 
+        title: 'Subir correcciones',
+
         data() {
             return {
                 form: {

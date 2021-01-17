@@ -334,6 +334,8 @@
             padres: Array,
         },
 
+        title: 'Tipos de cuenta',
+
          methods: {
             activarDocente(docente_id) {
                 this.$inertia.get(this.route('roles.activarDocente', docente_id))

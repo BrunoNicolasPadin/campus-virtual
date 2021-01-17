@@ -122,6 +122,8 @@
             successMessage: String,
         },
 
+        title: 'Perfil institucional',
+
         methods: {
             destroy() {
                 if (confirm('Estas seguro de que desea eliminar la institucion?')) {

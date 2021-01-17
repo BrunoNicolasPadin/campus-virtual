@@ -114,6 +114,8 @@
             archivos: Array,
         },
 
+        title: 'Archivos de la publicacion',
+
         methods: {
             destroyArchivo(archivo_id) {
                 if (confirm('Estas seguro de que desea eliminar este archivo?')) {

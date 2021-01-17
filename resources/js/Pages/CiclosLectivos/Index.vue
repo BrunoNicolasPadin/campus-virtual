@@ -164,6 +164,8 @@
             ciclosLectivos: Array,
         },
 
+        title: 'Ciclos lectivos',
+
         methods: {
             destroy(id) {
                 if (confirm('Estas seguro de que dese eliminar este ciclo lectivo?')) {

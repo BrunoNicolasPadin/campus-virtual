@@ -212,6 +212,8 @@
             evaluacion: Object,
         },
 
+        title: 'Editar evaluacion',
+
         data() {
             return {
                 form: {

@@ -112,6 +112,8 @@
             entrega: Object,
         },
 
+        title: 'Agregar entregas',
+
         data() {
             return {
                 form: {

@@ -267,6 +267,8 @@
             periodos: Array,
         },
 
+        title: 'Registrar division',
+
         data() {
             return {
                 form: {

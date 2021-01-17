@@ -114,6 +114,8 @@
             alumnos: Object,
         },
 
+        title: 'Alumnos de la division',
+
         methods: {
             destroy(alumno_id) {
                 if (confirm('Estas seguro de que desea sacar de la division a este alumno?')) {

@@ -113,6 +113,8 @@
             Pagination,
         },
 
+        title: 'Entregas',
+
         props:{ 
             institucion_id: String,
             division: Object,

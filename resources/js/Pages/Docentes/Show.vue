@@ -48,5 +48,7 @@
             institucion_id: String,
             docente: Object,
         },
+
+        title: 'Perfil docente',
     }
 </script>

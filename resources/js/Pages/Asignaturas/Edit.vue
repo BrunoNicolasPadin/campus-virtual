@@ -202,6 +202,8 @@
             asignatura: Object,
         },
 
+        title: 'Editar asignatura',
+
         data() {
             return {
                 form: {

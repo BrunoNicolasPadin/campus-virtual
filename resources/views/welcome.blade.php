@@ -22,7 +22,7 @@
                     @if (Route::has('login'))
                     <div class="space-x-8 sm:my-5 sm:ml-10 sm:flex">
                         @auth
-                            <a href="{{ route('dashboard') }}" class="text-sm text-indigo-800 font-bold hover:underline">Dashboard</a>
+                            <a href="{{ route('dashboard') }}" class="text-sm text-indigo-800 font-bold hover:underline">Campus</a>
                             @else
                                 <a href="{{ route('login') }}" class="text-sm text-indigo-800 font-bold hover:underline">Ingresar</a>
 

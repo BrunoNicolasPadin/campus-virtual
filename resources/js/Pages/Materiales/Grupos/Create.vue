@@ -117,6 +117,8 @@
             asignaturasDocentes: Array,
         },
 
+        title: 'Registrar grupo',
+
         data() {
             return {
                 form: {

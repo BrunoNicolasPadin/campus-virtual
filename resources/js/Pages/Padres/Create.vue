@@ -118,6 +118,8 @@
             alumnos: Array,
         },
 
+        title: 'Registrarte como padre',
+
         data() {
             return {
                 form: {

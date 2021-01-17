@@ -225,6 +225,8 @@
             division: Object,
         },
 
+        title: 'Editar division',
+
         data() {
             return {
                 form: {
