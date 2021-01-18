@@ -188,13 +188,14 @@
                 </p>
             </div>
             <div class="pt-6 pb-8 px-4 sm:px-8 my-2 mb-4">
-                <form action="" method="post">
+                <form action="{{ route('contacto.enviarEmail') }}" method="post">
+                    @csrf
                     <label class="block uppercase tracking-wide text-indigo-500 text-md font-bold mb-2">Email</label>
                     <input class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3" name="email" type="email">
                     <label class="block uppercase tracking-wide text-indigo-500 text-md font-bold mb-2">Asunto</label>
                     <input class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3" name="asunto" type="text">
                     <label class="block uppercase tracking-wide text-indigo-500 text-md font-bold mb-2">Mensaje</label>
-                    <textarea class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"></textarea>
+                    <textarea name="mensaje" class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"></textarea>
                     <button type="submit" class="border border-green-700 bg-green-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline">
                         Enviar
                     </button>

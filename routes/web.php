@@ -5,6 +5,7 @@ use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
 use App\Http\Controllers\Asignaturas\HorarioController;
 use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
+use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Evaluaciones\CorreccionController;
@@ -34,6 +35,8 @@ use App\Http\Controllers\Roles\TipoCuentaController;
 use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
 use App\Http\Controllers\RolesDivision\DocenteDivisionController;
 use App\Http\Controllers\TopNavController;
+use App\Mail\Contacto;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +53,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
+
+Route::post('/enviar-email', [ContactoController::class, 'enviarEmail'])->name('contacto.enviarEmail');
 
 Route::post('/login', [LoginController::class, 'authenticate'])->name('loginNuevo');
 
