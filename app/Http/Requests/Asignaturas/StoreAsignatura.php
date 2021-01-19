@@ -15,7 +15,7 @@ class StoreAsignatura extends FormRequest
     {
         return [
             'nombre' => 'required|string',
-            'docente.*.docente_id' => 'required',
+            'docente.*.docente_id' => 'nullable',
             'diaHorario.*.dia' => 'required',
             'diaHorario.*.horaDesde.HH' => 'required',
             'diaHorario.*.horaDesde.mm' => 'required',
@@ -28,7 +28,6 @@ class StoreAsignatura extends FormRequest
     {
         return [
             'nombre.required' => 'Debe ingresar un nombre.',
-            'docente.*.docente_id.required' => 'Debe seleccionar un docente.',
             'diaHorario.*.dia.required' => 'Debe seleccionar un dia.',
             'diaHorario.*.horaDesde.HH.required' => 'Debe seleccionar en la hora desde la/s hora/s.',
             'diaHorario.*.horaDesde.mm.required' => 'Debe seleccionar en la hora desde el/los minuto/s.',

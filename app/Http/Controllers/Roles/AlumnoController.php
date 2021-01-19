@@ -80,6 +80,7 @@ class AlumnoController extends Controller
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
                 'division_id' => $request->division_id,
+                'activado' => 0,
             ]);
 
             session(['tipo' => 'Alumno']);
@@ -87,7 +88,7 @@ class AlumnoController extends Controller
             session(['institucion_id' => $institucion_id]);
             session(['division_id' => $request->division_id]);
 
-            return redirect(route('divisiones.show', [$institucion_id, $request->division_id]));
+            return redirect(route('roles.mostrarCuentas'));
         }
         return redirect(route('alumnos.create', $institucion_id))->withErrors('Clave de acceso incorrecta.');
     }
@@ -122,7 +123,7 @@ class AlumnoController extends Controller
             $alumno = Alumno::find($id);
             $alumno->division_id = $request->division_id;
             $alumno->save();
-
+            session(['division_id' => $request->division_id]);
             return redirect('/dashboard');
         }
         return back()->withErrors('Clave de acceso incorrecta.');

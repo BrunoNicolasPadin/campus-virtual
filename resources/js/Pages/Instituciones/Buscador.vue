@@ -128,9 +128,13 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('roles.anotarse', user.instituciones)" class="cursor-pointer hover:underline">
-                                            Anotarme
-                                        </inertia-link>
+                                        <span v-if="user.instituciones != ''">
+                                            <inertia-link :href="route('roles.anotarse', user.instituciones)" class="cursor-pointer hover:underline">
+                                                Anotarme
+                                            </inertia-link>
+                                        </span>
+                                        <span v-else>-</span>
+                                        
                                     </template>
                                 </table-data>
                             </tr>

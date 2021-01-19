@@ -17,6 +17,7 @@ class CreateEvaluacionesTable extends Migration
             $table->id();
             $table->foreignId('division_id')->constrained('divisiones')->onDelete('cascade');
             $table->foreignId('asignatura_id')->constrained('asignaturas')->onDelete('cascade');
+            $table->string('titulo');
             $table->string('tipo');
             $table->dateTime('fechaHoraRealizacion');
             $table->dateTime('fechaHoraFinalizacion');

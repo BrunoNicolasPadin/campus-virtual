@@ -79,11 +79,21 @@ class EvaluacionController extends Controller
 
     public function show($institucion_id, $division_id, $id)
     {
+        $evaluacion = Evaluacion::with('asignatura')->findOrFail($id);
+
         return Inertia::render('Evaluaciones/Show', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'evaluacion' => Evaluacion::with('asignatura')->find($id),
-            'archivos' => Archivo::where('evaluacion_id', $id)->orderBy('titulo')->get(),
+            'evaluacion' => [
+                'id' => $evaluacion->id,
+                'asignatura' => $evaluacion->asignatura->only('nombre'),
+                'titulo' => $evaluacion->titulo,
+                'tipo' => $evaluacion->tipo,
+                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($evaluacion->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($evaluacion->fechaHoraFinalizacion),
+                'comentario' => $evaluacion->comentario,
+            ],
+            'archivos' => Archivo::where('evaluacion_id', $id)->orderBy('nombre')->get(),
             'comentarios' => EvaluacionComentario::where('evaluacion_id', $id)->with('user')->orderBy('created_at', 'DESC')->paginate(10)
                 ->transform(function ($comentario) {
                     return [

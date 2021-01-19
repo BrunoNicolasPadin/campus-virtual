@@ -52,7 +52,7 @@ class DocenteController extends Controller
             session(['tipo' => 'Directivo']);
             session(['tipo_id' => $docente->id]);
             session(['institucion_id' => $institucion_id]);
-            return redirect('/dashboard');
+            return redirect(route('roles.mostrarCuentas'));
         }
         return redirect(route('roles.anotarse', $institucion_id))->withErrors('Clave de acceso incorrecta.');
     }

@@ -68,7 +68,6 @@
                                 
                                 <select
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
-                                required
                                 v-model="docenteForm.docente_id">
                                     
                                     <option v-for="docente in docentes" :key="docente.id" :value="docente.id">{{ docente.user.name }}</option>

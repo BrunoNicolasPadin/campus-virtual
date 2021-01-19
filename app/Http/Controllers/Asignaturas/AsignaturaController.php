@@ -55,12 +55,14 @@ class AsignaturaController extends Controller
             'division_id' => $division_id,
             'nombre' => $request->nombre,
         ]);
-
-        for ($i=0; $i < count($request->docente); $i++) { 
-            AsignaturaDocente::create([
-                'asignatura_id' => $asig->id,
-                'docente_id' => $request->docente[$i]['docente_id'],
-            ]);
+        
+        if (! $request->docente[0]['docente_id'] == null) {
+            for ($i=0; $i < count($request->docente); $i++) { 
+                AsignaturaDocente::create([
+                    'asignatura_id' => $asig->id,
+                    'docente_id' => $request->docente[$i]['docente_id'],
+                ]);
+            }
         }
 
         for ($i=0; $i < count($request->diaHorario); $i++) { 
