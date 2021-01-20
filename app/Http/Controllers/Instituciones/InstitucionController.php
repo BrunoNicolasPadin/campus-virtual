@@ -19,7 +19,7 @@ class InstitucionController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente')->except('create', 'store');
-        $this->middleware('soloInstituciones')->except('create', 'store');
+        $this->middleware('soloInstituciones')->except('create', 'store', 'show');
         $this->middleware('institucionYaCreada')->only('create', 'store');
 
         $this->claveDeAccesoService = $claveDeAccesoService;
