@@ -14,5 +14,6 @@ class SoloAlumnos
         if (session('tipo') == 'Alumno' && Alumno::where('user_id', Auth::id())->exists()) {
             return $next($request);
         }
+        abort(403, 'Solo los alumnos pueden realizar esta accion.');
     }
 }

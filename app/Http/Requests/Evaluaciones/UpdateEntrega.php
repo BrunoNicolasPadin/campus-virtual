@@ -15,7 +15,7 @@ class UpdateEntrega extends FormRequest
     {
         return [
             'calificacion' => 'nullable|string',
-            'comentario' => 'required|string',
+            'comentario' => 'nullable|string',
         ];
     }
 
@@ -23,7 +23,6 @@ class UpdateEntrega extends FormRequest
     {
         return [
             'calificacion.string' => 'Debe ingresar una cadena de texto o numeros, no otra cosa.',
-            'comentario.required' => 'Debe ingresar algo.',
             'comentario.string' => 'Debe ingresar una cadena de texto o numeros, no otra cosa.',
         ];
     }

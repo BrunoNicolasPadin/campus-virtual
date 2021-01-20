@@ -34,7 +34,7 @@ class EvaluacionComentarioController extends Controller
             ->update([
                 'comentario' => $request->comentario,
             ]);
-            return back()->with(['successMessage' => 'Comentario actualizada con exito!']);
+        return back()->with(['successMessage' => 'Comentario actualizada con exito!']);
     }
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
