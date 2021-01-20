@@ -93,48 +93,10 @@
                             </div>
                             <div class="ml-4">
                                 <dt class="text-lg leading-6 font-bold text-indigo-600">
-                                    Faltas
-                                </dt>
-                                <dd class="mt-2 text-base text-gray-500">
-                                    Podra tomar asistencia dia a dia a sus alumnos, directivos y docentes.
-                                </dd>
-                            </div>
-                        </div>
-
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                                <!-- Heroicon name: globe-alt -->
-                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <dt class="text-lg leading-6 font-bold text-indigo-600">
                                     Libretas
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
                                     Podra subir las notas de la libreta para cada periodo (bimestre, tri, cuatri) junto con la nota final.
-                                </dd>
-                            </div>
-                        </div>
-          
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                                    <!-- Heroicon name: scale -->
-                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <dt class="text-lg leading-6 font-bold text-indigo-600">
-                                    Estadisticas
-                                </dt>
-                                <dd class="mt-2 text-base text-gray-500">
-                                    Tendra acceso a estadisticas por ciclo lectivo dentro de cada division y separarlo por asignatura y/o alumno.
                                 </dd>
                             </div>
                         </div>
@@ -153,7 +115,7 @@
                                     Materiales
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Podra subir archivos pdf, imagenes, videos, etc... para que los alumnos lo descarguen o lo vean de forma online.
+                                    Podra subir archivos PDFs, WORDs, PowerPoints, imagenes, videos, etc... para que los alumnos lo descarguen o lo vean de forma online.
                                 </dd>
                             </div>
                         </div>
@@ -173,6 +135,44 @@
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
                                     Los padres podran vincular su cuenta a la de su/s hijo/s y ver lo mismo que ellos sin ningun problema.
+                                </dd>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                <!-- Heroicon name: globe-alt -->
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <dt class="text-lg leading-6 font-bold text-indigo-600">
+                                    Faltas (Proximamente)
+                                </dt>
+                                <dd class="mt-2 text-base text-gray-500">
+                                    Podra tomar asistencia dia a dia a sus alumnos, directivos y docentes.
+                                </dd>
+                            </div>
+                        </div>
+          
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                    <!-- Heroicon name: scale -->
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <dt class="text-lg leading-6 font-bold text-indigo-600">
+                                    Estadisticas (Proximamente)
+                                </dt>
+                                <dd class="mt-2 text-base text-gray-500">
+                                    Tendra acceso a estadisticas por ciclo lectivo dentro de cada division y separarlo por asignatura y/o alumno.
                                 </dd>
                             </div>
                         </div>
