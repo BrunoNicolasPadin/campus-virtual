@@ -81,6 +81,6 @@ class PadreController extends Controller
             return back()->withErrors('Debe tener activado la cuenta que desea eliminar.');
         }
 
-        return redirect(route('roles.index', $institucion_id))->with(['successMessage' => $message]);
+        return redirect(route('roles.mostrarCuentas'))->with(['successMessage' => $message]);
     }
 }

@@ -143,6 +143,6 @@ class AlumnoController extends Controller
             return back()->withErrors('Debe tener activado la cuenta que desea eliminar.');
         }
 
-        return back()->with(['successMessage' => $message]);
+        return redirect(route('roles.mostrarCuentas'))->with(['successMessage' => $message]);
     }
 }
