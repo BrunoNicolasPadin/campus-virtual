@@ -9,7 +9,7 @@
                     <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
                 </inertia-link>
                 > 
-                Doceentes
+                Docentes
             </h2>
         </template>
 
