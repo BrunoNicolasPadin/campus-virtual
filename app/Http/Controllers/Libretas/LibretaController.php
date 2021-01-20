@@ -8,17 +8,23 @@ use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
+use App\Services\FechaHora\CambiarFormatoFecha;
 use Inertia\Inertia;
 
 class LibretaController extends Controller
 {
-    public function __construct()
+    protected $formatoService;
+
+    public function __construct(CambiarFormatoFecha $formatoService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('alumnoCorrespondiente');
         $this->middleware('libretaCicloCorrespondiente')->only('show');
+        $this->middleware('soloInstitucionesDirectivos')->only('edit', 'update');
         $this->middleware('libretaCorrespondiente')->only('edit', 'update');
+
+        $this->formatoService = $formatoService;
     }
 
     public function index($institucion_id, $alumno_id)
@@ -28,7 +34,15 @@ class LibretaController extends Controller
             'alumno' => Alumno::with('user')->find($alumno_id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
                 ->orderBy('comienzo')
-                ->get(),
+                ->get()
+                ->map(function ($ciclo) {
+                    return [
+                        'id' => $ciclo->id,
+                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
+                        'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
+                        'activado' => $ciclo->activado,
+                    ];
+                }),
         ]);
     }
 
