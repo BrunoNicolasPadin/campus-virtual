@@ -35,17 +35,21 @@ class CorreccionController extends Controller
 
     public function store(StoreArchivo $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
-        if ($request->hasFile('archivo')) {
-            $archivo = $request->file('archivo');
-            $archivoStore = $archivo->getClientOriginalName();
-            $archivo->storeAs('public/Evaluaciones/Correcciones', $archivo->getClientOriginalName());
+        if ($request->hasFile('archivos')) {
+            $archivos = $request->file('archivos');
 
-            Correccion::create([
-                'entrega_id' => $entrega_id,
-                'archivo' => $archivoStore,
-            ]);
+            foreach ($archivos as $archivo) {
+                $archivoStore = $archivo->getClientOriginalName();
+                $archivo->storeAs('public/Evaluaciones/Correcciones', $archivo->getClientOriginalName());
 
-            return back()->with(['successMessage' => 'Correccion cargado con exito! Apriete en el boton "Eliminar" para cargar otro archivo.']);
+                Correccion::create([
+                    'entrega_id' => $entrega_id,
+                    'archivo' => $archivoStore,
+                ]);
+            }
+
+            return redirect(route('entregas.show', [$institucion_id, $division_id, $evaluacion_id, $entrega_id]))
+                ->with(['successMessage' => 'Correcciones cargados con exito!']);
         }
 
         return back()->withErrors('No hay ningun archivo seleccionado');
