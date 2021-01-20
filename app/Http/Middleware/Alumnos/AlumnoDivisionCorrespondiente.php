@@ -9,7 +9,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AlumnoCorrespondiente
+class AlumnoDivisionCorrespondiente
 {
     protected $ruta;
 
@@ -22,7 +22,7 @@ class AlumnoCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $alumno = Alumno::find($link[6]);
+        $alumno = Alumno::find($link[7]);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
 
