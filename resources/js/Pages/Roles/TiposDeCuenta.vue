@@ -275,7 +275,9 @@
 
                                     <table-data>
                                         <template #td>
-                                            {{ padre.hijos.user.name }}
+                                            <inertia-link :href="route('alumnos.show', [padre.hijos.institucion_id, padre.hijos.id])">
+                                                {{ padre.hijos.user.name }}
+                                            </inertia-link>
                                         </template>
                                     </table-data>
 

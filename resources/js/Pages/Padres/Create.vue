@@ -74,7 +74,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio
+                                        Es obligatorio. Apriete en "Guardar" si quiere agregar otro hijo/a.
                                     </template>
                                 </info>
                             </div>
@@ -83,7 +83,7 @@
                         <guardar></guardar>
 
                         <button type="button" class="border border-yellow-200 bg-yellow-200 text-black rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-yellow-400 focus:outline-none focus:shadow-outline">
-                            <inertia-link href="/dashboard">Finalizar registro</inertia-link>
+                            <inertia-link :href="route('roles.mostrarCuentas')">Finalizar registro</inertia-link>
                         </button>
 
                     </form>
