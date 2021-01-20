@@ -30,7 +30,7 @@
             </transition>
 
             <div v-if="directivos">   
-                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Directivos</h2>
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Directivos (Activar para eliminar)</h2>
                 <estructura-tabla>
                     <template #tabla>
                         <table-head-estructura>
@@ -86,7 +86,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <button @click="destroy(directivo.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                            <button @click="destroyDirectivo(directivo.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                                 Eliminar
                                             </button>
                                         </template>
@@ -99,7 +99,7 @@
             </div>
 
             <div v-if="docentes">   
-                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Docentes</h2>
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Docentes (Activar para eliminar)</h2>
                 <estructura-tabla>
                     <template #tabla>
                         <table-head-estructura>
@@ -155,7 +155,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <button @click="destroy(docente.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                            <button @click="destroyDocente(docente.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                                 Eliminar
                                             </button>
                                         </template>
@@ -168,7 +168,7 @@
             </div>
 
             <div v-if="alumnos">   
-                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Alumnos</h2>
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Alumnos (Activar para eliminar)</h2>
                 <estructura-tabla>
                     <template #tabla>
                         <table-head-estructura>
@@ -224,7 +224,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <button @click="destroy(alumno.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                            <button @click="destroyAlumno(alumno.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                                 Eliminar
                                             </button>
                                         </template>
@@ -237,7 +237,7 @@
             </div>
 
             <div v-if="padres">   
-                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Padres</h2>
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Padres (Activar para eliminar)</h2>
                 <estructura-tabla>
                     <template #tabla>
                         <table-head-estructura>
@@ -293,7 +293,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <button @click="destroy(padre.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                            <button @click="destroyPadre(padre.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                                 Eliminar
                                             </button>
                                         </template>
@@ -328,6 +328,7 @@
 
         props:{ 
             successMessage: String,
+            institucion_id: String,
             directivos: Array,
             docentes: Array,
             alumnos: Array,
@@ -349,6 +350,31 @@
             activarPadre(padre_id) {
                 this.$inertia.get(this.route('roles.activarPadre', padre_id))
             },
+            
+            destroyDirectivo(id) {
+                if (confirm('Estas seguro de que desea eliminar tu cuenta de directivo?')) {
+                    this.$inertia.delete(this.route('directivos.destroy', [this.institucion_id, id]))
+                }
+            },
+
+            destroyDocente(id) {
+                if (confirm('Estas seguro de que desea eliminar tu cuenta de docente?')) {
+                    this.$inertia.delete(this.route('docentes.destroy', [this.institucion_id, id]))
+                }
+            },
+
+            destroyAlumno(id) {
+                if (confirm('Estas seguro de que desea eliminar tu cuenta de alumno?')) {
+                    this.$inertia.delete(this.route('alumnos.destroy', [this.institucion_id, id]))
+                }
+            },
+
+            destroyPadre(id) {
+                if (confirm('Estas seguro de que desea eliminar tu cuenta de padre?')) {
+                    this.$inertia.delete(this.route('padres.destroy', [this.institucion_id, id]))
+                }
+            },
+
             cerrarAlerta() {
                 this.successMessage = false;
             }

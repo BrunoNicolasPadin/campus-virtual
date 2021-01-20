@@ -73,6 +73,9 @@ class DirectivoController extends Controller
             $message = 'Te eliminaste con exito!';
             session()->forget(['tipo', 'tipo_id', 'institucion_id']);
         }
+        else {
+            return back()->withErrors('Debe tener activado la cuenta que desea eliminar.');
+        }
 
         return back()->with(['successMessage' => $message]);
     }

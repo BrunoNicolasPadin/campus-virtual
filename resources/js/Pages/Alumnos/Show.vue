@@ -77,6 +77,17 @@
                         </dd>
                     </div>
 
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Acciones
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <inertia-link :href="route('alumnos.edit', [institucion_id, alumno.id])">
+                                <editar></editar>
+                            </inertia-link>
+                        </dd>
+                    </div>
+
                 </template>
             </estructura-informacion>
             
@@ -87,11 +98,13 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import EstructuraInformacion from '@/Datos/EstructuraInformacion.vue'
+    import Editar from '@/Botones/Editar.vue'
 
     export default {
         components: {
             AppLayout,
             EstructuraInformacion,
+            Editar,
         },
 
         props: {

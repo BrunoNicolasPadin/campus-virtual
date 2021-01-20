@@ -124,7 +124,7 @@ class AlumnoController extends Controller
             $alumno->division_id = $request->division_id;
             $alumno->save();
             session(['division_id' => $request->division_id]);
-            return redirect('/dashboard');
+            return redirect(route('divisiones.show', [$institucion_id, $request->division_id]));
         }
         return back()->withErrors('Clave de acceso incorrecta.');
     }
@@ -138,6 +138,9 @@ class AlumnoController extends Controller
         if (session('tipo') == 'Alumno') {
             $message = 'Te eliminaste con exito!';
             session()->forget(['tipo', 'alumno_id', 'division_id', 'institucion_id']);
+        }
+        else {
+            return back()->withErrors('Debe tener activado la cuenta que desea eliminar.');
         }
 
         return back()->with(['successMessage' => $message]);

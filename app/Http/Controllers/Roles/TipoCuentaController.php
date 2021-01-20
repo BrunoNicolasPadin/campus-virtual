@@ -38,6 +38,7 @@ class TipoCuentaController extends Controller
             'docentes' => $docentes,
             'alumnos' => $alumnos,
             'padres' => $padres,
+            'institucion_id' => session('institucion_id'),
         ]);
     }
 
