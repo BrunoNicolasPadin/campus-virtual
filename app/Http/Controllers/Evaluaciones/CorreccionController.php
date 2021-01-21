@@ -8,6 +8,7 @@ use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CorreccionController extends Controller
@@ -39,12 +40,13 @@ class CorreccionController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $archivoStore = $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Evaluaciones/Correcciones', $archivo->getClientOriginalName());
+                $fecha = date_create();
+                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $archivo->storeAs('public/Evaluaciones/Correcciones', $nombre);
 
                 Correccion::create([
                     'entrega_id' => $entrega_id,
-                    'archivo' => $archivoStore,
+                    'archivo' => $nombre,
                 ]);
             }
 
@@ -57,6 +59,9 @@ class CorreccionController extends Controller
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $entrega_id, $id)
     {
+        $correccion = Correccion::findOrFail($id);
+        Storage::delete('public/Evaluaciones/Correcciones/' . $correccion->archivo);
+
         Correccion::destroy($id);
         return back()->with(['successMessage' => 'Correccion eliminado con exito!']);
     }

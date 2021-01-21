@@ -8,6 +8,7 @@ use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroArchivo;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MuroArchivoController extends Controller
@@ -56,12 +57,13 @@ class MuroArchivoController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $archivoStore = $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Muro', $archivo->getClientOriginalName());
+                $fecha = date_create();
+                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $archivo->storeAs('public/Muro', $nombre);
 
                 MuroArchivo::create([
                     'muro_id' => $muro_id,
-                    'archivo' => $archivoStore,
+                    'archivo' => $nombre,
                 ]);
             }
 
@@ -74,6 +76,9 @@ class MuroArchivoController extends Controller
 
     public function destroy($institucion_id, $division_id, $muro_id, $id)
     {
+        $muroArchivo = MuroArchivo::findOrFail($id);
+        Storage::delete('public/Muro/' . $muroArchivo->archivo);
+
         MuroArchivo::destroy($id);
         return back()->with(['successMessage' => 'Archivo eliminado con exito!']);
     }

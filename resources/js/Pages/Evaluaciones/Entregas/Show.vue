@@ -267,6 +267,7 @@
         },
 
         props: {
+            errors: Object,
             successMessage: String,
             institucion_id: String,
             division: Object,

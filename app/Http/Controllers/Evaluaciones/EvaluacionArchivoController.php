@@ -8,6 +8,7 @@ use App\Http\Requests\Evaluaciones\UpdateEvaluacionArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EvaluacionArchivoController extends Controller
@@ -38,13 +39,14 @@ class EvaluacionArchivoController extends Controller
             $i = 0;
 
             foreach ($archivos as $archivo) {
-                $archivoStore = $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Evaluaciones/Archivos', $archivo->getClientOriginalName());
+                $fecha = date_create();
+                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $archivo->storeAs('public/Evaluaciones/Archivos', $nombre);
 
                 Archivo::create([
                     'evaluacion_id' => $evaluacion_id,
                     'nombre' => $request['nombre'][$i],
-                    'archivo' => $archivoStore,
+                    'archivo' => $nombre,
                     'visibilidad'  => $request['visibilidad'][$i],
                 ]);
                 $i++;
@@ -72,13 +74,17 @@ class EvaluacionArchivoController extends Controller
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
 
-            $archivoStore = $archivo->getClientOriginalName();
-            $archivo->storeAs('public/Evaluaciones/Archivos', $archivo->getClientOriginalName());
+            $fecha = date_create();
+            $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+            $archivo->storeAs('public/Evaluaciones/Archivos', $nombre);
+
+            $evaluacionArchivo = Archivo::findOrFail($id);
+            Storage::delete('public/Evaluaciones/Archivos/' . $evaluacionArchivo->archivo);
 
             Archivo::where('id', $id)
                 ->update([
                     'nombre' => $request->nombre,
-                    'archivo' => $archivoStore,
+                    'archivo' => $nombre,
                     'visibilidad'  => $request->visibilidad,
                 ]);
 
@@ -98,6 +104,9 @@ class EvaluacionArchivoController extends Controller
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
     {
+        $evaluacionArchivo = Archivo::findOrFail($id);
+        Storage::delete('public/Evaluaciones/Archivos/' . $evaluacionArchivo->archivo);
+
         Archivo::destroy($id);
         return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
             ->with(['successMessage' => 'Archivo eliminado con exito!']);

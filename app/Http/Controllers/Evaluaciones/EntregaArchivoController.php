@@ -10,6 +10,7 @@ use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\Evaluacion;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EntregaArchivoController extends Controller
@@ -41,12 +42,13 @@ class EntregaArchivoController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $archivoStore = $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Evaluaciones/Entregas', $archivo->getClientOriginalName());
+                $fecha = date_create();
+                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $archivo->storeAs('public/Evaluaciones/Entregas', $nombre);
 
                 EntregaArchivo::create([
                     'entrega_id' => $entrega_id,
-                    'archivo' => $archivoStore,
+                    'archivo' => $nombre,
                 ]);
             }
 
@@ -59,6 +61,9 @@ class EntregaArchivoController extends Controller
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $entrega_id, $id)
     {
+        $entrega = EntregaArchivo::findOrFail($id);
+        Storage::delete('public/Evaluaciones/Entregas/' . $entrega->archivo);
+
         EntregaArchivo::destroy($id);
         return back()->with(['successMessage' => 'Archivo eliminado con exito!']);
     }

@@ -9,6 +9,7 @@ use App\Models\Instituciones\Institucion;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class InstitucionController extends Controller
@@ -32,12 +33,13 @@ class InstitucionController extends Controller
 
     public function store(StoreInstitucion $request)
     {
-        $archivoStore = null;
+        $nombre = null;
 
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
-            $archivoStore = $archivo->getClientOriginalName();
-            $archivo->storeAs('public/PlanesDeEstudio', $archivo->getClientOriginalName());
+            $fecha = date_create();
+            $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+            $archivo->storeAs('public/PlanesDeEstudio', $nombre);
         }
 
         $institucion = Institucion::create([
@@ -45,7 +47,7 @@ class InstitucionController extends Controller
             'numero' => $request->numero,
             'fundacion' => $request->fundacion,
             'historia' => $request->historia,
-            'planDeEstudio' => $archivoStore,
+            'planDeEstudio' => $nombre,
             'claveDeAcceso' => Hash::make($request->claveDeAcceso),
         ]);
                 
@@ -71,7 +73,7 @@ class InstitucionController extends Controller
 
     public function update(UpdateInstitucion $request, $id)
     {
-        $archivoStore = null;
+        $nombre = null;
         $institucion = Institucion::findOrFail($id);
 
         if (! $request->claveDeAccesoActual === null) {
@@ -83,10 +85,14 @@ class InstitucionController extends Controller
 
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
-            $archivoStore = $archivo->getClientOriginalName();
-            $archivo->storeAs('public/PlanesDeEstudio', $archivo->getClientOriginalName());
+            $fecha = date_create();
+            $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+            $archivo->storeAs('public/PlanesDeEstudio', $nombre);
 
-            $institucion->planDeEstudio = $archivoStore;
+            $institucion = Institucion::findOrFail($id);
+            Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
+
+            $institucion->planDeEstudio = $nombre;
 
             return redirect(route('instituciones.show', $id))->with(['successMessage' => 'Institución actualizada con éxito!']);
         }
@@ -101,6 +107,9 @@ class InstitucionController extends Controller
 
     public function destroy($id)
     {
+        $institucion = Institucion::findOrFail($id);
+        Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
+
         Institucion::destroy($id);
         return redirect(route('instituciones.create'));
     }

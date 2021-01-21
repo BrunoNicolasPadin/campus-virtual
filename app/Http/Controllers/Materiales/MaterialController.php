@@ -8,6 +8,7 @@ use App\Http\Requests\Evaluaciones\UpdateEvaluacionArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MaterialController extends Controller
@@ -38,13 +39,14 @@ class MaterialController extends Controller
             $i = 0;
 
             foreach ($archivos as $archivo) {
-                $archivoStore = $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Materiales', $archivo->getClientOriginalName());
+                $fecha = date_create();
+                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $archivo->storeAs('public/Materiales', $nombre);
 
                 Material::create([
                     'grupo_id' => $grupo_id,
                     'nombre' => $request['nombre'][$i],
-                    'archivo' => $archivoStore,
+                    'archivo' => $nombre,
                     'visibilidad'  => $request['visibilidad'][$i],
                 ]);
                 $i++;
@@ -72,13 +74,17 @@ class MaterialController extends Controller
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
 
-            $archivoStore = $archivo->getClientOriginalName();
-            $archivo->storeAs('public/Materiales', $archivo->getClientOriginalName());
+            $fecha = date_create();
+            $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+            $archivo->storeAs('public/Materiales', $nombre);
+
+            $material = Material::findOrFail($id);
+            Storage::delete('public/Materiales/' . $material->archivo);
 
             Material::where('id', $id)
                 ->update([
                     'nombre' => $request->nombre,
-                    'archivo' => $archivoStore,
+                    'archivo' => $nombre,
                     'visibilidad'  => $request->visibilidad,
                 ]);
 
@@ -98,6 +104,9 @@ class MaterialController extends Controller
 
     public function destroy($institucion_id, $division_id, $grupo_id, $id)
     {
+        $material = Material::findOrFail($id);
+        Storage::delete('public/Materiales/' . $material->archivo);
+
         Material::destroy($id);
         return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
                 ->with(['successMessage' => 'Archivo eliminado con exito!']);
