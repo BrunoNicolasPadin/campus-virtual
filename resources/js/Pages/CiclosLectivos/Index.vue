@@ -172,6 +172,10 @@
                     this.$inertia.delete(this.route('ciclos-lectivos.destroy', [this.institucion_id, id]))
                 }
             },
+
+            cerrarAlerta() {
+                this.successMessage = false;
+            },
         }
     }
 </script>

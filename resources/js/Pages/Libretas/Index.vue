@@ -95,6 +95,10 @@
         methods: {
             onChange() {
                 this.$inertia.get(this.route('libretas.show', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id]))
+            },
+
+            cerrarAlerta() {
+                this.successMessage = false;
             }
         }
     }

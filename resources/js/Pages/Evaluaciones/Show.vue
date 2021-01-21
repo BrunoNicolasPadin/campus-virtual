@@ -327,6 +327,10 @@
                     this.$inertia.delete(this.route('evaluaciones-comentarios.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, comentario_id]))
                 }
             },
+
+            cerrarAlerta() {
+                this.successMessage = false;
+            }
         },
     }
 </script>

@@ -130,6 +130,10 @@
                     this.$inertia.delete(this.route('instituciones.destroy', this.institucion.id))
                 }
             },
+
+            cerrarAlerta() {
+                this.successMessage = false;
+            }
         }
     }
 </script>

@@ -157,6 +157,10 @@
                     this.$inertia.delete(this.route('alumnos.destroy', [this.institucion_id, id]))
                 }
             },
+            
+            cerrarAlerta() {
+                this.successMessage = false;
+            },
         }
     }
 </script>

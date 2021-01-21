@@ -379,7 +379,7 @@
 
             cerrarAlerta() {
                 this.successMessage = false;
-            }
+            },
         },
     }
 </script>

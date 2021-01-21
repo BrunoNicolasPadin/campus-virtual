@@ -122,6 +122,10 @@
                     this.$inertia.delete(this.route('muro-archivos.destroy', [this.institucion_id, this.division.id, this.publicacion.id, archivo_id]))
                 }
             },
+
+            cerrarAlerta() {
+                this.successMessage = false;
+            }
         },
     }
 </script>

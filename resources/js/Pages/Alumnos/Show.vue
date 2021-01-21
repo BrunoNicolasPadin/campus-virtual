@@ -114,5 +114,11 @@
         },
 
         title: 'Perfil alumno',
+
+        methods: {
+            cerrarAlerta() {
+                this.successMessage = false;
+            },
+        }
     }
 </script>
