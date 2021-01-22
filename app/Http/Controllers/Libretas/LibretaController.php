@@ -69,7 +69,15 @@ class LibretaController extends Controller
             'periodos' => $periodos,
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
                 ->orderBy('comienzo')
-                ->get(),
+                ->get()
+                ->map(function ($ciclo) {
+                    return [
+                        'id' => $ciclo->id,
+                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
+                        'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
+                        'activado' => $ciclo->activado,
+                    ];
+                }),
             'libretas' => Libreta::where('alumno_id', $alumno_id)
                 ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
                 ->with(['asignatura', 'calificaciones'])
