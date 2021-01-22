@@ -13,7 +13,7 @@
                         > Evaluaciones
                     </h2>
                 </div>
-                <div class="w-3/12">
+                <div class="w-3/12" v-show="tipo == 'Docente' ">
                     <primary class="float-right">
                         <template #boton-primary>
                             <inertia-link :href="route('evaluaciones.create', [institucion_id, division.id])">Agregar</inertia-link>
@@ -88,7 +88,7 @@
                                 </template>
                             </table-head>
 
-                            <table-head colspan="2">
+                            <table-head colspan="2" v-show="tipo == 'Docente' ">
                                 <template #th-titulo>
                                     Acciones
                                 </template>
@@ -139,7 +139,7 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
+                                <table-data v-show="tipo == 'Docente' ">
                                     <template #td>
                                         <inertia-link :href="route('evaluaciones.edit', [institucion_id, division.id, evaluacion.id])">
                                             <editar></editar>
@@ -147,7 +147,7 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
+                                <table-data v-show="tipo == 'Docente' ">
                                     <template #td>
                                         <button @click="destroy(evaluacion.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                             Eliminar
@@ -196,6 +196,7 @@
         props:{ 
             successMessage: String,
             institucion_id: String,
+            tipo: String,
             division: Object,
             evaluaciones: Object,
         },

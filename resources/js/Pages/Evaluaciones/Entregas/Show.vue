@@ -97,7 +97,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Docente' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Calificar y comentar
                         </dt>
@@ -115,7 +115,7 @@
                     <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Archivos entregados</h2>
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-1/2" v-show="tipo == 'Alumno' ">
                         <primary class="float-right">
                             <template #boton-primary>
                                 <inertia-link :href="route('entregas-archivos.create', [institucion_id, division.id, evaluacion.id, entrega.id])">
@@ -137,7 +137,7 @@
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0">
+                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Alumno' ">
                             <span @click="destroyArchivo(archivo.id)" class="font-medium text-red-600 hover:text-red-500 cursor-pointer" type="submit">
                                 Eliminar
                             </span>
@@ -151,7 +151,7 @@
                     <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Correcciones</h2>
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-1/2" v-show="tipo == 'Docente' ">
                         <primary class="float-right">
                             <template #boton-primary>
                                 <inertia-link :href="route('correcciones.create', [institucion_id, division.id, evaluacion.id, entrega.id])">
@@ -173,7 +173,7 @@
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0">
+                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Docente' ">
                             <span @click="destroyCorreccion(correccion.id)" class="font-medium text-red-600 hover:text-red-500 cursor-pointer" type="submit">
                                 Eliminar
                             </span>
@@ -230,7 +230,12 @@
                 <div class="bg-white rounded shadow-sm p-8 my-2" v-for="comentario in comentarios.data" :key="comentario.id">
                     <div class="flex justify-between mb-1">
                         <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ comentario.comentario }}</p>
-                        <button class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" @click="editar(comentario)">Editar</button>
+                        <button 
+                             v-show="comentario.user_id == user_id "
+                            class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" 
+                            @click="editar(comentario)">
+                                Editar
+                        </button>
                     </div>
                     <div class="text-grey-dark leading-normal text-sm">
                         <p>
@@ -270,6 +275,8 @@
             errors: Object,
             successMessage: String,
             institucion_id: String,
+            tipo: String,
+            user_id: Number,
             division: Object,
             evaluacion: Object,
             entrega: Object,

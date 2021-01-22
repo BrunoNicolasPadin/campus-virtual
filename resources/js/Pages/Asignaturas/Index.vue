@@ -14,7 +14,7 @@
                         Asignaturas
                     </h2>
                 </div>
-                <div class="w-1/2">
+                <div class="w-1/2" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                     <primary class="float-right">
                         <template #boton-primary>
                             <inertia-link :href="route('asignaturas.create', [institucion_id, division.id])">Agregar</inertia-link>
@@ -52,20 +52,23 @@
                 </template>
 
                 <template #dl-contenido>
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Docentes
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <span v-for="(asignaturasDocentes, index) in asignatura.docentes" :key="asignaturasDocentes.id">
                                 <span>
-                                    {{ asignaturasDocentes.docente.user.name }}<span v-if="index != Object.keys(asignatura.docentes).length - 1">, </span>
+                                    <inertia-link class="hover:underline" :href="route('docentes.show', [institucion_id, asignaturasDocentes.docente.id])">
+                                        {{ asignaturasDocentes.docente.user.name }}<span v-if="index != Object.keys(asignatura.docentes).length - 1">, </span>
+                                    </inertia-link>
+                                    
                                 </span>
                             </span>
                         </dd>
                     </div>
                     
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Horarios
                         </dt>
@@ -76,7 +79,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones con la asignatura
                         </dt>
@@ -91,7 +94,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones con los horarios
                         </dt>
@@ -104,7 +107,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones con los docentes
                         </dt>
@@ -143,6 +146,7 @@
         props: {
             successMessage: String,
             institucion_id: String,
+            tipo: String,
             division: Object,
             asignaturas: Array,
         },

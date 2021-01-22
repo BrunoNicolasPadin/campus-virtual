@@ -5,6 +5,7 @@ namespace App\Http\Controllers\RolesDivision;
 use App\Http\Controllers\Controller;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AlumnoDivisionController extends Controller
@@ -21,6 +22,8 @@ class AlumnoDivisionController extends Controller
     {
         return Inertia::render('RolesDivision/Alumnos', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
+            'user_id' => Auth::id(),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'alumnos' => Alumno::where('division_id', $division_id)->with('user')->paginate(20),
         ]);

@@ -33,6 +33,7 @@ class EvaluacionController extends Controller
     {
         return Inertia::render('Evaluaciones/Index', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluaciones' => Evaluacion::where('division_id', $division_id)
                 ->with('asignatura')
@@ -83,6 +84,8 @@ class EvaluacionController extends Controller
 
         return Inertia::render('Evaluaciones/Show', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
+            'user_id' => Auth::id(),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => [
                 'id' => $evaluacion->id,
@@ -98,7 +101,7 @@ class EvaluacionController extends Controller
                 ->transform(function ($comentario) {
                     return [
                         'id' => $comentario->id,
-                        'user' => $comentario->user->only('name'),
+                        'user' => $comentario->user->only('id', 'name'),
                         'comentario' => $comentario->comentario,
                         'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($comentario->updated_at),
                     ];

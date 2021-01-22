@@ -99,7 +99,12 @@
                 <div class="bg-white rounded shadow-sm p-8 my-2" v-for="publicacion in publicaciones.data" :key="publicacion.id">
                     <div class="flex justify-between mb-1">
                         <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ publicacion.publicacion }}</p>
-                        <button class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" @click="editar(publicacion)">Editar</button>
+                        <button 
+                            v-show="publicacion.user.id == user_id "
+                            class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm"
+                            @click="editar(publicacion)">
+                                Editar
+                        </button>
                     </div>
                     <div class="text-grey-dark leading-normal text-sm">
                         <p>
@@ -146,6 +151,7 @@
             errors: Object,
             successMessage: String,
             institucion_id: String,
+            user_id: Number,
             division: Object,
             publicaciones: Object,
         },

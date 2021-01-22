@@ -27,6 +27,7 @@ class GrupoController extends Controller
     {
         return Inertia::render('Materiales/Grupos/Index', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'grupos' => Grupo::where('division_id', $division_id)->with('asignatura')->paginate(20),
         ]);
@@ -59,6 +60,7 @@ class GrupoController extends Controller
     {
         return Inertia::render('Materiales/Grupos/Show', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'grupo' => Grupo::find($id),
             'archivos' => Material::where('grupo_id', $id)->get(),

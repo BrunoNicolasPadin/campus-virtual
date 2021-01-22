@@ -8,6 +8,7 @@ use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroArchivo;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -31,6 +32,7 @@ class MuroArchivoController extends Controller
 
         return Inertia::render('Muro/Archivos/Index', [
             'institucion_id' => $institucion_id,
+            'user_id' => Auth::id(),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'publicacion' => [
                 'id' => $muro->id,

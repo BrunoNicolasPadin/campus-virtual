@@ -77,7 +77,7 @@
                                 </template>
                             </table-head>
 
-                            <table-head>
+                            <table-head v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                                 <template #th-titulo>
                                     Acciones
                                 </template>
@@ -88,7 +88,6 @@
 
                     <table-body>
                         <template #tr>
-                            
                             <tr v-for="libreta in libretas" :key="libreta.id">
                                 <table-data>
                                     <template #td>
@@ -102,7 +101,7 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
+                                <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                                     <template #td>
                                         <inertia-link class="hover:underline" :href="route('libretas.edit', [institucion_id, alumno.id, libreta.id])">
                                             Calificar
@@ -145,6 +144,7 @@
         props:{ 
             successMessage: String,
             institucion_id: String,
+            tipo: String,
             alumno: Object,
             ciclosLectivos: Array,
             periodos: Array,

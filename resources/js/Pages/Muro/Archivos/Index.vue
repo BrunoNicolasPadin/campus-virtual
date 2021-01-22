@@ -57,7 +57,7 @@
                     <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Archivos</h2>
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-1/2" v-show="publicacion.user_id == user_id ">
                         <primary class="float-right">
                             <template #boton-primary>
                                 <inertia-link :href="route('muro-archivos.create', [institucion_id, division.id, publicacion.id])">Agregar</inertia-link>
@@ -81,7 +81,7 @@
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0">
+                        <div class="ml-4 flex-shrink-0" v-show="publicacion.user_id == user_id ">
                             <span 
                             @click="destroyArchivo(archivo.id)" 
                             class="font-medium text-red-600 hover:text-red-500 cursor-pointer"
@@ -109,6 +109,7 @@
         props: {
             successMessage: String,
             institucion_id: String,
+            user_id: Number,
             division: Object,
             publicacion: Object,
             archivos: Array,

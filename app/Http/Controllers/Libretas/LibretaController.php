@@ -64,6 +64,7 @@ class LibretaController extends Controller
     
         return Inertia::render('Libretas/Show', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
             'alumno' => Alumno::with('user')->find($alumno_id),
             'ciclo_lectivo_id' => $ciclo_lectivo_id,
             'periodos' => $periodos,

@@ -26,6 +26,7 @@ class MuroController extends Controller
     {
         return Inertia::render('Muro/Index', [
             'institucion_id' => $institucion_id,
+            'user_id' => Auth::id(),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'publicaciones' => Muro::where('division_id', $division_id)
                 ->with('user')
@@ -37,7 +38,7 @@ class MuroController extends Controller
                         'division_id' => $muro->division_id,
                         'publicacion' => $muro->publicacion,
                         'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($muro->updated_at),
-                        'user' => $muro->user->only('name'),
+                        'user' => $muro->user->only('id', 'name'),
                     ];
                 }),
         ]);

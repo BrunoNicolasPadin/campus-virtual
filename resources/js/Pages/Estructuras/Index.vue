@@ -7,7 +7,7 @@
                         Estructura
                     </h2>
                 </div>
-                <div class="w-1/2">
+                <div class="w-1/2" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                     <primary class="float-right">
                         <template #boton-primary>
                             <inertia-link :href="route('divisiones.create', institucion_id)">Agregar</inertia-link>
@@ -128,7 +128,7 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
+                                <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                                     <template #td>
                                         <inertia-link :href="route('divisiones.edit', [division.institucion_id, division.id])">
                                             <editar></editar>
@@ -136,7 +136,7 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
+                                <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                                     <template #td>
                                         <button @click="destroy(division.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                             Eliminar

@@ -34,6 +34,7 @@ class EvaluacionRespuestaController extends Controller
 
         return Inertia::render('Evaluaciones/Respuestas/Index', [
             'institucion_id' => $institucion_id,
+            'user_id' => Auth::id(),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
             'comentario' => [
@@ -46,7 +47,7 @@ class EvaluacionRespuestaController extends Controller
                 ->transform(function ($respuesta) {
                     return [
                         'id' => $respuesta->id,
-                        'user' => $respuesta->user->only('name'),
+                        'user' => $respuesta->user->only('id', 'name'),
                         'respuesta' => $respuesta->respuesta,
                         'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($respuesta->updated_at),
                     ];

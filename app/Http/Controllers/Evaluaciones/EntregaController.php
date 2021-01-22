@@ -11,6 +11,7 @@ use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\EntregaComentario;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class EntregaController extends Controller
@@ -41,6 +42,8 @@ class EntregaController extends Controller
     {
         return Inertia::render('Evaluaciones/Entregas/Show', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
+            'user_id' => Auth::id(),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
@@ -67,6 +70,7 @@ class EntregaController extends Controller
                 ->transform(function ($comentario) {
                     return [
                         'id' => $comentario->id,
+                        'user_id' => $comentario->user_id,
                         'division_id' => $comentario->entrega_id,
                         'comentario' => $comentario->comentario,
                         'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($comentario->updated_at),

@@ -30,6 +30,7 @@ class MuroRespuestaController extends Controller
 
         return Inertia::render('Muro/Respuestas/Index', [
             'institucion_id' => $institucion_id,
+            'user_id' => Auth::id(),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'publicacion' => [
                 'id' => $muro->id,
@@ -46,7 +47,7 @@ class MuroRespuestaController extends Controller
                         'id' => $respuesta->id,
                         'respuesta' => $respuesta->respuesta,
                         'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($respuesta->updated_at),
-                        'user' => $respuesta->user->only('name'),
+                        'user' => $respuesta->user->only('id', 'name'),
                     ];
                 }),
         ]);

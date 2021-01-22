@@ -27,6 +27,7 @@ class AsignaturaController extends Controller
     {
         return Inertia::render('Asignaturas/Index', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'asignaturas' => Asignatura::where('division_id', $division_id)
                 ->with(['horarios', 'docentes', 'docentes.docente', 'docentes.docente.user'])
