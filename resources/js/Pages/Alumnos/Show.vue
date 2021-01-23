@@ -88,6 +88,19 @@
                         </dd>
                     </div>
 
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion'||tipo == 'Directivo' ">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Repetir curso
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <primary>
+                                <template #boton-primary>
+                                    <inertia-link :href="route('repetidores.createRepetidor', [institucion_id, alumno.id])">Procesar</inertia-link>
+                                </template>
+                            </primary>
+                        </dd>
+                    </div>
+
                 </template>
             </estructura-informacion>
             
@@ -99,17 +112,20 @@
     import AppLayout from '@/Layouts/AppLayout'
     import EstructuraInformacion from '@/Datos/EstructuraInformacion.vue'
     import Editar from '@/Botones/Editar.vue'
+    import Primary from '@/Botones/Primary.vue'
 
     export default {
         components: {
             AppLayout,
             EstructuraInformacion,
             Editar,
+            Primary,
         },
 
         props: {
             successMessage: String,
             institucion_id: String,
+            tipo: String,
             alumno: Object,
         },
 

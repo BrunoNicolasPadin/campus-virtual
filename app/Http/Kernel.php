@@ -101,5 +101,6 @@ class Kernel extends HttpKernel
         'padreYaCreado' => \App\Http\Middleware\Padres\PadreYaCreado::class,
         'soloInstitucionesDirectivosPadres' => \App\Http\Middleware\Padres\SoloInstitucionesDirectivosPadres::class,
         'padreCorrespondiente' => \App\Http\Middleware\Padres\PadreCorrespondiente::class,
+        'repetidorCorrespondiente' => \App\Http\Middleware\Repetidores\RepetidorCorrespondiente::class,
     ];
 }

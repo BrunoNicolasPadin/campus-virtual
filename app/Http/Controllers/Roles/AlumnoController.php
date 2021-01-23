@@ -97,6 +97,7 @@ class AlumnoController extends Controller
     {
         return Inertia::render('Alumnos/Show', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
             'alumno' => Alumno::with(['user', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
                 ->find($id),
         ]);

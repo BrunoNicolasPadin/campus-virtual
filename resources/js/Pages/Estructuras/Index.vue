@@ -186,6 +186,7 @@
         props:{ 
             successMessage: String,
             institucion_id: String,
+            tipo: String,
             divisiones: Object,
         },
 

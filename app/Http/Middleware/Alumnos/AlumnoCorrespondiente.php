@@ -29,6 +29,7 @@ class AlumnoCorrespondiente
             if (session('institucion_id') == $alumno->institucion_id) {
                 return $next($request);
             }
+            abort(403, 'Este alumno no forma parte de su institucion.');
         }
 
         if (session('tipo') == 'Alumno') {

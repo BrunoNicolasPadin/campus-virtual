@@ -25,6 +25,7 @@ use App\Http\Controllers\Materiales\MaterialController;
 use App\Http\Controllers\Muro\MuroArchivoController;
 use App\Http\Controllers\Muro\MuroController;
 use App\Http\Controllers\Muro\MuroRespuestaController;
+use App\Http\Controllers\Repetidores\RepetidorController;
 use App\Http\Controllers\Roles\ActivarCuentaController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DirectivoController;
@@ -128,7 +129,6 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         Route::prefix('materiales/{grupo_id}')->group(function () {
         
             Route::resource('materiales-archivos', MaterialController::class);
-            
         });
 
         Route::resource('muro', MuroController::class);
@@ -138,4 +138,8 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::resource('muro-respuestas', MuroRespuestaController::class);
         });
     });
+
+    Route::resource('repetidores', RepetidorController::class);
+    Route::get('repetidores/{alumno_id}/create', [RepetidorController::class, 'createRepetidor'])->name('repetidores.createRepetidor');
+    Route::post('/filtrados', [RepetidorController::class, 'filtrarRepetidores'])->name('repetidores.filtrar');
 });
