@@ -3,15 +3,15 @@
 namespace App\Models\Roles;
 
 use App\Models\Instituciones\Institucion;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class ExAlumno extends Model
 {
     protected $table = 'ex_alumnos';
     protected $fillable = [
-        'alumno_id',
+        'user_id',
         'institucion_id',
-        'activado',
     ];
 
     public function institucion()
@@ -19,8 +19,8 @@ class ExAlumno extends Model
         return $this->belongsTo(Institucion::class);
     }
 
-    public function alumno()
+    public function user()
     {
-        return $this->belongsTo(Alumno::class);
+        return $this->belongsTo(User::class);
     }
 }

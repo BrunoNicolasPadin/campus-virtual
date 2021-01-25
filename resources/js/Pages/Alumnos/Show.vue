@@ -101,7 +101,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion'||tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Ex alumno
                         </dt>

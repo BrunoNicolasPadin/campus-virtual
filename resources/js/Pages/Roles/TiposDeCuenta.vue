@@ -48,7 +48,7 @@
                                     </template>
                                 </table-head>
 
-                                <table-head colspan="2">
+                                <table-head colspan="3">
                                     <template #th-titulo>
                                         Acciones
                                     </template>
@@ -69,6 +69,14 @@
                                     <table-data>
                                         <template #td>
                                             {{ directivo.institucion.user.name }}
+                                        </template>
+                                    </table-data>
+
+                                    <table-data>
+                                        <template #td>
+                                            <inertia-link class="hover:underline" :href="route('directivos.show', [institucion_id, directivo.id])">
+                                                Ver perfil
+                                            </inertia-link>
                                         </template>
                                     </table-data>
 
@@ -117,7 +125,7 @@
                                     </template>
                                 </table-head>
 
-                                <table-head colspan="2">
+                                <table-head colspan="3">
                                     <template #th-titulo>
                                         Acciones
                                     </template>
@@ -138,6 +146,14 @@
                                     <table-data>
                                         <template #td>
                                             {{ docente.institucion.user.name }}
+                                        </template>
+                                    </table-data>
+
+                                    <table-data>
+                                        <template #td>
+                                            <inertia-link class="hover:underline" :href="route('docentes.show', [institucion_id, docente.id])">
+                                                Ver perfil
+                                            </inertia-link>
                                         </template>
                                     </table-data>
 
@@ -186,7 +202,7 @@
                                     </template>
                                 </table-head>
 
-                                <table-head colspan="2">
+                                <table-head colspan="3">
                                     <template #th-titulo>
                                         Acciones
                                     </template>
@@ -207,6 +223,14 @@
                                     <table-data>
                                         <template #td>
                                             {{ alumno.institucion.user.name }}
+                                        </template>
+                                    </table-data>
+
+                                    <table-data>
+                                        <template #td>
+                                            <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">
+                                                Ver perfil
+                                            </inertia-link>
                                         </template>
                                     </table-data>
 
@@ -255,7 +279,7 @@
                                     </template>
                                 </table-head>
 
-                                <table-head colspan="2">
+                                <table-head colspan="3">
                                     <template #th-titulo>
                                         Acciones
                                     </template>
@@ -277,6 +301,14 @@
                                         <template #td>
                                             <inertia-link :href="route('alumnos.show', [padre.hijos.institucion_id, padre.hijos.id])">
                                                 {{ padre.hijos.user.name }}
+                                            </inertia-link>
+                                        </template>
+                                    </table-data>
+
+                                    <table-data>
+                                        <template #td>
+                                            <inertia-link class="hover:underline" :href="route('padres.show', [institucion_id, padre.id])">
+                                                Ver perfil
                                             </inertia-link>
                                         </template>
                                     </table-data>
@@ -343,8 +375,8 @@
             activarDocente(docente_id) {
                 this.$inertia.get(this.route('roles.activarDocente', docente_id))
             },
-            activarAlumno(docente_id) {
-                this.$inertia.get(this.route('roles.activarAlumno', docente_id))
+            activarAlumno(alumno_id) {
+                this.$inertia.get(this.route('roles.activarAlumno', alumno_id))
             },
             activarDirectivo(directivo_id) {
                 this.$inertia.get(this.route('roles.activarDirectivo', directivo_id))

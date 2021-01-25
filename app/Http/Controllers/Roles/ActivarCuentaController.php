@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Roles\Alumno;
 use App\Models\Roles\Directivo;
 use App\Models\Roles\Docente;
+use App\Models\Roles\ExAlumno;
 use App\Models\Roles\Padre;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class ActivarCuentaController extends Controller
         $this->desactivarDirectivos($user_id);
         $this->desactivarPadres($user_id);
 
-        $docente = Docente::find($id);
+        $docente = Docente::findOrFail($id);
         $docente->activado = 1;
         $docente->save();
 
@@ -40,7 +41,7 @@ class ActivarCuentaController extends Controller
         $this->desactivarDirectivos($user_id);
         $this->desactivarPadres($user_id);
 
-        $directivo = Directivo::find($id);
+        $directivo = Directivo::findOrFail($id);
         $directivo->activado = 1;
         $directivo->save();
 
@@ -60,7 +61,7 @@ class ActivarCuentaController extends Controller
         $this->desactivarDirectivos($user_id);
         $this->desactivarPadres($user_id);
 
-        $alumno = Alumno::find($id);
+        $alumno = Alumno::findOrFail($id);
         $alumno->activado = 1;
         $alumno->save();
 
@@ -72,6 +73,7 @@ class ActivarCuentaController extends Controller
         return back()->with(['successMessage' => 'Alumno activado']);
     }
 
+
     public function activarPadre($id)
     {
         $user_id = Auth::id();
@@ -81,7 +83,7 @@ class ActivarCuentaController extends Controller
         $this->desactivarDirectivos($user_id);
         $this->desactivarPadres($user_id);
 
-        $padre = Padre::find($id);
+        $padre = Padre::findOrFail($id);
         $padre->activado = 1;
         $padre->save();
 

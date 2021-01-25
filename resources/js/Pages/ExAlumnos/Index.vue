@@ -65,9 +65,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('alumnos.show', [institucion_id, exalumno.alumno_id])" class="hover:underline">
-                                            {{ exalumno.alumno.user.name }}
-                                        </inertia-link>
+                                        {{ exalumno.user.name }}
                                     </template>
                                 </table-data>
 

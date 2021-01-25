@@ -23,22 +23,20 @@ class ExAlumnoController extends Controller
         return Inertia::render('ExAlumnos/Index', [
             'institucion_id' => $institucion_id,
             'exalumnos' => ExAlumno::where('institucion_id', $institucion_id)
-                ->with(['alumno', 'alumno.user'])
+                ->with('user')
                 ->paginate(20)
         ]);
     }
 
     public function store(Request $request, $institucion_id)
     {
-        Alumno::where('id', $request->alumno_id)
-            ->update([
-                'division_id' => null,
-            ]);
+        $alumno = Alumno::findOrFail($request->alumno_id);
+        $alumno->division_id = null;
+        $alumno->save();
 
         ExAlumno::create([
-            'alumno_id' => $request->alumno_id,
+            'user_id' => $alumno->user_id,
             'institucion_id' => $institucion_id,
-            'activado' => '0',
         ]);
 
         return redirect(route('exalumnos.index', $institucion_id))

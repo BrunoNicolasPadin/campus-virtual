@@ -34,7 +34,7 @@ class InstitucionCorrespondiente
         if (session('tipo') === 'Docente') {
             return $this->verificarDocente($request, $next, $link);
         }
-        if (session('tipo') === 'Alumno') {
+        if (session('tipo') === 'Alumno' || session('tipo') == 'Ex Alumno') {
             return $this->verificarAlumno($request, $next, $link);
         }
         if (session('tipo') === 'Padre') {

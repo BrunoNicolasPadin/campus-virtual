@@ -6,6 +6,7 @@ use App\Models\Instituciones\Institucion;
 use App\Models\Roles\Alumno;
 use App\Models\Roles\Directivo;
 use App\Models\Roles\Docente;
+use App\Models\Roles\ExAlumno;
 use App\Models\Roles\Padre;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -44,16 +45,6 @@ class LoginController extends Controller
         }
 
         return $this->desactivarCuentas($user);
-    }
-
-    public function sessionesAlumnos($user)
-    {
-        $alumno = Alumno::where('user_id', $user['id'])->first();
-        session(['tipo' => 'Alumno']);
-        session(['tipo_id' => $alumno['id']]);
-        session(['institucion_id' => $alumno['institucion_id']]);
-        session(['division_id' => $alumno['division_id']]);
-        return redirect(route('divisiones.show', [$alumno['institucion_id'], $alumno['division_id']]));
     }
 
     public function desactivarCuentas($user)

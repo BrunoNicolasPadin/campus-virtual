@@ -82,6 +82,20 @@
 
                                 <table-data>
                                     <template #td>
+                                        <inertia-link :href="route('exalumnos.index', institucion_id)" class="hover:underline">Ex Alumnos</inertia-link>
+                                    </template>
+                                </table-data>
+                            </tr>
+
+                            <tr>
+                                <table-data>
+                                    <template #td>
+                                        4]5
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
                                         Padre, madre o tutor
                                     </template>
                                 </table-data>
