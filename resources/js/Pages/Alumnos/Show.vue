@@ -49,7 +49,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                             Division
                         </dt>
-                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2" v-if="alumno.division">
                             <span v-if="alumno.division.orientacion">
                                 <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, alumno.division_id])">
                                     {{ alumno.division.nivel.nombre }} - 
