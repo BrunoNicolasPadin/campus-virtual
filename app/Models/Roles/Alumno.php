@@ -14,6 +14,7 @@ class Alumno extends Model
         'user_id',
         'institucion_id',
         'division_id',
+        'exAlumno',
         'activado',
     ];
 

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Alumnos\ExAlumnoController;
 use App\Http\Controllers\Asignaturas\AsignaturaController;
 use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
@@ -31,6 +30,7 @@ use App\Http\Controllers\Roles\ActivarCuentaController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DirectivoController;
 use App\Http\Controllers\Roles\DocenteController;
+use App\Http\Controllers\Roles\ExAlumnoController;
 use App\Http\Controllers\Roles\PadreController;
 use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\TipoCuentaController;

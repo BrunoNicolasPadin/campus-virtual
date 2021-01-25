@@ -102,5 +102,7 @@ class Kernel extends HttpKernel
         'soloInstitucionesDirectivosPadres' => \App\Http\Middleware\Padres\SoloInstitucionesDirectivosPadres::class,
         'padreCorrespondiente' => \App\Http\Middleware\Padres\PadreCorrespondiente::class,
         'repetidorCorrespondiente' => \App\Http\Middleware\Repetidores\RepetidorCorrespondiente::class,
+        'verificarExAlumnoNuevo' => \App\Http\Middleware\ExAlumnos\VerificarExAlumnoNuevo::class,
+        'exAlumnoCorrespondiente' => \App\Http\Middleware\ExAlumnos\ExAlumnoCorrespondiente::class,
     ];
 }
