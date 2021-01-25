@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Alumnos\ExAlumnoController;
 use App\Http\Controllers\Asignaturas\AsignaturaController;
 use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
@@ -142,4 +143,6 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::resource('repetidores', RepetidorController::class);
     Route::get('repetidores/{alumno_id}/create', [RepetidorController::class, 'createRepetidor'])->name('repetidores.createRepetidor');
     Route::post('/filtrados', [RepetidorController::class, 'filtrarRepetidores'])->name('repetidores.filtrar');
+
+    Route::resource('exalumnos', ExAlumnoController::class);
 });
