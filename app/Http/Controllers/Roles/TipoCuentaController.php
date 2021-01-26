@@ -19,7 +19,6 @@ class TipoCuentaController extends Controller
         $directivos = null;
         $docentes = null;
         $alumnos = null;
-        $exalumnos = null;
         $padres = null;
 
         if (Directivo::where('user_id', $user_id)->exists()) {
@@ -31,9 +30,6 @@ class TipoCuentaController extends Controller
         if (Alumno::where('user_id', $user_id)->exists()) {
             $alumnos = $this->obtenerCuentasAlumno($user_id);
         }
-        if (ExAlumno::where('user_id', $user_id)->exists()) {
-            $exalumnos = $this->obtenerCuentasExAlumnos($user_id);
-        }
         if (Padre::where('user_id', $user_id)->exists()) {
             $padres = $this->obtenerCuentasPadre($user_id);
         }
@@ -42,9 +38,7 @@ class TipoCuentaController extends Controller
             'directivos' => $directivos,
             'docentes' => $docentes,
             'alumnos' => $alumnos,
-            'exalumnos' => $exalumnos,
             'padres' => $padres,
-            'institucion_id' => session('institucion_id'),
         ]);
     }
 

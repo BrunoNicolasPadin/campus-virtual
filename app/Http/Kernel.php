@@ -104,5 +104,6 @@ class Kernel extends HttpKernel
         'repetidorCorrespondiente' => \App\Http\Middleware\Repetidores\RepetidorCorrespondiente::class,
         'verificarExAlumnoNuevo' => \App\Http\Middleware\ExAlumnos\VerificarExAlumnoNuevo::class,
         'exAlumnoCorrespondiente' => \App\Http\Middleware\ExAlumnos\ExAlumnoCorrespondiente::class,
+        'asignaturaAdeudadaCorrespondiente' => \App\Http\Middleware\Deudores\AsignaturaAdeudadaCorrespondiente::class,
     ];
 }

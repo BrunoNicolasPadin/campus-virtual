@@ -92,6 +92,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             
         Route::resource('libretas', LibretaController::class);
         Route::resource('asignaturas-adeudadas', AlumnoDeudorController::class);
+        Route::get('asignaturas-adeudadas/{division_id}/create', [AlumnoDeudorController::class, 'createAsignatura'])->name('asignaturas-adeudadas.createAsignatura');
     });
 
     Route::resource('divisiones', EstructuraController::class);

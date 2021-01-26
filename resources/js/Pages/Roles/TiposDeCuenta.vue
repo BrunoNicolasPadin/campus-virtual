@@ -74,7 +74,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <inertia-link class="hover:underline" :href="route('directivos.show', [institucion_id, directivo.id])">
+                                            <inertia-link class="hover:underline" :href="route('directivos.show', [directivo.institucion_id, directivo.id])">
                                                 Ver perfil
                                             </inertia-link>
                                         </template>
@@ -94,7 +94,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <button @click="destroyDirectivo(directivo.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                            <button @click="destroyDirectivo(directivo.institucion_id, directivo.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                                 Eliminar
                                             </button>
                                         </template>
@@ -151,7 +151,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <inertia-link class="hover:underline" :href="route('docentes.show', [institucion_id, docente.id])">
+                                            <inertia-link class="hover:underline" :href="route('docentes.show', [docente.institucion_id, docente.id])">
                                                 Ver perfil
                                             </inertia-link>
                                         </template>
@@ -163,7 +163,7 @@
                                                 Activado
                                             </button>
 
-                                            <button v-else @click="activarDocente(docente.id)" type="button" class="border border-green-500 bg-green-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-700 focus:outline-none focus:shadow-outline">
+                                            <button v-else @click="activarDocente(docente.institucion_id, docente.id)" type="button" class="border border-green-500 bg-green-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-700 focus:outline-none focus:shadow-outline">
                                                 Activar
                                             </button>
                                         </template>
@@ -171,7 +171,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <button @click="destroyDocente(docente.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                            <button @click="destroyDocente(docente.institucion_id, docente.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                                 Eliminar
                                             </button>
                                         </template>
@@ -228,7 +228,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">
+                                            <inertia-link class="hover:underline" :href="route('alumnos.show', [alumno.institucion_id, alumno.id])">
                                                 Ver perfil
                                             </inertia-link>
                                         </template>
@@ -248,7 +248,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <button @click="destroyAlumno(alumno.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                            <button @click="destroyAlumno(alumno.institucion_id, alumno.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                                 Eliminar
                                             </button>
                                         </template>
@@ -307,7 +307,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <inertia-link class="hover:underline" :href="route('padres.show', [institucion_id, padre.id])">
+                                            <inertia-link class="hover:underline" :href="route('padres.show', [padre.hijos.institucion_id, padre.id])">
                                                 Ver perfil
                                             </inertia-link>
                                         </template>
@@ -327,7 +327,7 @@
 
                                     <table-data>
                                         <template #td>
-                                            <button @click="destroyPadre(padre.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                            <button @click="destroyPadre(padre.hijos.institucion_id, padre.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                                 Eliminar
                                             </button>
                                         </template>
@@ -385,27 +385,27 @@
                 this.$inertia.get(this.route('roles.activarPadre', padre_id))
             },
             
-            destroyDirectivo(id) {
+            destroyDirectivo(institucion_id, id) {
                 if (confirm('Estas seguro de que desea eliminar tu cuenta de directivo?')) {
-                    this.$inertia.delete(this.route('directivos.destroy', [this.institucion_id, id]))
+                    this.$inertia.delete(this.route('directivos.destroy', [institucion_id, id]))
                 }
             },
 
-            destroyDocente(id) {
+            destroyDocente(institucion_id, id) {
                 if (confirm('Estas seguro de que desea eliminar tu cuenta de docente?')) {
-                    this.$inertia.delete(this.route('docentes.destroy', [this.institucion_id, id]))
+                    this.$inertia.delete(this.route('docentes.destroy', [institucion_id, id]))
                 }
             },
 
-            destroyAlumno(id) {
+            destroyAlumno(institucion_id, id) {
                 if (confirm('Estas seguro de que desea eliminar tu cuenta de alumno?')) {
-                    this.$inertia.delete(this.route('alumnos.destroy', [this.institucion_id, id]))
+                    this.$inertia.delete(this.route('alumnos.destroy', [institucion_id, id]))
                 }
             },
 
-            destroyPadre(id) {
+            destroyPadre(institucion_id, id) {
                 if (confirm('Estas seguro de que desea eliminar tu cuenta de padre?')) {
-                    this.$inertia.delete(this.route('padres.destroy', [this.institucion_id, id]))
+                    this.$inertia.delete(this.route('padres.destroy', [institucion_id, id]))
                 }
             },
 

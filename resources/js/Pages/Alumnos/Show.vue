@@ -93,13 +93,13 @@
                             Asignaturas que debe
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <inertia-link class="hover:underline" :href="route('asignaturas-que-debe.show', [institucion_id, alumno.division_id, alumno.id])">
+                            <inertia-link class="hover:underline" :href="route('asignaturas-adeudadas.index', [institucion_id, alumno.id])">
                                 Ver
                             </inertia-link>
                         </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion'||tipo == 'Directivo' ">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion'||tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Repetir curso
                         </dt>
@@ -112,7 +112,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion'||tipo == 'Directivo' ">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion'||tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Ex alumno
                         </dt>
