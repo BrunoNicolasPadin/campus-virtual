@@ -82,8 +82,8 @@
                             Acciones
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <inertia-link :href="route('alumnos.edit', [institucion_id, alumno.id])">
-                                <editar></editar>
+                            <inertia-link class="hover:underline" :href="route('alumnos.edit', [institucion_id, alumno.id])">
+                                Cambiar de curso
                             </inertia-link>
                         </dd>
                     </div>

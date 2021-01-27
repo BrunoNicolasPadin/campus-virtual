@@ -2,22 +2,20 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
-                     > 
-                    <inertia-link :href="route('divisiones.show', [institucion_id, division.id])">
-                        <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                        <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                    </inertia-link>
-                     > 
-                    <inertia-link :href="route('evaluaciones.index', [institucion_id, division.id])">Evaluaciones</inertia-link>
-                     > 
-                    <inertia-link :href="route('evaluaciones.show', [institucion_id, division.id, evaluacion.id])">{{ evaluacion.titulo }}</inertia-link>
-                     > 
-                    <inertia-link :href="route('entregas.index', [institucion_id, division.id, evaluacion.id])">Entregas</inertia-link>
-                     > 
-                    {{ entrega.alumno.user.name }}
-                </h2>
+                <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
+                    > 
+                <inertia-link :href="route('divisiones.show', [institucion_id, division.id])">
+                    <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                    <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                </inertia-link>
+                    > 
+                <inertia-link :href="route('evaluaciones.index', [institucion_id, division.id])">Evaluaciones</inertia-link>
+                    > 
+                <inertia-link :href="route('evaluaciones.show', [institucion_id, division.id, evaluacion.id])">{{ evaluacion.titulo }}</inertia-link>
+                    > 
+                <inertia-link :href="route('entregas.index', [institucion_id, division.id, evaluacion.id])">Entregas</inertia-link>
+                    > 
+                {{ entrega.alumno.user.name }}
             </h2>
         </template>
 

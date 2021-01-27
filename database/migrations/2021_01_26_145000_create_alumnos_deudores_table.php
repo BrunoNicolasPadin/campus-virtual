@@ -18,6 +18,7 @@ class CreateAlumnosDeudoresTable extends Migration
             $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
             $table->foreignId('asignatura_id')->constrained('asignaturas')->onDelete('cascade');
             $table->foreignId('ciclo_lectivo_id')->constrained('ciclos_lectivos')->onDelete('cascade');
+            $table->boolean('aprobado');
             $table->timestamps();
         });
     }

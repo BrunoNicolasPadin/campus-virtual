@@ -23,8 +23,8 @@ class AsignaturaController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('divisionCorrespondiente');
-        $this->middleware('soloInstitucionesDirectivos')->except('index');
+        $this->middleware('divisionCorrespondiente')->except('show');
+        $this->middleware('soloInstitucionesDirectivos')->except('index', 'show');
         $this->middleware('asignaturaCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;

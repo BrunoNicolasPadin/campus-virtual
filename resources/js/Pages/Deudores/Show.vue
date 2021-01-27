@@ -1,0 +1,124 @@
+<template>
+    <app-layout>
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link :href="route('alumnos.show', [institucion_id, alumno.id])">
+                    {{ alumno.user.name }}
+                </inertia-link>
+                 >
+                <inertia-link :href="route('asignaturas-adeudadas.index', [institucion_id, alumno.id])">
+                    Asignaturas que debe rendir o ya rindio
+                </inertia-link>
+                 > Mesas anotados en {{ asignatura.nombre }}
+            </h2>
+        </template>
+
+        <div class="py-6">
+
+            <estructura-tabla>
+                <template #tabla>
+
+                    <table-head-estructura>
+                        <template #th>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    #
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Fecha
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Calificacion
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Acciones
+                                </template>
+                            </table-head>
+
+                        </template>
+                    </table-head-estructura>
+
+                    <table-body>
+                        <template #tr>
+                            
+                            <tr v-for="(mesa, index) in mesas.data" :key="mesa.id">
+                                <table-data>
+                                    <template #td>
+                                        {{ index + 1 }}
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        {{ mesa.fechaHora }}
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <span v-if="mesa.calificacion">{{ mesa.calificacion }}</span>
+                                        <span v-else>Sin calificar</span>
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, mesa.asignatura.division_id, mesa.asignatura_id, mesa.id])">
+                                            Ingresar
+                                        </inertia-link>
+                                    </template>
+                                </table-data>
+                            </tr>
+                        </template>
+                    </table-body>
+                </template>
+            </estructura-tabla>
+
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <pagination :links="mesas.links" />
+            </div>
+        </div>
+    </app-layout>
+</template>
+
+<script>
+    import AppLayout from '@/Layouts/AppLayout'
+    import EstructuraTabla from '@/Tabla/EstructuraTabla'
+    import TableHeadEstructura from '@/Tabla/TableHeadEstructura'
+    import TableHead from '@/Tabla/TableHead'
+    import TableBody from '@/Tabla/TableBody'
+    import TableData from '@/Tabla/TableData'
+    import Pagination from '@/Pagination/Pagination.vue'
+
+    export default {
+        components: {
+            AppLayout,
+            EstructuraTabla,
+            TableHeadEstructura,
+            TableHead,
+            TableBody,
+            TableData,
+            Pagination,
+        },
+
+        props:{ 
+            successMessage: String,
+            institucion_id: String,
+            mesas: Object,
+            alumno: Object,
+            asignatura: Object,
+        },
+
+        title: 'Inscripciones a las mesas de una asignatura',
+    }
+</script>

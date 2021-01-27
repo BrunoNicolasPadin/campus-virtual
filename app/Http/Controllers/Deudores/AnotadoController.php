@@ -3,83 +3,124 @@
 namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Evaluaciones\UpdateEntrega;
+use App\Models\Asignaturas\Asignatura;
+use App\Models\Deudores\AlumnoDeudor;
+use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Mesa;
+use App\Models\Deudores\RendirComentario;
+use App\Models\Deudores\RendirCorreccion;
+use App\Models\Deudores\RendirEntrega;
+use App\Models\Estructuras\Division;
+use App\Models\Roles\Alumno;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class AnotadoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    protected $formatoService;
+
+    public function __construct(CambiarFormatoFechaHora $formatoService)
     {
-        //
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+
+        $this->formatoService = $formatoService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request, $institucion_id, $division_id, $asignatura_id, $mesa_id)
     {
-        //
+        $alumno = Alumno::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+        Anotado::create([
+            'mesa_id' => $mesa_id,
+            'alumno_id' => $alumno['id'],
+        ]);
+        return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
+            ->with(['successMessage' => 'Te inscribbiste con exito!']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function show($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        //
+        $mesa = Mesa::findOrFail($mesa_id);
+
+        return Inertia::render('Deudores/Anotados/Show', [
+            'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
+            'user_id' => Auth::id(),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'asignatura' => Asignatura::findOrFail($asignatura_id),
+            'mesa' => [
+                'id' => $mesa->id,
+                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'comentario'  => $mesa->comentario,
+            ],
+            'anotado' => Anotado::with('alumno', 'alumno.user')->findOrFail($id),
+            'entregas' => RendirEntrega::where('anotado_id', $id)->get(),
+            'correcciones' => RendirCorreccion::where('anotado_id', $id)->get(),
+            'comentarios' => RendirComentario::where('anotado_id', $id)
+                ->with('user')
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(20)
+                ->transform(function ($comentario) {
+                    return [
+                        'id' => $comentario->id,
+                        'user_id' => $comentario->user_id,
+                        'comentario' => $comentario->comentario,
+                        'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($comentario->updated_at),
+                        'user' => $comentario->user->only('name'),
+                    ];
+                }),
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function edit($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        //
+        $mesa = Mesa::findOrFail($mesa_id);
+
+        return Inertia::render('Deudores/Anotados/Edit', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'asignatura' => Asignatura::findOrFail($asignatura_id),
+            'mesa' => [
+                'id' => $mesa->id,
+                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'comentario'  => $mesa->comentario,
+            ],
+            'anotado' => Anotado::with('alumno', 'alumno.user')->findOrFail($id),
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(UpdateEntrega $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        //
+        $anotado = Anotado::findOrFail($id);
+
+        $anotado->calificacion = $request->calificacion;
+        $anotado->comentario = $request->comentario;
+        $anotado->save();
+
+        if ($request->calificacion >= 6 || $request->calificacion >= 'Aprobado') {
+            AlumnoDeudor::where('alumno_id', $anotado->alumno_id)->where('asignatura_id', $asignatura_id)->update([
+                'aprobado' => '1',
+            ]);
+        }
+        else {
+            AlumnoDeudor::where('alumno_id', $anotado->alumno_id)->where('asignatura_id', $asignatura_id)->update([
+                'aprobado' => '0',
+            ]);
+        }
+
+        return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $id]))
+            ->with(['successMessage' => 'Alumno calificado con exito!']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        //
-    }
+        Anotado::destroy($id);
+        return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
+            ->with(['successMessage' => 'Inscripcion eliminada con exito!']);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

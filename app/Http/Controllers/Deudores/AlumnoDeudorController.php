@@ -7,16 +7,24 @@ use App\Http\Requests\Deudores\StoreAlumnoDeudor;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Deudores\AlumnoDeudor;
+use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Mesa;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
 use App\Services\FechaHora\CambiarFormatoFecha;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
 
 class AlumnoDeudorController extends Controller
 {
     protected $formatoService;
+    protected $formatoFechaHoraService;
 
-    public function __construct(CambiarFormatoFecha $formatoService)
+    public function __construct(
+        CambiarFormatoFecha $formatoService,
+        CambiarFormatoFechaHora $formatoFechaHoraService,
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -25,6 +33,7 @@ class AlumnoDeudorController extends Controller
         $this->middleware('asignaturaAdeudadaCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
+        $this->formatoFechaHoraService = $formatoFechaHoraService;
     }
 
     public function index($institucion_id, $alumno_id)
@@ -114,7 +123,29 @@ class AlumnoDeudorController extends Controller
 
     public function show($institucion_id, $alumno_id, $id)
     {
-        //
+        $deuda = AlumnoDeudor::findOrFail($id);
+        $mesas = Mesa::where('asignatura_id', $deuda->asignatura_id)->with('anotados', 'asignatura')
+            ->whereHas('anotados', function($q) use($alumno_id)
+            {
+                $q->where('alumno_id', $alumno_id);
+            })
+            ->paginate(20)
+            ->transform(function ($mesa) {
+                return [
+                    'id' => $mesa->id,
+                    'asignatura_id' => $mesa->asignatura_id,
+                    'asignatura' => $mesa->asignatura,
+                    'fechaHora' => $this->formatoFechaHoraService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                    'comentario' => $mesa->comentario,
+                ];
+        });
+
+        return Inertia::render('Deudores/Show', [
+            'institucion_id' => $institucion_id,
+            'alumno' => Alumno::with('user')->findOrFail($alumno_id),
+            'mesas' => $mesas,
+            'asignatura' => Asignatura::findOrFail($deuda->asignatura_id),
+        ]); 
     }
 
     public function edit($institucion_id, $alumno_id, $id)

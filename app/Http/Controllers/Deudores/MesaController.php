@@ -3,83 +3,98 @@
 namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Deudores\StoreMesa;
+use App\Models\Asignaturas\Asignatura;
+use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Mesa;
+use App\Models\Estructuras\Division;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
+use Inertia\Inertia;
 
 class MesaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    protected $formatoService;
+
+    public function __construct(CambiarFormatoFechaHora $formatoService)
     {
-        //
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+
+        $this->formatoService = $formatoService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create($institucion_id, $division_id, $asignatura_id)
     {
-        //
+        return Inertia::render('Deudores/Mesas/Create', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'asignatura' => Asignatura::findOrFail($asignatura_id),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreMesa $request, $institucion_id, $division_id, $asignatura_id)
     {
-        //
+        Mesa::create([
+            'asignatura_id' => $asignatura_id,
+            'fechaHora' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHora),
+            'comentario' => $request->comentario,
+        ]);
+
+        return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
+            ->with(['successMessage' => 'Mesa agregada con exito!']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($institucion_id, $division_id, $asignatura_id, $id)
     {
-        //
+        $mesa = Mesa::with('asignatura')->findOrFail($id);
+
+        return Inertia::render('Deudores/Mesas/Show', [
+            'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'asignatura' => Asignatura::findOrFail($asignatura_id),
+            'mesa' => [
+                'id' => $mesa->id,
+                'asignatura' => $mesa->asignatura,
+                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'comentario'  => $mesa->comentario,
+            ],
+            'anotados' => Anotado::where('mesa_id', $id)->with('alumno', 'alumno.user')->paginate(20),
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit($institucion_id, $division_id, $asignatura_id, $id)
     {
-        //
+        $mesa = Mesa::findOrFail($id);
+
+        return Inertia::render('Deudores/Mesas/Edit', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'asignatura' => Asignatura::findOrFail($asignatura_id),
+            'mesa' => [
+                'id' => $mesa->id,
+                'fechaHora' => $this->formatoService->cambiarFormatoParaEditar($mesa->fechaHora),
+                'comentario'  => $mesa->comentario,
+            ],
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(StoreMesa $request, $institucion_id, $division_id, $asignatura_id, $id)
     {
-        //
+        Mesa::where('id', $id)
+            ->update([
+                'fechaHora' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHora),
+                'comentario' => $request->comentario,
+            ]);
+        return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
+            ->with(['successMessage' => 'Mesa editada con exito!']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $id)
     {
-        //
+        Mesa::destroy($id);
+        return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
+            ->with(['successMessage' => 'Mesa eliminada con exito!']);
     }
 }

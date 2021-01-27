@@ -18,4 +18,9 @@ class Mesa extends Model
     {
         return $this->belongsTo(Asignatura::class);
     }
+
+    public function anotados()
+    {
+        return $this->hasMany(Anotado::class);
+    }
 }

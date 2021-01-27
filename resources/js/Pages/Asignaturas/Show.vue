@@ -46,7 +46,7 @@
                     <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Mesas</h2>
                     </div>
-                    <div class="w-1/2" v-show="tipo != 'Alumno' || tipo != 'Padre' ">
+                    <div class="w-1/2" v-if="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                         <primary class="float-right">
                             <template #boton-primary>
                                 <inertia-link :href="route('mesas.create', [institucion_id, division.id, asignatura.id])">Agregar</inertia-link>
@@ -225,8 +225,8 @@
 
         methods: {
             destroy(mesa_id) {
-                if (confirm('Estas seguro de que desea eliminar esta asignatura?')) {
-                    this.$inertia.delete(this.route('mesas.destroy', [this.institucion_id, this.division.id, asignatura.id, mesa_id]))
+                if (confirm('Estas seguro de que desea eliminar esta mesa?')) {
+                    this.$inertia.delete(this.route('mesas.destroy', [this.institucion_id, this.division.id, this.asignatura.id, mesa_id]))
                 }
             },
 

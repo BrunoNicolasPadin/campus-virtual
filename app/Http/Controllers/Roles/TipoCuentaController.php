@@ -61,9 +61,4 @@ class TipoCuentaController extends Controller
     {
         return Padre::where('user_id', $user_id)->with(['hijos', 'hijos.user'])->get();
     }
-
-    public function obtenerCuentasExAlumnos($user_id)
-    {
-        return ExAlumno::where('user_id', $user_id)->with(['institucion', 'institucion.user'])->get();
-    }
 }
