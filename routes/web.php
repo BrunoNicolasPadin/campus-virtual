@@ -8,6 +8,11 @@ use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Deudores\AlumnoDeudorController;
+use App\Http\Controllers\Deudores\AnotadoController;
+use App\Http\Controllers\Deudores\MesaController;
+use App\Http\Controllers\Deudores\RendirComentarioController;
+use App\Http\Controllers\Deudores\RendirCorreccionController;
+use App\Http\Controllers\Deudores\RendirEntregaController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Evaluaciones\CorreccionController;
 use App\Http\Controllers\Evaluaciones\EntregaArchivoController;
@@ -103,6 +108,17 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             
             Route::resource('asignaturas-docentes', AsignaturaDocenteController::class);
             Route::resource('asignaturas-horarios', AsignaturaHorarioController::class);
+            Route::resource('mesas', MesaController::class);
+            Route::prefix('mesas/{mesa_id}')->group(function () {
+                
+                Route::resource('anotados', AnotadoController::class);
+                Route::prefix('anotados/{anotado_id}')->group(function () {
+                
+                    Route::resource('rendir-entregas', RendirEntregaController::class);
+                    Route::resource('rendir-correcciones', RendirCorreccionController::class);
+                    Route::resource('rendir-comentarios', RendirComentarioController::class);
+                });
+            });
         });
 
         Route::get('horarios', [HorarioController::class, 'mostrarHorarios'])->name('horarios.mostrar');

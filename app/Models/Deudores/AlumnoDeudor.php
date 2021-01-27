@@ -5,7 +5,6 @@ namespace App\Models\Deudores;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Roles\Alumno;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class AlumnoDeudor extends Model
