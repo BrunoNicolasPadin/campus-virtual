@@ -63,6 +63,12 @@
                                 </template>
                             </table-head>
 
+                            <table-head>
+                                <template #th-titulo>
+                                    Aprobado
+                                </template>
+                            </table-head>
+
                             <table-head colspan="3">
                                 <template #th-titulo>
                                     Acciones
@@ -93,6 +99,13 @@
                                 <table-data>
                                     <template #td>
                                         {{ deuda.comienzo }} - {{ deuda.final }}
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <span v-if="deuda.aprobado">Si</span>
+                                        <span v-else>No</span>
                                     </template>
                                 </table-data>
 
@@ -142,8 +155,6 @@
     import Eliminar from '@/Botones/Eliminar'
     import Pagination from '@/Pagination/Pagination.vue'
     import Editar from '@/Botones/Editar.vue'
-    import EstructuraForm from '@/Formulario/EstructuraForm.vue'
-    import LabelForm from '@/Formulario/LabelForm.vue'
     import Primary from '@/Botones/Primary.vue'
 
     export default {

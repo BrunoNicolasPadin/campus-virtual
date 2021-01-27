@@ -14,6 +14,7 @@ class AlumnoDeudor extends Model
         'alumno_id',
         'asignatura_id',
         'ciclo_lectivo_id',
+        'aprobado',
     ];
 
     public function alumno()

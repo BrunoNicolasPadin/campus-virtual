@@ -60,6 +60,33 @@
                                 </info>
                             </div>
                         </div>
+
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3 mb-6 md:mb-0">
+                                <label-form>
+                                    <template #label-value>
+                                        Condicion
+                                    </template>
+                                </label-form>
+                                
+                                <select
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.aprobado">
+                                    
+                                    <option value="" disabled selected>-</option>
+                                    <option value="1">Aprobado</option>
+                                    <option value="0">No aprobado</option>
+
+                                </select>
+                                
+                                <info>
+                                    <template #info>
+                                        Es obligatorio. Seleccione una condicion.
+                                    </template>
+                                </info>
+                            </div>
+                        </div>
                         <guardar></guardar>
                     </form>
                 </template>
@@ -98,6 +125,7 @@
             return {
                 form: {
                     ciclo_lectivo_id: this.deuda.ciclo_lectivo_id,
+                    aprobado: this.deuda.aprobado,
                 },
                 mostrarErrores: true,
             }

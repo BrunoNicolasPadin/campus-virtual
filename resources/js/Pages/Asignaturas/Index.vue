@@ -48,7 +48,9 @@
         <div class="py-12">
             <estructura-informacion v-for="asignatura in asignaturas" :key="asignatura.id">
                 <template #cabecera-info>
-                    {{ asignatura.nombre }}
+                    <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, asignatura.division_id, asignatura.id])">
+                        {{ asignatura.nombre }}
+                    </inertia-link>
                 </template>
 
                 <template #dl-contenido>

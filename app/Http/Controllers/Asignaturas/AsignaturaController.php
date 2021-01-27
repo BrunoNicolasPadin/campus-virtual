@@ -8,19 +8,26 @@ use App\Http\Requests\Asignaturas\UpdateAsignatura;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Asignaturas\AsignaturaHorario;
+use App\Models\Deudores\Mesa;
 use App\Models\Estructuras\Division;
+use App\Models\Materiales\Grupo;
 use App\Models\Roles\Docente;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
 
 class AsignaturaController extends Controller
 {
-    public function __construct()
+    protected $formatoService;
+
+    public function __construct(CambiarFormatoFechaHora $formatoService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos')->except('index');
         $this->middleware('asignaturaCorrespondiente')->only('edit', 'update', 'destroy');
+
+        $this->formatoService = $formatoService;
     }
 
     public function index($institucion_id, $division_id)
@@ -75,6 +82,34 @@ class AsignaturaController extends Controller
             ]);
         }
         return redirect(route('asignaturas.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Asignatura guardada con exito!']);
+    }
+
+    public function show($institucion_id, $division_id, $id)
+    {
+        return Inertia::render('Asignaturas/Show', [
+            'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'asignatura' => Asignatura::findOrFail($id),
+            'mesas' => Mesa::where('asignatura_id', $id)->with('asignatura')->orderBy('fechaHora')->paginate(20)
+                ->transform(function ($mesa) {
+                    return [
+                        'id' => $mesa->id,
+                        'asignatura_id' => $mesa->asignatura_id,
+                        'asignatura' => $mesa->asignatura,
+                        'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                        'comentario' => $mesa->comentario,
+                    ];
+                }),
+            'grupos' => Grupo::where('asignatura_id', $id)->orderBy('created_at')->paginate(20)
+                ->transform(function ($grupo) {
+                    return [
+                        'id' => $grupo->id,
+                        'asignatura_id' => $grupo->asignatura_id,
+                        'nombre' => $grupo->nombre,
+                    ];
+                }),
+        ]);
     }
 
     public function edit($institucion_id, $division_id, $id)

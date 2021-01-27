@@ -45,6 +45,7 @@ class AlumnoDeudorController extends Controller
                         'asignatura' => $deuda->asignatura,
                         'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->comienzo),
                         'final' => $this->formatoService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->final),
+                        'aprobado' => $deuda->aprobado,
                     ];
                 }),
         ]);
@@ -102,6 +103,7 @@ class AlumnoDeudorController extends Controller
                 'alumno_id' => $alumno_id,
                 'asignatura_id' => $request->asignatura_id[$i],
                 'ciclo_lectivo_id' => $request->ciclo_lectivo_id,
+                'aprobado' => '0',
             ]);
         }
 
@@ -141,6 +143,7 @@ class AlumnoDeudorController extends Controller
         AlumnoDeudor::where('id', $id)
             ->update([
                 'ciclo_lectivo_id' => $request->ciclo_lectivo_id,
+                'aprobado' => $request->aprobado,
             ]);
         return redirect(route('asignaturas-adeudadas.index', [$institucion_id, $alumno_id]))
             ->with((['successMessage' => 'Asignatura editada con exito!']));
