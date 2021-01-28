@@ -73,10 +73,8 @@ class RepetidorController extends Controller
                 ->map(function ($ciclo) {
                     return [
                         'id' => $ciclo->id,
-                        'institucion_id' => $ciclo->institucion_id,
                         'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
                         'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                        'activado' => $ciclo->activado,
                     ];
                 }),
             'repetidores' => Repetidor::where('institucion_id', $institucion_id)

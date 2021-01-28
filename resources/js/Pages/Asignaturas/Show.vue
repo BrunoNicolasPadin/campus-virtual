@@ -1,23 +1,18 @@
 <template>
     <app-layout>
         <template #header>
-            <div class="flex">
-                <div class="w-full">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
-                        > 
-                        <inertia-link :href="route('divisiones.show', [institucion_id, division.id])">
-                            <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                            <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                        </inertia-link>
-                        > 
-                        <inertia-link :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link>
-                         > 
-                        {{ asignatura.nombre }}
-                    </h2>
-                </div>
-            </div>
-            
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
+                > 
+                <inertia-link :href="route('divisiones.show', [institucion_id, division.id])">
+                    <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                    <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                </inertia-link>
+                > 
+                <inertia-link :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link>
+                    > 
+                {{ asignatura.nombre }}
+            </h2>
         </template>
 
         <!-- Success Message -->
