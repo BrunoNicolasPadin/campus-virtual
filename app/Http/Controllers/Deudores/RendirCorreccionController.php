@@ -3,83 +3,69 @@
 namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Muro\StoreArchivo;
+use App\Models\Asignaturas\Asignatura;
+use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Mesa;
+use App\Models\Deudores\RendirCorreccion;
+use App\Models\Estructuras\Division;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class RendirCorreccionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        /* $this->middleware('evaluacionCorrespondiente');
+        $this->middleware('entregaCorrespondiente'); */
+        $this->middleware('soloDocentes');
+        /* $this->middleware('correccionCorrespondiente')->only('destroy'); */
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
     {
-        //
+        return Inertia::render('Deudores/Correcciones/Create', [
+            'institucion_id' => $institucion_id,
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'asignatura' => Asignatura::findOrFail($asignatura_id),
+            'mesa' => Mesa::findOrFail($mesa_id),
+            'anotado' => Anotado::with(['alumno', 'alumno.user'])->findOrFail($anotado_id),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreArchivo $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
     {
-        //
+        if ($request->hasFile('archivos')) {
+            $archivos = $request->file('archivos');
+
+            foreach ($archivos as $archivo) {
+                $fecha = date_create();
+                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $archivo->storeAs('public/Deudores/Correcciones', $nombre);
+
+                RendirCorreccion::create([
+                    'anotado_id' => $anotado_id,
+                    'archivo' => $nombre,
+                ]);
+            }
+
+            return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id]))
+                ->with(['successMessage' => 'Tus correcciones han sido cargadas con exito!']);
+        }
+
+        return back()->withErrors('No hay ningun archivo seleccionado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
     {
-        //
-    }
+        $entrega = RendirCorreccion::findOrFail($id);
+        Storage::delete('public/Deudores/Entregas/' . $entrega->archivo);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        RendirCorreccion::destroy($id);
+        return back()->with(['successMessage' => 'Archivo eliminado con exito!']);
     }
 }
