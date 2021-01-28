@@ -3,83 +3,44 @@
 namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Evaluaciones\StoreComentario;
+use App\Models\Deudores\RendirComentario;
+use Illuminate\Support\Facades\Auth;
 
 class RendirComentarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        /* $this->middleware('evaluacionCorrespondiente');
+        $this->middleware('entregaCorrespondiente');
+        $this->middleware('entregaComentarioCorrespondiente')->only('update', 'destroy'); */
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StoreComentario $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
     {
-        //
+        RendirComentario::create([
+            'anotado_id' => $anotado_id,
+            'user_id' => Auth::id(),
+            'comentario' => $request->comentario,
+        ]);
+        return back()->with(['successMessage' => 'Comentario cargada con exito!']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(StoreComentario $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
     {
-        //
+        RendirComentario::where('id', $id)
+            ->update([
+                'comentario' => $request->comentario,
+            ]);
+        return back()->with(['successMessage' => 'Comentario actualizada con exito!']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        RendirComentario::destroy($id);
+        return back()->with(['successMessage' => 'Comentario eliminado con exito!']);
     }
 }
