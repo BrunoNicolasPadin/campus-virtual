@@ -33,6 +33,7 @@ class AsignaturaController extends Controller
         $this->middleware('divisionCorrespondiente')->except('show');
         $this->middleware('soloInstitucionesDirectivos')->except('index', 'show');
         $this->middleware('asignaturaCorrespondiente')->only('edit', 'update', 'destroy');
+        $this->middleware('asignaturaAdeudadaCorrespondiente')->only('show');
 
         $this->formatoService = $formatoService;
         $this->formatoFechaService = $formatoFechaService;
@@ -48,30 +49,6 @@ class AsignaturaController extends Controller
                 ->with(['horarios', 'docentes', 'docentes.docente', 'docentes.docente.user'])
                 ->orderBy('nombre')
                 ->get(),
-        ]);
-    }
-
-    public function mostrarDeudores($institucion_id, $division_id, $asignatura_id)
-    {
-        return Inertia::render('Asignaturas/Deudores', [
-            'institucion_id' => $institucion_id,
-            'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'asignatura' => Asignatura::findOrFail($asignatura_id),
-            'deudores' => AlumnoDeudor::where('asignatura_id', $asignatura_id)
-                ->with('alumno', 'alumno.user')
-                ->orderBy('ciclo_lectivo_id')
-                ->paginate(20)
-                ->transform(function ($deuda) {
-                    return [
-                        'id' => $deuda->id,
-                        'alumno_id' => $deuda->alumno_id,
-                        'alumno' => $deuda->alumno,
-                        'comienzo' => $this->formatoFechaService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->comienzo),
-                        'final' => $this->formatoFechaService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->final),
-                        'aprobado' => $deuda->aprobado,
-                    ];
-                }),
         ]);
     }
 

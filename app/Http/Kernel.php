@@ -104,6 +104,14 @@ class Kernel extends HttpKernel
         'repetidorCorrespondiente' => \App\Http\Middleware\Repetidores\RepetidorCorrespondiente::class,
         'verificarExAlumnoNuevo' => \App\Http\Middleware\ExAlumnos\VerificarExAlumnoNuevo::class,
         'exAlumnoCorrespondiente' => \App\Http\Middleware\ExAlumnos\ExAlumnoCorrespondiente::class,
-        'asignaturaAdeudadaCorrespondiente' => \App\Http\Middleware\Deudores\AsignaturaAdeudadaCorrespondiente::class,
+        'asignaturaAdeudadaCorrespondiente' => \App\Http\Middleware\Asignaturas\AsignaturaAdeudadaCorrespondiente::class,
+        'grupoAdeudadoCorrespondiente' => \App\Http\Middleware\Materiales\GrupoAdeudadoCorrespondiente::class,
+        'deudaCorrespondiente' => \App\Http\Middleware\Deudores\DeudaCorrespondiente::class,
+        'mesaCorrespondiente' => \App\Http\Middleware\Deudores\MesaCorrespondiente::class,
+        'inscripcionCorrespondiente' => \App\Http\Middleware\Deudores\InscripcionCorrespondiente::class,
+        'verificarInscripcion' => \App\Http\Middleware\Deudores\VerificarInscripcion::class,
+        'rendirEntregaCorrespondiente' => \App\Http\Middleware\Deudores\RendirEntregaCorrespondiente::class,
+        'rendirCorreccionCorrespondiente' => \App\Http\Middleware\Deudores\RendirCorreccionCorrespondiente::class,
+        'rendirComentarioCorrespondiente' => \App\Http\Middleware\Deudores\RendirComentarioCorrespondiente::class,
     ];
 }

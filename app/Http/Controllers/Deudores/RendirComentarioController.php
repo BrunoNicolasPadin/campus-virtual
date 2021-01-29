@@ -13,10 +13,10 @@ class RendirComentarioController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('divisionCorrespondiente');
-        /* $this->middleware('evaluacionCorrespondiente');
-        $this->middleware('entregaCorrespondiente');
-        $this->middleware('entregaComentarioCorrespondiente')->only('update', 'destroy'); */
+        $this->middleware('asignaturaAdeudadaCorrespondiente');
+        $this->middleware('mesaCorrespondiente');
+        $this->middleware('inscripcionCorrespondiente');
+        $this->middleware('rendirComentarioCorrespondiente')->only('update', 'destroy');
     }
 
     public function store(StoreComentario $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)

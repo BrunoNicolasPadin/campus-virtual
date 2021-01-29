@@ -18,11 +18,11 @@ class RendirEntregaController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('divisionCorrespondiente');
-       /*  $this->middleware('evaluacionCorrespondiente');
-        $this->middleware('entregaCorrespondiente'); */
+        $this->middleware('asignaturaAdeudadaCorrespondiente');
+        $this->middleware('mesaCorrespondiente');
+        $this->middleware('inscripcionCorrespondiente');
         $this->middleware('soloAlumnos');
-        /* $this->middleware('entregaArchivoCorrespondiente')->only('destroy'); */
+        $this->middleware('rendirEntregaCorrespondiente')->only('destroy');
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)

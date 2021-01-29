@@ -17,10 +17,22 @@ class MaterialController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('divisionCorrespondiente');
-        $this->middleware('soloDocentes');
-        $this->middleware('grupoCorrespondiente');
+        $this->middleware('divisionCorrespondiente')->except('index');
+        $this->middleware('soloDocentes')->except('index');
+        $this->middleware('grupoCorrespondiente')->except('index');
+        $this->middleware('grupoAdeudadoCorrespondiente')->only('index');
         $this->middleware('materialCorrespondiente')->only('edit', 'update', 'destroy');
+    }
+
+    public function index($institucion_id, $division_id, $grupo_id)
+    {
+        return Inertia::render('Materiales/Grupos/Show', [
+            'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'grupo' => Grupo::find($grupo_id),
+            'archivos' => Material::where('grupo_id', $grupo_id)->get(),
+        ]);
     }
 
     public function create($institucion_id, $division_id, $grupo_id)

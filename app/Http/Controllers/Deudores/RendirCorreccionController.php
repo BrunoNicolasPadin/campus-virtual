@@ -19,11 +19,11 @@ class RendirCorreccionController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('divisionCorrespondiente');
-        /* $this->middleware('evaluacionCorrespondiente');
-        $this->middleware('entregaCorrespondiente'); */
+        $this->middleware('asignaturaAdeudadaCorrespondiente');
+        $this->middleware('mesaCorrespondiente');
+        $this->middleware('inscripcionCorrespondiente');
         $this->middleware('soloDocentes');
-        /* $this->middleware('correccionCorrespondiente')->only('destroy'); */
+        $this->middleware('rendirCorreccionCorrespondiente')->only('destroy');
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)

@@ -7,7 +7,7 @@ use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
 
-class AsignaturaAdeudadaCorrespondiente
+class DeudaCorrespondiente
 {
     protected $ruta;
 

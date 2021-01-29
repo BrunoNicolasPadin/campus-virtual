@@ -29,8 +29,9 @@ class AlumnoDeudorController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('alumnoCorrespondiente');
-        $this->middleware('soloInstitucionesDirectivos')->only('edit', 'update', 'destroy');
-        $this->middleware('asignaturaAdeudadaCorrespondiente')->only('show', 'edit', 'update', 'destroy');
+        $this->middleware('soloInstitucionesDirectivos')->except('index', 'show');
+        $this->middleware('soloInstitucionesDirectivosAlumnos')->only('show');
+        $this->middleware('deudaCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
         $this->formatoFechaHoraService = $formatoFechaHoraService;

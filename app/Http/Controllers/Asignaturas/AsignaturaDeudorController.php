@@ -18,10 +18,10 @@ class AsignaturaDeudorController extends Controller
     public function __construct(CambiarFormatoFecha $formatoFechaService)
     {
         $this->middleware('auth');
-        /* $this->middleware('institucionCorrespondiente');
+        $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivosDocentes');
-        $this->middleware('asignaturaCorrespondiente'); */
+        $this->middleware('asignaturaCorrespondiente');
 
         $this->formatoFechaService = $formatoFechaService;
     }

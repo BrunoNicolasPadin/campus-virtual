@@ -19,7 +19,10 @@ class MesaController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('divisionCorrespondiente');
+        $this->middleware('asignaturaAdeudadaCorrespondiente');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->except('show');
+        $this->middleware('divisionCorrespondiente')->except('show');
+        $this->middleware('mesaCorrespondiente')->except('create', 'store');
 
         $this->formatoService = $formatoService;
     }

@@ -24,12 +24,8 @@ class GrupoCorrespondiente
         $grupo = Grupo::find($link[8]);
 
         if (session('tipo') == 'Docente') {
-            $asignaturasDocentes = AsignaturaDocente::where('asignatura_id', $grupo->asignatura_id)->get();
-
-            foreach ($asignaturasDocentes as $asignaturaDocente) {
-                if ($asignaturaDocente->docente_id == session('tipo_id')) {
-                    return $next($request);
-                }
+            if (AsignaturaDocente::where('asignatura_id', $grupo->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
+                return $next($request);
             }
             abort(403, 'Este grupo de archivos no es de una asignatura en la que eres docente.');
         }

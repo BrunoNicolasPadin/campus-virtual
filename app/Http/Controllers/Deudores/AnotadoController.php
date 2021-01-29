@@ -26,7 +26,13 @@ class AnotadoController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('divisionCorrespondiente');
+        $this->middleware('divisionCorrespondiente')->except('store', 'show');
+        $this->middleware('asignaturaAdeudadaCorrespondiente');
+        $this->middleware('mesaCorrespondiente');
+        $this->middleware('soloAlumnos')->except('store');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->except('store', 'show');
+        $this->middleware('inscripcionCorrespondiente')->except('store');
+        $this->middleware('verificarInscripcion')->only('store');
 
         $this->formatoService = $formatoService;
     }
