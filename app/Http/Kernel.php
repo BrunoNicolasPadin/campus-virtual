@@ -113,5 +113,6 @@ class Kernel extends HttpKernel
         'rendirEntregaCorrespondiente' => \App\Http\Middleware\Deudores\RendirEntregaCorrespondiente::class,
         'rendirCorreccionCorrespondiente' => \App\Http\Middleware\Deudores\RendirCorreccionCorrespondiente::class,
         'rendirComentarioCorrespondiente' => \App\Http\Middleware\Deudores\RendirComentarioCorrespondiente::class,
+        'mesaArchivoCorrespondiente' => \App\Http\Middleware\Deudores\MesaArchivoCorrespondiente::class,
     ];
 }

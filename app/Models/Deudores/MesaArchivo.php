@@ -12,4 +12,9 @@ class MesaArchivo extends Model
         'archivo',
         'visibilidad',
     ];
+
+    public function mesa()
+    {
+        return $this->belongsTo(Mesa::class);
+    }
 }

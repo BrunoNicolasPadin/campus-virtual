@@ -17,12 +17,13 @@ class MesaArchivoController extends Controller
 
     public function __construct(CambiarFormatoFechaHora $formatoService)
     {
-        /* $this->middleware('auth');
+        $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
         $this->middleware('asignaturaAdeudadaCorrespondiente');
-        $this->middleware('soloInstitucionesDirectivosDocentes')->except('show');
-        $this->middleware('divisionCorrespondiente')->except('show');
-        $this->middleware('mesaCorrespondiente')->except('create', 'store'); */
+        $this->middleware('mesaCorrespondiente');
+        $this->middleware('soloDocentes');
+        $this->middleware('mesaArchivoCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
     }
