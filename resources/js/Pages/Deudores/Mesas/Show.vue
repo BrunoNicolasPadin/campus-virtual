@@ -92,6 +92,53 @@
                 </template>
             </estructura-informacion>
 
+            <div class="container mx-auto px-4 sm:px-8 my-6" v-if="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
+                <div class="flex">
+                    <div class="w-1/2">
+                        <h2 class="text-2xl font-semibold leading-tight">Archivos</h2>
+                    </div>
+                    <div class="w-1/2" v-show="tipo == 'Docente' ">
+                        <primary class="float-right">
+                            <template #boton-primary>
+                                <inertia-link :href="route('mesas-archivos.create', [institucion_id, division.id, asignatura.id, mesa.id])">Agregar</inertia-link>
+                            </template>
+                        </primary>
+                    </div>
+                </div>
+
+                <ul class="my-2 bg-white border border-blue-100 rounded-md divide-y divide-gray-200">
+
+                    <li v-for="archivo in archivos" :key="archivo.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                        <div class="w-0 flex-1 flex items-center">
+                            <span class="ml-2 flex-1 w-0 truncate">
+                                <a
+                                :href="'/storage/mesas/archivos/' + archivo.archivo" 
+                                target="_blank" 
+                                class="text-blue-500"
+                                rel="noopener noreferrer">
+                                    {{ archivo.archivo }}
+                                </a>
+                            </span>
+                        </div>
+
+                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Docente' ">
+                            <inertia-link
+                            :href="route('mesas-archivos.edit', [institucion_id, division.id, asignatura.id, mesa.id, archivo.id])"
+                            class="font-medium text-indigo-600 hover:text-indigo-500">
+                                Editar
+                            </inertia-link>
+                            -
+                            <span 
+                            @click="destroyArchivo(archivo.id)" 
+                            class="font-medium text-red-600 hover:text-red-500 cursor-pointer"
+                            type="submit">
+                                Eliminar
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="flex">
                     <div class="w-1/2">
@@ -228,6 +275,7 @@
             asignatura: Object,
             mesa: Object,
             anotados: Object,
+            archivos: Array,
         },
 
         title: 'Mesa de examen',
@@ -247,7 +295,13 @@
                 if (confirm('Estas seguro de que desea inscribirse en esta mesa de examen?')) {
                     this.$inertia.post(this.route('anotados.store', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id]))
                 }
-            }
+            },
+
+            destroyArchivo(archivo_id) {
+                if (confirm('Estas seguro de que desea eliminar este archivo?')) {
+                    this.$inertia.delete(this.route('evaluaciones-archivos.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, archivo_id]))
+                }
+            },
         },
     }
 </script>

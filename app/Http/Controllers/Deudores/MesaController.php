@@ -7,6 +7,7 @@ use App\Http\Requests\Deudores\StoreMesa;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Deudores\Anotado;
 use App\Models\Deudores\Mesa;
+use App\Models\Deudores\MesaArchivo;
 use App\Models\Estructuras\Division;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
@@ -64,6 +65,7 @@ class MesaController extends Controller
                 'comentario'  => $mesa->comentario,
             ],
             'anotados' => Anotado::where('mesa_id', $id)->with('alumno', 'alumno.user')->paginate(20),
+            'archivos' => MesaArchivo::where('mesa_id', $id)->get(),
         ]);
     }
 
