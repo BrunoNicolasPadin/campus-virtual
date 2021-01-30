@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Deudores\AlumnoDeudorController;
 use App\Http\Controllers\Deudores\AnotadoController;
+use App\Http\Controllers\Deudores\MesaArchivoController;
 use App\Http\Controllers\Deudores\MesaController;
 use App\Http\Controllers\Deudores\RendirComentarioController;
 use App\Http\Controllers\Deudores\RendirCorreccionController;
@@ -110,6 +111,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::resource('mesas', MesaController::class);
             Route::prefix('mesas/{mesa_id}')->group(function () {
                 
+                Route::resource('mesas-archivos', MesaArchivoController::class);
                 Route::resource('anotados', AnotadoController::class);
                 Route::prefix('anotados/{anotado_id}')->group(function () {
                 
