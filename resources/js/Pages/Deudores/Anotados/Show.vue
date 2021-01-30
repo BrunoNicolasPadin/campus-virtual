@@ -107,6 +107,37 @@
                 </template>
             </estructura-informacion>
 
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <div class="flex">
+                    <div class="w-full">
+                        <h2 class="text-2xl font-semibold leading-tight">Archivos de la mesa</h2>
+                    </div>
+                </div>
+
+                <ul class="my-2 bg-white border border-blue-100 rounded-md divide-y divide-gray-200">
+
+                    <li v-for="archivo in archivos" :key="archivo.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                        <div v-if="archivo.visibilidad" class="w-0 flex-1 flex items-center">
+                            <span class="ml-2 flex-1 w-0 truncate">
+                                <a
+                                :href="'/storage/mesas/archivos/' + archivo.archivo" 
+                                target="_blank" 
+                                class="text-blue-500 hover:underline"
+                                rel="noopener noreferrer">
+                                    {{ archivo.archivo }}
+                                </a>
+                            </span>
+                        </div>
+
+                        <div v-else class="w-0 flex-1 flex items-center">
+                            <span class="ml-2 flex-1 w-0 truncate">
+                                Archivo no visible.
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="flex">
                     <div class="w-1/2">
@@ -278,6 +309,7 @@
             asignatura: Object,
             mesa: Object,
             anotado: Object,
+            archivos: Array,
             entregas: Array,
             correcciones: Array,
             comentarios: Object,

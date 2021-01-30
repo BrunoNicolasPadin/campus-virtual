@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Libretas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Libretas\UpdateLibreta;
 use App\Models\CiclosLectivos\CicloLectivo;
+use App\Models\Deudores\AlumnoDeudor;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
@@ -82,6 +83,10 @@ class LibretaController extends Controller
             'libretas' => Libreta::where('alumno_id', $alumno_id)
                 ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
                 ->with(['asignatura', 'calificaciones'])
+                ->get(),
+            'deudas' => AlumnoDeudor::where('alumno_id', $alumno_id)
+                ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
+                ->with('asignatura')
                 ->get(),
         ]);
     }

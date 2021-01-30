@@ -8,6 +8,7 @@ use App\Models\Asignaturas\Asignatura;
 use App\Models\Deudores\AlumnoDeudor;
 use App\Models\Deudores\Anotado;
 use App\Models\Deudores\Mesa;
+use App\Models\Deudores\MesaArchivo;
 use App\Models\Deudores\RendirComentario;
 use App\Models\Deudores\RendirCorreccion;
 use App\Models\Deudores\RendirEntrega;
@@ -29,7 +30,7 @@ class AnotadoController extends Controller
         $this->middleware('divisionCorrespondiente')->except('store', 'show');
         $this->middleware('asignaturaAdeudadaCorrespondiente');
         $this->middleware('mesaCorrespondiente');
-        $this->middleware('soloAlumnos')->except('store');
+        $this->middleware('soloAlumnos')->only('store');
         $this->middleware('soloInstitucionesDirectivosDocentes')->except('store', 'show');
         $this->middleware('inscripcionCorrespondiente')->except('store');
         $this->middleware('verificarInscripcion')->only('store');
@@ -64,6 +65,7 @@ class AnotadoController extends Controller
                 'comentario'  => $mesa->comentario,
             ],
             'anotado' => Anotado::with('alumno', 'alumno.user')->findOrFail($id),
+            'archivos' => MesaArchivo::where('mesa_id', $mesa_id)->get(),
             'entregas' => RendirEntrega::where('anotado_id', $id)->get(),
             'correcciones' => RendirCorreccion::where('anotado_id', $id)->get(),
             'comentarios' => RendirComentario::where('anotado_id', $id)

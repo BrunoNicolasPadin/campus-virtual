@@ -113,6 +113,67 @@
                     </table-body>
                 </template>
             </estructura-tabla>
+
+            <div class="container mx-auto px-4 sm:px-8">
+                <h2 class="text-2xl font-semibold leading-tight">Asignaturas adeudadas</h2>
+            </div>
+
+            <estructura-tabla>
+                <template #tabla>
+
+                    <table-head-estructura>
+                        <template #th>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    #
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Asignatura
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Aprobado
+                                </template>
+                            </table-head>
+
+                        </template>
+                    </table-head-estructura>
+
+                    <table-body>
+                        <template #tr>
+                            
+                            <tr v-for="(deuda, index) in deudas" :key="deuda.id">
+                                <table-data>
+                                    <template #td>
+                                        {{ index + 1 }}
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <inertia-link :href="route('asignaturas.show', [institucion_id, deuda.asignatura.division_id, deuda.asignatura_id])" class="hover:underline">
+                                            {{ deuda.asignatura.nombre }}
+                                        </inertia-link>
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <span v-if="deuda.aprobado">Si</span>
+                                        <span v-else>No</span>
+                                    </template>
+                                </table-data>
+                            </tr>
+                        </template>
+                    </table-body>
+                </template>
+            </estructura-tabla>
         </div>
     </app-layout>
 </template>
@@ -150,6 +211,7 @@
             periodos: Array,
             ciclo_lectivo_id: String,
             libretas: Array,
+            deudas: Array,
         },
 
         title: 'Ver libreta',
