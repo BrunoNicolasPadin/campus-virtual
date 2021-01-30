@@ -114,9 +114,9 @@
                                 <a
                                 :href="'/storage/mesas/archivos/' + archivo.archivo" 
                                 target="_blank" 
-                                class="text-blue-500"
+                                class="text-blue-500 hover:underline"
                                 rel="noopener noreferrer">
-                                    {{ archivo.archivo }}
+                                    {{ archivo.archivo }} - <span v-if="archivo.visibilidad">Visible</span> <span v-else>No visible</span>
                                 </a>
                             </span>
                         </div>
@@ -124,13 +124,13 @@
                         <div class="ml-4 flex-shrink-0" v-show="tipo == 'Docente' ">
                             <inertia-link
                             :href="route('mesas-archivos.edit', [institucion_id, division.id, asignatura.id, mesa.id, archivo.id])"
-                            class="font-medium text-indigo-600 hover:text-indigo-500">
+                            class="font-medium text-indigo-600 hover:text-indigo-500 hover:underline">
                                 Editar
                             </inertia-link>
                             -
                             <span 
                             @click="destroyArchivo(archivo.id)" 
-                            class="font-medium text-red-600 hover:text-red-500 cursor-pointer"
+                            class="font-medium text-red-600 hover:text-red-500 hover:underline cursor-pointer"
                             type="submit">
                                 Eliminar
                             </span>
@@ -299,7 +299,7 @@
 
             destroyArchivo(archivo_id) {
                 if (confirm('Estas seguro de que desea eliminar este archivo?')) {
-                    this.$inertia.delete(this.route('evaluaciones-archivos.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, archivo_id]))
+                    this.$inertia.delete(this.route('mesas-archivos.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, archivo_id]))
                 }
             },
         },

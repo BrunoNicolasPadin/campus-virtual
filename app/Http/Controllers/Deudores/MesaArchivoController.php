@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Deudores\StoreMesaArchivo;
-use App\Models\Asignaturas\Asignatura;
+use App\Http\Requests\Deudores\UpdateArchivo;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
-use App\Models\Estructuras\Division;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MesaArchivoController extends Controller
@@ -70,18 +69,42 @@ class MesaArchivoController extends Controller
         return back()->withErrors('No hay ningun archivo seleccionado');
     }
 
-    public function edit($id)
+    public function edit($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        //
+        $mesa = Mesa::with('asignatura')->findOrFail($mesa_id);
+
+        return Inertia::render('Deudores/Archivos/Edit', [
+            'institucion_id' => $institucion_id,
+            'division_id' => $division_id,
+            'asignatura_id' => $asignatura_id,
+            'mesa' => [
+                'id' => $mesa->id,
+                'asignatura' => $mesa->asignatura,
+                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'comentario'  => $mesa->comentario,
+            ],
+            'archivo' => MesaArchivo::findOrFail($id),
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateArchivo $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        //
+        MesaArchivo::where('id', $id)
+            ->update([
+            'visibilidad'  => $request->visibilidad,
+        ]);
+
+        return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
+            ->with(['successMessage' => 'Visibilidad actualizada con exito!']);
     }
 
-    public function destroy($id)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        //
+        $mesaArchivo = MesaArchivo::findOrFail($id);
+        Storage::delete('public/Mesas/Archivos/' . $mesaArchivo->archivo);
+
+        MesaArchivo::destroy($id);
+        return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
+            ->with(['successMessage' => 'Archivo eliminado con exito!']);
     }
 }
