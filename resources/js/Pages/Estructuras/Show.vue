@@ -97,6 +97,15 @@
                             <inertia-link class="hover:underline" :href="route('docentesDivision.mostrar', [institucion_id, division.id])">Ver</inertia-link>
                         </dd>
                     </div>
+
+                    <div v-if="tipo == 'Institucion' || tipo == 'Directivo' " class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Repetidores
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <inertia-link class="hover:underline" :href="route('repetidores-division.mostrar', [institucion_id, division.id])">Ver</inertia-link>
+                        </dd>
+                    </div>
                 </template>
             </estructura-informacion>
             
@@ -118,6 +127,7 @@
             institucion_id: String,
             division: Object,
             successMessage: String,
+            tipo: String,
         },
 
         title: 'Ver division',

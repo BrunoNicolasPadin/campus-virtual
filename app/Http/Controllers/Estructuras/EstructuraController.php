@@ -71,6 +71,7 @@ class EstructuraController extends Controller
         return Inertia::render('Estructuras/Show', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($id),
+            'tipo' => session('tipo'),
         ]);
     }
 
