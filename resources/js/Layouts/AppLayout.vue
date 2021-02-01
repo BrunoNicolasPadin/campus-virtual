@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-blue-200">
+    <div class="min-h-screen bg-blue-50">
         <nav class="bg-blue-100 border-b border-gray-100">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

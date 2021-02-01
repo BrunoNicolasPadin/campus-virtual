@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <inertia-link :href="route('divisiones.index', institucion_id)">Ciclos lectivos</inertia-link>
+                <inertia-link class="hover:underline" :href="route('ciclos-lectivos.index', institucion_id)">Ciclos lectivos</inertia-link>
                  > Crear ciclo lectivo
             </h2>
         </template>
@@ -41,18 +41,19 @@
                                     </template>
                                 </label-form>
                                 
-                                <datepicker
+                                <date-picker
                                 required
+                                valueType="format"
+                                :lang="lang"
+                                format="DD-MM-YYYY"
                                 v-model="form.comienzo"
-                                :language="es"
-                                :format="format"
-                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3" >
+                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3">
 
-                                </datepicker>
+                                </date-picker>
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio
+                                        Formato: AAAA-MM-DD. Es obligatorio
                                     </template>
                                 </info>
                             </div>
@@ -65,18 +66,36 @@
                                     </template>
                                 </label-form>
                                 
-                                <datepicker
+                                <date-picker
                                 required
+                                valueType="format"
+                                :lang="lang"
+                                format="DD-MM-YYYY"
                                 v-model="form.final"
-                                :language="es"
-                                :format="format"
-                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3" >
-
-                                </datepicker>
-
+                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"></date-picker>
+                                
                                 <info>
                                     <template #info>
-                                        Es obligatorio
+                                        Formato: AAAA-MM-DD. Es obligatorio
+                                    </template>
+                                </info>
+                            </div>
+                        </div>
+
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Activado
+                                    </template>
+                                </label-form>
+                                
+                                <input type="checkbox" v-model="form.activado" />
+                                
+                                <info>
+                                    <template #info>
+                                        Antes de activar un ciclo lectivo asegurese de que no tenga activado otro.
                                     </template>
                                 </info>
                             </div>
@@ -97,8 +116,9 @@
     import LabelForm from '@/Formulario/LabelForm.vue'
     import Info from '@/Formulario/Info.vue'
     import Guardar from '@/Botones/Guardar.vue'
-    import Datepicker from 'vuejs-datepicker'
-    import {es} from 'vuejs-datepicker/dist/locale'
+    import DatePicker from 'vue2-datepicker'
+    import 'vue2-datepicker/index.css'
+    import 'vue2-datepicker/locale/es'
 
     export default {
         components: {
@@ -107,7 +127,7 @@
             LabelForm,
             Info,
             Guardar,
-            Datepicker,
+            DatePicker,
         },
 
         props: {
@@ -123,8 +143,6 @@
                     comienzo: null,
                     final: null,
                 },
-                es: es,
-                format: "d MMMM yyyy",
                 mostrarErrores: true,
             }
         },

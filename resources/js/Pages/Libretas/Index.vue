@@ -1,10 +1,10 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <inertia-link :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link>
-                 > Libreta
-            </h2>
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
+                Libreta
+            </span>
         </template>
 
         <div class="py-12">

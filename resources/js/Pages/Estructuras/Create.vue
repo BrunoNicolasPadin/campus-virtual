@@ -1,10 +1,10 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
-                 > Armar estructura
-            </h2>
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
+                Agregar divisiones
+            </span>
         </template>
 
         <div class="py-12">

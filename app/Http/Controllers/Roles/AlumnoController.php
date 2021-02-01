@@ -115,7 +115,7 @@ class AlumnoController extends Controller
                 ->orderBy('curso_id')
                 ->orderBy('division')
                 ->get(),
-            'id' => $id,
+            'alumno' => Alumno::with('user')->findOrFail($id),
         ]);
     }
 

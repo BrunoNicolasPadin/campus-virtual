@@ -123,9 +123,26 @@ class RepetidorController extends Controller
         return redirect(route('repetidores.index', $institucion_id))->with(['successMessage' => 'Repetidor cargado con exito!']);
     }
 
-    public function show($institucion_id, $id)
+    public function show($institucion_id, $alumno_id)
     {
-        //
+        return Inertia::render('Repetidores/Show', [
+            'institucion_id' => $institucion_id,
+            'alumno' => Alumno::with('user')->find($alumno_id),
+            'repeticiones' => Repetidor::where('alumno_id', $alumno_id)
+                ->with('ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
+                ->orderBy('ciclo_lectivo_id')
+                ->get()
+                ->map(function ($repetidor) {
+                    return [
+                        'id' => $repetidor->id,
+                        'division_id' => $repetidor->division_id,
+                        'division' => $repetidor->division,
+                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repetidor->ciclo_lectivo->comienzo),
+                        'final' => $this->formatoService->cambiarFormatoParaMostrar($repetidor->ciclo_lectivo->final),
+                        'comentario'  => $repetidor->comentario,
+                    ];
+                }),
+        ]);
     }
 
     public function edit($institucion_id, $id)

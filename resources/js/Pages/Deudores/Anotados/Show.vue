@@ -1,21 +1,17 @@
 <template>
     <app-layout>
         <template #header>
-            <h3 class="font-semibold text-gray-800 leading-tight">
-                <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
-                > 
-                <inertia-link :href="route('divisiones.show', [institucion_id, division.id])">
+            <span class="font-semibold text-md text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
                     <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
                     <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                </inertia-link>
-                > 
-                <inertia-link :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link>
-                    > 
-                <inertia-link :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">{{ asignatura.nombre }}</inertia-link>
-                    > 
-                <inertia-link :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa del {{ mesa.fechaHora }}</inertia-link>
-                    > Entrega de {{ anotado.alumno.user.name }}
-            </h3>
+                </inertia-link> / 
+                <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">{{ asignatura.nombre }}</inertia-link> / 
+                <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa {{ mesa.fechaHora }}</inertia-link> / 
+                Entrega de {{ anotado.alumno.user.name }}
+            </span>
         </template>
 
         <!-- Errors Messages -->

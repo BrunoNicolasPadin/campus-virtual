@@ -14,8 +14,8 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
 
     </head>
-    <body class="antialiased bg-blue-100 container mx-auto px-4 sm:px-8 ">
-        <nav class="bg-blue-100 border-b border-gray-100">
+    <body class="antialiased bg-blue-50 container mx-auto px-4 sm:px-8 ">
+        <nav class="bg-blue-50 border-b border-gray-100">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 my-2">

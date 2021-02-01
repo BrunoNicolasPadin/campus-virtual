@@ -3,9 +3,9 @@
         <template #header>
             <div class="flex">
                 <div class="w-1/2">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    <span class="font-semibold text-xl text-gray-800 leading-tight">
                         Ciclos lectivos
-                    </h2>
+                    </span>
                 </div>
                 <div class="w-1/2">
                     <primary class="float-right">

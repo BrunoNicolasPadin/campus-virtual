@@ -1,13 +1,11 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <inertia-link :href="route('roles.index', institucion_id)">Roles</inertia-link>
-                 > 
-                <inertia-link :href="route('docentes.index', institucion_id)">Docentes</inertia-link>
-                 > 
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('docentes.index', institucion_id)">Docentes</inertia-link> /
                 {{ docente.user.name }}
-            </h2>
+            </span>
         </template>
 
         <div class="py-12">

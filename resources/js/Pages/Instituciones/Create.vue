@@ -1,9 +1,9 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
                 Crear institución
-            </h2>
+            </span>
         </template>
 
         <div class="py-12">

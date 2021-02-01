@@ -1,20 +1,16 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
-                 > 
-                <inertia-link :href="route('divisiones.show', [institucion_id, division.id])">
+            <span class="font-semibold text-md text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
                     <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
                     <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                </inertia-link>
-                 > 
-                <inertia-link :href="route('materiales.index', [institucion_id, division.id])">Grupos de materiales</inertia-link>
-                 > 
-                <inertia-link :href="route('materiales.show', [institucion_id, division.id, grupo.id])">{{ grupo.nombre }}</inertia-link>
-                 > {{ archivo.nombre }}
-                 > Editar
-            </h2>
+                </inertia-link> / 
+                <inertia-link class="hover:underline" :href="route('materiales.index', [institucion_id, division.id])">Grupos de materiales</inertia-link> / 
+                <inertia-link class="hover:underline" :href="route('materiales.show', [institucion_id, division.id, grupo.id])">{{ grupo.nombre }}</inertia-link> / 
+                Editar "{{ archivo.nombre }}"
+            </span>
         </template>
 
         <div class="py-12">

@@ -14,7 +14,16 @@ class CambiarFormatoFecha
 
     public function cambiarFormatoParaMostrar($fecha)
     {
+        $date = new DateTime($fecha);
+        return $date->format('d/m/Y');
+    }
+
+    public function cambiarFormatoParaEditar($fecha)
+    {
+        if (! $fecha == '') {
             $date = new DateTime($fecha);
-            return $date->format('d/m/Y');
+            return $date->format('d-m-Y');
+        }
+        return $fecha;
     }
 }

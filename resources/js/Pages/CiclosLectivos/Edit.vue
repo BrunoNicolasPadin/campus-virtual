@@ -1,10 +1,10 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <inertia-link :href="route('ciclos-lectivos.index', institucion_id)">Ciclos lectivos</inertia-link>
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('ciclos-lectivos.index', institucion_id)">Ciclos lectivos</inertia-link>
                  > Editar ciclo lectivo
-            </h2>
+            </span>
         </template>
 
         <div class="py-12">
@@ -44,15 +44,14 @@
                                 <date-picker
                                 required
                                 valueType="format"
+                                :lang="lang"
+                                format="DD-MM-YYYY"
                                 v-model="form.comienzo"
-                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"
-                                lang="es">
-
-                                </date-picker>
+                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"></date-picker>
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio
+                                        Formato: AAAA-MM-DD. Es obligatorio
                                     </template>
                                 </info>
                             </div>
@@ -68,13 +67,14 @@
                                 <date-picker
                                 required
                                 valueType="format"
+                                :lang="lang"
+                                format="DD-MM-YYYY"
                                 v-model="form.final"
-                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"
-                                lang="es"></date-picker>
+                                class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"></date-picker>
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio
+                                        Formato: AAAA-MM-DD. Es obligatorio
                                     </template>
                                 </info>
                             </div>
@@ -117,6 +117,7 @@
     import Guardar from '@/Botones/Guardar.vue'
     import DatePicker from 'vue2-datepicker'
     import 'vue2-datepicker/index.css'
+    import 'vue2-datepicker/locale/es'
 
     export default {
         components: {

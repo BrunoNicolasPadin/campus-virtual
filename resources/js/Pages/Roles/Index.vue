@@ -1,9 +1,9 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
                 Roles
-            </h2>
+            </span>
         </template>
 
         <div class="py-6">
@@ -90,13 +90,13 @@
                             <tr>
                                 <table-data>
                                     <template #td>
-                                        4]5
+                                        5
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        Padre, madre o tutor
+                                        <inertia-link :href="route('repetidores.index', institucion_id)" class="hover:underline">Repetidores</inertia-link>
                                     </template>
                                 </table-data>
                             </tr>

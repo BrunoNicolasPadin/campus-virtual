@@ -1,9 +1,9 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Ex alumnos
-            </h2>
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / Ex alumnos
+            </span>
         </template>
 
         <transition name="fade">

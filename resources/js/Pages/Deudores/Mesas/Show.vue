@@ -1,24 +1,16 @@
 <template>
     <app-layout>
         <template #header>
-            <div class="flex">
-                <div class="w-full">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
-                        > 
-                        <inertia-link :href="route('divisiones.show', [institucion_id, division.id])">
-                            <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                            <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                        </inertia-link>
-                        > 
-                        <inertia-link :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link>
-                         > 
-                        <inertia-link :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">{{ asignatura.nombre }}</inertia-link>
-                         > Mesa del {{ mesa.fechaHora }}
-                    </h2>
-                </div>
-            </div>
-            
+            <span class="font-semibold text-md text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
+                    <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                    <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                </inertia-link> / 
+                <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">{{ asignatura.nombre }}</inertia-link> / 
+                Mesa {{ mesa.fechaHora }}
+            </span>
         </template>
 
         <!-- Success Message -->

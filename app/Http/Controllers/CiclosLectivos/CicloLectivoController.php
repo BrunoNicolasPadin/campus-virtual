@@ -62,9 +62,16 @@ class CicloLectivoController extends Controller
 
     public function edit($institucion_id, $id)
     {
+        $cicloLectivo = CicloLectivo::findOrFail($id);
+
         return Inertia::render('CiclosLectivos/Edit', [
             'institucion_id' => $institucion_id,
-            'cicloLectivo' => CicloLectivo::find($id),
+            'cicloLectivo' => [
+                'id' => $cicloLectivo->id,
+                'comienzo' => $this->formatoService->cambiarFormatoParaEditar($cicloLectivo->comienzo),
+                'final' => $this->formatoService->cambiarFormatoParaEditar($cicloLectivo->final),
+                'activado' => $cicloLectivo->activado,
+            ],
         ]);
     }
 

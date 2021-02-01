@@ -2,18 +2,16 @@
     <app-layout>
         <template #header>
             <div class="flex">
-                <div class="w-9/12">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        <inertia-link :href="route('divisiones.index', institucion_id)">Estructura</inertia-link>
-                        > 
-                        <inertia-link :href="route('divisiones.show', [institucion_id, division.id])">
+                <div class="w-8/12">
+                    <span class="font-semibold text-md text-gray-800 leading-tight">
+                        <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
+                        <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
                             <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
                             <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                        </inertia-link>
-                        > Evaluaciones
-                    </h2>
+                        </inertia-link> / Evaluaciones
+                    </span>
                 </div>
-                <div class="w-3/12" v-show="tipo == 'Docente' ">
+                <div class="w-4/12" v-show="tipo == 'Docente' ">
                     <primary class="float-right">
                         <template #boton-primary>
                             <inertia-link :href="route('evaluaciones.create', [institucion_id, division.id])">Agregar</inertia-link>
@@ -87,13 +85,6 @@
                                     Finalizacion
                                 </template>
                             </table-head>
-
-                            <table-head colspan="2" v-show="tipo == 'Docente' ">
-                                <template #th-titulo>
-                                    Acciones
-                                </template>
-                            </table-head>
-
                         </template>
                     </table-head-estructura>
 
@@ -136,22 +127,6 @@
                                 <table-data>
                                     <template #td>
                                         {{ evaluacion.fechaHoraFinalizacion }}
-                                    </template>
-                                </table-data>
-
-                                <table-data v-show="tipo == 'Docente' ">
-                                    <template #td>
-                                        <inertia-link :href="route('evaluaciones.edit', [institucion_id, division.id, evaluacion.id])">
-                                            <editar></editar>
-                                        </inertia-link>
-                                    </template>
-                                </table-data>
-
-                                <table-data v-show="tipo == 'Docente' ">
-                                    <template #td>
-                                        <button @click="destroy(evaluacion.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
-                                            Eliminar
-                                        </button>
                                     </template>
                                 </table-data>
                             </tr>

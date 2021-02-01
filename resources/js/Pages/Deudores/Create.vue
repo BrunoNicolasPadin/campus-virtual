@@ -1,13 +1,12 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <inertia-link :href="route('asignaturas-adeudadas.index', [institucion_id, alumno.id])">
-                    Asignaturas que debe rendir {{ alumno.user.name }}
-                </inertia-link>
-                 > 
-                Agregar asignatura que debe rendir {{ alumno.user.name }}
-            </h2>
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('asignaturas-adeudadas.index', [institucion_id, alumno.id])">
+                    Asignatura adeudadas y/o ya rendidas
+                </inertia-link> / Agregar asignaturas
+            </span>
         </template>
 
         <div class="py-12">

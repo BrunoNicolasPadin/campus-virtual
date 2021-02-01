@@ -3,9 +3,9 @@
         <template #header>
             <div class="flex">
                 <div class="w-1/2">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    <span class="font-semibold text-xl text-gray-800 leading-tight">
                         Estructura
-                    </h2>
+                    </span>
                 </div>
                 <div class="w-1/2" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                     <primary class="float-right">

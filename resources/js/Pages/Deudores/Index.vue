@@ -3,11 +3,10 @@
         <template #header>
             <div class="flex">
                 <div class="w-1/2">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        Asignaturas que debe rendir o ya rindio <inertia-link :href="route('alumnos.show', [institucion_id, alumno.id])">
-                            {{ alumno.user.name }}
-                        </inertia-link>
-                    </h2>
+                    <span class="font-semibold text-xl text-gray-800 leading-tight">
+                        <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
+                        Asignaturas adeudadas y ya aprobadas
+                    </span>
                 </div>
                 <div class="w-1/2" v-if="tipo == 'Institucion' || tipo == 'Directivo' ">
                     <primary class="float-right">

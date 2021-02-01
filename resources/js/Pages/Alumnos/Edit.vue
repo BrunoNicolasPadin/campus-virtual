@@ -1,9 +1,10 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Inscribirte a otro curso
-            </h2>
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
+                Inscribirse a otro curso
+            </span>
         </template>
 
         <div class="py-12">
@@ -114,7 +115,7 @@
             errors: Object,
             institucion_id: String,
             divisiones: Array,
-            id: String,
+            alumno: Object,
         },
 
         title: 'Editar alumno',
@@ -131,7 +132,7 @@
 
         methods: {
             submit() {
-                this.$inertia.put(this.route('alumnos.update', [this.institucion_id, this.id]), this.form)
+                this.$inertia.put(this.route('alumnos.update', [this.institucion_id, this.alumno.id]), this.form)
             },
 
             cerrarAlerta() {

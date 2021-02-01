@@ -1,11 +1,10 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="text-xl text-gray-800 leading-tight">
-                <inertia-link :href="route('instituciones.show', institucion.id)">{{ institucion.user.name }}</inertia-link>
-                 > 
-                Editar institución
-            </h2>
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('instituciones.show', institucion.id)">{{ institucion.user.name }}</inertia-link> /
+                Editar
+            </span>
         </template>
 
         <div class="py-12">
