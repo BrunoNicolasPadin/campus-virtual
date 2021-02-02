@@ -5,6 +5,7 @@ use App\Http\Controllers\Asignaturas\AsignaturaDeudorController;
 use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
 use App\Http\Controllers\Asignaturas\HorarioController;
+use App\Http\Controllers\Calendario\CalendarioController;
 use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -70,6 +71,7 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('loginNuev
 Route::get('/dashboard', [DashboardController::class, 'mostrarDashboard'])->name('dashboard');
 
 Route::get('/top-divisiones', [TopNavController::class, 'mostrarDivisiones'])->name('topNav.divisiones');
+Route::get('top-calendario', [TopNavController::class, 'mostrarCalendario'])->name('topNav.calendario');
 Route::get('/top-ciclos-lectivos', [TopNavController::class, 'mostrarCiclosLectivos'])->name('topNav.ciclos-lectivos');
 Route::get('/top-roles', [TopNavController::class, 'mostrarRoles'])->name('topNav.roles');
 Route::get('/top-institucion', [TopNavController::class, 'mostrarPerfilInstitucional'])->name('topNav.institucion');
@@ -172,4 +174,6 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::post('/filtrados', [RepetidorController::class, 'filtrarRepetidores'])->name('repetidores.filtrar');
 
     Route::resource('exalumnos', ExAlumnoController::class);
+
+    Route::get('calendario', [CalendarioController::class, 'mostrarCalendario'])->name('calendario.mostrar');
 });

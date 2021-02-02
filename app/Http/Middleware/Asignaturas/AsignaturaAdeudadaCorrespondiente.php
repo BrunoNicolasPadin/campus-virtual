@@ -23,14 +23,14 @@ class AsignaturaAdeudadaCorrespondiente
         $link = $this->ruta->obtenerRoute();
 
         if (session('tipo') == 'Alumno') {
-            if (AlumnoDeudor::where('id', session('tipo_id'))->where('asignatura_id', $link[8])->exists()) {
+            if (AlumnoDeudor::where('alumno_id', session('tipo_id'))->where('asignatura_id', $link[8])->where('aprobado', '0')->exists()) {
                 return $next($request);
             }
             abort(403, 'Usted no adeuda esta asignatura.');
         }
 
         if (session('tipo') == 'Padre') {
-            if (AlumnoDeudor::where('id', session('alumno_id'))->where('asignatura_id', $link[8])->exists()) {
+            if (AlumnoDeudor::where('alumno_id', session('alumno_id'))->where('asignatura_id', $link[8])->exists()) {
                 return $next($request);
             }
             abort(403, 'Su hijo/a no adeuda esta asignatura.');

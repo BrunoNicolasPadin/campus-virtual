@@ -55,17 +55,26 @@ class EvaluacionController extends Controller
     public function create($institucion_id, $division_id)
     {
         $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+        $asignaturas = AsignaturaDocente::where('docente_id', $docente['id'])
+            ->with('asignatura')
+            ->whereHas('asignatura', function($q) use ($division_id)
+            {
+                $q->where('division_id', $division_id);
+
+            })
+            ->get();
     
         return Inertia::render('Evaluaciones/Create', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])->with('asignatura')->get(),
+            'asignaturasDocentes' => $asignaturas
         ]);
     }
 
     public function store(StoreEvaluacion $request, $institucion_id, $division_id)
     {
         $eva = Evaluacion::create([
+            'institucion_id' => $institucion_id,
             'division_id' => $division_id,
             'asignatura_id' => $request->asignatura_id,
             'titulo' => $request->titulo,

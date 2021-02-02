@@ -10,6 +10,7 @@ class Evaluacion extends Model
 {
     protected $table = 'evaluaciones';
     protected $fillable = [
+        'institucion_id',
         'division_id',
         'asignatura_id',
         'titulo',

@@ -15,6 +15,7 @@ class CreateMesasTable extends Migration
     {
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('institucion_id')->constrained('instituciones')->onDelete('cascade');
             $table->foreignId('asignatura_id')->constrained('asignaturas')->onDelete('cascade');
             $table->dateTime('fechaHora');
             $table->text('comentario')->nullable();

@@ -8,7 +8,6 @@ use App\Http\Requests\Asignaturas\UpdateAsignatura;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Asignaturas\AsignaturaHorario;
-use App\Models\Deudores\AlumnoDeudor;
 use App\Models\Deudores\Mesa;
 use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;

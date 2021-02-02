@@ -40,6 +40,7 @@ class MesaController extends Controller
     public function store(StoreMesa $request, $institucion_id, $division_id, $asignatura_id)
     {
         Mesa::create([
+            'institucion_id' => $institucion_id,
             'asignatura_id' => $asignatura_id,
             'fechaHora' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHora),
             'comentario' => $request->comentario,

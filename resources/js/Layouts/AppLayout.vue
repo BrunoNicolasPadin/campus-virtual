@@ -43,6 +43,9 @@
                                         </template>
 
                                         <template #content>
+                                             <jet-dropdown-link :href="route('topNav.calendario')" :active="route().current('calendario.mostrar')">
+                                                Calendario
+                                            </jet-dropdown-link>
                                             <jet-dropdown-link :href="route('topNav.ciclos-lectivos')" :active="route().current('ciclos-lectivos.index')">
                                                 Ciclos lectivos
                                             </jet-dropdown-link>
@@ -176,6 +179,9 @@
                     </div>
 
                     <div class="mt-3 space-y-1">
+                        <jet-responsive-nav-link :href="route('topNav.calendario')" :active="route().current('calendario.mostrar')">
+                            Ciclos lectivos
+                        </jet-responsive-nav-link>
                         <jet-responsive-nav-link :href="route('topNav.ciclos-lectivos')" :active="route().current('ciclos-lectivos.index')">
                             Ciclos lectivos
                         </jet-responsive-nav-link>

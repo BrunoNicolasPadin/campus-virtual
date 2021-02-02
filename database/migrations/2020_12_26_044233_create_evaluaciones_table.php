@@ -15,6 +15,7 @@ class CreateEvaluacionesTable extends Migration
     {
         Schema::create('evaluaciones', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('institucion_id')->constrained('instituciones')->onDelete('cascade');
             $table->foreignId('division_id')->constrained('divisiones')->onDelete('cascade');
             $table->foreignId('asignatura_id')->constrained('asignaturas')->onDelete('cascade');
             $table->string('titulo');
