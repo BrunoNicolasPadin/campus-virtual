@@ -101,7 +101,18 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Docente' ">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Estadisticas
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <inertia-link class="hover:underline" :href="route('evaluaciones.estadisticas', [institucion_id, division.id, evaluacion.id])">
+                                Ver
+                            </inertia-link>
+                        </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Docente' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones
                         </dt>

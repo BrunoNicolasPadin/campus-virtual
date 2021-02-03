@@ -24,6 +24,7 @@ use App\Http\Controllers\Evaluaciones\EntregaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionArchivoController;
 use App\Http\Controllers\Evaluaciones\EvaluacionComentarioController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
+use App\Http\Controllers\Evaluaciones\EvaluacionEstadisticaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionRespuestaController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
@@ -137,6 +138,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         Route::resource('evaluaciones', EvaluacionController::class);
         Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
         
+            Route::get('estadisticas', [EvaluacionEstadisticaController::class, 'mostrarEstadisticas'])->name('evaluaciones.estadisticas');
             Route::resource('evaluaciones-archivos', EvaluacionArchivoController::class);
             Route::resource('entregas', EntregaController::class);
             Route::prefix('entregas/{entrega_id}')->group(function () {

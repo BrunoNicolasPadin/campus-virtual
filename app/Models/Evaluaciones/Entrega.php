@@ -24,4 +24,9 @@ class Entrega extends Model
     {
         return $this->belongsTo(Alumno::class);
     }
+
+    public function archivos()
+    {
+        return $this->hasMany(EntregaArchivo::class);
+    }
 }
