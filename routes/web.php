@@ -3,6 +3,7 @@
 use App\Http\Controllers\Asignaturas\AsignaturaController;
 use App\Http\Controllers\Asignaturas\AsignaturaDeudorController;
 use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
+use App\Http\Controllers\Asignaturas\AsignaturaEstadisticaController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
 use App\Http\Controllers\Asignaturas\HorarioController;
 use App\Http\Controllers\Calendario\CalendarioController;
@@ -126,6 +127,9 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             });
             Route::get('deudores', [AsignaturaDeudorController::class, 'mostrarDeudores'])->name('asignaturas.deudores');
             Route::post('deudores/filtrados', [AsignaturaDeudorController::class, 'filtrarDeudores'])->name('asignaturas.deudores-filtrados');
+
+            Route::get('estadisticas', [AsignaturaEstadisticaController::class, 'mostrarEstadisticas'])->name('asignaturas.estadisticas');
+            Route::get('estadisticas/{ciclo_lectivo_id}', [AsignaturaEstadisticaController::class, 'mostrarPromedios'])->name('asignaturas.mostrarPromedios');
         });
 
         Route::get('horarios', [HorarioController::class, 'mostrarHorarios'])->name('horarios.mostrar');
