@@ -1,0 +1,88 @@
+<template>
+    <app-layout>
+        <template #header>
+            <span class="font-semibold text-md text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('repetidores.index', institucion_id)">Repetidores</inertia-link> /
+                Numeros
+            </span>
+        </template>
+
+        <div class="py-6">
+            <div class="container mx-auto px-4 sm:px-8 my-2">
+                <highcharts :options="cicloChartOptions"></highcharts>
+            </div>
+
+
+            <div class="container mx-auto px-4 sm:px-8 my-2">
+                <hr class="my-6">
+                <highcharts :options="divisionChartOptions"></highcharts>
+            </div>
+        </div>
+    </app-layout>
+</template>
+
+<script>
+    import AppLayout from '@/Layouts/AppLayout'
+
+    export default {
+        components: {
+            AppLayout,
+        },
+
+        props:{ 
+            institucion_id: String,
+            ciclos: Array,
+            ciclosCategorias: Array,
+            divisiones: Array,
+            divisionCategorias: Array,
+        },
+
+        title: 'Repetidores - Estadisticas',
+
+        data() {
+            return {
+                cicloChartOptions: {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Repetidores por ciclo'
+                    },
+                    xAxis: {
+                        categories: this.ciclosCategorias
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Cantidad'
+                        }
+                    },
+                    series: [{
+                        name: 'Ciclo',
+                        data: this.ciclos
+                    }]
+                },
+
+                divisionChartOptions: {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Repetidores por division'
+                    },
+                    xAxis: {
+                        categories: this.divisionCategorias
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Cantidad'
+                        }
+                    },
+                    series: [{
+                        name: 'Division',
+                        data: this.divisiones
+                    }]
+                }
+            }
+        },
+    }
+</script>

@@ -19,7 +19,6 @@
                     </primary>
                 </div>
             </div>
-            
         </template>
 
         <div class="py-12">

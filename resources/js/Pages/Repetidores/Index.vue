@@ -1,9 +1,20 @@
 <template>
     <app-layout>
         <template #header>
-            <span class="font-semibold text-xl text-gray-800 leading-tight">
-                Repetidores
-            </span>
+            <div class="flex">
+                <div class="w-8/12">
+                    <span class="font-semibold text-md text-gray-800 leading-tight">
+                        Repetidores
+                    </span>
+                </div>
+                <div class="w-4/12">
+                    <primary class="float-right">
+                        <template #boton-primary>
+                            <inertia-link :href="route('repetidores.estadisticas', institucion_id)">Numeros</inertia-link>
+                        </template>
+                    </primary>
+                </div>
+            </div>
         </template>
 
         <transition name="fade">
@@ -219,6 +230,7 @@
     import Editar from '@/Botones/Editar.vue'
     import EstructuraForm from '@/Formulario/EstructuraForm.vue'
     import LabelForm from '@/Formulario/LabelForm.vue'
+    import Primary from '@/Botones/Primary.vue'
 
     export default {
         components: {
@@ -233,6 +245,7 @@
             Editar,
             EstructuraForm,
             LabelForm,
+            Primary,
         },
 
         props:{ 

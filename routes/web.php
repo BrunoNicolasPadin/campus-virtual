@@ -38,6 +38,7 @@ use App\Http\Controllers\Muro\MuroController;
 use App\Http\Controllers\Muro\MuroRespuestaController;
 use App\Http\Controllers\Repetidores\RepetidorController;
 use App\Http\Controllers\Repetidores\RepetidorDivisionController;
+use App\Http\Controllers\Repetidores\RepetidorEstadisticaController;
 use App\Http\Controllers\Roles\ActivarCuentaController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DirectivoController;
@@ -178,6 +179,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::resource('repetidores', RepetidorController::class);
     Route::get('repetidores/{alumno_id}/create', [RepetidorController::class, 'createRepetidor'])->name('repetidores.createRepetidor');
     Route::post('/filtrados', [RepetidorController::class, 'filtrarRepetidores'])->name('repetidores.filtrar');
+    Route::get('estadisticas', [RepetidorEstadisticaController::class, 'mostrarEstadisticas'])->name('repetidores.estadisticas');
 
     Route::resource('exalumnos', ExAlumnoController::class);
 
