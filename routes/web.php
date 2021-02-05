@@ -27,6 +27,7 @@ use App\Http\Controllers\Evaluaciones\EvaluacionComentarioController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
 use App\Http\Controllers\Evaluaciones\EvaluacionEstadisticaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionRespuestaController;
+use App\Http\Controllers\ExAlumno\ExAlumnoController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Libretas\LibretaController;
@@ -43,7 +44,6 @@ use App\Http\Controllers\Roles\ActivarCuentaController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DirectivoController;
 use App\Http\Controllers\Roles\DocenteController;
-use App\Http\Controllers\Roles\ExAlumnoController;
 use App\Http\Controllers\Roles\PadreController;
 use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\TipoCuentaController;
@@ -182,6 +182,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::get('estadisticas', [RepetidorEstadisticaController::class, 'mostrarEstadisticas'])->name('repetidores.estadisticas');
 
     Route::resource('exalumnos', ExAlumnoController::class);
+    Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.createExAlumno');
 
     Route::get('calendario', [CalendarioController::class, 'mostrarCalendario'])->name('calendario.mostrar');
 });

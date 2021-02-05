@@ -2,7 +2,8 @@
     <app-layout>
         <template #header>
             <span class="font-semibold text-xl text-gray-800 leading-tight">
-                <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / Ex alumnos
+                <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / 
+                Ex alumnos
             </span>
         </template>
 
@@ -44,7 +45,7 @@
                                 </template>
                             </table-head>
 
-                            <table-head>
+                            <table-head colspan="2">
                                 <template #th-titulo>
                                     Acciones
                                 </template>
@@ -65,7 +66,17 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ exalumno.user.name }}
+                                        <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, exalumno.alumno_id])">
+                                            {{ exalumno.alumno.user.name }}
+                                        </inertia-link>
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <inertia-link :href="route('exalumnos.edit', [institucion_id, exalumno.id])">
+                                            <editar></editar>
+                                        </inertia-link>
                                     </template>
                                 </table-data>
 
@@ -98,6 +109,7 @@
     import TableData from '@/Tabla/TableData'
     import Eliminar from '@/Botones/Eliminar'
     import Pagination from '@/Pagination/Pagination.vue'
+    import Editar from '@/Botones/Editar.vue'
 
     export default {
         components: {
@@ -109,6 +121,7 @@
             TableData,
             Eliminar,
             Pagination,
+            Editar,
         },
 
         props:{ 

@@ -39,7 +39,7 @@ class AlumnoController extends Controller
         return Inertia::render('Alumnos/Index', [
             'institucion_id' => $institucion_id,
             'alumnos' => Alumno::where('institucion_id', $institucion_id)
-                ->where('division_id', '<>', 'null')
+                ->where('exAlumno', '0')
                 ->with('user', 'padres', 'padres.user')
                 ->paginate(20)
                 ->transform(function ($alumno) {
