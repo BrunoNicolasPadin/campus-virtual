@@ -53,7 +53,6 @@ class AsignaturaEstadisticaController extends Controller
         $totalPeriodo = [];
         $cantidadPeriodo = [];
         $promedio = [];
-        $alumno = [];
 
         for ($i=0; $i < count($periodos); $i++) { 
             $totalPeriodo[$i] = 0;

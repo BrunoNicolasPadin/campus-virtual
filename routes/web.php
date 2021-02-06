@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Alumnos\AlumnoEstadisticaController;
 use App\Http\Controllers\Asignaturas\AsignaturaController;
 use App\Http\Controllers\Asignaturas\AsignaturaDeudorController;
 use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
@@ -103,8 +104,12 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::prefix('alumnos/{alumno_id}')->group(function () {
             
         Route::resource('libretas', LibretaController::class);
+
         Route::resource('asignaturas-adeudadas', AlumnoDeudorController::class);
         Route::get('asignaturas-adeudadas/{division_id}/create', [AlumnoDeudorController::class, 'createAsignatura'])->name('asignaturas-adeudadas.createAsignatura');
+
+        Route::get('estadisticas', [AlumnoEstadisticaController::class, 'mostrarCiclosLectivos'])->name('alumnos.mostrarCiclosLectivos');
+        Route::get('estadisticas/{ciclo_lectivo_id}', [AlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('alumnos.mostrarEstadisticas');
     });
 
     Route::resource('divisiones', EstructuraController::class);
