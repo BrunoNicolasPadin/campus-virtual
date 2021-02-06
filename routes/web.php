@@ -27,7 +27,8 @@ use App\Http\Controllers\Evaluaciones\EvaluacionComentarioController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
 use App\Http\Controllers\Evaluaciones\EvaluacionEstadisticaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionRespuestaController;
-use App\Http\Controllers\ExAlumno\ExAlumnoController;
+use App\Http\Controllers\ExAlumnos\ExAlumnoController;
+use App\Http\Controllers\ExAlumnos\ExAlumnoEstadisticaController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Libretas\LibretaController;
@@ -183,6 +184,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
 
     Route::resource('exalumnos', ExAlumnoController::class);
     Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.createExAlumno');
+    Route::get('estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
 
     Route::get('calendario', [CalendarioController::class, 'mostrarCalendario'])->name('calendario.mostrar');
 });

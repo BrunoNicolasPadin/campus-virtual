@@ -2,6 +2,8 @@
 
 namespace App\Models\Roles;
 
+use App\Models\CiclosLectivos\CicloLectivo;
+use App\Models\Estructuras\Division;
 use App\Models\Instituciones\Institucion;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +27,15 @@ class ExAlumno extends Model
     public function alumno()
     {
         return $this->belongsTo(Alumno::class);
+    }
+
+    public function ciclo_lectivo()
+    {
+        return $this->belongsTo(CicloLectivo::class);
+    }
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
     }
 }

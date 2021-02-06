@@ -7,7 +7,6 @@ use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
 use App\Models\Repetidores\Repetidor;
 use App\Services\FechaHora\CambiarFormatoFecha;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class RepetidorEstadisticaController extends Controller
@@ -71,6 +70,5 @@ class RepetidorEstadisticaController extends Controller
             'divisiones' => $divArray,
             'divisionCategorias' => $divisionCategorias,
         ]);
-        
     }
 }

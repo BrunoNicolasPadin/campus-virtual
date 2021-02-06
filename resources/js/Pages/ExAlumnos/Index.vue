@@ -1,10 +1,21 @@
 <template>
     <app-layout>
         <template #header>
-            <span class="font-semibold text-xl text-gray-800 leading-tight">
-                <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / 
-                Ex alumnos
-            </span>
+            <div class="flex">
+                <div class="w-8/12">
+                    <span class="font-semibold text-md text-gray-800 leading-tight">
+                        <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / 
+                        Ex alumnos
+                    </span>
+                </div>
+                <div class="w-4/12">
+                    <primary class="float-right">
+                        <template #boton-primary>
+                            <inertia-link :href="route('exalumnos.estadisticas', institucion_id)">Numeros</inertia-link>
+                        </template>
+                    </primary>
+                </div>
+            </div>
         </template>
 
         <transition name="fade">
@@ -110,6 +121,7 @@
     import Eliminar from '@/Botones/Eliminar'
     import Pagination from '@/Pagination/Pagination.vue'
     import Editar from '@/Botones/Editar.vue'
+    import Primary from '@/Botones/Primary.vue'
 
     export default {
         components: {
@@ -122,6 +134,7 @@
             Eliminar,
             Pagination,
             Editar,
+            Primary,
         },
 
         props:{ 
