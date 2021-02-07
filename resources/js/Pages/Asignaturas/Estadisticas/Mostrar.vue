@@ -44,9 +44,61 @@
 
             <div class="container mx-auto px-4 sm:px-8">
                 <highcharts :options="chartOptions"></highcharts>
+                <hr class="my-6">
             </div>
 
+            <estructura-tabla>
+                <template #tabla>
 
+                    <table-head-estructura>
+                        <template #th>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    #
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Nombre
+                                </template>
+                            </table-head>
+
+                            <table-head v-for="periodo in periodos" :key="periodo">
+                                <template #th-titulo>
+                                    {{ periodo }}
+                                </template>
+                            </table-head>
+                        </template>
+                    </table-head-estructura>
+
+                    <table-body>
+                        <template #tr>
+                            
+                            <tr v-for="(calificacionAlumno, index) in calificacionesAlumnos" :key="calificacionAlumno.id">
+                                <table-data>
+                                    <template #td>
+                                        {{ index + 1 }}
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        {{ calificacionAlumno.nombre }}
+                                    </template>
+                                </table-data>
+
+                                <table-data v-for="calificacion in calificacionAlumno.calificaciones" :key="calificacion.id">
+                                    <template #td>
+                                        {{ calificacion }}
+                                    </template>
+                                </table-data>
+                            </tr>
+                        </template>
+                    </table-body>
+                </template>
+            </estructura-tabla>
         </div>
     </app-layout>
 </template>
@@ -55,12 +107,22 @@
     import AppLayout from '@/Layouts/AppLayout'
     import EstructuraForm from '@/Formulario/EstructuraForm.vue'
     import LabelForm from '@/Formulario/LabelForm.vue'
+    import EstructuraTabla from '@/Tabla/EstructuraTabla'
+    import TableHeadEstructura from '@/Tabla/TableHeadEstructura'
+    import TableHead from '@/Tabla/TableHead'
+    import TableBody from '@/Tabla/TableBody'
+    import TableData from '@/Tabla/TableData'
 
     export default {
         components: {
             AppLayout,
             EstructuraForm,
             LabelForm,
+            EstructuraTabla,
+            TableHeadEstructura,
+            TableHead,
+            TableBody,
+            TableData,
         },
 
         props: {
@@ -71,6 +133,7 @@
             ciclo_lectivo_id: String,
             promedios: Array,
             periodos: Array,
+            calificacionesAlumnos: Array,
         },
 
         title: 'Asignatura - Estadistica',

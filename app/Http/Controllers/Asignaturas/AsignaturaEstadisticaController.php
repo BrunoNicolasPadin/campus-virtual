@@ -53,11 +53,17 @@ class AsignaturaEstadisticaController extends Controller
         $totalPeriodo = [];
         $cantidadPeriodo = [];
         $promedio = [];
+        $a = 0;
+
+        $calificacionAlumno = [];
+        $calificacionesAlumnos = [];
 
         for ($i=0; $i < count($periodos); $i++) { 
             $totalPeriodo[$i] = 0;
             $cantidadPeriodo[$i] = 0;
             $promedio[$i] = 0;
+
+            $calificacionAlumno[$i] = 0;
         }
         $i = 0;
 
@@ -73,10 +79,19 @@ class AsignaturaEstadisticaController extends Controller
                 if (!($libreCali->calificacion === null)) {
                     $totalPeriodo[$i] = $totalPeriodo[$i] + $libreCali->calificacion;
                     $cantidadPeriodo[$i]++;
+
+                    $calificacionAlumno[$i] = $libreCali->calificacion;
                 }
                 $i++;
             }
             $i = 0;
+
+            $calificacionesAlumnos[$a] = [
+                'nombre' => $libreta->alumno->user->name,
+                'calificaciones' => $calificacionAlumno,
+            ];
+
+            $a++;
         }
 
         for ($i=0; $i < count($cantidadPeriodo); $i++) { 
@@ -101,6 +116,7 @@ class AsignaturaEstadisticaController extends Controller
             'ciclo_lectivo_id' => $ciclo_lectivo_id,
             'promedios' => $promedio,
             'periodos' => $periodos,
+            'calificacionesAlumnos' => $calificacionesAlumnos,
         ]);
     }
 }
