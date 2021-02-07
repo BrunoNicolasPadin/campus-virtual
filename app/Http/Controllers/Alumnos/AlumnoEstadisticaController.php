@@ -7,7 +7,6 @@ use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
 use App\Services\FechaHora\CambiarFormatoFecha;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AlumnoEstadisticaController extends Controller
@@ -41,13 +40,13 @@ class AlumnoEstadisticaController extends Controller
     {
         $libreta = Libreta::where('alumno_id', $alumno_id)->where('ciclo_lectivo_id', $ciclo_lectivo_id)->first();
 
-        if ($libreta['periodo'] == 'Bimestre') {
+        if ($libreta['periodo_id'] == 1) {
             $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
         }
-        elseif ($libreta['periodo'] == 'Trimestre') {
+        elseif ($libreta['periodo_id'] == 2) {
             $periodos = ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
         }
-        elseif ($libreta['periodo'] == 'Cuatrimestre') {
+        elseif ($libreta['periodo_id'] == 3) {
             $periodos = ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
         }
 

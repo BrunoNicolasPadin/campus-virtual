@@ -51,15 +51,15 @@ class LibretaController extends Controller
     {
         $libreta = Libreta::where('alumno_id', $alumno_id)->where('ciclo_lectivo_id', $ciclo_lectivo_id)->first();
     
-        if ($libreta->periodo == 'Bimestre') {
+        if ($libreta->periodo_id == 1) {
             $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
         }
 
-        if ($libreta->periodo == 'Trimestre') {
+        if ($libreta->periodo_id == 2) {
             $periodos = ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
         }
 
-        if ($libreta->periodo == 'Cuatrimestre') {
+        if ($libreta->periodo_id == 3) {
             $periodos = ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
         }
     

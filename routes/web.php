@@ -19,6 +19,7 @@ use App\Http\Controllers\Deudores\RendirComentarioController;
 use App\Http\Controllers\Deudores\RendirCorreccionController;
 use App\Http\Controllers\Deudores\RendirEntregaController;
 use App\Http\Controllers\Estructuras\EstructuraController;
+use App\Http\Controllers\Estructuras\EstructuraEstadisticaController;
 use App\Http\Controllers\Evaluaciones\CorreccionController;
 use App\Http\Controllers\Evaluaciones\EntregaArchivoController;
 use App\Http\Controllers\Evaluaciones\EntregaComentarioController;
@@ -180,6 +181,9 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
 
         Route::get('repetidores', [RepetidorDivisionController::class, 'mostrar'])->name('repetidores-division.mostrar');
         Route::post('/filtrados', [RepetidorDivisionController::class, 'filtrarRepetidores'])->name('repetidores-division.filtrar');
+
+        Route::get('estadisticas', [EstructuraEstadisticaController::class, 'mostrarCiclosLectivos'])->name('divisiones.mostrarCiclosLectivos');
+        Route::get('estadisticas/{ciclo_lectivo_id}', [EstructuraEstadisticaController::class, 'mostrarEstadisticas'])->name('divisiones.mostrarEstadisticas');
     });
 
     Route::resource('repetidores', RepetidorController::class);

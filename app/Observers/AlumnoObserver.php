@@ -30,17 +30,14 @@ class AlumnoObserver
         $division = Division::find($alumno->division_id);
 
         if ($division->periodo_id == 1) {
-            $periodo = 'Bimestre';
             $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
         }
 
         if ($division->periodo_id == 2) {
-            $periodo = 'Trimestre';
             $periodos = ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
         }
 
         if ($division->periodo_id == 1) {
-            $periodo = 'Cuatrimestre';
             $periodos = ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
         }
 
@@ -49,8 +46,9 @@ class AlumnoObserver
             $libreta = Libreta::create([
                 'alumno_id' => $alumno->id,
                 'ciclo_lectivo_id' => $cicloLectivo->id,
+                'division_id' => $division->id,
                 'asignatura_id' => $asignatura->id,
-                'periodo' => $periodo,
+                'periodo_id' => $division->periodo_id,
             ]);
 
             for ($k=0; $k < count($periodos); $k++) { 
