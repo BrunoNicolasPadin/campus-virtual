@@ -30,7 +30,7 @@
             </transition>
 
             <div v-if="directivos">   
-                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Directivos (Activar para eliminar)</h2>
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Directivos</h2>
                 <estructura-tabla>
                     <template #tabla>
                         <table-head-estructura>
@@ -107,7 +107,7 @@
             </div>
 
             <div v-if="docentes">   
-                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Docentes (Activar para eliminar)</h2>
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Docentes</h2>
                 <estructura-tabla>
                     <template #tabla>
                         <table-head-estructura>
@@ -184,7 +184,7 @@
             </div>
 
             <div v-if="alumnos">   
-                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Alumnos (Activar para eliminar)</h2>
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Alumnos</h2>
                 <estructura-tabla>
                     <template #tabla>
                         <table-head-estructura>
@@ -261,7 +261,7 @@
             </div>
 
             <div v-if="padres">   
-                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Padres (Activar para eliminar)</h2>
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Padres</h2>
                 <estructura-tabla>
                     <template #tabla>
                         <table-head-estructura>

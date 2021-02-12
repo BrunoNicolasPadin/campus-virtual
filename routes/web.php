@@ -189,11 +189,11 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::resource('repetidores', RepetidorController::class);
     Route::get('repetidores/{alumno_id}/create', [RepetidorController::class, 'createRepetidor'])->name('repetidores.createRepetidor');
     Route::post('/filtrados', [RepetidorController::class, 'filtrarRepetidores'])->name('repetidores.filtrar');
-    Route::get('estadisticas', [RepetidorEstadisticaController::class, 'mostrarEstadisticas'])->name('repetidores.estadisticas');
+    Route::get('repetidores-estadisticas', [RepetidorEstadisticaController::class, 'mostrarEstadisticas'])->name('repetidores.estadisticas');
 
     Route::resource('exalumnos', ExAlumnoController::class);
     Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.createExAlumno');
-    Route::get('estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
+    Route::get('exalumnos-estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
 
     Route::get('calendario', [CalendarioController::class, 'mostrarCalendario'])->name('calendario.mostrar');
 });

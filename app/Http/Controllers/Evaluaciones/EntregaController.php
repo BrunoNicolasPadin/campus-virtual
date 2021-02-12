@@ -35,6 +35,7 @@ class EntregaController extends Controller
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
             'entregas' => Entrega::where('evaluacion_id', $evaluacion_id)->with(['alumno', 'alumno.user'])->paginate(20),
+            'tipo' => session('tipo'),
         ]);
     }
 

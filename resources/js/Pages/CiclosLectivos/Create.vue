@@ -7,7 +7,7 @@
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
 
             <!-- Errors Messages -->
 
@@ -44,7 +44,6 @@
                                 <date-picker
                                 required
                                 valueType="format"
-                                :lang="lang"
                                 format="DD-MM-YYYY"
                                 v-model="form.comienzo"
                                 class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3">
@@ -53,7 +52,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Formato: AAAA-MM-DD. Es obligatorio
+                                        Es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -69,14 +68,13 @@
                                 <date-picker
                                 required
                                 valueType="format"
-                                :lang="lang"
                                 format="DD-MM-YYYY"
                                 v-model="form.final"
                                 class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"></date-picker>
                                 
                                 <info>
                                     <template #info>
-                                        Formato: AAAA-MM-DD. Es obligatorio
+                                        Es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -142,6 +140,7 @@
                 form: {
                     comienzo: null,
                     final: null,
+                    activado: false,
                 },
                 mostrarErrores: true,
             }

@@ -6,7 +6,7 @@
             </span>
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
 
             <!-- Errors Messages -->
 
@@ -177,12 +177,12 @@
         data() {
             return {
                 form: {
-                    numero: null,
-                    fundacion: null,
-                    historia: null,
-                    planDeEstudio: null,
-                    claveDeAcceso: null,
-                    claveDeAcceso_confirmation: null,
+                    numero: '',
+                    fundacion: '',
+                    historia: '',
+                    planDeEstudio: '',
+                    claveDeAcceso: '',
+                    claveDeAcceso_confirmation: '',
                 },
                 mostrarErrores: true,
             }

@@ -49,7 +49,7 @@
             </div>
         </transition>
 
-        <div class="py-12">
+        <div class="py-6">
 
             <div class="container mx-auto px-4 sm:px-8 my-6">
 

@@ -20,7 +20,8 @@ class RepetidorController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('soloInstitucionesDirectivos');
+        $this->middleware('soloInstitucionesDirectivos')->except('show');
+        $this->middleware('soloInstitucionesDirectivosAlumnos')->only('show');
         $this->middleware('alumnoCorrespondiente')->only('createRepetidor');
         $this->middleware('repetidorCorrespondiente')->only('edit', 'update', 'destroy');
 
@@ -126,6 +127,7 @@ class RepetidorController extends Controller
         return Inertia::render('Repetidores/Show', [
             'institucion_id' => $institucion_id,
             'alumno' => Alumno::with('user')->find($alumno_id),
+            'tipo' => session('tipo'),
             'repeticiones' => Repetidor::where('alumno_id', $alumno_id)
                 ->with('ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
                 ->orderBy('ciclo_lectivo_id')

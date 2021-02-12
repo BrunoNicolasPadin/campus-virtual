@@ -7,7 +7,7 @@
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
 
             <!-- Errors Messages -->
 
@@ -46,7 +46,7 @@
                                 required
                                 v-model="form.ciclo_lectivo_id">
 
-                                    <option selected value="">Todos</option>
+                                    <option selected value="" disabled>-</option>
                                     <option v-for="cicloLectivo in ciclosLectivos" :key="cicloLectivo.id" :value="cicloLectivo.id">
                                         {{ cicloLectivo.comienzo }} - {{ cicloLectivo.final }}
                                     </option>

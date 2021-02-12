@@ -34,7 +34,7 @@ class EstructuraController extends Controller
                 ->orderBy('orientacion_id')
                 ->orderBy('curso_id')
                 ->orderBy('division')
-                ->paginate(20),
+                ->paginate(10),
         ]);
     }
 

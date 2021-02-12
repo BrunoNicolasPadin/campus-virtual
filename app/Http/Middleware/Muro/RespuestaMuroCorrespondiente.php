@@ -23,7 +23,7 @@ class RespuestaMuroCorrespondiente
 
         $respuesta = MuroRespuesta::find($link[10]);
 
-        if ($respuesta->muro->user_id == Auth::id()) {
+        if ($respuesta->user_id == Auth::id()) {
             return $next($request);
         }
 

@@ -24,7 +24,7 @@
             
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
 
             <!-- Success Message -->
 

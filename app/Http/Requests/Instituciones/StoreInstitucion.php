@@ -14,7 +14,7 @@ class StoreInstitucion extends FormRequest
     public function rules()
     {
         return [
-            'numero' => 'nullable',
+            'numero' => 'nullable|string',
             'fundacion' => 'nullable|string',
             'historia' => 'nullable|string',
             'claveDeAcceso' => 'required|min:8|max:32',
@@ -25,6 +25,7 @@ class StoreInstitucion extends FormRequest
     public function messages()
     {
         return [
+            'numero.string' => 'Debe ingresar solo caracteres en los numeros.',
             'fundacion.string' => 'Debe ingresar solo caracteres en la fundacion.',
             'historia.string' => 'Debe ingresar solo caracteres en la historia.',
             'claveDeAcceso.required' => 'Debe ingresar una clave de acceso.',

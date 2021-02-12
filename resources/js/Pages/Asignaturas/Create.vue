@@ -74,7 +74,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio.
+                                        No es obligatorio.
                                     </template>
                                 </info>
                             </div>

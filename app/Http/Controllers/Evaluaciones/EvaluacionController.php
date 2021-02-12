@@ -126,7 +126,14 @@ class EvaluacionController extends Controller
         return Inertia::render('Evaluaciones/Edit', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])->with('asignatura')->get(),
+            'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
+                ->with('asignatura')
+                ->whereHas('asignatura', function($q) use ($division_id)
+                {
+                    $q->where('division_id', $division_id);
+
+                })
+                ->get(),
             'evaluacion' => [
                     'id' => $evaluacion->id,
                     'asignatura_id' => $evaluacion->asignatura_id,

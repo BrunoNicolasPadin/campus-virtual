@@ -50,11 +50,18 @@ class CicloLectivoController extends Controller
 
     public function store(StoreCicloLectivo $request, $institucion_id)
     {
+        if ($request->activado == true || $request->activado == 1) {
+            CicloLectivo::where('institucion_id', $institucion_id)
+            ->update([
+                'activado' => '0',
+            ]);
+        }
+
         CicloLectivo::create([
             'institucion_id' => $institucion_id,
             'comienzo' => $this->formatoService->cambiarFormatoParaGuardar($request->comienzo),
             'final' => $this->formatoService->cambiarFormatoParaGuardar($request->final),
-            'activado' => 0,
+            'activado' => $request->activado,
         ]);
 
         return redirect(route('ciclos-lectivos.index', $institucion_id))->with(['successMessage' => 'Ciclo lectivo cargado con éxito!']);

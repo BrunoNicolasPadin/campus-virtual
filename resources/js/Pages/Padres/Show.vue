@@ -7,7 +7,7 @@
             </span>
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
             <estructura-informacion>
                 <template #cabecera-info>
                     Datos

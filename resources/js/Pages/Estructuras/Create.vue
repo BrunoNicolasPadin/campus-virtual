@@ -7,7 +7,7 @@
             </span>
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
 
             <!-- Errors Messages -->
 
@@ -187,7 +187,7 @@
                                 <div class="md:w-1/2 px-3">
                                     <label-form>
                                         <template #label-value>
-                                            Clave de acceso.
+                                            Clave de acceso
                                         </template>
                                     </label-form>
 
@@ -203,7 +203,7 @@
                                 <div class="md:w-1/2 px-3">
                                     <label-form>
                                         <template #label-value>
-                                            Repetir clave de acceso para confirmar.
+                                            Repetir clave de acceso para confirmar
                                         </template>
                                     </label-form>
 
@@ -305,6 +305,7 @@
 
             cerrarAlerta() {
                 this.mostrarErrores = false;
+                this.successMessage = false;
             },
         },
     }

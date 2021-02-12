@@ -55,7 +55,7 @@
                                 </template>
                             </table-head>
 
-                            <table-head colspan="2">
+                            <table-head colspan="2" v-show="tipo == 'Institucion' || tipo == 'Directivo'">
                                 <template #th-titulo>
                                     Acciones
                                 </template>
@@ -105,7 +105,7 @@
                                 </table-data>
 
 
-                                <table-data>
+                                <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo'">
                                     <template #td>
                                         <inertia-link :href="route('repetidores.edit', [institucion_id, repeticion.id])">
                                             <editar></editar>
@@ -113,7 +113,7 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
+                                <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo'">
                                     <template #td>
                                         <button @click="destroy(repeticion.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                             Eliminar
@@ -156,6 +156,7 @@
             institucion_id: String,
             alumno: Object,
             repeticiones: Array,
+            tipo: String,
         },
 
         title: 'Repeticiones de un alumno',

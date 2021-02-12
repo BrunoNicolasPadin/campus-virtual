@@ -6,7 +6,7 @@
             </span>
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
 
             <!-- Success Message -->
 
@@ -84,7 +84,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones
                         </dt>
@@ -120,6 +120,7 @@
         props: {
             institucion: Object,
             successMessage: String,
+            tipo: String,
         },
 
         title: 'Perfil institucional',

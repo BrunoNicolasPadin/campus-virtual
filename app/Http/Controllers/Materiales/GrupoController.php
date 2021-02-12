@@ -42,6 +42,11 @@ class GrupoController extends Controller
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
                 ->with('asignatura')
+                ->whereHas('asignatura', function($q) use ($division_id)
+                {
+                    $q->where('division_id', $division_id);
+
+                })
                 ->get(),
         ]);
     }

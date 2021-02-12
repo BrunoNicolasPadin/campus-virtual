@@ -81,11 +81,12 @@ class AlumnoController extends Controller
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
                 'division_id' => $request->division_id,
+                'exAlumno' => 0,
                 'activado' => 0,
             ]);
 
             session(['tipo' => 'Alumno']);
-            session(['alumno_id' => $alumno->id]);
+            session(['tipo_id' => $alumno->id]);
             session(['institucion_id' => $institucion_id]);
             session(['division_id' => $request->division_id]);
 

@@ -44,11 +44,11 @@ class RepetidorEstadisticaController extends Controller
         $k = 0;
         foreach ($divisiones as $division) {
             if ($division->orientacion) {
-                $divisionCategorias[$k] = $division->nivel->nombre .' - '. $division->orientacion->nombre .' - '. 
+                $divisionCategorias[$k] = $division->orientacion->nombre .' - '. 
                 $division->curso->nombre .' - '. $division->division;
             }
             else {
-                $divisionCategorias[$k] = $division->nivel->nombre .' - '. $division->curso->nombre .' - '. $division->division;
+                $divisionCategorias[$k] = $division->curso->nombre .' - '. $division->division;
             }
             $divArray[$division->id] = 0;
             $k++;
@@ -62,6 +62,8 @@ class RepetidorEstadisticaController extends Controller
 
         $ciclos = array_values($ciclos);
         $divArray = array_values($divArray);
+
+
 
         return Inertia::render('Repetidores/Estadisticas', [
             'institucion_id' => $institucion_id,

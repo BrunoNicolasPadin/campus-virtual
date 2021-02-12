@@ -61,6 +61,7 @@ class InstitucionController extends Controller
     {
         return Inertia::render('Instituciones/Show', [
             'institucion' => Institucion::with('user')->find($id),
+            'tipo'  => session('tipo'),
         ]);
     }
 

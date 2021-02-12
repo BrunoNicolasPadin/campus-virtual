@@ -38,7 +38,7 @@
             divisionCategorias: Array,
         },
 
-        title: 'Repetidores - Estadisticas',
+        title: 'Abandonos - Estadisticas',
 
         data() {
             return {

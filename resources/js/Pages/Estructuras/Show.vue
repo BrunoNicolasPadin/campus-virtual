@@ -26,7 +26,7 @@
             </div>
         </transition>
 
-        <div class="py-12">
+        <div class="py-6">
             <estructura-informacion>
                 <template #cabecera-info>
                     Datos
@@ -109,7 +109,7 @@
                         </dd>
                     </div>
 
-                    <div v-if="tipo == 'Institucion' || tipo == 'Directivo' " class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div v-show="tipo == 'Institucion' || tipo == 'Directivo' " class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Repetidores
                         </dt>

@@ -99,7 +99,7 @@ class AsignaturaController extends Controller
             'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'asignatura' => Asignatura::findOrFail($id),
-            'mesas' => Mesa::where('asignatura_id', $id)->with('asignatura')->orderBy('fechaHora')->paginate(20)
+            'mesas' => Mesa::where('asignatura_id', $id)->with('asignatura')->orderBy('fechaHora')->paginate(2)
                 ->transform(function ($mesa) {
                     return [
                         'id' => $mesa->id,
@@ -109,8 +109,8 @@ class AsignaturaController extends Controller
                         'comentario' => $mesa->comentario,
                     ];
                 }),
-            'grupos' => Grupo::where('asignatura_id', $id)->orderBy('created_at')->paginate(20)
-                ->transform(function ($grupo) {
+            'grupos' => Grupo::where('asignatura_id', $id)->orderBy('created_at')->get()
+                ->map(function ($grupo) {
                     return [
                         'id' => $grupo->id,
                         'asignatura_id' => $grupo->asignatura_id,

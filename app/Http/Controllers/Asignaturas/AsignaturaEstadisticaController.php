@@ -91,6 +91,11 @@ class AsignaturaEstadisticaController extends Controller
                 'calificaciones' => $calificacionAlumno,
             ];
 
+            for ($i=0; $i < count($calificacionAlumno); $i++) { 
+                $calificacionAlumno[$i] = 0;
+            }
+            $i = 0;
+
             $a++;
         }
 
@@ -98,7 +103,7 @@ class AsignaturaEstadisticaController extends Controller
             if ($cantidadPeriodo[$i] == 0) {
                 $cantidadPeriodo[$i] = 1;
             }
-            $promedio[$i] = $totalPeriodo[$i] / $cantidadPeriodo[$i];
+            $promedio[$i] = \round($totalPeriodo[$i] / $cantidadPeriodo[$i], 2, PHP_ROUND_HALF_UP);
         }
 
         return Inertia::render('Asignaturas/Estadisticas/Mostrar', [

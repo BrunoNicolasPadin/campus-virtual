@@ -149,7 +149,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(grupo, index) in grupos.data" :key="grupo.id">
+                            <tr v-for="(grupo, index) in grupos" :key="grupo.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -168,11 +168,6 @@
                     </table-body>
                 </template>
             </estructura-tabla>
-
-            <div class="container mx-auto px-4 sm:px-8 my-6">
-                <pagination :links="grupos.links" />
-            </div>
-            
         </div>
     </app-layout>
 </template>
@@ -210,7 +205,7 @@
             division: Object,
             asignatura: Object,
             mesas: Object,
-            grupos: Object,
+            grupos: Array,
         },
 
         title: 'Perfil de la asignatura',

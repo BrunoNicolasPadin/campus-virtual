@@ -2,11 +2,11 @@
     <app-layout>
         <template #header>
             <span class="font-semibold text-xl text-gray-800 leading-tight">
-                Anotate como alumno
+                Seleccionar tu curso
             </span>
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
 
             <!-- Errors Messages -->
 

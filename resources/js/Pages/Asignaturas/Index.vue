@@ -42,7 +42,7 @@
             </div>
         </transition>
 
-        <div class="py-12">
+        <div class="py-6">
             <estructura-informacion v-for="asignatura in asignaturas" :key="asignatura.id">
                 <template #cabecera-info>
                     <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, asignatura.division_id, asignatura.id])">
@@ -140,10 +140,9 @@
                             </primary>
                         </dd>
                     </div>
-                    
+
                 </template>
             </estructura-informacion>
-            
         </div>
     </app-layout>
 </template>

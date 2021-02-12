@@ -93,7 +93,7 @@ class MesaController extends Controller
                 'fechaHora' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHora),
                 'comentario' => $request->comentario,
             ]);
-        return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
+        return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $id]))
             ->with(['successMessage' => 'Mesa editada con exito!']);
     }
 
