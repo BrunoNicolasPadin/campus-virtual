@@ -56,7 +56,7 @@
                                 v-if="archivo.visibilidad" 
                                 :href="'/storage/materiales/' + archivo.archivo" 
                                 target="_blank" 
-                                class="text-blue-500"
+                                class="text-blue-500 hover:underline"
                                 rel="noopener noreferrer">
                                     {{ archivo.nombre }}
                                 </a>

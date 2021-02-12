@@ -195,5 +195,5 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.createExAlumno');
     Route::get('exalumnos-estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
 
-    Route::get('calendario', [CalendarioController::class, 'mostrarCalendario'])->name('calendario.mostrar');
+    Route::get('calendario/{year}', [CalendarioController::class, 'mostrarCalendario'])->name('calendario.mostrar');
 });

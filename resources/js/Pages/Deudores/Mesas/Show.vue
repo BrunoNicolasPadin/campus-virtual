@@ -165,7 +165,7 @@
                                 </template>
                             </table-head>
 
-                            <table-head>
+                            <table-head v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                                 <template #th-titulo>
                                     Calificacion
                                 </template>
@@ -196,7 +196,7 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
+                                <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                                     <template #td>
                                         <span v-if="anotado.calificacion">{{ anotado.calificacion }}</span>
                                         <span v-else>Sin  calificar</span>

@@ -71,14 +71,14 @@
                                 <a 
                                 :href="'/storage/muro/' + archivo.archivo" 
                                 target="_blank" 
-                                class="text-blue-500"
+                                class="text-blue-500 hover:underline"
                                 rel="noopener noreferrer">
                                     {{ archivo.archivo }}
                                 </a>
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0" v-show="publicacion.user_id == user_id ">
+                        <div class="ml-4 flex-shrink-0" v-show="publicacion.user.id == user_id ">
                             <span 
                             @click="destroyArchivo(archivo.id)" 
                             class="font-medium text-red-600 hover:text-red-500 cursor-pointer"

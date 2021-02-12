@@ -2,6 +2,7 @@
     <app-layout>
         <template #header>
             <span class="font-semibold text-md text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('repetidores.index', institucion_id)">Repetidores</inertia-link> /
                 Numeros
             </span>

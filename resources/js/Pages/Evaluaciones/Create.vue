@@ -159,7 +159,6 @@
                                 
                                 <textarea
                                 class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
-                                required
                                 v-model="form.comentario"></textarea>
                                 
                                 <info>

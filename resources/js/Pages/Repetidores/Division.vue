@@ -177,7 +177,7 @@
             ciclosLectivos:  Array,
         },
 
-        title: 'Repetidores',
+        title: 'Division - Repetidores',
 
         data() {
             return {

@@ -8,6 +8,8 @@ use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -40,8 +42,12 @@ class CorreccionController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $fecha = date_create();
-                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+
+                $fechaHora = new DateTime(null, new DateTimeZone('America/Argentina/Buenos_Aires'));
+                $fechaHora->setTimestamp($fechaHora->getTimestamp());
+                $fechaHora = $fechaHora->format('d-m-Y H:i:s');
+
+                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Evaluaciones/Correcciones', $nombre);
 
                 Correccion::create([

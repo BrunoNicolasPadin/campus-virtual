@@ -132,7 +132,7 @@ class AlumnoController extends Controller
         return back()->withErrors('Clave de acceso incorrecta.');
     }
 
-    public function destroy($id)
+    public function destroy($institucion_id, $id)
     {
         Alumno::destroy($id);
 

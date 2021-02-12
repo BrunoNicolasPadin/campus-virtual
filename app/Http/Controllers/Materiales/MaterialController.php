@@ -83,27 +83,6 @@ class MaterialController extends Controller
 
     public function update(UpdateEvaluacionArchivo $request, $institucion_id, $division_id, $grupo_id, $id)
     {
-        if ($request->hasFile('archivo')) {
-            $archivo = $request->file('archivo');
-
-            $fecha = date_create();
-            $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
-            $archivo->storeAs('public/Materiales', $nombre);
-
-            $material = Material::findOrFail($id);
-            Storage::delete('public/Materiales/' . $material->archivo);
-
-            Material::where('id', $id)
-                ->update([
-                    'nombre' => $request->nombre,
-                    'archivo' => $nombre,
-                    'visibilidad'  => $request->visibilidad,
-                ]);
-
-            return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
-                ->with(['successMessage' => 'Archivos actualizados con exito!']);
-        }
-
         Material::where('id', $id)
             ->update([
             'nombre' => $request->nombre,
@@ -111,7 +90,7 @@ class MaterialController extends Controller
         ]);
 
         return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
-            ->with(['successMessage' => 'Nombre y/o visibilidad del archivo actualizadas con exito!']);
+            ->with(['successMessage' => 'Archivo actualizado con exito!']);
     }
 
     public function destroy($institucion_id, $division_id, $grupo_id, $id)

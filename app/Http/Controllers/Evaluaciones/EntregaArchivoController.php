@@ -42,8 +42,11 @@ class EntregaArchivoController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $fecha = date_create();
-                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $fechaHora = new DateTime(null, new DateTimeZone('America/Argentina/Buenos_Aires'));
+                $fechaHora->setTimestamp($fechaHora->getTimestamp());
+                $fechaHora = $fechaHora->format('d-m-Y H:i:s');
+
+                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Evaluaciones/Entregas', $nombre);
 
                 EntregaArchivo::create([

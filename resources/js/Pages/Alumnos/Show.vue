@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template #header>
-            <span class="font-semibold text-xl text-gray-800 leading-tight">
+            <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('alumnos.index', institucion_id)">Alumnos</inertia-link> /
                 {{ alumno.user.name }}
@@ -43,7 +43,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div v-if="alumno.exAlumno == 0" class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Division
                         </dt>
@@ -71,8 +71,12 @@
                             Acciones
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <inertia-link class="hover:underline" :href="route('alumnos.edit', [institucion_id, alumno.id])">
+                            <inertia-link v-if="alumno.exAlumno == 0" class="hover:underline" :href="route('alumnos.edit', [institucion_id, alumno.id])">
                                 Cambiar de curso
+                            </inertia-link>
+
+                            <inertia-link v-else class="hover:underline" :href="route('alumnos.edit', [institucion_id, alumno.id])">
+                                Volver a anotarse
                             </inertia-link>
                         </dd>
                     </div>
@@ -119,7 +123,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion'||tipo == 'Directivo' ">
+                    <div v-if="alumno.exAlumno == 0" class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion'||tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Repetir curso
                         </dt>
@@ -137,11 +141,13 @@
                             Ex alumno
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <primary>
+                            <primary v-if="alumno.exAlumno == 0">
                                 <template #boton-primary>
                                     <inertia-link :href="route('exalumnos.createExAlumno', [institucion_id, alumno.id])">Procesar</inertia-link>
                                 </template>
                             </primary>
+
+                            <span v-else>Ya lo es</span>
                         </dd>
                     </div>
 

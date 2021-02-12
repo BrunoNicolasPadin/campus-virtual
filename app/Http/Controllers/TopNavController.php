@@ -21,7 +21,10 @@ class TopNavController extends Controller
         if (session()->has('institucion_id')) {
             $institucion_id = session('institucion_id');
         }
-        return redirect(route('calendario.mostrar', $institucion_id));
+
+        $year = 2021;
+
+        return redirect(route('calendario.mostrar', [$institucion_id, $year]));
     }
 
     public function mostrarCiclosLectivos()

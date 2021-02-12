@@ -9,6 +9,12 @@ use Inertia\Inertia;
 
 class BuscadorDeInstitucionesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('prohibidoInstituciones');
+    }
+
     public function buscar(Request $request)
     {
         return Inertia::render('Instituciones/Buscador', [

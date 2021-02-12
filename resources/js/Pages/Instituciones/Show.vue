@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template #header>
-            <span class="font-semibold text-xl text-gray-800 leading-tight">
+            <span class="font-semibold text-md text-gray-800 leading-tight">
                 Perfil
             </span>
         </template>
@@ -77,7 +77,7 @@
                             <a 
                             :href="'/storage/planesDeEstudio/' + institucion.planDeEstudio" 
                             target="_blank" 
-                            class="text-blue-500 hover:cursor-pointer"
+                            class="text-blue-500 hover:underline cursor-pointer"
                             rel="noopener noreferrer">
                                 Ver
                             </a>

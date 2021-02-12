@@ -25,8 +25,10 @@ class AlumnoObserver
 
     public function cargarLibreta($alumno)
     {
-        $asignaturas = Asignatura::where('division_id', $alumno->division_id)->get();
         $cicloLectivo = CicloLectivo::where('institucion_id', $alumno->institucion_id)->where('activado', '1')->first();
+        $this->eliminarLibretas($cicloLectivo->id, $alumno->id);
+
+        $asignaturas = Asignatura::where('division_id', $alumno->division_id)->get();
         $division = Division::find($alumno->division_id);
 
         if ($division->periodo_id == 1) {
@@ -57,6 +59,15 @@ class AlumnoObserver
                     'periodo' => $periodos[$k],
                 ]);
             }
+        }
+    }
+
+    public function eliminarLibretas($ciclo_lectivo_id, $alumno_id)
+    {
+        $libretas = Libreta::where('alumno_id', $alumno_id)->where('ciclo_lectivo_id', $ciclo_lectivo_id)->get();
+        
+        foreach ($libretas as $libreta) {
+            Libreta::destroy($libreta->id);
         }
     }
 

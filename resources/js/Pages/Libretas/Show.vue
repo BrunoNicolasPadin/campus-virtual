@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template #header>
-            <span class="font-semibold text-xl text-gray-800 leading-tight">
+            <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
                 Libreta
             </span>
@@ -48,6 +48,7 @@
                                 required
                                 v-model="form.ciclo_lectivo_id">
 
+                                    <option selected disabled value="">-</option>
                                     <option v-for="cicloLectivo in ciclosLectivos" :key="cicloLectivo.id" :value="cicloLectivo.id">
                                         {{ cicloLectivo.comienzo }} - {{ cicloLectivo.final }}
                                     </option>
@@ -59,6 +60,14 @@
                 </template>
             </estructura-form>
                     
+            <div class="container mx-auto px-4 sm:px-8">
+                <h2 class="text-2xl font-semibold leading-tight">
+                    <span v-if="libreta.division.orientacion">{{ libreta.division.nivel.nombre }} - {{ libreta.division.orientacion.nombre }} - 
+                        {{ libreta.division.curso.nombre }} - {{ libreta.division.division }}</span>
+
+                    <span v-else>{{ libreta.division.nivel.nombre }} - {{ libreta.division.curso.nombre }} - {{ libreta.division.division }}</span>
+                </h2>
+            </div>
 
             <estructura-tabla>
                 <template #tabla>
@@ -212,6 +221,7 @@
             ciclo_lectivo_id: String,
             libretas: Array,
             deudas: Array,
+            libreta: Object,
         },
 
         title: 'Ver libreta',

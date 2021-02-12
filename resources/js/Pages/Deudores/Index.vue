@@ -3,7 +3,7 @@
         <template #header>
             <div class="flex">
                 <div class="w-1/2">
-                    <span class="font-semibold text-xl text-gray-800 leading-tight">
+                    <span class="font-semibold text-md text-gray-800 leading-tight">
                         <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
                         Asignaturas adeudadas y ya aprobadas
                     </span>

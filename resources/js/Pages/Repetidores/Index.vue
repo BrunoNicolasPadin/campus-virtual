@@ -4,7 +4,7 @@
             <div class="flex">
                 <div class="w-8/12">
                     <span class="font-semibold text-md text-gray-800 leading-tight">
-                        Repetidores
+                        <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / Repetidores
                     </span>
                 </div>
                 <div class="w-4/12">

@@ -15,6 +15,7 @@ class AlumnoDivisionController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
+        $this->middleware('soloInstitucionesDirectivos')->only('sacarloDeLaDivision');
         $this->middleware('alumnoDivisionCorrespondiente')->only('sacarloDeLaDivision');
     }
 

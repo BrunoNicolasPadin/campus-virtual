@@ -71,27 +71,6 @@ class EvaluacionArchivoController extends Controller
 
     public function update(UpdateEvaluacionArchivo $request, $institucion_id, $division_id, $evaluacion_id, $id)
     {
-        if ($request->hasFile('archivo')) {
-            $archivo = $request->file('archivo');
-
-            $fecha = date_create();
-            $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
-            $archivo->storeAs('public/Evaluaciones/Archivos', $nombre);
-
-            $evaluacionArchivo = Archivo::findOrFail($id);
-            Storage::delete('public/Evaluaciones/Archivos/' . $evaluacionArchivo->archivo);
-
-            Archivo::where('id', $id)
-                ->update([
-                    'nombre' => $request->nombre,
-                    'archivo' => $nombre,
-                    'visibilidad'  => $request->visibilidad,
-                ]);
-
-            return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
-                ->with(['successMessage' => 'Archivos actualizados con exito!']);
-        }
-
         Archivo::where('id', $id)
             ->update([
             'nombre' => $request->nombre,
@@ -99,7 +78,7 @@ class EvaluacionArchivoController extends Controller
         ]);
 
         return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
-            ->with(['successMessage' => 'Nombre y/o visibilidad del archivo actualizadas con exito!']);
+            ->with(['successMessage' => 'Archivo actualizado con exito!']);
     }
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)

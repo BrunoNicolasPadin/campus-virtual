@@ -82,8 +82,12 @@ class LibretaController extends Controller
                 }),
             'libretas' => Libreta::where('alumno_id', $alumno_id)
                 ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-                ->with(['asignatura', 'calificaciones'])
+                ->with(['asignatura', 'calificaciones', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
                 ->get(),
+            'libreta' => Libreta::where('alumno_id', $alumno_id)
+                ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
+                ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso'])
+                ->first(),
             'deudas' => AlumnoDeudor::where('alumno_id', $alumno_id)
                 ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
                 ->with('asignatura')

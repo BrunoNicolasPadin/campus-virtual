@@ -68,7 +68,7 @@ class InstitucionController extends Controller
     public function edit($id)
     {
         return Inertia::render('Instituciones/Edit', [
-            'institucion' => Institucion::with('user')->find($id),
+            'institucion' => Institucion::with('user')->findOrFail($id),
         ]);
     }
 
@@ -81,26 +81,26 @@ class InstitucionController extends Controller
             if($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAccesoActual, $id)) {
                 $institucion->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
             }
-            return back()->withErrors('La clave de acceso que ingresaste en el campo "clave de acceso actual" es incorrecta.');
+            else {
+                return back()->withErrors('La clave de acceso que ingresaste en el campo "clave de acceso actual" es incorrecta.');
+            }
         }
 
         if ($request->hasFile('archivo')) {
+
+            Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
+
             $archivo = $request->file('archivo');
             $fecha = date_create();
             $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
             $archivo->storeAs('public/PlanesDeEstudio', $nombre);
 
-            $institucion = Institucion::findOrFail($id);
-            Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
-
             $institucion->planDeEstudio = $nombre;
-
-            return redirect(route('instituciones.show', $id))->with(['successMessage' => 'Institución actualizada con éxito!']);
         }
 
-        $institucion->numero = $request->numero;
-        $institucion->fundacion = $request->fundacion;
-        $institucion->historia = $request->historia;
+        $institucion->numero = $this->verificarNull($request->numero);
+        $institucion->fundacion = $this->verificarNull($request->fundacion);
+        $institucion->historia = $this->verificarNull($request->historia);
         $institucion->save();
 
         return redirect(route('instituciones.show', $id))->with(['successMessage' => 'Institución actualizada con éxito!']);
@@ -113,5 +113,13 @@ class InstitucionController extends Controller
 
         Institucion::destroy($id);
         return redirect(route('instituciones.create'));
+    }
+
+    public function verificarNull($campo)
+    {
+        if ($campo == 'null') {
+            return null;
+        }
+        return $campo;
     }
 }

@@ -22,7 +22,7 @@ class CreateEvaluacionesTable extends Migration
             $table->string('tipo');
             $table->dateTime('fechaHoraRealizacion');
             $table->dateTime('fechaHoraFinalizacion');
-            $table->text('comentario');
+            $table->text('comentario')->nullable();
             $table->timestamps();
         });
     }

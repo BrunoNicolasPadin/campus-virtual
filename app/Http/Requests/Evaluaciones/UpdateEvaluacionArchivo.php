@@ -16,7 +16,6 @@ class UpdateEvaluacionArchivo extends FormRequest
         return [
             'nombre' => 'required|string',
             'visibilidad' => 'required',
-            'archivo' => 'nullable',
         ];
     }
 

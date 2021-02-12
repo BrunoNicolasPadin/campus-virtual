@@ -10,6 +10,7 @@ use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
 use App\Models\Roles\Docente;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class GrupoController extends Controller
@@ -99,6 +100,11 @@ class GrupoController extends Controller
 
     public function destroy($institucion_id, $division_id, $id)
     {
+        $materiales = Material::where('grupo_id', $id)->get();
+        foreach ($materiales as $material) {
+            Storage::delete('public/Materiales/' . $material->archivo);
+        }
+
         Grupo::destroy($id);
         return redirect(route('materiales.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Eliminado con exito!']);
     }

@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template #header>
-            <span class="font-semibold text-xl text-gray-800 leading-tight">
+            <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
                     <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
@@ -80,25 +80,6 @@
                                 </info>
                             </div>
                         </div>
-
-                        <div class="-mx-3 md:flex mb-6">
-                            <div class="md:w-full px-3 mb-6 md:mb-0">
-                                <label-form>
-                                    <template #label-value>
-                                        Archivo
-                                    </template>
-                                </label-form>
-                                
-                                <file-input v-model="form.archivo" type="file" />
-                                
-                                <info>
-                                    <template #info>
-                                        Es obligatorio. Solo puede subir de a uno.
-                                    </template>
-                                </info>
-                            </div>
-                        </div>
-
                         <guardar></guardar>
 
                     </form>
@@ -144,7 +125,6 @@
                 form: {
                     nombre: this.archivo.nombre,
                     visibilidad: this.archivo.visibilidad,
-                    archivo: null,
                 },
                 mostrarErrores: true,
             }
@@ -152,13 +132,7 @@
 
         methods: {
             submit() {
-                var data = new FormData();
-                data.append('nombre', this.form.nombre);
-                data.append('visibilidad', this.form.visibilidad);
-                data.append('archivo', this.form.archivo);
-                data.append('_method', 'put');
-
-                this.$inertia.post(this.route('evaluaciones-archivos.update', [this.institucion_id, this.division.id, this.evaluacion.id, this.archivo.id]), data)
+                this.$inertia.put(this.route('evaluaciones-archivos.update', [this.institucion_id, this.division.id, this.evaluacion.id, this.archivo.id]), this.form)
             },
 
             cerrarAlerta() {

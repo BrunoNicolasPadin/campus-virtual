@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-md text-gray-800 leading-tight">
                 Hacer repetir a {{ alumno.user.name }}
             </h2>
         </template>

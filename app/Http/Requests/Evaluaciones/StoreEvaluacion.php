@@ -19,7 +19,7 @@ class StoreEvaluacion extends FormRequest
             'tipo' => 'required|string',
             'fechaHoraRealizacion' => 'required|date_format:d-m-Y H:i:s',
             'fechaHoraFinalizacion' => 'required|date_format:d-m-Y H:i:s',
-            'comentario' => 'required|string',
+            'comentario' => 'nullable|string',
         ];
     }
 
@@ -33,7 +33,7 @@ class StoreEvaluacion extends FormRequest
             'fechaHoraFinalizacion.required' => 'Debe ingresar una fecha y hora de finalizacion.',
             'fechaHoraRealizacion.date_format' => 'El formato de la fecha y hora de realizacion debe ser: "DD-MM-AAAA HH:MM:SS".',
             'fechaHoraFinalizacion.date_format' => 'El formato de la fecha y hora de finalizacion debe ser: "DD-MM-AAAA HH:MM:SS".',
-            'comentario.required' => 'Debe ingresar un comentario.',
+            'comentario.string' => 'Debe ingresar una cadena de caracteres alfanumericos.',
         ];
     }
 }

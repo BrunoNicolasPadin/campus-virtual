@@ -29,16 +29,17 @@ class CalendarioController extends Controller
         $this->formatoService = $formatoService;
         $this->formatoFechaService = $formatoFechaService;
     }
-    public function mostrarCalendario($institucion_id, $year = 2021)
+    public function mostrarCalendario($institucion_id, $year)
     {
+        $anios = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            return $this->mostrarParaInstitucionesDirectivos($institucion_id, $year);
+            return $this->mostrarParaInstitucionesDirectivos($institucion_id, $year, $anios);
         }
         if (session('tipo') == 'Docente') {
-            return $this->mostrarParaDocentes($institucion_id, $year);
+            return $this->mostrarParaDocentes($institucion_id, $year, $anios);
         }
         if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
-            return $this->mostrarParaAlumnosPadres($institucion_id, $year);
+            return $this->mostrarParaAlumnosPadres($institucion_id, $year, $anios);
         }
     }
 
@@ -89,7 +90,7 @@ class CalendarioController extends Controller
         return $evasMesas;
     }
 
-    public function mostrarParaInstitucionesDirectivos($institucion_id, $year)
+    public function mostrarParaInstitucionesDirectivos($institucion_id, $year, $anios)
     {
         $evaluaciones = Evaluacion::where('institucion_id', $institucion_id)
             ->whereYear('fechaHoraRealizacion', $year)
@@ -137,13 +138,15 @@ class CalendarioController extends Controller
 
         $evasMesas = $this->ordenarEvasMesas($evasMesas);
 
-        return Inertia::render('Calendario/Institucion', [
+        return Inertia::render('Calendario/Mostrar', [
+            'institucion_id' => $institucion_id,
             'meses' => $this->obtenerMeses(),
             'evasMesas' => $evasMesas,
+            'anios' => $anios,
         ]);
     }
 
-    public function mostrarParaDocentes($institucion_id, $year)
+    public function mostrarParaDocentes($institucion_id, $year, $anios)
     {
         $asignaturasDocentes = AsignaturaDocente::where('docente_id', session('tipo_id'))->get();
         $evas = collect();
@@ -205,13 +208,15 @@ class CalendarioController extends Controller
 
         $evasMesas = $this->ordenarEvasMesas($evasMesas);
 
-        return Inertia::render('Calendario/Institucion', [
+        return Inertia::render('Calendario/Mostrar', [
+            'institucion_id' => $institucion_id,
             'meses' => $this->obtenerMeses(),
             'evasMesas' => $evasMesas,
+            'anios' => $anios,
         ]);
     }
 
-    public function mostrarParaAlumnosPadres($institucion_id, $year)
+    public function mostrarParaAlumnosPadres($institucion_id, $year, $anios)
     {
         $evaluaciones = Evaluacion::where('division_id', session('division_id'))
             ->whereYear('fechaHoraRealizacion', $year)
@@ -260,9 +265,11 @@ class CalendarioController extends Controller
 
         $evasMesas = $this->ordenarEvasMesas($evasMesas);
 
-        return Inertia::render('Calendario/Institucion', [
+        return Inertia::render('Calendario/Mostrar', [
+            'institucion_id' => $institucion_id,
             'meses' => $this->obtenerMeses(),
             'evasMesas' => $evasMesas,
+            'anios' => $anios,
         ]);
     }
 }

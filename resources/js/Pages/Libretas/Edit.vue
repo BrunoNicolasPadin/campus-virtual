@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template #header>
-            <span class="font-semibold text-xl text-gray-800 leading-tight">
+            <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('libretas.show', [institucion_id, alumno.id, libretas.ciclo_lectivo_id])">Libreta</inertia-link> / 
                 Editar notas de {{ libretas.asignatura.nombre }}
@@ -45,7 +45,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio.
+                                        Puede dejarlo vacio.
                                     </template>
                                 </info>
                             </div>
