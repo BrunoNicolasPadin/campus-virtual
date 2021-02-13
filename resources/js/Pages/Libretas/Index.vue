@@ -7,27 +7,27 @@
             </span>
         </template>
 
-        <div class="py-6">
+        <!-- Success Message -->
 
-            <!-- Success Message -->
+        <transition name="fade">
+            <div v-if="successMessage" class="bg-green-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center container mx-auto w-full">
+                <div class="w-1/12">
+                    <svg viewBox="0 0 24 24" class="text-green-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
+                        <path fill="currentColor" d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
 
-            <transition name="fade">
-                <div v-if="successMessage" class="bg-green-200 px-6 py-4 mx-2 my-4 rounded-md text-lg flex items-center container mx-auto w-full">
-                    <div class="w-1/12">
-                        <svg viewBox="0 0 24 24" class="text-green-600 w-5 h-5 sm:w-5 sm:h-5 mr-3">
-                            <path fill="currentColor" d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
-
-                            </path>
-                        </svg>
-                    </div>
-                    <div class="w-9/12">
-                        <span class="text-green-800 float-left">{{ successMessage }} </span>
-                    </div>
-                    <div class="w-2/12">
-                        <span class="text-black font-bold float-right text-2xl cursor-pointer" @click="cerrarAlerta()">&times;</span> 
-                    </div>
+                        </path>
+                    </svg>
                 </div>
-            </transition>
+                <div class="w-9/12">
+                    <span class="text-green-800 float-left">{{ successMessage }} </span>
+                </div>
+                <div class="w-2/12">
+                    <span class="text-black font-bold float-right text-2xl cursor-pointer" @click="cerrarAlerta()">&times;</span> 
+                </div>
+            </div>
+        </transition>
+
+        <div class="py-6">
 
             <estructura-form>
                 <template #formulario>
@@ -48,7 +48,7 @@
                                 required
                                 v-model="form.ciclo_lectivo_id">
 
-                                    <option disabled selected value="">-</option>
+                                    <option selected disabled value="">-</option>
                                     <option v-for="cicloLectivo in ciclosLectivos" :key="cicloLectivo.id" :value="cicloLectivo.id">
                                         {{ cicloLectivo.comienzo }} - {{ cicloLectivo.final }}
                                     </option>
@@ -59,6 +59,130 @@
                     </form>
                 </template>
             </estructura-form>
+                    
+            <div v-if="libreta !== null " class="container mx-auto px-4 sm:px-8">
+                <h2 class="text-2xl font-semibold leading-tight">
+                    <span v-if="libreta.division.orientacion">{{ libreta.division.nivel.nombre }} - {{ libreta.division.orientacion.nombre }} - 
+                        {{ libreta.division.curso.nombre }} - {{ libreta.division.division }}</span>
+
+                    <span v-else>{{ libreta.division.nivel.nombre }} - {{ libreta.division.curso.nombre }} - {{ libreta.division.division }}</span>
+                </h2>
+            </div>
+
+            <estructura-tabla v-show="mostrar">
+                <template #tabla>
+
+                    <table-head-estructura>
+                        <template #th>
+                            <table-head>
+                                <template #th-titulo>
+                                    Asignatura
+                                </template>
+                            </table-head>
+
+                            <table-head v-for="periodo in periodos" :key="periodo">
+                                <template #th-titulo>
+                                    {{ periodo }}
+                                </template>
+                            </table-head>
+
+                            <table-head v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
+                                <template #th-titulo>
+                                    Acciones
+                                </template>
+                            </table-head>
+
+                        </template>
+                    </table-head-estructura>
+
+                    <table-body>
+                        <template #tr>
+                            <tr v-for="libreta in libretas" :key="libreta.id">
+                                <table-data>
+                                    <template #td>
+                                        {{ libreta.asignatura.nombre }}
+                                    </template>
+                                </table-data>
+
+                                <table-data v-for="calificacion in libreta.calificaciones" :key="calificacion.id">
+                                    <template #td>
+                                        {{ calificacion.calificacion }}
+                                    </template>
+                                </table-data>
+
+                                <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
+                                    <template #td>
+                                        <inertia-link class="hover:underline" :href="route('libretas.edit', [institucion_id, alumno.id, libreta.id])">
+                                            Calificar
+                                        </inertia-link>
+                                    </template>
+                                </table-data>
+                            </tr>
+                        </template>
+                    </table-body>
+                </template>
+            </estructura-tabla>
+
+            <div class="container mx-auto px-4 sm:px-8" v-show="mostrar">
+                <h2 class="text-2xl font-semibold leading-tight">Asignaturas adeudadas</h2>
+            </div>
+
+            <estructura-tabla v-show="mostrar">
+                <template #tabla>
+
+                    <table-head-estructura>
+                        <template #th>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    #
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Asignatura
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Aprobado
+                                </template>
+                            </table-head>
+
+                        </template>
+                    </table-head-estructura>
+
+                    <table-body>
+                        <template #tr>
+                            
+                            <tr v-for="(deuda, index) in deudas" :key="deuda.id">
+                                <table-data>
+                                    <template #td>
+                                        {{ index + 1 }}
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <inertia-link :href="route('asignaturas.show', [institucion_id, deuda.asignatura.division_id, deuda.asignatura_id])" class="hover:underline">
+                                            {{ deuda.asignatura.nombre }}
+                                        </inertia-link>
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <span v-if="deuda.aprobado">Si</span>
+                                        <span v-else>No</span>
+                                    </template>
+                                </table-data>
+                            </tr>
+                        </template>
+                    </table-body>
+                </template>
+            </estructura-tabla>
         </div>
     </app-layout>
 </template>
@@ -67,34 +191,67 @@
     import AppLayout from '@/Layouts/AppLayout'
     import EstructuraForm from '@/Formulario/EstructuraForm.vue'
     import LabelForm from '@/Formulario/LabelForm.vue'
+    import EstructuraTabla from '@/Tabla/EstructuraTabla'
+    import TableHeadEstructura from '@/Tabla/TableHeadEstructura'
+    import TableHead from '@/Tabla/TableHead'
+    import TableBody from '@/Tabla/TableBody'
+    import TableData from '@/Tabla/TableData'
+    import Eliminar from '@/Botones/Eliminar'
+    import axios from 'axios'
 
     export default {
         components: {
             AppLayout,
             EstructuraForm,
             LabelForm,
+            EstructuraTabla,
+            TableHeadEstructura,
+            TableHead,
+            TableBody,
+            TableData,
+            Eliminar,
         },
 
         props:{ 
             successMessage: String,
             institucion_id: String,
+            tipo: String,
             alumno: Object,
             ciclosLectivos: Array,
         },
 
-        title: 'Libreta',
+        title: 'Ver libreta',
 
         data() {
             return {
                 form: {
-                    ciclo_lectivo_id: null,
+                    ciclo_lectivo_id: this.ciclo_lectivo_id,
                 },
+                mostrar: false,
+                libreta: null,
+                periodos: [],
+                libretas: [],
+                deudas: [],
+                ciclo_lectivo_id: null,
             }
         },
 
         methods: {
             onChange() {
-                this.$inertia.get(this.route('libretas.show', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id]))
+                axios.get(this.route('libretas.show', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id]))
+                .then(response => {
+                    this.mostrar = true;
+                    this.libreta = response.data[0];
+                    this.periodos = response.data[1];
+                    this.libretas = response.data[2];
+                    this.deudas = response.data[3];
+                    this.ciclo_lectivo_id = response.data[4];
+                })
+                .catch(e => {
+                    // Podemos mostrar los errores en la consola
+                    console.log(e);
+                })
+                /* this.$inertia.get(this.route('libretas.show', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id])) */
             },
 
             cerrarAlerta() {

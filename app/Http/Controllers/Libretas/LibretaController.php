@@ -30,9 +30,24 @@ class LibretaController extends Controller
 
     public function index($institucion_id, $alumno_id)
     {
+        $cicloLectivo = CicloLectivo::where('institucion_id', $institucion_id)->where('activado', 1)->first();
+        $libreta = $this->obtenerLibreta($alumno_id, $cicloLectivo->id);
+
+        $periodos = [];
+        $libretas = [];
+        $deudas = [];
+
+        if (! $libreta == null) {
+            $periodos = $this->obtenerPeriodos($libreta);
+            $libretas = $this->obtenerLibretas($alumno_id, $cicloLectivo->id);
+            $deudas = $this->obtenerDeudas($alumno_id, $cicloLectivo->id);
+        }
+    
         return Inertia::render('Libretas/Index', [
             'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
             'alumno' => Alumno::with('user')->find($alumno_id),
+            'ciclo_lectivo_id' => $cicloLectivo->id,
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
                 ->orderBy('comienzo')
                 ->get()
@@ -44,55 +59,28 @@ class LibretaController extends Controller
                         'activado' => $ciclo->activado,
                     ];
                 }),
+            'periodos' => $periodos,
+            'libretas' => $libretas,
+            'libreta' => $libreta,
+            'deudas' => $deudas,
         ]);
     }
 
     public function show($institucion_id, $alumno_id, $ciclo_lectivo_id)
     {
-        $libreta = Libreta::where('alumno_id', $alumno_id)->where('ciclo_lectivo_id', $ciclo_lectivo_id)->first();
-    
-        if ($libreta->periodo_id == 1) {
-            $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
+        $libreta = $this->obtenerLibreta($alumno_id, $ciclo_lectivo_id);
+
+        $periodos = [];
+        $libretas = [];
+        $deudas = [];
+
+        if (! $libreta == null) {
+            $periodos = $this->obtenerPeriodos($libreta);
+            $libretas = $this->obtenerLibretas($alumno_id, $ciclo_lectivo_id);
+            $deudas = $this->obtenerDeudas($alumno_id, $ciclo_lectivo_id);
         }
 
-        if ($libreta->periodo_id == 2) {
-            $periodos = ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
-        }
-
-        if ($libreta->periodo_id == 3) {
-            $periodos = ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
-        }
-    
-        return Inertia::render('Libretas/Show', [
-            'institucion_id' => $institucion_id,
-            'tipo' => session('tipo'),
-            'alumno' => Alumno::with('user')->find($alumno_id),
-            'ciclo_lectivo_id' => $ciclo_lectivo_id,
-            'periodos' => $periodos,
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
-                ->orderBy('comienzo')
-                ->get()
-                ->map(function ($ciclo) {
-                    return [
-                        'id' => $ciclo->id,
-                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                        'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                        'activado' => $ciclo->activado,
-                    ];
-                }),
-            'libretas' => Libreta::where('alumno_id', $alumno_id)
-                ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-                ->with(['asignatura', 'calificaciones', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
-                ->get(),
-            'libreta' => Libreta::where('alumno_id', $alumno_id)
-                ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-                ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso'])
-                ->first(),
-            'deudas' => AlumnoDeudor::where('alumno_id', $alumno_id)
-                ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-                ->with('asignatura')
-                ->get(),
-        ]);
+        return [$libreta, $periodos, $libretas, $deudas, $ciclo_lectivo_id];
     }
 
     public function edit($institucion_id, $alumno_id, $id)
@@ -117,5 +105,44 @@ class LibretaController extends Controller
 
         return redirect(route('libretas.show', [$institucion_id, $alumno_id, $libreta->ciclo_lectivo_id]))
             ->with(['successMessage'  => 'Calificaciones actualizadas con exito!']);
+    }
+
+    public function obtenerLibreta($alumno_id, $ciclo_lectivo_id)
+    {
+        return Libreta::where('alumno_id', $alumno_id)
+            ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
+            ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso'])
+            ->first();
+    }
+
+    public function obtenerPeriodos($libreta)
+    {
+        if ($libreta->periodo_id == 1) {
+            return ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
+        }
+
+        if ($libreta->periodo_id == 2) {
+            return ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
+        }
+
+        if ($libreta->periodo_id == 3) {
+            return ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
+        }
+    }
+
+    public function obtenerDeudas($alumno_id, $ciclo_lectivo_id)
+    {
+        return AlumnoDeudor::where('alumno_id', $alumno_id)
+            ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
+            ->with('asignatura')
+            ->get();
+    }
+
+    public function obtenerLibretas($alumno_id, $ciclo_lectivo_id)
+    {
+        return Libreta::where('alumno_id', $alumno_id)
+            ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
+            ->with(['asignatura', 'calificaciones', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
+            ->get();
     }
 }
