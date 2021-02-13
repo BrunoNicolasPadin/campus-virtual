@@ -16,6 +16,12 @@ class AsignaturaEstadisticaController extends Controller
 
     public function __construct(CambiarFormatoFecha $formatoService)
     {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('soloInstitucionesDirectivosDocentes');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('asignaturaCorrespondiente');
+
         $this->formatoService = $formatoService;
     }
 

@@ -16,7 +16,13 @@ class EstructuraEstadisticaController extends Controller
 
     public function __construct(CambiarFormatoFecha $formatoService)
     {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('soloInstitucionesDirectivos');
+        $this->middleware('divisionCorrespondiente');
+
         $this->formatoService = $formatoService;
+        
     }
 
     public function mostrarCiclosLectivos($institucion_id, $division_id)
