@@ -151,6 +151,22 @@
                         </dd>
                     </div>
 
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Padre/s
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <!-- <inertia-link class="hover:underline" :href="route('repetidores.show', [institucion_id, alumno.id])">
+                                Ver
+                            </inertia-link> -->
+                            <span v-for="padre in alumno.padres" :key="padre.id">
+                                <inertia-link class="hover:underline" :href="route('padres.show', [institucion_id, padre.id])">
+                                    {{ padre.user.name }}
+                                </inertia-link> <br>
+                            </span>
+                        </dd>
+                    </div>
+
                 </template>
             </estructura-informacion>
             

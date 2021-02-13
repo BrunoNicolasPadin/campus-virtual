@@ -28,13 +28,15 @@ class DirectivoController extends Controller
     {
         return Inertia::render('Directivos/Index', [
             'institucion_id' => $institucion_id,
-            'directivos' => Directivo::where('institucion_id', $institucion_id)
-                ->with('user')
+            'directivos' => Directivo::select('directivos.id', 'users.name')
+                ->where('institucion_id', $institucion_id)
+                ->join('users', 'users.id', 'directivos.user_id')
+                ->orderBy('users.name')
                 ->paginate(20)
                 ->transform(function ($directivo) {
                     return [
                         'id' => $directivo->id,
-                        'user'  => $directivo->user->only('name'),
+                        'name'  => $directivo->name,
                     ];
                 }),
         ]);

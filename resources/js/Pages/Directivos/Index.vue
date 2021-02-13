@@ -71,7 +71,7 @@
                                 <table-data>
                                     <template #td>
                                         <inertia-link :href="route('directivos.show', [institucion_id, directivo.id])" class="hover:underline">
-                                            {{ directivo.user.name }}
+                                            {{ directivo.name }}
                                         </inertia-link>
                                     </template>
                                 </table-data>

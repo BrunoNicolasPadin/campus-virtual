@@ -38,15 +38,15 @@ class AlumnoController extends Controller
     {
         return Inertia::render('Alumnos/Index', [
             'institucion_id' => $institucion_id,
-            'alumnos' => Alumno::where('institucion_id', $institucion_id)
-                ->where('exAlumno', '0')
-                ->with('user', 'padres', 'padres.user')
+            'alumnos' => Alumno::select('alumnos.id', 'users.name')
+                ->where('institucion_id', $institucion_id)
+                ->join('users', 'users.id', 'alumnos.user_id')
+                ->orderBy('users.name')
                 ->paginate(20)
                 ->transform(function ($alumno) {
                     return [
                         'id' => $alumno->id,
-                        'user'  => $alumno->user->only('name'),
-                        'padres' => $alumno->padres,
+                        'name'  => $alumno->name,
                     ];
                 }),
         ]);
@@ -100,7 +100,7 @@ class AlumnoController extends Controller
         return Inertia::render('Alumnos/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'alumno' => Alumno::with(['user', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
+            'alumno' => Alumno::with(['user', 'division', 'division.nivel', 'division.orientacion', 'division.curso', 'padres', 'padres.user'])
                 ->find($id),
         ]);
     }

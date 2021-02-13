@@ -29,13 +29,15 @@ class DocenteController extends Controller
     {
         return Inertia::render('Docentes/Index', [
             'institucion_id' => $institucion_id,
-            'docentes' => Docente::where('institucion_id', $institucion_id)
-                ->with('user')
+            'docentes' => Docente::select('docentes.id', 'users.name')
+                ->where('institucion_id', $institucion_id)
+                ->join('users', 'users.id', 'docentes.user_id')
+                ->orderBy('users.name')
                 ->paginate(20)
                 ->transform(function ($docente) {
                     return [
                         'id' => $docente->id,
-                        'user'  => $docente->user->only('name'),
+                        'name'  => $docente->name,
                     ];
                 }),
         ]);
