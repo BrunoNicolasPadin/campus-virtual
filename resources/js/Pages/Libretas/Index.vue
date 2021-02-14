@@ -251,7 +251,6 @@
                     // Podemos mostrar los errores en la consola
                     console.log(e);
                 })
-                /* this.$inertia.get(this.route('libretas.show', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id])) */
             },
 
             cerrarAlerta() {

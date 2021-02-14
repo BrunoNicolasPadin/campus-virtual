@@ -58,6 +58,9 @@
                         }
                     },
                     series: [{
+                        dataLabels: {
+                            enabled: true
+                        },
                         name: 'Ciclo',
                         data: this.ciclos
                     }]
@@ -79,6 +82,9 @@
                         }
                     },
                     series: [{
+                        dataLabels: {
+                            enabled: true
+                        },
                         name: 'Division',
                         data: this.divisiones
                     }]

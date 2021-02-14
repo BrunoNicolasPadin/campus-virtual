@@ -34,8 +34,7 @@
 
             <estructura-form>
                 <template #formulario>
-                    <form method="post" @submit.prevent="submit">
-                        
+                    <form>
                         <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 
@@ -84,7 +83,7 @@
                 </template>
             </estructura-form>
 
-            <estructura-tabla>
+            <estructura-tabla v-show="mostrar">
                 <template #tabla>
 
                     <table-head-estructura>
@@ -205,7 +204,6 @@
             institucion_id: String,
             tipo: String,
             division: Object,
-            deudores: Object,
             asignatura: Object,
             ciclosLectivos: Array,
         },
@@ -218,6 +216,8 @@
                     ciclo_lectivo_id: null,
                     aprobado: null,
                 },
+                mostrar: false,
+                deudores: [],
             }
         },
 
@@ -233,7 +233,15 @@
             },
 
             onChange() {
-                this.$inertia.post(this.route('asignaturas.deudores-filtrados', [this.institucion_id, this.division.id, this.asignatura.id]), this.form)
+                axios.post(this.route('asignaturas.deudores-filtrados', [this.institucion_id, this.division.id, this.asignatura.id]), this.form)
+                .then(response => {
+                    this.mostrar = true;
+                    this.deudores = response.data;
+                })
+                .catch(e => {
+                    // Podemos mostrar los errores en la consola
+                    console.log(e);
+                })
             },
         }
     }

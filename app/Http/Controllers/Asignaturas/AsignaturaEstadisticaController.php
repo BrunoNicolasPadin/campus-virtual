@@ -27,7 +27,7 @@ class AsignaturaEstadisticaController extends Controller
 
     public function mostrarEstadisticas($institucion_id, $division_id, $asignatura_id)
     {
-        return Inertia::render('Asignaturas/Estadisticas/SeleccionarCiclo', [
+        return Inertia::render('Asignaturas/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'asignatura' => Asignatura::findOrFail($asignatura_id),
@@ -112,22 +112,6 @@ class AsignaturaEstadisticaController extends Controller
             $promedio[$i] = \round($totalPeriodo[$i] / $cantidadPeriodo[$i], 2, PHP_ROUND_HALF_UP);
         }
 
-        return Inertia::render('Asignaturas/Estadisticas/Mostrar', [
-            'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura' => Asignatura::findOrFail($asignatura_id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get()
-            ->map(function ($ciclo) {
-                return [
-                    'id' => $ciclo->id,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                ];
-            }),
-            'ciclo_lectivo_id' => $ciclo_lectivo_id,
-            'promedios' => $promedio,
-            'periodos' => $periodos,
-            'calificacionesAlumnos' => $calificacionesAlumnos,
-        ]);
+        return [$promedio, $periodos, $calificacionesAlumnos];
     }
 }

@@ -25,7 +25,7 @@ class AlumnoEstadisticaController extends Controller
 
     public function mostrarCiclosLectivos($institucion_id, $alumno_id)
     {
-        return Inertia::render('Alumnos/Estadisticas/Ciclos', [
+        return Inertia::render('Alumnos/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
             'alumno' => Alumno::with('user')->findOrFail($alumno_id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
@@ -91,21 +91,6 @@ class AlumnoEstadisticaController extends Controller
             $promedios[$i] = $totalPeriodo[$i] / $cantidadPeriodo[$i];
         }
 
-        return Inertia::render('Alumnos/Estadisticas/Mostrar', [
-            'institucion_id' => $institucion_id,
-            'alumno' => Alumno::with('user')->findOrFail($alumno_id),
-            'ciclo_lectivo_id' => $ciclo_lectivo_id,
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get()
-            ->map(function ($ciclo) {
-                return [
-                    'id' => $ciclo->id,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                ];
-            }),
-            'ciclo_lectivo_id' => $ciclo_lectivo_id,
-            'promedios' => $promedios,
-            'periodos' => $periodos,
-        ]);
+        return [$promedios, $periodos];
     }
 }

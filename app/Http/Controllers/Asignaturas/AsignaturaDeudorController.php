@@ -33,20 +33,6 @@ class AsignaturaDeudorController extends Controller
             'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'asignatura' => Asignatura::findOrFail($asignatura_id),
-            'deudores' => AlumnoDeudor::where('asignatura_id', $asignatura_id)
-                ->with('alumno', 'alumno.user')
-                ->orderBy('ciclo_lectivo_id')
-                ->paginate(20)
-                ->transform(function ($deuda) {
-                    return [
-                        'id' => $deuda->id,
-                        'alumno_id' => $deuda->alumno_id,
-                        'alumno' => $deuda->alumno,
-                        'comienzo' => $this->formatoFechaService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->comienzo),
-                        'final' => $this->formatoFechaService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->final),
-                        'aprobado' => $deuda->aprobado,
-                    ];
-                }),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get()
                 ->map(function ($ciclo) {
                     return [
@@ -60,42 +46,28 @@ class AsignaturaDeudorController extends Controller
 
     public function filtrarDeudores($institucion_id, $division_id, $asignatura_id, Request $filtros)
     {
-        return Inertia::render('Asignaturas/Deudores', [
-            'institucion_id' => $institucion_id,
-            'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'asignatura' => Asignatura::findOrFail($asignatura_id),
-            'deudores' => AlumnoDeudor::where('asignatura_id', $asignatura_id)
-                ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
-                    return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
-                })
-                ->when($filtros->aprobado, function ($query, $aprobado) {
-                    return $query->where('aprobado', $aprobado);
-                })
-                ->when($filtros->aprobado == '0', function ($query, $aprobado) {
-                    return $query->where('aprobado', '0');
-                })
-                ->with('alumno', 'alumno.user')
-                ->orderBy('ciclo_lectivo_id')
-                ->paginate(20)
-                ->transform(function ($deuda) {
-                    return [
-                        'id' => $deuda->id,
-                        'alumno_id' => $deuda->alumno_id,
-                        'alumno' => $deuda->alumno,
-                        'comienzo' => $this->formatoFechaService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->comienzo),
-                        'final' => $this->formatoFechaService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->final),
-                        'aprobado' => $deuda->aprobado,
-                    ];
-                }),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get()
-                ->map(function ($ciclo) {
-                    return [
-                        'id' => $ciclo->id,
-                        'comienzo' => $this->formatoFechaService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                        'final' => $this->formatoFechaService->cambiarFormatoParaMostrar($ciclo->final),
-                    ];
-                }),
-        ]);
+        return AlumnoDeudor::where('asignatura_id', $asignatura_id)
+            ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
+                return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
+            })
+            ->when($filtros->aprobado, function ($query, $aprobado) {
+                return $query->where('aprobado', $aprobado);
+            })
+            ->when($filtros->aprobado == '0', function ($query, $aprobado) {
+                return $query->where('aprobado', '0');
+            })
+            ->with('alumno', 'alumno.user')
+            ->orderBy('ciclo_lectivo_id')
+            ->paginate(20)
+            ->transform(function ($deuda) {
+                return [
+                    'id' => $deuda->id,
+                    'alumno_id' => $deuda->alumno_id,
+                    'alumno' => $deuda->alumno,
+                    'comienzo' => $this->formatoFechaService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->comienzo),
+                    'final' => $this->formatoFechaService->cambiarFormatoParaMostrar($deuda->ciclo_lectivo->final),
+                    'aprobado' => $deuda->aprobado,
+                ];
+            });
     }
 }

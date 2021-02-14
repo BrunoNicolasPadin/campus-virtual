@@ -96,7 +96,7 @@
                 </template>
             </estructura-form>
 
-            <estructura-tabla>
+            <estructura-tabla v-show="mostrar">
                 <template #tabla>
 
                     <table-head-estructura>
@@ -251,7 +251,6 @@
         props:{ 
             successMessage: String,
             institucion_id: String,
-            repetidores: Object,
             ciclosLectivos:  Array,
             divisiones: Array,
         },
@@ -264,6 +263,8 @@
                     ciclo_lectivo_id: null,
                     division_id: null,
                 },
+                mostrar: false,
+                repetidores: [],
             }
         },
 
@@ -279,7 +280,15 @@
             },
 
             onChange() {
-                this.$inertia.post(this.route('repetidores.filtrar', this.institucion_id), this.form)
+                axios.post(this.route('repetidores.filtrar', this.institucion_id), this.form)
+                .then(response => {
+                    this.mostrar = true;
+                    this.repetidores = response.data;
+                })
+                .catch(e => {
+                    // Podemos mostrar los errores en la consola
+                    console.log(e);
+                })
             },
             
         }

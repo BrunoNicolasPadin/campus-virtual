@@ -42,12 +42,12 @@
                 </template>
             </estructura-form>
 
-            <div class="container mx-auto px-4 sm:px-8">
+            <div v-show="mostrar" class="container mx-auto px-4 sm:px-8">
                 <highcharts :options="chartOptions"></highcharts>
                 <hr class="my-6">
             </div>
 
-            <estructura-tabla>
+            <estructura-tabla v-show="mostrar">
                 <template #tabla>
 
                     <table-head-estructura>
@@ -131,43 +131,56 @@
             asignatura: Object,
             ciclosLectivos: Array,
             ciclo_lectivo_id: String,
-            promedios: Array,
-            periodos: Array,
-            calificacionesAlumnos: Array,
         },
 
         title: 'Asignatura - Estadistica',
 
         data() {
             return {
+                promedios: [],
+                periodos: [],
+                calificacionesAlumnos: [],
+                mostrar: false,
                 form: {
                     ciclo_lectivo_id: this.ciclo_lectivo_id,
                 },
-                chartOptions: {
-                    xAxis: {
-                        categories: this.periodos
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Calificaciones'
-                        },
-                    },
-                    series: [{
-                        data: this.promedios,
-                        dataLabels: {
-                            enabled: true
-                        }
-                    }],
-                    title: {
-                        text: 'Promedios',
-                    },
-                }
+                chartOptions: [],
             }
         },
 
         methods: {
             onChange() {
-                this.$inertia.get(this.route('asignaturas.mostrarPromedios', [this.institucion_id, this.division.id, this.asignatura.id, this.form.ciclo_lectivo_id]))
+                axios.get(this.route('asignaturas.mostrarPromedios', [this.institucion_id, this.division.id, this.asignatura.id, this.form.ciclo_lectivo_id]))
+                .then(response => {
+                    this.mostrar = true;
+                    this.promedios = response.data[0];
+                    this.periodos = response.data[1];
+                    this.calificacionesAlumnos = response.data[2];
+
+                    this.chartOptions = {
+                        xAxis: {
+                            categories: this.periodos
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Calificaciones'
+                            }
+                        },
+                        series: [{
+                            data: this.promedios,
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }],
+                        title: {
+                            text: 'Promedios'
+                        }
+                    }
+                })
+                .catch(e => {
+                    // Podemos mostrar los errores en la consola
+                    console.log(e);
+                })
             },
         }
     }

@@ -172,7 +172,6 @@
         props:{ 
             successMessage: String,
             institucion_id: String,
-            repetidores: Object,
             division: Object,
             ciclosLectivos:  Array,
         },
@@ -184,6 +183,8 @@
                 form: {
                     ciclo_lectivo_id: null,
                 },
+                mostrar: false,
+                repetidores: [],
             }
         },
 
@@ -199,7 +200,15 @@
             },
 
             onChange() {
-                this.$inertia.post(this.route('repetidores-division.filtrar', [this.institucion_id, this.division.id]), this.form)
+                axios.post(this.route('repetidores-division.filtrar', [this.institucion_id, this.division.id]), this.form)
+                .then(response => {
+                    this.mostrar = true;
+                    this.repetidores = response.data;
+                })
+                .catch(e => {
+                    // Podemos mostrar los errores en la consola
+                    console.log(e);
+                })
             },
             
         }

@@ -38,7 +38,86 @@
 
         <div class="py-6">
 
-            <estructura-tabla>
+            <estructura-form>
+                <template #formulario>
+                    <form>
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Seleccione ciclo lectivo:
+                                    </template>
+                                </label-form>
+                                
+                                <select
+                                @change="onChange()"
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.ciclo_lectivo_id">
+
+                                    <option selected value="">Todos</option>
+                                    <option v-for="cicloLectivo in ciclosLectivos" :key="cicloLectivo.id" :value="cicloLectivo.id">
+                                        {{ cicloLectivo.comienzo }} - {{ cicloLectivo.final }}
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Seleccione division:
+                                    </template>
+                                </label-form>
+                                
+                                <select
+                                @change="onChange()"
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.division_id">
+
+                                    <option selected value="">Todas</option>
+                                    <option v-for="division in divisiones" :key="division.id" :value="division.id">
+                                        <span v-if="division.orientacion">
+                                            {{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}
+                                        </span>
+
+                                        <span v-else>
+                                            {{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}
+                                        </span>
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Seleccione condicion:
+                                    </template>
+                                </label-form>
+                                
+                                <select
+                                @change="onChange()"
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.abandono">
+
+                                    <option value="" selected>Todos</option>
+                                    <option value="0">No abandono</option>
+                                    <option value="1">Abandono</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </template>
+            </estructura-form>
+
+            <estructura-tabla v-show="mostrar">
                 <template #tabla>
 
                     <table-head-estructura>
@@ -53,6 +132,24 @@
                             <table-head>
                                 <template #th-titulo>
                                     Nombre
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Ciclo lectivo
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Division
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Abandono
                                 </template>
                             </table-head>
 
@@ -80,6 +177,37 @@
                                         <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, exalumno.alumno_id])">
                                             {{ exalumno.alumno.user.name }}
                                         </inertia-link>
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        {{ exalumno.comienzo }} - {{ exalumno.final }}
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <span v-if="exalumno.division.orientacion">
+                                            <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, exalumno.division_id])">
+                                                {{ exalumno.division.nivel.nombre }} - {{ exalumno.division.orientacion.nombre }} - 
+                                                {{ exalumno.division.curso.nombre }} - {{ exalumno.division.division }}
+                                            </inertia-link>
+                                        </span>
+
+                                        <span v-else>
+                                            <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, exalumno.division_id])">
+                                                {{ exalumno.division.nivel.nombre }} - {{ exalumno.division.orientacion.nombre }} - 
+                                                {{ exalumno.division.curso.nombre }} - {{ exalumno.division.division }}
+                                            </inertia-link>
+                                        </span>
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <span v-if="exalumno.abandono">Si</span>
+                                        <span v-else>No</span>
                                     </template>
                                 </table-data>
 
@@ -122,10 +250,14 @@
     import Pagination from '@/Pagination/Pagination.vue'
     import Editar from '@/Botones/Editar.vue'
     import Primary from '@/Botones/Primary.vue'
+    import EstructuraForm from '@/Formulario/EstructuraForm.vue'
+    import LabelForm from '@/Formulario/LabelForm.vue'
 
     export default {
         components: {
             AppLayout,
+            EstructuraForm,
+            LabelForm,
             EstructuraTabla,
             TableHeadEstructura,
             TableHead,
@@ -140,16 +272,41 @@
         props:{ 
             successMessage: String,
             institucion_id: String,
-            exalumnos: Object,
+            divisiones: Array,
+            ciclosLectivos: Array,
         },
 
         title: 'Ex alumnos',
+
+        data() {
+            return {
+                form: {
+                    ciclo_lectivo_id: null,
+                    division_id: null,
+                    abandono: null,
+                },
+                mostrar: false,
+                exalumnos: [],
+            }
+        },
 
         methods: {
             destroy(id) {
                 if (confirm('Estas seguro de que desea eliminar a este ex alumno?')) {
                     this.$inertia.delete(this.route('exalumnos.destroy', [this.institucion_id, id]))
                 }
+            },
+
+            onChange() {
+                axios.post(this.route('exalumnos.filtrar', this.institucion_id), this.form)
+                .then(response => {
+                    this.mostrar = true;
+                    this.exalumnos = response.data;
+                })
+                .catch(e => {
+                    // Podemos mostrar los errores en la consola
+                    console.log(e);
+                })
             },
             
             cerrarAlerta() {

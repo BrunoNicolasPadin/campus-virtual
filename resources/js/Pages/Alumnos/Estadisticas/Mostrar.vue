@@ -42,7 +42,7 @@
                 </template>
             </estructura-form>
 
-            <div class="container mx-auto px-4 sm:px-8">
+            <div v-show="mostrar" class="container mx-auto px-4 sm:px-8">
                 <highcharts :options="chartOptions"></highcharts>
             </div>
         </div>
@@ -53,6 +53,7 @@
     import AppLayout from '@/Layouts/AppLayout'
     import EstructuraForm from '@/Formulario/EstructuraForm.vue'
     import LabelForm from '@/Formulario/LabelForm.vue'
+    import axios from 'axios'
 
     export default {
         components: {
@@ -65,43 +66,54 @@
             institucion_id: String,
             alumno: Object,
             ciclosLectivos: Array,
-            ciclo_lectivo_id: String,
-            promedios: Array,
-            periodos: Array,
         },
 
         title: 'Alumno - Estadisticas',
 
         data() {
             return {
+                promedios: [],
+                periodos: [],
+                mostrar: false,
                 form: {
                     ciclo_lectivo_id: this.ciclo_lectivo_id,
                 },
-                chartOptions: {
-                    xAxis: {
-                        categories: this.periodos
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Calificaciones'
-                        },
-                    },
-                    series: [{
-                        data: this.promedios,
-                        dataLabels: {
-                            enabled: true
-                        }
-                    }],
-                    title: {
-                        text: 'Promedios',
-                    },
-                }
+                chartOptions: [],
             }
         },
 
         methods: {
             onChange() {
-                this.$inertia.get(this.route('alumnos.mostrarEstadisticas', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id]))
+                axios.get(this.route('alumnos.mostrarEstadisticas', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id]))
+                .then(response => {
+                    this.mostrar = true;
+                    this.promedios = response.data[0];
+                    this.periodos = response.data[1];
+
+                    this.chartOptions = {
+                        xAxis: {
+                            categories: this.periodos
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Calificaciones'
+                            }
+                        },
+                        series: [{
+                            data: this.promedios,
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }],
+                        title: {
+                            text: 'Promedios'
+                        }
+                    }
+                })
+                .catch(e => {
+                    // Podemos mostrar los errores en la consola
+                    console.log(e);
+                })
             },
         }
     }

@@ -27,7 +27,7 @@ class EstructuraEstadisticaController extends Controller
 
     public function mostrarCiclosLectivos($institucion_id, $division_id)
     {
-        return Inertia::render('Estructuras/Estadisticas/Ciclos', [
+        return Inertia::render('Estructuras/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
@@ -138,40 +138,9 @@ class EstructuraEstadisticaController extends Controller
                 $promedios[$i] = $totalPeriodo[$i] / $cantidadPeriodo[$i];
                 $promedios[$i] = \round($promedios[$i], 2, PHP_ROUND_HALF_UP);
             }
-    
-            return Inertia::render('Estructuras/Estadisticas/Mostrar', [
-                'institucion_id' => $institucion_id,
-                'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-                'ciclo_lectivo_id' => $ciclo_lectivo_id,
-                'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get()
-                ->map(function ($ciclo) {
-                    return [
-                        'id' => $ciclo->id,
-                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                        'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                    ];
-                }),
-                'ciclo_lectivo_id' => $ciclo_lectivo_id,
-                'promedios' => $promedios,
-                'periodos' => $periodos,
-                'promediosAlumnos' => $promediosAlumnos,
-                
-            ]);
-        }
 
-        return Inertia::render('Estructuras/Estadisticas/Ciclos', [
-            'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
-            ->orderBy('comienzo')
-            ->get()
-            ->map(function ($ciclo) {
-                return [
-                    'id' => $ciclo->id,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                ];
-            }),
-        ]);
+            return [$promedios, $periodos, $promediosAlumnos];
+        }
+        return [null, null, null];
     }
 }
