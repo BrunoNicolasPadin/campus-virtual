@@ -77,7 +77,9 @@
                                     Evaluaciones
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Los docentes podran crear examenes, tareas y trabajos practicos y los alumnos realizar entregas que seran corregidas y calificadas.
+                                    Los docentes podran crear examenes, tareas y trabajos practicos; los alumnos realizar entregas, 
+                                    que seran corregidas y calificadas por los docentes, subiendo la entrega corregida si asi desean. 
+                                    Tambien los alumnos tendran la posibilidad de resolver sus dudas con los docentes en los comentarios.
                                 </dd>
                             </div>
                         </div>
@@ -93,10 +95,13 @@
                             </div>
                             <div class="ml-4">
                                 <dt class="text-lg leading-6 font-bold text-indigo-600">
-                                    Libretas
+                                    Materiales
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Podra subir las notas de la libreta para cada periodo (bimestre, tri, cuatri) junto con la nota final.
+                                    Los docente podran subir archivos PDFs, WORDs, PowerPoints, imagenes, videos, etc... 
+                                    para que los alumnos puedan descargarlos y los tengan en un solo lugar. 
+                                    Los podran dejar alli para que los nuevos alumnos tambien accedan a ellos y asi evitar que el docente 
+                                    los tenga que volver a subir.
                                 </dd>
                             </div>
                         </div>
@@ -112,10 +117,11 @@
                             </div>
                             <div class="ml-4">
                                 <dt class="text-lg leading-6 font-bold text-indigo-600">
-                                    Materiales
+                                    Libretas
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Podra subir archivos PDFs, WORDs, PowerPoints, imagenes, videos, etc... para que los alumnos lo descarguen o lo vean de forma online.
+                                    Cada alumno contara con una libreta en la que los directivos subiran las notas de la libreta 
+                                    para cada periodo (bimestre, trimestre, cuatrimestre) junto con la nota final en cada materia.
                                 </dd>
                             </div>
                         </div>
@@ -134,7 +140,7 @@
                                     Padres
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Los padres podran vincular su cuenta a la de su/s hijo/s y ver lo mismo que ellos sin ningun problema.
+                                    Los padres vincularan su cuenta a la de su/s hijo/s y veran lo mismo que ellos asi no se les escapa nada.
                                 </dd>
                             </div>
                         </div>
@@ -150,10 +156,10 @@
                             </div>
                             <div class="ml-4">
                                 <dt class="text-lg leading-6 font-bold text-indigo-600">
-                                    Faltas (Proximamente)
+                                    Calendario
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Podra tomar asistencia dia a dia a sus alumnos, directivos y docentes.
+                                    Poseera un calendario con las fechas de los examenes, trabajos practicos, tareas y mesas para rendir.
                                 </dd>
                             </div>
                         </div>
@@ -169,16 +175,25 @@
                             </div>
                             <div class="ml-4">
                                 <dt class="text-lg leading-6 font-bold text-indigo-600">
-                                    Estadisticas (Proximamente)
+                                    Estadisticas
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Tendra acceso a estadisticas por ciclo lectivo dentro de cada division y separarlo por asignatura y/o alumno.
+                                    Accedera a estadisticas por ciclo lectivo dentro de cada division, asignatura y alumno por bimestre/trimestre/cuatrimestre. 
+                                    Cantidad de alumnos que repiten o abanadonan, dividido por ciclo lectivo y division.
                                 </dd>
                             </div>
                         </div>
                     </dl>
                 </div>
             </div>
+        </div>
+
+        <div class="my-2 container mx-auto px-4 sm:px-8 text-center">
+            <button type="button" class="border border-indigo-500 bg-indigo-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-700 focus:outline-none focus:shadow-outline">
+                Ver con mas detalles
+            </button>
+
+            <hr class="my-5">
         </div>
 
         <div class="py-5">
