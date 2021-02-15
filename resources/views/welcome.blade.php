@@ -190,7 +190,7 @@
 
         <div class="my-2 container mx-auto px-4 sm:px-8 text-center">
             <button type="button" class="border border-indigo-500 bg-indigo-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-700 focus:outline-none focus:shadow-outline">
-                Ver con mas detalles
+                <a href="{{ route('suscripciones.detalles') }}">Ver con mas detalle</a>
             </button>
 
             <hr class="my-5">

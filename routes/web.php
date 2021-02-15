@@ -52,6 +52,7 @@ use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\TipoCuentaController;
 use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
 use App\Http\Controllers\RolesDivision\DocenteDivisionController;
+use App\Http\Controllers\Suscripciones\SuscripcionController;
 use App\Http\Controllers\TopNavController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +74,8 @@ Route::get('/', function () {
 Route::post('/enviar-email', [ContactoController::class, 'enviarEmail'])->name('contacto.enviarEmail');
 
 Route::post('/login', [LoginController::class, 'authenticate'])->name('loginNuevo');
+
+Route::get('detalles', [SuscripcionController::class, 'mostrarDetalles'])->name('suscripciones.detalles');
 
 Route::get('/dashboard', [DashboardController::class, 'mostrarDashboard'])->name('dashboard');
 
@@ -180,7 +183,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         });
 
         Route::get('repetidores', [RepetidorDivisionController::class, 'mostrar'])->name('repetidores-division.mostrar');
-        Route::post('/filtrados', [RepetidorDivisionController::class, 'filtrarRepetidores'])->name('repetidores-division.filtrar');
+        Route::post('repetidores/filtrados', [RepetidorDivisionController::class, 'filtrarRepetidores'])->name('repetidores-division.filtrar');
 
         Route::get('estadisticas', [EstructuraEstadisticaController::class, 'mostrarCiclosLectivos'])->name('divisiones.mostrarCiclosLectivos');
         Route::get('estadisticas/{ciclo_lectivo_id}', [EstructuraEstadisticaController::class, 'mostrarEstadisticas'])->name('divisiones.mostrarEstadisticas');
@@ -188,11 +191,11 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
 
     Route::resource('repetidores', RepetidorController::class);
     Route::get('repetidores/{alumno_id}/create', [RepetidorController::class, 'createRepetidor'])->name('repetidores.createRepetidor');
-    Route::post('/filtrados', [RepetidorController::class, 'filtrarRepetidores'])->name('repetidores.filtrar');
+    Route::post('repetidores/filtrados', [RepetidorController::class, 'filtrarRepetidores'])->name('repetidores.filtrar');
     Route::get('repetidores-estadisticas', [RepetidorEstadisticaController::class, 'mostrarEstadisticas'])->name('repetidores.estadisticas');
 
     Route::resource('exalumnos', ExAlumnoController::class);
-    Route::post('/filtrados', [ExAlumnoController::class, 'filtrarExAlumnos'])->name('exalumnos.filtrar');
+    Route::post('exalumnos/filtrados', [ExAlumnoController::class, 'filtrarExAlumnos'])->name('exalumnos.filtrar');
     Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.createExAlumno');
     Route::get('exalumnos-estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
 
