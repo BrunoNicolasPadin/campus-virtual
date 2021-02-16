@@ -5,6 +5,7 @@
                 <div class="flex justify-between h-16 my-2">
                     <div class="space-x-8 sm:my-5 sm:ml-10 sm:flex">
                         <inertia-link target="_blank" :href="route('inicio')" class="text-sm text-indigo-800 font-bold hover:underline">Inicio</inertia-link>
+                        <inertia-link target="_blank" :href="route('tutoriales')" class="text-sm text-indigo-800 font-bold hover:underline">Tutoriales</inertia-link>
                     </div>
                 </div>
             </div>

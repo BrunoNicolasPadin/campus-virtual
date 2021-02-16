@@ -192,6 +192,9 @@
             <button type="button" class="border border-indigo-500 bg-indigo-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-700 focus:outline-none focus:shadow-outline">
                 <a href="{{ route('suscripciones.detalles') }}">Ver con mas detalle</a>
             </button>
+            <button type="button" class="border border-green-500 bg-green-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-green-700 focus:outline-none focus:shadow-outline">
+                <a href="{{ route('tutoriales') }}">Tutoriales</a>
+            </button>
 
             <hr class="my-5">
         </div>

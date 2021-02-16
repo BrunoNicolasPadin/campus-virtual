@@ -9,7 +9,8 @@ import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import VueSimpleAlert from "vue-simple-alert";
 import VuePageTitle from 'vue-page-title';
-import HighchartsVue from 'highcharts-vue'
+import HighchartsVue from 'highcharts-vue';
+import Embed from 'v-video-embed';
 
 Vue.use(VueSimpleAlert);
 Vue.mixin({ methods: { route } });
@@ -18,6 +19,7 @@ Vue.use(InertiaForm);
 Vue.use(PortalVue);
 Vue.use(VuePageTitle);
 Vue.use(HighchartsVue);
+Vue.use(Embed);
 
 const app = document.getElementById('app');
 

@@ -201,3 +201,10 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
 
     Route::get('calendario/{year}', [CalendarioController::class, 'mostrarCalendario'])->name('calendario.mostrar');
 });
+
+Route::inertia('/tutoriales', 'Tutoriales/Principal')->name('tutoriales');
+Route::prefix('tutoriales')->group(function () {
+
+    Route::inertia('institucion', 'Tutoriales/Institucion')->name('tutoriales.institucion');
+
+});
