@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Ciclo lectivo</template>
+                <template #titulo-tutorial>Ciclos lectivos</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#agregar">Agregar</a></li>
@@ -16,6 +16,10 @@
                             Agregar
                         </template>
 
+                        <template #informacion>
+                            Al crear un ciclo lectivo activado, hara que el resto se desactive. Antes de hacer eso verifique que haya cumplido los pasos de "Comienza de ciclo lectivo nuevo? Sigue estos pasos".
+                        </template>
+
                         <template #contenido-video>
                             <video-embed class="w-screen" src="https://youtu.be/26YEJA_QXD4"></video-embed>
                         </template>
@@ -26,6 +30,10 @@
                             Editar
                         </template>
 
+                        <template #informacion>
+                            Si coloca el ciclo lectivo como "activado" se desactivaran los otros.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/xOxqUf9cO-k"></video-embed>
                         </template>
@@ -34,6 +42,10 @@
                     <detalles-tutorial id="eliminar">
                         <template #titulo-sub-tutorial>
                             Eliminar
+                        </template>
+
+                        <template #informacion>
+                            Si elimina el ciclo lectivo se eliminaran las libretas creadas para este ciclo (lo cual afectaria a las estadisticas), las asignaturas adeudadas que tienen los alumnos en el ciclo lectivo eliminado, registros de la lista de ex alumnos y repetidores.
                         </template>
 
                         <template #contenido-video>

@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Estructura</template>
+                <template #titulo-tutorial>Muros</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#agregar-publicacion">Agregar publicacion</a></li>

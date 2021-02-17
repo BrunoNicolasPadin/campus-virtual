@@ -220,4 +220,9 @@ Route::prefix('tutoriales')->group(function () {
     Route::inertia('material', 'Tutoriales/Material')->name('tutoriales.material');
     Route::inertia('libreta', 'Tutoriales/Libreta')->name('tutoriales.libreta');
     Route::inertia('muro', 'Tutoriales/Muro')->name('tutoriales.muro');
+    Route::inertia('mesa', 'Tutoriales/Mesa')->name('tutoriales.mesa');
+    Route::inertia('estadistica', 'Tutoriales/Estadistica')->name('tutoriales.estadistica');
+    Route::inertia('repitente', 'Tutoriales/Repitente')->name('tutoriales.repitente');
+    Route::inertia('exalumno', 'Tutoriales/ExAlumno')->name('tutoriales.exalumno');
+    Route::inertia('calendario', 'Tutoriales/Calendario')->name('tutoriales.calendario');
 });

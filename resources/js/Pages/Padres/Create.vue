@@ -77,7 +77,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio. Apriete en "Guardar" si quiere agregar otro hijo/a.
+                                        Es obligatorio. Debe apretar en "Guardar" para registrar a este/a alumno/a como su hijo/a y luego, si ya cargo a todos sus hijos, apriete en "Finalizar registro".
                                     </template>
                                 </info>
                             </div>

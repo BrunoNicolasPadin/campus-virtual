@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Docente</template>
+                <template #titulo-tutorial>Docentes</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
@@ -17,6 +17,11 @@
                             Registrarse
                         </template>
 
+                        <template #informacion>
+                            No podra registrarse como directivo nuevamente en la misma institucion pero si con otro rol. 
+                            Si podra registrarse en otra institucion con el rol de directivo sin ningun problema.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed class="w-screen" src="https://youtu.be/uDqlFfPjuHY"></video-embed>
                         </template>
@@ -28,7 +33,7 @@
                         </template>
 
                         <template #informacion>
-                            Para hacerlo deberas tener la cuenta activada que deseas eliminar.
+                            Para hacerlo deberas tener la cuenta activada que desee eliminar.
                         </template>
 
                         <template #contenido-video>
@@ -41,6 +46,10 @@
                             Anotarte en una institucion
                         </template>
 
+                        <template #informacion>
+                            Debera saber la clave de acceso.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/o-gpXJyPwhc"></video-embed>
                         </template>
@@ -49,6 +58,13 @@
                     <detalles-tutorial id="eliminar">
                         <template #titulo-sub-tutorial>
                             Eliminar docente de mi institucion
+                        </template>
+
+                        <template #informacion>
+                            Esto lo elimina completamente de la institucion, no se eliminara nada de la/s asignatura/s en las que fue docente.
+                            Si solo desea eliminarlo como docente de una asignatura debe ver el menu de la izquierda y apretar en "Asignatura" y luego en "Eliminar docente".
+                            Si el docente tiene la clave de acceso y la sabe podra ingresar cuantas veces quiera a menos que cambie la clave de acceso.
+                            No sucedera nada con todos los usuarios que ya estan inscriptos en su institucion.
                         </template>
 
                         <template #contenido-video>

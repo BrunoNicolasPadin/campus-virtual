@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Material</template>
+                <template #titulo-tutorial>Materiales</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#agregar-material">Agregar grupo y material</a></li>
@@ -16,6 +16,11 @@
                     <detalles-tutorial id="agregar-material">
                         <template #titulo-sub-tutorial>
                             Agregar grupo y material
+                        </template>
+
+                        <template #informacion>
+                            Se debe crear un grupo en el cual se agregaran los archivos que desee cada docente. 
+                            Se pueden crear muchos grupos y agregar todos los materiales que desee.
                         </template>
 
                         <template #contenido-video>
@@ -38,6 +43,10 @@
                             Eliminar grupo
                         </template>
 
+                        <template #informacion>
+                            Se eliminaran todos los archivos guardados en este grupo y no se podran recuperar.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
                         </template>
@@ -56,6 +65,10 @@
                     <detalles-tutorial id="eliminar-material">
                         <template #titulo-sub-tutorial>
                             Eliminar material
+                        </template>
+
+                        <template #informacion>
+                            Se eliminara para siempre y no se podra recuperar.
                         </template>
 
                         <template #contenido-video>

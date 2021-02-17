@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Institucion</template>
+                <template #titulo-tutorial>Instituciones</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
@@ -14,6 +14,10 @@
                     <detalles-tutorial id="registrarse">
                         <template #titulo-sub-tutorial>
                             Registrarse
+                        </template>
+
+                        <template #informacion>
+                            Anotar la clave de acceso.
                         </template>
 
                         <template #contenido-video>
@@ -38,6 +42,7 @@
 
                         <template #informacion>
                             Topnav -> Institucional -> Perfil institucional -> Boton eliminar.
+                            Si lo hace se borrara absolutamente todo y no se podra recuperar.
                         </template>
 
                         <template #contenido-video>

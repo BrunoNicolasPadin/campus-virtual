@@ -16,6 +16,10 @@
                             Agregar
                         </template>
 
+                        <template #informacion>
+                            Recomendacion: escriba todas las claves de acceso de cada division.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
@@ -34,6 +38,12 @@
                     <detalles-tutorial id="eliminar">
                         <template #titulo-sub-tutorial>
                             Eliminar
+                        </template>
+
+                        <template #informacion>
+                            No la elimine aunque en la vida real no exista mas, no paga nada adicional por la cantidad de divisiones que tenga ;).
+                            Si elimina una division automaticamente se eliminaran las libretas de todos los alumnos que pasaron por aqui, asignaturas, evaluaciones, 
+                            materiales, archivos de correcciones, entregas, publicaciones en el muro y sus respectivas respuestas. 
                         </template>
 
                         <template #contenido-video>

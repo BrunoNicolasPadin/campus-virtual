@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Padre</template>
+                <template #titulo-tutorial>Padres</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
@@ -15,6 +15,10 @@
                     <detalles-tutorial id="registrarse">
                         <template #titulo-sub-tutorial>
                             Registrarse
+                        </template>
+
+                        <template #informacion>
+                            Puede inscribirse con otros roles si quiere. Debe apretar en "Guardar" para guardar al hijo seleccionado.
                         </template>
 
                         <template #contenido-video>
@@ -41,6 +45,10 @@
                             Anotarte en una institucion
                         </template>
 
+                        <template #informacion>
+                            Debera saber la clave de acceso.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/o-gpXJyPwhc"></video-embed>
                         </template>
@@ -49,6 +57,12 @@
                     <detalles-tutorial id="eliminar">
                         <template #titulo-sub-tutorial>
                             Eliminar padre de mi institucion
+                        </template>
+
+                        <template #informacion>
+                            Esto lo elimina completamente de la institucion, no se eliminara nada relacionado a su hijo/a.
+                            Si el padre tiene la clave de acceso y la sabe podra ingresar cuantas veces quiera a menos que cambie la clave de acceso.
+                            No sucedera nada con todos los usuarios que ya estan inscriptos en su institucion.
                         </template>
 
                         <template #contenido-video>

@@ -25,6 +25,10 @@
                             Eliminar
                         </template>
 
+                        <template #informacion>
+                            Se elimina complemtamente el usuario.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/YGcI1Gb_UPQ"></video-embed>
                         </template>

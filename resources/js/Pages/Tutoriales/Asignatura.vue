@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Asignatura</template>
+                <template #titulo-tutorial>Asignaturas</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#agregar-asignatura">Agregar asignatura</a></li>
@@ -21,6 +21,10 @@
                             Agregar asignatura
                         </template>
 
+                        <template #informacion>
+                            Puede hacerlo sin tener docentes anotados en su institucion, luego los podra agregar y asi estos podran ingresar a la/s division/es en las que son docentes de una o mas asignaturas.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
@@ -29,6 +33,10 @@
                     <detalles-tutorial id="editar-asignatura">
                         <template #titulo-sub-tutorial>
                             Editar asignatura
+                        </template>
+
+                        <template #informacion>
+                            Desde aqui podra eliminar horarios y docentes.
                         </template>
 
                         <template #contenido-video>
@@ -41,6 +49,10 @@
                             Eliminar asignatura
                         </template>
 
+                        <template #informacion>
+                            Se eliminara todo lo relacionado a la asignatura: horarios, materiales, mesas de examen, evaluaciones, entregas, correcciones, desaparece de las libretas, deja de contar en la estadistica.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
                         </template>
@@ -49,6 +61,10 @@
                     <detalles-tutorial id="agregar-docente">
                         <template #titulo-sub-tutorial>
                             Agregar docente
+                        </template>
+
+                        <template #informacion>
+                            Le permitira a los docentes ingresar a la division.
                         </template>
 
                         <template #contenido-video>
@@ -69,6 +85,10 @@
                     <detalles-tutorial id="eliminar-docente">
                         <template #titulo-sub-tutorial>
                             Eliminar docente
+                        </template>
+
+                        <template #informacion>
+                            El docente no podra volver a ingresar a la division salvo que este anotado como docente en otra asignatura.
                         </template>
 
                         <template #contenido-video>

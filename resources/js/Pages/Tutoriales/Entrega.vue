@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Entrega</template>
+                <template #titulo-tutorial>Entregas</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#agregar">Agregar</a></li>
@@ -27,6 +27,10 @@
                     <detalles-tutorial id="eliminar">
                         <template #titulo-sub-tutorial>
                             Eliminar
+                        </template>
+
+                        <template #informacion>
+                            Lo elimina para siempre y no se podra recuperar.
                         </template>
 
                         <template #contenido-video>

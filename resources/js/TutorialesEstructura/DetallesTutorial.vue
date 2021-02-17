@@ -6,7 +6,7 @@
             </span>
         </span>
 
-        <p class="text-black text-md font-bold">
+        <p class="my-4 text-gray-800 font-semibold text-md">
             <slot name="informacion"></slot>
         </p>
 

@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Evaluacion</template>
+                <template #titulo-tutorial>Evaluaciones</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#agregar-evaluacion">Agregar evaluacion</a></li>
@@ -84,6 +84,10 @@
                     <detalles-tutorial id="eliminar-archivo">
                         <template #titulo-sub-tutorial>
                             Eliminar archivo
+                        </template>
+
+                        <template #informacion>
+                            Se eliminara para siempre y no podra ser recueperado.
                         </template>
 
                         <template #contenido-video>

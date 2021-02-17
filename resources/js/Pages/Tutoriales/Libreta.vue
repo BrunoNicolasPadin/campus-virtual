@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Libreta</template>
+                <template #titulo-tutorial>Libretas</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#calificar">Calificar</a></li>
@@ -12,6 +12,11 @@
                     <detalles-tutorial id="calificar">
                         <template #titulo-sub-tutorial>
                             Calificar
+                        </template>
+
+                        <template #informacion>
+                            Las calificaciones deben ser del 1 al 10 y escritos numericamente, ya que sino las estadisticas no funcionaran.
+                            Estamos trabajando para que pueda calificarse de otras maneras y aun asi funcionen las estadisticas de forma correcta.
                         </template>
 
                         <template #contenido-video>

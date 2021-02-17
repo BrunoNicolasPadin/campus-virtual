@@ -90,12 +90,6 @@
                                 </label-form>
                                 
                                 <input type="checkbox" v-model="form.activado" />
-                                
-                                <info>
-                                    <template #info>
-                                        Antes de activar un ciclo lectivo asegurese de que no tenga activado otro.
-                                    </template>
-                                </info>
                             </div>
                         </div>
 

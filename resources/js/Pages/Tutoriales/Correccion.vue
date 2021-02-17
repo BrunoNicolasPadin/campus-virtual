@@ -16,6 +16,11 @@
                             Calificar
                         </template>
 
+                        <template #informacion>
+                            Puede calificar como quiera siempre y cuando sea alfanumericamente, pero recomendamos que sean con numeros del 1 al 10 porque sino la parte de "Estadisticas" de la evaluacion no funcionara al 100%. 
+                            Estamos trabajando para que, al calificar de otra forma como por ejemplo con un "Bueno" o un "Excelente" tambien funcione.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/mEr8WG6JChc"></video-embed>
                         </template>
@@ -38,6 +43,10 @@
                     <detalles-tutorial id="eliminar">
                         <template #titulo-sub-tutorial>
                             Eliminar
+                        </template>
+
+                        <template #informacion>
+                            Se borrara para siempre y no se podra recuperar.
                         </template>
 
                         <template #contenido-video>

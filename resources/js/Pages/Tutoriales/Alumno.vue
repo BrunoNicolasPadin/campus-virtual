@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Alumno</template>
+                <template #titulo-tutorial>Alumnos</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
@@ -20,6 +20,11 @@
                     <detalles-tutorial id="registrarse">
                         <template #titulo-sub-tutorial>
                             Registrarse
+                        </template>
+
+                        <template #informacion>
+                            No podra registrarse como alumno nuevamente en la misma institucion pero si con otro rol. 
+                            Si podra registrarse en otra institucion con el rol de alumno sin ningun problema.
                         </template>
 
                         <template #contenido-video>
@@ -85,6 +90,10 @@
                             Agregar asignaturas que adeuda
                         </template>
 
+                        <template #informacion>
+                            Debe hacerlo para que el alumno pueda inscribirse en las mesas.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/2nBAGrqSKM8"></video-embed>
                         </template>
@@ -96,7 +105,7 @@
                         </template>
 
                         <template #informacion>
-                            Esto sirve mas que nada para la estadistica.
+                            Esto sirve mas que nada para la estadistica, no debe volver a ingresar la division en la que cursara.
                         </template>
 
                         <template #contenido-video>
@@ -110,7 +119,7 @@
                         </template>
 
                         <template #informacion>
-                            Al eliminar al alumno de la division solo le prohibes su ingreso a esta, salvo que el alumno vuelva a anotarse y para eso debe sabeer la clave de acceso, cambiala si quieres evitar esto. 
+                            Al eliminar al alumno de la division solo le prohibes su ingreso a esta, salvo que el alumno vuelva a anotarse y para eso debe saber la clave de acceso de la division, cambiela si quieres evitar esto. 
                         </template>
 
                         <template #contenido-video>
@@ -120,11 +129,11 @@
 
                     <detalles-tutorial id="ex-alumno">
                         <template #titulo-sub-tutorial>
-                            Abandono el institucion o cambio de institucion
+                            Transformar en ex alumno
                         </template>
 
                         <template #informacion>
-                            Esto tambien sirve mas que nada para la estadistica.
+                            Esto tambien sirve mas que nada para la estadistica. Pasara a no estar anotado en ninguna division automaticamente.
                         </template>
 
                         <template #contenido-video>
