@@ -206,5 +206,8 @@ Route::inertia('/tutoriales', 'Tutoriales/Principal')->name('tutoriales');
 Route::prefix('tutoriales')->group(function () {
 
     Route::inertia('institucion', 'Tutoriales/Institucion')->name('tutoriales.institucion');
-
+    Route::inertia('ciclo-lectivo', 'Tutoriales/CicloLectivo')->name('tutoriales.ciclo-lectivo');
+    Route::inertia('estructura', 'Tutoriales/Estructura')->name('tutoriales.estructura');
+    Route::inertia('usuario', 'Tutoriales/PerfilUsuario')->name('tutoriales.usuario');
+    Route::inertia('docente', 'Tutoriales/Docente')->name('tutoriales.docente');
 });

@@ -11,7 +11,7 @@
                 </template>
 
                 <template #detalles>
-                    <detalles-tutorial id="eliminar">
+                    <detalles-tutorial id="registrarse">
                         <template #titulo-sub-tutorial>
                             Registrarse
                         </template>
