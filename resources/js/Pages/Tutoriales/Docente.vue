@@ -27,6 +27,10 @@
                             Eliminarte como docente
                         </template>
 
+                        <template #informacion>
+                            Para hacerlo deberas tener la cuenta activada que deseas eliminar.
+                        </template>
+
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/2nBAGrqSKM8"></video-embed>
                         </template>

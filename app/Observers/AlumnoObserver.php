@@ -39,7 +39,7 @@ class AlumnoObserver
             $periodos = ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
         }
 
-        if ($division->periodo_id == 1) {
+        if ($division->periodo_id == 3) {
             $periodos = ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
         }
 

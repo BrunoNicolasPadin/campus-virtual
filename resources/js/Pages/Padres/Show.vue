@@ -30,7 +30,7 @@
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, padre.hijos.id])">{{ padre.hijos.user.name }}</inertia-link>
-                            <button @click="destroy(padre.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                            <button v-show="tipo == 'Institucion' || tipo == 'Directivo' " @click="destroy(padre.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                 Eliminar
                             </button>
                         </dd>
@@ -56,6 +56,7 @@
         props: {
             institucion_id: String,
             padre: Object,
+            tipo: String,
         },
 
         title: 'Perfil de padre/madre/tutor',

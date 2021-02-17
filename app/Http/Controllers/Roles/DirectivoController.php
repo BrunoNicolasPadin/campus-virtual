@@ -71,14 +71,17 @@ class DirectivoController extends Controller
         Directivo::destroy($id);
         $message = 'Directivo eliminado con exito!';
 
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            return redirect(route('roles.index'))->with(['successMessage' => $message]);
+        }
+
         if (session('tipo') == 'Directivo') {
             $message = 'Te eliminaste con exito!';
             session()->forget(['tipo', 'tipo_id', 'institucion_id']);
+            return redirect(route('roles.mostrarCuentas'))->with(['successMessage' => $message]);
         }
         else {
             return back()->withErrors('Debe tener activado la cuenta que desea eliminar.');
         }
-
-        return redirect(route('roles.mostrarCuentas'))->with(['successMessage' => $message]);
     }
 }

@@ -20,7 +20,7 @@ class PadreCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $padre = Padre::find($link[6]);
+        $padre = Padre::with('hijos')->find($link[6]);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             if ($padre->hijos->institucion_id == session('institucion_id')) {
