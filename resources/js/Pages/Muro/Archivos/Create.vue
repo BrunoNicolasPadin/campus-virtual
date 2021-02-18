@@ -39,7 +39,7 @@
                     <form method="post" @submit.prevent="submit" enctype="multipart/form-data">
                         <div v-for="(arc, index) in form.archivos" :key="index">
                             <div class="-mx-3 md:flex mb-6">
-                                <div class="md:w-full px-3 mb-6 md:mb-0">
+                                <div class="md:w-10/12 px-3 mb-6 md:mb-0">
                                     <label-form>
                                         <template #label-value>
                                             Archivo
@@ -53,6 +53,15 @@
                                             Es obligatorio. Solo puede subir de a uno.
                                         </template>
                                     </info>
+                                </div>
+
+                                <div class="md:w-2/12 px-3 mb-6 md:mb-0">
+                                    <button 
+                                    @click="eliminarArchivo(index)"
+                                    type="button" 
+                                    class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 my-8 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                        Eliminar formulario
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -131,6 +140,10 @@
                 this.form.archivos.push({
                     archivo: null,
                 });
+            },
+
+            eliminarArchivo(index) {
+                this.form.archivos.splice(index, 1);
             },
 
             cerrarAlerta() {
