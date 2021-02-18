@@ -66,13 +66,6 @@
                                     Asignatura
                                 </template>
                             </table-head>
-
-                            <table-head colspan="2" v-show="tipo == 'Docente' ">
-                                <template #th-titulo>
-                                    Acciones
-                                </template>
-                            </table-head>
-
                         </template>
                     </table-head-estructura>
 
@@ -97,22 +90,6 @@
                                 <table-data>
                                     <template #td>
                                         {{ grupo.asignatura.nombre }}
-                                    </template>
-                                </table-data>
-
-                                <table-data v-show="tipo == 'Docente' ">
-                                    <template #td>
-                                        <inertia-link :href="route('materiales.edit', [institucion_id, division.id, grupo.id])">
-                                            <editar></editar>
-                                        </inertia-link>
-                                    </template>
-                                </table-data>
-
-                                <table-data v-show="tipo == 'Docente' ">
-                                    <template #td>
-                                        <button @click="destroy(grupo.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
-                                            Eliminar
-                                        </button>
                                     </template>
                                 </table-data>
                             </tr>
@@ -165,12 +142,6 @@
         title: 'Grupos',
 
         methods: {
-            destroy(id) {
-                if (confirm('Estas seguro de que desea eliminar este grupo?')) {
-                    this.$inertia.delete(this.route('materiales.destroy', [this.institucion_id, this.division.id, id]))
-                }
-            },
-
             cerrarAlerta() {
                 this.successMessage = false;
             }

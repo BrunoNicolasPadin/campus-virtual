@@ -46,6 +46,57 @@
                 </div>
             </transition>
 
+            <estructura-informacion>
+                <template #cabecera-info>
+                    Datos
+                </template>
+
+                <template #dl-contenido>
+                    
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Nombre
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            {{ grupo.nombre }}
+                        </dd>
+                    </div>
+
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Asignatura
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            {{ grupo.asignatura.nombre }}
+                        </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Cantidad de archivos
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            {{ cantidad }}
+                        </dd>
+                    </div>
+
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Acciones
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <inertia-link :href="route('materiales.edit', [institucion_id, division.id, grupo.id])">
+                                <editar></editar>
+                            </inertia-link>
+
+                            <form method="post" @submit.prevent="destroy(grupo.id)">
+                                <eliminar></eliminar>
+                            </form>
+                        </dd>
+                    </div>
+                </template>
+            </estructura-informacion>
+
             <div class="container mx-auto px-4 sm:px-8">
                 <h2 class="text-2xl font-semibold leading-tight">Archivos</h2>
                 <ul class="my-2 bg-white border border-blue-100 rounded-md divide-y divide-gray-200">
@@ -97,11 +148,17 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import Primary from '@/Botones/Primary.vue'
+    import EstructuraInformacion from '@/Datos/EstructuraInformacion.vue'
+    import Eliminar from '@/Botones/Eliminar.vue'
+    import Editar from '@/Botones/Editar.vue'
 
     export default {
         components: {
             AppLayout,
             Primary,
+            EstructuraInformacion,
+            Eliminar,
+            Editar,
         },
 
         props:{ 
@@ -111,11 +168,18 @@
             division: Object,
             grupo: Object,
             archivos: Array,
+            cantidad: Number,
         },
 
         title: 'Grupo',
 
         methods: {
+            destroy(id) {
+                if (confirm('Estas seguro de que desea eliminar este grupo?')) {
+                    this.$inertia.delete(this.route('materiales.destroy', [this.institucion_id, this.division.id, id]))
+                }
+            },
+
             destroyArchivo(id) {
                 if (confirm('Estas seguro de que desea eliminar este archivo?')) {
                     this.$inertia.delete(this.route('materiales-archivos.destroy', [this.institucion_id, this.division.id, this.grupo.id, id]))

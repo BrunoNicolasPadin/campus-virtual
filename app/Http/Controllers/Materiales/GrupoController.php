@@ -72,8 +72,9 @@ class GrupoController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'grupo' => Grupo::find($id),
+            'grupo' => Grupo::with('asignatura')->find($id),
             'archivos' => Material::where('grupo_id', $id)->get(),
+            'cantidad' => Material::where('grupo_id', $id)->count(),
         ]);
     }
 
