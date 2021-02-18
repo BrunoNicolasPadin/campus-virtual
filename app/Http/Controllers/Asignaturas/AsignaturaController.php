@@ -10,8 +10,11 @@ use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Asignaturas\AsignaturaHorario;
 use App\Models\Deudores\Mesa;
 use App\Models\Estructuras\Division;
+use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Materiales\Grupo;
 use App\Models\Roles\Docente;
+use App\Services\Archivos\EliminarEntregasCorrecciones;
+use App\Services\Archivos\EliminarGruposMateriales;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
@@ -20,10 +23,14 @@ class AsignaturaController extends Controller
 {
     protected $formatoService;
     protected $formatoFechaService;
+    protected $archivosGruposServices;
+    protected $archivosEvaServices;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         CambiarFormatoFecha $formatoFechaService,
+        EliminarGruposMateriales $archivosGruposServices,
+        EliminarEntregasCorrecciones $archivosEvaServices,
     )
 
     {
@@ -36,6 +43,8 @@ class AsignaturaController extends Controller
 
         $this->formatoService = $formatoService;
         $this->formatoFechaService = $formatoFechaService;
+        $this->archivosGruposServices = $archivosGruposServices;
+        $this->archivosEvaServices = $archivosEvaServices;
     }
 
     public function index($institucion_id, $division_id)
@@ -163,6 +172,19 @@ class AsignaturaController extends Controller
 
     public function destroy($institucion_id, $division_id, $id)
     {
+        $grupos = Grupo::where('asignatura_id', $id)->get();
+        
+        foreach ($grupos as $grupo) {
+            $this->archivosGruposServices->eliminarGruposMateriales($grupo->id);
+        }
+
+        $evaluaciones = Evaluacion::where('asignatura_id', $id)->get();
+
+        foreach ($evaluaciones as $evaluacion) {
+
+            $this->archivosEvaServices->eliminarEntregasCorrecciones($evaluacion->id);
+        }
+    
         Asignatura::destroy($id);
         return redirect(route('asignaturas.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Asignatura eliminada con exito!']);
     }

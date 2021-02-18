@@ -10,6 +10,7 @@ use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Roles\Docente;
+use App\Services\Archivos\EliminarEntregasCorrecciones;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -17,8 +18,13 @@ use Inertia\Inertia;
 class EvaluacionController extends Controller
 {
     protected $formatoService;
+    protected $archivosServices;
 
-    public function __construct(CambiarFormatoFechaHora $formatoService)
+    public function __construct(
+        CambiarFormatoFechaHora $formatoService,
+        EliminarEntregasCorrecciones $archivosServices
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -27,6 +33,7 @@ class EvaluacionController extends Controller
         $this->middleware('evaluacionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
+        $this->archivosServices = $archivosServices;
     }
 
     public function index($institucion_id, $division_id)
@@ -164,6 +171,8 @@ class EvaluacionController extends Controller
 
     public function destroy($institucion_id, $division_id, $id)
     {
+        $this->archivosServices->eliminarEntregasCorrecciones($id);
+
         Evaluacion::destroy($id);
         return redirect(route('evaluaciones.index', [$institucion_id, $division_id]))
             ->with(['successMessage' => 'Evaluacion eliminada con exito!']);

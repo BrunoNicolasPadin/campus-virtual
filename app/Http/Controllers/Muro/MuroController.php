@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StorePublicacion;
 use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
+use App\Models\Muro\MuroArchivo;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MuroController extends Controller
@@ -65,6 +67,10 @@ class MuroController extends Controller
 
     public function destroy($institucion_id, $division_id, $id)
     {
+        $archivos = MuroArchivo::where('muro_id', $id)->get();
+        foreach ($archivos as $archivo) {
+            Storage::delete('public/Muro/' . $archivo->archivo);
+        }
         Muro::destroy($id);
         return back()->with(['successMessage' => 'Publicacion eliminada con exito!']);
     }

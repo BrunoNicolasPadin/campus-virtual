@@ -9,19 +9,23 @@ use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
 use App\Models\Roles\Docente;
+use App\Services\Archivos\EliminarGruposMateriales;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class GrupoController extends Controller
 {
-    public function __construct()
+    protected $archivosServices;
+
+    public function __construct(EliminarGruposMateriales $archivosServices)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
         $this->middleware('soloDocentes')->except('index', 'show');
         $this->middleware('grupoCorrespondiente')->only('show', 'edit', 'update', 'destroy');
+
+        $this->archivosServices = $archivosServices;
     }
 
     public function index($institucion_id, $division_id)
@@ -100,10 +104,7 @@ class GrupoController extends Controller
 
     public function destroy($institucion_id, $division_id, $id)
     {
-        $materiales = Material::where('grupo_id', $id)->get();
-        foreach ($materiales as $material) {
-            Storage::delete('public/Materiales/' . $material->archivo);
-        }
+        $this->archivosServices->eliminarGruposMateriales($id);
 
         Grupo::destroy($id);
         return redirect(route('materiales.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Eliminado con exito!']);
