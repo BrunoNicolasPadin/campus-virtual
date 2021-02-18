@@ -203,3 +203,11 @@
         </div>
     </div>
 </template>
+
+<script>
+
+    export default {
+
+        title: 'Gescol - Detalles de los servicios',
+    }
+</script>

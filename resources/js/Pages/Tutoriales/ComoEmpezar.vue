@@ -115,5 +115,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutoriales - Como empezar',
     }
 </script>
