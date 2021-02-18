@@ -112,7 +112,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Docente' ">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones
                         </dt>
@@ -168,7 +168,7 @@
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Docente' ">
+                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                             <inertia-link
                             :href="route('evaluaciones-archivos.edit', [institucion_id, division.id, evaluacion.id, archivo.id])"
                             class="font-medium text-indigo-600 hover:text-indigo-500">
@@ -236,7 +236,7 @@
                     <div class="flex justify-between mb-1">
                         <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ comentario.comentario }}</p>
                         <button 
-                            v-show="comentario.user.id == user_id"
+                            v-show="comentario.user.id == user_id || tipo == 'Institucion' || tipo == 'Directivo' "
                             class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" 
                             @click="editar(comentario)">
                                 Editar

@@ -18,7 +18,8 @@ class EvaluacionArchivoController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
-        $this->middleware('soloDocentes');
+        $this->middleware('soloDocentes')->except('destroy');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->only('destroy');
         $this->middleware('evaluacionCorrespondiente');
         $this->middleware('archivoCorrespondiente')->only('edit', 'update', 'destroy');
     }

@@ -27,6 +27,13 @@ class EntregaComentarioCorrespondiente
             return $next($request);
         }
 
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            if ($comentario->entrega->evaluacion->institucion_id == session('institucion_id')) {
+                return $next($request);
+            }
+            abort(403, 'Estos comentarios no forma parte de tu institucion');
+        }
+
         abort(403, 'Este comentario no es tuyo.');
     }
 }

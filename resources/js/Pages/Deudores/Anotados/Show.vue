@@ -255,7 +255,7 @@
                     <div class="flex justify-between mb-1">
                         <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ comentario.comentario }}</p>
                         <button 
-                             v-show="comentario.user_id == user_id "
+                             v-show="comentario.user_id == user_id || tipo == 'Institucion' || tipo == 'Directivo' "
                             class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" 
                             @click="editar(comentario)">
                                 Editar

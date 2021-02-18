@@ -25,6 +25,14 @@ class EntregaArchivoCorrespondiente
         if ($archivo->entrega->alumno_id == session('tipo_id')) {
             return $next($request);
         }
+
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            if ($archivo->entrega->evaluacion->institucion_id == session('institucion_id')) {
+                return $next($request);
+            }
+            abort(403, 'Estos archivos entregados no forma parte de tu institucion');
+        }
+
         abort(403, 'Este archivo no es tuyo.');
     }
 }

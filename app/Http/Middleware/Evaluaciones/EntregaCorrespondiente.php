@@ -52,7 +52,7 @@ class EntregaCorrespondiente
             if ($entrega->evaluacion->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Esta entrega de una evaluacion no forma parte de la institucion de la que perteneces.');
+            abort(403, 'Esta entrega no forma parte de tu institucion.');
         }
 
         abort(403, 'No puedes estar aqui.');

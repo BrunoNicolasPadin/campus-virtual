@@ -29,7 +29,8 @@ class EvaluacionController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
-        $this->middleware('soloDocentes')->except('index', 'show');
+        $this->middleware('soloDocentes')->only('create', 'store', 'edit', 'update');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->except('index', 'show');
         $this->middleware('evaluacionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;

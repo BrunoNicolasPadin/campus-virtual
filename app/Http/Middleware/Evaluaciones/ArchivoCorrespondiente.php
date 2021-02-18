@@ -23,13 +23,24 @@ class ArchivoCorrespondiente
 
         $archivo = Archivo::find($link[10]);
 
-        $asignaturasDocentes = AsignaturaDocente::where('asignatura_id', $archivo->evaluacion->asignatura_id)->get();
+        if (session('tipo') == 'Docente') {
 
-        foreach ($asignaturasDocentes as $asignaturaDocente) {
-            if ($asignaturaDocente->docente_id == session('tipo_id')) {
+            $asignaturasDocentes = AsignaturaDocente::where('asignatura_id', $archivo->evaluacion->asignatura_id)->get();
+
+            foreach ($asignaturasDocentes as $asignaturaDocente) {
+                if ($asignaturaDocente->docente_id == session('tipo_id')) {
+                    return $next($request);
+                }
+            }
+            abort(403, 'Este archivo forma parte de una evaluacion en una asignatura de la que no eres docente.');
+        }
+
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            if ($archivo->evaluacion->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
+            abort(403, 'Estos archivos no forman parte de tu institucion.');
         }
-        abort(403, 'Este archivo forma parte de una evaluacion en una asignatura de la que no eres docente.');
+        abort(403, 'No puedes estar aqui.');
     }
 }

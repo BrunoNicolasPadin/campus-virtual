@@ -18,4 +18,9 @@ class EntregaComentario extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function entrega()
+    {
+        return $this->belongsTo(Entrega::class);
+    }
 }

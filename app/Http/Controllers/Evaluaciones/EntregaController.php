@@ -12,6 +12,7 @@ use App\Models\Evaluaciones\EntregaComentario;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EntregaController extends Controller
@@ -22,7 +23,7 @@ class EntregaController extends Controller
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
         $this->middleware('evaluacionCorrespondiente');
-        $this->middleware('soloDocentes')->only('edit', 'update');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->only('edit', 'update', 'destroy');
         $this->middleware('entregaCorrespondiente')->only('show', 'edit', 'update');
 
         $this->formatoService = $formatoService;
@@ -100,5 +101,23 @@ class EntregaController extends Controller
             ]);
         return redirect(route('entregas.show', [$institucion_id, $division_id, $evaluacion_id, $id]))
             ->with(['successMessage' => 'Entrega calificada y/o comentada con exito!']);
+    }
+
+    public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
+    {
+        $entregasArchivos = EntregaArchivo::where('entrega_id', $id)->get();
+        $correcciones = Correccion::where('entrega_id', $id)->get();
+
+        foreach ($entregasArchivos as $entrega) {
+            Storage::delete('public/Evaluaciones/Entregas/' . $entrega->archivo);
+        }
+
+        foreach ($correcciones as $correccion) {
+            Storage::delete('public/Evaluaciones/Correcciones/' . $correccion->archivo);
+        }
+
+        Entrega::destroy($id);
+        return redirect(route('entregas.index', [$institucion_id, $division_id, $evaluacion_id]))
+            ->with(['successMessage' => 'Entrega eliminada con exito!']);
     }
 }

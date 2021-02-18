@@ -22,7 +22,8 @@ class CorreccionController extends Controller
         $this->middleware('divisionCorrespondiente');
         $this->middleware('evaluacionCorrespondiente');
         $this->middleware('entregaCorrespondiente');
-        $this->middleware('soloDocentes');
+        $this->middleware('soloDocentes')->except('destroy');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->only('destroy');
         $this->middleware('correccionCorrespondiente')->only('destroy');
     }
 

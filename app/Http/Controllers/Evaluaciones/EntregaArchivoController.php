@@ -22,7 +22,8 @@ class EntregaArchivoController extends Controller
         $this->middleware('divisionCorrespondiente');
         $this->middleware('evaluacionCorrespondiente');
         $this->middleware('entregaCorrespondiente');
-        $this->middleware('soloAlumnos');
+        $this->middleware('soloAlumnos')->except('destroy');
+        $this->middleware('soloInstitucionesDirectivosAlumnos')->only('destroy');
         $this->middleware('entregaArchivoCorrespondiente')->only('destroy');
     }
 

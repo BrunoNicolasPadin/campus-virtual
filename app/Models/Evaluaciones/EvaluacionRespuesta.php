@@ -18,4 +18,9 @@ class EvaluacionRespuesta extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function comentario()
+    {
+        return $this->belongsTo(EvaluacionComentario::class);
+    }
 }

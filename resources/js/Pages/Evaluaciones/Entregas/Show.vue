@@ -90,7 +90,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Docente' ">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Docente'  || tipo == 'Institucion' || tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Calificar y comentar
                         </dt>
@@ -98,6 +98,10 @@
                             <inertia-link :href="route('entregas.edit', [institucion_id, division.id, evaluacion.id, entrega.id])">
                                 <editar></editar>
                             </inertia-link>
+
+                            <form method="post" @submit.prevent="destroyEntrega(entrega.id)">
+                                <eliminar></eliminar>
+                            </form>
                         </dd>
                     </div>
                 </template>
@@ -130,7 +134,7 @@
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Alumno' ">
+                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Alumno' || tipo == 'Institucion' || tipo == 'Directivo' ">
                             <span @click="destroyArchivo(archivo.id)" class="font-medium text-red-600 hover:text-red-500 cursor-pointer" type="submit">
                                 Eliminar
                             </span>
@@ -166,7 +170,7 @@
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Docente' ">
+                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Docente' || tipo == 'Institucion' || tipo == 'Directivo' ">
                             <span @click="destroyCorreccion(correccion.id)" class="font-medium text-red-600 hover:text-red-500 cursor-pointer" type="submit">
                                 Eliminar
                             </span>
@@ -224,7 +228,7 @@
                     <div class="flex justify-between mb-1">
                         <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ comentario.comentario }}</p>
                         <button 
-                             v-show="comentario.user_id == user_id "
+                             v-show="comentario.user_id == user_id || tipo == 'Institucion' || tipo == 'Directivo' "
                             class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" 
                             @click="editar(comentario)">
                                 Editar
@@ -295,6 +299,11 @@
         },
 
         methods: {
+            destroyEntrega(entrega_id) {
+                if (confirm('Estas seguro de que desea eliminar esta entrega?')) {
+                    this.$inertia.delete(this.route('entregas.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, entrega_id]))
+                }
+            },
             
             destroyArchivo(archivo_id) {
                 if (confirm('Estas seguro de que desea eliminar este archivo?')) {
