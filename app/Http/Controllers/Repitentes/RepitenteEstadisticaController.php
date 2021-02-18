@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Repetidores;
+namespace App\Http\Controllers\Repitentes;
 
 use App\Http\Controllers\Controller;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
-use App\Models\Repetidores\Repetidor;
+use App\Models\Repitentes\Repitente;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Inertia\Inertia;
 
-class RepetidorEstadisticaController extends Controller
+class RepitenteEstadisticaController extends Controller
 {
     protected $formatoService;
 
@@ -27,7 +27,7 @@ class RepetidorEstadisticaController extends Controller
         $ciclosLectivos = CicloLectivo::where('institucion_id', $institucion_id)->get();
         $divisiones = Division::where('institucion_id', $institucion_id)->get();
 
-        $repetidores = Repetidor::where('institucion_id', $institucion_id)
+        $repitentes = Repitente::where('institucion_id', $institucion_id)
         ->with(['ciclo_lectivo', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
         ->get();
         $ciclos = [];
@@ -58,10 +58,10 @@ class RepetidorEstadisticaController extends Controller
             $k++;
         }
 
-        foreach ($repetidores as $repetidor) {
+        foreach ($repitentes as $repitente) {
         
-            $ciclos[$repetidor->ciclo_lectivo_id]++;
-            $divArray[$repetidor->division_id]++;
+            $ciclos[$repitente->ciclo_lectivo_id]++;
+            $divArray[$repitente->division_id]++;
         }
 
         $ciclos = array_values($ciclos);
@@ -69,7 +69,7 @@ class RepetidorEstadisticaController extends Controller
 
 
 
-        return Inertia::render('Repetidores/Estadisticas', [
+        return Inertia::render('Repitentes/Estadisticas', [
             'institucion_id' => $institucion_id,
             'ciclos' => $ciclos,
             'ciclosCategorias' => $ciclosCategorias,

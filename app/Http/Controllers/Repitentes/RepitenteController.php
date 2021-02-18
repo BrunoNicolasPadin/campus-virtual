@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Repetidores;
+namespace App\Http\Controllers\Repitentes;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Repetidores\StoreRepetidor;
+use App\Http\Requests\Repitentes\StoreRepitente;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
-use App\Models\Repetidores\Repetidor;
+use App\Models\Repitentes\Repitente;
 use App\Models\Roles\Alumno;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class RepetidorController extends Controller
+class RepitenteController extends Controller
 {
     protected $formatoService;
 
@@ -22,15 +22,15 @@ class RepetidorController extends Controller
         $this->middleware('institucionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos')->except('show');
         $this->middleware('soloInstitucionesDirectivosAlumnos')->only('show');
-        $this->middleware('alumnoCorrespondiente')->only('createRepetidor');
-        $this->middleware('repetidorCorrespondiente')->only('edit', 'update', 'destroy');
+        $this->middleware('alumnoCorrespondiente')->only('createRepitente');
+        $this->middleware('repitenteCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
     }
 
     public function index($institucion_id)
     {
-        return Inertia::render('Repetidores/Index', [
+        return Inertia::render('Repitentes/Index', [
             'institucion_id' => $institucion_id,
             'divisiones' => Division::where('institucion_id', $institucion_id)
                 ->with('nivel', 'curso', 'orientacion')
@@ -46,9 +46,9 @@ class RepetidorController extends Controller
         ]);
     }
 
-    public function filtrarRepetidores($institucion_id, Request $filtros)
+    public function filtrarRepitentes($institucion_id, Request $filtros)
     {
-        return Repetidor::where('institucion_id', $institucion_id)
+        return Repitente::where('institucion_id', $institucion_id)
             ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
                 return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
             })
@@ -57,32 +57,32 @@ class RepetidorController extends Controller
             })
             ->with('alumno', 'alumno.user', 'ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
             ->paginate(20)
-            ->transform(function ($repetidor) {
+            ->transform(function ($repitente) {
                 return [
-                    'id' => $repetidor->id,
-                    'alumno_id' => $repetidor->alumno_id,
-                    'division_id' => $repetidor->division_id,
-                    'division' => $repetidor->division,
-                    'alumno' => $repetidor->alumno,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repetidor->ciclo_lectivo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($repetidor->ciclo_lectivo->final),
-                    'comentario'  => $repetidor->comentario,
+                    'id' => $repitente->id,
+                    'alumno_id' => $repitente->alumno_id,
+                    'division_id' => $repitente->division_id,
+                    'division' => $repitente->division,
+                    'alumno' => $repitente->alumno,
+                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->comienzo),
+                    'final' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->final),
+                    'comentario'  => $repitente->comentario,
                 ];
             });
     }
 
-    public function createRepetidor($institucion_id, $alumno_id)
+    public function createRepitente($institucion_id, $alumno_id)
     {
-        return Inertia::render('Repetidores/Create', [
+        return Inertia::render('Repitentes/Create', [
             'institucion_id' => $institucion_id,
             'alumno' => Alumno::with('user')->find($alumno_id),
             'cicloLectivo' => CicloLectivo::where('institucion_id', $institucion_id)->where('activado', '1')->first(),
         ]);
     }
 
-    public function store(StoreRepetidor $request, $institucion_id)
+    public function store(StoreRepitente $request, $institucion_id)
     {
-        Repetidor::create([
+        Repitente::create([
             'institucion_id' => $institucion_id,
             'alumno_id' => $request->alumno_id,
             'division_id' => $request->division_id,
@@ -90,27 +90,27 @@ class RepetidorController extends Controller
             'comentario' => $request->comentario,
         ]);
 
-        return redirect(route('repetidores.index', $institucion_id))->with(['successMessage' => 'Repetidor cargado con exito!']);
+        return redirect(route('repitentes.index', $institucion_id))->with(['successMessage' => 'Repitente cargado con exito!']);
     }
 
     public function show($institucion_id, $alumno_id)
     {
-        return Inertia::render('Repetidores/Show', [
+        return Inertia::render('Repitentes/Show', [
             'institucion_id' => $institucion_id,
             'alumno' => Alumno::with('user')->find($alumno_id),
             'tipo' => session('tipo'),
-            'repeticiones' => Repetidor::where('alumno_id', $alumno_id)
+            'repeticiones' => Repitente::where('alumno_id', $alumno_id)
                 ->with('ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
                 ->orderBy('ciclo_lectivo_id')
                 ->get()
-                ->map(function ($repetidor) {
+                ->map(function ($repitente) {
                     return [
-                        'id' => $repetidor->id,
-                        'division_id' => $repetidor->division_id,
-                        'division' => $repetidor->division,
-                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repetidor->ciclo_lectivo->comienzo),
-                        'final' => $this->formatoService->cambiarFormatoParaMostrar($repetidor->ciclo_lectivo->final),
-                        'comentario'  => $repetidor->comentario,
+                        'id' => $repitente->id,
+                        'division_id' => $repitente->division_id,
+                        'division' => $repitente->division,
+                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->comienzo),
+                        'final' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->final),
+                        'comentario'  => $repitente->comentario,
                     ];
                 }),
         ]);
@@ -118,9 +118,9 @@ class RepetidorController extends Controller
 
     public function edit($institucion_id, $id)
     {
-        return Inertia::render('Repetidores/Edit', [
+        return Inertia::render('Repitentes/Edit', [
             'institucion_id' => $institucion_id,
-            'repetidor' => Repetidor::with('alumno', 'alumno.user')->find($id),
+            'repitente' => Repitente::with('alumno', 'alumno.user')->find($id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get()
                 ->map(function ($ciclo) {
                     return [
@@ -139,19 +139,19 @@ class RepetidorController extends Controller
 
     public function update(Request $request, $institucion_id, $id)
     {
-        Repetidor::where('id', $id)
+        Repitente::where('id', $id)
             ->update([
                 'division_id' => $request->division_id,
                 'ciclo_lectivo_id' => $request->ciclo_lectivo_id,
                 'comentario' => $request->comentario,
             ]);
 
-        return redirect(route('repetidores.index', $institucion_id))->with(['successMessage' => 'Repetidor actualziado con exito!']);
+        return redirect(route('repitentes.index', $institucion_id))->with(['successMessage' => 'Repitente actualziado con exito!']);
     }
 
     public function destroy($institucion_id, $id)
     {
-        Repetidor::destroy($id);
-        return redirect(route('repetidores.index', $institucion_id))->with(['successMessage' => 'Repetidor eliminado con exito!']);
+        Repitente::destroy($id);
+        return redirect(route('repitentes.index', $institucion_id))->with(['successMessage' => 'Repitente eliminado con exito!']);
     }
 }

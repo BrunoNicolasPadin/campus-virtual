@@ -110,7 +110,7 @@
 
                                 <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo'">
                                     <template #td>
-                                        <inertia-link :href="route('repetidores.edit', [institucion_id, repeticion.id])">
+                                        <inertia-link :href="route('repitentes.edit', [institucion_id, repeticion.id])">
                                             <editar></editar>
                                         </inertia-link>
                                     </template>
@@ -166,8 +166,8 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que desea eliminar a este repetidor?')) {
-                    this.$inertia.delete(this.route('repetidores.destroy', [this.institucion_id, id]))
+                if (confirm('Estas seguro de que desea eliminar a este repitente?')) {
+                    this.$inertia.delete(this.route('repitentes.destroy', [this.institucion_id, id]))
                 }
             },
             

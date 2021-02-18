@@ -98,7 +98,7 @@
 
         methods: {
             submit() {
-                this.$inertia.post(this.route('repetidores.store', this.institucion_id), this.form)
+                this.$inertia.post(this.route('repitentes.store', this.institucion_id), this.form)
             },
 
             cerrarAlerta() {

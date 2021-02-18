@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRepetidoresTable extends Migration
+class CreateRepitentesTablte extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddRepetidoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('repetidores', function (Blueprint $table) {
+        Schema::create('repitentes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('institucion_id')->constrained('instituciones')->onDelete('cascade');
             $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
@@ -31,6 +31,6 @@ class AddRepetidoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('repetidores');
+        Schema::dropIfExists('repitentes');
     }
 }

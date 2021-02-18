@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-md text-gray-800 leading-tight">
-                Editar a {{ repetidor.alumno.user.name }}
+                Editar a {{ repitente.alumno.user.name }}
             </h2>
         </template>
 
@@ -69,7 +69,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccionar ciclo lectivo
+                                        Seleccionar ciclo lectivo que acaba de cursar (o sea, en el que repitio)
                                     </template>
                                 </label-form>
                                 
@@ -138,7 +138,7 @@
         props: {
             errors: Object,
             institucion_id: String,
-            repetidor: Object,
+            repitente: Object,
             divisiones: Array,
             ciclosLectivos: Array,
         },
@@ -148,9 +148,9 @@
         data() {
             return {
                 form: {
-                    division_id: this.repetidor.division_id,
-                    ciclo_lectivo_id: this.repetidor.ciclo_lectivo_id,
-                    comentario: this.repetidor.comentario,
+                    division_id: this.repitente.division_id,
+                    ciclo_lectivo_id: this.repitente.ciclo_lectivo_id,
+                    comentario: this.repitente.comentario,
                 },
                 mostrarErrores: true,
             }
@@ -158,7 +158,7 @@
 
         methods: {
             submit() {
-                this.$inertia.put(this.route('repetidores.update', [this.institucion_id, this.repetidor.id]), this.form)
+                this.$inertia.put(this.route('repitentes.update', [this.institucion_id, this.repitente.id]), this.form)
             },
 
             cerrarAlerta() {

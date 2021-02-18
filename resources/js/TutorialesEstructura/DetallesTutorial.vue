@@ -1,7 +1,7 @@
 <template>
     <div class="container px-4 text-left">
-        <span class="tracking-tight font-bold text-2xl">
-            <span class="text-indigo-900">
+        <span class="tracking-tight font-semibold text-2xl">
+            <span class="text-indigo-700">
                 <slot name="titulo-sub-tutorial"></slot>
             </span>
         </span>

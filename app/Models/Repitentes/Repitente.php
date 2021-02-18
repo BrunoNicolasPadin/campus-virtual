@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\Repetidores;
+namespace App\Models\Repitentes;
 
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
 use Illuminate\Database\Eloquent\Model;
 
-class Repetidor extends Model
+class Repitente extends Model
 {
-    protected $table = 'repetidores';
+    protected $table = 'repitentes';
     protected $fillable = [
         'institucion_id',
         'alumno_id',

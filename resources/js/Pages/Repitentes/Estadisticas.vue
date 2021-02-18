@@ -3,7 +3,7 @@
         <template #header>
             <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / 
-                <inertia-link class="hover:underline" :href="route('repetidores.index', institucion_id)">Repetidores</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('repitentes.index', institucion_id)">Repitentes</inertia-link> /
                 Numeros
             </span>
         </template>
@@ -38,7 +38,7 @@
             divisionCategorias: Array,
         },
 
-        title: 'Repetidores - Estadisticas',
+        title: 'Repitentes - Estadisticas',
 
         data() {
             return {
@@ -47,7 +47,7 @@
                         type: 'bar'
                     },
                     title: {
-                        text: 'Repetidores por ciclo'
+                        text: 'Repitentes por ciclo'
                     },
                     xAxis: {
                         categories: this.ciclosCategorias
@@ -71,7 +71,7 @@
                         type: 'bar'
                     },
                     title: {
-                        text: 'Repetidores por division'
+                        text: 'Repitentes por division'
                     },
                     xAxis: {
                         categories: this.divisionCategorias

@@ -96,7 +96,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('repetidores.index', institucion_id)" class="hover:underline">Repetidores</inertia-link>
+                                        <inertia-link :href="route('repitentes.index', institucion_id)" class="hover:underline">Repitentes</inertia-link>
                                     </template>
                                 </table-data>
                             </tr>

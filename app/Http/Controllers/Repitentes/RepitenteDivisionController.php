@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Repetidores;
+namespace App\Http\Controllers\Repitentes;
 
 use App\Http\Controllers\Controller;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
-use App\Models\Repetidores\Repetidor;
+use App\Models\Repitentes\Repitente;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class RepetidorDivisionController extends Controller
+class RepitenteDivisionController extends Controller
 {
     protected $formatoService;
 
@@ -25,7 +25,7 @@ class RepetidorDivisionController extends Controller
 
     public function mostrar($institucion_id, $division_id)
     {
-        return Inertia::render('Repetidores/Division', [
+        return Inertia::render('Repitentes/Division', [
             'institucion_id' => $institucion_id,
             'division' => Division::where('institucion_id', $institucion_id)
                 ->with('nivel', 'curso', 'orientacion')
@@ -41,24 +41,24 @@ class RepetidorDivisionController extends Controller
         ]);
     }
 
-    public function filtrarRepetidores($institucion_id, $division_id, Request $filtro)
+    public function filtrarRepitentes($institucion_id, $division_id, Request $filtro)
     {
-        return Repetidor::where('institucion_id', $institucion_id)
+        return Repitente::where('institucion_id', $institucion_id)
         ->when($filtro->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
             return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
         })
         ->with('alumno', 'alumno.user', 'ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
         ->paginate(20)
-        ->transform(function ($repetidor) {
+        ->transform(function ($repitente) {
             return [
-                'id' => $repetidor->id,
-                'alumno_id' => $repetidor->alumno_id,
-                'division_id' => $repetidor->division_id,
-                'division' => $repetidor->division,
-                'alumno' => $repetidor->alumno,
-                'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repetidor->ciclo_lectivo->comienzo),
-                'final' => $this->formatoService->cambiarFormatoParaMostrar($repetidor->ciclo_lectivo->final),
-                'comentario'  => $repetidor->comentario,
+                'id' => $repitente->id,
+                'alumno_id' => $repitente->alumno_id,
+                'division_id' => $repitente->division_id,
+                'division' => $repitente->division,
+                'alumno' => $repitente->alumno,
+                'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->comienzo),
+                'final' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->final),
+                'comentario'  => $repitente->comentario,
             ];
         });
     }

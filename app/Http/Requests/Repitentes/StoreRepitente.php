@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Repetidores;
+namespace App\Http\Requests\Repitentes;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRepetidor extends FormRequest
+class StoreRepitente extends FormRequest
 {
     public function authorize()
     {

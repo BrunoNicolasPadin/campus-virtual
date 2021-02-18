@@ -40,9 +40,9 @@ use App\Http\Controllers\Materiales\MaterialController;
 use App\Http\Controllers\Muro\MuroArchivoController;
 use App\Http\Controllers\Muro\MuroController;
 use App\Http\Controllers\Muro\MuroRespuestaController;
-use App\Http\Controllers\Repetidores\RepetidorController;
-use App\Http\Controllers\Repetidores\RepetidorDivisionController;
-use App\Http\Controllers\Repetidores\RepetidorEstadisticaController;
+use App\Http\Controllers\Repitentes\RepitenteController;
+use App\Http\Controllers\Repitentes\RepitenteDivisionController;
+use App\Http\Controllers\Repitentes\RepitenteEstadisticaController;
 use App\Http\Controllers\Roles\ActivarCuentaController;
 use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\DirectivoController;
@@ -182,17 +182,17 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::resource('muro-respuestas', MuroRespuestaController::class);
         });
 
-        Route::get('repetidores', [RepetidorDivisionController::class, 'mostrar'])->name('repetidores-division.mostrar');
-        Route::post('repetidores/filtrados', [RepetidorDivisionController::class, 'filtrarRepetidores'])->name('repetidores-division.filtrar');
+        Route::get('repitentes', [RepitenteDivisionController::class, 'mostrar'])->name('repitentes-division.mostrar');
+        Route::post('repitentes/filtrados', [RepitenteDivisionController::class, 'filtrarRepitentes'])->name('repitentes-division.filtrar');
 
         Route::get('estadisticas', [EstructuraEstadisticaController::class, 'mostrarCiclosLectivos'])->name('divisiones.mostrarCiclosLectivos');
         Route::get('estadisticas/{ciclo_lectivo_id}', [EstructuraEstadisticaController::class, 'mostrarEstadisticas'])->name('divisiones.mostrarEstadisticas');
     });
 
-    Route::resource('repetidores', RepetidorController::class);
-    Route::get('repetidores/{alumno_id}/create', [RepetidorController::class, 'createRepetidor'])->name('repetidores.createRepetidor');
-    Route::post('repetidores/filtrados', [RepetidorController::class, 'filtrarRepetidores'])->name('repetidores.filtrar');
-    Route::get('repetidores-estadisticas', [RepetidorEstadisticaController::class, 'mostrarEstadisticas'])->name('repetidores.estadisticas');
+    Route::resource('repitentes', RepitenteController::class);
+    Route::get('repitentes/{alumno_id}/create', [RepitenteController::class, 'createRepitente'])->name('repitentes.createRepitente');
+    Route::post('repitentes/filtrados', [RepitenteController::class, 'filtrarRepitentes'])->name('repitentes.filtrar');
+    Route::get('repitentes-estadisticas', [RepitenteEstadisticaController::class, 'mostrarEstadisticas'])->name('repitentes.estadisticas');
 
     Route::resource('exalumnos', ExAlumnoController::class);
     Route::post('exalumnos/filtrados', [ExAlumnoController::class, 'filtrarExAlumnos'])->name('exalumnos.filtrar');

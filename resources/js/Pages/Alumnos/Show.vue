@@ -117,7 +117,7 @@
                             Veces que repitio el alumno
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <inertia-link class="hover:underline" :href="route('repetidores.show', [institucion_id, alumno.id])">
+                            <inertia-link class="hover:underline" :href="route('repitentes.show', [institucion_id, alumno.id])">
                                 Ver
                             </inertia-link>
                         </dd>
@@ -130,7 +130,7 @@
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <primary>
                                 <template #boton-primary>
-                                    <inertia-link :href="route('repetidores.createRepetidor', [institucion_id, alumno.id])">Procesar</inertia-link>
+                                    <inertia-link :href="route('repitentes.createRepitente', [institucion_id, alumno.id])">Procesar</inertia-link>
                                 </template>
                             </primary>
                         </dd>
@@ -156,9 +156,6 @@
                             Padre/s
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <!-- <inertia-link class="hover:underline" :href="route('repetidores.show', [institucion_id, alumno.id])">
-                                Ver
-                            </inertia-link> -->
                             <span v-for="padre in alumno.padres" :key="padre.id">
                                 <inertia-link class="hover:underline" :href="route('padres.show', [institucion_id, padre.id])">
                                     {{ padre.user.name }}

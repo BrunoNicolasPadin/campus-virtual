@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Middleware\Repetidores;
+namespace App\Http\Middleware\Repitentes;
 
-use App\Models\Repetidores\Repetidor;
+use App\Models\Repitentes\Repitente;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
 
-class RepetidorCorrespondiente
+class RepitenteCorrespondiente
 {
     protected $ruta;
 
@@ -19,9 +19,9 @@ class RepetidorCorrespondiente
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
-        $repetidor = Repetidor::find($link[6]);
+        $repitente = Repitente::find($link[6]);
 
-        if (session('institucion_id') == $repetidor->institucion_id) {
+        if (session('institucion_id') == $repitente->institucion_id) {
             return $next($request);
         }
         abort(403, 'Este alumno que repitio no pertenece a su institucion.');
