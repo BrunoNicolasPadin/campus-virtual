@@ -20,6 +20,7 @@ use App\Http\Controllers\Deudores\RendirCorreccionController;
 use App\Http\Controllers\Deudores\RendirEntregaController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Estructuras\EstructuraEstadisticaController;
+use App\Http\Controllers\Estructuras\LimpiarDivisionController;
 use App\Http\Controllers\Evaluaciones\CorreccionController;
 use App\Http\Controllers\Evaluaciones\EntregaArchivoController;
 use App\Http\Controllers\Evaluaciones\EntregaComentarioController;
@@ -187,6 +188,8 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
 
         Route::get('estadisticas', [EstructuraEstadisticaController::class, 'mostrarCiclosLectivos'])->name('divisiones.mostrarCiclosLectivos');
         Route::get('estadisticas/{ciclo_lectivo_id}', [EstructuraEstadisticaController::class, 'mostrarEstadisticas'])->name('divisiones.mostrarEstadisticas');
+   
+        Route::get('limpiar', [LimpiarDivisionController::class, 'limpiarDivision'])->name('divisiones.limpiar');
     });
 
     Route::resource('repitentes', RepitenteController::class);

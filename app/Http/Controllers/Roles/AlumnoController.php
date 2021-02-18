@@ -126,7 +126,11 @@ class AlumnoController extends Controller
             $alumno = Alumno::find($id);
             $alumno->division_id = $request->division_id;
             $alumno->save();
-            session(['division_id' => $request->division_id]);
+
+            if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
+                session(['division_id' => $request->division_id]);
+            }
+
             return redirect(route('divisiones.show', [$institucion_id, $request->division_id]));
         }
         return back()->withErrors('Clave de acceso incorrecta.');

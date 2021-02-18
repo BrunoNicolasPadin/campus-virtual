@@ -8,6 +8,7 @@
                     <li>1) <a class="hover:underline" href="#agregar">Agregar</a></li>
                     <li>2) <a class="hover:underline" href="#editar">Editar</a></li>
                     <li>3) <a class="hover:underline" href="#eliminar">Eliminar</a></li>
+                    <li>3) <a class="hover:underline" href="#limpiar">Limpiar</a></li>
                 </template>
 
                 <template #detalles>
@@ -44,6 +45,22 @@
                             No la elimine aunque en la vida real no exista mas, no paga nada adicional por la cantidad de divisiones que tenga ;).
                             Si elimina una division automaticamente se eliminaran las libretas de todos los alumnos que pasaron por aqui, asignaturas, evaluaciones, 
                             materiales, archivos de correcciones, entregas, publicaciones en el muro y sus respectivas respuestas. 
+                        </template>
+
+                        <template #contenido-video>
+                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
+                        </template>
+                    </detalles-tutorial>
+
+                    <detalles-tutorial id="limpiar">
+                        <template #titulo-sub-tutorial>
+                            Limpiar
+                        </template>
+
+                        <template #informacion>
+                            Se eliminaran las evaluaciones, archivos de evaluaciones, comentarios y respuestas de evaluaciones, entregas, correcciones, 
+                            comentarios de entregas, publicaciones, respuestas y archivos del muro. 
+                            El resto se mantiene: materiales, asignaturas, docentes, alumnos, repitentes y estadisticas.
                         </template>
 
                         <template #contenido-video>
