@@ -1,13 +1,25 @@
 <template>
     <app-layout>
         <template #header>
-            <span class="font-semibold text-md text-gray-800 leading-tight">
-                <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
-                <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
-                    <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                    <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                </inertia-link> / Alumnos
-            </span>
+            <div class="flex">
+                <div class="w-8/12">
+                    <span class="font-semibold text-md text-gray-800 leading-tight">
+                        <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
+                        <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
+                            <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                            <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                        </inertia-link> / Alumnos
+                    </span>
+                </div>
+                <div v-show="tipo == 'Institucion' || tipo == 'Directivo' " class="w-4/12">
+                    <primary class="float-right">
+                        <template #boton-primary>
+                            <inertia-link :href="route('alumnosDivision.hacerlosPasar', [institucion_id, division.id])">Pasar de año</inertia-link>
+                        </template>
+                    </primary>
+                </div>
+            </div>
+            
         </template>
 
         <div class="py-6">
@@ -92,6 +104,7 @@
     import TableBody from '@/Tabla/TableBody.vue'
     import TableData from '@/Tabla/TableData.vue'
     import Pagination from '@/Pagination/Pagination.vue'
+    import Primary from '@/Botones/Primary.vue'
 
     export default {
         components: {
@@ -102,6 +115,7 @@
             TableBody,
             TableData,
             Pagination,
+            Primary,
         },
 
         props: {

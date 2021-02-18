@@ -251,7 +251,7 @@
         props:{ 
             successMessage: String,
             institucion_id: String,
-            ciclosLectivos:  Array,
+            ciclosLectivos: Array,
             divisiones: Array,
         },
 

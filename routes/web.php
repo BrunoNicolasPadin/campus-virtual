@@ -148,6 +148,8 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
 
         Route::get('alumnos', [AlumnoDivisionController::class, 'mostrarAlumnos'])->name('alumnosDivision.mostrar');
         Route::get('{alumno_id}/sacarlo', [AlumnoDivisionController::class, 'sacarloDeLaDivision'])->name('alumnosDivision.sacarlo');
+        Route::get('alumnos/hacerlos-pasar', [AlumnoDivisionController::class, 'hacerlosPasar'])->name('alumnosDivision.hacerlosPasar');
+        Route::post('alumnos/cambiarCurso', [AlumnoDivisionController::class, 'cambiarCurso'])->name('alumnosDivision.cambiarCurso');
 
         Route::get('docentes', [DocenteDivisionController::class, 'mostrarDocentes'])->name('docentesDivision.mostrar');
 
