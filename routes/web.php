@@ -225,4 +225,5 @@ Route::prefix('tutoriales')->group(function () {
     Route::inertia('repitente', 'Tutoriales/Repitente')->name('tutoriales.repitente');
     Route::inertia('exalumno', 'Tutoriales/ExAlumno')->name('tutoriales.exalumno');
     Route::inertia('calendario', 'Tutoriales/Calendario')->name('tutoriales.calendario');
+    Route::inertia('como-empezar', 'Tutoriales/ComoEmpezar')->name('tutoriales.como-empezar');
 });

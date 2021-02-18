@@ -18,8 +18,8 @@
                         </template>
 
                         <template #informacion>
-                            No podra registrarse como directivo nuevamente en la misma institucion pero si con otro rol. 
-                            Si podra registrarse en otra institucion con el rol de directivo sin ningun problema.
+                            No podra registrarse como docente nuevamente en la misma institucion pero si con otro rol. 
+                            Si podra registrarse en otra institucion con el rol de docente sin ningun problema.
                         </template>
 
                         <template #contenido-video>
