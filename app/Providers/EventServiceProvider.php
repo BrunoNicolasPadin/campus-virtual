@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Evaluaciones\Evaluacion;
+use App\Models\Repitentes\Repitente;
 use App\Models\Roles\Alumno;
 use App\Observers\AlumnoObserver;
 use App\Observers\EvaluacionObserver;
+use App\Observers\RepitenteObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,5 +34,6 @@ class EventServiceProvider extends ServiceProvider
     {
         Evaluacion::observe(EvaluacionObserver::class);
         Alumno::observe(AlumnoObserver::class);
+        Repitente::observe(RepitenteObserver::class);
     }
 }

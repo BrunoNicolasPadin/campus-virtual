@@ -101,7 +101,7 @@ class Kernel extends HttpKernel
         'padreYaCreado' => \App\Http\Middleware\Padres\PadreYaCreado::class,
         'soloInstitucionesDirectivosPadres' => \App\Http\Middleware\Padres\SoloInstitucionesDirectivosPadres::class,
         'padreCorrespondiente' => \App\Http\Middleware\Padres\PadreCorrespondiente::class,
-        'repetidorCorrespondiente' => \App\Http\Middleware\Repetidores\RepetidorCorrespondiente::class,
+        'repitenteCorrespondiente' => \App\Http\Middleware\Repitentes\RepitenteCorrespondiente::class,
         'verificarExAlumnoNuevo' => \App\Http\Middleware\ExAlumnos\VerificarExAlumnoNuevo::class,
         'exAlumnoCorrespondiente' => \App\Http\Middleware\ExAlumnos\ExAlumnoCorrespondiente::class,
         'asignaturaAdeudadaCorrespondiente' => \App\Http\Middleware\Asignaturas\AsignaturaAdeudadaCorrespondiente::class,

@@ -139,12 +139,11 @@ class RepitenteController extends Controller
 
     public function update(Request $request, $institucion_id, $id)
     {
-        Repitente::where('id', $id)
-            ->update([
-                'division_id' => $request->division_id,
-                'ciclo_lectivo_id' => $request->ciclo_lectivo_id,
-                'comentario' => $request->comentario,
-            ]);
+        $repitente = Repitente::find($id);
+        $repitente->division_id = $request->division_id;
+        $repitente->ciclo_lectivo_id = $request->ciclo_lectivo_id;
+        $repitente->comentario = $request->comentario;
+        $repitente->save();
 
         return redirect(route('repitentes.index', $institucion_id))->with(['successMessage' => 'Repitente actualziado con exito!']);
     }
