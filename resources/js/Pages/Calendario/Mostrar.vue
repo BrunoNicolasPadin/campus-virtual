@@ -51,80 +51,108 @@
                             <template #th>
                                 <table-head>
                                     <template #th-titulo>
-                                        Info
+                                        #
+                                    </template>
+                                </table-head>
+
+                                <table-head>
+                                    <template #th-titulo>
+                                        Titulo
+                                    </template>
+                                </table-head>
+
+                                <table-head>
+                                    <template #th-titulo>
+                                        Tipo
+                                    </template>
+                                </table-head>
+
+                                <table-head>
+                                    <template #th-titulo>
+                                        Dia y hora
+                                    </template>
+                                </table-head>
+
+                                <table-head>
+                                    <template #th-titulo>
+                                        Division
+                                    </template>
+                                </table-head>
+
+                                <table-head>
+                                    <template #th-titulo>
+                                        Asignatura
                                     </template>
                                 </table-head>
                             </template>
                         </table-head-estructura>
 
                         <table-body v-for="(evaluacion, evaindex) in evasMesas" :key="evaluacion.id">
-                            <template #tr>
-                                <span v-if="evaindex == mindex">
-                                    <tr v-for="(eva, index) in evaluacion" :key="eva.id">
-                                        <table-data>
-                                            <template #td>
-                                                {{ index + 1 }}
-                                            </template>
-                                        </table-data>
+                            <template #tr v-if="evaindex == mindex">
+                                <tr v-for="(eva, index) in evaluacion" :key="eva.id">
+                                    <table-data>
+                                        <template #td>
+                                            {{ index + 1 }}
+                                        </template>
+                                    </table-data>
 
-                                        <table-data>
-                                            <template #td>
-                                                <span v-if="eva.tipo == 'Mesa de examen' ">
-                                                    <inertia-link class="hover:underline" 
-                                                    :href="route('mesas.show', [eva.institucion_id, eva.division_id, eva.asignatura.id, eva.id])">
-                                                        Ingresar
-                                                    </inertia-link>
-                                                </span>
+                                    <table-data>
+                                        <template #td>
+                                            <span v-if="eva.tipo == 'Mesa de examen' ">
+                                                <inertia-link class="hover:underline" 
+                                                :href="route('mesas.show', [eva.institucion_id, eva.division_id, eva.asignatura.id, eva.id])">
+                                                    Ingresar a la mesa
+                                                </inertia-link>
+                                            </span>
 
-                                                <span v-else>
-                                                    <inertia-link class="hover:underline" 
-                                                    :href="route('evaluaciones.show', [eva.institucion_id, eva.division_id, eva.id])">
-                                                        {{ eva.titulo }}
-                                                    </inertia-link>
-                                                </span>
-                                                
-                                            </template>
-                                        </table-data>
+                                            <span v-else>
+                                                <inertia-link class="hover:underline" 
+                                                :href="route('evaluaciones.show', [eva.institucion_id, eva.division_id, eva.id])">
+                                                    {{ eva.titulo }}
+                                                </inertia-link>
+                                            </span>
+                                            
+                                        </template>
+                                    </table-data>
 
-                                        <table-data>
-                                            <template #td>
-                                                {{ eva.tipo }}
-                                            </template>
-                                        </table-data>
+                                    <table-data>
+                                        <template #td>
+                                            {{ eva.tipo }}
+                                        </template>
+                                    </table-data>
 
-                                        <table-data>
-                                            <template #td>
-                                                {{ eva.fechaHora }} - {{ eva.fechaHoraFinalizacion }}
-                                            </template>
-                                        </table-data>
+                                    <table-data>
+                                        <template #td>
+                                            {{ eva.fechaHora }}<span v-show="eva.fechaHoraFinalizacion !== '' "> - {{ eva.fechaHoraFinalizacion }}</span>
+                                        </template>
+                                    </table-data>
 
-                                        <table-data>
-                                            <template #td>
-                                                <span v-if="eva.division.orientacion">
-                                                    <inertia-link class="hover:underline" 
-                                                    :href="route('divisiones.show', [eva.institucion_id, eva.division_id])">
-                                                        {{ eva.division.nivel.nombre }} - {{ eva.division.orientacion.nombre }} - 
-                                                        {{ eva.division.curso.nombre }} - {{ eva.division.division }}
-                                                    </inertia-link>
-                                                </span>
+                                    <table-data>
+                                        <template #td>
+                                            <span v-if="eva.division.orientacion">
+                                                <inertia-link class="hover:underline" 
+                                                :href="route('divisiones.show', [eva.institucion_id, eva.division_id])">
+                                                    {{ eva.division.nivel.nombre }} - {{ eva.division.orientacion.nombre }} - 
+                                                    {{ eva.division.curso.nombre }} - {{ eva.division.division }}
+                                                </inertia-link>
+                                            </span>
 
-                                                <span v-else>
-                                                    <inertia-link class="hover:underline" 
-                                                    :href="route('divisiones.show', [eva.institucion_id, eva.division_id])">
-                                                        {{ eva.division.nivel.nombre }} - 
-                                                        {{ eva.division.curso.nombre }} - {{ eva.division.division }}
-                                                    </inertia-link>
-                                                </span>
-                                            </template>
-                                        </table-data>
+                                            <span v-else>
+                                                <inertia-link class="hover:underline" 
+                                                :href="route('divisiones.show', [eva.institucion_id, eva.division_id])">
+                                                    {{ eva.division.nivel.nombre }} - 
+                                                    {{ eva.division.curso.nombre }} - {{ eva.division.division }}
+                                                </inertia-link>
+                                            </span>
+                                        </template>
+                                    </table-data>
 
-                                        <table-data>
-                                            <template #td>
-                                                {{ eva.asignatura.nombre }}
-                                            </template>
-                                        </table-data>
-                                    </tr>
-                                </span>
+                                    <table-data>
+                                        <template #td>
+                                            {{ eva.asignatura.nombre }}
+                                        </template>
+                                    </table-data>
+                                </tr>
                             </template>
                         </table-body>
                     </template>

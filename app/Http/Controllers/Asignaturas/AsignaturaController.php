@@ -113,7 +113,7 @@ class AsignaturaController extends Controller
             'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'asignatura' => Asignatura::findOrFail($id),
-            'mesas' => Mesa::where('asignatura_id', $id)->with('asignatura')->orderBy('fechaHora')->paginate(2)
+            'mesas' => Mesa::where('asignatura_id', $id)->with('asignatura')->orderBy('fechaHora')->paginate(10)
                 ->transform(function ($mesa) {
                     return [
                         'id' => $mesa->id,
