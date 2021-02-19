@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Materiales;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Materiales\StoreGrupo;
+use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
@@ -34,7 +35,8 @@ class GrupoController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'grupos' => Grupo::where('division_id', $division_id)->with('asignatura')->paginate(20),
+            'asignaturas' => Asignatura::where('division_id', $division_id)->get(),
+            'gruposTodos' => Grupo::where('division_id', $division_id)->with('asignatura')->paginate(20),
         ]);
     }
 

@@ -36,6 +36,7 @@ use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Libretas\LibretaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Materiales\BuscarGruposController;
 use App\Http\Controllers\Materiales\GrupoController;
 use App\Http\Controllers\Materiales\MaterialController;
 use App\Http\Controllers\Muro\MuroArchivoController;
@@ -173,6 +174,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         });
 
         Route::resource('materiales', GrupoController::class);
+        Route::post('materiales/filtrar', [BuscarGruposController::class, 'filtrarPorAsignaturas'])->name('materiales.filtrarPorAsignatura');
         Route::prefix('materiales/{grupo_id}')->group(function () {
         
             Route::resource('materiales-archivos', MaterialController::class);

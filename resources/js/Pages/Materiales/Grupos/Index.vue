@@ -43,6 +43,37 @@
                 </div>
             </transition>
 
+            <estructura-form>
+                <template #formulario>
+                    <form method="post" @submit.prevent="submit">
+                        
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3 mb-6 md:mb-0">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Seleccionar asignatura que desea ver:
+                                    </template>
+                                </label-form>
+                                
+                                <select
+                                @change="onChange()"
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.asignatura_id">
+
+                                    <option selected value="">Todas</option>
+                                    <option v-for="asignatura in asignaturas" :key="asignatura.id" :value="asignatura.id">
+                                        {{ asignatura.nombre }}
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </template>
+            </estructura-form>
+
             <estructura-tabla>
                 <template #tabla>
 
@@ -116,6 +147,9 @@
     import Eliminar from '@/Botones/Eliminar'
     import Primary from '@/Botones/Primary.vue'
     import Pagination from '@/Pagination/Pagination.vue'
+    import EstructuraForm from '@/Formulario/EstructuraForm.vue'
+    import LabelForm from '@/Formulario/LabelForm.vue'
+    import axios from 'axios'
 
     export default {
         components: {
@@ -129,6 +163,8 @@
             Eliminar,
             Primary,
             Pagination,
+            EstructuraForm,
+            LabelForm,
         },
 
         props:{ 
@@ -136,15 +172,37 @@
             institucion_id: String,
             tipo: String,
             division: Object,
-            grupos: Object,
+            asignaturas: Array,
+            gruposTodos: Object,
         },
 
         title: 'Grupos',
 
+        data() {
+            return {
+                form: {
+                    asignatura_id: null,
+                },
+                mostrarErrores: true,
+                grupos: this.gruposTodos,
+            }
+        },
+
         methods: {
             cerrarAlerta() {
                 this.successMessage = false;
-            }
+            },
+
+            onChange() {
+                axios.post(this.route('materiales.filtrarPorAsignatura', [this.institucion_id, this.division.id]), this.form)
+                .then(response => {
+                    this.grupos = response.data;
+                })
+                .catch(e => {
+                    // Podemos mostrar los errores en la consola
+                    console.log(e);
+                })
+            },
         }
     }
 </script>
