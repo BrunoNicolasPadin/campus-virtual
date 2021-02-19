@@ -6,7 +6,7 @@
                 <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
                     <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
                     <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                </inertia-link> / Estadisticas
+                </inertia-link> / Estadísticas
             </span>
         </template>
 

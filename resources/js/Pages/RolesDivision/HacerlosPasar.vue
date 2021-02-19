@@ -23,7 +23,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccione division a la que iran:
+                                        Seleccione la división a la que pasarán:
                                     </template>
                                 </label-form>
                                 

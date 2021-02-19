@@ -45,7 +45,7 @@
 
                     <div v-if="alumno.exAlumno == 0" class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Division
+                            División
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2" v-if="alumno.division">
                             <span v-if="alumno.division.orientacion">
@@ -103,7 +103,7 @@
                     
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Estadisticas
+                            Estadísticas
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <inertia-link class="hover:underline" :href="route('alumnos.mostrarCiclosLectivos', [institucion_id, alumno.id])">
@@ -114,7 +114,7 @@
 
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Veces que repitio el alumno
+                            Veces que repitió el alumno
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <inertia-link class="hover:underline" :href="route('repitentes.show', [institucion_id, alumno.id])">

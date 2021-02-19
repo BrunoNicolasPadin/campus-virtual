@@ -26,15 +26,15 @@ class PadreCorrespondiente
             if ($padre->hijos->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Este padre no es de tu institucion.');
+            abort(403, 'Este padre no es de tu institución.');
         }
 
         if (session('tipo') == 'Padre') {
             if ($padre->id == session('tipo_id')) {
                 return $next($request);
             }
-            abort(403, 'Este padre no eres tu.');
+            abort(403, 'Este padre no eres tú.');
         }
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

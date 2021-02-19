@@ -24,6 +24,6 @@ class RepitenteCorrespondiente
         if (session('institucion_id') == $repitente->institucion_id) {
             return $next($request);
         }
-        abort(403, 'Este alumno que repitio no pertenece a su institucion.');
+        abort(403, 'Este repitente no pertenece a tu institución.');
     }
 }

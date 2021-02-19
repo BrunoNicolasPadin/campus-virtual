@@ -36,7 +36,7 @@
 
             <div class="container mx-auto px-4 sm:px-8">
 
-                <h2 class="text-2xl font-semibold leading-tight">Publicacion</h2>
+                <h2 class="text-2xl font-semibold leading-tight">Publicación</h2>
 
                 <div class="bg-white rounded shadow-sm p-8 my-6">
                     <div class="flex justify-between mb-1">

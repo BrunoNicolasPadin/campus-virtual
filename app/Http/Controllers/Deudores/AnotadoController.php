@@ -46,7 +46,7 @@ class AnotadoController extends Controller
             'alumno_id' => $alumno['id'],
         ]);
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
-            ->with(['successMessage' => 'Te inscribbiste con exito!']);
+            ->with(['successMessage' => 'Te inscribbiste con éxito!']);
     }
 
     public function show($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
@@ -121,14 +121,14 @@ class AnotadoController extends Controller
         }
 
         return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $id]))
-            ->with(['successMessage' => 'Alumno calificado con exito!']);
+            ->with(['successMessage' => 'Alumno calificado con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
         Anotado::destroy($id);
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
-            ->with(['successMessage' => 'Inscripcion eliminada con exito!']);
+            ->with(['successMessage' => 'Inscripción eliminada con éxito!']);
 
     }
 }

@@ -26,14 +26,14 @@ class InscripcionCorrespondiente
             if (session('institucion_id') == $anotado->alumno->institucion_id) {
                 return $next($request);
             }
-            abort(403, 'Esta inscripcion es de un alumno que no forma parte de tu institucion.');
+            abort(403, 'Esta inscripción es de un alumno que no forma parte de tu institución.');
         }
 
         if (session('tipo') == 'Docente') {
             if (AsignaturaDocente::where('asignatura_id', $anotado->mesa->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
                 return $next($request);
             }
-            abort(403, 'Usted no es docente de la asignatura en la que se inscribio este alumno.');
+            abort(403, 'Usted no es docente de la asignatura en la que se inscribió este alumno.');
         }
 
         if (session('tipo') == 'Alumno' ) {
@@ -41,16 +41,16 @@ class InscripcionCorrespondiente
             if (session('tipo_id') == $anotado->alumno_id) {
                 return $next($request);
             }
-            abort(403, 'Esta no es tu inscripcion.');
+            abort(403, 'Esta no es tu inscripción.');
         }
 
         if (session('tipo') == 'Padre' ) {
             if (session('alumno_id') == $anotado->alumno_id) {
                 return $next($request);
             }
-            abort(403, 'Esta no es la inscripcion de su hijo/a.');
+            abort(403, 'Esta no es la inscripción de su hijo/a.');
         }
 
-        abort(403, 'No puede estar aqui.');
+        abort(403, 'No puede estar aquí.');
     }
 }

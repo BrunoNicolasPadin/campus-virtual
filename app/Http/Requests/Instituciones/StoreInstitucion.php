@@ -25,12 +25,12 @@ class StoreInstitucion extends FormRequest
     public function messages()
     {
         return [
-            'numero.string' => 'Debe ingresar solo caracteres en los numeros.',
-            'fundacion.string' => 'Debe ingresar solo caracteres en la fundacion.',
-            'historia.string' => 'Debe ingresar solo caracteres en la historia.',
+            'numero.string' => 'Debe ingresar solo cadenas de caracteres (letras, números o signos) en los numeros.',
+            'fundacion.string' => 'Debe ingresar solo cadenas de caracteres (letras, números o signos) en la fundación.',
+            'historia.string' => 'Debe ingresar solo cadenas de caracteres (letras, números o signos) en la historia.',
             'claveDeAcceso.required' => 'Debe ingresar una clave de acceso.',
-            'claveDeAcceso.min' => 'La clave de acceso debe tener como minimo 8 caracteres.',
-            'claveDeAcceso.max' => 'La clave de acceso debe tener como maximo 32 caracteres.',
+            'claveDeAcceso.min' => 'La clave de acceso debe tener como mínimo 8 caracteres.',
+            'claveDeAcceso.max' => 'La clave de acceso debe tener como máximo 32 caracteres.',
             'claveDeAcceso_confirmation.same' => 'Las claves de acceso no coinciden.',
             
         ];

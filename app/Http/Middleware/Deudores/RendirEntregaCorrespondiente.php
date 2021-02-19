@@ -25,7 +25,7 @@ class RendirEntregaCorrespondiente
             if (session('tipo_id') == $entrega->anotado->alumno_id) {
                 return $next($request);
             }
-            abort(403, 'No es un archivo de su entrega.');
+            abort(403, 'Este archivo no es tuyo.');
         }
 
         if (session('tipo') == 'Padre' ) {
@@ -34,6 +34,6 @@ class RendirEntregaCorrespondiente
             }
             abort(403, 'Este archivo no es de la entrega de su hijo/a.');
         }
-        abort(403, 'No puede estar aqui.');
+        abort(403, 'No puede estar aquí.');
     }
 }

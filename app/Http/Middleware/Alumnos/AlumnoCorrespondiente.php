@@ -29,7 +29,7 @@ class AlumnoCorrespondiente
             if (session('institucion_id') == $alumno->institucion_id) {
                 return $next($request);
             }
-            abort(403, 'Este alumno no forma parte de su institucion.');
+            abort(403, 'Este alumno no forma parte de su institución.');
         }
 
         if (session('tipo') == 'Alumno') {
@@ -39,7 +39,7 @@ class AlumnoCorrespondiente
                 ->exists()) {
                 return $next($request);
             }
-            abort(403, 'Este alumno no eres tu.');
+            abort(403, 'Este alumno no eres tú.');
         }
 
         if (session('tipo') == 'Padre') {
@@ -49,9 +49,9 @@ class AlumnoCorrespondiente
                 ->exists()) {
                 return $next($request);
             }
-            abort(403, 'Este/a alumno/a no es tu hijo/a.');
+            abort(403, 'Este/a alumno/a no es tú hijo/a.');
         }
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
 
     }
 }

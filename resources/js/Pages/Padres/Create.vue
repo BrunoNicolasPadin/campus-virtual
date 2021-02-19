@@ -59,7 +59,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccionar hijo
+                                        Seleccionar hijo/a
                                     </template>
                                 </label-form>
                                 
@@ -77,7 +77,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio. Debe apretar en "Guardar" para registrar a este/a alumno/a como su hijo/a y luego, si ya cargo a todos sus hijos, apriete en "Finalizar registro".
+                                        Es obligatorio. Debe apretar en "Guardar" para registrar a este/a alumno/a como su hijo/a y luego, si ya cargo a todos sus hijos/as, apriete en "Finalizar registro".
                                     </template>
                                 </info>
                             </div>

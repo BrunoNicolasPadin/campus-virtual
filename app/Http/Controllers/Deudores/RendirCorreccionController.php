@@ -54,7 +54,7 @@ class RendirCorreccionController extends Controller
             }
 
             return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id]))
-                ->with(['successMessage' => 'Tus correcciones han sido cargadas con exito!']);
+                ->with(['successMessage' => 'Tus correcciones han sido subidas con éxito!']);
         }
 
         return back()->withErrors('No hay ningun archivo seleccionado');
@@ -66,6 +66,6 @@ class RendirCorreccionController extends Controller
         Storage::delete('public/Deudores/Entregas/' . $entrega->archivo);
 
         RendirCorreccion::destroy($id);
-        return back()->with(['successMessage' => 'Archivo eliminado con exito!']);
+        return back()->with(['successMessage' => 'Archivo eliminado con éxito!']);
     }
 }

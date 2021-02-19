@@ -58,7 +58,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Titulo
+                                    Título
                                 </template>
                             </table-head>
 
@@ -76,13 +76,13 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Realizacion
+                                    Realización
                                 </template>
                             </table-head>
 
                             <table-head>
                                 <template #th-titulo>
-                                    Finalizacion
+                                    Finalización
                                 </template>
                             </table-head>
                         </template>

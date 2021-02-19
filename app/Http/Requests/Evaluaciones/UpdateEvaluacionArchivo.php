@@ -23,7 +23,7 @@ class UpdateEvaluacionArchivo extends FormRequest
     {
         return [
             'nombre.required' => 'Debe ingresar un nombre.',
-            'nombre.string' => 'El nombre debe  ser una cadena de caracteres o numeros, no otra cosa.',
+            'nombre.string' => 'El nombre debe ser una cadena de caracteres (letras, numeros o signos), no otra cosa.',
             'visibilidad.required' => 'Debe seleccionar una visibilidad.',
         ];
     }

@@ -31,7 +31,7 @@ class AsignaturaEstadisticaController extends Controller
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'asignatura' => Asignatura::findOrFail($asignatura_id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get()
+            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->orderBy('comienzo')->get()
             ->map(function ($ciclo) {
                 return [
                     'id' => $ciclo->id,

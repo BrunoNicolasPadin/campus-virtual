@@ -14,7 +14,7 @@ class PadreYaCreado
         if (Padre::where('user_id', Auth::id())
             ->where('alumno_id', $request->alumno_id)
             ->exists()) {
-            abort(403, 'Ya estas registrado como padre de este alumno.');
+            abort(403, 'Ya estás registrado como padre de este alumno.');
         }
         return $next($request);
     }

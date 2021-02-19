@@ -36,7 +36,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccionar division
+                                        Seleccionar división
                                     </template>
                                 </label-form>
                                 
@@ -69,7 +69,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccionar ciclo lectivo que acaba de cursar (o sea, en el que repitio)
+                                        Seleccionar ciclo lectivo que acaba de cursar (o sea, en el que repitió)
                                     </template>
                                 </label-form>
                                 

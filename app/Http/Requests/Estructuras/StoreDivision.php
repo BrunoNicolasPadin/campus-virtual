@@ -30,11 +30,11 @@ class StoreDivision extends FormRequest
             'nivel_id.required' => 'Debe seleccionar un nivel.',
             'curso_id.required' => 'Debe seleccionar un curso.',
             'periodo_id.required' => 'Debe ingresar un periodo.',
-            'divisiones.*.division.required' => 'Debe ingresar una division.',
+            'divisiones.*.division.required' => 'Debe ingresar una división.',
             'divisiones.*.claveDeAcceso.required' => 'Debe ingresar una clave de acceso.',
-            'divisiones.*.claveDeAcceso.min' => 'La clave de acceso debe tener como minimo 8 caracteres.',
-            'divisiones.*.claveDeAcceso.max' => 'La clave de acceso debe tener como maximo 32 caracteres.',
-            'divisiones.*.claveDeAccesoConfirmation.required' => 'Debe ingresar la clave de acceso de confirmacion.',
+            'divisiones.*.claveDeAcceso.min' => 'La clave de acceso debe tener como mínimo 8 caracteres.',
+            'divisiones.*.claveDeAcceso.max' => 'La clave de acceso debe tener como máximo 32 caracteres.',
+            'divisiones.*.claveDeAccesoConfirmation.required' => 'Debe ingresar la clave de acceso de confirmación.',
             'divisiones.*.claveDeAccesoConfirmation.same' => 'Las claves de acceso no coinciden.',
         ];
     }

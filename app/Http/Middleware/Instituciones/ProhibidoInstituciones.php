@@ -13,7 +13,7 @@ class ProhibidoInstituciones
     {
         if (Institucion::where('user_id', Auth::id())
             ->exists()) {
-            return abort(403, 'Las instituciones no pueden ingresar aqui.');
+            return abort(403, 'Las instituciones no pueden ingresar aquí.');
         }
         return $next($request);
     }

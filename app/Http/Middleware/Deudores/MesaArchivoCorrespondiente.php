@@ -28,6 +28,6 @@ class MesaArchivoCorrespondiente
             }
             abort(403, 'Usted no es docente de la asignatura a la que pertenece este archivo.');
         }
-        abort(403, 'No puede estar aqui.');
+        abort(403, 'No puede estar aquí.');
     }
 }

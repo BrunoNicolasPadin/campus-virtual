@@ -22,7 +22,7 @@ class StoreAlumno extends FormRequest
     public function messages()
     {
         return [
-            'division_id.required' => 'Debe seleccionar una division.',
+            'division_id.required' => 'Debe seleccionar una división.',
             'claveDeAcceso.required' => 'Debe seleccionar una clave de acceso.',
         ];
     }

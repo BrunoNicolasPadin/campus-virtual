@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware\Libretas;
 
-use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Libretas\Libreta;
 use App\Services\Ruta\RutaService;
 use Closure;
@@ -25,18 +24,8 @@ class LibretaCorrespondiente
 
         if ($libreta->cicloLectivo->institucion_id == session('institucion_id')) {
             
-            if (session('tipo') == 'Docente') {
-                $asignaturasDocentes = AsignaturaDocente::where('asignatura_id', $libreta->asignatura_id)->get();
-
-                foreach ($asignaturasDocentes as $asignaturaDocente) {
-                    if ($asignaturaDocente->docente_id == session('tipo_id')) {
-                        return $next($request);
-                    }
-                }
-                abort(403, 'Esta asignatura no eres docente.');
-            }
             return $next($request);
         }
-        abort(403, 'Esta libreta no es de tu institucion.');
+        abort(403, 'Esta libreta no es de tu institución.');
     }
 }

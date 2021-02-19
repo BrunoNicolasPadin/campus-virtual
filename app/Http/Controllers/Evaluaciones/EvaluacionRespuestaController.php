@@ -62,7 +62,7 @@ class EvaluacionRespuestaController extends Controller
             'user_id' => Auth::id(),
             'respuesta' => $request->respuesta,
         ]);
-        return back()->with(['successMessage' => 'Respuesta cargada con exito!']);
+        return back()->with(['successMessage' => 'Respuesta guardada con éxito!']);
     }
 
     public function update(StoreRespuesta $request, $institucion_id, $division_id, $evaluacion_id, $comentario_id, $id)
@@ -71,12 +71,12 @@ class EvaluacionRespuestaController extends Controller
             ->update([
                 'respuesta' => $request->respuesta,
             ]);
-            return back()->with(['successMessage' => 'Respuesta editada con exito!']);
+            return back()->with(['successMessage' => 'Respuesta actualizada con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $comentario_id, $id)
     {
         EvaluacionRespuesta::destroy($id);
-        return back()->with(['successMessage' => 'Respuesta eliminada con exito!']);
+        return back()->with(['successMessage' => 'Respuesta eliminada con éxito!']);
     }
 }

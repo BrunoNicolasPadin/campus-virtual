@@ -167,7 +167,7 @@
 
                             <table-head v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                                 <template #th-titulo>
-                                    Calificacion
+                                    Calificación
                                 </template>
                             </table-head>
 

@@ -62,7 +62,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccione condicion:
+                                        Seleccione condición:
                                     </template>
                                 </label-form>
                                 

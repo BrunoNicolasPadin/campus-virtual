@@ -118,7 +118,7 @@ class AlumnoDeudorController extends Controller
         }
 
         return redirect(route('asignaturas-adeudadas.index', [$institucion_id, $alumno_id]))
-            ->with((['successMessage' => 'Asignaturas adeudadas agregadas con exito!']));
+            ->with((['successMessage' => 'Asignaturas adeudadas agregadas con éxito!']));
         
     }
 
@@ -178,13 +178,13 @@ class AlumnoDeudorController extends Controller
                 'aprobado' => $request->aprobado,
             ]);
         return redirect(route('asignaturas-adeudadas.index', [$institucion_id, $alumno_id]))
-            ->with((['successMessage' => 'Asignatura editada con exito!']));
+            ->with((['successMessage' => 'Asignatura adeudada editada con éxito!']));
     }
 
     public function destroy($institucion_id, $alumno_id, $id)
     {
         AlumnoDeudor::destroy($id);
         return redirect(route('asignaturas-adeudadas.index', [$institucion_id, $alumno_id]))
-            ->with((['successMessage' => 'Asignatura adeudada eliminada con exito!']));
+            ->with((['successMessage' => 'Asignatura adeudada eliminada con éxito!']));
     }
 }

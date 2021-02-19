@@ -42,7 +42,7 @@
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Titulo
+                                        Título
                                     </template>
                                 </label-form>
                                 
@@ -112,7 +112,7 @@
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Fecha y hora de realizacion
+                                        Fecha y hora de realización
                                     </template>
                                 </label-form>
                                 
@@ -133,7 +133,7 @@
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Fecha y hora de realizacion
+                                        Fecha y hora de realización
                                     </template>
                                 </label-form>
                                 

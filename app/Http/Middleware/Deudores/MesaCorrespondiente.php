@@ -27,7 +27,7 @@ class MesaCorrespondiente
             if (session('institucion_id') == $mesa->asignatura->division->institucion_id) {
                 return $next($request);
             }
-            abort(403, 'Esta asignatura adeudada no es de tu institucion.');
+            abort(403, 'Esta asignatura adeudada no es de tu institución.');
         }
 
         if (session('tipo') == 'Docente') {
@@ -44,7 +44,7 @@ class MesaCorrespondiente
                 ->exists()) {
                 return $next($request);
             }
-            abort(403, 'No adeuda esta asignatura (O se confundio o ya la tiene aprobada y por la tanto no puede acceder.');
+            abort(403, 'No adeuda esta asignatura (O se confundió o ya la tiene aprobada y por la tanto no puede acceder.');
         }
 
         if (session('tipo') == 'Padre' ) {
@@ -53,7 +53,7 @@ class MesaCorrespondiente
                 ->exists()) {
                 return $next($request);
             }
-            abort(403, 'Si hijo/a adeuda esta asignatura (O se confundio o ya la tiene aprobada y por la tanto no puede acceder.');
+            abort(403, 'Su hijo/a no adeuda esta asignatura (O se confundió o ya la tiene aprobada y por la tanto no puede acceder.');
         }
 
         abort(403, 'No puede estar aqui.');

@@ -31,7 +31,7 @@ class VerRespuestasMuroCorrespondiente
                     return $next($request);
                 }
             }
-            abort(403, 'No puedes ver las respuestas de publicaciones hechas en divisiones en las que no  eres docente.');
+            abort(403, 'No puedes ver las respuestas de publicaciones hechas en divisiones en las que no eres docente.');
         }
 
         if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
@@ -45,9 +45,9 @@ class VerRespuestasMuroCorrespondiente
             if ($publicacion->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Estas respuestas no forma parte de la institucion de la que perteneces.');
+            abort(403, 'Estas respuestas no forma parte de tu institución.');
         }
 
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

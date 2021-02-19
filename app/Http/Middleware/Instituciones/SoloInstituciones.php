@@ -15,6 +15,6 @@ class SoloInstituciones
             ->exists()) {
             return $next($request);
         }
-        return abort(403, 'Usted no es una institucion.');
+        return abort(403, 'Usted no es una institución.');
     }
 }

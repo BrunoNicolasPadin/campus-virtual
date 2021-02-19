@@ -9,14 +9,14 @@
                 </inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('evaluaciones.index', [institucion_id, division.id])">Evaluaciones</inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('evaluaciones.show', [institucion_id, division.id, evaluacion.id])">{{ evaluacion.titulo }}</inertia-link> / 
-                Estadisticas
+                Estadísticas
             </span>
         </template>
 
         <div class="py-6">
             <estructura-informacion>
                 <template #cabecera-info>
-                    Numeros
+                    Números
                 </template>
 
                 <template #dl-contenido>
@@ -118,7 +118,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Calificacion
+                                    Calificación
                                 </template>
                             </table-head>
 
@@ -187,7 +187,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Calificacion
+                                    Calificación
                                 </template>
                             </table-head>
 
@@ -440,7 +440,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Calificacion
+                                    Calificación
                                 </template>
                             </table-head>
 

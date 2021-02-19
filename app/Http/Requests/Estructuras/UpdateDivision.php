@@ -29,11 +29,11 @@ class UpdateDivision extends FormRequest
         return [
             'nivel_id.required' => 'Debe seleccionar un nivel.',
             'curso_id.required' => 'Debe seleccionar un curso.',
-            'division.required' => 'Debe ingresar una division.',
-            'division.string' => 'La division deben ser solo caracteres.',
+            'division.required' => 'Debe ingresar una división.',
+            'division.string' => 'La división deben ser solo una cadena de caracteres.',
             'periodo_id.required' => 'Debe ingresar un periodo.',
-            'claveDeAcceso.min' => 'La clave de acceso debe tener como minimo 8 caracteres.',
-            'claveDeAcceso.max' => 'La clave de acceso debe tener como maximo 32 caracteres.',
+            'claveDeAcceso.min' => 'La clave de acceso debe tener como mínimo 8 caracteres.',
+            'claveDeAcceso.max' => 'La clave de acceso debe tener como máximo 32 caracteres.',
             'claveDeAcceso_confirmation.same' => 'Las claves de acceso no coinciden.',
         ];
     }

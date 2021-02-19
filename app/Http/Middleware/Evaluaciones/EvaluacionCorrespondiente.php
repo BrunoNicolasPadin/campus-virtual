@@ -31,21 +31,21 @@ class EvaluacionCorrespondiente
                     return $next($request);
                 }
             }
-            abort(403, 'Esta evaluacion no es de una asignatura en la que eres docente.');
+            abort(403, 'Esta evaluación no es de una asignatura en la que eres docente.');
         }
 
         if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
             if ($evaluacion->division_id == session('division_id')) {
                 return $next($request);
             }
-            abort(403, 'Esta evaluacion no forma parte de tu division.');
+            abort(403, 'Esta evaluación no forma parte de tu división.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             if ($evaluacion->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Esta evaluacion no forma parte de la institucion de la que perteneces.');
+            abort(403, 'Esta evaluación no forma parte de tu institución.');
         }
 
         abort(403, 'No puedes estar aqui.');

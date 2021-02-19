@@ -25,7 +25,7 @@ class DeudaCorrespondiente
             if (session('institucion_id') == $deudor->alumno->institucion_id) {
                 return $next($request);
             }
-            abort(403, 'Esta asignatura adeudada no es de un alumno que pertenezca a tu institucion.');
+            abort(403, 'Esta asignatura adeudada no es de un alumno que pertenezca a tu institución.');
         }
 
         if (session('tipo') == 'Alumno' ) {
@@ -42,6 +42,6 @@ class DeudaCorrespondiente
             abort(403, 'Esta asignatura adeudada no es de tu hijo.');
         }
 
-        abort(403, 'No puede estar aqui.');
+        abort(403, 'No puede estar aquí.');
     }
 }

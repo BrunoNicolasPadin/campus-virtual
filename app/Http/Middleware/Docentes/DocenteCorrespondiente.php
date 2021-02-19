@@ -26,15 +26,15 @@ class DocenteCorrespondiente
             if ($docente->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Este docente no es de tu institucion.');
+            abort(403, 'Este docente no forma parte de tu institución.');
         }
 
         if (session('tipo') == 'Docente') {
             if ($docente->id == session('tipo_id')) {
                 return $next($request);
             }
-            abort(403, 'Este docente no eres tu.');
+            abort(403, 'Este docente no eres tú.');
         }
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

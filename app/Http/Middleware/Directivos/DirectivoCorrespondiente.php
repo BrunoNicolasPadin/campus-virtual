@@ -26,15 +26,15 @@ class DirectivoCorrespondiente
             if ($directivo->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Este directivo no es de tu institucion.');
+            abort(403, 'Este directivo no es de tu institución.');
         }
 
         if (session('tipo') == 'Directivo') {
             if ($directivo->id == session('tipo_id')) {
                 return $next($request);
             }
-            abort(403, 'Este directivo no eres tu.');
+            abort(403, 'Este directivo no eres tú.');
         }
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

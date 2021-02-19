@@ -100,7 +100,7 @@ class EntregaController extends Controller
                 'comentario' => $request->comentario,
             ]);
         return redirect(route('entregas.show', [$institucion_id, $division_id, $evaluacion_id, $id]))
-            ->with(['successMessage' => 'Entrega calificada y/o comentada con exito!']);
+            ->with(['successMessage' => 'Entrega calificada y/o comentada con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
@@ -118,6 +118,6 @@ class EntregaController extends Controller
 
         Entrega::destroy($id);
         return redirect(route('entregas.index', [$institucion_id, $division_id, $evaluacion_id]))
-            ->with(['successMessage' => 'Entrega eliminada con exito!']);
+            ->with(['successMessage' => 'Entrega eliminada con éxito!']);
     }
 }

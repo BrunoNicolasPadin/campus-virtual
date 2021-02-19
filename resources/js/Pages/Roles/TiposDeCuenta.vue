@@ -44,7 +44,7 @@
 
                                 <table-head>
                                     <template #th-titulo>
-                                        Institucion
+                                        Institución
                                     </template>
                                 </table-head>
 
@@ -121,7 +121,7 @@
 
                                 <table-head>
                                     <template #th-titulo>
-                                        Institucion
+                                        Institución
                                     </template>
                                 </table-head>
 
@@ -198,7 +198,7 @@
 
                                 <table-head>
                                     <template #th-titulo>
-                                        Institucion
+                                        Institución
                                     </template>
                                 </table-head>
 
@@ -275,7 +275,7 @@
 
                                 <table-head>
                                     <template #th-titulo>
-                                        Hijo
+                                        Hijo/a
                                     </template>
                                 </table-head>
 

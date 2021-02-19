@@ -43,7 +43,7 @@ class InstitucionCorrespondiente
         if ($link[4] == 0) {
             return $next($request);
         }
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 
     public function verificarInstitucion($request, $next, $link)
@@ -56,7 +56,7 @@ class InstitucionCorrespondiente
         if ($link[4] == 0) {
             return $next($request);
         }
-        abort(403, 'No es tu institucion.');
+        abort(403, 'No es tu institución.');
     }
 
     public function verificarDirectivo($request, $next, $link)
@@ -66,7 +66,7 @@ class InstitucionCorrespondiente
             ->exists()) {
             return $next($request);
         }
-        abort(403, 'No eres directivo en esta institucion.');
+        abort(403, 'No eres directivo en esta institución.');
     }
 
     public function verificarDocente($request, $next, $link)
@@ -76,7 +76,7 @@ class InstitucionCorrespondiente
             ->exists()) {
             return $next($request);
         }
-        abort(403, 'No eres docente en esta institucion.');
+        abort(403, 'No eres docente en esta institución.');
     }
 
     public function verificarAlumno($request, $next, $link)
@@ -86,7 +86,7 @@ class InstitucionCorrespondiente
             ->exists()) {
             return $next($request);
         }
-        abort(403, 'No eres alumno en esta institucion.');
+        abort(403, 'No eres alumno en esta institución.');
     }
 
     public function verificarPadre($request, $next, $link)
@@ -99,7 +99,7 @@ class InstitucionCorrespondiente
                 return $next($request);
             }
         }
-        abort(403, 'Tu hijo/a no forma parte de esta institucion.');
+        abort(403, 'Tu hijo/a no forma parte de esta institución.');
     }
     
 }

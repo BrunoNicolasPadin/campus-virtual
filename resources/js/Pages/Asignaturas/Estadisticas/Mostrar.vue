@@ -8,7 +8,7 @@
                     <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
                 </inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
-                {{ asignatura.nombre }} / Estadisticas
+                {{ asignatura.nombre }} / Estadísticas
             </span>
         </template>
 

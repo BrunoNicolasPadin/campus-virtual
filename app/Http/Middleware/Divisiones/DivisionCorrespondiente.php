@@ -32,22 +32,22 @@ class DivisionCorrespondiente
                     return $next($request);
                 }
             }
-            abort(403, 'No eres docente de ninguna asignatura de esta division.');
+            abort(403, 'No eres docente de ninguna asignatura de esta división.');
         }
 
         if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
             if ($division->id == session('division_id')) {
                 return $next($request);
             }
-            abort(403, 'No formas parte de esta division.');
+            abort(403, 'No formas parte de esta división.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             if ($division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Esta division no forma parte de tu institucion.');
+            abort(403, 'Esta división no forma parte de tu institución.');
         }
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

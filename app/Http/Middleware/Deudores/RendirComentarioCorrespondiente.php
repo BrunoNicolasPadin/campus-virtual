@@ -31,8 +31,8 @@ class RendirComentarioCorrespondiente
             if ($comentario->anotado->alumno->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
+            abort(403, 'Este comentario no es de tu institución');
         }
-
         abort(403, 'Este comentario no es tuyo.');
     }
 }

@@ -47,7 +47,7 @@ class MesaController extends Controller
         ]);
 
         return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
-            ->with(['successMessage' => 'Mesa agregada con exito!']);
+            ->with(['successMessage' => 'Mesa agregada con éxito!']);
     }
 
     public function show($institucion_id, $division_id, $asignatura_id, $id)
@@ -94,13 +94,13 @@ class MesaController extends Controller
                 'comentario' => $request->comentario,
             ]);
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $id]))
-            ->with(['successMessage' => 'Mesa editada con exito!']);
+            ->with(['successMessage' => 'Mesa actualizada con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $asignatura_id, $id)
     {
         Mesa::destroy($id);
         return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
-            ->with(['successMessage' => 'Mesa eliminada con exito!']);
+            ->with(['successMessage' => 'Mesa eliminada con éxito!']);
     }
 }

@@ -33,6 +33,6 @@ class MaterialCorrespondiente
             }
             abort(403, 'Este material no es de una asignatura en la que eres docente.');
         }
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

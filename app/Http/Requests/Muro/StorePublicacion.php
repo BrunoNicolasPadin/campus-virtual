@@ -22,7 +22,7 @@ class StorePublicacion extends FormRequest
     {
         return [
             'publicacion.required' => 'Debe ingresar algo.',
-            'publicacion.string' => 'Debe ingresar una cadena de texto o numeros, no otra cosa.',
+            'publicacion.string' => 'Debe ingresar una cadena de carecteres (letras, números o signos), no otra cosa.',
         ];
     }
 }

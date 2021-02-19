@@ -25,9 +25,9 @@ class StoreRepitente extends FormRequest
     {
         return [
             'alumno_id.required' => 'Falta el id del alumno.',
-            'division_id.required' => 'Falta el id de la division.',
+            'division_id.required' => 'Falta el id de la división.',
             'ciclo_lectivo_id.required' => 'Falta el id del ciclo lectivo.',
-            'comentario.string' => 'Debe ingresar una cadena de texto o numeros, no otra cosa.',
+            'comentario.string' => 'Debe ingresar una cadena de caracteres (letras, números o signos), no otra cosa.',
         ];
     }
 }

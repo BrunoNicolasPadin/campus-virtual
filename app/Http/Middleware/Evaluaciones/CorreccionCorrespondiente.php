@@ -31,16 +31,16 @@ class CorreccionCorrespondiente
                     return $next($request);
                 }
             }
-            abort(403, 'Esta entrega de una evaluacion no es de una asignatura en la que eres docente.');
+            abort(403, 'Esta corrección no es tuya.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             if ($correccion->entrega->evaluacion->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Esta correccion no forma parte de tu institucion');
+            abort(403, 'Esta corrección no forma parte de tu institución');
         }
 
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

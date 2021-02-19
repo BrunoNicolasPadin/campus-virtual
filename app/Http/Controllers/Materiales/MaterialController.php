@@ -65,10 +65,10 @@ class MaterialController extends Controller
             }
 
             return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
-                ->with(['successMessage' => 'Archivos cargados con exito!']);
+                ->with(['successMessage' => 'Archivos subidos con éxito!']);
         }
 
-        return back()->withErrors('No hay ningun archivo seleccionado');
+        return back()->withErrors('No hay ningún archivo seleccionado');
     }
 
     public function edit($institucion_id, $division_id, $grupo_id, $id)
@@ -90,7 +90,7 @@ class MaterialController extends Controller
         ]);
 
         return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
-            ->with(['successMessage' => 'Archivo actualizado con exito!']);
+            ->with(['successMessage' => 'Archivo actualizado con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $grupo_id, $id)
@@ -100,6 +100,6 @@ class MaterialController extends Controller
 
         Material::destroy($id);
         return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))
-                ->with(['successMessage' => 'Archivo eliminado con exito!']);
+                ->with(['successMessage' => 'Archivo eliminado con éxito!']);
     }
 }

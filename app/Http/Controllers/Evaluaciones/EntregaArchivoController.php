@@ -57,7 +57,7 @@ class EntregaArchivoController extends Controller
             }
 
             return redirect(route('entregas.show', [$institucion_id, $division_id, $evaluacion_id, $entrega_id]))
-                ->with(['successMessage' => 'Archivos cargados con exito!']);
+                ->with(['successMessage' => 'Archivos subidos con éxito!']);
         }
 
         return back()->withErrors('No hay ningun archivo seleccionado');
@@ -69,6 +69,6 @@ class EntregaArchivoController extends Controller
         Storage::delete('public/Evaluaciones/Entregas/' . $entrega->archivo);
 
         EntregaArchivo::destroy($id);
-        return back()->with(['successMessage' => 'Archivo eliminado con exito!']);
+        return back()->with(['successMessage' => 'Archivo eliminado con éxito!']);
     }
 }

@@ -49,7 +49,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Pais
+                                    País
                                 </template>
                             </table-head>
 

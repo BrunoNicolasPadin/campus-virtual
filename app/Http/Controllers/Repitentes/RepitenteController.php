@@ -90,7 +90,8 @@ class RepitenteController extends Controller
             'comentario' => $request->comentario,
         ]);
 
-        return redirect(route('repitentes.index', $institucion_id))->with(['successMessage' => 'Repitente cargado con exito!']);
+        return redirect(route('repitentes.index', $institucion_id))
+            ->with(['successMessage' => 'Repitente registrado con éxito!']);
     }
 
     public function show($institucion_id, $alumno_id)
@@ -145,12 +146,14 @@ class RepitenteController extends Controller
         $repitente->comentario = $request->comentario;
         $repitente->save();
 
-        return redirect(route('repitentes.index', $institucion_id))->with(['successMessage' => 'Repitente actualziado con exito!']);
+        return redirect(route('repitentes.index', $institucion_id))
+            ->with(['successMessage' => 'Repitente actualizado con éxito!']);
     }
 
     public function destroy($institucion_id, $id)
     {
         Repitente::destroy($id);
-        return redirect(route('repitentes.index', $institucion_id))->with(['successMessage' => 'Repitente eliminado con exito!']);
+        return redirect(route('repitentes.index', $institucion_id))
+            ->with(['successMessage' => 'Repitente eliminado con éxito!']);
     }
 }

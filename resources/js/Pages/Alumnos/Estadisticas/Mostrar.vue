@@ -5,7 +5,7 @@
                 <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('alumnos.index', institucion_id)">Alumnos</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
-                Estadisticas
+                Estadísticas
             </span>
         </template>
 

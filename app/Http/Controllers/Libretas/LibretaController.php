@@ -104,7 +104,7 @@ class LibretaController extends Controller
         }
 
         return redirect(route('libretas.index', [$institucion_id, $alumno_id]))
-            ->with(['successMessage'  => 'Calificaciones actualizadas con exito!']);
+            ->with(['successMessage'  => 'Libreta actualizada con éxito!']);
     }
 
     public function obtenerLibreta($alumno_id, $ciclo_lectivo_id)

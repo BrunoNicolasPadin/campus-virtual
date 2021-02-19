@@ -37,7 +37,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccionar division
+                                        Seleccionar división
                                     </template>
                                 </label-form>
                                 
@@ -70,7 +70,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Clave de acceso de la division
+                                        Clave de acceso de la división
                                     </template>
                                 </label-form>
                                 

@@ -37,7 +37,7 @@
                             <div class="md:w-full px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Ciclo lectivo
+                                        Seleccionar ciclo lectivo
                                     </template>
                                 </label-form>
                                 
@@ -55,7 +55,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio. Seleccione un ciclo lectivo.
+                                        Es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -65,7 +65,7 @@
                             <div class="md:w-full px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Condicion
+                                        Seleccionar condición
                                     </template>
                                 </label-form>
                                 
@@ -82,7 +82,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio. Seleccione una condicion.
+                                        Es obligatorio.
                                     </template>
                                 </info>
                             </div>

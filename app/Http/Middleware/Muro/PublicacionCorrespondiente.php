@@ -27,6 +27,6 @@ class PublicacionCorrespondiente
             return $next($request);
         }
 
-        abort(403, 'Esta publicacion no es tuyo.');
+        abort(403, 'Esta publicación no es tuya.');
     }
 }

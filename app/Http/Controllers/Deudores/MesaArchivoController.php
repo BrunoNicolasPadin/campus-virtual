@@ -65,9 +65,9 @@ class MesaArchivoController extends Controller
             }
 
             return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
-                ->with(['successMessage' => 'Archivos cargados con exito!']);
+                ->with(['successMessage' => 'Archivos subidos con éxito!']);
         }
-        return back()->withErrors('No hay ningun archivo seleccionado');
+        return back()->withErrors('No hay ningún archivo seleccionado');
     }
 
     public function edit($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
@@ -96,7 +96,7 @@ class MesaArchivoController extends Controller
         ]);
 
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
-            ->with(['successMessage' => 'Visibilidad actualizada con exito!']);
+            ->with(['successMessage' => 'Archivo actualizado con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
@@ -106,6 +106,6 @@ class MesaArchivoController extends Controller
 
         MesaArchivo::destroy($id);
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
-            ->with(['successMessage' => 'Archivo eliminado con exito!']);
+            ->with(['successMessage' => 'Archivo eliminado con éxito!']);
     }
 }

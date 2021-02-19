@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <span class="font-semibold text-md text-gray-800 leading-tight">
-                Perfil
+                Perfil institucional
             </span>
         </template>
 
@@ -55,7 +55,7 @@
 
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Fundacion
+                            Fundación
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             {{ institucion.fundacion }}

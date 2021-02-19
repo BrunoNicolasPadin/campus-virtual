@@ -19,6 +19,6 @@ class SoloAlumnos
             return $next($request);
         }
 
-        abort(403, 'Solo los alumnos y padres pueden realizar esta accion.');
+        abort(403, 'Solo los alumnos y padres pueden realizar esta acción.');
     }
 }

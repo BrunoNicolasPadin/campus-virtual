@@ -62,7 +62,7 @@ class AsignaturaController extends Controller
 
     public function create($institucion_id, $division_id)
     {
-        $dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+        $dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
         return Inertia::render('Asignaturas/Create', [
             'institucion_id' => $institucion_id,
@@ -98,7 +98,8 @@ class AsignaturaController extends Controller
                 'horaHasta' => $request->diaHorario[$i]['horaHasta']['HH'] . ':' . $request->diaHorario[$i]['horaHasta']['mm'] . ':00',
             ]);
         }
-        return redirect(route('asignaturas.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Asignatura guardada con exito!']);
+        return redirect(route('asignaturas.index', [$institucion_id, $division_id]))
+            ->with(['successMessage' => 'Asignatura creada con éxito!']);
     }
 
     public function show($institucion_id, $division_id, $id)
@@ -131,7 +132,7 @@ class AsignaturaController extends Controller
 
     public function edit($institucion_id, $division_id, $id)
     {
-        $dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+        $dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
         return Inertia::render('Asignaturas/Edit', [
             'institucion_id' => $institucion_id,
@@ -167,7 +168,8 @@ class AsignaturaController extends Controller
                     'horaHasta' => $request->diaHorario[$i]['horaHasta'] . ':00',
                 ]);
         }
-        return redirect(route('asignaturas.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Asignatura guardada con exito!']);
+        return redirect(route('asignaturas.index', [$institucion_id, $division_id]))
+            ->with(['successMessage' => 'Asignatura actualizada con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $id)
@@ -186,6 +188,7 @@ class AsignaturaController extends Controller
         }
     
         Asignatura::destroy($id);
-        return redirect(route('asignaturas.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Asignatura eliminada con exito!']);
+        return redirect(route('asignaturas.index', [$institucion_id, $division_id]))
+            ->with(['successMessage' => 'Asignatura eliminada con éxito!']);
     }
 }

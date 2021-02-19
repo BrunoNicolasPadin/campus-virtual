@@ -38,7 +38,7 @@
                             <div class="md:w-full px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Division
+                                        División
                                     </template>
                                 </label-form>
                                 
@@ -63,7 +63,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Seleccione la division donde se encuentren las asignaturas que desee agregar.
+                                        Seleccione la división donde se encuentren las asignaturas que desee agregar.
                                     </template>
                                 </info>
                             </div>

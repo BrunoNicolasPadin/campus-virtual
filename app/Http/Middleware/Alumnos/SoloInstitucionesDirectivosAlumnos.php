@@ -36,6 +36,6 @@ class SoloInstitucionesDirectivosAlumnos
             return $next($request);
         }
 
-        return abort(403, 'Usted no es una institucion o un directivo o un alumno como para realizar tal accion.');
+        return abort(403, 'Usted no es una institución o un directivo o un alumno como para realizar tal acción.');
     }
 }

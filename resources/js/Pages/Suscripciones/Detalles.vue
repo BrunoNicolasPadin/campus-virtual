@@ -25,7 +25,7 @@
                         <li><a href="#evaluaciones-entregas-numeros">3) Evaluaciones, entregas y numeros</a></li>
                         <li><a href="#materiales">4) Materiales</a></li>
                         <li><a href="#libreta">5) Libreta</a></li>
-                        <li><a href="#estadisticas">6) Estadisticas</a></li>
+                        <li><a href="#estadisticas">6) Estadísticas</a></li>
                         <li><a href="#calendario">7) Calendario</a></li>
                         <li><a href="#asignaturas">8) Asignaturas y mesas</a></li>
                         <li><a href="#muro">9) Muro</a></li>
@@ -65,7 +65,7 @@
 
             <div class="my-2 container mx-auto px-4 sm:px-8 text-left">
                 <h1 class="text-2xl tracking-tight font-bold text-gray-900">
-                    <span id="evaluaciones-entregas-numeros">Evaluaciones, entregas y numeros:</span>
+                    <span id="evaluaciones-entregas-numeros">Evaluaciones, entregas y números:</span>
                 </h1>
 
                 <a :href="'storage/detalles/Evaluaciones.png'" target="_blank">
@@ -124,7 +124,7 @@
 
             <div class="my-2 container mx-auto px-4 sm:px-8 text-left">
                 <h1 class="text-2xl tracking-tight font-bold text-gray-900">
-                    <span class="text-black" id="estadisticas">Estadisticas division, asignatura, alumno, abandonos y repeticiones:</span>
+                    <span class="text-black" id="estadisticas">Estadísticas división, asignatura, alumno, abandonos y repeticiones:</span>
                 </h1>
 
                 <a :href="'storage/detalles/EstadisticasDivision.png'" target="_blank">
@@ -183,7 +183,7 @@
 
             <div class="my-2 container mx-auto px-4 sm:px-8 text-left">
                 <h1 class="text-2xl tracking-tight font-bold text-gray-900">
-                    <span class="text-black" id="muro">Muro de la division, respuestas y archivos:</span>
+                    <span class="text-black" id="muro">Muro de la división, respuestas y archivos:</span>
                 </h1>
 
                 <a :href="'storage/detalles/Muro.png'" target="_blank">

@@ -26,7 +26,7 @@ class RendirComentarioController extends Controller
             'user_id' => Auth::id(),
             'comentario' => $request->comentario,
         ]);
-        return back()->with(['successMessage' => 'Comentario cargada con exito!']);
+        return back()->with(['successMessage' => 'Comentario subido con éxito!']);
     }
 
     public function update(StoreComentario $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
@@ -35,12 +35,12 @@ class RendirComentarioController extends Controller
             ->update([
                 'comentario' => $request->comentario,
             ]);
-        return back()->with(['successMessage' => 'Comentario actualizada con exito!']);
+        return back()->with(['successMessage' => 'Comentario actualizado con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
     {
         RendirComentario::destroy($id);
-        return back()->with(['successMessage' => 'Comentario eliminado con exito!']);
+        return back()->with(['successMessage' => 'Comentario eliminado con éxito!']);
     }
 }

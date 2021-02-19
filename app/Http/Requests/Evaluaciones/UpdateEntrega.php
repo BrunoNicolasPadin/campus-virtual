@@ -22,8 +22,8 @@ class UpdateEntrega extends FormRequest
     public function messages()
     {
         return [
-            'calificacion.string' => 'Debe ingresar una cadena de texto o numeros en la calificacion, no otra cosa.',
-            'comentario.string' => 'Debe ingresar una cadena de texto o numeros en el comentario, no otra cosa.',
+            'calificacion.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en la calificación, no otra cosa.',
+            'comentario.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el comentario, no otra cosa.',
         ];
     }
 }

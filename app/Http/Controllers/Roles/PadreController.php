@@ -55,9 +55,9 @@ class PadreController extends Controller
                 'activado' => 0,
             ]);
     
-            return back()->with(['successMessage' => 'Hijo registrado con  exito! Seleccione a otro si desea cargarlo.']);
+            return back()->with(['successMessage' => 'Hijo registrado con  éxito! Seleccione a otro si desea cargarlo.']);
         }
-        return back()->withErrors('Este alumno no existe en esta institucion.');
+        return back()->withErrors('Este alumno no existe en esta institución.');
     }
 
     public function show($institucion_id, $id)
@@ -72,7 +72,7 @@ class PadreController extends Controller
     public function destroy($institucion_id, $id)
     {
         Padre::destroy($id);
-        $message = 'Padre eliminado con exito!';
+        $message = 'Padre eliminado con éxito!';
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             return redirect(route('roles.index'))->with(['successMessage' => $message]);

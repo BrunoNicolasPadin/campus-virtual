@@ -53,7 +53,7 @@ class MuroController extends Controller
             'user_id' => Auth::id(),
             'publicacion' => $request->publicacion,
         ]);
-        return back()->with(['successMessage' => 'Publicacion realizada con exito!']);
+        return back()->with(['successMessage' => 'Publicación agregada con éxito!']);
     }
 
     public function update(StorePublicacion $request, $institucion_id, $division_id, $id)
@@ -62,7 +62,7 @@ class MuroController extends Controller
             ->update([
                 'publicacion' => $request->publicacion,
             ]);
-        return back()->with(['successMessage' => 'Publicacion actualizada con exito!']);
+        return back()->with(['successMessage' => 'Publicación actualizada con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $id)
@@ -72,6 +72,6 @@ class MuroController extends Controller
             Storage::delete('public/Muro/' . $archivo->archivo);
         }
         Muro::destroy($id);
-        return back()->with(['successMessage' => 'Publicacion eliminada con exito!']);
+        return back()->with(['successMessage' => 'Publicación eliminada con éxito!']);
     }
 }

@@ -37,7 +37,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccione ciclo lectivo:
+                                        Seleccione un ciclo lectivo:
                                     </template>
                                 </label-form>
                                 
@@ -70,7 +70,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        No es obligatorio
+                                        No es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -81,7 +81,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        El alumno abandonó el colegio?
+                                        ¿El alumno abandonó el colegio?
                                     </template>
                                 </label-form>
                                 

@@ -46,7 +46,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccione ciclo lectivo:
+                                        Seleccione un ciclo lectivo:
                                     </template>
                                 </label-form>
                                 
@@ -68,7 +68,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccione division:
+                                        Seleccione una división
                                     </template>
                                 </label-form>
                                 
@@ -116,7 +116,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Division
+                                    División
                                 </template>
                             </table-head>
 

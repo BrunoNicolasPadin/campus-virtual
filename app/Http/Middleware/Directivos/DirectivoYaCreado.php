@@ -24,7 +24,7 @@ class DirectivoYaCreado
         if (Directivo::where('user_id', Auth::id())
             ->where('institucion_id', $link[4])
             ->exists()) {
-            abort(403, 'Ya estas registrado como directivo para esta institucion.');
+            abort(403, 'Ya estás registrado como directivo para esta institución.');
         }
         return $next($request);
     }

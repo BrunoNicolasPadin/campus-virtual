@@ -34,16 +34,16 @@ class GrupoCorrespondiente
             if ($grupo->division_id == session('division_id')) {
                 return $next($request);
             }
-            abort(403, 'Este grupo no forma parte de tu division.');
+            abort(403, 'Este grupo no forma parte de tu división.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             if ($grupo->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Este grupo no forma parte de la institucion de la que perteneces.');
+            abort(403, 'Este grupo no forma parte de tu institución.');
         }
 
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

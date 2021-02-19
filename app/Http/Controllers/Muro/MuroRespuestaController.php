@@ -60,7 +60,7 @@ class MuroRespuestaController extends Controller
             'user_id' => Auth::id(),
             'respuesta' => $request->respuesta,
         ]);
-        return back()->with(['successMessage' => 'Respuesta realizada con exito!']);
+        return back()->with(['successMessage' => 'Respuesta agregada con éxito!']);
     }
 
     public function update(StoreRespuesta $request, $institucion_id, $division_id, $muro_id, $id)
@@ -69,12 +69,12 @@ class MuroRespuestaController extends Controller
             ->update([
                 'respuesta' => $request->respuesta,
             ]);
-        return back()->with(['successMessage' => 'Respuesta actualizada con exito!']);
+        return back()->with(['successMessage' => 'Respuesta actualizada con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $muro_id, $id)
     {
         MuroRespuesta::destroy($id);
-        return back()->with(['successMessage' => 'Respuesta eliminada con exito!']);
+        return back()->with(['successMessage' => 'Respuesta eliminada con éxito!']);
     }
 }

@@ -36,7 +36,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Numero
+                                        Número
                                     </template>
                                 </label-form>
                                 
@@ -44,7 +44,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        No es obligatorio
+                                        No es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -61,7 +61,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        No es obligatorio
+                                        No es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -82,7 +82,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        No es obligatorio
+                                        No es obligatorio.
                                     </template>
                                 </info>
                             </div>

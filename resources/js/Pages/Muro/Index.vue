@@ -67,7 +67,7 @@
                 </div>
 
                 <div v-show="state === 'editing'">
-                    <h2 class="text-2xl font-semibold leading-tight">Actualizar publicacion</h2>
+                    <h2 class="text-2xl font-semibold leading-tight">Actualizar publicación</h2>
 
                     <div class="bg-white rounded shadow-sm p-8 mb-4 my-4">
                         <form method="post" @submit.prevent="updatePublicacion">

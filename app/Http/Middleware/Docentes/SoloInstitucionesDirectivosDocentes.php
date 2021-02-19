@@ -30,6 +30,6 @@ class SoloInstitucionesDirectivosDocentes
             return $next($request);
         }
 
-        return abort(403, 'Usted no es una institucion o un directivo o un docente como para realizar tal accion.');
+        return abort(403, 'Usted no es una institución o un directivo o un docente como para realizar tal acción.');
     }
 }

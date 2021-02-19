@@ -26,6 +26,6 @@ class RendirCorreccionCorrespondiente
         if (AsignaturaDocente::where('asignatura_id', $correccion->anotado->mesa->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
             return $next($request);
         }
-        abort(403, 'Usted no es docente de la asignatura a la que pertenece esta correccion.');
+        abort(403, 'Usted no es docente de la asignatura a la que pertenece esta corrección.');
     }
 }

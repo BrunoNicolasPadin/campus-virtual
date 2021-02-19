@@ -54,7 +54,7 @@ class EvaluacionArchivoController extends Controller
             }
 
             return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
-                ->with(['successMessage' => 'Archivos cargados con exito!']);
+                ->with(['successMessage' => 'Archivos cargados con éxito!']);
         }
 
         return back()->withErrors('No hay ningun archivo seleccionado');
@@ -79,7 +79,7 @@ class EvaluacionArchivoController extends Controller
         ]);
 
         return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
-            ->with(['successMessage' => 'Archivo actualizado con exito!']);
+            ->with(['successMessage' => 'Archivo actualizado con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
@@ -89,6 +89,6 @@ class EvaluacionArchivoController extends Controller
 
         Archivo::destroy($id);
         return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))
-            ->with(['successMessage' => 'Archivo eliminado con exito!']);
+            ->with(['successMessage' => 'Archivo eliminado con éxito!']);
     }
 }

@@ -64,7 +64,8 @@ class CicloLectivoController extends Controller
             'activado' => $request->activado,
         ]);
 
-        return redirect(route('ciclos-lectivos.index', $institucion_id))->with(['successMessage' => 'Ciclo lectivo cargado con éxito!']);
+        return redirect(route('ciclos-lectivos.index', $institucion_id))
+            ->with(['successMessage' => 'Ciclo lectivo creado con éxito!']);
     }
 
     public function edit($institucion_id, $id)
@@ -100,12 +101,14 @@ class CicloLectivoController extends Controller
                 'activado' => $request->activado,
             ]);
 
-        return redirect(route('ciclos-lectivos.index', $institucion_id))->with(['successMessage' => 'Ciclo lectivo actualizado con éxito!']);
+        return redirect(route('ciclos-lectivos.index', $institucion_id))
+            ->with(['successMessage' => 'Ciclo lectivo actualizado con éxito!']);
     }
 
     public function destroy($institucion_id, $id)
     {
         CicloLectivo::destroy($id);
-        return redirect(route('ciclos-lectivos.index', $institucion_id))->with(['successMessage' => 'Ciclo lectivo eliminado con éxito!']);
+        return redirect(route('ciclos-lectivos.index', $institucion_id))
+            ->with(['successMessage' => 'Ciclo lectivo eliminado con éxito!']);
     }
 }

@@ -70,10 +70,10 @@ class MuroArchivoController extends Controller
             }
 
             return redirect(route('muro-archivos.index', [$institucion_id, $division_id, $muro_id]))
-                ->with(['successMessage' => 'Archivos cargados con exito!']);
+                ->with(['successMessage' => 'Archivos subbidos con éxito!']);
         }
 
-        return back()->withErrors('No hay ningun archivo seleccionado');
+        return back()->withErrors('No hay ningún archivo seleccionado');
     }
 
     public function destroy($institucion_id, $division_id, $muro_id, $id)
@@ -82,6 +82,6 @@ class MuroArchivoController extends Controller
         Storage::delete('public/Muro/' . $muroArchivo->archivo);
 
         MuroArchivo::destroy($id);
-        return back()->with(['successMessage' => 'Archivo eliminado con exito!']);
+        return back()->with(['successMessage' => 'Archivo eliminado con éxito!']);
     }
 }

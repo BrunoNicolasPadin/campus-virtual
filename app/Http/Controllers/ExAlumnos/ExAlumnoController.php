@@ -114,7 +114,7 @@ class ExAlumnoController extends Controller
         ]);
 
         return redirect(route('exalumnos.index', $institucion_id))
-            ->with(['successMessage' => 'Ex alumno agregado con exito!']);
+            ->with(['successMessage' => 'Ex alumno agregado con éxito!']);
     }
 
     public function edit($institucion_id, $id)
@@ -145,7 +145,7 @@ class ExAlumnoController extends Controller
         ]);
 
         return redirect(route('exalumnos.index', $institucion_id))
-            ->with(['successMessage' => 'Ex alumno actualizado con exito!']);
+            ->with(['successMessage' => 'Ex alumno actualizado con éxito!']);
     }
 
     public function destroy($institucion_id, $id)
@@ -158,7 +158,7 @@ class ExAlumnoController extends Controller
         $alumno->exAlumno = '0';
         $alumno->save();
 
-        return back()->with(['successMessage' => 'Ex alumno eliminado con exito!']);
+        return back()->with(['successMessage' => 'Ex alumno eliminado con éxito!']);
 
     }
 }

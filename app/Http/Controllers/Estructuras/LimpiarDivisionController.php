@@ -23,7 +23,7 @@ class LimpiarDivisionController extends Controller
         $this->limpiarMuro($division_id);
         $this->limpiarEvaluaciones($division_id);
 
-        return back()->with(['successMessage' => 'Division limpiada con exito!']);
+        return back()->with(['successMessage' => 'División limpiada con éxito!']);
     }
 
     public function limpiarMuro($division_id)

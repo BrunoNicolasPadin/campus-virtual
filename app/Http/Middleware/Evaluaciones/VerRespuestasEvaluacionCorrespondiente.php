@@ -45,9 +45,9 @@ class VerRespuestasEvaluacionCorrespondiente
             if ($comentario->evaluacion->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Estas respuestas no forma parte de la institucion de la que perteneces.');
+            abort(403, 'Estas respuestas no forma parte de tu institución.');
         }
 
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

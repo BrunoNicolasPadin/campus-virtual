@@ -26,10 +26,10 @@ class UpdateInstitucion extends FormRequest
     public function messages()
     {
         return [
-            'fundacion.string' => 'Debe ingresar solo caracteres en la fundacion.',
-            'historia.string' => 'Debe ingresar solo caracteres en la historia.',
-            'claveDeAccesoNueva.min' => 'La clave de acceso debe tener como minimo 8 caracteres.',
-            'claveDeAccesoNueva.max' => 'La clave de acceso debe tener como maximo 32 caracteres.',
+            'fundacion.string' => 'Debe ingresar solo cadenas de caracteres (letras, números o signos) en la fundación.',
+            'historia.string' => 'Debe ingresar solo cadenas de caracteres (letras, números o signos) en la historia.',
+            'claveDeAccesoNueva.min' => 'La clave de acceso debe tener como mínimo 8 caracteres.',
+            'claveDeAccesoNueva.max' => 'La clave de acceso debe tener como máximo 32 caracteres.',
             'claveDeAccesoNuevaConfirmation.same' => 'Las claves de acceso no coinciden.',
         ];
     }

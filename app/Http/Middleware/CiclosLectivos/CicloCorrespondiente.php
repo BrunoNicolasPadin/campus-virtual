@@ -25,6 +25,6 @@ class CicloCorrespondiente
         if ($cicloLectivo->institucion_id  == session('institucion_id')) {
             return $next($request);
         }
-        abort(403, 'Este ciclo lectivo no es de tu institucion.');
+        abort(403, 'Este ciclo lectivo no es de tu institución.');
     }
 }

@@ -31,7 +31,7 @@ class ComentarioCorrespondiente
             if ($comentario->evaluacion->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Este comentario no forma parte de tu institucion.');
+            abort(403, 'Este comentario no forma parte de tu institución.');
         }
 
         abort(403, 'Este comentario no es tuyo.');

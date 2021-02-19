@@ -63,7 +63,8 @@ class EstructuraController extends Controller
             ]);
         }
 
-        return redirect(route('divisiones.create', $institucion_id))->with(['successMessage' => 'Divisiones creadas con exito!']);
+        return redirect(route('divisiones.create', $institucion_id))
+            ->with(['successMessage' => 'Divisiones agregadas con éxito!']);
     }
 
     public function show($institucion_id, $id)
@@ -105,12 +106,14 @@ class EstructuraController extends Controller
                 ]);
         }
         
-        return redirect(route('divisiones.index', $institucion_id))->with(['successMessage' => 'Division editada con exito!']); 
+        return redirect(route('divisiones.index', $institucion_id))
+            ->with(['successMessage' => 'División actualizada con éxito!']); 
     }
 
     public function destroy($institucion_id, $id)
     {
         Division::destroy($id);
-        return redirect(route('divisiones.index', $institucion_id))->with(['successMessage' => 'Division eliminada con exito!']); 
+        return redirect(route('divisiones.index', $institucion_id))
+            ->with(['successMessage' => 'División eliminada con éxito!']); 
     }
 }

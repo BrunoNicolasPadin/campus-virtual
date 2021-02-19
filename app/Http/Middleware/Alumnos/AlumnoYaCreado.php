@@ -24,7 +24,7 @@ class AlumnoYaCreado
         if (Alumno::where('user_id', Auth::id())
             ->where('institucion_id', $link[4])
             ->exists()) {
-            abort(403, 'Ya estas registrado como alumno para esta institucion.');
+            abort(403, 'Ya estás registrado como alumno para esta institución.');
         }
         return $next($request);
     }

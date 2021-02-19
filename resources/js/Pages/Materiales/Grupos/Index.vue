@@ -52,7 +52,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccionar asignatura que desea ver:
+                                        Seleccionar asignatura de la cual desea ver sus grupos:
                                     </template>
                                 </label-form>
                                 

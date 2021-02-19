@@ -18,6 +18,6 @@ class VerificarExAlumnoNuevo
             }
             return $next($request);
         }
-        abort(403, 'Este alumno no es de tu institucion.');
+        abort(403, 'Este alumno no es de tu institución.');
     }
 }

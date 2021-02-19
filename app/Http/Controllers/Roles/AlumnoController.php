@@ -90,7 +90,8 @@ class AlumnoController extends Controller
             session(['institucion_id' => $institucion_id]);
             session(['division_id' => $request->division_id]);
 
-            return redirect(route('roles.mostrarCuentas'));
+            return redirect(route('roles.mostrarCuentas'))
+                ->with(['successMessage' => 'Te registraste exitosamente como alumno.']);
         }
         return redirect(route('alumnos.create', $institucion_id))->withErrors('Clave de acceso incorrecta.');
     }
@@ -131,7 +132,8 @@ class AlumnoController extends Controller
                 session(['division_id' => $request->division_id]);
             }
 
-            return redirect(route('divisiones.show', [$institucion_id, $request->division_id]));
+            return redirect(route('divisiones.show', [$institucion_id, $request->division_id]))
+                ->with(['successMessage' => 'Cambio de división exitoso.']);
         }
         return back()->withErrors('Clave de acceso incorrecta.');
     }
@@ -140,14 +142,14 @@ class AlumnoController extends Controller
     {
         Alumno::destroy($id);
 
-        $message = 'Alumno eliminado con exito!';
+        $message = 'Alumno eliminado con éxito!';
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             return redirect(route('roles.index'))->with(['successMessage' => $message]);
         }
 
         if (session('tipo') == 'Alumno') {
-            $message = 'Te eliminaste con exito!';
+            $message = 'Te eliminaste con éxito!';
             session()->forget(['tipo', 'alumno_id', 'division_id', 'institucion_id']);
             return redirect(route('roles.mostrarCuentas'))->with(['successMessage' => $message]);
         }

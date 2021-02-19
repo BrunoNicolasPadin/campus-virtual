@@ -22,9 +22,9 @@ class StoreMesa extends FormRequest
     public function messages()
     {
         return [
-            'fechaHora.required' => 'Debe ingresar una fecha y hora de realizacion.',
+            'fechaHora.required' => 'Debe ingresar una fecha y hora de realización.',
             'fechaHora.date_format' => 'El formato de la fecha y hora debe ser: "DD-MM-AAAA HH:MM:SS".',
-            'comentario.string' => 'Debe ingresar una cadena de caracteres y/o numeros, no otra cosa.',
+            'comentario.string' => 'Debe ingresar una cadena de caracteres y/o números, no otra cosa.',
         ];
     }
 }

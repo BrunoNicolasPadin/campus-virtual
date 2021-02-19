@@ -26,7 +26,7 @@ class UpdateAsignatura extends FormRequest
     {
         return [
             'nombre.required' => 'Debe ingresar un nombre.',
-            'diaHorario.*.dia.required' => 'Debe seleccionar un dia.',
+            'diaHorario.*.dia.required' => 'Debe seleccionar un día.',
             'diaHorario.*.horaDesde.required' => 'Debe seleccionar una hora desde.',
             'diaHorario.*.horaHasta.required' => 'Debe seleccionar una hora hasta.',
         ];

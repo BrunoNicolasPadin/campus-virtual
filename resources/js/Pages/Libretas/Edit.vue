@@ -45,7 +45,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Puede dejarlo vacio.
+                                        Puede dejarlo vacío.
                                     </template>
                                 </info>
                             </div>

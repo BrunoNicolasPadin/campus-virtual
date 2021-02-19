@@ -24,6 +24,6 @@ class ExAlumnoCorrespondiente
         if (session('institucion_id') == $exAlumno->institucion_id) {
             return $next($request);
         }
-        abort(403, 'Este ex  alumno no pertenecio a tu institucion.');
+        abort(403, 'Este ex alumno no perteneció a tu institución.');
     }
 }

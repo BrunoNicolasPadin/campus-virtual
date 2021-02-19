@@ -53,10 +53,10 @@ class RendirEntregaController extends Controller
             }
 
             return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id]))
-                ->with(['successMessage' => 'Tu entrega ha sido cargado con exito!']);
+                ->with(['successMessage' => 'Tu entrega ha sido cargada con éxito!']);
         }
 
-        return back()->withErrors('No hay ningun archivo seleccionado');
+        return back()->withErrors('No hay ningún archivo seleccionado');
     }
 
     public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
@@ -65,6 +65,6 @@ class RendirEntregaController extends Controller
         Storage::delete('public/Deudores/Entregas/' . $entrega->archivo);
 
         RendirEntrega::destroy($id);
-        return back()->with(['successMessage' => 'Archivo eliminado con exito!']);
+        return back()->with(['successMessage' => 'Archivo eliminado con éxito!']);
     }
 }

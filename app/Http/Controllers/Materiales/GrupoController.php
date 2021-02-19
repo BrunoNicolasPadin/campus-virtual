@@ -65,7 +65,8 @@ class GrupoController extends Controller
             'asignatura_id' => $request->asignatura_id,
             'nombre' => $request->nombre,
         ]);
-        return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo->id]));
+        return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo->id]))
+            ->with(['successMessage' => 'Grupo creado con éxito']);
     }
 
     public function show($institucion_id, $division_id, $id)
@@ -102,7 +103,8 @@ class GrupoController extends Controller
                 'asignatura_id' => $request->asignatura_id,
                 'nombre' => $request->nombre,
             ]);
-        return redirect(route('materiales.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Editado con exito!']);
+        return redirect(route('materiales.index', [$institucion_id, $division_id]))
+            ->with(['successMessage' => 'Grupo actualizado con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $id)
@@ -110,6 +112,7 @@ class GrupoController extends Controller
         $this->archivosServices->eliminarGruposMateriales($id);
 
         Grupo::destroy($id);
-        return redirect(route('materiales.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Eliminado con exito!']);
+        return redirect(route('materiales.index', [$institucion_id, $division_id]))
+            ->with(['successMessage' => 'Grupo eliminado con éxito!']);
     }
 }

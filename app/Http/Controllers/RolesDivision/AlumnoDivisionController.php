@@ -50,7 +50,7 @@ class AlumnoDivisionController extends Controller
         }
 
         return redirect(route('alumnosDivision.mostrar', [$institucion_id, $division_id]))
-            ->with((['successMessage' => 'Alumnos pasados de año con exito!']));
+            ->with((['successMessage' => 'Alumnos pasados de año con éxito!']));
         
     }
 

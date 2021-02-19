@@ -54,7 +54,8 @@ class InstitucionController extends Controller
         session(['tipo' => 'Institucion']);
         session(['institucion_id' => $institucion->id]);
 
-        return redirect(route('ciclos-lectivos.index', $institucion->id))->with(['successMessage' => 'Institución cargada con éxito!']);
+        return redirect(route('ciclos-lectivos.index', $institucion->id))
+            ->with(['successMessage' => 'Institución creada con éxito!']);
     }
 
     public function show($id)
@@ -103,7 +104,8 @@ class InstitucionController extends Controller
         $institucion->historia = $this->verificarNull($request->historia);
         $institucion->save();
 
-        return redirect(route('instituciones.show', $id))->with(['successMessage' => 'Institución actualizada con éxito!']);
+        return redirect(route('instituciones.show', $id))
+            ->with(['successMessage' => 'Institución actualizada con éxito!']);
     }
 
     public function destroy($id)
@@ -112,7 +114,8 @@ class InstitucionController extends Controller
         Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
 
         Institucion::destroy($id);
-        return redirect(route('instituciones.create'));
+        return redirect(route('instituciones.create'))
+            ->with(['successMessage' => 'Institución eliminada con éxito']);
     }
 
     public function verificarNull($campo)

@@ -155,7 +155,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Ingrese la clave de acceso que el instituto le dio.
+                                        Ingrese la clave de acceso de la institución.
                                     </template>
                                 </info>
                             </div>

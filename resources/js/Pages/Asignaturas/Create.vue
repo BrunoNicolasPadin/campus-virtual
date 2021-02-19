@@ -104,7 +104,7 @@
                             <div class="md:w-1/4 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Dia
+                                        Día
                                     </template>
                                 </label-form>
                                 
@@ -164,7 +164,7 @@
                                 @click="eliminarOtroDiaHora(index)"
                                 type="button" 
                                 class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 my-8 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
-                                    Eliminar dia y horas
+                                    Eliminar día y hora
                                 </button>
                             </div>
                         </div>

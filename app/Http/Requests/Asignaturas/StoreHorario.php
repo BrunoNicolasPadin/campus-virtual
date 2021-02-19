@@ -25,7 +25,7 @@ class StoreHorario extends FormRequest
     public function messages()
     {
         return [
-            'diaHorario.*.dia.required' => 'Debe seleccionar un dia.',
+            'diaHorario.*.dia.required' => 'Debe seleccionar un día.',
             'diaHorario.*.horaDesde.HH.required' => 'Debe seleccionar en la hora desde la/s hora/s.',
             'diaHorario.*.horaDesde.mm.required' => 'Debe seleccionar en la hora desde el/los minuto/s.',
             'diaHorario.*.horaHasta.HH.required' => 'Debe seleccionar en la hora hasta la/s hora/s.',

@@ -44,7 +44,7 @@
                             <div class="md:w-full px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Calificacion
+                                        Calificación
                                     </template>
                                 </label-form>
                                 
@@ -52,7 +52,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Se puede dejar vacio, poner cualquier numero real, con %, 'aprobado', 'no aprobado', 'bien', etc...
+                                        Se puede dejar vacío, poner cualquier numero con coma (ponga un punto en vez de la coma) o con 'Aprobado' y 'Desaprobado'.
                                     </template>
                                 </info>
                             </div>

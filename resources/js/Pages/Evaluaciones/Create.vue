@@ -41,7 +41,7 @@
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Titulo
+                                        Título
                                     </template>
                                 </label-form>
                                 
@@ -111,7 +111,7 @@
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Fecha y hora de realizacion
+                                        Fecha y hora de realización
                                     </template>
                                 </label-form>
                                 
@@ -131,7 +131,7 @@
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Fecha y hora de finalizacion
+                                        Fecha y hora de finalización
                                     </template>
                                 </label-form>
                                 
@@ -163,7 +163,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio poner aunque sea una letra o simbolo como minimo.
+                                        No es obligatorio.
                                     </template>
                                 </info>
                             </div>

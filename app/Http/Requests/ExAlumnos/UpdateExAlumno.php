@@ -25,7 +25,7 @@ class UpdateExAlumno extends FormRequest
         return [
             'ciclo_lectivo_id.required' => 'Debe seleccionar un ciclo lectivo.',
             'abandono.required' => 'Debe informar si abandono el colegio (seleccionar) o solo se cambio (Dejar en blanco).',
-            'comentario.string' => 'Si desea ingresar un comentario debera ser una candena de caracteres.',
+            'comentario.string' => 'Si desea ingresar un comentario deberá ser una candena de caracteres.',
         ];
     }
 }

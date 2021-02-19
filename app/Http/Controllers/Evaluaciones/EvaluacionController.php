@@ -92,7 +92,8 @@ class EvaluacionController extends Controller
             'comentario' => $request->comentario,
         ]);
 
-        return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $eva->id]));
+        return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $eva->id]))
+            ->with(['successMessage' => 'Evaluación registrada con éxito']);
     }
 
     public function show($institucion_id, $division_id, $id)
@@ -167,7 +168,7 @@ class EvaluacionController extends Controller
             ]);
 
         return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $id]))
-            ->with(['successMessage' => 'Evaluacion editada con exito!']);
+            ->with(['successMessage' => 'Evaluación actualizada con éxito!']);
     }
 
     public function destroy($institucion_id, $division_id, $id)
@@ -176,6 +177,6 @@ class EvaluacionController extends Controller
 
         Evaluacion::destroy($id);
         return redirect(route('evaluaciones.index', [$institucion_id, $division_id]))
-            ->with(['successMessage' => 'Evaluacion eliminada con exito!']);
+            ->with(['successMessage' => 'Evaluación eliminada con éxito!']);
     }
 }

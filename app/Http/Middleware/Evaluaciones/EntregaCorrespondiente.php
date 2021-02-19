@@ -31,7 +31,7 @@ class EntregaCorrespondiente
                     return $next($request);
                 }
             }
-            abort(403, 'Esta entrega de una evaluacion no es de una asignatura en la que eres docente.');
+            abort(403, 'Esta entrega de una evaluación no es de una asignatura en la que eres docente.');
         }
 
         if (session('tipo') == 'Alumno') {
@@ -45,16 +45,16 @@ class EntregaCorrespondiente
             if ($entrega->alumno_id == session('alumno_id')) {
                 return $next($request);
             }
-            abort(403, 'Esta entrega no es de tu hijo.');
+            abort(403, 'Esta entrega no es de tu hijo/a.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             if ($entrega->evaluacion->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Esta entrega no forma parte de tu institucion.');
+            abort(403, 'Esta entrega no forma parte de tu institución.');
         }
 
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }

@@ -46,7 +46,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccione ciclo lectivo:
+                                        Seleccione un ciclo lectivo:
                                     </template>
                                 </label-form>
                                 
@@ -68,7 +68,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccione division:
+                                        Seleccione una división:
                                     </template>
                                 </label-form>
                                 
@@ -96,7 +96,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccione condicion:
+                                        Seleccione una condición:
                                     </template>
                                 </label-form>
                                 
@@ -107,8 +107,8 @@
                                 v-model="form.abandono">
 
                                     <option value="" selected>Todos</option>
-                                    <option value="0">No abandono</option>
-                                    <option value="1">Abandono</option>
+                                    <option value="0">No abandonó</option>
+                                    <option value="1">Abandonó</option>
 
                                 </select>
                             </div>
@@ -143,13 +143,13 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Division
+                                    División
                                 </template>
                             </table-head>
 
                             <table-head>
                                 <template #th-titulo>
-                                    Abandono
+                                    Abandonó
                                 </template>
                             </table-head>
 

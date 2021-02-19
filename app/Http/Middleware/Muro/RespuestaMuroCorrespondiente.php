@@ -27,6 +27,6 @@ class RespuestaMuroCorrespondiente
             return $next($request);
         }
 
-        abort(403, 'Esta respuesta no es tuyo.');
+        abort(403, 'Esta respuesta no es tuya.');
     }
 }

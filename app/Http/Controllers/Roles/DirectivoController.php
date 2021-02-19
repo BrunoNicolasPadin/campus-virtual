@@ -53,9 +53,11 @@ class DirectivoController extends Controller
             session(['tipo' => 'Directivo']);
             session(['tipo_id' => $directivo->id]);
             session(['institucion_id' => $institucion_id]);
-            return redirect(route('roles.mostrarCuentas'));
+            return redirect(route('roles.mostrarCuentas'))
+                ->with(['successMessage' => 'Te registrastee exitosamente como directivo.']);
         }
-        return redirect(route('roles.anotarse', $institucion_id))->withErrors('Clave de acceso incorrecta.');
+        return redirect(route('roles.anotarse', $institucion_id))
+            ->withErrors('Clave de acceso incorrecta.');
     }
 
     public function show($institucion_id, $id)
@@ -69,14 +71,14 @@ class DirectivoController extends Controller
     public function destroy($institucion_id, $id)
     {
         Directivo::destroy($id);
-        $message = 'Directivo eliminado con exito!';
+        $message = 'Directivo eliminado con éxito!';
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             return redirect(route('roles.index'))->with(['successMessage' => $message]);
         }
 
         if (session('tipo') == 'Directivo') {
-            $message = 'Te eliminaste con exito!';
+            $message = 'Te eliminaste con éxito!';
             session()->forget(['tipo', 'tipo_id', 'institucion_id']);
             return redirect(route('roles.mostrarCuentas'))->with(['successMessage' => $message]);
         }

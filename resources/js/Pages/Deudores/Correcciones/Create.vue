@@ -11,7 +11,7 @@
                 <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">{{ asignatura.nombre }}</inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa {{ mesa.fechaHora }}</inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, anotado.id])">Entrega de {{ anotado.alumno.user.name }}</inertia-link> /
-                Agregar correccion
+                Agregar corrección
             </span>
         </template>
 

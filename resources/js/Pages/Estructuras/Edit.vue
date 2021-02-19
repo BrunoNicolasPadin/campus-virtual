@@ -52,7 +52,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio
+                                        Es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -61,7 +61,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Orientacion
+                                        Orientación
                                     </template>
                                 </label-form>
                                 
@@ -76,7 +76,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        No es obligatorio. Puede crear cursos sin tener que seleccionar una orientacion.
+                                        No es obligatorio. Puede crear cursos sin tener que seleccionar una orientación.
                                     </template>
                                 </info>
                             </div>
@@ -103,7 +103,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio
+                                        Es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -112,7 +112,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Periodo de evaluacion
+                                        Periodo de evaluación
                                     </template>
                                 </label-form>
                                 
@@ -128,7 +128,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio
+                                        Es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -138,7 +138,7 @@
                             <div class="md:w-full px-3">
                                 <label-form>
                                     <template #label-value>
-                                        Division
+                                        División
                                     </template>
                                 </label-form>
                                 
@@ -146,7 +146,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatorio
+                                        Es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -164,7 +164,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Es obligatoria solo si desea cambiarla y debe tener entre 8 y 32 caracteres. Es la clave que deberan ingresar los alumnos para poder anotarse en la division.
+                                        Es obligatoria solo si desea cambiarla y debe tener entre 8 y 32 caracteres. Es la clave que deberan ingresar los alumnos para poder anotarse en la división.
                                     </template>
                                 </info>
                             </div>

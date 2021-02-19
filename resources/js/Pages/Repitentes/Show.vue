@@ -42,7 +42,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Division
+                                    División
                                 </template>
                             </table-head>
 

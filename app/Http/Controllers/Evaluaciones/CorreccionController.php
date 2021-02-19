@@ -58,7 +58,7 @@ class CorreccionController extends Controller
             }
 
             return redirect(route('entregas.show', [$institucion_id, $division_id, $evaluacion_id, $entrega_id]))
-                ->with(['successMessage' => 'Correcciones cargados con exito!']);
+                ->with(['successMessage' => 'Correcciones subidas con éxito!']);
         }
 
         return back()->withErrors('No hay ningun archivo seleccionado');
@@ -70,6 +70,6 @@ class CorreccionController extends Controller
         Storage::delete('public/Evaluaciones/Correcciones/' . $correccion->archivo);
 
         Correccion::destroy($id);
-        return back()->with(['successMessage' => 'Correccion eliminado con exito!']);
+        return back()->with(['successMessage' => 'Correccion eliminada con éxito!']);
     }
 }

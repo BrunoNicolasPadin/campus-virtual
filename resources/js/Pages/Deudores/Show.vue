@@ -31,7 +31,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Calificacion
+                                    Calificación
                                 </template>
                             </table-head>
 

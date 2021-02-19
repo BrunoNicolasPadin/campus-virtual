@@ -35,8 +35,8 @@ class AsignaturaCorrespondiente
             if ($asignatura->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Esta asignatura no forma parte de la institucion de la que formas parte.');
+            abort(403, 'Esta asignatura no forma parte de la institución de la que formas parte.');
         }
-        abort(403, 'No puede estar aqui.');
+        abort(403, 'No puede estar aquí.');
     }
 }

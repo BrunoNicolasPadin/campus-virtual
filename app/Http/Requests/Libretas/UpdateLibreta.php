@@ -21,7 +21,7 @@ class UpdateLibreta extends FormRequest
     public function messages()
     {
         return [
-            'notas.*.calificacion' => 'Debe ser una cadena de texto o de numeros las calificaciones.',
+            'notas.*.calificacion' => 'Debe ser una cadena de caracteres (letras, números o signos) las calificaciones.',
         ];
     }
 }

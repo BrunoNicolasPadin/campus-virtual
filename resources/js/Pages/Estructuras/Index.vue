@@ -60,7 +60,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Orientacion
+                                    Orientación
                                 </template>
                             </table-head>
 
@@ -72,7 +72,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Division
+                                    División
                                 </template>
                             </table-head>
 

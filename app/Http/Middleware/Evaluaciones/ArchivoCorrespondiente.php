@@ -32,15 +32,15 @@ class ArchivoCorrespondiente
                     return $next($request);
                 }
             }
-            abort(403, 'Este archivo forma parte de una evaluacion en una asignatura de la que no eres docente.');
+            abort(403, 'Este archivo no forma parte de una evaluación tuya.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             if ($archivo->evaluacion->division->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
-            abort(403, 'Estos archivos no forman parte de tu institucion.');
+            abort(403, 'Este archivo no forman parte de tu institución.');
         }
-        abort(403, 'No puedes estar aqui.');
+        abort(403, 'No puedes estar aquí.');
     }
 }
