@@ -7,13 +7,13 @@
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
                     <li>2) <a class="hover:underline" href="#eliminarte">Eliminarte como alumno</a></li>
-                    <li>3) <a class="hover:underline" href="#anotarte">Anotarte en una institucion</a></li>
-                    <li>4) <a class="hover:underline" href="#eliminar">Eliminar alumno de mi institucion</a></li>
+                    <li>3) <a class="hover:underline" href="#anotarte">Anotarte en una institución</a></li>
+                    <li>4) <a class="hover:underline" href="#eliminar">Eliminar alumno de mi institución</a></li>
                     <li>5) <a class="hover:underline" href="#cambiar-curso">Cambiar de curso</a></li>
                     <li>6) <a class="hover:underline" href="#agregar-asignatura-adeudada">Agregar asignaturas que adeuda</a></li>
                     <li>7) <a class="hover:underline" href="#repetir">Hacerlo repetir</a></li>
-                    <li>8) <a class="hover:underline" href="#eliminar-division">Eliminar alumno de la division</a></li>
-                    <li>9) <a class="hover:underline" href="#ex-alumno">Abandono el institucion o cambio de institucion</a></li>
+                    <li>8) <a class="hover:underline" href="#eliminar-division">Eliminar alumno de la división</a></li>
+                    <li>9) <a class="hover:underline" href="#ex-alumno">Abandono el institución o cambio de institución</a></li>
                 </template>
 
                 <template #detalles>
@@ -23,8 +23,8 @@
                         </template>
 
                         <template #informacion>
-                            No podra registrarse como alumno nuevamente en la misma institucion pero si con otro rol. 
-                            Si podra registrarse en otra institucion con el rol de alumno sin ningun problema.
+                            No podrá registrarse como alumno nuevamente en la misma institución pero si con otro rol. 
+                            Si podrá registrarse en otra institución con el rol de alumno sin ningún problema.
                         </template>
 
                         <template #contenido-video>
@@ -38,7 +38,7 @@
                         </template>
 
                         <template #informacion>
-                            Para hacerlo deberas tener la cuenta activada que deseas eliminar.
+                            Para hacerlo deberás tener la cuenta activada que deseas eliminar.
                         </template>
 
                         <template #contenido-video>
@@ -48,7 +48,7 @@
 
                     <detalles-tutorial id="anotarte">
                         <template #titulo-sub-tutorial>
-                            Anotarte en una institucion
+                            Anotarte en una institución
                         </template>
 
                         <template #contenido-video>
@@ -58,11 +58,11 @@
 
                     <detalles-tutorial id="eliminar">
                         <template #titulo-sub-tutorial>
-                            Eliminar alumno de mi institucion
+                            Eliminar alumno de mi institución
                         </template>
 
                         <template #informacion>
-                            Se eliminara todo de este alumno: entregas, inscripciones a mesas, libreta y deja de contar en las estadisticas.
+                            Se eliminara todo de este alumno: entregas, inscripciones a mesas, libreta y deja de contar en las estadísticas.
                         </template>
 
                         <template #contenido-video>
@@ -105,7 +105,7 @@
                         </template>
 
                         <template #informacion>
-                            Esto sirve mas que nada para la estadistica, no debe volver a ingresar la division en la que cursara.
+                            Esto sirve mas que nada para la estadística, no debe volver a ingresar la división en la que cursara.
                         </template>
 
                         <template #contenido-video>
@@ -115,11 +115,12 @@
 
                     <detalles-tutorial id="eliminar-division">
                         <template #titulo-sub-tutorial>
-                            Eliminar alumno de la division
+                            Eliminar alumno de la división
                         </template>
 
                         <template #informacion>
-                            Al eliminar al alumno de la division solo le prohibes su ingreso a esta, salvo que el alumno vuelva a anotarse y para eso debe saber la clave de acceso de la division, cambiela si quieres evitar esto. 
+                            Al eliminar al alumno de la división solo le prohibes su ingreso a esta, salvo que el alumno vuelva a anotarse y 
+                            para eso deberá saber la clave de acceso de la división, cámbiela si quiere evitar esto. 
                         </template>
 
                         <template #contenido-video>
@@ -129,11 +130,11 @@
 
                     <detalles-tutorial id="ex-alumno">
                         <template #titulo-sub-tutorial>
-                            Transformar en ex alumno
+                            Transformarlo en un ex alumno
                         </template>
 
                         <template #informacion>
-                            Esto tambien sirve mas que nada para la estadistica. Pasara a no estar anotado en ninguna division automaticamente.
+                            Esto tambien sirve mas que nada para la estadística. Pasará a no estar anotado en ninguna división automáticamente.
                         </template>
 
                         <template #contenido-video>
@@ -157,5 +158,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Alumnos',
     }
 </script>

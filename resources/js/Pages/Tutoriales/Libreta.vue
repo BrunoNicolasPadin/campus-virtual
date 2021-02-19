@@ -15,8 +15,8 @@
                         </template>
 
                         <template #informacion>
-                            Las calificaciones deben ser del 1 al 10 y escritos numericamente, ya que sino las estadisticas no funcionaran.
-                            Estamos trabajando para que pueda calificarse de otras maneras y aun asi funcionen las estadisticas de forma correcta.
+                            Las calificaciones deben ser del 1 al 10 y escritos numéricamente, ya que sino las estadísticas no funcionarán.
+                            Estamos trabajando para que pueda calificarse de otras maneras y aun así funcionen las estadísticas de forma correcta.
                         </template>
 
                         <template #contenido-video>
@@ -40,5 +40,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Libretas',
     }
 </script>

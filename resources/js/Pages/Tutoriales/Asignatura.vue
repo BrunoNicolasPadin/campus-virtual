@@ -22,7 +22,8 @@
                         </template>
 
                         <template #informacion>
-                            Puede hacerlo sin tener docentes anotados en su institucion, luego los podra agregar y asi estos podran ingresar a la/s division/es en las que son docentes de una o mas asignaturas.
+                            Puede hacerlo sin tener docentes anotados en su institución, luego los podra agregar y así estos podran ingresar a 
+                            la/s división/es en las que son docentes de una o mas asignaturas.
                         </template>
 
                         <template #contenido-video>
@@ -36,7 +37,7 @@
                         </template>
 
                         <template #informacion>
-                            Desde aqui podra eliminar horarios y docentes.
+                            Desde aquí también podra eliminar horarios y docentes.
                         </template>
 
                         <template #contenido-video>
@@ -50,7 +51,8 @@
                         </template>
 
                         <template #informacion>
-                            Se eliminara todo lo relacionado a la asignatura: horarios, materiales, mesas de examen, evaluaciones, entregas, correcciones, desaparece de las libretas, deja de contar en la estadistica.
+                            Se eliminará todo lo relacionado a la asignatura: horarios, materiales, mesas de examen, evaluaciones, entregas, correcciones, 
+                            desaparecerá de las libretas, deja de contar en la estadística.
                         </template>
 
                         <template #contenido-video>
@@ -64,7 +66,7 @@
                         </template>
 
                         <template #informacion>
-                            Le permitira a los docentes ingresar a la division.
+                            Le permitirá a los docentes ingresar a la división.
                         </template>
 
                         <template #contenido-video>
@@ -88,7 +90,7 @@
                         </template>
 
                         <template #informacion>
-                            El docente no podra volver a ingresar a la division salvo que este anotado como docente en otra asignatura.
+                            El docente no podrá volver a ingresar a la división salvo que esté anotado como docente en otra asignatura.
                         </template>
 
                         <template #contenido-video>
@@ -132,5 +134,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Asignaturas',
     }
 </script>

@@ -44,7 +44,7 @@
                         </template>
 
                         <template #informacion>
-                            Se eliminaran todos los archivos guardados en este grupo y no se podran recuperar.
+                            Se eliminarán todos los archivos guardados en este grupo y no se podrán recuperar.
                         </template>
 
                         <template #contenido-video>
@@ -68,7 +68,7 @@
                         </template>
 
                         <template #informacion>
-                            Se eliminara para siempre y no se podra recuperar.
+                            Se eliminará para siempre y no se podrá recuperar.
                         </template>
 
                         <template #contenido-video>
@@ -92,5 +92,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Materiales',
     }
 </script>

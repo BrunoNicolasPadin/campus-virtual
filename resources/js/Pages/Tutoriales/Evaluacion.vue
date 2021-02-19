@@ -5,9 +5,9 @@
                 <template #titulo-tutorial>Evaluaciones</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#agregar-evaluacion">Agregar evaluacion</a></li>
-                    <li>2) <a class="hover:underline" href="#editar-evaluacion">Editar evaluacion</a></li>
-                    <li>3) <a class="hover:underline" href="#eliminar-evaluacion">Eliminar evaluacion</a></li>
+                    <li>1) <a class="hover:underline" href="#agregar-evaluacion">Agregar evaluación</a></li>
+                    <li>2) <a class="hover:underline" href="#editar-evaluacion">Editar evaluación</a></li>
+                    <li>3) <a class="hover:underline" href="#eliminar-evaluacion">Eliminar evaluación</a></li>
                     <li>4) <a class="hover:underline" href="#agregar-archivo">Agregar archivo</a></li>
                     <li>5) <a class="hover:underline" href="#editar-archivo">Editar archivo</a></li>
                     <li>6) <a class="hover:underline" href="#eliminar-archivo">Eliminar archivo</a></li>
@@ -16,11 +16,12 @@
                 <template #detalles>
                     <detalles-tutorial id="agregar-evaluacion">
                         <template #titulo-sub-tutorial>
-                            Agregar evaluacion
+                            Agregar evaluación
                         </template>
 
                         <template #informacion>
-                            Al crear una evaluacion, se le cargara en la base de datos una entrega correspondiente a cada alumno que este anotado en ese momento en la division. Si ingresa un alumno nuevo luego de crear la evaluacion, no tendra ninguna entrega para realizar.
+                            Al crear una evaluación, se le cargará en la base de datos una entrega correspondiente a cada alumno que esté anotado en ese 
+                            momento en la división. Si ingresa un alumno nuevo luego de crear la evaluación, no tendrá ninguna entrega para realizar. <br>
                             Debe apretar en "OK" luego de seleccionar la fecha y hora deseada.
                         </template>
 
@@ -31,7 +32,7 @@
 
                     <detalles-tutorial id="editar-evaluacion">
                         <template #titulo-sub-tutorial>
-                            Editar evaluacion
+                            Editar evaluación
                         </template>
 
                         <template #informacion>
@@ -45,11 +46,11 @@
 
                     <detalles-tutorial id="eliminar-evaluacion">
                         <template #titulo-sub-tutorial>
-                            Eliminar evaluacion
+                            Eliminar evaluación
                         </template>
 
                         <template #informacion>
-                            Se eliminaran los archivos entregados por los alumnos, tus correcciones y los archivos cargados a la evaluacion.
+                            Se eliminarán los archivos entregados por los alumnos, tus correcciones y los archivos cargados a la evaluación.
                         </template>
 
                         <template #contenido-video>
@@ -63,7 +64,8 @@
                         </template>
 
                         <template #informacion>
-                            Se puede agregar uno o mas archivos. Tambien se puede cambiar de archivo si se equivoco al subirlo o si se equivoco y en realidad no quiere agregar otro puede "eliminar el formulario" de ese nuevo archivo.
+                            Se puede agregar uno o mas archivos. También se puede cambiar de archivo si se equivocó al subirlo o si se equivocó y en realidad 
+                            no quiere agregar otro puede "eliminar el formulario" de ese nuevo archivo.
                         </template>
 
                         <template #contenido-video>
@@ -87,7 +89,7 @@
                         </template>
 
                         <template #informacion>
-                            Se eliminara para siempre y no podra ser recueperado.
+                            Se eliminará para siempre y no podra ser recueperado.
                         </template>
 
                         <template #contenido-video>
@@ -111,5 +113,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Evaluaciones',
     }
 </script>

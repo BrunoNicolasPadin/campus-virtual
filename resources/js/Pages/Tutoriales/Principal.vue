@@ -13,5 +13,7 @@
         components: {
             Estructura
         },
+
+        title: 'Gescol - Tutorial - Principal',
     }
 </script>

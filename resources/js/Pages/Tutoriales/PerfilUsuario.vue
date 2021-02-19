@@ -26,7 +26,7 @@
                         </template>
 
                         <template #informacion>
-                            Se elimina complemtamente el usuario.
+                            Se elimina complemtamente el usuario y se deberá crear otro nuevamente.
                         </template>
 
                         <template #contenido-video>
@@ -50,5 +50,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Perfil de usuario',
     }
 </script>

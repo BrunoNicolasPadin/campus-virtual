@@ -30,7 +30,7 @@
                         </template>
 
                         <template #informacion>
-                            Lo elimina para siempre y no se podra recuperar.
+                            Lo elimina para siempre y no se podrá recuperar.
                         </template>
 
                         <template #contenido-video>
@@ -54,5 +54,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Entregas',
     }
 </script>

@@ -8,7 +8,7 @@
                     <li>1) <a class="hover:underline" href="#agregar">Hacer repetir a un alumno</a></li>
                     <li>2) <a class="hover:underline" href="#editar">Editar repitente</a></li>
                     <li>3) <a class="hover:underline" href="#eliminar">Eliminar repitente</a></li>
-                    <li>3) <a class="hover:underline" href="#numeros">Numeros</a></li>
+                    <li>4) <a class="hover:underline" href="#numeros">Números</a></li>
                 </template>
 
                 <template #detalles>
@@ -18,7 +18,7 @@
                         </template>
 
                         <template #informacion>
-                            Esto sirve mas que nada para la estadistica, no debe volver a ingresar la division en la que cursara.
+                            Esto sirve más que nada para la estadística, no debe ingresar la división en la que cursará, eso se hace automáticamente.
                         </template>
 
                         <template #contenido-video>
@@ -42,7 +42,7 @@
                         </template>
 
                         <template #informacion>
-                            Solo saldra de la lista.
+                            Solo saldrá de la lista.
                         </template>
 
                         <template #contenido-video>
@@ -52,7 +52,7 @@
 
                     <detalles-tutorial id="numeros">
                         <template #titulo-sub-tutorial>
-                            Numeros
+                            Números
                         </template>
 
                         <template #contenido-video>
@@ -76,5 +76,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Repitentes',
     }
 </script>

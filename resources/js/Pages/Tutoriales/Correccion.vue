@@ -17,8 +17,9 @@
                         </template>
 
                         <template #informacion>
-                            Puede calificar como quiera siempre y cuando sea alfanumericamente, pero recomendamos que sean con numeros del 1 al 10 porque sino la parte de "Estadisticas" de la evaluacion no funcionara al 100%. 
-                            Estamos trabajando para que, al calificar de otra forma como por ejemplo con un "Bueno" o un "Excelente" tambien funcione.
+                            Puede calificar como quiera siempre y cuando sea alfanumericamente, pero recomendamos que sean con números del 1 al 10 porque sino 
+                            la sección de "Números" de la evaluacion no funcionara al 100%. 
+                            Estamos trabajando para que, al calificar de otra forma como por ejemplo con un "Bueno" o un "Excelente" o un "75%" también funcione.
                         </template>
 
                         <template #contenido-video>
@@ -46,7 +47,7 @@
                         </template>
 
                         <template #informacion>
-                            Se borrara para siempre y no se podra recuperar.
+                            Se borrara para siempre y no se podrá recuperar.
                         </template>
 
                         <template #contenido-video>
@@ -70,5 +71,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Correcciones',
     }
 </script>

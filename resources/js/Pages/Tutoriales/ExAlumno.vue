@@ -8,7 +8,7 @@
                     <li>1) <a class="hover:underline" href="#agregar">Transformar a ex alumno</a></li>
                     <li>2) <a class="hover:underline" href="#editar">Editar ex alumno</a></li>
                     <li>3) <a class="hover:underline" href="#eliminar">Eliminar</a></li>
-                    <li>3) <a class="hover:underline" href="#numeros">Numeros</a></li>
+                    <li>4) <a class="hover:underline" href="#numeros">Números</a></li>
                 </template>
 
                 <template #detalles>
@@ -18,8 +18,8 @@
                         </template>
 
                         <template #informacion>
-                            Esto sirve mas que nada a la estadistica. Solo pasara a no estar anotado en ninguna division automaticamente 
-                            con lo cual no podra ingresar a la division, solo podra ingresar a todo lo que se encuentre en su perfil.
+                            Esto sirve mas que nada a la estadística. Solo pasará a no estar anotado en ninguna división automaticamente 
+                            con lo cual no podrá ingresar a la división, solo podrá ingresar a todo lo que se encuentre en su perfil.
                         </template>
 
                         <template #contenido-video>
@@ -43,12 +43,11 @@
                         </template>
 
                         <template #informacion>
-                            Solo saldra de la lista. Si se equivoco de alumno tendra un problema: al volver a anotarlo en la division correspondiente 
-                            se creara una nueva libreta con todas las asignaturas de esa division, si el alumno ya tiene una libreta en la base de datos
-                            con el mismo ciclo lectivo (si se equivoco es seguro de que si) que esta actualmente activado, se borrara la ya existente y 
-                            aparecera una nueva en blanco.
-                            Recomendacion: antes de volver a anotarlo en la division correspondiente, anote o saque una captura de pantalla de la libreta para 
-                            luego pasar las notas nuevamente, no perdera nada mas que tiempo. 
+                            Solo saldrá de la lista. Si se equivocó de alumno tendrá un problema: al volver a anotarlo en la división correspondiente 
+                            se creará una nueva libreta con todas las asignaturas de esa división, si el alumno ya tiene una libreta en la base de datos
+                            con el mismo ciclo lectivo que esta actualmente activado, se borrara la ya existente y aparecerá una nueva en blanco.
+                            Recomendación: antes de volver a anotarlo en la división correspondiente, anote o saque una captura de pantalla de la libreta para 
+                            luego pasar las calificaciones nuevamente, no perderá nada más que tiempo. 
                         </template>
 
                         <template #contenido-video>
@@ -62,7 +61,7 @@
                         </template>
 
                         <template #informacion>
-                            Se basa en los alumnos que abandonaron el institucion nada mas, no en los que cambiaron de institucion.
+                            Se basa en los alumnos que abandonaron la institución nada más, no en los que cambiaron de institución.
                         </template>
 
                         <template #contenido-video>
@@ -86,5 +85,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Ex alumnos',
     }
 </script>

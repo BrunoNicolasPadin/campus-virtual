@@ -15,8 +15,8 @@
                         </template>
 
                         <template #informacion>
-                            Cada tipo de cuenta ve algo distinto. La institucion y los directivos pueden ver todo.
-                            Los alumnos solo las evaluaciones de la division de la que forman parte y las mesas en las que estan anotados.
+                            Cada tipo de cuenta ve algo distinto. La institución y los directivos pueden ver todo.
+                            Los alumnos solo las evaluaciones de la división de la que forman parte y las mesas en las que están anotados.
                             Los padres lo mismo que el hijo que tengan activado.
                             Los docentes las evaluaciones y mesas de las asignaturas en las que son docente.
                         </template>
@@ -42,5 +42,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Calendario',
     }
 </script>

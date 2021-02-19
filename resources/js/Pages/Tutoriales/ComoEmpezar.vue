@@ -2,25 +2,25 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Como empezar: primeros pasos</template>
+                <template #titulo-tutorial>Cómo empezar: primeros pasos</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#registrar-institucion">Registrar tu institucion</a></li>
+                    <li>1) <a class="hover:underline" href="#registrar-institucion">Registrar tu institución</a></li>
                     <li>2) <a class="hover:underline" href="#registrar-ciclo-lectivo">Registrar un ciclo lectivo</a></li>
                     <li>3) <a class="hover:underline" href="#registrar-estructura">Registrar estructura</a></li>
-                    <li>4) <a class="hover:underline" href="#registrar-asignaturas">Registrar todas las asignaturas de cada division</a></li>
+                    <li>4) <a class="hover:underline" href="#registrar-asignaturas">Registrar todas las asignaturas de cada división</a></li>
                     <li>5) <a class="hover:underline" href="#registrar-docentes">Que los docentes se registren</a></li>
-                    <li>6) <a class="hover:underline" href="#anotar-docentes">Anotar a los docentes en las asignaturas que les corresponden</a></li>
+                    <li>6) <a class="hover:underline" href="#anotar-docentes">Anotar a los docentes en las asignaturas que les corresponde</a></li>
                 </template>
 
                 <template #detalles>
                     <detalles-tutorial id="registrar-institucion">
                         <template #titulo-sub-tutorial>
-                            Registrar tu institucion
+                            Registrar tu institución
                         </template>
 
                         <template #informacion>
-                            Anotar la clave de acceso.
+                            Anotar la clave de acceso para no olvidarsela.
                         </template>
 
                         <template #contenido-video>
@@ -31,10 +31,6 @@
                     <detalles-tutorial id="registrar-ciclo-lectivo">
                         <template #titulo-sub-tutorial>
                             Registrar un ciclo lectivo
-                        </template>
-
-                        <template #informacion>
-                            Al crear un ciclo lectivo activado, hara que el resto se desactive. Antes de hacer eso verifique que haya cumplido los pasos de "Comienza de ciclo lectivo nuevo? Sigue estos pasos".
                         </template>
 
                         <template #contenido-video>
@@ -48,7 +44,7 @@
                         </template>
 
                         <template #informacion>
-                            Recomendacion: escriba todas las claves de acceso de cada division.
+                            Recomendación: escriba todas las claves de acceso de cada división.
                         </template>
 
                         <template #contenido-video>
@@ -58,11 +54,12 @@
 
                     <detalles-tutorial id="registrar-asignaturas">
                         <template #titulo-sub-tutorial>
-                            Registrar todas las asignaturas de cada division
+                            Registrar todas las asignaturas de cada división
                         </template>
 
                         <template #informacion>
-                            Puede hacerlo sin tener docentes anotados en su institucion, luego los podra agregar y asi estos podran ingresar a la/s division/es en las que son docentes de una o mas asignaturas.
+                            Puede hacerlo sin tener docentes anotados en su institución, luego los podra agregar y así estos podran ingresar a 
+                            la/s división/es en las que son docentes de una o mas asignaturas.
                         </template>
 
                         <template #contenido-video>
@@ -76,8 +73,8 @@
                         </template>
 
                         <template #informacion>
-                            No podra registrarse como docente nuevamente en la misma institucion pero si con otro rol. 
-                            Si podra registrarse en otra institucion con el rol de docente sin ningun problema.
+                            No podrá registrarse como docente nuevamente en la misma institución pero si con otro rol. 
+                            Si podrá registrarse en otra institución con el rol de docente sin ningún problema.
                         </template>
 
                         <template #contenido-video>
@@ -87,11 +84,11 @@
 
                     <detalles-tutorial id="anotar-docentes">
                         <template #titulo-sub-tutorial>
-                            Anotar a los docentes en las asignaturas que les corresponden
+                            Anotar a los docentes en las asignaturas que les corresponde
                         </template>
 
                         <template #informacion>
-                            Le permitira a los docentes ingresar a la division.
+                            Le permitirá a los docentes ingresar a la división.
                         </template>
 
                         <template #contenido-video>
@@ -116,6 +113,6 @@
             DetallesTutorial,
         },
 
-        title: 'Gescol - Tutoriales - Como empezar',
+        title: 'Gescol - Tutoriales - Primeros pasos',
     }
 </script>

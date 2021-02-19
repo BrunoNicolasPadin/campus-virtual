@@ -7,8 +7,8 @@
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
                     <li>2) <a class="hover:underline" href="#eliminarte">Eliminarte como directivo</a></li>
-                    <li>3) <a class="hover:underline" href="#anotarte">Anotarte en una institucion</a></li>
-                    <li>4) <a class="hover:underline" href="#eliminar">Eliminar directivo de mi institucion</a></li>
+                    <li>3) <a class="hover:underline" href="#anotarte">Anotarte en una institución</a></li>
+                    <li>4) <a class="hover:underline" href="#eliminar">Eliminar directivo de mi institución</a></li>
                 </template>
 
                 <template #detalles>
@@ -18,8 +18,8 @@
                         </template>
 
                         <template #informacion>
-                            No podra registrarse como directivo nuevamente en la misma institucion pero si con otro rol. 
-                            Si podra registrarse en otra institucion con el rol de directivo sin ningun problema.
+                            No podrá registrarse como directivo nuevamente en la misma institución pero si con otro rol. 
+                            Si podrá registrarse en otra institución con el rol de directivo sin ningún problema.
                         </template>
 
                         <template #contenido-video>
@@ -33,7 +33,7 @@
                         </template>
 
                         <template #informacion>
-                            Para hacerlo deberas tener la cuenta activada que desee eliminar.
+                            Para hacerlo deberás tener la cuenta activada que desee eliminar.
                         </template>
 
                         <template #contenido-video>
@@ -43,11 +43,11 @@
 
                     <detalles-tutorial id="anotarte">
                         <template #titulo-sub-tutorial>
-                            Anotarte en una institucion
+                            Anotarte en una institución
                         </template>
 
                         <template #informacion>
-                            Debera saber la clave de acceso.
+                            Deberá saber la clave de acceso.
                         </template>
 
                         <template #contenido-video>
@@ -57,12 +57,12 @@
 
                     <detalles-tutorial id="eliminar">
                         <template #titulo-sub-tutorial>
-                            Eliminar directivo de mi institucion
+                            Eliminar directivo de mi institución
                         </template>
 
                         <template #informacion>
-                            Si el directivo tiene la clave de acceso y la sabe podra ingresar cuantas veces quiera a menos que cambie la clave de acceso.
-                            No sucedera nada con todos los usuarios que ya estan inscriptos en su institucion.
+                            Si el directivo tiene la clave de acceso y la sabe, podrá ingresar cuantas veces quiera a menos que cambie la clave de acceso.
+                            No sucederá nada con todos los usuarios que ya están inscriptos en su institución.
                         </template>
 
                         <template #contenido-video>
@@ -86,5 +86,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Directivos',
     }
 </script>

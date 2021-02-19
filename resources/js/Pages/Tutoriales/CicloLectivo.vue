@@ -17,7 +17,8 @@
                         </template>
 
                         <template #informacion>
-                            Al crear un ciclo lectivo activado, hara que el resto se desactive. Antes de hacer eso verifique que haya cumplido los pasos de "Comienza de ciclo lectivo nuevo? Sigue estos pasos".
+                            Al crear un ciclo lectivo activado, hará que el resto se desactive. 
+                            Antes de hacer esto, verifique que haya cumplido los pasos de "<inertia-link class="hover:underline" :href="route('tutoriales.nuevo-ciclo-lectivo')">¿Está por comenzar un ciclo lectivo nuevo? Sigue estos pasos</inertia-link>".
                         </template>
 
                         <template #contenido-video>
@@ -31,7 +32,7 @@
                         </template>
 
                         <template #informacion>
-                            Si coloca el ciclo lectivo como "activado" se desactivaran los otros.
+                            Si coloca el ciclo lectivo como "activado" se desactivarán los otros.
                         </template>
 
                         <template #contenido-video>
@@ -45,7 +46,8 @@
                         </template>
 
                         <template #informacion>
-                            Si elimina el ciclo lectivo se eliminaran las libretas creadas para este ciclo (lo cual afectaria a las estadisticas), las asignaturas adeudadas que tienen los alumnos en el ciclo lectivo eliminado, registros de la lista de ex alumnos y repetidores.
+                            Si elimina el ciclo lectivo se eliminarán las libretas creadas para este ciclo (lo cual afectaría a las estadísticas), 
+                            las asignaturas adeudadas que tienen los alumnos en el ciclo lectivo eliminado, registros de la lista de ex alumnos y repetidores.
                         </template>
 
                         <template #contenido-video>
@@ -69,5 +71,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Ciclos lectivos',
     }
 </script>

@@ -5,8 +5,8 @@
                 <template #titulo-tutorial>Muros</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#agregar-publicacion">Agregar publicacion</a></li>
-                    <li>2) <a class="hover:underline" href="#editar-eliminar-publicacion">Editar y eliminar publicacion</a></li>
+                    <li>1) <a class="hover:underline" href="#agregar-publicacion">Agregar publicación</a></li>
+                    <li>2) <a class="hover:underline" href="#editar-eliminar-publicacion">Editar y eliminar publicación</a></li>
                     <li>3) <a class="hover:underline" href="#agregar-eliminar-archivo">Agregar y eliminar archivo</a></li>
                     <li>4) <a class="hover:underline" href="#agregar-editar-eliminar-respuesta">Agregar, editar y eliminar respuesta</a></li>
                 </template>
@@ -14,7 +14,7 @@
                 <template #detalles>
                     <detalles-tutorial id="agregar-publicacion">
                         <template #titulo-sub-tutorial>
-                            Agregar publicacion
+                            Agregar publicación
                         </template>
 
                         <template #contenido-video>
@@ -24,7 +24,7 @@
 
                     <detalles-tutorial id="editar-eliminar-publicacion">
                         <template #titulo-sub-tutorial>
-                            Editar y eliminar publicacion
+                            Editar y eliminar publicación
                         </template>
 
                         <template #contenido-video>
@@ -68,5 +68,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Muro',
     }
 </script>

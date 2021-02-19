@@ -8,7 +8,7 @@
                     <li>1) <a class="hover:underline" href="#agregar">Agregar</a></li>
                     <li>2) <a class="hover:underline" href="#editar">Editar</a></li>
                     <li>3) <a class="hover:underline" href="#eliminar">Eliminar</a></li>
-                    <li>3) <a class="hover:underline" href="#limpiar">Limpiar</a></li>
+                    <li>4) <a class="hover:underline" href="#limpiar">Limpiar</a></li>
                 </template>
 
                 <template #detalles>
@@ -18,7 +18,7 @@
                         </template>
 
                         <template #informacion>
-                            Recomendacion: escriba todas las claves de acceso de cada division.
+                            Recomendación: escriba todas las claves de acceso de cada división.
                         </template>
 
                         <template #contenido-video>
@@ -42,9 +42,9 @@
                         </template>
 
                         <template #informacion>
-                            No la elimine aunque en la vida real no exista mas, no paga nada adicional por la cantidad de divisiones que tenga ;).
-                            Si elimina una division automaticamente se eliminaran las libretas de todos los alumnos que pasaron por aqui, asignaturas, evaluaciones, 
-                            materiales, archivos de correcciones, entregas, publicaciones en el muro y sus respectivas respuestas. 
+                            No la elimine aunque en la vida real no exista más, no paga nada adicional por la cantidad de divisiones que tenga, solo limpiela (abajo se explica).
+                            Si elimina una división automáticamente se eliminarán las libretas de todos los alumnos que pasaron por allí, asignaturas, evaluaciones, 
+                            materiales, archivos de correcciones, entregas, publicaciones en el muro y sus respectivas respuestas.
                         </template>
 
                         <template #contenido-video>
@@ -58,9 +58,9 @@
                         </template>
 
                         <template #informacion>
-                            Se eliminaran las evaluaciones, archivos de evaluaciones, comentarios y respuestas de evaluaciones, entregas, correcciones, 
+                            Se eliminarán las evaluaciones, archivos de evaluaciones, comentarios y respuestas de evaluaciones, entregas, correcciones, 
                             comentarios de entregas, publicaciones, respuestas y archivos del muro. 
-                            El resto se mantiene: materiales, asignaturas, docentes, alumnos, repitentes y estadisticas.
+                            El resto se mantiene: materiales, asignaturas, docentes, alumnos, repitentes y estadísticas.
                         </template>
 
                         <template #contenido-video>
@@ -84,5 +84,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Estructuras',
     }
 </script>

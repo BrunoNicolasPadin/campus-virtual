@@ -48,7 +48,7 @@
                         </template>
 
                         <template #informacion>
-                            Para que el alumno pueda anotarse debe primero, la institucion o algun directivo, registrar que adeuda una asignatura.
+                            Para que el alumno pueda anotarse debe primero, la institución o algun directivo, registrar que adeuda una asignatura.
                         </template>
 
                         <template #contenido-video>
@@ -72,5 +72,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Mesas',
     }
 </script>

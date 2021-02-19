@@ -42,7 +42,7 @@
 
                         <template #informacion>
                             Topnav -> Institucional -> Perfil institucional -> Boton eliminar.
-                            Si lo hace se borrara absolutamente todo y no se podra recuperar.
+                            Si lo hace se borrara absolutamente todo y no se podrá recuperar.
                         </template>
 
                         <template #contenido-video>
@@ -68,5 +68,7 @@
             TituloLista,
             DetallesTutorial,
         },
+
+        title: 'Gescol - Tutorial - Instituciones',
     }
 </script>
