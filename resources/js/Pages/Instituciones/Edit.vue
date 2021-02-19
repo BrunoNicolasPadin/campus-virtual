@@ -107,7 +107,7 @@
                             </div>
                         </div>
 
-                        <div class="-mx-3 md:flex mb-6">
+                        <!-- <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-full px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
@@ -123,7 +123,7 @@
                                     </template>
                                 </info>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
@@ -203,7 +203,7 @@
                     fundacion: this.institucion.fundacion,
                     historia: this.institucion.historia,
                     planDeEstudio: null,
-                    claveDeAccesoActual: null,
+                    /* claveDeAccesoActual: null, */
                     claveDeAccesoNueva: null,
                     claveDeAccesoNuevaConfirmation: null,
                 },
@@ -218,7 +218,7 @@
                 data.append('fundacion', this.form.fundacion);
                 data.append('historia', this.form.historia);
                 data.append('archivo', this.form.planDeEstudio);
-                data.append('claveDeAccesoActual', this.form.claveDeAccesoActual);
+                /* data.append('claveDeAccesoActual', this.form.claveDeAccesoActual); */
                 data.append('claveDeAccesoNueva', this.form.claveDeAccesoNueva);
                 data.append('claveDeAccesoNuevaConfirmation', this.form.claveDeAccesoNuevaConfirmation);
                 data.append('_method', 'put');

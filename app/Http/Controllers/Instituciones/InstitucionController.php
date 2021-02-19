@@ -79,12 +79,12 @@ class InstitucionController extends Controller
         $institucion = Institucion::findOrFail($id);
 
         if (! $request->claveDeAccesoActual === null) {
-            if($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAccesoActual, $id)) {
+            /* if($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAccesoActual, $id)) { */
                 $institucion->claveDeAcceso = Hash::make($request->claveDeAccesoNueva);
-            }
+            /* }
             else {
                 return back()->withErrors('La clave de acceso que ingresaste en el campo "clave de acceso actual" es incorrecta.');
-            }
+            } */
         }
 
         if ($request->hasFile('archivo')) {
