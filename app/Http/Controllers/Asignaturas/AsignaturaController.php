@@ -15,6 +15,7 @@ use App\Models\Materiales\Grupo;
 use App\Models\Roles\Docente;
 use App\Services\Archivos\EliminarEntregasCorrecciones;
 use App\Services\Archivos\EliminarGruposMateriales;
+use App\Services\Archivos\EliminarMesas;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
@@ -25,12 +26,14 @@ class AsignaturaController extends Controller
     protected $formatoFechaService;
     protected $archivosGruposServices;
     protected $archivosEvaServices;
+    protected $mesasService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         CambiarFormatoFecha $formatoFechaService,
         EliminarGruposMateriales $archivosGruposServices,
         EliminarEntregasCorrecciones $archivosEvaServices,
+        EliminarMesas $mesasService,
     )
 
     {
@@ -45,6 +48,7 @@ class AsignaturaController extends Controller
         $this->formatoFechaService = $formatoFechaService;
         $this->archivosGruposServices = $archivosGruposServices;
         $this->archivosEvaServices = $archivosEvaServices;
+        $this->mesasService = $mesasService;
     }
 
     public function index($institucion_id, $division_id)
@@ -175,17 +179,22 @@ class AsignaturaController extends Controller
     public function destroy($institucion_id, $division_id, $id)
     {
         $grupos = Grupo::where('asignatura_id', $id)->get();
-        
         foreach ($grupos as $grupo) {
             $this->archivosGruposServices->eliminarGruposMateriales($grupo->id);
         }
 
         $evaluaciones = Evaluacion::where('asignatura_id', $id)->get();
-
         foreach ($evaluaciones as $evaluacion) {
 
             $this->archivosEvaServices->eliminarEntregasCorrecciones($evaluacion->id);
         }
+
+        $mesas = Mesa::where('asignatura_id', $id)->get();
+        foreach ($mesas as $mesa) {
+            
+            $this->mesasService->eliminarMesas($mesa->id);
+        }
+        
     
         Asignatura::destroy($id);
         return redirect(route('asignaturas.index', [$institucion_id, $division_id]))

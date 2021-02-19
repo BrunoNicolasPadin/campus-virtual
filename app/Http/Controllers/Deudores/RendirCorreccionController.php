@@ -63,8 +63,8 @@ class RendirCorreccionController extends Controller
 
     public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
     {
-        $entrega = RendirCorreccion::findOrFail($id);
-        Storage::delete('public/Deudores/Entregas/' . $entrega->archivo);
+        $correccion = RendirCorreccion::findOrFail($id);
+        Storage::delete('public/Deudores/Correcciones/' . $correccion->archivo);
 
         RendirCorreccion::destroy($id);
         return back()->with(['successMessage' => 'Archivo eliminado con éxito!']);

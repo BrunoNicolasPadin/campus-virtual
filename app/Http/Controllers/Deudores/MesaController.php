@@ -8,15 +8,24 @@ use App\Models\Asignaturas\Asignatura;
 use App\Models\Deudores\Anotado;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
+use App\Models\Deudores\RendirCorreccion;
+use App\Models\Deudores\RendirEntrega;
 use App\Models\Estructuras\Division;
+use App\Services\Archivos\EliminarMesas;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MesaController extends Controller
 {
     protected $formatoService;
+    protected $mesasService;
 
-    public function __construct(CambiarFormatoFechaHora $formatoService)
+    public function __construct(
+        CambiarFormatoFechaHora $formatoService,
+        EliminarMesas $mesasService,
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -26,6 +35,7 @@ class MesaController extends Controller
         $this->middleware('mesaCorrespondiente')->except('create', 'store');
 
         $this->formatoService = $formatoService;
+        $this->mesasService = $mesasService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id)
@@ -99,6 +109,8 @@ class MesaController extends Controller
 
     public function destroy($institucion_id, $division_id, $asignatura_id, $id)
     {
+        $this->mesasService->eliminarMesas($id);
+
         Mesa::destroy($id);
         return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
             ->with(['successMessage' => 'Mesa eliminada con éxito!']);
