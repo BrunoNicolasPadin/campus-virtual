@@ -29,7 +29,7 @@ class DocenteController extends Controller
     {
         return Inertia::render('Docentes/Index', [
             'institucion_id' => $institucion_id,
-            'docentes' => Docente::select('docentes.id', 'users.name')
+            'docentes' => Docente::select('docentes.id', 'users.name', 'users.profile_photo_path')
                 ->where('institucion_id', $institucion_id)
                 ->join('users', 'users.id', 'docentes.user_id')
                 ->orderBy('users.name')
@@ -38,6 +38,7 @@ class DocenteController extends Controller
                     return [
                         'id' => $docente->id,
                         'name'  => $docente->name,
+                        'foto' => $docente->profile_photo_path,
                     ];
                 }),
         ]);

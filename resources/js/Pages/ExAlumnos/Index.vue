@@ -137,6 +137,12 @@
 
                             <table-head>
                                 <template #th-titulo>
+                                    Foto de perfil
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
                                     Ciclo lectivo
                                 </template>
                             </table-head>
@@ -177,6 +183,16 @@
                                         <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, exalumno.alumno_id])">
                                             {{ exalumno.alumno.user.name }}
                                         </inertia-link>
+                                    </template>
+                                </table-data>
+
+                                <table-data >
+                                    <template #td v-if="exalumno.alumno.user.profile_photo_path">
+                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../storage/' + exalumno.alumno.user.profile_photo_path "  alt="Foto de perfil" />
+                                    </template>
+
+                                    <template #td v-else>
+                                        -
                                     </template>
                                 </table-data>
 

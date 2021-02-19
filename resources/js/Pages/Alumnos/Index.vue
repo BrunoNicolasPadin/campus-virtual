@@ -77,8 +77,12 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
-                                    <template #td>
+                                <table-data >
+                                    <template #td v-if="alumno.foto">
+                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../storage/' + alumno.foto "  alt="Foto de perfil" />
+                                    </template>
+
+                                    <template #td v-else>
                                         -
                                     </template>
                                 </table-data>

@@ -38,7 +38,7 @@ class AlumnoController extends Controller
     {
         return Inertia::render('Alumnos/Index', [
             'institucion_id' => $institucion_id,
-            'alumnos' => Alumno::select('alumnos.id', 'users.name')
+            'alumnos' => Alumno::select('alumnos.id', 'users.name', 'users.profile_photo_path')
                 ->where('institucion_id', $institucion_id)
                 ->join('users', 'users.id', 'alumnos.user_id')
                 ->orderBy('users.name')
@@ -47,6 +47,7 @@ class AlumnoController extends Controller
                     return [
                         'id' => $alumno->id,
                         'name'  => $alumno->name,
+                        'foto' => $alumno->profile_photo_path,
                     ];
                 }),
         ]);

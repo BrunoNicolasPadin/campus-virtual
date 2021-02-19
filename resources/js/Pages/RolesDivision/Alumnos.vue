@@ -35,13 +35,13 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Foto de perfil
+                                    Nombre
                                 </template>
                             </table-head>
 
                             <table-head>
                                 <template #th-titulo>
-                                    Nombre
+                                    Foto de perfil
                                 </template>
                             </table-head>
 
@@ -65,15 +65,19 @@
 
                                 <table-data>
                                     <template #td>
-                                        -
-                                    </template>
-                                </table-data>
-
-                                <table-data>
-                                    <template #td>
                                         <a class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">
                                             {{ alumno.user.name }}
                                         </a>
+                                    </template>
+                                </table-data>
+
+                                <table-data >
+                                    <template #td v-if="alumno.user.profile_photo_path">
+                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + alumno.user.profile_photo_path "  alt="Foto de perfil" />
+                                    </template>
+
+                                    <template #td v-else>
+                                        -
                                     </template>
                                 </table-data>
 

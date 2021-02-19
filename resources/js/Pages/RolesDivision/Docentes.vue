@@ -45,8 +45,12 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
-                                    <template #td>
+                                <table-data >
+                                    <template #td v-if="docente.user.profile_photo_path">
+                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + docente.user.profile_photo_path "  alt="Foto de perfil" />
+                                    </template>
+
+                                    <template #td v-else>
                                         -
                                     </template>
                                 </table-data>

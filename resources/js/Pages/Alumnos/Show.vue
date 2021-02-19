@@ -39,7 +39,9 @@
                             Nombre
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            {{ alumno.user.name }}
+                            {{ alumno.user.name }} <span v-show="alumno.user.profile_photo_path">
+                                - <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + alumno.user.profile_photo_path "  alt="Foto de perfil" />
+                            </span>
                         </dd>
                     </div>
 

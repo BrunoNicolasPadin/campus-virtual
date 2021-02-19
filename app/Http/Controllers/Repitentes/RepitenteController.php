@@ -34,8 +34,12 @@ class RepitenteController extends Controller
             'institucion_id' => $institucion_id,
             'divisiones' => Division::where('institucion_id', $institucion_id)
                 ->with('nivel', 'curso', 'orientacion')
+                ->orderBy('nivel_id')
+                ->orderBy('orientacion_id')
+                ->orderBy('curso_id')
+                ->orderBy('division')
                 ->get(),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get()
+            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->orderBy('comienzo')->get()
                 ->map(function ($ciclo) {
                     return [
                         'id' => $ciclo->id,
@@ -134,6 +138,10 @@ class RepitenteController extends Controller
                 }),
             'divisiones' => Division::where('institucion_id', $institucion_id)
                 ->with('nivel', 'curso', 'orientacion')
+                ->orderBy('nivel_id')
+                ->orderBy('orientacion_id')
+                ->orderBy('curso_id')
+                ->orderBy('division')
                 ->get(),
         ]);
     }

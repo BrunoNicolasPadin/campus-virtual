@@ -67,6 +67,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'email' => $input['email'],
             'tipo' => $input['tipo'],
             'pais' => $input['pais'],
+            'photo' => $input['photo'],
             'provincia' => $input['provincia'],
             'ciudad' => $input['ciudad'],
             'direccion' => $input['direccion'],

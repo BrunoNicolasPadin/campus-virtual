@@ -116,6 +116,12 @@
 
                             <table-head>
                                 <template #th-titulo>
+                                    Foto de perfil
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
                                     División
                                 </template>
                             </table-head>
@@ -156,6 +162,16 @@
                                         <inertia-link :href="route('alumnos.show', [institucion_id, repitente.alumno_id])" class="hover:underline">
                                             {{ repitente.alumno.user.name }}
                                         </inertia-link>
+                                    </template>
+                                </table-data>
+
+                                <table-data >
+                                    <template #td v-if="repitente.alumno.user.profile_photo_path">
+                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../storage/' + repitente.alumno.user.profile_photo_path "  alt="Foto de perfil" />
+                                    </template>
+
+                                    <template #td v-else>
+                                        -
                                     </template>
                                 </table-data>
 

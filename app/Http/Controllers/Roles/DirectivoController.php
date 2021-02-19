@@ -28,7 +28,7 @@ class DirectivoController extends Controller
     {
         return Inertia::render('Directivos/Index', [
             'institucion_id' => $institucion_id,
-            'directivos' => Directivo::select('directivos.id', 'users.name')
+            'directivos' => Directivo::select('directivos.id', 'users.name', 'users.profile_photo_path')
                 ->where('institucion_id', $institucion_id)
                 ->join('users', 'users.id', 'directivos.user_id')
                 ->orderBy('users.name')
@@ -37,6 +37,7 @@ class DirectivoController extends Controller
                     return [
                         'id' => $directivo->id,
                         'name'  => $directivo->name,
+                        'foto' => $directivo->profile_photo_path,
                     ];
                 }),
         ]);

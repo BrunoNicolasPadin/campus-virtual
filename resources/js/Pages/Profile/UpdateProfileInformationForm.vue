@@ -16,11 +16,11 @@
                             ref="photo"
                             @change="updatePhotoPreview">
 
-                <jet-label for="photo" value="Photo" />
+                <jet-label for="photo" value="Foto de perfil" />
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" alt="Current Profile Photo" class="rounded-full h-20 w-20 object-cover">
+                    <img :src="user.profile_photo_url" alt="Foto de perfil actual" class="rounded-full h-20 w-20 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -31,11 +31,11 @@
                 </div>
 
                 <jet-secondary-button class="mt-2 mr-2" type="button" @click.native.prevent="selectNewPhoto">
-                    Select A New Photo
+                    Seleccionar foto de perfil
                 </jet-secondary-button>
 
                 <jet-secondary-button type="button" class="mt-2" @click.native.prevent="deletePhoto" v-if="user.profile_photo_path">
-                    Remove Photo
+                    Eliminar foto
                 </jet-secondary-button>
 
                 <jet-input-error :message="form.error('photo')" class="mt-2" />
