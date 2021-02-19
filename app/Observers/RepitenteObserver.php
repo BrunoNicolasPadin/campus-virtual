@@ -23,12 +23,6 @@ class RepitenteObserver
         }
     }
 
-    public function deleted(Repitente $repitente)
-    {
-        $cicloLectivo = CicloLectivo::where('institucion_id', $repitente->institucion_id)->where('activado', '1')->first();
-        $this->eliminarLibretas($cicloLectivo->id, $repitente->alumno_id);
-    }
-
     public function cargarLibreta($repitente)
     {
         $cicloLectivo = CicloLectivo::where('institucion_id', $repitente->institucion_id)->where('activado', '1')->first();
