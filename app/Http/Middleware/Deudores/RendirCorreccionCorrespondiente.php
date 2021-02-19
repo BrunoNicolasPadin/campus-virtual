@@ -23,9 +23,18 @@ class RendirCorreccionCorrespondiente
         $link = $this->ruta->obtenerRoute();
         $correccion = RendirCorreccion::findOrFail($link[14]);
 
-        if (AsignaturaDocente::where('asignatura_id', $correccion->anotado->mesa->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
-            return $next($request);
+        if (session('tipo') == 'Docente') {
+            if (AsignaturaDocente::where('asignatura_id', $correccion->anotado->mesa->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
+                return $next($request);
+            }
+            abort(403, 'Usted no es docente de la asignatura a la que pertenece esta corrección.');
         }
-        abort(403, 'Usted no es docente de la asignatura a la que pertenece esta corrección.');
+
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            if ($correccion->anotado->mesa->institucion_id == session('institucion_id')) {
+                return $next($request);
+            }
+            abort(403, 'Esta corrección no es de tu institución');
+        }
     }
 }

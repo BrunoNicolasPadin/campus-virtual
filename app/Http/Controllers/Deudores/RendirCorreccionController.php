@@ -22,7 +22,8 @@ class RendirCorreccionController extends Controller
         $this->middleware('asignaturaAdeudadaCorrespondiente');
         $this->middleware('mesaCorrespondiente');
         $this->middleware('inscripcionCorrespondiente');
-        $this->middleware('soloDocentes');
+        $this->middleware('soloDocentes')->except('destroy');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->only('destroy');
         $this->middleware('rendirCorreccionCorrespondiente')->only('destroy');
     }
 

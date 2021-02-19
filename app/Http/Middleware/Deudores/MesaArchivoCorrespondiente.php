@@ -28,6 +28,14 @@ class MesaArchivoCorrespondiente
             }
             abort(403, 'Usted no es docente de la asignatura a la que pertenece este archivo.');
         }
+
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            if ($archivo->mesa->institucion_id == session('institucion_id')) {
+                return $next($request);
+            }
+            abort(403, 'Este archivo no es de tu institución');
+        }
+
         abort(403, 'No puede estar aquí.');
     }
 }

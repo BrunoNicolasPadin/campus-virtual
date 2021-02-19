@@ -21,7 +21,8 @@ class RendirEntregaController extends Controller
         $this->middleware('asignaturaAdeudadaCorrespondiente');
         $this->middleware('mesaCorrespondiente');
         $this->middleware('inscripcionCorrespondiente');
-        $this->middleware('soloAlumnos');
+        $this->middleware('soloAlumnos')->except('destroy');
+        $this->middleware('soloInstitucionesDirectivosAlumnos')->only('destroy');
         $this->middleware('rendirEntregaCorrespondiente')->only('destroy');
     }
 

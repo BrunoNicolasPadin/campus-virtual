@@ -84,7 +84,7 @@
                 </template>
             </estructura-informacion>
 
-            <div class="container mx-auto px-4 sm:px-8 my-6" v-if="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
+            <div class="container mx-auto px-4 sm:px-8 my-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                 <div class="flex">
                     <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Archivos</h2>
