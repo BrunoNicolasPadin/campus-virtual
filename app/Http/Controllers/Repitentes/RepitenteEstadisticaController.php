@@ -25,7 +25,12 @@ class RepitenteEstadisticaController extends Controller
     public function mostrarEstadisticas($institucion_id)
     {
         $ciclosLectivos = CicloLectivo::where('institucion_id', $institucion_id)->get();
-        $divisiones = Division::where('institucion_id', $institucion_id)->get();
+        $divisiones = Division::where('institucion_id', $institucion_id)
+            ->orderBy('nivel_id')
+            ->orderBy('orientacion_id')
+            ->orderBy('curso_id')
+            ->orderBy('division')
+            ->get();
 
         $repitentes = Repitente::where('institucion_id', $institucion_id)
         ->with(['ciclo_lectivo', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])

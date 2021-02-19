@@ -34,7 +34,13 @@ class ExAlumnoController extends Controller
             'exalumnos' => ExAlumno::where('institucion_id', $institucion_id)
                 ->with('alumno', 'alumno.user')
                 ->paginate(20),
-            'divisiones' => Division::with(['nivel', 'orientacion', 'curso'])->where('institucion_id', $institucion_id)->get(),
+            'divisiones' => Division::where('institucion_id', $institucion_id)
+                ->orderBy('nivel_id')
+                ->orderBy('orientacion_id')
+                ->orderBy('curso_id')
+                ->orderBy('division')
+                ->with(['nivel', 'orientacion', 'curso'])
+                ->get(),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->orderBy('comienzo')->get()
                 ->map(function ($ciclo) {
                     return [

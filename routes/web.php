@@ -54,7 +54,6 @@ use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\TipoCuentaController;
 use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
 use App\Http\Controllers\RolesDivision\DocenteDivisionController;
-use App\Http\Controllers\Suscripciones\SuscripcionController;
 use App\Http\Controllers\TopNavController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,7 +76,7 @@ Route::post('/enviar-email', [ContactoController::class, 'enviarEmail'])->name('
 
 Route::post('/login', [LoginController::class, 'authenticate'])->name('loginNuevo');
 
-Route::get('detalles', [SuscripcionController::class, 'mostrarDetalles'])->name('suscripciones.detalles');
+Route::inertia('detalles', 'Suscripciones/Detalles')->name('suscripciones.detalles');
 
 Route::get('/dashboard', [DashboardController::class, 'mostrarDashboard'])->name('dashboard');
 

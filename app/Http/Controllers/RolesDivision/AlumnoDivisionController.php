@@ -36,7 +36,13 @@ class AlumnoDivisionController extends Controller
         return Inertia::render('RolesDivision/HacerlosPasar', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'divisiones' => Division::with(['nivel', 'orientacion', 'curso'])->where('institucion_id', $institucion_id)->get(),
+            'divisiones' => Division::where('institucion_id', $institucion_id)
+                ->orderBy('nivel_id')
+                ->orderBy('orientacion_id')
+                ->orderBy('curso_id')
+                ->orderBy('division')
+                ->with(['nivel', 'orientacion', 'curso'])
+                ->get(),
             'alumnos' => Alumno::where('division_id', $division_id)->with('user')->get(),
         ]);
     }
