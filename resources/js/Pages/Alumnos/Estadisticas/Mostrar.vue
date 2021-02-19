@@ -42,6 +42,12 @@
                 </template>
             </estructura-form>
 
+            <div v-if="division !== null " class="container mx-auto px-4 sm:px-8">
+                <h2 class="text-2xl font-semibold leading-tight">
+                    {{ division }}
+                </h2>
+            </div>
+
             <div v-show="mostrar" class="container mx-auto px-4 sm:px-8">
                 <highcharts :options="chartOptions"></highcharts>
             </div>
@@ -74,6 +80,7 @@
             return {
                 promedios: [],
                 periodos: [],
+                division: null,
                 mostrar: false,
                 form: {
                     ciclo_lectivo_id: this.ciclo_lectivo_id,
@@ -89,6 +96,7 @@
                     this.mostrar = true;
                     this.promedios = response.data[0];
                     this.periodos = response.data[1];
+                    this.division = response.data[2];
 
                     this.chartOptions = {
                         xAxis: {

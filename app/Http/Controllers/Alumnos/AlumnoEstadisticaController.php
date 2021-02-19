@@ -43,7 +43,19 @@ class AlumnoEstadisticaController extends Controller
 
     public function mostrarEstadisticas($institucion_id, $alumno_id, $ciclo_lectivo_id)
     {
-        $libreta = Libreta::where('alumno_id', $alumno_id)->where('ciclo_lectivo_id', $ciclo_lectivo_id)->first();
+        $libreta = Libreta::where('alumno_id', $alumno_id)->where('ciclo_lectivo_id', $ciclo_lectivo_id)
+            ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso'])
+            ->first();
+
+        if ($libreta->division->orientacion) {
+            $division = $libreta->division->nivel->nombre . ' - ' . $libreta->division->orientacion->nombre . ' - ' . $libreta->division->curso->nombre
+             . ' - ' . $libreta->division->division;
+        }
+        else {
+            $division = $libreta->division->nivel->nombre . ' - ' . $libreta->division->curso->nombre . ' - ' . $libreta->division->division;
+        }
+
+        
 
         if ($libreta['periodo_id'] == 1) {
             $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
@@ -91,6 +103,6 @@ class AlumnoEstadisticaController extends Controller
             $promedios[$i] = $totalPeriodo[$i] / $cantidadPeriodo[$i];
         }
 
-        return [$promedios, $periodos];
+        return [$promedios, $periodos, $division];
     }
 }
