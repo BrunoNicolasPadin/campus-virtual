@@ -27,6 +27,13 @@ class RespuestaMuroCorrespondiente
             return $next($request);
         }
 
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            if ($respuesta->muro->division->institucion_id == session('institucion_id')) {
+                return $next($request);
+            }
+            abort(403, 'Esta respuesta no forma parte de tu institución.');
+        }
+
         abort(403, 'Esta respuesta no es tuya.');
     }
 }

@@ -27,6 +27,13 @@ class ArchivoMuroCorrespondiente
             return $next($request);
         }
 
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            if ($archivo->muro->division->institucion_id == session('institucion_id')) {
+                return $next($request);
+            }
+            abort(403, 'Este archivo no forma parte de tu institución.');
+        }
+
         abort(403, 'Este archivo no es tuyo.');
     }
 }

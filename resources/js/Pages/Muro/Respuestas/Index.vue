@@ -114,7 +114,7 @@
                     <div class="flex justify-between mb-1">
                         <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ respuesta.respuesta }}</p>
                         <button
-                            v-show="respuesta.user.id == user_id "
+                            v-show="respuesta.user.id == user_id || tipo == 'Institucion' || tipo == 'Directivo' "
                             class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm" 
                             @click="editar(respuesta)">
                                 Editar
@@ -158,6 +158,7 @@
             division: Object,
             publicacion: Object,
             respuestas: Object,
+            tipo: String,
         },
 
         title: 'Respuestas',

@@ -27,6 +27,13 @@ class PublicacionCorrespondiente
             return $next($request);
         }
 
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            if ($publicacion->division->institucion_id == session('institucion_id')) {
+                return $next($request);
+            }
+            abort(403, 'Esta publicación no forma parte de tu institución.');
+        }
+
         abort(403, 'Esta publicación no es tuya.');
     }
 }

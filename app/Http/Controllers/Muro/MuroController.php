@@ -29,6 +29,7 @@ class MuroController extends Controller
         return Inertia::render('Muro/Index', [
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
+            'tipo' => session('tipo'),
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'publicaciones' => Muro::where('division_id', $division_id)
                 ->with('user')

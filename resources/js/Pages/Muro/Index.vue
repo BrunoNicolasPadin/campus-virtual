@@ -98,7 +98,7 @@
                     <div class="flex justify-between mb-1">
                         <p class="text-grey-darkest leading-normal text-lg whitespace-pre-wrap">{{ publicacion.publicacion }}</p>
                         <button 
-                            v-show="publicacion.user.id == user_id "
+                            v-show="publicacion.user.id == user_id || tipo == 'Institucion' || tipo == 'Directivo' "
                             class="ml-2 mt-1 mb-auto text-blue hover:underline text-sm"
                             @click="editar(publicacion)">
                                 Editar
@@ -152,6 +152,7 @@
             user_id: Number,
             division: Object,
             publicaciones: Object,
+            tipo: String,
         },
 
         title: 'Muro de la division',
