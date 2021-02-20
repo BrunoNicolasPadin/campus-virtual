@@ -18,8 +18,8 @@
                         </template>
 
                         <template #informacion>
-                            Esto sirve mas que nada a la estadística. Solo pasará a no estar anotado en ninguna división automaticamente 
-                            con lo cual no podrá ingresar a la división, solo podrá ingresar a todo lo que se encuentre en su perfil.
+                            Pasará a no desinscribirse de la división en la que este actualmente con lo cual no podrá ingresar a la división nunca mas, 
+                            solo podrá ingresar a todo lo que se encuentre en su perfil.
                         </template>
 
                         <template #contenido-video>
@@ -45,7 +45,7 @@
                         <template #informacion>
                             Solo saldrá de la lista. Si se equivocó de alumno tendrá un problema: al volver a anotarlo en la división correspondiente 
                             se creará una nueva libreta con todas las asignaturas de esa división, si el alumno ya tiene una libreta en la base de datos
-                            con el mismo ciclo lectivo que esta actualmente activado, se borrara la ya existente y aparecerá una nueva en blanco.
+                            con el ciclo lectivo que esta actualmente activado, se borrara la ya existente y aparecerá una nueva en blanco.
                             Recomendación: antes de volver a anotarlo en la división correspondiente, anote o saque una captura de pantalla de la libreta para 
                             luego pasar las calificaciones nuevamente, no perderá nada más que tiempo. 
                         </template>
@@ -57,7 +57,7 @@
 
                     <detalles-tutorial id="numeros">
                         <template #titulo-sub-tutorial>
-                            Numeros
+                            Números
                         </template>
 
                         <template #informacion>

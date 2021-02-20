@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Correccion</template>
+                <template #titulo-tutorial>Correcciones</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#calificar">Calificar</a></li>

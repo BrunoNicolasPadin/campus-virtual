@@ -18,7 +18,8 @@
                         </template>
 
                         <template #informacion>
-                            Esto sirve más que nada para la estadística, no debe ingresar la división en la que cursará, eso se hace automáticamente.
+                            Esto sirve más que nada para la estadística, no debe ingresar la división en la que cursará, eso se hace automáticamente y 
+                            se inscribirá en la misma división.
                         </template>
 
                         <template #contenido-video>
