@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\Alumnos\AlumnoEstadisticaController;
 use App\Http\Controllers\Asignaturas\AsignaturaController;
 use App\Http\Controllers\Asignaturas\AsignaturaDeudorController;
@@ -34,6 +33,7 @@ use App\Http\Controllers\ExAlumnos\ExAlumnoController;
 use App\Http\Controllers\ExAlumnos\ExAlumnoEstadisticaController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
+use App\Http\Controllers\Libretas\ExportarLibretaController;
 use App\Http\Controllers\Libretas\LibretaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Materiales\BuscarGruposController;
@@ -109,6 +109,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::prefix('alumnos/{alumno_id}')->group(function () {
             
         Route::resource('libretas', LibretaController::class);
+        Route::get('libretas/exportar/{ciclo_lectivo_id}', [ExportarLibretaController::class, 'exportarLibreta'])->name('libretas.exportarUna');
 
         Route::resource('asignaturas-adeudadas', AlumnoDeudorController::class);
         Route::get('asignaturas-adeudadas/{division_id}/create', [AlumnoDeudorController::class, 'createAsignatura'])->name('asignaturas-adeudadas.createAsignatura');

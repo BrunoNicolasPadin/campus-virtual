@@ -1,10 +1,19 @@
 <template>
     <app-layout>
         <template #header>
-            <span class="font-semibold text-md text-gray-800 leading-tight">
-                <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
-                Libreta
-            </span>
+            <div class="flex">
+                <div class="w-8/12">
+                    <span class="font-semibold text-md text-gray-800 leading-tight">
+                        <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
+                        Libreta
+                    </span>
+                </div>
+                <div v-show="mostrar" class="w-4/12">
+                    <button type="button" class="float-right border border-indigo-500 bg-indigo-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-700 focus:outline-none focus:shadow-outline">
+                        <a :href="route('libretas.exportarUna', [institucion_id, alumno.id, ciclo_lectivo_id])" target="_blank" rel="noopener noreferrer">Exportar</a>
+                    </button>
+                </div>
+            </div>
         </template>
 
         <!-- Success Message -->
@@ -232,7 +241,7 @@
                 periodos: [],
                 libretas: [],
                 deudas: [],
-                ciclo_lectivo_id: null,
+                ciclo_lectivo_id: 0,
             }
         },
 
