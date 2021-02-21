@@ -18,17 +18,29 @@ class EnviarEmailEntrega
 
     public function handle(EntregaActualizada $event)
     {
-        $alumno = Alumno::find($event->entrega->alumno_id);
+        $alumno = Alumno::with('padres', 'padres.user')->find($event->entrega->alumno_id);
         $to_email = $alumno->user->email;
 
         $detalles = [
-            'titulo' => 'Nueva actualización en tu entrega de ' . $event->entrega->evaluacion->titulo,
+            'titulo' => 'Nueva actualización en tu entrega de ' . $event->entrega->evaluacion->titulo . ' para ' . $event->entrega->evaluacion->asignatura->nombre,
             'email' => 'gescolcontacto@gmail.com',
             'mensaje' => 'Tu calificacion: ' . $event->entrega->calificacion . ' | Comentario: ' . $event->entrega->comentario,
             'asunto' => 'Actualización en la entraga',
         ];
 
         Mail::to($to_email)->send(new ActualizacionEntrega($detalles));
-        return back();
+
+        foreach ($alumno->padres as $padre) {
+
+            $to_email = $padre->user->email;
+            $detalles = [
+                'titulo' => 'Nueva actualización en la entrega de '. $event->entrega->evaluacion->titulo .' de tu hijo/a '. $alumno->user->name . ' para ' . $event->entrega->evaluacion->asignatura->nombre,
+                'email' => 'gescolcontacto@gmail.com',
+                'mensaje' => 'La calificacion: ' . $event->entrega->calificacion . ' | Comentario: ' . $event->entrega->comentario,
+                'asunto' => 'Actualización en la entraga',
+            ];
+            
+            Mail::to($to_email)->send(new ActualizacionEntrega($detalles));
+        }
     }
 }

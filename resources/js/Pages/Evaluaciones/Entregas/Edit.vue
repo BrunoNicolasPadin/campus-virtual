@@ -52,7 +52,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Se puede dejar vacío, poner cualquier numero con coma (ponga un punto en vez de la coma) o con 'Aprobado' y 'Desaprobado'.
+                                        Se puede dejar vacío, poner cualquier numero con coma (ponga un punto en vez de la coma) o con 'Aprobado' y 'Desaprobado'. Puede tardar ya que al calificarlo se envía un email al alumno y a sus padres de la calificación y el comentario.
                                     </template>
                                 </info>
                             </div>
@@ -72,7 +72,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        No es obligatorio.
+                                        No es obligatorio. Puede tardar ya que al calificarlo se envía un email al alumno y a sus padres de la calificación y el comentario.
                                     </template>
                                 </info>
                             </div>

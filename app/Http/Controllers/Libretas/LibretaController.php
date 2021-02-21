@@ -94,13 +94,11 @@ class LibretaController extends Controller
 
     public function update(UpdateLibreta $request, $institucion_id, $alumno_id, $id)
     {
-        $libreta = Libreta::find($id);
-
         for ($i=0; $i < count($request->notas); $i++) { 
-            Calificacion::where('id', $request->notas[$i]['id'])
-                ->update([
-                    'calificacion' => $request->notas[$i]['calificacion'],
-                ]);
+            
+            $calificacion = Calificacion::find($request->notas[$i]['id']);
+            $calificacion->calificacion = $request->notas[$i]['calificacion'];
+            $calificacion->save();
         }
 
         return redirect(route('libretas.index', [$institucion_id, $alumno_id]))

@@ -19,24 +19,4 @@ class EvaluacionObserver
             ]);
         }
     }
-
-    public function updated(Evaluacion $evaluacion)
-    {
-        //
-    }
-
-    public function deleted(Evaluacion $evaluacion)
-    {
-        //
-    }
-
-    public function restored(Evaluacion $evaluacion)
-    {
-        //
-    }
-
-    public function forceDeleted(Evaluacion $evaluacion)
-    {
-        //
-    }
 }

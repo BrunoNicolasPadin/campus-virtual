@@ -45,7 +45,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Puede dejarlo vacío.
+                                        Puede dejarlo vacío. Puede tardar ya que al calificar se envía un email al alumno y a sus padres de la calificación.
                                     </template>
                                 </info>
                             </div>
