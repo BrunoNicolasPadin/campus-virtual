@@ -19,6 +19,8 @@ use App\Http\Controllers\Deudores\RendirCorreccionController;
 use App\Http\Controllers\Deudores\RendirEntregaController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Estructuras\EstructuraEstadisticaController;
+use App\Http\Controllers\Estructuras\FormaDescripcionController;
+use App\Http\Controllers\Estructuras\FormaEvaluacionController;
 use App\Http\Controllers\Estructuras\LimpiarDivisionController;
 use App\Http\Controllers\Evaluaciones\CorreccionController;
 use App\Http\Controllers\Evaluaciones\EntregaArchivoController;
@@ -116,6 +118,12 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
 
         Route::get('estadisticas', [AlumnoEstadisticaController::class, 'mostrarCiclosLectivos'])->name('alumnos.mostrarCiclosLectivos');
         Route::get('estadisticas/{ciclo_lectivo_id}', [AlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('alumnos.mostrarEstadisticas');
+    });
+
+    Route::resource('formas-evaluacion', FormaEvaluacionController::class);
+    Route::prefix('formas-evaluacion/{forma_evaluacion_id}')->group(function () {
+        
+        Route::resource('formas-descripcion', FormaDescripcionController::class);
     });
 
     Route::resource('divisiones', EstructuraController::class);

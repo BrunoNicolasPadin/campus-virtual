@@ -21,6 +21,7 @@ class CreateDivisionesTable extends Migration
             $table->foreignId('curso_id')->constrained('cursos')->onDelete('cascade');
             $table->string('division');
             $table->foreignId('periodo_id')->constrained('periodos')->onDelete('cascade');
+            $table->foreignId('forma_evaluacion_id')->constrained('formas_evaluacion')->nullable();
             $table->string('claveDeAcceso');
             $table->timestamps();
         });

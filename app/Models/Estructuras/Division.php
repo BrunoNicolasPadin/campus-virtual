@@ -14,6 +14,7 @@ class Division extends Model
         'curso_id',
         'division',
         'periodo_id',
+        'forma_evaluacion_id',
         'claveDeAcceso',
     ];
 
@@ -30,5 +31,10 @@ class Division extends Model
     public function curso()
     {
         return $this->belongsTo(Curso::class);
+    }
+
+    public function formaEvaluacion()
+    {
+        return $this->belongsTo(FormaEvaluacion::class);
     }
 }
