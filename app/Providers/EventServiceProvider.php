@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Repitentes\Repitente;
 use App\Models\Roles\Alumno;
 use App\Observers\AlumnoObserver;
+use App\Observers\EntregaObserver;
 use App\Observers\EvaluacionObserver;
 use App\Observers\RepitenteObserver;
 use Illuminate\Auth\Events\Registered;
@@ -20,8 +22,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
+        /* Registered::class => [
             SendEmailVerificationNotification::class,
+        ], */
+        \App\Events\EntregaActualizada::class => [
+            \App\Listeners\EnviarEmailEntrega::class,
         ],
     ];
 
@@ -35,5 +40,6 @@ class EventServiceProvider extends ServiceProvider
         Evaluacion::observe(EvaluacionObserver::class);
         Alumno::observe(AlumnoObserver::class);
         Repitente::observe(RepitenteObserver::class);
+        Entrega::observe(EntregaObserver::class);
     }
 }

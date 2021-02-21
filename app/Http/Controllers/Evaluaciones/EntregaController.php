@@ -94,11 +94,11 @@ class EntregaController extends Controller
 
     public function update(UpdateEntrega $request, $institucion_id, $division_id, $evaluacion_id, $id)
     {
-        Entrega::where('id', $id)
-            ->update([
-                'calificacion' => $request->calificacion,
-                'comentario' => $request->comentario,
-            ]);
+        $entrega = Entrega::findOrFail($id);
+        $entrega->calificacion = $request->calificacion;
+        $entrega->comentario = $request->comentario;
+        $entrega->save();
+
         return redirect(route('entregas.show', [$institucion_id, $division_id, $evaluacion_id, $id]))
             ->with(['successMessage' => 'Entrega calificada y/o comentada con éxito!']);
     }
