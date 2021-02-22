@@ -2,8 +2,6 @@
 
 namespace App\Services\Division;
 
-use Illuminate\Support\Facades\Hash;
-
 class ObtenerPeriodosEvaluacion
 {
     public function obtenerPeriodos($libreta)

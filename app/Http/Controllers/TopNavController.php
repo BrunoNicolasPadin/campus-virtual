@@ -24,7 +24,17 @@ class TopNavController extends Controller
 
         $year = 2021;
 
-        return redirect(route('calendario.mostrar', [$institucion_id, $year]));
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            return redirect(route('calendario-instituciones.mostrar', [$institucion_id, $year]));
+        }
+        if (session('tipo') == 'Docente') {
+            return redirect(route('calendario-docentes.mostrar', [$institucion_id, $year]));
+        }
+        if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
+            return redirect(route('calendario-alumnos.mostrar', [$institucion_id, $year]));
+        }
+        return redirect('inicio');
+        
     }
 
     public function mostrarCiclosLectivos()

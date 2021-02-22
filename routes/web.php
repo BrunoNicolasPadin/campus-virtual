@@ -6,7 +6,10 @@ use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
 use App\Http\Controllers\Asignaturas\AsignaturaEstadisticaController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
 use App\Http\Controllers\Asignaturas\HorarioController;
+use App\Http\Controllers\Calendario\CalendarioAlumnoController;
 use App\Http\Controllers\Calendario\CalendarioController;
+use App\Http\Controllers\Calendario\CalendarioDocenteController;
+use App\Http\Controllers\Calendario\CalendarioInstitucionController;
 use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -214,7 +217,9 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.createExAlumno');
     Route::get('exalumnos-estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
 
-    Route::get('calendario/{year}', [CalendarioController::class, 'mostrarCalendario'])->name('calendario.mostrar');
+    Route::get('calendario/instituciones/{year}', [CalendarioInstitucionController::class, 'mostrarCalendario'])->name('calendario-instituciones.mostrar');
+    Route::get('calendario/docentes/{year}', [CalendarioDocenteController::class, 'mostrarCalendario'])->name('calendario-docentes.mostrar');
+    Route::get('calendario/alumnos/{year}', [CalendarioAlumnoController::class, 'mostrarCalendario'])->name('calendario-alumnos.mostrar');
 });
 
 Route::inertia('/tutoriales', 'Tutoriales/Principal')->name('tutoriales');
