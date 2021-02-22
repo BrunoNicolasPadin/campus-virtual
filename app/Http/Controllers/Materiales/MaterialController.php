@@ -8,12 +8,15 @@ use App\Http\Requests\Evaluaciones\UpdateEvaluacionArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MaterialController extends Controller
 {
-    public function __construct()
+    protected $ObtenerFechaHoraService;
+
+    public function __construct(ObtenerFechaHoraService $ObtenerFechaHoraService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -22,6 +25,8 @@ class MaterialController extends Controller
         $this->middleware('grupoCorrespondiente')->except('index');
         $this->middleware('grupoAdeudadoCorrespondiente')->only('index');
         $this->middleware('materialCorrespondiente')->only('edit', 'update', 'destroy');
+
+        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
     }
 
     public function index($institucion_id, $division_id, $grupo_id)
@@ -51,8 +56,8 @@ class MaterialController extends Controller
             $i = 0;
 
             foreach ($archivos as $archivo) {
-                $fecha = date_create();
-                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
+                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Materiales', $nombre);
 
                 Material::create([
