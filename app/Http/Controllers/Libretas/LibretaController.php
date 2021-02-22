@@ -90,12 +90,33 @@ class LibretaController extends Controller
     {
         $libreta = Libreta::findOrFail($id);
         $division = Division::findOrFail($libreta->division_id);
+        $formaDescripcion = [];
+
+        if ($division->formaEvaluacion->tipo == 'Escrita') {
+            $tipo = 'Escrita';
+            $formaDescripcion = FormaDescripcion::where('forma_evaluacion_id', $division->forma_evaluacion_id)->get();
+        }
+        else {
+            $tipo = $division->formaEvaluacion->tipo;
+
+            if ($tipo == 'Numerica') {
+                for ($i=1; $i < 11; $i++) { 
+                    array_push($formaDescripcion, $i);
+                }
+            }
+            else {
+                for ($i=1; $i < 101; $i++) { 
+                    array_push($formaDescripcion, $i);
+                }
+            }
+        }
 
         return Inertia::render('Libretas/Edit', [
             'institucion_id' => $institucion_id,
             'alumno' => Alumno::with('user')->find($alumno_id),
             'libretas' => Libreta::with(['asignatura', 'calificaciones'])->findOrFail($id),
-            'formasDescripcion' => FormaDescripcion::where('forma_evaluacion_id', $division->forma_evaluacion_id)->get(),
+            'formasDescripcion' => $formaDescripcion,
+            'tipoEvaluacion' => $tipo,
         ]);
     }
 

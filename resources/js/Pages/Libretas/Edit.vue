@@ -43,11 +43,18 @@
 
                                 <select
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
-                                required
                                 v-model="nota.calificacion">
                                     
                                     <option value="" disabled selected>-</option>
-                                    <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion.opcion">{{ formaDescripcion.opcion }}</option>
+                                    <span v-show="tipoEvaluacion == 'Escrita' " >
+                                        <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion.opcion">
+                                            {{ formaDescripcion.opcion }}
+                                        </option>
+                                    </span>
+                                    
+                                    <option v-show="tipoEvaluacion == 'Numerica' ||  tipoEvaluacion == 'Porcentual' " v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion">
+                                        {{ formaDescripcion }}
+                                    </option>
 
                                 </select>
                                 
@@ -97,6 +104,7 @@
             alumno: Object,
             libretas: Object,
             formasDescripcion: Array,
+            tipoEvaluacion: String,
         },
 
         title: 'Editar libreta',

@@ -6,14 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
+use App\Services\Division\ObtenerPeriodosEvaluacion;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Inertia\Inertia;
 
 class AlumnoEstadisticaController extends Controller
 {
     protected $formatoService;
+    protected $divisionService;
 
-    public function __construct(CambiarFormatoFecha $formatoService)
+    public function __construct(
+        CambiarFormatoFecha $formatoService,
+        ObtenerPeriodosEvaluacion $divisionService,
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -21,6 +27,7 @@ class AlumnoEstadisticaController extends Controller
         $this->middleware('soloInstitucionesDirectivosAlumnos');
 
         $this->formatoService = $formatoService;
+        $this->divisionService = $divisionService;
     }
 
     public function mostrarCiclosLectivos($institucion_id, $alumno_id)
@@ -48,27 +55,13 @@ class AlumnoEstadisticaController extends Controller
             ->first();
 
 
-        if ($libreta->division->orientacion) {
-            $division = $libreta->division->nivel->nombre . ' - ' . $libreta->division->orientacion->nombre . ' - ' . $libreta->division->curso->nombre
-             . ' - ' . $libreta->division->division;
-        }
-        else {
-            $division = $libreta->division->nivel->nombre . ' - ' . $libreta->division->curso->nombre . ' - ' . $libreta->division->division;
-        }
+        $division = $this->obtenerDivision($libreta);
 
         if ($libreta->division->formaEvaluacion->tipo == 'Escrita') {
             return [null, null, $division];
         }
 
-        if ($libreta['periodo_id'] == 1) {
-            $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
-        }
-        elseif ($libreta['periodo_id'] == 2) {
-            $periodos = ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
-        }
-        elseif ($libreta['periodo_id'] == 3) {
-            $periodos = ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
-        }
+        $periodos = $this->divisionService->obtenerPeriodos($libreta);
 
         $totalPeriodo = [];
         $cantidadPeriodo = [];
@@ -81,11 +74,42 @@ class AlumnoEstadisticaController extends Controller
         }
         $i = 0;
 
-        $libretas = Libreta::where('alumno_id', $alumno_id)
+        $libretas = $this->obtenerNotasDeLaLibreta($alumno_id, $ciclo_lectivo_id);
+
+        $arrayTemporal = $this->recorrerLasNotas($libretas, $totalPeriodo, $cantidadPeriodo);
+
+        $promedios = $this->obtenerPromedio($promedios, $arrayTemporal[1], $arrayTemporal[0]);
+
+        return [$promedios, $periodos, $division];
+    }
+
+    public function obtenerDivision($libreta)
+    {
+        if ($libreta->division->orientacion) {
+            
+            return $libreta->division->nivel->nombre . ' - ' . 
+                $libreta->division->orientacion->nombre . ' - ' . 
+                $libreta->division->curso->nombre . ' - ' . 
+                $libreta->division->division;
+        }
+        else {
+            return $libreta->division->nivel->nombre . ' - ' . 
+                $libreta->division->curso->nombre . ' - ' . 
+                $libreta->division->division;
+        }
+    }
+
+    public function obtenerNotasDeLaLibreta($alumno_id, $ciclo_lectivo_id)
+    {
+        return Libreta::where('alumno_id', $alumno_id)
             ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
             ->with('calificaciones')
             ->get();
+    }
 
+    public function recorrerLasNotas($libretas, $totalPeriodo, $cantidadPeriodo)
+    {
+        $i = 0;
         foreach ($libretas as $libreta) {
 
             foreach ($libreta->calificaciones as $libreCali) {
@@ -99,13 +123,17 @@ class AlumnoEstadisticaController extends Controller
             $i = 0;
         }
 
+        return [$totalPeriodo, $cantidadPeriodo];
+    }
+
+    public function obtenerPromedio($promedios, $cantidadPeriodo, $totalPeriodo)
+    {
         for ($i=0; $i < count($cantidadPeriodo); $i++) { 
             if ($cantidadPeriodo[$i] == 0) {
                 $cantidadPeriodo[$i] = 1;
             }
             $promedios[$i] = $totalPeriodo[$i] / $cantidadPeriodo[$i];
         }
-
-        return [$promedios, $periodos, $division];
+        return $promedios;
     }
 }

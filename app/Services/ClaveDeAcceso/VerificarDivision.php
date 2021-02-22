@@ -5,7 +5,7 @@ namespace App\Services\ClaveDeAcceso;
 use App\Models\Estructuras\Division;
 use Illuminate\Support\Facades\Hash;
 
-class VerificarDIvision
+class VerificarDivision
 {
     public function verificarClaveDeAcceso($claveIngresada, $id)
     {

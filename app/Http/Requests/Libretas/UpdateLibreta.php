@@ -14,14 +14,14 @@ class UpdateLibreta extends FormRequest
     public function rules()
     {
         return [
-            'notas.*.calificacion' => 'nullable|string',
+            'notas.*.calificacion' => 'nullable|integer',
         ];
     }
 
     public function messages()
     {
         return [
-            'notas.*.calificacion' => 'Debe ser una cadena de caracteres (letras, números o signos) las calificaciones.',
+            'notas.*.calificacion.integer' => 'Debe ser un numero entero.',
         ];
     }
 }

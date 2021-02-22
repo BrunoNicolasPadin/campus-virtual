@@ -7,7 +7,7 @@ use App\Http\Requests\Roles\StoreAlumno;
 use App\Http\Requests\Roles\StoreDirectivo;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
-use App\Services\ClaveDeAcceso\VerificarDIvision;
+use App\Services\ClaveDeAcceso\VerificarDivision;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
