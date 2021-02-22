@@ -3,83 +3,84 @@
 namespace App\Http\Controllers\Estructuras;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estructuras\FormaDescripcion;
+use App\Models\Estructuras\FormaEvaluacion;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class FormaEvaluacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+        $this->middleware('soloInstitucionesDirectivos');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('formaEvaluacionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function index($institucion_id)
     {
-        //
+        return Inertia::render('FormasEvaluacion/Index', [
+            'institucion_id' => $institucion_id,
+            'formasEvaluacion' => FormaEvaluacion::where('institucion_id', $institucion_id)->get(),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function create($institucion_id)
     {
-        //
+        return Inertia::render('FormasEvaluacion/Create', [
+            'institucion_id' => $institucion_id,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function store(Request $request, $institucion_id)
     {
-        //
+        if ($request->desdeCuando == false) {
+            $request->desdeCuando = null;
+        }
+        FormaEvaluacion::create([
+            'institucion_id' => $institucion_id,
+            'nombre' => $request->nombre,
+            'tipo' => $request->tipo,
+            'desdeCuando' => $request->desdeCuando,
+        ]);
+
+        return redirect(route('formas-evaluacion.index', $institucion_id))
+            ->with(['successMessage' => 'Forma de evaluación creada con éxito!']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function show($institucion_id, $id)
     {
-        //
+        return Inertia::render('FormasEvaluacion/Show', [
+            'institucion_id' => $institucion_id,
+            'formaEvaluacion' => FormaEvaluacion::findOrFail($id),
+            'formasDescripcion' => FormaDescripcion::where('forma_evaluacion_id', $id)->get(),
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function edit($institucion_id, $id)
     {
-        //
+        return Inertia::render('FormasEvaluacion/Edit', [
+            'institucion_id' => $institucion_id,
+            'formaEvaluacion' => FormaEvaluacion::findOrFail($id),
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function update(Request $request, $institucion_id, $id)
     {
-        //
+        FormaEvaluacion::findOrFail($id)
+        ->update([
+            'nombre' => $request->nombre,
+            'tipo' => $request->tipo,
+            'desdeCuando' => $request->desdeCuando,
+        ]);
+
+        return redirect(route('formas-evaluacion.index', $institucion_id))->with(['successMessage' => 'Forma de evaluación actualizada con éxito!']);
+    }
+
+    public function destroy($institucion_id, $id)
+    {
+        FormaEvaluacion::destroy($id);
+        return redirect(route('formas-evaluacion.index', $institucion_id))->with(['successMessage' => 'Forma de evaluación eliminada con éxito!']);
     }
 }

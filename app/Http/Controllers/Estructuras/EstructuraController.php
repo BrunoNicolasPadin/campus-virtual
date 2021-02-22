@@ -7,6 +7,7 @@ use App\Http\Requests\Estructuras\StoreDivision;
 use App\Http\Requests\Estructuras\UpdateDivision;
 use App\Models\Estructuras\Curso;
 use App\Models\Estructuras\Division;
+use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Estructuras\Nivel;
 use App\Models\Estructuras\Orientacion;
 use App\Models\Estructuras\Periodo;
@@ -46,6 +47,7 @@ class EstructuraController extends Controller
             'orientaciones' => Orientacion::all(),
             'cursos' => Curso::all(),
             'periodos' => Periodo::all(),
+            'formasEvaluacion' => FormaEvaluacion::where('institucion_id', $institucion_id)->get(),
         ]);
     }
 
@@ -59,6 +61,7 @@ class EstructuraController extends Controller
                 'curso_id' => $request->curso_id,
                 'division' => $request->divisiones[$i]['division'],
                 'periodo_id' => $request->periodo_id,
+                'forma_evaluacion_id' => $request->forma_evaluacion_id,
                 'claveDeAcceso' => Hash::make($request->divisiones[$i]['claveDeAcceso']),
             ]);
         }
@@ -71,7 +74,7 @@ class EstructuraController extends Controller
     {
         return Inertia::render('Estructuras/Show', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso', 'formaEvaluacion'])->find($id),
             'tipo' => session('tipo'),
         ]);
     }
@@ -85,6 +88,7 @@ class EstructuraController extends Controller
             'cursos' => Curso::all(),
             'periodos' => Periodo::all(),
             'division' => Division::find($id),
+            'formasEvaluacion' => FormaEvaluacion::where('institucion_id', $institucion_id)->get(),
         ]);
     }
 
@@ -97,6 +101,7 @@ class EstructuraController extends Controller
                 'curso_id' => $request->curso_id,
                 'division' => strtoupper($request->division),
                 'periodo_id' => $request->periodo_id,
+                'forma_evaluacion_id' => $request->forma_evaluacion_id,
             ]);
 
         if (! $request->claveDeAcceso == '') {

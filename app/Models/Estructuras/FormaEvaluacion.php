@@ -16,6 +16,6 @@ class FormaEvaluacion extends Model
 
     public function formaDescripcion()
     {
-        return $this->belongsTo(FormaDescripcion::class);
+        return $this->hasMany(FormaDescripcion::class);
     }
 }

@@ -7,10 +7,11 @@
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#registrar-institucion">Registrar tu institución</a></li>
                     <li>2) <a class="hover:underline" href="#registrar-ciclo-lectivo">Registrar un ciclo lectivo</a></li>
-                    <li>3) <a class="hover:underline" href="#registrar-estructura">Registrar estructura</a></li>
-                    <li>4) <a class="hover:underline" href="#registrar-asignaturas">Registrar todas las asignaturas de cada división</a></li>
-                    <li>5) <a class="hover:underline" href="#registrar-docentes">Que los docentes se registren</a></li>
-                    <li>6) <a class="hover:underline" href="#anotar-docentes">Anotar a los docentes en las asignaturas que les corresponde</a></li>
+                    <li>3) <a class="hover:underline" href="#registrar-forma-evaluacion">Registrar formas de evaluación</a></li>
+                    <li>4) <a class="hover:underline" href="#registrar-estructura">Registrar estructura</a></li>
+                    <li>5) <a class="hover:underline" href="#registrar-asignaturas">Registrar todas las asignaturas de cada división</a></li>
+                    <li>6) <a class="hover:underline" href="#registrar-docentes">Que los docentes se registren</a></li>
+                    <li>7) <a class="hover:underline" href="#anotar-docentes">Anotar a los docentes en las asignaturas que les corresponde</a></li>
                 </template>
 
                 <template #detalles>
@@ -31,6 +32,22 @@
                     <detalles-tutorial id="registrar-ciclo-lectivo">
                         <template #titulo-sub-tutorial>
                             Registrar un ciclo lectivo
+                        </template>
+
+                        <template #contenido-video>
+                            <video-embed class="w-screen" src="https://youtu.be/26YEJA_QXD4"></video-embed>
+                        </template>
+                    </detalles-tutorial>
+
+                    <detalles-tutorial id="registrar-forma-evaluacion">
+                        <template #titulo-sub-tutorial>
+                            Registrar formas de evaluación
+                        </template>
+
+                        <template #informacion>
+                            Deberá ingresar las distintas formas de valores en las que evaluara a sus alumnos, ya se con números de 1 al 10, del 1 al 100 
+                            o con calificaciones alfabéticas como "Excelente", "Muy bien", o la que deseen. Luego pondrá en cada división la forma de 
+                            evaluación que tendrá cada una.
                         </template>
 
                         <template #contenido-video>

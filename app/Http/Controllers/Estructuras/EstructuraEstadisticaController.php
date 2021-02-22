@@ -45,6 +45,12 @@ class EstructuraEstadisticaController extends Controller
 
     public function mostrarEstadisticas($institucion_id, $division_id, $ciclo_lectivo_id)
     {
+        $division = Division::with('formaEvaluacion')->findOrFail($division_id);
+
+        if ($division->formaEvaluacion->tipo == 'Escrita') {
+            return [null, null, null];
+        }
+
         $libreta = Libreta::where('division_id', $division_id)->where('ciclo_lectivo_id', $ciclo_lectivo_id)->first();
         $cantidadAsignaturas = Asignatura::where('division_id', $division_id)->count();
 

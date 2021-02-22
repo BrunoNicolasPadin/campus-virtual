@@ -40,17 +40,30 @@
                                         {{ nota.periodo }}
                                     </template>
                                 </label-form>
-                                
-                                <input-form type="text" v-model="nota.calificacion" />
+
+                                <select
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="nota.calificacion">
+                                    
+                                    <option value="" disabled selected>-</option>
+                                    <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion.opcion">{{ formaDescripcion.opcion }}</option>
+
+                                </select>
                                 
                                 <info>
                                     <template #info>
-                                        Puede dejarlo vacío. Puede tardar ya que al calificar se envía un email al alumno y a sus padres de la calificación.
+                                        Puede dejarlo vacío.
                                     </template>
                                 </info>
                             </div>
                         </div>
 
+                        <info>
+                            <template #info>
+                                Puede tardar ya que al calificar se envía un email al alumno y a sus padres de la calificación.
+                            </template>
+                        </info>
                         <guardar></guardar>
 
                     </form>
@@ -83,6 +96,7 @@
             institucion_id: String,
             alumno: Object,
             libretas: Object,
+            formasDescripcion: Array,
         },
 
         title: 'Editar libreta',

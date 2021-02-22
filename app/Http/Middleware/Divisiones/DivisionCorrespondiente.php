@@ -4,7 +4,6 @@ namespace App\Http\Middleware\Divisiones;
 
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Estructuras\Division;
-use App\Models\Instituciones\Institucion;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;

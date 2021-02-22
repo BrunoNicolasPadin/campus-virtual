@@ -44,8 +44,9 @@ class AlumnoEstadisticaController extends Controller
     public function mostrarEstadisticas($institucion_id, $alumno_id, $ciclo_lectivo_id)
     {
         $libreta = Libreta::where('alumno_id', $alumno_id)->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-            ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso'])
+            ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso', 'division.formaEvaluacion'])
             ->first();
+
 
         if ($libreta->division->orientacion) {
             $division = $libreta->division->nivel->nombre . ' - ' . $libreta->division->orientacion->nombre . ' - ' . $libreta->division->curso->nombre
@@ -55,7 +56,9 @@ class AlumnoEstadisticaController extends Controller
             $division = $libreta->division->nivel->nombre . ' - ' . $libreta->division->curso->nombre . ' - ' . $libreta->division->division;
         }
 
-        
+        if ($libreta->division->formaEvaluacion->tipo == 'Escrita') {
+            return [null, null, $division];
+        }
 
         if ($libreta['periodo_id'] == 1) {
             $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];

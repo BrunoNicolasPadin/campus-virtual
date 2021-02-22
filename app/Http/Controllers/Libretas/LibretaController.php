@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Libretas\UpdateLibreta;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Deudores\AlumnoDeudor;
+use App\Models\Estructuras\Division;
+use App\Models\Estructuras\FormaDescripcion;
+use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
@@ -85,10 +88,14 @@ class LibretaController extends Controller
 
     public function edit($institucion_id, $alumno_id, $id)
     {
+        $libreta = Libreta::findOrFail($id);
+        $division = Division::findOrFail($libreta->division_id);
+
         return Inertia::render('Libretas/Edit', [
             'institucion_id' => $institucion_id,
             'alumno' => Alumno::with('user')->find($alumno_id),
-            'libretas' => Libreta::with(['asignatura', 'calificaciones'])->find($id),
+            'libretas' => Libreta::with(['asignatura', 'calificaciones'])->findOrFail($id),
+            'formasDescripcion' => FormaDescripcion::where('forma_evaluacion_id', $division->forma_evaluacion_id)->get(),
         ]);
     }
 

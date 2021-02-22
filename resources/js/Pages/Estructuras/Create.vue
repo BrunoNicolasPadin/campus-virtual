@@ -104,7 +104,7 @@
                         </div>
 
                         <div class="-mx-3 md:flex mb-6">
-                            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                                 
                                 <label-form>
                                     <template #label-value>
@@ -129,7 +129,7 @@
                                 </info>
                             </div>
 
-                            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                                 
                                 <label-form>
                                     <template #label-value>
@@ -144,6 +144,31 @@
                                     
                                     <option value="" disabled selected>-</option>
                                     <option v-for="periodo in periodos" :key="periodo.id" :value="periodo.id">{{ periodo.nombre }}</option>
+
+                                </select>
+                                
+                                <info>
+                                    <template #info>
+                                        Es obligatorio.
+                                    </template>
+                                </info>
+                            </div>
+
+                            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Forma de evaluación
+                                    </template>
+                                </label-form>
+                                
+                                <select
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.forma_evaluacion_id">
+                                    
+                                    <option value="" disabled selected>-</option>
+                                    <option v-for="formaEvaluacion in formasEvaluacion" :key="formaEvaluacion.id" :value="formaEvaluacion.id">{{ formaEvaluacion.nombre }}</option>
 
                                 </select>
                                 
@@ -265,6 +290,7 @@
             orientaciones: Array,
             cursos: Array,
             periodos: Array,
+            formasEvaluacion: Array,
         },
 
         title: 'Registrar division',
@@ -276,6 +302,7 @@
                     orientacion_id: null,
                     curso_id: null,
                     periodo_id: null,
+                    forma_evaluacion_id: null,
                     divisiones: [{
                         division: null,
                         claveDeAcceso: null,

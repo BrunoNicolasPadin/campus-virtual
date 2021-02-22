@@ -48,7 +48,15 @@
                                     </template>
                                 </label-form>
                                 
-                                <input-form type="text" v-model="form.calificacion" />
+                                <select
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.calificacion">
+                                    
+                                    <option value="" disabled selected>-</option>
+                                    <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion.opcion">{{ formaDescripcion.opcion }}</option>
+
+                                </select>
                                 
                                 <info>
                                     <template #info>
@@ -111,6 +119,7 @@
             division: Object,
             evaluacion: Object,
             entrega: Object,
+            formasDescripcion: Array,
         },
 
         title: 'Calificar entrega',

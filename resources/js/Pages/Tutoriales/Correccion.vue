@@ -16,12 +16,6 @@
                             Calificar
                         </template>
 
-                        <template #informacion>
-                            Puede calificar como quiera siempre y cuando sea alfanumericamente, pero recomendamos que sean con números del 1 al 10 porque sino 
-                            la sección de "Números" de la evaluacion no funcionara al 100%. 
-                            Estamos trabajando para que, al calificar de otra forma como por ejemplo con un "Bueno" o un "Excelente" o un "75%" también funcione.
-                        </template>
-
                         <template #contenido-video>
                             <video-embed src="https://youtu.be/mEr8WG6JChc"></video-embed>
                         </template>

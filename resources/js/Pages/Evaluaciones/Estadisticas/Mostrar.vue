@@ -84,7 +84,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div v-show="tipoEvaluacion !== 'Escrita' " class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Mejor nota
                         </dt>
@@ -417,11 +417,11 @@
                 </template>
             </estructura-tabla>
 
-            <div class="container mx-auto px-4 sm:px-8">
+            <div v-show="tipoEvaluacion !== 'Escrita' " class="container mx-auto px-4 sm:px-8">
                 <h2 class="text-2xl font-semibold leading-tight">Mejor/es nota/s</h2>
             </div>
 
-            <estructura-tabla>
+            <estructura-tabla v-show="tipoEvaluacion !== 'Escrita' ">
                 <template #tabla>
                     <table-head-estructura>
                         <template #th>
@@ -516,6 +516,7 @@
             evaluacion: Object,
             numerosArray: Array,
             numeros: Array,
+            tipoEvaluacion: String,
         },
 
         title: 'Evaluacion - Estadisticas',

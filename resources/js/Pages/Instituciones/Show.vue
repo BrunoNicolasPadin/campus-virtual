@@ -77,7 +77,7 @@
                             <a 
                             :href="'/storage/planesDeEstudio/' + institucion.planDeEstudio" 
                             target="_blank" 
-                            class="text-blue-500 hover:underline cursor-pointer"
+                            class="hover:underline hover:text-blue-500"
                             rel="noopener noreferrer">
                                 Ver
                             </a>
@@ -85,6 +85,17 @@
                     </div>
 
                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' ">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Formas de evaluación
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <inertia-link :href="route('formas-evaluacion.index', institucion.id)" class="hover:underline hover:text-blue-500">
+                                Ver
+                            </inertia-link>
+                        </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones
                         </dt>

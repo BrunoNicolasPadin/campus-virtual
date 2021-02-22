@@ -15,11 +15,6 @@
                             Calificar
                         </template>
 
-                        <template #informacion>
-                            Las calificaciones deben ser del 1 al 10 y escritos numéricamente, ya que sino las estadísticas no funcionarán.
-                            Estamos trabajando para que pueda calificarse de otras maneras y aun así funcionen las estadísticas de forma correcta.
-                        </template>
-
                         <template #contenido-video>
                             <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>

@@ -44,7 +44,7 @@ class AsignaturaEstadisticaController extends Controller
 
     public function mostrarPromedios($institucion_id, $division_id, $asignatura_id, $ciclo_lectivo_id)
     {
-        $division = Division::findOrFail($division_id);
+        $division = Division::with('formaEvaluacion')->findOrFail($division_id);
 
         if ($division->periodo_id == 1) {
             $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
@@ -77,6 +77,34 @@ class AsignaturaEstadisticaController extends Controller
             ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
             ->with('calificaciones')
             ->get();
+
+        if ($division->formaEvaluacion->tipo == 'Escrita') {
+            foreach ($libretas as $libreta) {
+
+                foreach ($libreta->calificaciones as $libreCali) {
+    
+                    if (!($libreCali->calificacion === null)) {
+                        $calificacionAlumno[$i] = $libreCali->calificacion;
+                    }
+                    $i++;
+                }
+                $i = 0;
+    
+                $calificacionesAlumnos[$a] = [
+                    'nombre' => $libreta->alumno->user->name,
+                    'calificaciones' => $calificacionAlumno,
+                ];
+    
+                for ($i=0; $i < count($calificacionAlumno); $i++) { 
+                    $calificacionAlumno[$i] = 0;
+                }
+                $i = 0;
+    
+                $a++;
+            }
+
+            return [$promedio, $periodos, $calificacionesAlumnos];
+        }
 
         foreach ($libretas as $libreta) {
 

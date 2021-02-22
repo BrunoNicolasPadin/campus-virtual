@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Evaluaciones;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\UpdateEntrega;
 use App\Models\Estructuras\Division;
+use App\Models\Estructuras\FormaDescripcion;
 use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
@@ -84,11 +85,14 @@ class EntregaController extends Controller
 
     public function edit($institucion_id, $division_id, $evaluacion_id, $id)
     {
+        $division = Division::findOrFail($division_id);
+
         return Inertia::render('Evaluaciones/Entregas/Edit', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
+            'formasDescripcion' => FormaDescripcion::where('forma_evaluacion_id', $division->forma_evaluacion_id)->get(),
         ]);
     }
 
