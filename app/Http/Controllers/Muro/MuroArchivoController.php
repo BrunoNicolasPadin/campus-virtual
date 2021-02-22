@@ -7,14 +7,16 @@ use App\Http\Requests\Muro\StoreArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroArchivo;
-use App\Services\FechaHora\CambiarFormatoFechaHora;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MuroArchivoController extends Controller
 {
-    public function __construct(CambiarFormatoFechaHora $formatoService)
+    protected $obtenerFechaHoraService;
+
+    public function __construct(ObtenerFechaHoraService $obtenerFechaHoraService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -23,7 +25,7 @@ class MuroArchivoController extends Controller
         $this->middleware('publicacionCorrespondiente')->only('create', 'store');
         $this->middleware('archivoMuroCorrespondiente')->only('destroy');
 
-        $this->formatoService = $formatoService;
+        $this->obtenerFechaHoraService = $obtenerFechaHoraService;
     }
 
     public function index($institucion_id, $division_id, $muro_id)
@@ -38,7 +40,6 @@ class MuroArchivoController extends Controller
             'publicacion' => [
                 'id' => $muro->id,
                 'publicacion' => $muro->publicacion,
-                'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($muro->updated_at),
                 'user' => $muro->user,
             ],
             'archivos' => MuroArchivo::where('muro_id', $muro_id)->orderBy('created_at', 'DESC')->get(),
@@ -60,8 +61,8 @@ class MuroArchivoController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $fecha = date_create();
-                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
+                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Muro', $nombre);
 
                 MuroArchivo::create([

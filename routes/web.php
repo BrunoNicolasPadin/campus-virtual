@@ -48,7 +48,6 @@ use App\Http\Controllers\Muro\MuroArchivoController;
 use App\Http\Controllers\Muro\MuroController;
 use App\Http\Controllers\Muro\MuroRespuestaController;
 use App\Http\Controllers\Repitentes\RepitenteController;
-use App\Http\Controllers\Repitentes\RepitenteDivisionController;
 use App\Http\Controllers\Repitentes\RepitenteEstadisticaController;
 use App\Http\Controllers\Roles\ActivarCuentaController;
 use App\Http\Controllers\Roles\AlumnoController;
@@ -197,9 +196,6 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::resource('muro-archivos', MuroArchivoController::class);
             Route::resource('muro-respuestas', MuroRespuestaController::class);
         });
-
-        Route::get('repitentes', [RepitenteDivisionController::class, 'mostrar'])->name('repitentes-division.mostrar');
-        Route::post('repitentes/filtrados', [RepitenteDivisionController::class, 'filtrarRepitentes'])->name('repitentes-division.filtrar');
 
         Route::get('estadisticas', [EstructuraEstadisticaController::class, 'mostrarCiclosLectivos'])->name('divisiones.mostrarCiclosLectivos');
         Route::get('estadisticas/{ciclo_lectivo_id}', [EstructuraEstadisticaController::class, 'mostrarEstadisticas'])->name('divisiones.mostrarEstadisticas');

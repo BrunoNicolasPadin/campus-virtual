@@ -14,9 +14,9 @@ use Inertia\Inertia;
 
 class EvaluacionArchivoController extends Controller
 {
-    protected $ObtenerFechaHoraService;
+    protected $obtenerFechaHoraService;
 
-    public function __construct(ObtenerFechaHoraService $ObtenerFechaHoraService)
+    public function __construct(ObtenerFechaHoraService $obtenerFechaHoraService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -26,7 +26,7 @@ class EvaluacionArchivoController extends Controller
         $this->middleware('evaluacionCorrespondiente');
         $this->middleware('archivoCorrespondiente')->only('edit', 'update', 'destroy');
 
-        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
+        $this->obtenerFechaHoraService = $obtenerFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $evaluacion_id)
@@ -45,7 +45,7 @@ class EvaluacionArchivoController extends Controller
             $i = 0;
 
             foreach ($archivos as $archivo) {
-                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
+                $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Evaluaciones/Archivos', $nombre);
 

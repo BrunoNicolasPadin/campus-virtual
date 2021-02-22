@@ -35,6 +35,7 @@ class RepitenteEstadisticaController extends Controller
         $repitentes = Repitente::where('institucion_id', $institucion_id)
         ->with(['ciclo_lectivo', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
         ->get();
+
         $ciclos = [];
         $ciclosCategorias = [];
         
@@ -71,8 +72,6 @@ class RepitenteEstadisticaController extends Controller
 
         $ciclos = array_values($ciclos);
         $divArray = array_values($divArray);
-
-
 
         return Inertia::render('Repitentes/Estadisticas', [
             'institucion_id' => $institucion_id,

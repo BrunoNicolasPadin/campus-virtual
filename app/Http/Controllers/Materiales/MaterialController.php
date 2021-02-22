@@ -14,9 +14,9 @@ use Inertia\Inertia;
 
 class MaterialController extends Controller
 {
-    protected $ObtenerFechaHoraService;
+    protected $obtenerFechaHoraService;
 
-    public function __construct(ObtenerFechaHoraService $ObtenerFechaHoraService)
+    public function __construct(ObtenerFechaHoraService $obtenerFechaHoraService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -26,7 +26,7 @@ class MaterialController extends Controller
         $this->middleware('grupoAdeudadoCorrespondiente')->only('index');
         $this->middleware('materialCorrespondiente')->only('edit', 'update', 'destroy');
 
-        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
+        $this->obtenerFechaHoraService = $obtenerFechaHoraService;
     }
 
     public function index($institucion_id, $division_id, $grupo_id)
@@ -56,7 +56,7 @@ class MaterialController extends Controller
             $i = 0;
 
             foreach ($archivos as $archivo) {
-                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
+                $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Materiales', $nombre);
 

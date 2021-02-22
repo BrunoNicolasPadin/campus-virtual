@@ -15,9 +15,9 @@ use Inertia\Inertia;
 
 class RendirEntregaController extends Controller
 {
-    protected $ObtenerFechaHoraService;
+    protected $obtenerFechaHoraService;
 
-    public function __construct(ObtenerFechaHoraService $ObtenerFechaHoraService)
+    public function __construct(ObtenerFechaHoraService $obtenerFechaHoraService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -28,7 +28,7 @@ class RendirEntregaController extends Controller
         $this->middleware('soloInstitucionesDirectivosAlumnos')->only('destroy');
         $this->middleware('rendirEntregaCorrespondiente')->only('destroy');
 
-        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
+        $this->obtenerFechaHoraService = $obtenerFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
@@ -48,7 +48,7 @@ class RendirEntregaController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
+                $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Deudores/Entregas', $nombre);
 

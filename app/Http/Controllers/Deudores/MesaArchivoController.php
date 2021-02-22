@@ -15,11 +15,11 @@ use Inertia\Inertia;
 class MesaArchivoController extends Controller
 {
     protected $formatoService;
-    protected $ObtenerFechaHoraService;
+    protected $obtenerFechaHoraService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        ObtenerFechaHoraService $ObtenerFechaHoraService,
+        ObtenerFechaHoraService $obtenerFechaHoraService,
     )
 
     {
@@ -33,7 +33,7 @@ class MesaArchivoController extends Controller
         $this->middleware('mesaArchivoCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
-        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
+        $this->obtenerFechaHoraService = $obtenerFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id)
@@ -60,7 +60,7 @@ class MesaArchivoController extends Controller
             $i = 0;
 
             foreach ($archivos as $archivo) {
-                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
+                $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Mesas/Archivos', $nombre);
 
