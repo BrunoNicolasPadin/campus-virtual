@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Libretas;
 
 use App\Http\Controllers\Controller;
-use App\Models\Libretas\Libreta;
-use Illuminate\Http\Request;
 use App\Exports\LibretasExport;
 use Maatwebsite\Excel\Facades\Excel;
 

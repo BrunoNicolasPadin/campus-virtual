@@ -3,23 +3,30 @@
 namespace App\Http\Controllers\Libretas;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Libretas\UpdateLibreta;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Deudores\AlumnoDeudor;
 use App\Models\Estructuras\Division;
-use App\Models\Estructuras\FormaDescripcion;
-use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
+use App\Services\Division\ObtenerFormaEvaluacion;
+use App\Services\Division\ObtenerPeriodosEvaluacion;
 use App\Services\FechaHora\CambiarFormatoFecha;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class LibretaController extends Controller
 {
     protected $formatoService;
+    protected $formaEvaluacionService;
+    protected $divisionService;
 
-    public function __construct(CambiarFormatoFecha $formatoService)
+    public function __construct(
+        CambiarFormatoFecha $formatoService, 
+        ObtenerFormaEvaluacion $formaEvaluacionService,
+        ObtenerPeriodosEvaluacion $divisionService,
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -29,6 +36,8 @@ class LibretaController extends Controller
         $this->middleware('libretaCorrespondiente')->only('edit', 'update');
 
         $this->formatoService = $formatoService;
+        $this->formaEvaluacionService = $formaEvaluacionService;
+        $this->divisionService = $divisionService;
     }
 
     public function index($institucion_id, $alumno_id)
@@ -78,7 +87,7 @@ class LibretaController extends Controller
         $deudas = [];
 
         if (! $libreta == null) {
-            $periodos = $this->obtenerPeriodos($libreta);
+            $periodos = $this->divisionService->obtenerPeriodos($libreta);
             $libretas = $this->obtenerLibretas($alumno_id, $ciclo_lectivo_id);
             $deudas = $this->obtenerDeudas($alumno_id, $ciclo_lectivo_id);
         }
@@ -89,38 +98,18 @@ class LibretaController extends Controller
     public function edit($institucion_id, $alumno_id, $id)
     {
         $libreta = Libreta::findOrFail($id);
-        $division = Division::findOrFail($libreta->division_id);
-        $formaDescripcion = [];
-
-        if ($division->formaEvaluacion->tipo == 'Escrita') {
-            $tipo = 'Escrita';
-            $formaDescripcion = FormaDescripcion::where('forma_evaluacion_id', $division->forma_evaluacion_id)->get();
-        }
-        else {
-            $tipo = $division->formaEvaluacion->tipo;
-
-            if ($tipo == 'Numerica') {
-                for ($i=1; $i < 11; $i++) { 
-                    array_push($formaDescripcion, $i);
-                }
-            }
-            else {
-                for ($i=1; $i < 101; $i++) { 
-                    array_push($formaDescripcion, $i);
-                }
-            }
-        }
+        $arrayTemporal = $this->formaEvaluacionService->obtenerFormaEvaluacion($libreta->division_id);
 
         return Inertia::render('Libretas/Edit', [
             'institucion_id' => $institucion_id,
             'alumno' => Alumno::with('user')->find($alumno_id),
             'libretas' => Libreta::with(['asignatura', 'calificaciones'])->findOrFail($id),
-            'formasDescripcion' => $formaDescripcion,
-            'tipoEvaluacion' => $tipo,
+            'formasDescripcion' => $arrayTemporal[0],
+            'tipoEvaluacion' => $arrayTemporal[1],
         ]);
     }
 
-    public function update(UpdateLibreta $request, $institucion_id, $alumno_id, $id)
+    public function update(Request $request, $institucion_id, $alumno_id, $id)
     {
         for ($i=0; $i < count($request->notas); $i++) { 
             
@@ -139,21 +128,6 @@ class LibretaController extends Controller
             ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
             ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso'])
             ->first();
-    }
-
-    public function obtenerPeriodos($libreta)
-    {
-        if ($libreta->periodo_id == 1) {
-            return ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
-        }
-
-        if ($libreta->periodo_id == 2) {
-            return ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
-        }
-
-        if ($libreta->periodo_id == 3) {
-            return ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
-        }
     }
 
     public function obtenerDeudas($alumno_id, $ciclo_lectivo_id)

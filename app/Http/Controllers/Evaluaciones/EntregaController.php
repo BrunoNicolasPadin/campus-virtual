@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Evaluaciones;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\UpdateEntrega;
 use App\Models\Estructuras\Division;
-use App\Models\Estructuras\FormaDescripcion;
 use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\EntregaComentario;
 use App\Models\Evaluaciones\Evaluacion;
+use App\Services\Division\ObtenerFormaEvaluacion;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +18,14 @@ use Inertia\Inertia;
 
 class EntregaController extends Controller
 {
-    public function __construct(CambiarFormatoFechaHora $formatoService)
+    protected $formaEvaluacionService;
+    protected $formatoService;
+
+    public function __construct(
+        CambiarFormatoFechaHora $formatoService,
+        ObtenerFormaEvaluacion $formaEvaluacionService,
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -28,6 +35,7 @@ class EntregaController extends Controller
         $this->middleware('entregaCorrespondiente')->only('show', 'edit', 'update');
 
         $this->formatoService = $formatoService;
+        $this->formaEvaluacionService = $formaEvaluacionService;
     }
 
     public function index($institucion_id, $division_id, $evaluacion_id)
@@ -55,7 +63,6 @@ class EntregaController extends Controller
                     return [
                         'id' => $archivo->id,
                         'archivo' => $archivo->archivo,
-                        'created_at' => $this->formatoService->cambiarFormatoParaMostrar($archivo->created_at),
                     ];
                 }),
             'correcciones' => Correccion::where('entrega_id', $id)->orderBy('created_at', 'DESC')->get()
@@ -63,7 +70,6 @@ class EntregaController extends Controller
                     return [
                         'id' => $correccion->id,
                         'archivo' => $correccion->archivo,
-                        'created_at' => $this->formatoService->cambiarFormatoParaMostrar($correccion->created_at),
                     ];
                 }),
             'comentarios' => EntregaComentario::where('entrega_id', $id)
@@ -85,34 +91,15 @@ class EntregaController extends Controller
 
     public function edit($institucion_id, $division_id, $evaluacion_id, $id)
     {
-        $division = Division::findOrFail($division_id);
-        $formaDescripcion = [];
-        $tipo = $division->formaEvaluacion->tipo;
-
-        if ($division->formaEvaluacion->tipo == 'Escrita') {
-            $formaDescripcion = FormaDescripcion::where('forma_evaluacion_id', $division->forma_evaluacion_id)->get();
-        }
-        else {
-
-            if ($tipo == 'Numerica') {
-                for ($i=1; $i < 11; $i++) { 
-                    array_push($formaDescripcion, $i);
-                }
-            }
-            else {
-                for ($i=1; $i < 101; $i++) { 
-                    array_push($formaDescripcion, $i);
-                }
-            }
-        }
+        $arrayTemporal = $this->formaEvaluacionService->obtenerFormaEvaluacion($division_id);
 
         return Inertia::render('Evaluaciones/Entregas/Edit', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
-            'formasDescripcion' => $formaDescripcion,
-            'tipoEvaluacion' => $tipo,
+            'formasDescripcion' => $arrayTemporal[0],
+            'tipoEvaluacion' => $arrayTemporal[1],
         ]);
     }
 

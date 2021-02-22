@@ -14,6 +14,7 @@ use App\Models\Deudores\RendirEntrega;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
 use App\Services\Archivos\EliminarMesas;
+use App\Services\Division\ObtenerFormaEvaluacion;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use App\Services\Mesas\EvaluarAprobacion;
 use Illuminate\Http\Request;
@@ -25,11 +26,13 @@ class AnotadoController extends Controller
     protected $formatoService;
     protected $mesasService;
     protected $evaluarAprobacionService;
+    protected $formaEvaluacionService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         EliminarMesas $mesasService,
         EvaluarAprobacion $evaluarAprobacionService,
+        ObtenerFormaEvaluacion $formaEvaluacionService,
     )
 
     {
@@ -46,6 +49,7 @@ class AnotadoController extends Controller
         $this->formatoService = $formatoService;
         $this->mesasService = $mesasService;
         $this->evaluarAprobacionService = $evaluarAprobacionService;
+        $this->formaEvaluacionService = $formaEvaluacionService;
     }
 
     public function store(Request $request, $institucion_id, $division_id, $asignatura_id, $mesa_id)
@@ -97,6 +101,7 @@ class AnotadoController extends Controller
     public function edit($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
         $mesa = Mesa::findOrFail($mesa_id);
+        $arrayTemporal = $this->formaEvaluacionService->obtenerFormaEvaluacion($division_id);
 
         return Inertia::render('Deudores/Anotados/Edit', [
             'institucion_id' => $institucion_id,
@@ -108,6 +113,8 @@ class AnotadoController extends Controller
                 'comentario'  => $mesa->comentario,
             ],
             'anotado' => Anotado::with('alumno', 'alumno.user')->findOrFail($id),
+            'formasDescripcion' => $arrayTemporal[0],
+            'tipoEvaluacion' => $arrayTemporal[1],
         ]);
     }
 
