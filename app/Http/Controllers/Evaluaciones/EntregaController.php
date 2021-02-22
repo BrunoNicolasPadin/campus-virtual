@@ -86,13 +86,33 @@ class EntregaController extends Controller
     public function edit($institucion_id, $division_id, $evaluacion_id, $id)
     {
         $division = Division::findOrFail($division_id);
+        $formaDescripcion = [];
+        $tipo = $division->formaEvaluacion->tipo;
+
+        if ($division->formaEvaluacion->tipo == 'Escrita') {
+            $formaDescripcion = FormaDescripcion::where('forma_evaluacion_id', $division->forma_evaluacion_id)->get();
+        }
+        else {
+
+            if ($tipo == 'Numerica') {
+                for ($i=1; $i < 11; $i++) { 
+                    array_push($formaDescripcion, $i);
+                }
+            }
+            else {
+                for ($i=1; $i < 101; $i++) { 
+                    array_push($formaDescripcion, $i);
+                }
+            }
+        }
 
         return Inertia::render('Evaluaciones/Entregas/Edit', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
             'evaluacion' => Evaluacion::find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
-            'formasDescripcion' => FormaDescripcion::where('forma_evaluacion_id', $division->forma_evaluacion_id)->get(),
+            'formasDescripcion' => $formaDescripcion,
+            'tipoEvaluacion' => $tipo,
         ]);
     }
 

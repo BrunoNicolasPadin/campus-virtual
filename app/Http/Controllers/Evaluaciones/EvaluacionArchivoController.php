@@ -8,12 +8,15 @@ use App\Http\Requests\Evaluaciones\UpdateEvaluacionArchivo;
 use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EvaluacionArchivoController extends Controller
 {
-    public function __construct()
+    protected $ObtenerFechaHoraService;
+
+    public function __construct(ObtenerFechaHoraService $ObtenerFechaHoraService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -22,6 +25,8 @@ class EvaluacionArchivoController extends Controller
         $this->middleware('soloInstitucionesDirectivosDocentes')->only('destroy');
         $this->middleware('evaluacionCorrespondiente');
         $this->middleware('archivoCorrespondiente')->only('edit', 'update', 'destroy');
+
+        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $evaluacion_id)
@@ -40,8 +45,8 @@ class EvaluacionArchivoController extends Controller
             $i = 0;
 
             foreach ($archivos as $archivo) {
-                $fecha = date_create();
-                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
+                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Evaluaciones/Archivos', $nombre);
 
                 Archivo::create([

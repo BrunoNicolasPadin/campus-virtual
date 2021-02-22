@@ -14,7 +14,7 @@ class UpdateEntrega extends FormRequest
     public function rules()
     {
         return [
-            'calificacion' => 'nullable|string',
+            'calificacion' => 'nullable',
             'comentario' => 'nullable|string',
         ];
     }
@@ -22,7 +22,6 @@ class UpdateEntrega extends FormRequest
     public function messages()
     {
         return [
-            'calificacion.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en la calificación, no otra cosa.',
             'comentario.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el comentario, no otra cosa.',
         ];
     }

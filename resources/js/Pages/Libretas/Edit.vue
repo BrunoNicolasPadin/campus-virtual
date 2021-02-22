@@ -42,20 +42,27 @@
                                 </label-form>
 
                                 <select
+                                v-if="tipoEvaluacion == 'Escrita'"
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
                                 v-model="nota.calificacion">
                                     
-                                    <option value="" disabled selected>-</option>
-                                    <span v-show="tipoEvaluacion == 'Escrita' " >
-                                        <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion.opcion">
-                                            {{ formaDescripcion.opcion }}
-                                        </option>
-                                    </span>
+                                    <option value="">-</option>
+                                    <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion.opcion">
+                                        {{ formaDescripcion.opcion }}
+                                    </option>
+                                </select>
+
+                                <select
+                                v-else
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="nota.calificacion">
                                     
-                                    <option v-show="tipoEvaluacion == 'Numerica' ||  tipoEvaluacion == 'Porcentual' " v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion">
+                                    <option value="">-</option>
+                                    <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion">
                                         {{ formaDescripcion }}
                                     </option>
-
                                 </select>
                                 
                                 <info>

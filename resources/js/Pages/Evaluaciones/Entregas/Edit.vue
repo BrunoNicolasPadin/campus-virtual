@@ -49,13 +49,27 @@
                                 </label-form>
                                 
                                 <select
+                                v-if="tipoEvaluacion == 'Escrita'"
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
                                 required
                                 v-model="form.calificacion">
                                     
                                     <option value="">-</option>
-                                    <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion.opcion">{{ formaDescripcion.opcion }}</option>
+                                    <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion.opcion">
+                                        {{ formaDescripcion.opcion }}
+                                    </option>
+                                </select>
 
+                                <select
+                                v-else
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.calificacion">
+                                    
+                                    <option value="">-</option>
+                                    <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion">
+                                        {{ formaDescripcion }}
+                                    </option>
                                 </select>
                                 
                                 <info>
@@ -120,6 +134,7 @@
             evaluacion: Object,
             entrega: Object,
             formasDescripcion: Array,
+            tipoEvaluacion: String,
         },
 
         title: 'Calificar entrega',
