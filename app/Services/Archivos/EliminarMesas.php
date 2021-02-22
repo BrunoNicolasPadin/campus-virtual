@@ -6,7 +6,6 @@ use App\Models\Deudores\Anotado;
 use App\Models\Deudores\MesaArchivo;
 use App\Models\Deudores\RendirCorreccion;
 use App\Models\Deudores\RendirEntrega;
-use App\Models\Materiales\Material;
 use Illuminate\Support\Facades\Storage;
 
 class EliminarMesas

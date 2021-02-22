@@ -7,6 +7,7 @@ use App\Http\Requests\Deudores\StoreMesaArchivo;
 use App\Http\Requests\Deudores\UpdateArchivo;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -14,8 +15,13 @@ use Inertia\Inertia;
 class MesaArchivoController extends Controller
 {
     protected $formatoService;
+    protected $ObtenerFechaHoraService;
 
-    public function __construct(CambiarFormatoFechaHora $formatoService)
+    public function __construct(
+        CambiarFormatoFechaHora $formatoService,
+        ObtenerFechaHoraService $ObtenerFechaHoraService,
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -27,6 +33,7 @@ class MesaArchivoController extends Controller
         $this->middleware('mesaArchivoCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
+        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id)
@@ -53,8 +60,8 @@ class MesaArchivoController extends Controller
             $i = 0;
 
             foreach ($archivos as $archivo) {
-                $fecha = date_create();
-                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
+                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Mesas/Archivos', $nombre);
 
                 MesaArchivo::create([

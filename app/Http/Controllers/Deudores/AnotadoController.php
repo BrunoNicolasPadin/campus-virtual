@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Deudores;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\UpdateEntrega;
 use App\Models\Asignaturas\Asignatura;
-use App\Models\Deudores\AlumnoDeudor;
 use App\Models\Deudores\Anotado;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
@@ -16,19 +15,21 @@ use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
 use App\Services\Archivos\EliminarMesas;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
+use App\Services\Mesas\EvaluarAprobacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class AnotadoController extends Controller
 {
     protected $formatoService;
     protected $mesasService;
+    protected $evaluarAprobacionService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         EliminarMesas $mesasService,
+        EvaluarAprobacion $evaluarAprobacionService,
     )
 
     {
@@ -44,6 +45,7 @@ class AnotadoController extends Controller
 
         $this->formatoService = $formatoService;
         $this->mesasService = $mesasService;
+        $this->evaluarAprobacionService = $evaluarAprobacionService;
     }
 
     public function store(Request $request, $institucion_id, $division_id, $asignatura_id, $mesa_id)
@@ -117,16 +119,7 @@ class AnotadoController extends Controller
         $anotado->comentario = $request->comentario;
         $anotado->save();
 
-        if ($request->calificacion >= 6 || $request->calificacion >= 'Aprobado') {
-            AlumnoDeudor::where('alumno_id', $anotado->alumno_id)->where('asignatura_id', $asignatura_id)->update([
-                'aprobado' => '1',
-            ]);
-        }
-        else {
-            AlumnoDeudor::where('alumno_id', $anotado->alumno_id)->where('asignatura_id', $asignatura_id)->update([
-                'aprobado' => '0',
-            ]);
-        }
+        $this->evaluarAprobacionService->actualizacionDeInscripcion($division_id, $request, $anotado, $asignatura_id);
 
         return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $id]))
             ->with(['successMessage' => 'Alumno calificado con éxito!']);

@@ -9,12 +9,15 @@ use App\Models\Deudores\Anotado;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\RendirEntrega;
 use App\Models\Estructuras\Division;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class RendirEntregaController extends Controller
 {
-    public function __construct()
+    protected $ObtenerFechaHoraService;
+
+    public function __construct(ObtenerFechaHoraService $ObtenerFechaHoraService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -24,6 +27,8 @@ class RendirEntregaController extends Controller
         $this->middleware('soloAlumnos')->except('destroy');
         $this->middleware('soloInstitucionesDirectivosAlumnos')->only('destroy');
         $this->middleware('rendirEntregaCorrespondiente')->only('destroy');
+
+        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
@@ -43,8 +48,8 @@ class RendirEntregaController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $fecha = date_create();
-                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
+                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Deudores/Entregas', $nombre);
 
                 RendirEntrega::create([

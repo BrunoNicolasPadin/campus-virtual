@@ -9,13 +9,15 @@ use App\Models\Deudores\Anotado;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\RendirCorreccion;
 use App\Models\Estructuras\Division;
-use Illuminate\Http\Request;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class RendirCorreccionController extends Controller
 {
-    public function __construct()
+    protected $ObtenerFechaHoraService;
+
+    public function __construct(ObtenerFechaHoraService $ObtenerFechaHoraService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -25,6 +27,8 @@ class RendirCorreccionController extends Controller
         $this->middleware('soloDocentes')->except('destroy');
         $this->middleware('soloInstitucionesDirectivosDocentes')->only('destroy');
         $this->middleware('rendirCorreccionCorrespondiente')->only('destroy');
+
+        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
@@ -44,8 +48,8 @@ class RendirCorreccionController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $fecha = date_create();
-                $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
+                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
+                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Deudores/Correcciones', $nombre);
 
                 RendirCorreccion::create([

@@ -8,14 +8,15 @@ use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\Evaluacion;
-use DateTime;
-use DateTimeZone;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EntregaArchivoController extends Controller
 {
-    public function __construct()
+    protected $ObtenerFechaHoraService;
+
+    public function __construct(ObtenerFechaHoraService $ObtenerFechaHoraService,)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -25,6 +26,8 @@ class EntregaArchivoController extends Controller
         $this->middleware('soloAlumnos')->except('destroy');
         $this->middleware('soloInstitucionesDirectivosAlumnos')->only('destroy');
         $this->middleware('entregaArchivoCorrespondiente')->only('destroy');
+
+        $this->ObtenerFechaHoraService = $ObtenerFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $evaluacion_id, $entrega_id)
@@ -43,10 +46,7 @@ class EntregaArchivoController extends Controller
             $archivos = $request->file('archivos');
 
             foreach ($archivos as $archivo) {
-                $fechaHora = new DateTime(null, new DateTimeZone('America/Argentina/Buenos_Aires'));
-                $fechaHora->setTimestamp($fechaHora->getTimestamp());
-                $fechaHora = $fechaHora->format('d-m-Y H:i:s');
-
+                $fechaHora = $this->ObtenerFechaHoraService->obtenerFechaHora();
                 $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
                 $archivo->storeAs('public/Evaluaciones/Entregas', $nombre);
 

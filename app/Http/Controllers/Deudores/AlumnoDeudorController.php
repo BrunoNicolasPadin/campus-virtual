@@ -7,7 +7,6 @@ use App\Http\Requests\Deudores\StoreAlumnoDeudor;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Deudores\AlumnoDeudor;
-use App\Models\Deudores\Anotado;
 use App\Models\Deudores\Mesa;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
