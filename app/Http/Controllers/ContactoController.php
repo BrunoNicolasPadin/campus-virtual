@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Contacto\EnviarEmail;
 use App\Mail\Contacto;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactoController extends Controller
 {
-    public function enviarEmail(Request $request)
+    public function enviarEmail(EnviarEmail $request)
     {
         $to_email = "gescolcontacto@gmail.com";
 

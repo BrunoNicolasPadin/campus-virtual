@@ -26,7 +26,7 @@ class EnviarEmail extends FormRequest
             'email.required' => 'Debe ingresar un email.',
             'email.email' => 'Debe ingresar un email VALIDO.',
             'asunto.required' => 'Debe ingresar un asunto.',
-            'asunto.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos)',
+            'asunto.string' => 'Debe seleccionar una de las 5 opciones',
             'mensaje.required' => 'Debe ingresar un mensaje.',
             'mensaje.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos)',
         ];

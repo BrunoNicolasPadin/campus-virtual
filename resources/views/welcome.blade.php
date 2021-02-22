@@ -45,8 +45,8 @@
                             <span class="block text-indigo-600 xl:inline">con Gescol</span>
                         </h1>
                         <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
-                            Conecta a tus directivos, docentes, alumnos, padres y madres en un solo lugar y permiti que accedan a la informacion relacionada a 
-                            los examenes, tareas y trabajos practicos cuando deseen.
+                            Conecta a tus directivos, docentes, alumnos, padres y madres en un solo lugar y permite que accedan a la información relacionada a 
+                            los exámenes, tareas, trabajos prácticos, libretas de calificaciones, estadísticas y mas cuando lo deseen.
                         </p>
                     </div>
                 </main>
@@ -77,9 +77,9 @@
                                     Evaluaciones
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Los docentes podran crear examenes, tareas y trabajos practicos; los alumnos realizar entregas, 
-                                    que seran corregidas y calificadas por los docentes, subiendo la entrega corregida si asi desean. 
-                                    Tambien los alumnos tendran la posibilidad de resolver sus dudas con los docentes en los comentarios.
+                                    Los docentes podrán crear exámenes, tareas y trabajos prácticos; los alumnos realizar entregas, 
+                                    que serán corregidas y calificadas por los docentes, subiendo la entrega corregida si así desean. 
+                                    También los alumnos tendrán la posibilidad de resolver sus dudas con los docentes en los comentarios.
                                 </dd>
                             </div>
                         </div>
@@ -98,9 +98,9 @@
                                     Materiales
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Los docente podran subir archivos PDFs, WORDs, PowerPoints, imagenes, videos, etc... 
+                                    Los docente podrán subir archivos PDFs, WORDs, PowerPoint, imágenes, videos, etc... 
                                     para que los alumnos puedan descargarlos y los tengan en un solo lugar. 
-                                    Los podran dejar alli para que los nuevos alumnos tambien accedan a ellos y asi evitar que el docente 
+                                    Los podrán dejar allí para que los nuevos alumnos también accedan a ellos y así evitar que el docente 
                                     los tenga que volver a subir.
                                 </dd>
                             </div>
@@ -120,7 +120,7 @@
                                     Libretas
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Cada alumno contara con una libreta en la que los directivos subiran las notas de la libreta 
+                                    Cada alumno contará con una libreta en la que los directivos subirán las notas de la libreta 
                                     para cada periodo (bimestre, trimestre, cuatrimestre) junto con la nota final en cada materia.
                                 </dd>
                             </div>
@@ -140,7 +140,7 @@
                                     Padres
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Los padres vincularan su cuenta a la de su/s hijo/s y veran lo mismo que ellos asi no se les escapa nada.
+                                    Los padres vincularan su cuenta a la de su/s hijo/s y verán lo mismo que ellos así no se les escapa nada.
                                 </dd>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                                     Calendario
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Poseera un calendario con las fechas de los examenes, trabajos practicos, tareas y mesas para rendir.
+                                    Poseerá un calendario con las fechas de los exámenes, trabajos prácticos, tareas y mesas para rendir.
                                 </dd>
                             </div>
                         </div>
@@ -175,11 +175,11 @@
                             </div>
                             <div class="ml-4">
                                 <dt class="text-lg leading-6 font-bold text-indigo-600">
-                                    Estadisticas
+                                    Estadísticas
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Accedera a estadisticas por ciclo lectivo dentro de cada division, asignatura y alumno por bimestre/trimestre/cuatrimestre. 
-                                    Cantidad de alumnos que repiten o abanadonan, dividido por ciclo lectivo y division.
+                                    Accederá a estadísticas por ciclo lectivo dentro de cada división, asignatura y alumno por bimestre/trimestre/cuatrimestre. 
+                                    Cantidad de alumnos que repiten o abandonan, dividido por ciclo lectivo y división.
                                 </dd>
                             </div>
                         </div>
@@ -209,14 +209,24 @@
                 <form action="{{ route('contacto.enviarEmail') }}" method="post">
                     @csrf
                     <label class="block uppercase tracking-wide text-indigo-500 text-md font-bold mb-2">Email</label>
-                    <input class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3" name="email" type="email">
+                    <input required class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3" name="email" type="email">
                     <label class="block uppercase tracking-wide text-indigo-500 text-md font-bold mb-2">Asunto</label>
-                    <input class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3" name="asunto" type="text">
+                    <select class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3" required name="asunto">
+                        <option disabled value="">-</option>
+                        <option value="Queja">Queja</option>
+                        <option value="Error">Reportar error</option>
+                        <option value="Nueva idea">Nueva idea</option>
+                        <option value="Adquirir servicio">Adquirir servicio</option>
+                        <option value="Otro motivo">Otro motivo</option>
+                    </select>
                     <label class="block uppercase tracking-wide text-indigo-500 text-md font-bold mb-2">Mensaje</label>
-                    <textarea name="mensaje" class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"></textarea>
+                    <textarea required name="mensaje" class="appearance-none block w-full bg-white text-black border border-red rounded py-3 px-4 mb-3"></textarea>
                     <button type="submit" class="border border-green-700 bg-green-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline">
                         Enviar
                     </button>
+                    <span class="text-black text-md">
+                        o enviar un mensaje a <span class="underline">3413154714</span>.
+                    </span>
                 </form>
             </div>
         </div>
