@@ -1,6 +1,6 @@
 <template>
-    <div class="min-h-screen bg-blue-50">
-        <nav class="bg-blue-100 border-b border-gray-100">
+    <div class="h-auto bg-blue-50">
+        <nav class="h-auto bg-blue-100 border-b border-gray-100">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
@@ -180,7 +180,7 @@
 
                     <div class="mt-3 space-y-1">
                         <jet-responsive-nav-link :href="route('topNav.calendario')" :active="route().current('calendario.mostrar')">
-                            Ciclos lectivos
+                            Calendario
                         </jet-responsive-nav-link>
                         <jet-responsive-nav-link :href="route('topNav.ciclos-lectivos')" :active="route().current('ciclos-lectivos.index')">
                             Ciclos lectivos
@@ -264,20 +264,162 @@
         </nav>
 
         <!-- Page Heading -->
-        <header class="bg-blue-100 shadow">
+        <header class="h-auto bg-blue-100 shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <slot name="header"></slot>
             </div>
         </header>
 
         <!-- Page Content -->
-        <main>
+        <main class="h-auto">
             <slot></slot>
         </main>
 
         <!-- Modal Portal -->
         <portal-target name="modal" multiple>
         </portal-target>
+
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@iconscout/unicons@3.0.6/css/line.css"> -->
+
+        <footer class="bg-gray-800 pt-10 sm:mt-10 pt-10 h-screen">
+            <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-left">
+                <!-- Col-1 -->
+                <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+                    <!-- Col Title -->
+                    <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                        Para instituciones
+                    </div>
+
+                    <!-- Links -->
+                    <inertia-link :href="route('tutoriales.como-empezar')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        ¿Cómo empezar?
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.nuevo-ciclo-lectivo')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        ¿Está por comenzar un ciclo lectivo nuevo? Sigue estos pasos
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.institucion')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Institución
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.ciclo-lectivo')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Ciclos lectivos
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.estructura')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Estructuras
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.asignatura')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Asignaturas
+                    </inertia-link>
+                </div>
+
+                <!-- Col-2 -->
+                <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+                    <!-- Col Title -->
+                    <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                        Roles
+                    </div>
+
+                    <!-- Links -->
+                    <inertia-link :href="route('tutoriales.usuario')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Perfil de usuario
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.directivo')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Directivos
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.docente')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Docentes
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.alumno')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Alumnos
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.padre')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Padres, madres y tutores
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.repitente')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Repitentes
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.exalumno')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Ex alumnos
+                    </inertia-link>
+                </div>
+
+                <!-- Col-3 -->
+                <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+                    <!-- Col Title -->
+                    <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                        Para docentes y alumnos
+                    </div>
+
+                    <!-- Links -->
+                    <inertia-link :href="route('tutoriales.evaluacion')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Evaluaciones
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.correccion')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Correcciones
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.entrega')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Entregas
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.material')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Materiales
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.mesa')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Mesa/Rendir
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.muro')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Muro
+                    </inertia-link>
+                </div>
+
+                <!-- Col-3 -->
+                <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+                    <!-- Col Title -->
+                    <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                        Números y calendario
+                    </div>
+
+                    <!-- Links -->
+                    <inertia-link :href="route('tutoriales.libreta')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Libretas
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.estadistica')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Estadísticas y números
+                    </inertia-link>
+                    <inertia-link :href="route('tutoriales.calendario')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                        Calendario
+                    </inertia-link>
+                </div>
+            </div>
+
+            <!-- Copyright Bar -->
+            <div class="pt-2">
+                <div class="flex pb-5 px-3 m-auto pt-5 
+                    border-t border-gray-500 text-gray-400 text-sm 
+                    flex-col md:flex-row max-w-6xl">
+                    <div class="mt-2">
+                        © Copyright 2020 - 2021 | Gescolonline. All Rights Reserved.
+                    </div>
+
+                    <!-- 
+                    <div class="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
+                        <a href="#" class="w-6 mx-1">
+                            <i class="uil uil-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-6 mx-1">
+                            <i class="uil uil-twitter-alt"></i>
+                        </a>
+                        <a href="#" class="w-6 mx-1">
+                            <i class="uil uil-youtube"></i>
+                        </a>
+                        <a href="#" class="w-6 mx-1">
+                            <i class="uil uil-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-6 mx-1">
+                            <i class="uil uil-instagram"></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+        </footer>
     </div>
 </template>
 

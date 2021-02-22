@@ -53,14 +53,14 @@
                                 required
                                 v-model="form.calificacion">
                                     
-                                    <option value="" disabled selected>-</option>
+                                    <option value="">-</option>
                                     <option v-for="formaDescripcion in formasDescripcion" :key="formaDescripcion.id" :value="formaDescripcion.opcion">{{ formaDescripcion.opcion }}</option>
 
                                 </select>
                                 
                                 <info>
                                     <template #info>
-                                        Se puede dejar vacío, poner cualquier numero con coma (ponga un punto en vez de la coma) o con 'Aprobado' y 'Desaprobado'. Puede tardar ya que al calificarlo se envía un email al alumno y a sus padres de la calificación y el comentario.
+                                        Se puede dejar vacío (primera opción). Puede tardar ya que al calificarlo se envía un email al alumno y a sus padres de la calificación y el comentario.
                                     </template>
                                 </info>
                             </div>

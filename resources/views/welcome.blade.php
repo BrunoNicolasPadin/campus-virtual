@@ -228,6 +228,37 @@
                         o enviar un mensaje a <span class="underline">3413154714</span>.
                     </span>
                 </form>
+
+                <hr class="my-5">
+            </div>
+        </div>
+
+        <div class="py-5">
+            <div class="lg:text-center">
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Nosotros
+                </p>
+            </div>
+            <div class="pt-6 pb-8 px-4 sm:px-8 my-2 mb-4">
+                <p class="mt-3 text-gray-900 leading-loose">
+                    Gescol surge de mi interés por la educación y de que esta mejore, ya que es muy importante para el progreso de un país. 
+                    También surge de mi experiencia en el colegio y en la universidad. <br>
+
+                    Cuando iba a la escuela no teníamos ninguna página de internet donde enterarnos de las fechas de las evaluaciones, 
+                    enviar nuestros trabajos prácticos, recibir las correcciones, hacer preguntas al profesor, descargar material y 
+                    demás cosas que hubiesen hecho mas fácil y organizada nuestra vida en el colegio, algo que seguramente todos deseamos para 
+                    nosotros, nuestros alumnos, amigos, hijos, docentes y etc… <br>
+
+                    Luego en la universidad había un “campus virtual” pero tenía (tiene) un diseño espantoso, se caía cuando nos queríamos inscribir 
+                    en alguna materia, demasiados tramites y procesos no estaban digitalizados, sumado a que pocos docentes lo utilizaban y tenía todo lo que, 
+                    en la misma universidad te enseñan que un sistema NO debe tener. <br>
+                    
+                    Teniendo todo esto en mente pensaba en los bien que le haría a los colegios y sus miembros al tener un servicio como Gescol, 
+                    un sitio web en el cual podrán ir digitalizando poco a poco los procesos que hoy en día hacen en papel o en tablas Excel y 
+                    facilitarle la vida a todas las personas que forman una institución educativa.
+                </p>
+
+                <hr class="my-5">
             </div>
         </div>
     </body>
