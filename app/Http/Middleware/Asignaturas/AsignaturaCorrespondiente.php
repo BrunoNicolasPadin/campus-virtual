@@ -2,8 +2,6 @@
 
 namespace App\Http\Middleware\Asignaturas;
 
-use App\Models\Asignaturas\Asignatura;
-use App\Models\Asignaturas\AsignaturaDocente;
 use App\Services\Asignaturas\VerificarAsignatura;
 use App\Services\Ruta\RutaService;
 use Closure;

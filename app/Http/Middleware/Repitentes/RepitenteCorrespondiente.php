@@ -19,7 +19,7 @@ class RepitenteCorrespondiente
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
-        $repitente = Repitente::findOrFail($link[6]);
+        $repitente = Repitente::select('institucion_id')->findOrFail($link[6]);
 
         if (session('institucion_id') == $repitente->institucion_id) {
             return $next($request);

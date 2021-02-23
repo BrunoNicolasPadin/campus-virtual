@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\Evaluaciones;
 
 use App\Models\Asignaturas\AsignaturaDocente;
+use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Services\Roles\DocenteService;
 use App\Services\Ruta\RutaService;
@@ -28,7 +29,13 @@ class EvaluacionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $evaluacion = Evaluacion::findOrFail($link[8]);
+        $evaluacion = Evaluacion::select('division_id', 'asignatura_id')
+        ->addSelect(
+            ['institucion_id' => Division::select('institucion_id')
+                ->whereColumn('id', 'division_id')
+                ->limit(1)
+            ])
+        ->findOrFail($link[8]);
 
         if (session('tipo') == 'Docente') {
             if ($this->docenteService->verificarDocenteId($evaluacion->asignatura_id)) {
@@ -45,7 +52,7 @@ class EvaluacionCorrespondiente
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($evaluacion->division->institucion_id == session('institucion_id')) {
+            if ($evaluacion->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
             abort(403, 'Esta evaluación no forma parte de tu institución.');

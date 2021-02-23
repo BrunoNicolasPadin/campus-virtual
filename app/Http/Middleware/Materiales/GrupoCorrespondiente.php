@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Materiales;
 
+use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
 use App\Services\Asignaturas\VerificarAsignatura;
 use App\Services\Ruta\RutaService;
@@ -27,10 +28,16 @@ class GrupoCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $grupo = Grupo::findOrFail($link[8]);
+        $grupo = Grupo::select('asignatura_id', 'division_id')
+        ->addSelect(
+            ['institucion_id' => Division::select('institucion_id')
+                ->whereColumn('id', 'division_id')
+                ->limit(1)
+            ])
+        ->findOrFail($link[8]);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($grupo->division->institucion_id == session('institucion_id')) {
+            if ($grupo->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
             abort(403, 'Este grupo no forma parte de tu institución.');

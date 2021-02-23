@@ -11,7 +11,7 @@ class VerificarExAlumnoNuevo
 {
     public function handle(Request $request, Closure $next)
     {
-        $alumno = Alumno::findOrFail($request->alumno_id);
+        $alumno = Alumno::select('id', 'institucion_id')->findOrFail($request->alumno_id);
 
         if ($alumno->institucion_id == session('institucion_id')) {
             if (ExAlumno::where('alumno_id', $alumno->id)->exists()) {

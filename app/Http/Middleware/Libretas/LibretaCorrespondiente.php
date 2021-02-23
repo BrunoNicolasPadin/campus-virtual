@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Libretas;
 
+use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Libretas\Libreta;
 use App\Services\Ruta\RutaService;
 use Closure;
@@ -20,9 +21,15 @@ class LibretaCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $libreta = Libreta::findOrFail($link[8]);
+        $libreta = Libreta::select('id')
+            ->addSelect(
+                ['institucion_id' => CicloLectivo::select('institucion_id')
+                    ->whereColumn('id', 'ciclo_lectivo_id')
+                    ->limit(1)
+                ])
+        ->findOrFail($link[8]);
 
-        if ($libreta->cicloLectivo->institucion_id == session('institucion_id')) {
+        if ($libreta->institucion_id == session('institucion_id')) {
             
             return $next($request);
         }

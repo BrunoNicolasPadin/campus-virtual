@@ -19,7 +19,7 @@ class ExAlumnoCorrespondiente
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
-        $exAlumno = ExAlumno::findOrFail($link[6]);
+        $exAlumno = ExAlumno::select('institucion_id')->findOrFail($link[6]);
 
         if (session('institucion_id') == $exAlumno->institucion_id) {
             return $next($request);

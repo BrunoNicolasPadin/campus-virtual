@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\Muro;
 
 use App\Models\Asignaturas\AsignaturaDocente;
+use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Services\Roles\DocenteService;
 use App\Services\Ruta\RutaService;
@@ -28,7 +29,12 @@ class VerArchivosMuroCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $publicacion = Muro::findOrFail($link[8]);
+        $publicacion = Muro::select('division_id')
+        ->addSelect(
+            ['institucion_id' => Division::select('institucion_id')
+                ->whereColumn('id', 'division_id')
+                ->limit(1)
+            ])->findOrFail($link[8]);
 
         if (session('tipo') == 'Docente') {
             if ($this->docenteService->verificarDocenteDivision($publicacion->division_id)) {
@@ -45,7 +51,7 @@ class VerArchivosMuroCorrespondiente
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($publicacion->division->institucion_id == session('institucion_id')) {
+            if ($publicacion->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
             abort(403, 'Estos archivos no forma parte de tu institución.');

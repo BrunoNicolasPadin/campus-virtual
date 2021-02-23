@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Padres;
 
+use App\Models\Roles\Alumno;
 use App\Models\Roles\Padre;
 use App\Services\Ruta\RutaService;
 use Closure;
@@ -20,10 +21,15 @@ class PadreCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $padre = Padre::with('hijos')->findOrFail($link[6]);
+        $padre = Padre::select('id')
+        ->addSelect(
+            ['institucion_id' => Alumno::select('institucion_id')
+                ->whereColumn('id', 'alumno_id')
+                ->limit(1)
+            ])->findOrFail($link[6]);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($padre->hijos->institucion_id == session('institucion_id')) {
+            if ($padre->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
             abort(403, 'Este padre no es de tu institución.');

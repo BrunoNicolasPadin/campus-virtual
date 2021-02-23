@@ -3,6 +3,8 @@
 namespace App\Http\Middleware\Deudores;
 
 use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Mesa;
+use App\Models\Roles\Alumno;
 use App\Services\Asignaturas\VerificarAsignatura;
 use App\Services\Ruta\RutaService;
 use Closure;
@@ -26,17 +28,27 @@ class InscripcionCorrespondiente
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
-        $anotado = Anotado::findOrFail($link[12]);
+
+        $anotado = Anotado::select('alumno_id')
+            ->addSelect(
+                ['institucion_id' => Alumno::select('institucion_id')
+                    ->whereColumn('id', 'alumno_id')
+                    ->limit(1),
+                'asignatura_id' => Mesa::select('asignatura_id')
+                    ->whereColumn('id', 'mesa_id')
+                    ->limit(1)
+                ])
+            ->findOrFail($link[12]);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo' ) {
-            if (session('institucion_id') == $anotado->alumno->institucion_id) {
+            if (session('institucion_id') == $anotado->institucion_id) {
                 return $next($request);
             }
             abort(403, 'Esta inscripción es de un alumno que no forma parte de tu institución.');
         }
 
         if (session('tipo') == 'Docente') {
-            if ($this->asignaturaService->verificarDocente($anotado->mesa->asignatura_id)) {
+            if ($this->asignaturaService->verificarDocente($anotado->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de la asignatura en la que se inscribió este alumno.');

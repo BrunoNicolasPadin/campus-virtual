@@ -10,7 +10,7 @@ class AlumnoService
 {
     public function AlumnoCorrespondiente($alumno_id)
     {
-        $alumno = Alumno::findOrFail($alumno_id);
+        $alumno = Alumno::select('id', 'institucion_id')->findOrFail($alumno_id);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
 

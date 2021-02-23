@@ -20,7 +20,7 @@ class FormaEvaluacionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $formaEvaluacion = FormaEvaluacion::findOrFail($link[6]);
+        $formaEvaluacion = FormaEvaluacion::select('institucion_id')->findOrFail($link[6]);
 
         if ($formaEvaluacion->institucion_id  == session('institucion_id')) {
             return $next($request);

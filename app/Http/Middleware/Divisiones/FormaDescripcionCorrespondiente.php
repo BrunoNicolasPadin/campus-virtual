@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\Divisiones;
 
 use App\Models\Estructuras\FormaDescripcion;
+use App\Models\Estructuras\FormaEvaluacion;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -20,9 +21,15 @@ class FormaDescripcionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $formaDescripcion = FormaDescripcion::findOrFail($link[8]);
+        $formaDescripcion = FormaDescripcion::select('id')
+            ->addSelect(
+                ['institucion_id' => FormaEvaluacion::select('institucion_id')
+                    ->whereColumn('id', 'forma_evaluacion_id')
+                    ->limit(1)
+                ])
+            ->findOrFail($link[8]);
 
-        if ($formaDescripcion->formaEvaluacion->institucion_id  == session('institucion_id')) {
+        if ($formaDescripcion->institucion_id  == session('institucion_id')) {
             return $next($request);
         }
         abort(403, 'Esta opción de forma de evaluación no es de tu institución.');

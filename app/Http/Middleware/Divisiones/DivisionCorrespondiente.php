@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Divisiones;
 
+use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Estructuras\Division;
 use App\Services\Ruta\RutaService;
@@ -21,13 +22,18 @@ class DivisionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $division = Division::findOrFail($link[6]);
+        $division = Division::select('id', 'institucion_id')->findOrFail($link[6]);
 
         if (session('tipo') == 'Docente') {
-            $asignaturasDocentes = AsignaturaDocente::where('docente_id', session('tipo_id'))->get();
+            $asignaturasDocentes = AsignaturaDocente::where('docente_id', session('tipo_id'))
+                    ->addSelect(['division_id' => Asignatura::select('division_id')
+                    ->whereColumn('asignaturas_docentes.asignatura_id', 'asignatura.id')
+                    ->limit(1)
+                ])
+                ->get();
 
             foreach ($asignaturasDocentes as $asignaturaDocente) {
-                if ($asignaturaDocente->asignatura->division_id == $division->id) {
+                if ($asignaturaDocente->division_id == $division->id) {
                     return $next($request);
                 }
             }
