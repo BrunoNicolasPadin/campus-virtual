@@ -4,6 +4,7 @@ namespace App\Services\Division;
 
 use App\Models\Estructuras\Division;
 use App\Models\Estructuras\FormaDescripcion;
+use App\Models\Estructuras\FormaEvaluacion;
 
 class ObtenerFormaEvaluacion
 {
@@ -31,5 +32,10 @@ class ObtenerFormaEvaluacion
             }
         }
         return [$formaDescripcion, $tipo];
+    }
+
+    public function find($id)
+    {
+        return FormaEvaluacion::select('nombre')->findOrFail($id);
     }
 }
