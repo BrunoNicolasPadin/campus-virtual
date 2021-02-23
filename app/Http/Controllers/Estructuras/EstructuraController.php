@@ -74,7 +74,7 @@ class EstructuraController extends Controller
     {
         return Inertia::render('Estructuras/Show', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso', 'formaEvaluacion'])->find($id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso', 'formaEvaluacion'])->findOrFail($id),
             'tipo' => session('tipo'),
         ]);
     }
@@ -87,7 +87,7 @@ class EstructuraController extends Controller
             'orientaciones' => Orientacion::all(),
             'cursos' => Curso::all(),
             'periodos' => Periodo::all(),
-            'division' => Division::find($id),
+            'division' => Division::findOrFail($id),
             'formasEvaluacion' => FormaEvaluacion::where('institucion_id', $institucion_id)->get(),
         ]);
     }

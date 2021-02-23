@@ -20,7 +20,7 @@ class DirectivoCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $directivo = Directivo::find($link[6]);
+        $directivo = Directivo::findOrFail($link[6]);
 
         if (session('tipo') == 'Institucion') {
             if ($directivo->institucion_id == session('institucion_id')) {

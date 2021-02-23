@@ -4,7 +4,6 @@ namespace App\Http\Middleware\Deudores;
 
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Deudores\RendirCorreccion;
-use App\Models\Evaluaciones\Correccion;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -24,7 +23,7 @@ class RendirCorreccionCorrespondiente
         $correccion = RendirCorreccion::findOrFail($link[14]);
 
         if (session('tipo') == 'Docente') {
-            if (AsignaturaDocente::where('asignatura_id', $correccion->anotado->mesa->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
+            if ($this->asignaturaService->verificarDocente($correccion->anotado->mesa->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de la asignatura a la que pertenece esta corrección.');

@@ -64,7 +64,7 @@ class PadreController extends Controller
     {
         return Inertia::render('Padres/Show', [
             'institucion_id' => $institucion_id,
-            'padre' => Padre::with('user', 'hijos', 'hijos.user')->find($id),
+            'padre' => Padre::with('user', 'hijos', 'hijos.user')->findOrFail($id),
             'tipo' => session('tipo'),
         ]);
     }

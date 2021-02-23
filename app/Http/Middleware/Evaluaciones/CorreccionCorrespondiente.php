@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware\Evaluaciones;
 
-use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Evaluaciones\Correccion;
+use App\Services\Roles\DocenteService;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -11,25 +11,27 @@ use Illuminate\Http\Request;
 class CorreccionCorrespondiente
 {
     protected $ruta;
+    protected $docenteService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta, 
+        DocenteService $docenteService
+    )
+
     {
         $this->ruta = $ruta;
+        $this->docenteService = $docenteService;
     }
 
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
 
-        $correccion = Correccion::find($link[12]);
+        $correccion = Correccion::findOrFail($link[12]);
 
         if (session('tipo') == 'Docente') {
-            $asignaturasDocentes = AsignaturaDocente::where('asignatura_id', $correccion->entrega->evaluacion->asignatura_id)->get();
-
-            foreach ($asignaturasDocentes as $asignaturaDocente) {
-                if ($asignaturaDocente->docente_id == session('tipo_id')) {
-                    return $next($request);
-                }
+            if ($this->docenteService->verificarDocenteId($correccion->entrega->evaluacion->asignatura_id)) {
+                return $next($request);
             }
             abort(403, 'Esta corrección no es tuya.');
         }

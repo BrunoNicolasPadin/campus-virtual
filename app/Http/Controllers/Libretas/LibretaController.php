@@ -50,7 +50,7 @@ class LibretaController extends Controller
         $deudas = [];
 
         if (! $libreta == null) {
-            $periodos = $this->obtenerPeriodos($libreta);
+            $periodos = $this->divisionService->obtenerPeriodos($libreta);
             $libretas = $this->obtenerLibretas($alumno_id, $cicloLectivo->id);
             $deudas = $this->obtenerDeudas($alumno_id, $cicloLectivo->id);
         }
@@ -102,7 +102,7 @@ class LibretaController extends Controller
 
         return Inertia::render('Libretas/Edit', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::with('user')->find($alumno_id),
+            'alumno' => Alumno::with('user')->findOrFail($alumno_id),
             'libretas' => Libreta::with(['asignatura', 'calificaciones'])->findOrFail($id),
             'formasDescripcion' => $arrayTemporal[0],
             'tipoEvaluacion' => $arrayTemporal[1],
@@ -113,7 +113,7 @@ class LibretaController extends Controller
     {
         for ($i=0; $i < count($request->notas); $i++) { 
             
-            $calificacion = Calificacion::find($request->notas[$i]['id']);
+            $calificacion = Calificacion::findOrFail($request->notas[$i]['id']);
             $calificacion->calificacion = $request->notas[$i]['calificacion'];
             $calificacion->save();
         }

@@ -4,6 +4,7 @@ namespace App\Http\Middleware\Muro;
 
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Muro\Muro;
+use App\Services\Roles\DocenteService;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -11,25 +12,27 @@ use Illuminate\Http\Request;
 class VerArchivosMuroCorrespondiente
 {
     protected $ruta;
+    protected $docenteService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta,
+        DocenteService $docenteService,
+    )
+
     {
         $this->ruta = $ruta;
+        $this->docenteService = $docenteService;
     }
 
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
 
-        $publicacion = Muro::find($link[8]);
+        $publicacion = Muro::findOrFail($link[8]);
 
         if (session('tipo') == 'Docente') {
-            $asignaturasDocentes = AsignaturaDocente::where('docente_id', session('tipo_id'))->get();
-
-            foreach ($asignaturasDocentes as $asignaturaDocente) {
-                if ($asignaturaDocente->asignatura->division_id == $publicacion->division_id) {
-                    return $next($request);
-                }
+            if ($this->docenteService->verificarDocenteDivision($publicacion->division_id)) {
+                return $next($request);
             }
             abort(403, 'No puedes ver los archivos de publicaciones hechas en divisiones en las que no eres docente.');
         }

@@ -79,7 +79,7 @@ class RepitenteController extends Controller
     {
         return Inertia::render('Repitentes/Create', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::with('user')->find($alumno_id),
+            'alumno' => Alumno::with('user')->findOrFail($alumno_id),
             'cicloLectivo' => CicloLectivo::where('institucion_id', $institucion_id)->where('activado', '1')->first(),
         ]);
     }
@@ -102,7 +102,7 @@ class RepitenteController extends Controller
     {
         return Inertia::render('Repitentes/Show', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::with('user')->find($alumno_id),
+            'alumno' => Alumno::with('user')->findOrFail($alumno_id),
             'tipo' => session('tipo'),
             'repeticiones' => Repitente::where('alumno_id', $alumno_id)
                 ->with('ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
@@ -125,7 +125,7 @@ class RepitenteController extends Controller
     {
         return Inertia::render('Repitentes/Edit', [
             'institucion_id' => $institucion_id,
-            'repitente' => Repitente::with('alumno', 'alumno.user')->find($id),
+            'repitente' => Repitente::with('alumno', 'alumno.user')->findOrFail($id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->get()
                 ->map(function ($ciclo) {
                     return [
@@ -148,7 +148,7 @@ class RepitenteController extends Controller
 
     public function update(Request $request, $institucion_id, $id)
     {
-        $repitente = Repitente::find($id);
+        $repitente = Repitente::findOrFail($id);
         $repitente->division_id = $request->division_id;
         $repitente->ciclo_lectivo_id = $request->ciclo_lectivo_id;
         $repitente->comentario = $request->comentario;

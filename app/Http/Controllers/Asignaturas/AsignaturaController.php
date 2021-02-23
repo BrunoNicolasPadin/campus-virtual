@@ -56,7 +56,7 @@ class AsignaturaController extends Controller
         return Inertia::render('Asignaturas/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'asignaturas' => Asignatura::where('division_id', $division_id)
                 ->with(['horarios', 'docentes', 'docentes.docente', 'docentes.docente.user'])
                 ->orderBy('nombre')
@@ -70,11 +70,11 @@ class AsignaturaController extends Controller
 
         return Inertia::render('Asignaturas/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'dias' => $dias,
             'docentes' => Docente::where('institucion_id', $institucion_id)
                 ->with('user')
-                ->get()
+                ->get(),
         ]);
     }
 
@@ -111,8 +111,8 @@ class AsignaturaController extends Controller
         return Inertia::render('Asignaturas/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'asignatura' => Asignatura::findOrFail($id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'asignatura' => Asignatura::select('id', 'nombre')->findOrFail($id),
             'mesas' => Mesa::where('asignatura_id', $id)->with('asignatura')->orderBy('fechaHora')->paginate(10)
                 ->transform(function ($mesa) {
                     return [
@@ -140,13 +140,13 @@ class AsignaturaController extends Controller
 
         return Inertia::render('Asignaturas/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'dias' => $dias,
             'docentes' => Docente::where('institucion_id', $institucion_id)
                 ->with('user')
                 ->get(),
             'asignatura' => Asignatura::with(['horarios', 'docentes', 'docentes.docente', 'docentes.docente.user'])
-                ->find($id),
+                ->findOrFail($id),
         ]);
     }
 

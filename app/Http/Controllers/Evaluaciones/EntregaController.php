@@ -42,8 +42,8 @@ class EntregaController extends Controller
     {
         return Inertia::render('Evaluaciones/Entregas/Index', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'evaluacion' => Evaluacion::find($evaluacion_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
             'entregas' => Entrega::where('evaluacion_id', $evaluacion_id)->with(['alumno', 'alumno.user'])->paginate(20),
             'tipo' => session('tipo'),
         ]);
@@ -55,9 +55,9 @@ class EntregaController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'evaluacion' => Evaluacion::find($evaluacion_id),
-            'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'entrega' => Entrega::with(['alumno', 'alumno.user'])->findOrFail($id),
             'archivos' => EntregaArchivo::where('entrega_id', $id)->orderBy('created_at', 'DESC')->get()
                 ->map(function ($archivo) {
                     return [
@@ -95,9 +95,9 @@ class EntregaController extends Controller
 
         return Inertia::render('Evaluaciones/Entregas/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'evaluacion' => Evaluacion::find($evaluacion_id),
-            'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'entrega' => Entrega::with(['alumno', 'alumno.user'])->findOrFail($id),
             'formasDescripcion' => $arrayTemporal[0],
             'tipoEvaluacion' => $arrayTemporal[1],
         ]);

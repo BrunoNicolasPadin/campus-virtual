@@ -36,7 +36,7 @@ class MuroArchivoController extends Controller
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'publicacion' => [
                 'id' => $muro->id,
                 'publicacion' => $muro->publicacion,
@@ -50,8 +50,8 @@ class MuroArchivoController extends Controller
     {
         return Inertia::render('Muro/Archivos/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'publicacion' => Muro::find($muro_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'publicacion' => Muro::findOrFail($muro_id),
         ]);
     }
 

@@ -30,13 +30,13 @@ class EvaluacionRespuestaController extends Controller
 
     public function index($institucion_id, $division_id, $evaluacion_id, $comentario_id)
     {
-        $comentario = EvaluacionComentario::with('user')->find($comentario_id);
+        $comentario = EvaluacionComentario::with('user')->findOrFail($comentario_id);
 
         return Inertia::render('Evaluaciones/Respuestas/Index', [
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'evaluacion' => Evaluacion::find($evaluacion_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
             'comentario' => [
                 'id' => $comentario->id,
                 'user' => $comentario->user->only('name'),

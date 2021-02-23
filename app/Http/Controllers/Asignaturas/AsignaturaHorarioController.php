@@ -27,8 +27,8 @@ class AsignaturaHorarioController extends Controller
         return Inertia::render('Asignaturas/Horarios/Create', [
             'institucion_id' => $institucion_id,
             'dias' => $dias,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'asignatura'  => Asignatura::find($asignatura_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'asignatura'  => Asignatura::findOrFail($asignatura_id),
         ]);
     }
 

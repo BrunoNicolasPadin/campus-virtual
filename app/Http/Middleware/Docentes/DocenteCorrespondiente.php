@@ -20,7 +20,7 @@ class DocenteCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $docente = Docente::find($link[6]);
+        $docente = Docente::findOrFail($link[6]);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             if ($docente->institucion_id == session('institucion_id')) {

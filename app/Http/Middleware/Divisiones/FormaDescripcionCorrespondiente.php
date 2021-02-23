@@ -20,7 +20,7 @@ class FormaDescripcionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $formaDescripcion = FormaDescripcion::find($link[8]);
+        $formaDescripcion = FormaDescripcion::findOrFail($link[8]);
 
         if ($formaDescripcion->formaEvaluacion->institucion_id  == session('institucion_id')) {
             return $next($request);

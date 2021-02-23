@@ -103,7 +103,7 @@ class AlumnoController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'alumno' => Alumno::with(['user', 'division', 'division.nivel', 'division.orientacion', 'division.curso', 'padres', 'padres.user'])
-                ->find($id),
+                ->findOrFail($id),
         ]);
     }
 
@@ -125,7 +125,7 @@ class AlumnoController extends Controller
     public function update(StoreAlumno $request, $institucion_id, $id)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $request->division_id)) {
-            $alumno = Alumno::find($id);
+            $alumno = Alumno::findOrFail($id);
             $alumno->division_id = $request->division_id;
             $alumno->save();
 

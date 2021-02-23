@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware\Deudores;
 
-use App\Models\Asignaturas\AsignaturaDocente;
-use App\Models\Deudores\AlumnoDeudor;
 use App\Models\Deudores\Mesa;
+use App\Services\Asignaturas\VerificarAsignatura;
+use App\Services\Mesas\DeudorService;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -12,10 +12,19 @@ use Illuminate\Http\Request;
 class MesaCorrespondiente
 {
     protected $ruta;
+    protected $asignaturaService;
+    protected $deudorService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta,
+        VerificarAsignatura $asignaturaService,
+        DeudorService $deudorService,
+    )
+
     {
         $this->ruta = $ruta;
+        $this->asignaturaService = $asignaturaService;
+        $this->deudorService = $deudorService;
     }
 
     public function handle(Request $request, Closure $next)
@@ -31,29 +40,17 @@ class MesaCorrespondiente
         }
 
         if (session('tipo') == 'Docente') {
-            if (AsignaturaDocente::where('asignatura_id', $mesa->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
+            if ($this->asignaturaService->verificarDocente($mesa->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de la asignatura a la que pertenece la mesa.');
         }
 
-        if (session('tipo') == 'Alumno' ) {
-            
-            if (AlumnoDeudor::where('alumno_id', session('tipo_id'))->where('asignatura_id', $mesa->asignatura_id)
-                ->where('aprobado', '0')
-                ->exists()) {
+        if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
+            if ($this->deudorService->verificarGeneral($mesa->asignatura_id)) {
                 return $next($request);
             }
-            abort(403, 'No adeuda esta asignatura (O se confundió o ya la tiene aprobada y por la tanto no puede acceder.');
-        }
-
-        if (session('tipo') == 'Padre' ) {
-            if (AlumnoDeudor::where('alumno_id', session('alumno_id'))->where('asignatura_id', $mesa->asignatura_id)
-                ->where('aprobado', '0')
-                ->exists()) {
-                return $next($request);
-            }
-            abort(403, 'Su hijo/a no adeuda esta asignatura (O se confundió o ya la tiene aprobada y por la tanto no puede acceder.');
+            abort(403, 'No adeuda esta asignatura.');
         }
 
         abort(403, 'No puede estar aqui.');

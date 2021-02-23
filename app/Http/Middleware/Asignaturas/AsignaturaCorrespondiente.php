@@ -4,6 +4,7 @@ namespace App\Http\Middleware\Asignaturas;
 
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
+use App\Services\Asignaturas\VerificarAsignatura;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -11,10 +12,16 @@ use Illuminate\Http\Request;
 class AsignaturaCorrespondiente
 {
     protected $ruta;
+    protected $asignaturaService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta,
+        VerificarAsignatura $asignaturaService,
+    )
+
     {
         $this->ruta = $ruta;
+        $this->asignaturaService = $asignaturaService;
     }
 
     public function handle(Request $request, Closure $next)
@@ -22,20 +29,18 @@ class AsignaturaCorrespondiente
         $link = $this->ruta->obtenerRoute();
 
         if (session('tipo') == 'Docente') {
-            if (AsignaturaDocente::where('asignatura_id', $link[8])->where('docente_id', session('tipo_id'))->exists()) {
+            if ($this->asignaturaService->verificarDocente($link[8])) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de esta asignatura.');
         }
 
         if (session('tipo') == 'Directivo' || session('tipo') == 'Institucion') {
-            
-            $asignatura = Asignatura::find($link[8]);
-            
-            if ($asignatura->division->institucion_id == session('institucion_id')) {
+
+            if ($this->asignaturaService->verificarInstitucionDirectivo($link[8])) {
                 return $next($request);
             }
-            abort(403, 'Esta asignatura no forma parte de la institución de la que formas parte.');
+            abort(403, 'Esta asignatura no forma parte de tu institución.');
         }
         abort(403, 'No puede estar aquí.');
     }

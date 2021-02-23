@@ -132,7 +132,7 @@ class AlumnoEstadisticaController extends Controller
             if ($cantidadPeriodo[$i] == 0) {
                 $cantidadPeriodo[$i] = 1;
             }
-            $promedios[$i] = $totalPeriodo[$i] / $cantidadPeriodo[$i];
+            $promedios[$i] = \round($totalPeriodo[$i] / $cantidadPeriodo[$i], 2, PHP_ROUND_HALF_UP);
         }
         return $promedios;
     }

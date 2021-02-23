@@ -21,7 +21,7 @@ class DivisionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $division = Division::find($link[6]);
+        $division = Division::findOrFail($link[6]);
 
         if (session('tipo') == 'Docente') {
             $asignaturasDocentes = AsignaturaDocente::where('docente_id', session('tipo_id'))->get();

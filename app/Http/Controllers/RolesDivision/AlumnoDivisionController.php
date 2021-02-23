@@ -26,7 +26,7 @@ class AlumnoDivisionController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'alumnos' => Alumno::where('division_id', $division_id)->with('user')->paginate(20),
         ]);
     }
@@ -35,7 +35,7 @@ class AlumnoDivisionController extends Controller
     {
         return Inertia::render('RolesDivision/HacerlosPasar', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'divisiones' => Division::where('institucion_id', $institucion_id)
                 ->orderBy('nivel_id')
                 ->orderBy('orientacion_id')

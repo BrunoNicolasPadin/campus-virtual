@@ -2,9 +2,8 @@
 
 namespace App\Http\Middleware\Asignaturas;
 
-use App\Models\Asignaturas\Asignatura;
-use App\Models\Asignaturas\AsignaturaDocente;
-use App\Models\Deudores\AlumnoDeudor;
+use App\Services\Asignaturas\VerificarAsignatura;
+use App\Services\Mesas\DeudorService;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -12,46 +11,47 @@ use Illuminate\Http\Request;
 class AsignaturaAdeudadaCorrespondiente
 {
     protected $ruta;
+    protected $asignaturaService;
+    protected $deudorService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta,
+        VerificarAsignatura $asignaturaService,
+        DeudorService $deudorService,
+    )
+
     {
         $this->ruta = $ruta;
+        $this->asignaturaService = $asignaturaService;
+        $this->deudorService = $deudorService;
     }
 
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
 
-        if (session('tipo') == 'Alumno') {
-            if (AlumnoDeudor::where('alumno_id', session('tipo_id'))->where('asignatura_id', $link[8])->where('aprobado', '0')->exists()) {
-                return $next($request);
-            }
-            abort(403, 'Usted no adeuda esta asignatura.');
-        }
+        if (session('tipo') == 'Directivo' || session('tipo') == 'Institucion') {
 
-        if (session('tipo') == 'Padre') {
-            if (AlumnoDeudor::where('alumno_id', session('alumno_id'))->where('asignatura_id', $link[8])->exists()) {
+            if ($this->asignaturaService->verificarInstitucionDirectivo($link[8])) {
                 return $next($request);
             }
-            abort(403, 'Su hijo/a no adeuda esta asignatura.');
+            abort(403, 'Esta asignatura no forma parte de tu institución.');
         }
 
         if (session('tipo') == 'Docente') {
-            if (AsignaturaDocente::where('asignatura_id', $link[8])->where('docente_id', session('tipo_id'))->exists()) {
+            if ($this->asignaturaService->verificarDocente($link[8])) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de esta asignatura.');
         }
 
-        if (session('tipo') == 'Directivo' || session('tipo') == 'Institucion') {
-
-            $asignatura = Asignatura::find($link[8]);
-
-            if ($asignatura->division->institucion_id == session('institucion_id')) {
+        if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
+            if ($this->deudorService->verificarGeneral($link[8])) {
                 return $next($request);
             }
-            abort(403, 'Esta asignatura no forma parte de tu institución.');
+            abort(403, 'No adeuda esta asignatura.');
         }
+
         abort(403, 'No puede estar aquí.');
     }
 }

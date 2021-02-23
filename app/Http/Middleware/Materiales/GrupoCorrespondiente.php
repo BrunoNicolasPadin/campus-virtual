@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware\Materiales;
 
-use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Materiales\Grupo;
+use App\Services\Asignaturas\VerificarAsignatura;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -11,20 +11,33 @@ use Illuminate\Http\Request;
 class GrupoCorrespondiente
 {
     protected $ruta;
+    protected $asignaturaService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta,
+        VerificarAsignatura $asignaturaService,
+    )
+
     {
         $this->ruta = $ruta;
+        $this->asignaturaService = $asignaturaService;
     }
 
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
 
-        $grupo = Grupo::find($link[8]);
+        $grupo = Grupo::findOrFail($link[8]);
+
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            if ($grupo->division->institucion_id == session('institucion_id')) {
+                return $next($request);
+            }
+            abort(403, 'Este grupo no forma parte de tu institución.');
+        }
 
         if (session('tipo') == 'Docente') {
-            if (AsignaturaDocente::where('asignatura_id', $grupo->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
+            if ($this->asignaturaService->verificarDocente($grupo->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Este grupo de archivos no es de una asignatura en la que eres docente.');
@@ -35,13 +48,6 @@ class GrupoCorrespondiente
                 return $next($request);
             }
             abort(403, 'Este grupo no forma parte de tu división.');
-        }
-
-        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($grupo->division->institucion_id == session('institucion_id')) {
-                return $next($request);
-            }
-            abort(403, 'Este grupo no forma parte de tu institución.');
         }
 
         abort(403, 'No puedes estar aquí.');

@@ -65,7 +65,7 @@ class DirectivoController extends Controller
     {
         return Inertia::render('Directivos/Show', [
             'institucion_id' => $institucion_id,
-            'directivo' => Directivo::with('user')->find($id),
+            'directivo' => Directivo::with('user')->findOrFail($id),
         ]);
     }
 

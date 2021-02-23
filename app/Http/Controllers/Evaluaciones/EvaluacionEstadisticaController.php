@@ -120,7 +120,7 @@ class EvaluacionEstadisticaController extends Controller
         return Inertia::render('Evaluaciones/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'evaluacion' => $evaluacion,
             'numerosArray' => $numerosArray,
             'numeros' => $numeros,

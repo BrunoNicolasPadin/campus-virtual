@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware\Deudores;
 
-use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Deudores\Anotado;
+use App\Services\Asignaturas\VerificarAsignatura;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -11,10 +11,16 @@ use Illuminate\Http\Request;
 class InscripcionCorrespondiente
 {
     protected $ruta;
+    protected $asignaturaService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta,
+        VerificarAsignatura $asignaturaService,
+    )
+
     {
         $this->ruta = $ruta;
+        $this->asignaturaService = $asignaturaService;
     }
 
     public function handle(Request $request, Closure $next)
@@ -30,7 +36,7 @@ class InscripcionCorrespondiente
         }
 
         if (session('tipo') == 'Docente') {
-            if (AsignaturaDocente::where('asignatura_id', $anotado->mesa->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
+            if ($this->asignaturaService->verificarDocente($anotado->mesa->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de la asignatura en la que se inscribió este alumno.');

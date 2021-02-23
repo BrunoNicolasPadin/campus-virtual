@@ -3,37 +3,35 @@
 namespace App\Http\Middleware\Evaluaciones;
 
 use App\Models\Evaluaciones\EvaluacionRespuesta;
+use App\Services\Muro\EliminarService;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class RespuestaEvaluacionCorrespondiente
 {
     protected $ruta;
+    protected $eliminarService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta,
+        EliminarService $eliminarService,
+    )
+
     {
         $this->ruta = $ruta;
+        $this->eliminarService = $eliminarService;
     }
 
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
 
-        $respuesta = EvaluacionRespuesta::find($link[12]);
+        $respuesta = EvaluacionRespuesta::findOrFail($link[12]);
 
-        if ($respuesta->user_id == Auth::id()) {
+        if ($this->eliminarService->verificarUsuarioParaEliminar($respuesta->user_id, $respuesta->comentario->evaluacion->institucion_id)) {
             return $next($request);
         }
-
-        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($respuesta->comentario->evaluacion->institucion_id == session('institucion_id')) {
-                return $next($request);
-            }
-            abort(403, 'Estos comentarios no forma parte de tu institución');
-        }
-
         abort(403, 'Esta respuesta no es tuya.');
     }
 }

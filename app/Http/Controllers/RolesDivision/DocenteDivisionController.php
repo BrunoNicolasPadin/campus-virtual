@@ -35,7 +35,7 @@ class DocenteDivisionController extends Controller
 
         return Inertia::render('RolesDivision/Docentes', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'docentes' => $docNuevo,
         ]);
     }

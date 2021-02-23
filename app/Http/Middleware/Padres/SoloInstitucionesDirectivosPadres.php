@@ -2,34 +2,27 @@
 
 namespace App\Http\Middleware\Padres;
 
-use App\Models\Instituciones\Institucion;
-use App\Models\Roles\Directivo;
-use App\Models\Roles\Padre;
+use App\Services\Roles\VerificarExistenciaUsuario;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class SoloInstitucionesDirectivosPadres
 {
+    protected $rolesService;
+
+    public function __construct(VerificarExistenciaUsuario $rolesService)
+    {
+        $this->rolesService = $rolesService;
+    }
+
     public function handle(Request $request, Closure $next)
     {
-        $user_id = Auth::id();
-
-        if (session('tipo') == 'Institucion' && Institucion::where('user_id', $user_id)
-            ->exists()) {
-            return $next($request);
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo' || session('tipo') == 'Padre') {
+            if ($this->rolesService->verificarRol()) {
+                return $next($request);
+            }
         }
-
-        if (session('tipo') == 'Directivo' && Directivo::where('user_id', $user_id)
-            ->exists()) {
-            return $next($request);
-        }
-
-        if (session('tipo') == 'Padre' && Padre::where('user_id', $user_id)
-            ->exists()) {
-            return $next($request);
-        }
-
+        
         return abort(403, 'Usted no es una institución o un directivo o un padre como para realizar tal acción.');
     }
 }

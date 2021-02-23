@@ -4,6 +4,7 @@ namespace App\Http\Middleware\Evaluaciones;
 
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Evaluaciones\Evaluacion;
+use App\Services\Roles\DocenteService;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -11,25 +12,27 @@ use Illuminate\Http\Request;
 class EvaluacionCorrespondiente
 {
     protected $ruta;
+    protected $docenteService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta, 
+        DocenteService $docenteService
+    )
+
     {
         $this->ruta = $ruta;
+        $this->docenteService = $docenteService;
     }
 
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
 
-        $evaluacion = Evaluacion::find($link[8]);
+        $evaluacion = Evaluacion::findOrFail($link[8]);
 
         if (session('tipo') == 'Docente') {
-            $asignaturasDocentes = AsignaturaDocente::where('asignatura_id', $evaluacion->asignatura_id)->get();
-
-            foreach ($asignaturasDocentes as $asignaturaDocente) {
-                if ($asignaturaDocente->docente_id == session('tipo_id')) {
-                    return $next($request);
-                }
+            if ($this->docenteService->verificarDocenteId($evaluacion->asignatura_id)) {
+                return $next($request);
             }
             abort(403, 'Esta evaluación no es de una asignatura en la que eres docente.');
         }

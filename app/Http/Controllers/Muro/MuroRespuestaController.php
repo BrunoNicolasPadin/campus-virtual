@@ -18,7 +18,7 @@ class MuroRespuestaController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
-        $this->middleware('verRespuestasMuroCorrespondiente');
+        $this->middleware('verArchivosMuroCorrespondiente');
         $this->middleware('respuestaMuroCorrespondiente')->only('update', 'destroy');
 
         $this->formatoService = $formatoService;
@@ -32,7 +32,7 @@ class MuroRespuestaController extends Controller
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'publicacion' => [
                 'id' => $muro->id,
                 'publicacion' => $muro->publicacion,

@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware\Deudores;
 
-use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Deudores\MesaArchivo;
+use App\Services\Asignaturas\VerificarAsignatura;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -11,10 +11,16 @@ use Illuminate\Http\Request;
 class MesaArchivoCorrespondiente
 {
     protected $ruta;
+    protected $asignaturaService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(
+        RutaService $ruta,
+        VerificarAsignatura $asignaturaService,
+    )
+
     {
         $this->ruta = $ruta;
+        $this->asignaturaService = $asignaturaService;
     }
 
     public function handle(Request $request, Closure $next)
@@ -23,7 +29,7 @@ class MesaArchivoCorrespondiente
         $archivo = MesaArchivo::findOrFail($link[12]);
 
         if (session('tipo') == 'Docente') {
-            if (AsignaturaDocente::where('asignatura_id', $archivo->mesa->asignatura_id)->where('docente_id', session('tipo_id'))->exists()) {
+            if ($this->asignaturaService->verificarDocente($archivo->mesa->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de la asignatura a la que pertenece este archivo.');

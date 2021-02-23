@@ -20,7 +20,7 @@ class EntregaArchivoCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $archivo = EntregaArchivo::find($link[12]);
+        $archivo = EntregaArchivo::findOrFail($link[12]);
 
         if ($archivo->entrega->alumno_id == session('tipo_id')) {
             return $next($request);

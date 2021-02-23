@@ -33,8 +33,8 @@ class EvaluacionArchivoController extends Controller
     {
         return Inertia::render('Evaluaciones/Archivos/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'evaluacion' => Evaluacion::find($evaluacion_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
         ]);
     }
 
@@ -69,9 +69,9 @@ class EvaluacionArchivoController extends Controller
     {
         return Inertia::render('Evaluaciones/Archivos/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'evaluacion' => Evaluacion::find($evaluacion_id),
-            'archivo' => Archivo::find($id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'archivo' => Archivo::findOrFail($id),
         ]);
     }
 

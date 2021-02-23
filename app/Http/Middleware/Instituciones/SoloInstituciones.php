@@ -2,18 +2,25 @@
 
 namespace App\Http\Middleware\Instituciones;
 
-use App\Models\Instituciones\Institucion;
+use App\Services\Roles\VerificarExistenciaUsuario;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class SoloInstituciones
 {
+    protected $rolesService;
+
+    public function __construct(VerificarExistenciaUsuario $rolesService)
+    {
+        $this->rolesService = $rolesService;
+    }
+
     public function handle(Request $request, Closure $next)
     {
-        if (Institucion::where('user_id', Auth::id())
-            ->exists()) {
-            return $next($request);
+        if (session('tipo') == 'Institucion') {
+            if ($this->rolesService->verificarRol()) {
+                return $next($request);
+            }
         }
         return abort(403, 'Usted no es una institución.');
     }

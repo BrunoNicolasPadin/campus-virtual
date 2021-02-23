@@ -66,7 +66,7 @@ class DocenteController extends Controller
     {
         return Inertia::render('Docentes/Show', [
             'institucion_id' => $institucion_id,
-            'docente' => Docente::with('user')->find($id),
+            'docente' => Docente::with('user')->findOrFail($id),
         ]);
     }
 

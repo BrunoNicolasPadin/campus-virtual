@@ -35,7 +35,7 @@ class EstructuraEstadisticaController extends Controller
     {
         return Inertia::render('Estructuras/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
             ->orderBy('comienzo')
             ->get()

@@ -36,9 +36,9 @@ class CorreccionController extends Controller
     {
         return Inertia::render('Evaluaciones/Correcciones/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'evaluacion' => Evaluacion::find($evaluacion_id),
-            'entrega' => Entrega::with(['alumno', 'alumno.user'])->find($entrega_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'entrega' => Entrega::with(['alumno', 'alumno.user'])->findOrFail($entrega_id),
         ]);
     }
 

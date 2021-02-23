@@ -34,7 +34,7 @@ class GrupoController extends Controller
         return Inertia::render('Materiales/Grupos/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'asignaturas' => Asignatura::where('division_id', $division_id)->get(),
             'gruposTodos' => Grupo::where('division_id', $division_id)->with('asignatura')->paginate(20),
         ]);
@@ -46,7 +46,7 @@ class GrupoController extends Controller
 
         return Inertia::render('Materiales/Grupos/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
                 ->with('asignatura')
                 ->whereHas('asignatura', function($q) use ($division_id)
@@ -74,8 +74,8 @@ class GrupoController extends Controller
         return Inertia::render('Materiales/Grupos/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'grupo' => Grupo::with('asignatura')->find($id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'grupo' => Grupo::with('asignatura')->findOrFail($id),
             'archivos' => Material::where('grupo_id', $id)->get(),
             'cantidad' => Material::where('grupo_id', $id)->count(),
         ]);
@@ -87,11 +87,11 @@ class GrupoController extends Controller
 
         return Inertia::render('Materiales/Grupos/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
                 ->with('asignatura')
                 ->get(),
-            'grupo' => Grupo::find($id),
+            'grupo' => Grupo::findOrFail($id),
         ]);
     }
 

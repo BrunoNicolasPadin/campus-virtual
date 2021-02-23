@@ -31,7 +31,7 @@ class AsignaturaDeudorController extends Controller
         return Inertia::render('Asignaturas/Deudores', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'asignatura' => Asignatura::findOrFail($asignatura_id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->orderBy('comienzo')->get()
                 ->map(function ($ciclo) {

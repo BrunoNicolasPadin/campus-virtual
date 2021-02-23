@@ -44,8 +44,8 @@ class MaterialController extends Controller
     {
         return Inertia::render('Materiales/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'grupo' => Grupo::find($grupo_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'grupo' => Grupo::findOrFail($grupo_id),
         ]);
     }
 
@@ -80,9 +80,9 @@ class MaterialController extends Controller
     {
         return Inertia::render('Materiales/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'grupo' => Grupo::find($grupo_id),
-            'archivo' => Material::find($id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'grupo' => Grupo::findOrFail($grupo_id),
+            'archivo' => Material::findOrFail($id),
         ]);
     }
 

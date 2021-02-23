@@ -20,7 +20,7 @@ class LibretaCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $libreta = Libreta::find($link[8]);
+        $libreta = Libreta::findOrFail($link[8]);
 
         if ($libreta->cicloLectivo->institucion_id == session('institucion_id')) {
             

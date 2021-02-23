@@ -35,7 +35,7 @@ class RendirEntregaController extends Controller
     {
         return Inertia::render('Deudores/Entregas/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
+            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
             'asignatura' => Asignatura::findOrFail($asignatura_id),
             'mesa' => Mesa::findOrFail($mesa_id),
             'anotado' => Anotado::with(['alumno', 'alumno.user'])->findOrFail($anotado_id),
