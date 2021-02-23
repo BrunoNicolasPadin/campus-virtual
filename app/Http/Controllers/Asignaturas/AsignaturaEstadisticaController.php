@@ -38,7 +38,7 @@ class AsignaturaEstadisticaController extends Controller
         return Inertia::render('Asignaturas/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura' => Asignatura::findOrFail($asignatura_id),
+            'asignatura' => Asignatura::select('id', 'nombre')->findOrFail($asignatura_id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->orderBy('comienzo')->get()
             ->map(function ($ciclo) {
                 return [
@@ -52,7 +52,7 @@ class AsignaturaEstadisticaController extends Controller
 
     public function mostrarPromedios($institucion_id, $division_id, $asignatura_id, $ciclo_lectivo_id)
     {
-        $division = Division::with('formaEvaluacion')->findOrFail($division_id);
+        $division = Division::select('forma_evaluacion_id', 'periodo_id')->findOrFail($division_id);
 
         $periodos = $this->divisionService->obtenerPeriodos($division);
 

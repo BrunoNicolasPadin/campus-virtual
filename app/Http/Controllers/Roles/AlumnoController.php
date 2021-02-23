@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Roles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreAlumno;
 use App\Http\Requests\Roles\StoreDirectivo;
+use App\Models\Estructuras\Curso;
 use App\Models\Estructuras\Division;
+use App\Models\Estructuras\Nivel;
+use App\Models\Estructuras\Orientacion;
 use App\Models\Roles\Alumno;
 use App\Services\ClaveDeAcceso\VerificarDivision;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
@@ -112,7 +115,22 @@ class AlumnoController extends Controller
         return Inertia::render('Alumnos/Edit', [
             'institucion_id' => $institucion_id,
             'divisiones' => Division::where('institucion_id', $institucion_id)
-                ->with(['nivel', 'orientacion', 'curso'])
+                ->select('id', 'division')
+                ->addSelect(
+                    ['nivel_nombre' => Nivel::select('nombre')
+                        ->whereColumn('id', 'nivel_id')
+                        ->limit(1)
+                    ])
+                ->addSelect(
+                    ['orientacion_nombre' => Orientacion::select('nombre')
+                        ->whereColumn('id', 'orientacion_id')
+                        ->limit(1)
+                    ])
+                ->addSelect(
+                    ['curso_nombre' => Curso::select('nombre')
+                        ->whereColumn('id', 'curso_id')
+                        ->limit(1)
+                    ])
                 ->orderBy('nivel_id')
                 ->orderBy('orientacion_id')
                 ->orderBy('curso_id')

@@ -28,7 +28,7 @@ class AsignaturaHorarioController extends Controller
             'institucion_id' => $institucion_id,
             'dias' => $dias,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura'  => Asignatura::findOrFail($asignatura_id),
+            'asignatura'  => Asignatura::select('id', 'nombre')->findOrFail($asignatura_id),
         ]);
     }
 

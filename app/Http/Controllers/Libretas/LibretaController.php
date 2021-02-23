@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Libretas;
 use App\Http\Controllers\Controller;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Deudores\AlumnoDeudor;
-use App\Models\Estructuras\Division;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;

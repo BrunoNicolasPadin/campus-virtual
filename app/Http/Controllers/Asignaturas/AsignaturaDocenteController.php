@@ -26,7 +26,7 @@ class AsignaturaDocenteController extends Controller
         return Inertia::render('Asignaturas/Docentes/Create', [
             'institucion_id' => $institucion_id,
             'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura'  => Asignatura::findOrFail($asignatura_id),
+            'asignatura'  => Asignatura::select('id', 'nombre')->findOrFail($asignatura_id),
             'docentes' => Docente::where('institucion_id', $institucion_id)
                 ->with('user')
                 ->get()

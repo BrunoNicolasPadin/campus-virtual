@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
+use App\Models\User;
 use App\Services\Division\ObtenerPeriodosEvaluacion;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Inertia\Inertia;
@@ -34,7 +35,13 @@ class AlumnoEstadisticaController extends Controller
     {
         return Inertia::render('Alumnos/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::with('user')->findOrFail($alumno_id),
+            'alumno' => Alumno::select('id')
+                ->addSelect(
+                    ['name' => User::select('name')
+                        ->whereColumn('id', 'user_id')
+                        ->limit(1)
+                    ])
+                ->findOrFail($alumno_id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
             ->orderBy('comienzo')
             ->get()
