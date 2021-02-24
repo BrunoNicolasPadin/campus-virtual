@@ -27,9 +27,12 @@ class RespuestaMuroCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $respuesta = MuroRespuesta::findOrFail($link[10]);
+        $respuesta = MuroRespuesta::select('muro.user_id', 'divisiones.institucion_id')
+            ->join('muro', 'muro.id', 'muro_archivos.muro_id')
+            ->join('divisiones', 'divisiones.id', 'muro.division_id')
+            ->first($link[10]);
 
-        if ($this->eliminarService->verificarUsuarioParaEliminar($respuesta->user_id, $respuesta->muro->division->institucion_id)) {
+        if ($this->eliminarService->verificarUsuarioParaEliminar($respuesta->user_id, $respuesta->institucion_id)) {
             return $next($request);
         }
         abort(403, 'Esta respuesta no es tuya.');

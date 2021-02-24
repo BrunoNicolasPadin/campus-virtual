@@ -27,9 +27,13 @@ class RespuestaEvaluacionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $respuesta = EvaluacionRespuesta::findOrFail($link[12]);
+        $respuesta = EvaluacionRespuesta::select('evaluaciones_respuestas.user_id', 'divisiones.institucion_id')
+            ->join('evaluaciones_comentarios', 'evaluaciones_comentarios.id', 'evaluaciones_respuestas.comentario_id')
+            ->join('evaluaciones', 'evaluaciones.id', 'evaluaciones_comentarios.evaluacion_id')
+            ->join('divisiones', 'divisiones.id', 'muro.division_id')
+            ->first($link[12]);
 
-        if ($this->eliminarService->verificarUsuarioParaEliminar($respuesta->user_id, $respuesta->comentario->evaluacion->institucion_id)) {
+        if ($this->eliminarService->verificarUsuarioParaEliminar($respuesta->user_id, $respuesta->institucion_id)) {
             return $next($request);
         }
         abort(403, 'Esta respuesta no es tuya.');

@@ -28,10 +28,13 @@ class EntregaCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $entrega = Entrega::findOrFail($link[10]);
+        $entrega = Entrega::select('entregas.alumno_id', 'evaluaciones.asignatura_id', 'divisiones.institucion_id')
+            ->join('evaluaciones', 'evaluaciones.id', 'entregas.evaluacion_id')
+            ->join('divisiones', 'divisiones.id', 'muro.division_id')
+            ->first($link[10]);
 
         if (session('tipo') == 'Docente') {
-            if ($this->docenteService->verificarDocenteId($entrega->evaluacion->asignatura_id)) {
+            if ($this->docenteService->verificarDocenteId($entrega->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Esta entrega de una evaluación no es de una asignatura en la que eres docente.');
@@ -52,7 +55,7 @@ class EntregaCorrespondiente
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($entrega->evaluacion->division->institucion_id == session('institucion_id')) {
+            if ($entrega->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
             abort(403, 'Esta entrega no forma parte de tu institución.');

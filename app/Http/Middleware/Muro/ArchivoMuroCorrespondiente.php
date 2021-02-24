@@ -27,9 +27,12 @@ class ArchivoMuroCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $archivo = MuroArchivo::findOrFail($link[10]);
+        $archivo = MuroArchivo::select('muro.user_id', 'divisiones.institucion_id')
+            ->join('muro', 'muro.id', 'muro_archivos.muro_id')
+            ->join('divisiones', 'divisiones.id', 'muro.division_id')
+            ->first($link[10]);
 
-        if ($this->eliminarService->verificarUsuarioParaEliminar($archivo->muro->user_id, $archivo->muro->division->institucion_id)) {
+        if ($this->eliminarService->verificarUsuarioParaEliminar($archivo->user_id, $archivo->institucion_id)) {
             return $next($request);
         }
 

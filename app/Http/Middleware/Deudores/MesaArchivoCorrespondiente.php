@@ -26,17 +26,19 @@ class MesaArchivoCorrespondiente
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
-        $archivo = MesaArchivo::findOrFail($link[12]);
+        $archivo = MesaArchivo::select('mesas.asignatura_id', 'mesas.institucion_id')
+            ->join('mesas', 'mesas.id', 'mesas_archivos.mesa_id')
+            ->first($link[12]);
 
         if (session('tipo') == 'Docente') {
-            if ($this->asignaturaService->verificarDocente($archivo->mesa->asignatura_id)) {
+            if ($this->asignaturaService->verificarDocente($archivo->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de la asignatura a la que pertenece este archivo.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($archivo->mesa->institucion_id == session('institucion_id')) {
+            if ($archivo->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
             abort(403, 'Este archivo no es de tu institución');

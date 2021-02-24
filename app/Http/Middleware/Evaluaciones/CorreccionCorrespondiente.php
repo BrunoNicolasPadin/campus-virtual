@@ -27,7 +27,10 @@ class CorreccionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $correccion = Correccion::findOrFail($link[12]);
+        $correccion = Correccion::select('evaluaciones.institucion_id', 'evaluaciones.asignatura_id')
+            ->join('entregas', 'entregas.id', 'correcciones.entrega_id')
+            ->join('evaluaciones', 'evaluaciones.id', 'entregas.evaluacion_id')
+            ->first($link[12]);
 
         if (session('tipo') == 'Docente') {
             if ($this->docenteService->verificarDocenteId($correccion->entrega->evaluacion->asignatura_id)) {

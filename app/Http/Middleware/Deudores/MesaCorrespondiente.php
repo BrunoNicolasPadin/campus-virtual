@@ -30,10 +30,10 @@ class MesaCorrespondiente
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
-        $mesa = Mesa::findOrFail($link[10]);
+        $mesa = Mesa::select('asignatura_id', 'mesas.institucion_id')->first($link[10]);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo' ) {
-            if (session('institucion_id') == $mesa->asignatura->division->institucion_id) {
+            if (session('institucion_id') == $mesa->institucion_id) {
                 return $next($request);
             }
             abort(403, 'Esta asignatura adeudada no es de tu institución.');

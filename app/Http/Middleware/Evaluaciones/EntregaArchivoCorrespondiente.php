@@ -20,14 +20,18 @@ class EntregaArchivoCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $archivo = EntregaArchivo::findOrFail($link[12]);
+        $archivo = EntregaArchivo::select('evaluaciones.institucion_id', 'entregas.alumno_id')
+            ->join('entregas', 'entregas.id', 'entregas_archivos.entrega_id')
+            ->join('evaluaciones', 'evaluaciones.id', 'entregas.evaluacion_id')
+            ->join('divisiones', 'divisiones.id', 'muro.division_id')
+            ->first($link[12]);
 
-        if ($archivo->entrega->alumno_id == session('tipo_id')) {
+        if ($archivo->alumno_id == session('tipo_id')) {
             return $next($request);
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($archivo->entrega->evaluacion->institucion_id == session('institucion_id')) {
+            if ($archivo->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
             abort(403, 'Estos archivos entregados no forma parte de tu institución');

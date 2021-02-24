@@ -22,17 +22,20 @@ class RendirCorreccionCorrespondiente
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
-        $correccion = RendirCorreccion::findOrFail($link[14]);
+        $correccion = RendirCorreccion::select('mesas.asignatura_id', 'mesas.institucion_id')
+            ->join('anotados', 'anotados.id', 'rendir_correcciones.anotado_id')
+            ->join('mesas', 'mesas.id', 'anotados.mesa_id')
+            ->first($link[14]);
 
         if (session('tipo') == 'Docente') {
-            if ($this->docenteService->verificarDocenteId($correccion->anotado->mesa->asignatura_id)) {
+            if ($this->docenteService->verificarDocenteId($correccion->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de la asignatura a la que pertenece esta corrección.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($correccion->anotado->mesa->institucion_id == session('institucion_id')) {
+            if ($correccion->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
             abort(403, 'Esta corrección no es de tu institución');

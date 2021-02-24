@@ -27,7 +27,10 @@ class ArchivoCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $archivo = Archivo::findOrFail($link[10]);
+        $archivo = Archivo::select('evaluaciones.asignatura_id', 'divisiones.institucion_id')
+            ->join('evaluaciones', 'evaluaciones.id', 'evaluaciones_comentarios.evaluacion_id')
+            ->join('divisiones', 'divisiones.id', 'muro.division_id')
+            ->first($link[10]);
 
         if (session('tipo') == 'Docente') {
 

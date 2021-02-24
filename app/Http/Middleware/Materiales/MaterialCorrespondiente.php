@@ -28,10 +28,12 @@ class MaterialCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $material = Material::findOrFail($link[10]);
+        $material = Material::select('grupos.asignatura_id')
+            ->join('grupos', 'grupos.id', 'materiales.grupo_id')
+            ->first($link[10]);
 
         if (session('tipo') == 'Docente') {
-            if ($this->docenteService->verificarDocenteId($material->grupo->asignatura_id)) {
+            if ($this->docenteService->verificarDocenteId($material->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Este material no es de una asignatura en la que eres docente.');

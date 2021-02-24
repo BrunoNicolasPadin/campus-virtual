@@ -28,7 +28,10 @@ class ComentarioCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $comentario = EvaluacionComentario::findOrFail($link[10]);
+        $comentario = EvaluacionComentario::select('evaluaciones_comentarios.user_id', 'divisiones.institucion_id')
+            ->join('evaluaciones', 'evaluaciones.id', 'evaluaciones_comentarios.evaluacion_id')
+            ->join('divisiones', 'divisiones.id', 'muro.division_id')
+            ->first($link[10]);
 
         if ($this->eliminarService->verificarUsuarioParaEliminar($comentario->user_id, $comentario->evaluacion->division->institucion_id)) {
             return $next($request);
