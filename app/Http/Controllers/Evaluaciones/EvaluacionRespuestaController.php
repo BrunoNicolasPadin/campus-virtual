@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreRespuesta;
-use App\Models\Estructuras\Division;
-use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Evaluaciones\EvaluacionRespuesta;
+use App\Services\Division\DivisionService;
+use App\Services\Evaluaciones\EvaluacionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -15,8 +15,15 @@ use Inertia\Inertia;
 class EvaluacionRespuestaController extends Controller
 {
     protected $formatoService;
+    protected $divisionService;
+    protected $evaluacionService;
 
-    public function __construct(CambiarFormatoFechaHora $formatoService)
+    public function __construct(
+        CambiarFormatoFechaHora $formatoService,
+        DivisionService $divisionService,
+        EvaluacionService $evaluacionService
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -26,6 +33,8 @@ class EvaluacionRespuestaController extends Controller
         $this->middleware('respuestaEvaluacionCorrespondiente')->only('update', 'destroy');
 
         $this->formatoService = $formatoService;
+        $this->divisionService = $divisionService;
+        $this->evaluacionService = $evaluacionService;
     }
 
     public function index($institucion_id, $division_id, $evaluacion_id, $comentario_id)
@@ -35,8 +44,8 @@ class EvaluacionRespuestaController extends Controller
         return Inertia::render('Evaluaciones/Respuestas/Index', [
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'division' => $this->divisionService->find($division_id),
+            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
             'comentario' => [
                 'id' => $comentario->id,
                 'user' => $comentario->user->only('name'),

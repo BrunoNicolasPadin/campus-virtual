@@ -4,20 +4,30 @@ namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreArchivo;
-use App\Models\Asignaturas\Asignatura;
-use App\Models\Deudores\Anotado;
-use App\Models\Deudores\Mesa;
 use App\Models\Deudores\RendirCorreccion;
-use App\Models\Estructuras\Division;
 use App\Services\Archivos\ObtenerFechaHoraService;
+use App\Services\Asignaturas\AsignaturaService;
+use App\Services\Division\DivisionService;
+use App\Services\Mesas\InscriptoService;
+use App\Services\Mesas\MesaService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class RendirCorreccionController extends Controller
 {
     protected $obtenerFechaHoraService;
+    protected $divisionService;
+    protected $asignaturaService;
+    protected $mesaService;
+    protected $inscripcionService;
 
-    public function __construct(ObtenerFechaHoraService $obtenerFechaHoraService)
+    public function __construct(
+        ObtenerFechaHoraService $obtenerFechaHoraService,
+        DivisionService $divisionService,
+        AsignaturaService $asignaturaService,
+        MesaService $mesaService,
+        InscriptoService $inscripcionService
+    )
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -29,16 +39,20 @@ class RendirCorreccionController extends Controller
         $this->middleware('rendirCorreccionCorrespondiente')->only('destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
+        $this->divisionService = $divisionService;
+        $this->asignaturaService = $asignaturaService;
+        $this->mesaService = $mesaService;
+        $this->inscripcionService = $inscripcionService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
     {
         return Inertia::render('Deudores/Correcciones/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura' => Asignatura::findOrFail($asignatura_id),
-            'mesa' => Mesa::findOrFail($mesa_id),
-            'anotado' => Anotado::with(['alumno', 'alumno.user'])->findOrFail($anotado_id),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'mesa' => $this->mesaService->find($mesa_id),
+            'anotado' => $this->inscripcionService->find($anotado_id),
         ]);
     }
 

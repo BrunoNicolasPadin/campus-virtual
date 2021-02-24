@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Roles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreAlumno;
 use App\Http\Requests\Roles\StoreDirectivo;
-use App\Models\Estructuras\Curso;
-use App\Models\Estructuras\Division;
-use App\Models\Estructuras\Nivel;
-use App\Models\Estructuras\Orientacion;
 use App\Models\Roles\Alumno;
 use App\Services\ClaveDeAcceso\VerificarDivision;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
+use App\Services\Division\DivisionService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -19,10 +16,12 @@ class AlumnoController extends Controller
 {
     protected $claveDeAccesoService;
     protected $claveInstitucion;
+    protected $divisionService;
 
     public function __construct(
         VerificarDivision $claveDeAccesoService,
-        VerificarInstitucion $claveInstitucion
+        VerificarInstitucion $claveInstitucion,
+        DivisionService $divisionService
     )
 
     {
@@ -35,6 +34,7 @@ class AlumnoController extends Controller
 
         $this->claveDeAccesoService = $claveDeAccesoService;
         $this->claveInstitucion = $claveInstitucion;
+        $this->divisionService = $divisionService;
     }
 
     public function index($institucion_id)
@@ -68,13 +68,7 @@ class AlumnoController extends Controller
     {
         return Inertia::render('Alumnos/Create', [
             'institucion_id' => $institucion_id,
-            'divisiones' => Division::where('institucion_id', $institucion_id)
-                ->with(['nivel', 'orientacion', 'curso'])
-                ->orderBy('nivel_id')
-                ->orderBy('orientacion_id')
-                ->orderBy('curso_id')
-                ->orderBy('division')
-                ->get(),
+            'divisiones' => $this->divisionService->get($institucion_id),
         ]);
     }
 
@@ -114,28 +108,7 @@ class AlumnoController extends Controller
     {
         return Inertia::render('Alumnos/Edit', [
             'institucion_id' => $institucion_id,
-            'divisiones' => Division::where('institucion_id', $institucion_id)
-                ->select('id', 'division')
-                ->addSelect(
-                    ['nivel_nombre' => Nivel::select('nombre')
-                        ->whereColumn('id', 'nivel_id')
-                        ->limit(1)
-                    ])
-                ->addSelect(
-                    ['orientacion_nombre' => Orientacion::select('nombre')
-                        ->whereColumn('id', 'orientacion_id')
-                        ->limit(1)
-                    ])
-                ->addSelect(
-                    ['curso_nombre' => Curso::select('nombre')
-                        ->whereColumn('id', 'curso_id')
-                        ->limit(1)
-                    ])
-                ->orderBy('nivel_id')
-                ->orderBy('orientacion_id')
-                ->orderBy('curso_id')
-                ->orderBy('division')
-                ->get(),
+            'divisiones' => $this->divisionService->get($institucion_id),
             'alumno' => Alumno::with('user')->findOrFail($id),
         ]);
     }
@@ -145,6 +118,7 @@ class AlumnoController extends Controller
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $request->division_id)) {
             $alumno = Alumno::findOrFail($id);
             $alumno->division_id = $request->division_id;
+            $alumno->exAlumno = '0';
             $alumno->save();
 
             if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {

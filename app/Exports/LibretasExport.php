@@ -72,9 +72,14 @@ class LibretasExport implements FromCollection
         
 
         foreach ($deudas as $deuda) {
+            
+            $condicion = 'No';
+            if ($deuda->aprobado) {
+                $condicion = 'Si';
+            }
             $deudasCabecera[] = array(
                 'Asignatura' => $deuda->asignatura->nombre,
-                'Condicion' => $deuda->aprobado = 'Si' ?? 'No',
+                'Aprobado' => $condicion,
             );
         }
 

@@ -4,8 +4,8 @@
             <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
-                    <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                    <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                    <span v-if="division.orientacion_nombre">{{ division.nivel_nombre }} - {{ division.orientacion_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
+                    <span v-else>{{ division.nivel_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
                 </inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">{{ asignatura.nombre }}</inertia-link> / 
@@ -156,7 +156,7 @@
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
                                 <a :href="'/storage/deudores/entregas/' + entrega.archivo" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline" rel="noopener noreferrer">
-                                    {{ entrega.archivo }} - {{ entrega.created_at }}
+                                    {{ entrega.archivo }}
                                 </a>
                             </span>
                         </div>
@@ -192,7 +192,7 @@
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
                                 <a :href="'/storage/deudores/correcciones/' + correccion.archivo" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline" rel="noopener noreferrer">
-                                    {{ correccion.archivo }} - {{ correccion.created_at }}
+                                    {{ correccion.archivo }}
                                 </a>
                             </span>
                         </div>

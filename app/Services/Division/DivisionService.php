@@ -12,7 +12,7 @@ class DivisionService
     public function get($institucion_id)
     {
         return Division::where('institucion_id', $institucion_id)
-        ->select('id', 'division')
+        ->select('id', 'division', 'forma_evaluacion_id')
         ->addSelect(
             ['nivel_nombre' => Nivel::select('nombre')
                 ->whereColumn('id', 'nivel_id')
@@ -37,7 +37,7 @@ class DivisionService
 
     public function find($id)
     {
-        return Division::select('id', 'division')
+        return Division::select('id', 'division', 'forma_evaluacion_id')
         ->addSelect(
             ['nivel_nombre' => Nivel::select('nombre')
                 ->whereColumn('id', 'nivel_id')

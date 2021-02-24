@@ -8,6 +8,7 @@ use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroArchivo;
 use App\Services\Archivos\ObtenerFechaHoraService;
+use App\Services\Division\DivisionService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -15,8 +16,13 @@ use Inertia\Inertia;
 class MuroArchivoController extends Controller
 {
     protected $obtenerFechaHoraService;
+    protected $divisionService;
 
-    public function __construct(ObtenerFechaHoraService $obtenerFechaHoraService)
+    public function __construct(
+        ObtenerFechaHoraService $obtenerFechaHoraService,
+        DivisionService $divisionService
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -26,6 +32,7 @@ class MuroArchivoController extends Controller
         $this->middleware('archivoMuroCorrespondiente')->only('destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
+        $this->divisionService = $divisionService;
     }
 
     public function index($institucion_id, $division_id, $muro_id)
@@ -36,7 +43,7 @@ class MuroArchivoController extends Controller
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'publicacion' => [
                 'id' => $muro->id,
                 'publicacion' => $muro->publicacion,
@@ -50,7 +57,7 @@ class MuroArchivoController extends Controller
     {
         return Inertia::render('Muro/Archivos/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'publicacion' => Muro::findOrFail($muro_id),
         ]);
     }

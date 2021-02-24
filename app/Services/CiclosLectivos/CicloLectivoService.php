@@ -25,7 +25,13 @@ class CicloLectivoService
                     'id' => $ciclo->id,
                     'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
                     'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
+                    'activado' => $ciclo->activado,
                 ];
             });
+    }
+
+    public function obtenerCicloLectivoActivad($institucion_id)
+    {
+        return CicloLectivo::where('institucion_id', $institucion_id)->where('activado', '1')->first();
     }
 }

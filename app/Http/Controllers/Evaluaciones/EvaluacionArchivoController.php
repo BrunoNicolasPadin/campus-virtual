@@ -5,18 +5,25 @@ namespace App\Http\Controllers\Evaluaciones;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\StoreEvaluacionArchivo;
 use App\Http\Requests\Evaluaciones\UpdateEvaluacionArchivo;
-use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Archivo;
-use App\Models\Evaluaciones\Evaluacion;
 use App\Services\Archivos\ObtenerFechaHoraService;
+use App\Services\Division\DivisionService;
+use App\Services\Evaluaciones\EvaluacionService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EvaluacionArchivoController extends Controller
 {
     protected $obtenerFechaHoraService;
+    protected $divisionService;
+    protected $evaluacionService;
 
-    public function __construct(ObtenerFechaHoraService $obtenerFechaHoraService)
+    public function __construct(
+        ObtenerFechaHoraService $obtenerFechaHoraService,
+        DivisionService $divisionService,
+        EvaluacionService $evaluacionService
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -27,14 +34,16 @@ class EvaluacionArchivoController extends Controller
         $this->middleware('archivoCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
+        $this->divisionService = $divisionService;
+        $this->evaluacionService = $evaluacionService;
     }
 
     public function create($institucion_id, $division_id, $evaluacion_id)
     {
         return Inertia::render('Evaluaciones/Archivos/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'division' => $this->divisionService->find($division_id),
+            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
         ]);
     }
 
@@ -69,8 +78,8 @@ class EvaluacionArchivoController extends Controller
     {
         return Inertia::render('Evaluaciones/Archivos/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'division' => $this->divisionService->find($division_id),
+            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
             'archivo' => Archivo::findOrFail($id),
         ]);
     }

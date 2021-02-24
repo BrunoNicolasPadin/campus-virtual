@@ -3,7 +3,7 @@
         <template #header>
             <h2 class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / 
-                Pasar a ser ex alumno a {{ alumno.user.name }}
+                Pasar a ser ex alumno a {{ alumno.name }}
             </h2>
         </template>
 

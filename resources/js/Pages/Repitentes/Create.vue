@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-md text-gray-800 leading-tight">
-                Hacer repetir a {{ alumno.user.name }}
+                Hacer repetir a {{ alumno.name }}
             </h2>
         </template>
 

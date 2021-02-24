@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Alumnos;
 
 use App\Http\Controllers\Controller;
-use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Libretas\Libreta;
-use App\Models\Roles\Alumno;
-use App\Models\User;
+use App\Services\Alumnos\AlumnoService;
+use App\Services\CiclosLectivos\CicloLectivoService;
 use App\Services\Division\ObtenerPeriodosEvaluacion;
-use App\Services\FechaHora\CambiarFormatoFecha;
 use Inertia\Inertia;
 
 class AlumnoEstadisticaController extends Controller
 {
-    protected $formatoService;
+    protected $alumnoService;
     protected $divisionService;
+    protected $cicloLectivoService;
 
     public function __construct(
-        CambiarFormatoFecha $formatoService,
         ObtenerPeriodosEvaluacion $divisionService,
+        CicloLectivoService $cicloLectivoService,
+        AlumnoService $alumnoService,
     )
 
     {
@@ -27,31 +27,17 @@ class AlumnoEstadisticaController extends Controller
         $this->middleware('alumnoCorrespondiente');
         $this->middleware('soloInstitucionesDirectivosAlumnos');
 
-        $this->formatoService = $formatoService;
+        $this->alumnoService = $alumnoService;
         $this->divisionService = $divisionService;
+        $this->cicloLectivoService = $cicloLectivoService;
     }
 
     public function mostrarCiclosLectivos($institucion_id, $alumno_id)
     {
         return Inertia::render('Alumnos/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::select('id')
-                ->addSelect(
-                    ['name' => User::select('name')
-                        ->whereColumn('id', 'user_id')
-                        ->limit(1)
-                    ])
-                ->findOrFail($alumno_id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
-            ->orderBy('comienzo')
-            ->get()
-            ->map(function ($ciclo) {
-                return [
-                    'id' => $ciclo->id,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                ];
-            }),
+            'alumno' => $this->alumnoService->find($alumno_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 

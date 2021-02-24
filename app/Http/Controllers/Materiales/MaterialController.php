@@ -9,14 +9,20 @@ use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
 use App\Services\Archivos\ObtenerFechaHoraService;
+use App\Services\Division\DivisionService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MaterialController extends Controller
 {
     protected $obtenerFechaHoraService;
+    protected $divisionService;
 
-    public function __construct(ObtenerFechaHoraService $obtenerFechaHoraService)
+    public function __construct(
+        ObtenerFechaHoraService $obtenerFechaHoraService,
+        DivisionService $divisionService 
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -27,6 +33,7 @@ class MaterialController extends Controller
         $this->middleware('materialCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
+        $this->divisionService = $divisionService;
     }
 
     public function index($institucion_id, $division_id, $grupo_id)
@@ -34,8 +41,8 @@ class MaterialController extends Controller
         return Inertia::render('Materiales/Grupos/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->find($division_id),
-            'grupo' => Grupo::find($grupo_id),
+            'division' => $this->divisionService->find($division_id),
+            'grupo' => Grupo::select('id', 'nombree')->findOrFail($grupo_id),
             'archivos' => Material::where('grupo_id', $grupo_id)->get(),
         ]);
     }
@@ -44,8 +51,8 @@ class MaterialController extends Controller
     {
         return Inertia::render('Materiales/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'grupo' => Grupo::findOrFail($grupo_id),
+            'division' => $this->divisionService->find($division_id),
+            'grupo' => Grupo::select('id', 'nombre')->findOrFail($grupo_id),
         ]);
     }
 
@@ -80,8 +87,8 @@ class MaterialController extends Controller
     {
         return Inertia::render('Materiales/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'grupo' => Grupo::findOrFail($grupo_id),
+            'division' => $this->divisionService->find($division_id),
+            'grupo' => Grupo::select('id', 'nombre')->findOrFail($grupo_id),
             'archivo' => Material::findOrFail($id),
         ]);
     }

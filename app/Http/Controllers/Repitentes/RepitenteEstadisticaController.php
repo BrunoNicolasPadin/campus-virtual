@@ -4,38 +4,38 @@ namespace App\Http\Controllers\Repitentes;
 
 use App\Http\Controllers\Controller;
 use App\Models\CiclosLectivos\CicloLectivo;
-use App\Models\Estructuras\Division;
 use App\Models\Repitentes\Repitente;
+use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Inertia\Inertia;
 
 class RepitenteEstadisticaController extends Controller
 {
     protected $formatoService;
+    protected $divisionService;
 
-    public function __construct(CambiarFormatoFecha $formatoService)
+    public function __construct(
+        CambiarFormatoFecha $formatoService,
+        DivisionService $divisionService
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos');
 
         $this->formatoService = $formatoService;
+        $this->divisionService = $divisionService;
     }
 
     public function mostrarEstadisticas($institucion_id)
     {
         $ciclosLectivos = CicloLectivo::where('institucion_id', $institucion_id)->get();
-        $divisiones = Division::where('institucion_id', $institucion_id)
-            ->orderBy('nivel_id')
-            ->orderBy('orientacion_id')
-            ->orderBy('curso_id')
-            ->orderBy('division')
-            ->get();
+        $divisiones = $this->divisionService->get($institucion_id);
 
         $repitentes = Repitente::where('institucion_id', $institucion_id)
         ->with(['ciclo_lectivo', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
         ->get();
-
         $ciclos = [];
         $ciclosCategorias = [];
         
@@ -53,12 +53,12 @@ class RepitenteEstadisticaController extends Controller
         $divisionCategorias = [];
         $k = 0;
         foreach ($divisiones as $division) {
-            if ($division->orientacion) {
-                $divisionCategorias[$k] = $division->orientacion->nombre .' - '. 
-                $division->curso->nombre .' - '. $division->division;
+            if ($division->orientacion_nombre) {
+                $divisionCategorias[$k] = $division->nivel_nombre .' - ' . $division->orientacion_nombre .' - '. 
+                $division->curso_nombre .' - '. $division->division;
             }
             else {
-                $divisionCategorias[$k] = $division->curso->nombre .' - '. $division->division;
+                $divisionCategorias[$k] = $division->nivel_nombre .' - ' . $division->curso_nombre .' - '. $division->division;
             }
             $divArray[$division->id] = 0;
             $k++;

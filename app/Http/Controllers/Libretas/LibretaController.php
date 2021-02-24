@@ -7,7 +7,8 @@ use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Deudores\AlumnoDeudor;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
-use App\Models\Roles\Alumno;
+use App\Services\Alumnos\AlumnoService;
+use App\Services\CiclosLectivos\CicloLectivoService;
 use App\Services\Division\ObtenerFormaEvaluacion;
 use App\Services\Division\ObtenerPeriodosEvaluacion;
 use App\Services\FechaHora\CambiarFormatoFecha;
@@ -19,11 +20,15 @@ class LibretaController extends Controller
     protected $formatoService;
     protected $formaEvaluacionService;
     protected $divisionService;
+    protected $cicloLectivoService;
+    protected $alumnoService;
 
     public function __construct(
         CambiarFormatoFecha $formatoService, 
         ObtenerFormaEvaluacion $formaEvaluacionService,
         ObtenerPeriodosEvaluacion $divisionService,
+        CicloLectivoService $cicloLectivoService,
+        AlumnoService $alumnoService
     )
 
     {
@@ -37,6 +42,8 @@ class LibretaController extends Controller
         $this->formatoService = $formatoService;
         $this->formaEvaluacionService = $formaEvaluacionService;
         $this->divisionService = $divisionService;
+        $this->cicloLectivoService = $cicloLectivoService;
+        $this->alumnoService = $alumnoService;
     }
 
     public function index($institucion_id, $alumno_id)
@@ -57,19 +64,9 @@ class LibretaController extends Controller
         return Inertia::render('Libretas/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'alumno' => Alumno::with('user')->find($alumno_id),
             'ciclo_lectivo_id' => $cicloLectivo->id,
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
-                ->orderBy('comienzo')
-                ->get()
-                ->map(function ($ciclo) {
-                    return [
-                        'id' => $ciclo->id,
-                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                        'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                        'activado' => $ciclo->activado,
-                    ];
-                }),
+            'alumno' => $this->alumnoService->find($alumno_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
             'periodos' => $periodos,
             'libretas' => $libretas,
             'libreta' => $libreta,
@@ -101,7 +98,7 @@ class LibretaController extends Controller
 
         return Inertia::render('Libretas/Edit', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::with('user')->findOrFail($alumno_id),
+            'alumno' => $this->alumnoService->find($alumno_id),
             'libretas' => Libreta::with(['asignatura', 'calificaciones'])->findOrFail($id),
             'formasDescripcion' => $arrayTemporal[0],
             'tipoEvaluacion' => $arrayTemporal[1],

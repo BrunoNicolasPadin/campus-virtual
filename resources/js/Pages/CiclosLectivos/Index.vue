@@ -110,7 +110,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('ciclos-lectivos.edit', [cicloLectivo.institucion_id, cicloLectivo.id])">
+                                        <inertia-link :href="route('ciclos-lectivos.edit', [institucion_id, cicloLectivo.id])">
                                             <editar></editar>
                                         </inertia-link>
                                     </template>

@@ -8,6 +8,6 @@ class FormaEvaluacionService
 {
     public function find($id)
     {
-        return FormaEvaluacion::select('nombre')->findOrFail($id);
+        return FormaEvaluacion::select('id', 'nombre', 'tipo', 'desdeCuando')->findOrFail($id);
     }
 }

@@ -9,7 +9,7 @@ class AlumnoService
 {
     public function find($id)
     {
-        return Alumno::select('id')
+        return Alumno::select('id', 'division_id')
             ->addSelect(
                 ['name' => User::select('name')
                     ->whereColumn('id', 'user_id')

@@ -9,13 +9,14 @@ use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Asignaturas\AsignaturaHorario;
 use App\Models\Deudores\Mesa;
-use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Materiales\Grupo;
-use App\Models\Roles\Docente;
 use App\Services\Archivos\EliminarEntregasCorrecciones;
 use App\Services\Archivos\EliminarGruposMateriales;
 use App\Services\Archivos\EliminarMesas;
+use App\Services\Asignaturas\AsignaturaService;
+use App\Services\Division\DivisionService;
+use App\Services\Docentes\DocenteService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
@@ -27,6 +28,9 @@ class AsignaturaController extends Controller
     protected $archivosGruposServices;
     protected $archivosEvaServices;
     protected $mesasService;
+    protected $divisionService;
+    protected $asignaturaService;
+    protected $docenteService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
@@ -34,6 +38,9 @@ class AsignaturaController extends Controller
         EliminarGruposMateriales $archivosGruposServices,
         EliminarEntregasCorrecciones $archivosEvaServices,
         EliminarMesas $mesasService,
+        DivisionService $divisionService, 
+        AsignaturaService $asignaturaService,
+        DocenteService $docenteService,
     )
 
     {
@@ -49,6 +56,9 @@ class AsignaturaController extends Controller
         $this->archivosGruposServices = $archivosGruposServices;
         $this->archivosEvaServices = $archivosEvaServices;
         $this->mesasService = $mesasService;
+        $this->divisionService = $divisionService;
+        $this->asignaturaService = $asignaturaService;
+        $this->docenteService = $docenteService;
     }
 
     public function index($institucion_id, $division_id)
@@ -56,7 +66,7 @@ class AsignaturaController extends Controller
         return Inertia::render('Asignaturas/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'asignaturas' => Asignatura::where('division_id', $division_id)
                 ->with(['horarios', 'docentes', 'docentes.docente', 'docentes.docente.user'])
                 ->orderBy('nombre')
@@ -70,11 +80,9 @@ class AsignaturaController extends Controller
 
         return Inertia::render('Asignaturas/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'dias' => $dias,
-            'docentes' => Docente::where('institucion_id', $institucion_id)
-                ->with('user')
-                ->get(),
+            'docentes' => $this->docenteService->get($institucion_id),
         ]);
     }
 
@@ -111,8 +119,8 @@ class AsignaturaController extends Controller
         return Inertia::render('Asignaturas/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura' => Asignatura::select('id', 'nombre')->findOrFail($id),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura' => $this->asignaturaService->find($id),
             'mesas' => Mesa::where('asignatura_id', $id)->with('asignatura')->orderBy('fechaHora')->paginate(10)
                 ->transform(function ($mesa) {
                     return [
@@ -140,11 +148,9 @@ class AsignaturaController extends Controller
 
         return Inertia::render('Asignaturas/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'dias' => $dias,
-            'docentes' => Docente::where('institucion_id', $institucion_id)
-                ->with('user')
-                ->get(),
+            'docentes' => $this->docenteService->get($institucion_id),
             'asignatura' => Asignatura::with(['horarios', 'docentes', 'docentes.docente', 'docentes.docente.user'])
                 ->findOrFail($id),
         ]);

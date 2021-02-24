@@ -5,19 +5,24 @@ namespace App\Http\Controllers\RolesDivision;
 use App\Http\Controllers\Controller;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
+use App\Services\Division\DivisionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AlumnoDivisionController extends Controller
 {
-    public function __construct()
+    protected $divisionService;
+
+    public function __construct(DivisionService $divisionService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos')->only('sacarloDeLaDivision');
         $this->middleware('alumnoDivisionCorrespondiente')->only('sacarloDeLaDivision');
+
+        $this->divisionService = $divisionService;
     }
 
     public function mostrarAlumnos($institucion_id, $division_id)
@@ -26,7 +31,7 @@ class AlumnoDivisionController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'alumnos' => Alumno::where('division_id', $division_id)->with('user')->paginate(20),
         ]);
     }
@@ -35,14 +40,8 @@ class AlumnoDivisionController extends Controller
     {
         return Inertia::render('RolesDivision/HacerlosPasar', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'divisiones' => Division::where('institucion_id', $institucion_id)
-                ->orderBy('nivel_id')
-                ->orderBy('orientacion_id')
-                ->orderBy('curso_id')
-                ->orderBy('division')
-                ->with(['nivel', 'orientacion', 'curso'])
-                ->get(),
+            'division' => $this->divisionService->find($division_id),
+            'divisiones' => $this->divisionService->get($institucion_id),
             'alumnos' => Alumno::where('division_id', $division_id)->with('user')->get(),
         ]);
     }

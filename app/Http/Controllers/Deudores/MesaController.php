@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Deudores\StoreMesa;
-use App\Models\Asignaturas\Asignatura;
 use App\Models\Deudores\Anotado;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
-use App\Models\Estructuras\Division;
 use App\Services\Archivos\EliminarMesas;
+use App\Services\Asignaturas\AsignaturaService;
+use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
 
@@ -17,10 +17,14 @@ class MesaController extends Controller
 {
     protected $formatoService;
     protected $mesasService;
+    protected $divisionService;
+    protected $asignaturaService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         EliminarMesas $mesasService,
+        DivisionService $divisionService, 
+        AsignaturaService $asignaturaService,
     )
 
     {
@@ -33,14 +37,16 @@ class MesaController extends Controller
 
         $this->formatoService = $formatoService;
         $this->mesasService = $mesasService;
+        $this->divisionService = $divisionService;
+        $this->asignaturaService = $asignaturaService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id)
     {
         return Inertia::render('Deudores/Mesas/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura' => Asignatura::select('id', 'nombre')->findOrFail($asignatura_id),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura' => $this->asignaturaService->find($asignatura_id),
         ]);
     }
 
@@ -64,8 +70,8 @@ class MesaController extends Controller
         return Inertia::render('Deudores/Mesas/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura' => Asignatura::findOrFail($asignatura_id),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura' => $this->asignaturaService->find($asignatura_id),
             'mesa' => [
                 'id' => $mesa->id,
                 'asignatura' => $mesa->asignatura,
@@ -83,8 +89,8 @@ class MesaController extends Controller
 
         return Inertia::render('Deudores/Mesas/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura' => Asignatura::findOrFail($asignatura_id),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura' => $this->asignaturaService->find($asignatura_id),
             'mesa' => [
                 'id' => $mesa->id,
                 'fechaHora' => $this->formatoService->cambiarFormatoParaEditar($mesa->fechaHora),

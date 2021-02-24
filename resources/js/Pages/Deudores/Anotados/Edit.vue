@@ -4,13 +4,13 @@
             <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
-                    <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                    <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
+                    <span v-if="division.orientacion_nombre">{{ division.nivel_nombre }} - {{ division.orientacion_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
+                    <span v-else>{{ division.nivel_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
                 </inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">{{ asignatura.nombre }}</inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa {{ mesa.fechaHora }}</inertia-link> / 
-                <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, anotado.id])">Entrega de {{ anotado.alumno.user.name }}</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, anotado.id])">Entrega de {{ anotado.name }}</inertia-link> /
                 Calificar
             </span>
         </template>

@@ -27,7 +27,7 @@ class DivisionCorrespondiente
         if (session('tipo') == 'Docente') {
             $asignaturasDocentes = AsignaturaDocente::where('docente_id', session('tipo_id'))
                     ->addSelect(['division_id' => Asignatura::select('division_id')
-                    ->whereColumn('asignaturas_docentes.asignatura_id', 'asignatura.id')
+                    ->whereColumn('asignatura_id', 'id')
                     ->limit(1)
                 ])
                 ->get();

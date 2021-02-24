@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\UpdateEntrega;
-use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\EntregaComentario;
-use App\Models\Evaluaciones\Evaluacion;
+use App\Services\Division\DivisionService;
 use App\Services\Division\ObtenerFormaEvaluacion;
+use App\Services\Evaluaciones\EvaluacionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -20,10 +20,14 @@ class EntregaController extends Controller
 {
     protected $formaEvaluacionService;
     protected $formatoService;
+    protected $divisionService;
+    protected $evaluacionService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         ObtenerFormaEvaluacion $formaEvaluacionService,
+        DivisionService $divisionService,
+        EvaluacionService $evaluacionService
     )
 
     {
@@ -36,14 +40,16 @@ class EntregaController extends Controller
 
         $this->formatoService = $formatoService;
         $this->formaEvaluacionService = $formaEvaluacionService;
+        $this->divisionService = $divisionService;
+        $this->evaluacionService = $evaluacionService;
     }
 
     public function index($institucion_id, $division_id, $evaluacion_id)
     {
         return Inertia::render('Evaluaciones/Entregas/Index', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'division' => $this->divisionService->find($division_id),
+            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
             'entregas' => Entrega::where('evaluacion_id', $evaluacion_id)->with(['alumno', 'alumno.user'])->paginate(20),
             'tipo' => session('tipo'),
         ]);
@@ -55,8 +61,8 @@ class EntregaController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'division' => $this->divisionService->find($division_id),
+            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->findOrFail($id),
             'archivos' => EntregaArchivo::where('entrega_id', $id)->orderBy('created_at', 'DESC')->get()
                 ->map(function ($archivo) {
@@ -95,8 +101,8 @@ class EntregaController extends Controller
 
         return Inertia::render('Evaluaciones/Entregas/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
+            'division' => $this->divisionService->find($division_id),
+            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->findOrFail($id),
             'formasDescripcion' => $arrayTemporal[0],
             'tipoEvaluacion' => $arrayTemporal[1],

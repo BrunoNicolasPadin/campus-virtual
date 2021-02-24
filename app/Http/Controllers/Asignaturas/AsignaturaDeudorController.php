@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
-use App\Models\Asignaturas\Asignatura;
-use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Deudores\AlumnoDeudor;
-use App\Models\Estructuras\Division;
+use App\Services\Asignaturas\AsignaturaService;
+use App\Services\CiclosLectivos\CicloLectivoService;
+use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,8 +14,17 @@ use Inertia\Inertia;
 class AsignaturaDeudorController extends Controller
 {
     protected $formatoFechaService;
+    protected $divisionService;
+    protected $asignaturaService;
+    protected $cicloLectivoService;
 
-    public function __construct(CambiarFormatoFecha $formatoFechaService)
+    public function __construct(
+        CambiarFormatoFecha $formatoFechaService,
+        DivisionService $divisionService,
+        AsignaturaService $asignaturaService,
+        CicloLectivoService $cicloLectivoService
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -24,6 +33,9 @@ class AsignaturaDeudorController extends Controller
         $this->middleware('asignaturaCorrespondiente');
 
         $this->formatoFechaService = $formatoFechaService;
+        $this->divisionService = $divisionService;
+        $this->asignaturaService = $asignaturaService;
+        $this->cicloLectivoService = $cicloLectivoService;
     }
 
     public function mostrarDeudores($institucion_id, $division_id, $asignatura_id)
@@ -31,16 +43,9 @@ class AsignaturaDeudorController extends Controller
         return Inertia::render('Asignaturas/Deudores', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura' => Asignatura::select('id', 'nombre')->findOrFail($asignatura_id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->orderBy('comienzo')->get()
-                ->map(function ($ciclo) {
-                    return [
-                        'id' => $ciclo->id,
-                        'comienzo' => $this->formatoFechaService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                        'final' => $this->formatoFechaService->cambiarFormatoParaMostrar($ciclo->final),
-                    ];
-                }),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura'  => $this->asignaturaService->find($asignatura_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 

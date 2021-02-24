@@ -5,10 +5,11 @@ namespace App\Http\Controllers\ExAlumnos;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExAlumnos\StoreExAlumno;
 use App\Http\Requests\ExAlumnos\UpdateExAlumno;
-use App\Models\CiclosLectivos\CicloLectivo;
-use App\Models\Estructuras\Division;
 use App\Models\Roles\ExAlumno;
 use App\Models\Roles\Alumno;
+use App\Services\Alumnos\AlumnoService;
+use App\Services\CiclosLectivos\CicloLectivoService;
+use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -16,8 +17,17 @@ use Inertia\Inertia;
 class ExAlumnoController extends Controller
 {
     protected $formatoService;
+    protected $divisionService;
+    protected $cicloLectivoService;
+    protected $alumnoService;
 
-    public function __construct(CambiarFormatoFecha $formatoService)
+    public function __construct(
+        CambiarFormatoFecha $formatoService,
+        DivisionService $divisionService,
+        CicloLectivoService $cicloLectivoService,
+        AlumnoService $alumnoService
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -26,6 +36,9 @@ class ExAlumnoController extends Controller
         $this->middleware('exAlumnoCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
+        $this->divisionService = $divisionService;
+        $this->cicloLectivoService = $cicloLectivoService;
+        $this->alumnoService = $alumnoService;
     }
     public function index($institucion_id)
     {
@@ -34,21 +47,8 @@ class ExAlumnoController extends Controller
             'exalumnos' => ExAlumno::where('institucion_id', $institucion_id)
                 ->with('alumno', 'alumno.user')
                 ->paginate(20),
-            'divisiones' => Division::where('institucion_id', $institucion_id)
-                ->orderBy('nivel_id')
-                ->orderBy('orientacion_id')
-                ->orderBy('curso_id')
-                ->orderBy('division')
-                ->with(['nivel', 'orientacion', 'curso'])
-                ->get(),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->orderBy('comienzo')->get()
-                ->map(function ($ciclo) {
-                    return [
-                        'id' => $ciclo->id,
-                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                        'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                    ];
-                }),
+            'divisiones' => $this->divisionService->get($institucion_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 
@@ -88,17 +88,8 @@ class ExAlumnoController extends Controller
     {
         return Inertia::render('ExAlumnos/Create', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::with('user')->findOrFail($alumno_id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
-            ->orderBy('comienzo')
-            ->get()
-            ->map(function ($ciclo) {
-                return [
-                    'id' => $ciclo->id,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                ];
-            }),
+            'alumno' => $this->alumnoService->find($alumno_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 
@@ -128,16 +119,7 @@ class ExAlumnoController extends Controller
         return Inertia::render('ExAlumnos/Edit', [
             'institucion_id' => $institucion_id,
             'exalumno' => ExAlumno::with('alumno', 'alumno.user')->findOrFail($id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
-            ->orderBy('comienzo')
-            ->get()
-            ->map(function ($ciclo) {
-                return [
-                    'id' => $ciclo->id,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                ];
-            }),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 

@@ -5,7 +5,7 @@ namespace App\Services\Mesas;
 use App\Models\Deudores\Mesa;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 
-class DeudorService
+class MesaService
 {
     protected $formatoService;
     protected $obtenerFechaHoraService;

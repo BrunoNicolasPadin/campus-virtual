@@ -5,14 +5,20 @@ namespace App\Http\Controllers\CiclosLectivos;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CiclosLectivos\StoreCicloLectivo;
 use App\Models\CiclosLectivos\CicloLectivo;
+use App\Services\CiclosLectivos\CicloLectivoService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Inertia\Inertia;
 
 class CicloLectivoController extends Controller
 {
     protected $formatoService;
+    protected $cicloLectivoService;
 
-    public function __construct(CambiarFormatoFecha $formatoService)
+    public function __construct(
+        CambiarFormatoFecha $formatoService, 
+        CicloLectivoService $cicloLectivoService,
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -20,24 +26,14 @@ class CicloLectivoController extends Controller
         $this->middleware('cicloCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
+        $this->cicloLectivoService = $cicloLectivoService;
     }
 
     public function index($institucion_id)
     {
         return Inertia::render('CiclosLectivos/Index', [
             'institucion_id' => $institucion_id,
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
-            ->orderBy('comienzo')
-            ->get()
-            ->map(function ($ciclo) {
-                return [
-                    'id' => $ciclo->id,
-                    'institucion_id' => $ciclo->institucion_id,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                    'activado' => $ciclo->activado,
-                ];
-            }),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 

@@ -3,23 +3,27 @@
 namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
-use App\Models\Asignaturas\Asignatura;
-use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
 use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Libretas\Libreta;
+use App\Services\Asignaturas\AsignaturaService;
+use App\Services\CiclosLectivos\CicloLectivoService;
+use App\Services\Division\DivisionService;
 use App\Services\Division\ObtenerPeriodosEvaluacion;
-use App\Services\FechaHora\CambiarFormatoFecha;
 use Inertia\Inertia;
 
 class AsignaturaEstadisticaController extends Controller
 {
-    protected $formatoService;
+    protected $periodoService;
     protected $divisionService;
+    protected $asignaturaService;
+    protected $cicloLectivoService;
 
     public function __construct(
-        CambiarFormatoFecha $formatoService,
-        ObtenerPeriodosEvaluacion $divisionService,
+        ObtenerPeriodosEvaluacion $periodoService,
+        DivisionService $divisionService,
+        AsignaturaService $asignaturaService,
+        CicloLectivoService $cicloLectivoService
     )
 
     {
@@ -29,24 +33,19 @@ class AsignaturaEstadisticaController extends Controller
         $this->middleware('divisionCorrespondiente');
         $this->middleware('asignaturaCorrespondiente');
 
-        $this->formatoService = $formatoService;
+        $this->periodoService = $periodoService;
         $this->divisionService = $divisionService;
+        $this->asignaturaService = $asignaturaService;
+        $this->cicloLectivoService = $cicloLectivoService;
     }
 
     public function mostrarEstadisticas($institucion_id, $division_id, $asignatura_id)
     {
         return Inertia::render('Asignaturas/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura' => Asignatura::select('id', 'nombre')->findOrFail($asignatura_id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)->orderBy('comienzo')->get()
-            ->map(function ($ciclo) {
-                return [
-                    'id' => $ciclo->id,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                ];
-            }),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura'  => $this->asignaturaService->find($asignatura_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 
@@ -54,7 +53,7 @@ class AsignaturaEstadisticaController extends Controller
     {
         $division = Division::select('forma_evaluacion_id', 'periodo_id')->findOrFail($division_id);
 
-        $periodos = $this->divisionService->obtenerPeriodos($division);
+        $periodos = $this->periodoService->obtenerPeriodos($division);
 
         $totalPeriodo = [];
         $cantidadPeriodo = [];

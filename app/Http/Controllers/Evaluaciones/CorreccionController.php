@@ -4,21 +4,28 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreArchivo;
-use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Correccion;
-use App\Models\Evaluaciones\Entrega;
-use App\Models\Evaluaciones\Evaluacion;
 use App\Services\Archivos\ObtenerFechaHoraService;
-use DateTime;
-use DateTimeZone;
+use App\Services\Division\DivisionService;
+use App\Services\Evaluaciones\EntregaService;
+use App\Services\Evaluaciones\EvaluacionService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CorreccionController extends Controller
 {
     protected $obtenerFechaHoraService;
+    protected $divisionService;
+    protected $evaluacionService;
+    protected $entregaService;
 
-    public function __construct(ObtenerFechaHoraService $obtenerFechaHoraService)
+    public function __construct(
+        ObtenerFechaHoraService $obtenerFechaHoraService,
+        DivisionService $divisionService,
+        EvaluacionService $evaluacionService,
+        EntregaService $entregaService
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -30,15 +37,18 @@ class CorreccionController extends Controller
         $this->middleware('correccionCorrespondiente')->only('destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
+        $this->divisionService = $divisionService;
+        $this->evaluacionService = $evaluacionService;
+        $this->entregaService = $entregaService;
     }
 
     public function create($institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
         return Inertia::render('Evaluaciones/Correcciones/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'evaluacion' => Evaluacion::findOrFail($evaluacion_id),
-            'entrega' => Entrega::with(['alumno', 'alumno.user'])->findOrFail($entrega_id),
+            'division' => $this->divisionService->find($division_id),
+            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
+            'entrega' => $this->entregaService->find($entrega_id),
         ]);
     }
 

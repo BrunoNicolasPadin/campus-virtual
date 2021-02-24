@@ -169,7 +169,7 @@
         methods: {
             destroy(id) {
                 if (confirm('Estas seguro de que dese eliminar esta forma de descripción?')) {
-                    this.$inertia.delete(this.route('formas-descripcion.destroy', [this.institucion_id, id]))
+                    this.$inertia.delete(this.route('formas-descripcion.destroy', [this.institucion_id, this.formaEvaluacion.id, id]))
                 }
             },
 

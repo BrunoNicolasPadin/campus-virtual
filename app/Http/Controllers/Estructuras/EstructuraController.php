@@ -11,17 +11,22 @@ use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Estructuras\Nivel;
 use App\Models\Estructuras\Orientacion;
 use App\Models\Estructuras\Periodo;
+use App\Services\Division\DivisionService;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class EstructuraController extends Controller
 {
-    public function __construct()
+    protected $divisionService;
+
+    public function __construct(DivisionService $divisionService)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos')->except('index', 'show');
         $this->middleware('divisionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
+
+        $this->divisionService = $divisionService;
     }
 
     public function index($institucion_id)
@@ -74,7 +79,7 @@ class EstructuraController extends Controller
     {
         return Inertia::render('Estructuras/Show', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso', 'formaEvaluacion'])->findOrFail($id),
+            'division' => $this->divisionService->find($id),
             'tipo' => session('tipo'),
         ]);
     }
@@ -99,7 +104,7 @@ class EstructuraController extends Controller
                 'nivel_id' => $request->nivel_id,
                 'orientacion_id' => $request->orientacion_id,
                 'curso_id' => $request->curso_id,
-                'division' => strtoupper($request->division),
+                'division' => $request->division,
                 'periodo_id' => $request->periodo_id,
                 'forma_evaluacion_id' => $request->forma_evaluacion_id,
             ]);

@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware\Deudores;
 
-use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Deudores\RendirCorreccion;
+use App\Services\Roles\DocenteService;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -11,10 +11,12 @@ use Illuminate\Http\Request;
 class RendirCorreccionCorrespondiente
 {
     protected $ruta;
+    protected $docenteService;
 
-    public function __construct(RutaService $ruta)
+    public function __construct(RutaService $ruta, DocenteService $docenteService)
     {
         $this->ruta = $ruta;
+        $this->docenteService = $docenteService;
     }
 
     public function handle(Request $request, Closure $next)
@@ -23,7 +25,7 @@ class RendirCorreccionCorrespondiente
         $correccion = RendirCorreccion::findOrFail($link[14]);
 
         if (session('tipo') == 'Docente') {
-            if ($this->asignaturaService->verificarDocente($correccion->anotado->mesa->asignatura_id)) {
+            if ($this->docenteService->verificarDocenteId($correccion->anotado->mesa->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de la asignatura a la que pertenece esta corrección.');

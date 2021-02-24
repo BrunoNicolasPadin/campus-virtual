@@ -7,6 +7,7 @@ use App\Models\Asignaturas\Asignatura;
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
 use App\Models\Libretas\Libreta;
+use App\Services\Division\DivisionService;
 use App\Services\Division\ObtenerPeriodosEvaluacion;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Inertia\Inertia;
@@ -14,11 +15,13 @@ use Inertia\Inertia;
 class EstructuraEstadisticaController extends Controller
 {
     protected $formatoService;
+    protected $periodoService;
     protected $divisionService;
 
     public function __construct(
         CambiarFormatoFecha $formatoService,
-        ObtenerPeriodosEvaluacion $divisionService,
+        ObtenerPeriodosEvaluacion $periodoService,
+        DivisionService $divisionService,
     )
 
     {
@@ -27,6 +30,8 @@ class EstructuraEstadisticaController extends Controller
         $this->middleware('soloInstitucionesDirectivos');
         $this->middleware('divisionCorrespondiente');
 
+        $this->periodoService = $periodoService;
+        $this->periodoService = $periodoService;
         $this->formatoService = $formatoService;
         $this->divisionService = $divisionService;
     }
@@ -35,7 +40,7 @@ class EstructuraEstadisticaController extends Controller
     {
         return Inertia::render('Estructuras/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
             ->orderBy('comienzo')
             ->get()
@@ -64,7 +69,7 @@ class EstructuraEstadisticaController extends Controller
             return [null, null, null];
         }
 
-        $periodos = $this->divisionService->obtenerPeriodos($libreta);
+        $periodos = $this->periodoService->obtenerPeriodos($libreta);
 
         $totalRecorrido = $cantidadAsignaturas * count($periodos);
         $recorrido = 0;

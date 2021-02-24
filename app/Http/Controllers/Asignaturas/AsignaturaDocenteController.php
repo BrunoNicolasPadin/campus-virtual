@@ -4,32 +4,43 @@ namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Asignaturas\StoreDocente;
-use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
-use App\Models\Estructuras\Division;
-use App\Models\Roles\Docente;
+use App\Services\Asignaturas\AsignaturaService;
+use App\Services\Division\DivisionService;
+use App\Services\Docentes\DocenteService;
 use Inertia\Inertia;
 
 class AsignaturaDocenteController extends Controller
 {
-    public function __construct()
+    protected $divisionService;
+    protected $asignaturaService;
+    protected $docenteService;
+
+    public function __construct(
+        DivisionService $divisionService, 
+        AsignaturaService $asignaturaService,
+        DocenteService $docenteService,
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos');
         $this->middleware('asignaturaCorrespondiente');
+
+        $this->divisionService = $divisionService;
+        $this->asignaturaService = $asignaturaService;
+        $this->docenteService = $docenteService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id)
     {
         return Inertia::render('Asignaturas/Docentes/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura'  => Asignatura::select('id', 'nombre')->findOrFail($asignatura_id),
-            'docentes' => Docente::where('institucion_id', $institucion_id)
-                ->with('user')
-                ->get()
+            'division' => $this->divisionService->find($division_id),
+            'asignatura'  => $this->asignaturaService->find($asignatura_id),
+            'docentes' => $this->docenteService->get($institucion_id),
         ]);
     }
 

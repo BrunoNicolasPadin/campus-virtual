@@ -8,13 +8,28 @@ use App\Models\Estructuras\FormaDescripcion;
 use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
+use App\Services\Division\DivisionService;
 use Inertia\Inertia;
 
 class EvaluacionEstadisticaController extends Controller
 {
+    protected $divisionService;
+
+    public function __construct(DivisionService $divisionService)
+
+    {
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('divisionCorrespondiente');
+        $this->middleware('soloInstitucionesDirectivosDocentes');
+        $this->middleware('evaluacionCorrespondiente');
+
+        $this->divisionService = $divisionService;
+    }
+
     public function mostrarEstadisticas($institucion_id, $division_id, $evaluacion_id)
     {
-        $division = Division::findOrFail($division_id);
+        $division = $this->divisionService->find($division_id);
         $formaEvaluacion = FormaEvaluacion::findOrFail($division->forma_evaluacion_id);
         $partida = null;
         $calificacionesAprobadas = [];
@@ -120,7 +135,7 @@ class EvaluacionEstadisticaController extends Controller
         return Inertia::render('Evaluaciones/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $division,
             'evaluacion' => $evaluacion,
             'numerosArray' => $numerosArray,
             'numeros' => $numeros,
@@ -143,7 +158,7 @@ class EvaluacionEstadisticaController extends Controller
 
     public function obtenerDesaprobados($entrega, $partida, $calificacionesAprobadas, $desaprobados, $desaprobadosArray)
     {
-        if ($entrega->calificacion < $partida && !(in_array($entrega->calificacion, $calificacionesAprobadas))) {
+        if ($entrega->calificacion && $entrega->calificacion < $partida && !(in_array($entrega->calificacion, $calificacionesAprobadas))) {
             $desaprobados = $desaprobados + 1;
             array_push($desaprobadosArray, [
                 'nombre' => $entrega->alumno->user->name,
@@ -156,14 +171,14 @@ class EvaluacionEstadisticaController extends Controller
 
     public function obtenerSinCalificar($entrega, $sinCalificar, $sinCalificarArray)
     {
-        if ($entrega->calificacion == null) {
+        if ($entrega->calificacion == null || $entrega->calificacion == '') {
             $sinCalificar = $sinCalificar + 1;
             array_push($sinCalificarArray, [
                 'nombre' => $entrega->alumno->user->name,
                 'id' => $entrega->id,
             ]);
         }
-        return [$sinCalificar, $sinCalificar];
+        return [$sinCalificar, $sinCalificarArray];
     }
 
     public function obtenerEntregadosATiempo($entrega, $archivo, $evaluacion, $entregadosTiempo, $entregadosArray)

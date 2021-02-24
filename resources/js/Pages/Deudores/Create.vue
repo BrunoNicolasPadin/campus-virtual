@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <span class="font-semibold text-md text-gray-800 leading-tight">
-                <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.user.name }}</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.name }}</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('asignaturas-adeudadas.index', [institucion_id, alumno.id])">
                     Asignatura adeudadas y/o ya rendidas
                 </inertia-link> / Agregar asignaturas
@@ -50,12 +50,12 @@
                                     
                                     <option value="" disabled selected>-</option>
                                     <option v-for="division in divisiones" :key="division.id" :value="division.id">
-                                        <span v-if="division.orientacion">
-                                            {{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}
+                                        <span v-if="division.orientacion_nombre">
+                                            {{ division.nivel_nombre }} - {{ division.orientacion_nombre }} - {{ division.curso_nombre }} - {{ division.division }}
                                         </span>
 
                                         <span v-else>
-                                            {{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}
+                                            {{ division.nivel_nombre }} - {{ division.curso_nombre }} - {{ division.division }}
                                         </span>
                                     </option>
 

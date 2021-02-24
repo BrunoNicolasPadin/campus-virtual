@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Deudores\StoreAlumnoDeudor;
-use App\Models\Asignaturas\Asignatura;
-use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Deudores\AlumnoDeudor;
 use App\Models\Deudores\Mesa;
-use App\Models\Estructuras\Division;
-use App\Models\Roles\Alumno;
-use App\Models\User;
+use App\Services\Alumnos\AlumnoService;
+use App\Services\Asignaturas\AsignaturaService;
+use App\Services\CiclosLectivos\CicloLectivoService;
+use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
@@ -19,10 +18,18 @@ class AlumnoDeudorController extends Controller
 {
     protected $formatoService;
     protected $formatoFechaHoraService;
+    protected $divisionService;
+    protected $asignaturaService;
+    protected $cicloLectivoService;
+    protected $alumnoService;
 
     public function __construct(
         CambiarFormatoFecha $formatoService,
         CambiarFormatoFechaHora $formatoFechaHoraService,
+        DivisionService $divisionService, 
+        AsignaturaService $asignaturaService,
+        CicloLectivoService $cicloLectivoService,
+        AlumnoService $alumnoService
     )
 
     {
@@ -35,6 +42,10 @@ class AlumnoDeudorController extends Controller
 
         $this->formatoService = $formatoService;
         $this->formatoFechaHoraService = $formatoFechaHoraService;
+        $this->divisionService = $divisionService;
+        $this->asignaturaService = $asignaturaService;
+        $this->cicloLectivoService = $cicloLectivoService;
+        $this->alumnoService = $alumnoService;
     }
 
     public function index($institucion_id, $alumno_id)
@@ -42,13 +53,7 @@ class AlumnoDeudorController extends Controller
         return Inertia::render('Deudores/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'alumno' => Alumno::select('id')
-                ->addSelect(
-                    ['name' => User::select('name')
-                        ->whereColumn('id', 'user_id')
-                        ->limit(1)
-                    ])
-                ->findOrFail($alumno_id),
+            'alumno' => $this->alumnoService->find($alumno_id),
             'deudas' => AlumnoDeudor::where('alumno_id', $alumno_id)
                 ->with(['asignatura', 'ciclo_lectivo'])
                 ->orderBy('ciclo_lectivo_id')
@@ -71,20 +76,8 @@ class AlumnoDeudorController extends Controller
     {
         return Inertia::render('Deudores/Create', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::select('id')
-                ->addSelect(
-                    ['name' => User::select('name')
-                        ->whereColumn('id', 'user_id')
-                        ->limit(1)
-                    ])
-                ->findOrFail($alumno_id),
-            'divisiones' => Division::where('institucion_id', $institucion_id)
-                ->with(['nivel', 'orientacion', 'curso'])
-                ->orderBy('nivel_id')
-                ->orderBy('orientacion_id')
-                ->orderBy('curso_id')
-                ->orderBy('division')
-                ->get(),
+            'alumno' => $this->alumnoService->find($alumno_id),
+            'divisiones' => $this->divisionService->get($institucion_id),
         ]);
     }
 
@@ -92,35 +85,10 @@ class AlumnoDeudorController extends Controller
     {
         return Inertia::render('Deudores/CreateAsignatura', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::select('id')
-                ->addSelect(
-                    ['name' => User::select('name')
-                        ->whereColumn('id', 'user_id')
-                        ->limit(1)
-                    ])
-                ->findOrFail($alumno_id),
-            'divisiones' => Division::where('institucion_id', $institucion_id)
-                ->with(['nivel', 'orientacion', 'curso'])
-                ->orderBy('nivel_id')
-                ->orderBy('orientacion_id')
-                ->orderBy('curso_id')
-                ->orderBy('division')
-                ->get(),
-            'asignaturas' => Asignatura::where('division_id', $division_id)
-                ->orderBy('nombre')
-                ->get(),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
-                ->orderBy('comienzo')
-                ->get()
-                ->map(function ($ciclo) {
-                    return [
-                        'id' => $ciclo->id,
-                        'institucion_id' => $ciclo->institucion_id,
-                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                        'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                        'activado' => $ciclo->activado,
-                    ];
-                }),
+            'alumno' => $this->alumnoService->find($alumno_id),
+            'divisiones' => $this->divisionService->get($institucion_id),
+            'asignaturas'  => $this->asignaturaService->get($division_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 
@@ -142,7 +110,7 @@ class AlumnoDeudorController extends Controller
 
     public function show($institucion_id, $alumno_id, $id)
     {
-        $deuda = AlumnoDeudor::findOrFail($id);
+        $deuda = AlumnoDeudor::select('asignatura_id')->findOrFail($id);
         $mesas = Mesa::where('asignatura_id', $deuda->asignatura_id)->with('anotados', 'asignatura')
             ->whereHas('anotados', function($q) use($alumno_id)
             {
@@ -161,15 +129,9 @@ class AlumnoDeudorController extends Controller
 
         return Inertia::render('Deudores/Show', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::select('id')
-                ->addSelect(
-                    ['name' => User::select('name')
-                        ->whereColumn('id', 'user_id')
-                        ->limit(1)
-                    ])
-                ->findOrFail($alumno_id),
+            'alumno' => $this->alumnoService->find($alumno_id),
             'mesas' => $mesas,
-            'asignatura' => Asignatura::select('id', 'nombre')->findOrFail($deuda->asignatura_id),
+            'asignatura'  => $this->asignaturaService->find($deuda->asignatura_id),
         ]); 
     }
 
@@ -177,26 +139,9 @@ class AlumnoDeudorController extends Controller
     {
         return Inertia::render('Deudores/Edit', [
             'institucion_id' => $institucion_id,
-            'alumno' => Alumno::select('id')
-                ->addSelect(
-                    ['name' => User::select('name')
-                        ->whereColumn('id', 'user_id')
-                        ->limit(1)
-                    ])
-                ->findOrFail($alumno_id),
+            'alumno' => $this->alumnoService->find($alumno_id),
             'deuda' => AlumnoDeudor::findOrFail($id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
-                ->orderBy('comienzo')
-                ->get()
-                ->map(function ($ciclo) {
-                    return [
-                        'id' => $ciclo->id,
-                        'institucion_id' => $ciclo->institucion_id,
-                        'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
-                        'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
-                        'activado' => $ciclo->activado,
-                    ];
-                }),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 

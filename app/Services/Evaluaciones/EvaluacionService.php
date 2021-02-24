@@ -8,6 +8,6 @@ class EvaluacionService
 {
     public function find($id)
     {
-        return Evaluacion::select('titulo')->findOrFail($id);
+        return Evaluacion::findOrFail($id);
     }
 }

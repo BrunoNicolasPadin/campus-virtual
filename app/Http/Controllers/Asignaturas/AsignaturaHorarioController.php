@@ -4,20 +4,29 @@ namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Asignaturas\StoreHorario;
-use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaHorario;
-use App\Models\Estructuras\Division;
+use App\Services\Asignaturas\AsignaturaService;
+use App\Services\Division\DivisionService;
 use Inertia\Inertia;
 
 class AsignaturaHorarioController extends Controller
 {
-    public function __construct()
+    protected $divisionService;
+    protected $asignaturaService;
+
+    public function __construct(
+        DivisionService $divisionService, 
+        AsignaturaService $asignaturaService
+    )
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos');
         $this->middleware('asignaturaCorrespondiente');
+
+        $this->divisionService = $divisionService;
+        $this->asignaturaService = $asignaturaService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id)
@@ -27,8 +36,8 @@ class AsignaturaHorarioController extends Controller
         return Inertia::render('Asignaturas/Horarios/Create', [
             'institucion_id' => $institucion_id,
             'dias' => $dias,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
-            'asignatura'  => Asignatura::select('id', 'nombre')->findOrFail($asignatura_id),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura' => $this->asignaturaService->find($asignatura_id),
         ]);
     }
 

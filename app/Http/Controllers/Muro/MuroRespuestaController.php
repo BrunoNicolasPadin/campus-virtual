@@ -7,13 +7,20 @@ use App\Http\Requests\Muro\StoreRespuesta;
 use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroRespuesta;
+use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class MuroRespuestaController extends Controller
 {
-    public function __construct(CambiarFormatoFechaHora $formatoService)
+    protected $divisionService;
+
+    public function __construct(
+        CambiarFormatoFechaHora $formatoService,
+        DivisionService $divisionService
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -22,6 +29,7 @@ class MuroRespuestaController extends Controller
         $this->middleware('respuestaMuroCorrespondiente')->only('update', 'destroy');
 
         $this->formatoService = $formatoService;
+        $this->divisionService = $divisionService;
     }
 
     public function index($institucion_id, $division_id, $muro_id)
@@ -32,7 +40,7 @@ class MuroRespuestaController extends Controller
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'publicacion' => [
                 'id' => $muro->id,
                 'publicacion' => $muro->publicacion,

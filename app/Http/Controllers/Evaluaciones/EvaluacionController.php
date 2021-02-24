@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Evaluaciones;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\StoreEvaluacion;
 use App\Models\Asignaturas\AsignaturaDocente;
-use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Roles\Docente;
 use App\Services\Archivos\EliminarEntregasCorrecciones;
+use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -19,10 +19,12 @@ class EvaluacionController extends Controller
 {
     protected $formatoService;
     protected $archivosServices;
+    protected $divisionService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        EliminarEntregasCorrecciones $archivosServices
+        EliminarEntregasCorrecciones $archivosServices,
+        DivisionService $divisionService
     )
 
     {
@@ -35,6 +37,7 @@ class EvaluacionController extends Controller
 
         $this->formatoService = $formatoService;
         $this->archivosServices = $archivosServices;
+        $this->divisionService = $divisionService;
     }
 
     public function index($institucion_id, $division_id)
@@ -42,7 +45,7 @@ class EvaluacionController extends Controller
         return Inertia::render('Evaluaciones/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'evaluaciones' => Evaluacion::where('division_id', $division_id)
                 ->with('asignatura')
                 ->orderBy('fechaHoraRealizacion')
@@ -74,7 +77,7 @@ class EvaluacionController extends Controller
     
         return Inertia::render('Evaluaciones/Create', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'asignaturasDocentes' => $asignaturas
         ]);
     }
@@ -104,7 +107,7 @@ class EvaluacionController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'evaluacion' => [
                 'id' => $evaluacion->id,
                 'asignatura' => $evaluacion->asignatura->only('nombre'),
@@ -134,7 +137,7 @@ class EvaluacionController extends Controller
     
         return Inertia::render('Evaluaciones/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => Division::with(['nivel', 'orientacion', 'curso'])->findOrFail($division_id),
+            'division' => $this->divisionService->find($division_id),
             'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
                 ->with('asignatura')
                 ->whereHas('asignatura', function($q) use ($division_id)

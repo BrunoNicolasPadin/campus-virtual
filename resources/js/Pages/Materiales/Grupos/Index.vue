@@ -6,9 +6,10 @@
                     <span class="font-semibold text-md text-gray-800 leading-tight">
                         <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
                         <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
-                            <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                            <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                        </inertia-link> / Grupos de materiales
+                            <span v-if="division.orientacion_nombre">{{ division.nivel_nombre }} - {{ division.orientacion_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
+                            <span v-else>{{ division.nivel_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
+                        </inertia-link> / 
+                        Grupos de materiales
                     </span>
                 </div>
                 <div class="w-4/12" v-show="tipo == 'Docente' ">

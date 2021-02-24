@@ -8,6 +8,7 @@ use App\Models\Estructuras\Division;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
 use App\Models\Roles\Alumno;
+use App\Models\Roles\ExAlumno;
 
 class AlumnoObserver
 {
@@ -19,6 +20,7 @@ class AlumnoObserver
     public function updated(Alumno $alumno)
     {
         if ($alumno->isDirty('division_id')) {
+            ExAlumno::where('alumno_id', $alumno->id)->delete();
             $this->cargarLibreta($alumno);
         }
     }
