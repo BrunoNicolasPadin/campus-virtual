@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Muro;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StorePublicacion;
-use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroArchivo;
 use App\Services\Division\DivisionService;

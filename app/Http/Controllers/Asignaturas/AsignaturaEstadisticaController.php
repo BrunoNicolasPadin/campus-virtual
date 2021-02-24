@@ -70,7 +70,7 @@ class AsignaturaEstadisticaController extends Controller
             $calificacionAlumno[$i] = 0;
         }
 
-        $formaEvaluacion = FormaEvaluacion::findOrFail($division->forma_evaluacion_id);
+        $formaEvaluacion = FormaEvaluacion::select('tipo')->findOrFail($division->forma_evaluacion_id);
 
         $libretas = $this->obtenerNotasDeLaLibreta($asignatura_id, $ciclo_lectivo_id);
         $arrayTemporal = $this->recorrerLibreta($libretas, $totalPeriodo, $cantidadPeriodo, $calificacionAlumno, $calificacionesAlumnos, $formaEvaluacion);

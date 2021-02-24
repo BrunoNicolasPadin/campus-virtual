@@ -31,16 +31,20 @@ class EstructuraController extends Controller
 
     public function index($institucion_id)
     {
+        $divisiones = Division::select('divisiones.id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+            'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre')
+            ->join('niveles', 'niveles.id', 'divisiones.nivel_id')
+            ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
+            ->join('cursos', 'cursos.id', 'divisiones.curso_id')
+            ->orderBy('divisiones.nivel_id')
+            ->orderBy('divisiones.curso_id')
+            ->orderBy('divisiones.division')
+            ->orderBy('divisiones.orientacion_id')
+            ->paginate(10);
         return Inertia::render('Estructuras/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'divisiones' => Division::where('institucion_id', $institucion_id)
-                ->with(['nivel', 'orientacion', 'curso'])
-                ->orderBy('nivel_id')
-                ->orderBy('orientacion_id')
-                ->orderBy('curso_id')
-                ->orderBy('division')
-                ->paginate(10),
+            'divisiones' => $divisiones,
         ]);
     }
 
@@ -52,7 +56,7 @@ class EstructuraController extends Controller
             'orientaciones' => Orientacion::all(),
             'cursos' => Curso::all(),
             'periodos' => Periodo::all(),
-            'formasEvaluacion' => FormaEvaluacion::where('institucion_id', $institucion_id)->get(),
+            'formasEvaluacion' => FormaEvaluacion::select('id', 'nombre')->where('institucion_id', $institucion_id)->get(),
         ]);
     }
 
@@ -93,7 +97,7 @@ class EstructuraController extends Controller
             'cursos' => Curso::all(),
             'periodos' => Periodo::all(),
             'division' => Division::findOrFail($id),
-            'formasEvaluacion' => FormaEvaluacion::where('institucion_id', $institucion_id)->get(),
+            'formasEvaluacion' => FormaEvaluacion::select('id', 'nombre')->where('institucion_id', $institucion_id)->get(),
         ]);
     }
 

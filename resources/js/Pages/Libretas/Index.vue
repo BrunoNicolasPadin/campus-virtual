@@ -4,6 +4,8 @@
             <div class="flex">
                 <div class="w-8/12">
                     <span class="font-semibold text-md text-gray-800 leading-tight">
+                        <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> /
+                        <inertia-link class="hover:underline" :href="route('alumnos.index', institucion_id)">Alumnos</inertia-link> /
                         <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.name }}</inertia-link> /
                         Libreta
                     </span>
@@ -71,10 +73,10 @@
                     
             <div v-if="libreta !== null " class="container mx-auto px-4 sm:px-8">
                 <h2 class="text-2xl font-semibold leading-tight">
-                    <span v-if="libreta.division.orientacion">{{ libreta.division.nivel.nombre }} - {{ libreta.division.orientacion.nombre }} - 
-                        {{ libreta.division.curso.nombre }} - {{ libreta.division.division }}</span>
+                    <span v-if="libreta.orientacion_nombre">{{ libreta.nivel_nombre }} - {{ libreta.orientacion_nombre }} - 
+                        {{ libreta.curso_nombre }} - {{ libreta.division }}</span>
 
-                    <span v-else>{{ libreta.division.nivel.nombre }} - {{ libreta.division.curso.nombre }} - {{ libreta.division.division }}</span>
+                    <span v-else>{{ libreta.nivel_nombre }} - {{ libreta.curso_nombre }} - {{ libreta.division }}</span>
                 </h2>
             </div>
 

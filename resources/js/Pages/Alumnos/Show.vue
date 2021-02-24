@@ -4,7 +4,7 @@
             <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('alumnos.index', institucion_id)">Alumnos</inertia-link> /
-                {{ alumno.user.name }}
+                {{ alumno.name }}
             </span>
         </template>
 
@@ -39,8 +39,8 @@
                             Nombre
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            {{ alumno.user.name }} <span v-show="alumno.user.profile_photo_path">
-                                - <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + alumno.user.profile_photo_path "  alt="Foto de perfil" />
+                            {{ alumno.name }} <span v-show="alumno.fotoDePerfil">
+                                - <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + alumno.fotoDePerfil "  alt="Foto de perfil" />
                             </span>
                         </dd>
                     </div>
@@ -50,19 +50,19 @@
                             División
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2" v-if="alumno.division">
-                            <span v-if="alumno.division.orientacion">
+                            <span v-if="alumno.orientacion_nombre">
                                 <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, alumno.division_id])">
-                                    {{ alumno.division.nivel.nombre }} - 
-                                    {{ alumno.division.orientacion.nombre }} - 
-                                    {{ alumno.division.curso.nombre }} - 
-                                    {{ alumno.division.division }}
+                                    {{ alumno.nivel_nombre }} - 
+                                    {{ alumno.orientacion_nombre }} - 
+                                    {{ alumno.curso_nombre }} - 
+                                    {{ alumno.division }}
                                 </inertia-link>
                             </span>
                             <span v-else>
                                 <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, alumno.division_id])">
-                                    {{ alumno.division.nivel.nombre }} - 
-                                    {{ alumno.division.curso.nombre }} - 
-                                    {{ alumno.division.division }}
+                                    {{ alumno.nivel_nombre }} - 
+                                    {{ alumno.curso_nombre }} - 
+                                    {{ alumno.division }}
                                 </inertia-link>
                             </span>
                         </dd>
@@ -153,7 +153,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <!-- <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Padre/s
                         </dt>
@@ -164,7 +164,7 @@
                                 </inertia-link> <br>
                             </span>
                         </dd>
-                    </div>
+                    </div> -->
 
                 </template>
             </estructura-informacion>

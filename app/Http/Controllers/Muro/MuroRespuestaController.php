@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Muro;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreRespuesta;
-use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroRespuesta;
 use App\Services\Division\DivisionService;
@@ -15,6 +14,7 @@ use Inertia\Inertia;
 class MuroRespuestaController extends Controller
 {
     protected $divisionService;
+    protected $formatoService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
@@ -45,7 +45,7 @@ class MuroRespuestaController extends Controller
                 'id' => $muro->id,
                 'publicacion' => $muro->publicacion,
                 'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($muro->updated_at),
-                'user' => $muro->user,
+                'user' => $muro->user->only('id', 'name'),
             ],
             'respuestas' => MuroRespuesta::where('muro_id', $muro->id)
                 ->with('user')

@@ -41,7 +41,7 @@ class EstructuraEstadisticaController extends Controller
         return Inertia::render('Estructuras/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
-            'ciclosLectivos' => CicloLectivo::where('institucion_id', $institucion_id)
+            'ciclosLectivos' => CicloLectivo::select('id', 'comienzo', 'final')->where('institucion_id', $institucion_id)
             ->orderBy('comienzo')
             ->get()
             ->map(function ($ciclo) {
@@ -119,6 +119,13 @@ class EstructuraEstadisticaController extends Controller
                 $promediosAlumnos[$a] = $this->obtenerPromediosPorAlumno($promediosMomentaneos, $cantidadPeriodoAlumno, $totalPeriodoAlumno, $libreta);
                 $a++;
                 $recorrido = 0;
+                
+                for ($i=0; $i < count($periodos); $i++) { 
+        
+                    $totalPeriodoAlumno[$i] = 0;
+                    $cantidadPeriodoAlumno[$i] = 0;
+                }
+                $i = 0;
             }
         }
 

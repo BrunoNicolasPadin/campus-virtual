@@ -40,12 +40,20 @@ class GrupoController extends Controller
 
     public function index($institucion_id, $division_id)
     {
+        $gruposTodos = Grupo::select('id', 'asignatura_id', 'nombre')
+            ->with(array(
+                'asignatura' => function($query){
+                    $query->select('id', 'nombre');
+                },
+            ))
+            ->paginate(20);
+
         return Inertia::render('Materiales/Grupos/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'division' => $this->divisionService->find($division_id),
             'asignaturas' => $this->asignaturaService->get($division_id),
-            'gruposTodos' => Grupo::where('division_id', $division_id)->with('asignatura')->paginate(20),
+            'gruposTodos' => $gruposTodos,
         ]);
     }
 
@@ -99,6 +107,11 @@ class GrupoController extends Controller
             'division' => $this->divisionService->find($division_id),
             'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
                 ->with('asignatura')
+                ->whereHas('asignatura', function($q) use ($division_id)
+                {
+                    $q->where('division_id', $division_id);
+
+                })
                 ->get(),
             'grupo' => Grupo::findOrFail($id),
         ]);

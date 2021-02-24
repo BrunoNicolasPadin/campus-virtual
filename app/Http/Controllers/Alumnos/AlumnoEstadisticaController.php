@@ -43,14 +43,21 @@ class AlumnoEstadisticaController extends Controller
 
     public function mostrarEstadisticas($institucion_id, $alumno_id, $ciclo_lectivo_id)
     {
-        $libreta = Libreta::where('alumno_id', $alumno_id)->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-            ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso', 'division.formaEvaluacion'])
+        $libreta = Libreta::select('libretas.periodo_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+            'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'formas_evaluacion.tipo')
+            ->where('libretas.alumno_id', $alumno_id)
+            ->where('libretas.ciclo_lectivo_id', $ciclo_lectivo_id)
+            ->join('divisiones', 'libretas.division_id', 'divisiones.id')
+            ->join('niveles', 'niveles.id', 'divisiones.nivel_id')
+            ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
+            ->join('cursos', 'cursos.id', 'divisiones.curso_id')
+            ->join('formas_evaluacion', 'formas_evaluacion.id', 'divisiones.forma_evaluacion_id')
             ->first();
 
 
         $division = $this->obtenerDivision($libreta);
 
-        if ($libreta->division->formaEvaluacion->tipo == 'Escrita') {
+        if ($libreta->tipo == 'Escrita') {
             return [null, null, $division];
         }
 
@@ -78,17 +85,17 @@ class AlumnoEstadisticaController extends Controller
 
     public function obtenerDivision($libreta)
     {
-        if ($libreta->division->orientacion) {
+        if ($libreta->orientacion_nombre) {
             
-            return $libreta->division->nivel->nombre . ' - ' . 
-                $libreta->division->orientacion->nombre . ' - ' . 
-                $libreta->division->curso->nombre . ' - ' . 
-                $libreta->division->division;
+            return $libreta->nivel_nombre . ' - ' . 
+                $libreta->orientacion_nombre . ' - ' . 
+                $libreta->curso_nombre . ' - ' . 
+                $libreta->division;
         }
         else {
-            return $libreta->division->nivel->nombre . ' - ' . 
-                $libreta->division->curso->nombre . ' - ' . 
-                $libreta->division->division;
+            return $libreta->nivel_nombre . ' - ' . 
+                $libreta->curso_nombre . ' - ' . 
+                $libreta->division;
         }
     }
 

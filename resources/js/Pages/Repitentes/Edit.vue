@@ -2,7 +2,10 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-md text-gray-800 leading-tight">
-                Editar a {{ repitente.alumno.user.name }}
+                <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('alumnos.index', institucion_id)">Alumnos</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, repitente.alumno.id])">{{ repitente.alumno.user.name }}</inertia-link> /
+                Editar
             </h2>
         </template>
 

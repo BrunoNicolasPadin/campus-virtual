@@ -44,9 +44,7 @@ class ExAlumnoController extends Controller
     {
         return Inertia::render('ExAlumnos/Index', [
             'institucion_id' => $institucion_id,
-            'exalumnos' => ExAlumno::where('institucion_id', $institucion_id)
-                ->with('alumno', 'alumno.user')
-                ->paginate(20),
+            'exAlumnos' => [],
             'divisiones' => $this->divisionService->get($institucion_id),
             'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
@@ -54,7 +52,8 @@ class ExAlumnoController extends Controller
 
     public function filtrarExAlumnos($institucion_id, Request $filtros)
     {
-        return ExAlumno::where('institucion_id', $institucion_id)
+        return ExAlumno::select('id', 'alumno_id', 'ciclo_lectivo_id', 'division_id', 'abandono')
+            ->where('institucion_id', $institucion_id)
             ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
                 return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
             })
@@ -67,7 +66,29 @@ class ExAlumnoController extends Controller
             ->when($filtros->abandono == '0', function ($query, $abandono) {
                 return $query->where('abandono', '0');
             })
-            ->with(['alumno', 'alumno.user', 'division', 'division.nivel', 'division.orientacion', 'division.curso'])
+            ->with(array(
+                'alumno' => function($query){
+                    $query->select('id', 'user_id');
+                },
+                'alumno.user' => function($query){
+                    $query->select('id', 'name', 'profile_photo_path');
+                },
+                'division' => function($query){
+                    $query->select('id', 'nivel_id', 'orientacion_id', 'curso_id', 'division');
+                },
+                'division.nivel' => function($query){
+                    $query->select('id', 'nombre');
+                },
+                'division.orientacion' => function($query){
+                    $query->select('id', 'nombre');
+                },
+                'division.curso' => function($query){
+                    $query->select('id', 'nombre');
+                },
+                'ciclo_lectivo' => function($query){
+                    $query->select('id', 'comienzo', 'final');
+                },
+            ))
             ->orderBy('ciclo_lectivo_id')
             ->paginate(20)
             ->transform(function ($exalumno) {
@@ -75,8 +96,9 @@ class ExAlumnoController extends Controller
                     'id' => $exalumno->id,
                     'alumno_id' => $exalumno->alumno_id,
                     'division_id' => $exalumno->division_id,
-                    'alumno' => $exalumno->alumno,
-                    'division' => $exalumno->division,
+                    'name' => $exalumno->alumno->user->name,
+                    'fotoDePerfil' => $exalumno->alumno->user->profile_photo_path,
+                    'division' => $exalumno->division->nivel->nombre . ' - ' . $exalumno->division->orientacion->nombre . ' - ' . $exalumno->division->curso->nombre . ' - ' . $exalumno->division->division,
                     'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($exalumno->ciclo_lectivo->comienzo),
                     'final' => $this->formatoService->cambiarFormatoParaMostrar($exalumno->ciclo_lectivo->final),
                     'abandono' => $exalumno->abandono,
@@ -116,9 +138,21 @@ class ExAlumnoController extends Controller
 
     public function edit($institucion_id, $id)
     {
+        $exAlumno = ExAlumno::select('id', 'alumno_id', 'ciclo_lectivo_id', 'comentario', 'abandono')
+            ->where('id', $id)
+            ->with(array(
+                'alumno' => function($query){
+                    $query->select('id', 'user_id');
+                },
+                'alumno.user' => function($query){
+                    $query->select('id', 'name', 'profile_photo_path');
+                },
+            ))
+            ->first();
+
         return Inertia::render('ExAlumnos/Edit', [
             'institucion_id' => $institucion_id,
-            'exalumno' => ExAlumno::with('alumno', 'alumno.user')->findOrFail($id),
+            'exAlumno' => $exAlumno,
             'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }

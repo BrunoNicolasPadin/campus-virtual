@@ -89,8 +89,12 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
-                                    <template #td>
+                                <table-data >
+                                    <template #td v-if="alumno.profile_photo_path">
+                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + alumno.profile_photo_path "  alt="Foto de perfil" />
+                                    </template>
+
+                                    <template #td v-else>
                                         -
                                     </template>
                                 </table-data>
@@ -98,7 +102,7 @@
                                 <table-data>
                                     <template #td>
                                         <a class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">
-                                            {{ alumno.user.name }}
+                                            {{ alumno.name }}
                                         </a>
                                     </template>
                                 </table-data>

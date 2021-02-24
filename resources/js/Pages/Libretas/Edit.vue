@@ -2,8 +2,10 @@
     <app-layout>
         <template #header>
             <span class="font-semibold text-md text-gray-800 leading-tight">
+                <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('alumnos.index', institucion_id)">Alumnos</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.name }}</inertia-link> /
-                <inertia-link class="hover:underline" :href="route('libretas.show', [institucion_id, alumno.id, libretas.ciclo_lectivo_id])">Libreta</inertia-link> / 
+                <inertia-link class="hover:underline" :href="route('libretas.index', [institucion_id, alumno.id])">Libreta</inertia-link> / 
                 Editar notas de {{ libretas.asignatura.nombre }}
             </span>
         </template>
@@ -44,7 +46,6 @@
                                 <select
                                 v-if="tipoEvaluacion == 'Escrita'"
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
-                                required
                                 v-model="nota.calificacion">
                                     
                                     <option value="">-</option>
@@ -56,7 +57,6 @@
                                 <select
                                 v-else
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
-                                required
                                 v-model="nota.calificacion">
                                     
                                     <option value="">-</option>

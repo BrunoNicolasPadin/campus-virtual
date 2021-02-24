@@ -97,20 +97,20 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ division.nivel.nombre }}
+                                        {{ division.nivel_nombre }}
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        <span v-if="division.orientacion">{{ division.orientacion.nombre }}</span>
+                                        <span v-if="division.orientacion_nombre">{{ division.orientacion_nombre }}</span>
                                         <span v-else >-</span>
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        {{ division.curso.nombre }}
+                                        {{ division.curso_nombre }}
                                     </template>
                                 </table-data>
 
@@ -122,7 +122,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('divisiones.show', [division.institucion_id, division.id])" class="hover:underline">
+                                        <inertia-link :href="route('divisiones.show', [institucion_id, division.id])" class="hover:underline">
                                             Ingresar
                                         </inertia-link>
                                     </template>
@@ -130,7 +130,7 @@
 
                                 <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                                     <template #td>
-                                        <inertia-link :href="route('divisiones.edit', [division.institucion_id, division.id])">
+                                        <inertia-link :href="route('divisiones.edit', [institucion_id, division.id])">
                                             <editar></editar>
                                         </inertia-link>
                                     </template>

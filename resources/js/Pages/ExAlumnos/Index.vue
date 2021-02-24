@@ -181,14 +181,14 @@
                                 <table-data>
                                     <template #td>
                                         <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, exalumno.alumno_id])">
-                                            {{ exalumno.alumno.user.name }}
+                                            {{ exalumno.name }}
                                         </inertia-link>
                                     </template>
                                 </table-data>
 
                                 <table-data >
-                                    <template #td v-if="exalumno.alumno.user.profile_photo_path">
-                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../storage/' + exalumno.alumno.user.profile_photo_path "  alt="Foto de perfil" />
+                                    <template #td v-if="exalumno.fotoDePerfil">
+                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../storage/' + exalumno.fotoDePerfil"  alt="Foto de perfil" />
                                     </template>
 
                                     <template #td v-else>
@@ -204,17 +204,9 @@
 
                                 <table-data>
                                     <template #td>
-                                        <span v-if="exalumno.division.orientacion">
+                                        <span>
                                             <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, exalumno.division_id])">
-                                                {{ exalumno.division.nivel.nombre }} - {{ exalumno.division.orientacion.nombre }} - 
-                                                {{ exalumno.division.curso.nombre }} - {{ exalumno.division.division }}
-                                            </inertia-link>
-                                        </span>
-
-                                        <span v-else>
-                                            <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, exalumno.division_id])">
-                                                {{ exalumno.division.nivel.nombre }} - {{ exalumno.division.orientacion.nombre }} - 
-                                                {{ exalumno.division.curso.nombre }} - {{ exalumno.division.division }}
+                                                {{ exalumno.division }}
                                             </inertia-link>
                                         </span>
                                     </template>

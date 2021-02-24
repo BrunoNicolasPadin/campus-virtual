@@ -3,7 +3,9 @@
         <template #header>
             <h2 class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / 
-                Editar al ex alumno {{ exalumno.alumno.user.name }}
+                <inertia-link class="hover:underline" :href="route('exalumnos.index', institucion_id)">Ex alumnos</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, exAlumno.alumno.id])">{{ exAlumno.alumno.user.name }}</inertia-link> /
+                Editar
             </h2>
         </template>
 
@@ -115,7 +117,7 @@
         props: {
             errors: Object,
             institucion_id: String,
-            exalumno: Object,
+            exAlumno: Object,
             ciclosLectivos: Array,
         },
 
@@ -124,9 +126,9 @@
         data() {
             return {
                 form: {
-                    ciclo_lectivo_id: this.exalumno.ciclo_lectivo_id,
-                    comentario: this.exalumno.comentario,
-                    abandono: this.exalumno.abandono,
+                    ciclo_lectivo_id: this.exAlumno.ciclo_lectivo_id,
+                    comentario: this.exAlumno.comentario,
+                    abandono: this.exAlumno.abandono,
                 },
                 mostrarErrores: true,
             }
@@ -134,7 +136,7 @@
 
         methods: {
             submit() {
-                this.$inertia.put(this.route('exalumnos.update', [this.institucion_id, this.exalumno.id]), this.form)
+                this.$inertia.put(this.route('exalumnos.update', [this.institucion_id, this.exAlumno.id]), this.form)
             },
 
             cerrarAlerta() {

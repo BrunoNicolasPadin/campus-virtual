@@ -45,7 +45,7 @@
         <div class="py-6">
             <estructura-informacion v-for="asignatura in asignaturas" :key="asignatura.id">
                 <template #cabecera-info>
-                    <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, asignatura.division_id, asignatura.id])">
+                    <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">
                         {{ asignatura.nombre }}
                     </inertia-link>
                 </template>
@@ -53,16 +53,12 @@
                 <template #dl-contenido>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Docentes
+                            Docente
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <span v-for="(asignaturasDocentes, index) in asignatura.docentes" :key="asignaturasDocentes.id">
-                                <span>
-                                    <inertia-link class="hover:underline" :href="route('docentes.show', [institucion_id, asignaturasDocentes.docente.id])">
-                                        {{ asignaturasDocentes.docente.user.name }}<span v-if="index != Object.keys(asignatura.docentes).length - 1">, </span>
-                                    </inertia-link>
-                                    
-                                </span>
+                                <inertia-link class="hover:underline" :href="route('docentes.show', [institucion_id, asignaturasDocentes.docente.id])">
+                                    {{ asignaturasDocentes.docente.user.name }}</inertia-link><span v-if="index != Object.keys(asignatura.docentes).length - 1">, </span>
                             </span>
                         </dd>
                     </div>

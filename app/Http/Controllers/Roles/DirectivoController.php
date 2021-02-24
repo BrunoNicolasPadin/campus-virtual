@@ -63,9 +63,14 @@ class DirectivoController extends Controller
 
     public function show($institucion_id, $id)
     {
+        $directivo = Directivo::select('users.name', 'users.profile_photo_path')
+            ->where('directivos.id', $id)
+            ->join('users', 'users.id', 'directivos.user_id')
+            ->first();
+    
         return Inertia::render('Directivos/Show', [
             'institucion_id' => $institucion_id,
-            'directivo' => Directivo::with('user')->findOrFail($id),
+            'directivo' => $directivo,
         ]);
     }
 

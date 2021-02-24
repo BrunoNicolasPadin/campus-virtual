@@ -60,16 +60,34 @@ class InstitucionController extends Controller
 
     public function show($id)
     {
+        $institucion = Institucion::select('id', 'user_id', 'numero', 'fundacion', 'historia', 'planDeEstudio')
+            ->where('id', $id)
+            ->with(array(
+                'user' => function($query){
+                    $query->select('id', 'name', 'profile_photo_path');
+                },
+            ))
+            ->first();
+
         return Inertia::render('Instituciones/Show', [
-            'institucion' => Institucion::with('user')->findOrFail($id),
+            'institucion' => $institucion,
             'tipo'  => session('tipo'),
         ]);
     }
 
     public function edit($id)
     {
+        $institucion = Institucion::select('id', 'user_id', 'numero', 'fundacion', 'historia', 'planDeEstudio')
+            ->where('id', $id)
+            ->with(array(
+                'user' => function($query){
+                    $query->select('id', 'name', 'profile_photo_path');
+                },
+            ))
+            ->first();
+
         return Inertia::render('Instituciones/Edit', [
-            'institucion' => Institucion::with('user')->findOrFail($id),
+            'institucion' => $institucion,
         ]);
     }
 

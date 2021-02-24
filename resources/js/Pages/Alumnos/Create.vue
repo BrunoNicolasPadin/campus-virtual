@@ -48,11 +48,11 @@
                                     <option value="" disabled selected>-</option>
                                     <option v-for="division in divisiones" :key="division.id" :value="division.id">
                                         <span v-if="division.orientacion">
-                                            {{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}
+                                            {{ division.nivel_nombre }} - {{ division.orientacion_nombre }} - {{ division.curso_nombre }} - {{ division.division }}
                                         </span>
 
                                         <span v-else>
-                                            {{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}
+                                            {{ division.nivel_nombre }} - {{ division.curso_nombre }} - {{ division.division }}
                                         </span>
                                     </option>
 

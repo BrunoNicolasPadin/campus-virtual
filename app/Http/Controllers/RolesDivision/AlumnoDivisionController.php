@@ -27,22 +27,32 @@ class AlumnoDivisionController extends Controller
 
     public function mostrarAlumnos($institucion_id, $division_id)
     {
+        $alumnos = Alumno::select('users.name', 'users.profile_photo_path', 'alumnos.id')
+            ->where('alumnos.division_id', $division_id)
+            ->join('users', 'users.id', 'alumnos.user_id')
+            ->paginate(20);
+
         return Inertia::render('RolesDivision/Alumnos', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
             'division' => $this->divisionService->find($division_id),
-            'alumnos' => Alumno::where('division_id', $division_id)->with('user')->paginate(20),
+            'alumnos' => $alumnos,
         ]);
     }
 
     public function hacerlosPasar($institucion_id, $division_id)
     {
+        $alumnos = Alumno::select('users.name', 'users.profile_photo_path', 'alumnos.id')
+            ->where('alumnos.division_id', $division_id)
+            ->join('users', 'users.id', 'alumnos.user_id')
+            ->get();
+
         return Inertia::render('RolesDivision/HacerlosPasar', [
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
             'divisiones' => $this->divisionService->get($institucion_id),
-            'alumnos' => Alumno::where('division_id', $division_id)->with('user')->get(),
+            'alumnos' => $alumnos,
         ]);
     }
 

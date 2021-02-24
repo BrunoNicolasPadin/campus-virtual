@@ -4,6 +4,8 @@
             <div class="flex">
                 <div class="w-1/2">
                     <span class="font-semibold text-md text-gray-800 leading-tight">
+                        <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> /
+                        <inertia-link class="hover:underline" :href="route('alumnos.index', institucion_id)">Alumnos</inertia-link> /
                         <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.name }}</inertia-link> /
                         Asignaturas adeudadas y ya aprobadas
                     </span>

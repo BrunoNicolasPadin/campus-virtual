@@ -63,14 +63,29 @@ class AsignaturaController extends Controller
 
     public function index($institucion_id, $division_id)
     {
-        return Inertia::render('Asignaturas/Index', [
+        $asignaturas = Asignatura::select('asignaturas.id', 'asignaturas.nombre')
+            ->where('asignaturas.division_id', $division_id)
+            ->with(array(
+                'docentes' => function($query){
+                    $query->select('asignatura_id', 'docente_id');
+                },
+                'docentes.docente' => function($query){
+                    $query->select('id', 'user_id');
+                },
+                'docentes.docente.user' => function($query){
+                    $query->select('id','name');
+                },
+                'horarios' => function($query){
+                    $query->select('asignatura_id','dia', 'horaDesde', 'horaHasta');
+                }
+            ))
+            ->get();
+
+            return Inertia::render('Asignaturas/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'division' => $this->divisionService->find($division_id),
-            'asignaturas' => Asignatura::where('division_id', $division_id)
-                ->with(['horarios', 'docentes', 'docentes.docente', 'docentes.docente.user'])
-                ->orderBy('nombre')
-                ->get(),
+            'asignaturas' => $asignaturas,
         ]);
     }
 
@@ -146,13 +161,29 @@ class AsignaturaController extends Controller
     {
         $dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
+        $asignatura = Asignatura::select('asignaturas.id', 'asignaturas.nombre')
+            ->with(array(
+                'docentes' => function($query){
+                    $query->select('asignatura_id', 'docente_id');
+                },
+                'docentes.docente' => function($query){
+                    $query->select('id', 'user_id');
+                },
+                'docentes.docente.user' => function($query){
+                    $query->select('id','name');
+                },
+                'horarios' => function($query){
+                    $query->select('asignatura_id','dia', 'horaDesde', 'horaHasta');
+                }
+            ))
+            ->findOrFail($id);
+
         return Inertia::render('Asignaturas/Edit', [
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
             'dias' => $dias,
             'docentes' => $this->docenteService->get($institucion_id),
-            'asignatura' => Asignatura::with(['horarios', 'docentes', 'docentes.docente', 'docentes.docente.user'])
-                ->findOrFail($id),
+            'asignatura' => $asignatura,
         ]);
     }
 

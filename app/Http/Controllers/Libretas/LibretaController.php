@@ -49,18 +49,12 @@ class LibretaController extends Controller
     public function index($institucion_id, $alumno_id)
     {
         $cicloLectivo = CicloLectivo::where('institucion_id', $institucion_id)->where('activado', 1)->first();
-        $libreta = $this->obtenerLibreta($alumno_id, $cicloLectivo->id);
 
+        $libreta = null;
         $periodos = [];
         $libretas = [];
         $deudas = [];
 
-        if (! $libreta == null) {
-            $periodos = $this->divisionService->obtenerPeriodos($libreta);
-            $libretas = $this->obtenerLibretas($alumno_id, $cicloLectivo->id);
-            $deudas = $this->obtenerDeudas($alumno_id, $cicloLectivo->id);
-        }
-    
         return Inertia::render('Libretas/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
@@ -68,8 +62,8 @@ class LibretaController extends Controller
             'alumno' => $this->alumnoService->find($alumno_id),
             'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
             'periodos' => $periodos,
-            'libretas' => $libretas,
             'libreta' => $libreta,
+            'libretas' => $libretas,
             'deudas' => $deudas,
         ]);
     }
@@ -93,13 +87,25 @@ class LibretaController extends Controller
 
     public function edit($institucion_id, $alumno_id, $id)
     {
-        $libreta = Libreta::findOrFail($id);
+        $libreta = Libreta::select('division_id')->findOrFail($id);
         $arrayTemporal = $this->formaEvaluacionService->obtenerFormaEvaluacion($libreta->division_id);
+
+        $libretas = Libreta::select('id', 'asignatura_id')
+            ->where('id', $id)
+            ->with(array(
+                'asignatura' => function($query){
+                    $query->select('id', 'nombre');
+                },
+                'calificaciones' => function($query){
+                    $query->select('libreta_id', 'id', 'calificacion', 'periodo');
+                },
+            ))
+            ->first();
 
         return Inertia::render('Libretas/Edit', [
             'institucion_id' => $institucion_id,
             'alumno' => $this->alumnoService->find($alumno_id),
-            'libretas' => Libreta::with(['asignatura', 'calificaciones'])->findOrFail($id),
+            'libretas' => $libretas,
             'formasDescripcion' => $arrayTemporal[0],
             'tipoEvaluacion' => $arrayTemporal[1],
         ]);
@@ -120,10 +126,16 @@ class LibretaController extends Controller
 
     public function obtenerLibreta($alumno_id, $ciclo_lectivo_id)
     {
-        return Libreta::where('alumno_id', $alumno_id)
-            ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-            ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso'])
-            ->first();
+        return Libreta::select('libretas.periodo_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+        'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'formas_evaluacion.tipo')
+        ->where('libretas.alumno_id', $alumno_id)
+        ->where('libretas.ciclo_lectivo_id', $ciclo_lectivo_id)
+        ->join('divisiones', 'libretas.division_id', 'divisiones.id')
+        ->join('niveles', 'niveles.id', 'divisiones.nivel_id')
+        ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
+        ->join('cursos', 'cursos.id', 'divisiones.curso_id')
+        ->join('formas_evaluacion', 'formas_evaluacion.id', 'divisiones.forma_evaluacion_id')
+        ->first();
     }
 
     public function obtenerDeudas($alumno_id, $ciclo_lectivo_id)

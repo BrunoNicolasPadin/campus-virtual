@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <span class="font-semibold text-md text-gray-800 leading-tight">
-                Perfil institucional
+                Perfil institucional {{ institucion.user.name }}
             </span>
         </template>
 

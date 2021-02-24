@@ -2,7 +2,10 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-md text-gray-800 leading-tight">
-                Hacer repetir a {{ alumno.name }}
+                <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('repitentes.index', institucion_id)">Repitentes</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.name }}</inertia-link> /
+                Hacer repetir
             </h2>
         </template>
 

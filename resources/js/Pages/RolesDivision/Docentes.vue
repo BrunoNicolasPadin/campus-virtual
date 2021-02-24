@@ -4,9 +4,10 @@
             <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('divisiones.index', institucion_id)">Estructura</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, division.id])">
-                    <span v-if="division.orientacion">{{ division.nivel.nombre }} - {{ division.orientacion.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                    <span v-else>{{ division.nivel.nombre }} - {{ division.curso.nombre }} - {{ division.division }}</span>
-                </inertia-link> / Docentes
+                    <span v-if="division.orientacion_nombre">{{ division.nivel_nombre }} - {{ division.orientacion_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
+                    <span v-else>{{ division.nivel_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
+                </inertia-link> / 
+                Docentes
             </span>
         </template>
 
@@ -46,8 +47,8 @@
                                 </table-data>
 
                                 <table-data >
-                                    <template #td v-if="docente.user.profile_photo_path">
-                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + docente.user.profile_photo_path "  alt="Foto de perfil" />
+                                    <template #td v-if="docente.profile_photo_path">
+                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + docente.profile_photo_path "  alt="Foto de perfil" />
                                     </template>
 
                                     <template #td v-else>
@@ -58,7 +59,7 @@
                                 <table-data>
                                     <template #td>
                                         <a class="hover:underline" :href="route('docentes.show', [institucion_id, docente.id])">
-                                            {{ docente.user.name }}
+                                            {{ docente.name }}
                                         </a>
                                     </template>
                                 </table-data>

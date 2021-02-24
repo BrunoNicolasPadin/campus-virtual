@@ -4,7 +4,7 @@
             <span class="font-semibold text-md text-gray-800 leading-tight">
                 <inertia-link class="hover:underline" :href="route('roles.index', institucion_id)">Roles</inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('directivos.index', institucion_id)">Directivos</inertia-link> /
-                {{ directivo.user.name }}
+                {{ directivo.name }}
             </span>
         </template>
 
@@ -21,8 +21,8 @@
                             Nombre
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            {{ directivo.user.name }}<span v-show="directivo.user.profile_photo_path">
-                                - <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + directivo.user.profile_photo_path "  alt="Foto de perfil" />
+                            {{ directivo.name }}<span v-show="directivo.profile_photo_path">
+                                - <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + directivo.profile_photo_path "  alt="Foto de perfil" />
                             </span>
                         </dd>
                     </div>

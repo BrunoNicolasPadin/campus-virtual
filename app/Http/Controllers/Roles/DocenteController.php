@@ -64,9 +64,14 @@ class DocenteController extends Controller
 
     public function show($institucion_id, $id)
     {
+        $docente = Docente::select('users.name', 'users.profile_photo_path')
+            ->where('docentes.id', $id)
+            ->join('users', 'users.id', 'docentes.user_id')
+            ->first();
+
         return Inertia::render('Docentes/Show', [
             'institucion_id' => $institucion_id,
-            'docente' => Docente::with('user')->findOrFail($id),
+            'docente' => $docente,
         ]);
     }
 

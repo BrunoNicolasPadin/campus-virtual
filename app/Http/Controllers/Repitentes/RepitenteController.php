@@ -122,9 +122,21 @@ class RepitenteController extends Controller
 
     public function edit($institucion_id, $id)
     {
+        $repitente = Repitente::select('id', 'alumno_id', 'ciclo_lectivo_id', 'comentario', 'division_id')
+            ->where('id', $id)
+            ->with(array(
+                'alumno' => function($query){
+                    $query->select('id', 'user_id');
+                },
+                'alumno.user' => function($query){
+                    $query->select('id', 'name');
+                },
+            ))
+            ->first();
+
         return Inertia::render('Repitentes/Edit', [
             'institucion_id' => $institucion_id,
-            'repitente' => Repitente::with('alumno', 'alumno.user')->findOrFail($id),
+            'repitente' => $repitente,
             'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
             'divisiones' => $this->divisionService->get($institucion_id),
         ]);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreAlumno;
 use App\Http\Requests\Roles\StoreDirectivo;
 use App\Models\Roles\Alumno;
+use App\Services\Alumnos\AlumnoService;
 use App\Services\ClaveDeAcceso\VerificarDivision;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
 use App\Services\Division\DivisionService;
@@ -17,11 +18,13 @@ class AlumnoController extends Controller
     protected $claveDeAccesoService;
     protected $claveInstitucion;
     protected $divisionService;
+    protected $alumnoService;
 
     public function __construct(
         VerificarDivision $claveDeAccesoService,
         VerificarInstitucion $claveInstitucion,
-        DivisionService $divisionService
+        DivisionService $divisionService,
+        AlumnoService $alumnoService
     )
 
     {
@@ -35,6 +38,7 @@ class AlumnoController extends Controller
         $this->claveDeAccesoService = $claveDeAccesoService;
         $this->claveInstitucion = $claveInstitucion;
         $this->divisionService = $divisionService;
+        $this->alumnoService = $alumnoService;
     }
 
     public function index($institucion_id)
@@ -43,6 +47,7 @@ class AlumnoController extends Controller
             'institucion_id' => $institucion_id,
             'alumnos' => Alumno::select('alumnos.id', 'users.name', 'users.profile_photo_path')
                 ->where('institucion_id', $institucion_id)
+                ->where('alumnos.exAlumno', '0')
                 ->join('users', 'users.id', 'alumnos.user_id')
                 ->orderBy('users.name')
                 ->paginate(20)
@@ -96,11 +101,21 @@ class AlumnoController extends Controller
 
     public function show($institucion_id, $id)
     {
+        $alumno = Alumno::select('alumnos.id', 'alumnos.exAlumno', 'divisiones.id AS division_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+        'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'users.name')
+            ->where('alumnos.id', $id)
+            ->leftjoin('divisiones', 'alumnos.division_id', 'divisiones.id')
+            ->leftjoin('niveles', 'niveles.id', 'divisiones.nivel_id')
+            ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
+            ->leftjoin('cursos', 'cursos.id', 'divisiones.curso_id')
+            ->join('users', 'users.id', 'alumnos.user_id')
+            ->leftjoin('padres', 'padres.alumno_id', 'alumnos.id')
+            ->first();
+
         return Inertia::render('Alumnos/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'alumno' => Alumno::with(['user', 'division', 'division.nivel', 'division.orientacion', 'division.curso', 'padres', 'padres.user'])
-                ->findOrFail($id),
+            'alumno' => $alumno,
         ]);
     }
 
@@ -109,7 +124,7 @@ class AlumnoController extends Controller
         return Inertia::render('Alumnos/Edit', [
             'institucion_id' => $institucion_id,
             'divisiones' => $this->divisionService->get($institucion_id),
-            'alumno' => Alumno::with('user')->findOrFail($id),
+            'alumno' => $this->alumnoService->find($id),
         ]);
     }
 
