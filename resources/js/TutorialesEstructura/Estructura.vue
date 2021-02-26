@@ -12,115 +12,164 @@
             </div>
         </nav>
 
-        <div class="md:flex flex-col md:flex-row md:min-h-screen w-full">
-            <div @click="open = false" class="border-r-2 border-r-black flex flex-col w-full md:w-64 text-gray-700 bg-blue-50 dark-mode:text-gray-200 dark-mode:bg-gray-800 flex-shrink-0" x-data="{ open: false }">
-                <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between">
-                    <span href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Lista</span>
-                    <button class="rounded-lg md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                            <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                            <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
+        <div class="flex flex-wrap w-full h-auto bg-blue-50">
+            <div class="w-3/12 bg-blue-50 rounded p-3 shadow-md">
+                <div class="flex items-center space-x-4 p-2 mb-5">
+                    <h4 class="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide">Lista</h4>
                 </div>
-                <nav :class="{'block': open, 'hidden': !open}" class="flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.como-empezar')">
-                        ¿Cómo empezar?
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.nuevo-ciclo-lectivo')">
-                        ¿Está por comenzar un ciclo lectivo nuevo? Sigue estos pasos
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.soporte')">
-                        Soporte
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.institucion')">
-                        Institución
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.ciclo-lectivo')">
-                        Ciclos lectivos
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.estructura')">
-                        Estructuras
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.asignatura')">
-                        Asignaturas
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.usuario')">
-                        Perfil de usuario
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.directivo')">
-                        Directivos
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.docente')">
-                        Docentes
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.alumno')">
-                        Alumnos
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.padre')">
-                        Padres
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.evaluacion')">
-                        Evaluaciones
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.correccion')">
-                        Correcciones
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.entrega')">
-                        Entregas
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.material')">
-                        Materiales
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.libreta')">
-                        Libretas
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.muro')">
-                        Muro
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.mesa')">
-                        Mesas/Rendir
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.repitente')">
-                        Repitentes
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.exalumno')">
-                        Ex alumnos
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.estadistica')">
-                        Estadísticas y números
-                    </inertia-link>
-                    <inertia-link class="hover:underline block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" 
-                        :href="route('tutoriales.calendario')">
-                        Calendario
-                    </inertia-link>
-                </nav>
+                <ul class="space-y-2 text-sm">
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.como-empezar')">
+                            ¿Cómo empezar?
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.nuevo-ciclo-lectivo')">
+                            ¿Está por comenzar un ciclo lectivo nuevo? Sigue estos pasos
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.nuevo-ciclo-lectivo')">
+                            ¿Está por comenzar un ciclo lectivo nuevo? Sigue estos pasos
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.soporte')">
+                            Soporte
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.institucion')">
+                            Institución
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.ciclo-lectivo')">
+                            Ciclos lectivos
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.estructura')">
+                            Estructuras
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.asignatura')">
+                            Asignaturas
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.usuario')">
+                            Perfil de usuario
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.directivo')">
+                            Directivos
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.docente')">
+                            Docentes
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.alumno')">
+                            Alumnos
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.padre')">
+                            Padres
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.evaluacion')">
+                            Evaluaciones
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.correccion')">
+                            Correcciones
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.entrega')">
+                            Entregas
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.material')">
+                            Materiales
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.libreta')">
+                            Libretas
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.muro')">
+                            Muro
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.mesa')">
+                            Mesas/Rendir
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.repitente')">
+                            Repitentes
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.exalumno')">
+                            Ex alumnos
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.estadistica')">
+                            Estadísticas y números
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.calendario')">
+                            Calendario
+                        </inertia-link>
+                    </li>
+                </ul>
             </div>
 
-            <slot name="contenido"></slot>
-            
+            <div class="w-9/12">
+                <div class="p-4 text-gray-500">
+                    <slot name=contenido></slot>
+                </div>
+            </div>
         </div>
     </div>
 </div>
