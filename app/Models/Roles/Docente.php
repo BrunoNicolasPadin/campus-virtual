@@ -10,9 +10,11 @@ class Docente extends Model
 {
     protected $table = 'docentes';
     protected $fillable = [
+        'activado',
+    ];
+    protected $guarded = [
         'user_id',
         'institucion_id',
-        'activado',
     ];
 
     public function user()

@@ -11,11 +11,13 @@ class Alumno extends Model
 {
     protected $table = 'alumnos';
     protected $fillable = [
+        'exAlumno',
+        'activado',
+    ];
+    protected $guarded = [
         'user_id',
         'institucion_id',
         'division_id',
-        'exAlumno',
-        'activado',
     ];
 
     public function institucion()

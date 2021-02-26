@@ -8,10 +8,12 @@ class Material extends Model
 {
     protected $table = 'materiales';
     protected $fillable = [
-        'grupo_id',
         'nombre',
         'visibilidad',
         'archivo',
+    ];
+    protected $guarded = [
+        'grupo_id',
     ];
 
     public function grupo()

@@ -9,9 +9,11 @@ class Padre extends Model
 {
     protected $table = 'padres';
     protected $fillable = [
+        'activado',
+    ];
+    protected $guarded = [
         'user_id',
         'alumno_id',
-        'activado',
     ];
 
     public function user()

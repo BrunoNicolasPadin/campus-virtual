@@ -51,20 +51,18 @@ class EvaluacionArchivoController extends Controller
     {
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
-            $i = 0;
 
-            foreach ($archivos as $archivo) {
+            for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Evaluaciones/Archivos', $nombre);
+                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $archivos[$i]->storeAs('public/Evaluaciones/Archivos', $nombre);
 
-                Archivo::create([
-                    'evaluacion_id' => $evaluacion_id,
-                    'nombre' => $request['nombre'][$i],
-                    'archivo' => $nombre,
-                    'visibilidad'  => $request['visibilidad'][$i],
-                ]);
-                $i++;
+                $evaluacionArchivo = new Archivo();
+                $evaluacionArchivo->nombre = $request['nombre'][$i];
+                $evaluacionArchivo->archivo = $nombre;
+                $evaluacionArchivo->visibilidad = $request['visibilidad'][$i];
+                $evaluacionArchivo->evaluacion()->associate($evaluacion_id);
+                $evaluacionArchivo->save();
             }
 
             return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))

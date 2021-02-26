@@ -8,8 +8,10 @@ class RendirCorreccion extends Model
 {
     protected $table = 'rendir_correcciones';
     protected $fillable = [
-        'anotado_id',
         'archivo',
+    ];
+    protected $guarded = [
+        'anotado_id',
     ];
 
     public function anotado()

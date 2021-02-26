@@ -33,11 +33,11 @@ class FormaDescripcionController extends Controller
 
     public function store(Request $request, $institucion_id, $forma_evaluacion_id)
     {
-        FormaDescripcion::create([
-            'forma_evaluacion_id' => $forma_evaluacion_id,
-            'opcion' => $request->opcion,
-            'aprobado' => $request->aprobado,
-        ]);
+        $formaDescripcion = new FormaDescripcion();
+        $formaDescripcion->opcion = $request->opcion;
+        $formaDescripcion->aprobado = $request->aprobado;
+        $formaDescripcion->formaEvaluacion()->associate($forma_evaluacion_id);
+        $formaDescripcion->save();
 
         return redirect(route('formas-evaluacion.show', [$institucion_id, $forma_evaluacion_id]))
             ->with(['successMessage' => 'Forma de descripción creada con éxito!']);

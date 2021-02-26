@@ -9,12 +9,14 @@ class Institucion extends Model
 {
     protected $table = 'instituciones';
     protected $fillable = [
-        'user_id',
         'numero',
         'fundacion',
         'historia',
         'planDeEstudio',
         'claveDeAcceso',
+    ];
+    protected $guarded = [
+        'useer_id',
     ];
 
     public function user()

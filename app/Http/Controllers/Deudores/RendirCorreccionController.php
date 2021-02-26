@@ -61,15 +61,15 @@ class RendirCorreccionController extends Controller
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
 
-            foreach ($archivos as $archivo) {
+            for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Deudores/Correcciones', $nombre);
+                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $archivos[$i]->storeAs('public/Deudores/Correcciones', $nombre);
 
-                RendirCorreccion::create([
-                    'anotado_id' => $anotado_id,
-                    'archivo' => $nombre,
-                ]);
+                $rendirCorreccion = new RendirCorreccion();
+                $rendirCorreccion->archivo = $nombre;
+                $rendirCorreccion->anotado()->associate($anotado_id);
+                $rendirCorreccion->save();
             }
 
             return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id]))

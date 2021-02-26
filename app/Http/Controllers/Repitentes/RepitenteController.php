@@ -85,13 +85,13 @@ class RepitenteController extends Controller
 
     public function store(StoreRepitente $request, $institucion_id)
     {
-        Repitente::create([
-            'institucion_id' => $institucion_id,
-            'alumno_id' => $request->alumno_id,
-            'division_id' => $request->division_id,
-            'ciclo_lectivo_id' => $request->ciclo_lectivo_id,
-            'comentario' => $request->comentario,
-        ]);
+        $repitente = new Repitente();
+        $repitente->comentario = $request->comentario;
+        $repitente->institucion()->associate($institucion_id);
+        $repitente->alumno()->associate($request->alumno_id);
+        $repitente->division()->associate($request->division_id);
+        $repitente->ciclo_lectivo()->associate($request->ciclo_lectivo_id);
+        $repitente->save();
 
         return redirect(route('repitentes.index', $institucion_id))
             ->with(['successMessage' => 'Repitente registrado con éxito!']);

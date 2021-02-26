@@ -52,12 +52,12 @@ class MesaController extends Controller
 
     public function store(StoreMesa $request, $institucion_id, $division_id, $asignatura_id)
     {
-        Mesa::create([
-            'institucion_id' => $institucion_id,
-            'asignatura_id' => $asignatura_id,
-            'fechaHora' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHora),
-            'comentario' => $request->comentario,
-        ]);
+        $mesa = new Mesa();
+        $mesa->fechaHora = $this->formatoService->cambiarFormatoParaGuardar($request->fechaHora);
+        $mesa->comentario = $request->comentario;
+        $mesa->institucion()->associate($institucion_id);
+        $mesa->asignatura()->associate($asignatura_id);
+        $mesa->save();
 
         return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
             ->with(['successMessage' => 'Mesa agregada con éxito!']);

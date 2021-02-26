@@ -10,9 +10,11 @@ class Grupo extends Model
 {
     protected $table = 'grupos';
     protected $fillable = [
-        'division_id',
-        'asignatura_id',
         'nombre',
+    ];
+    protected $guarded = [
+        'division_id',
+        'asignatura_id'
     ];
 
     public function asignatura()

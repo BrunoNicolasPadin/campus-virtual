@@ -23,6 +23,6 @@ class SoloInstitucionesDirectivos
             }
         }
 
-        return abort(403, 'Usted no es una institución o un directivo.');
+        abort(403, 'Usted no es una institución o un directivo.');
     }
 }

@@ -63,16 +63,17 @@ class EstructuraController extends Controller
     public function store(StoreDivision $request, $institucion_id)
     {
         for ($i=0; $i < count($request->divisiones); $i++) { 
-            Division::create([
-                'institucion_id' => $institucion_id,
-                'nivel_id' => $request->nivel_id,
-                'orientacion_id' => $request->orientacion_id,
-                'curso_id' => $request->curso_id,
-                'division' => $request->divisiones[$i]['division'],
-                'periodo_id' => $request->periodo_id,
-                'forma_evaluacion_id' => $request->forma_evaluacion_id,
-                'claveDeAcceso' => Hash::make($request->divisiones[$i]['claveDeAcceso']),
-            ]);
+
+            $division = new Division();
+            $division->division = $request->divisiones[$i]['division'];
+            $division->claveDeAcceso = Hash::make($request->divisiones[$i]['claveDeAcceso']);
+            $division->institucion()->associate($institucion_id);
+            $division->nivel()->associate($request->nivel_id);
+            $division->orientacion()->associate($request->orientacion_id);
+            $division->curso()->associate($request->curso_id);
+            $division->periodo()->associate($request->periodo_id);
+            $division->formaEvaluacion()->associate($request->forma_evaluacion_id);
+            $division->save();
         }
 
         return redirect(route('divisiones.create', $institucion_id))

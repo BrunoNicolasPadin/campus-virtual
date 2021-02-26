@@ -17,27 +17,27 @@ class InstitucionYaCreada
     {
         if (Institucion::where('user_id', Auth::id())
             ->exists()) {
-            return abort(403, 'Usted ya está registrado como institución.');
+            abort(403, 'Usted ya está registrado como institución.');
         }
 
         if (Directivo::where('user_id', Auth::id())
             ->exists()) {
-            return abort(403, 'Usted ya está registrado con otro tipo de cuenta (Directivo)');
+            abort(403, 'Usted ya está registrado con otro tipo de cuenta (Directivo)');
         }
 
         if (Docente::where('user_id', Auth::id())
             ->exists()) {
-            return abort(403, 'Usted ya está registrado con otro tipo de cuenta (Docente)');
+            abort(403, 'Usted ya está registrado con otro tipo de cuenta (Docente)');
         }
 
         if (Alumno::where('user_id', Auth::id())
             ->exists()) {
-            return abort(403, 'Usted ya está registrado con otro tipo de cuenta (Alumno)');
+            abort(403, 'Usted ya está registrado con otro tipo de cuenta (Alumno)');
         }
 
         if (Padre::where('user_id', Auth::id())
             ->exists()) {
-            return abort(403, 'Usted ya está registrado con otro tipo de cuenta (Padre)');
+            abort(403, 'Usted ya está registrado con otro tipo de cuenta (Padre)');
         }
 
         return $next($request);

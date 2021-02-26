@@ -82,6 +82,13 @@ class GrupoController extends Controller
             'asignatura_id' => $request->asignatura_id,
             'nombre' => $request->nombre,
         ]);
+
+        $grupo = new Grupo();
+        $grupo->nombre = $request->nombre;
+        $grupo->division()->associate($division_id);
+        $grupo->asignatura()->associate($request->asignatura_id);
+        $grupo->save();
+
         return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo->id]))
             ->with(['successMessage' => 'Grupo creado con éxito']);
     }

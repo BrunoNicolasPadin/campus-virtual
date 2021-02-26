@@ -49,11 +49,11 @@ class PadreController extends Controller
     public function store(StorePadre $request, $institucion_id)
     {
         if (Alumno::where('id', $request->alumno_id)->where('institucion_id', $institucion_id)->exists()) {
-            Padre::create([
-                'user_id' => Auth::id(),
-                'alumno_id' => $request->alumno_id,
-                'activado' => 0,
-            ]);
+            $padre = new Padre();
+            $padre->activado = '0';
+            $padre->user()->associate(Auth::id());
+            $padre->hijos()->associate($request->alumno_id);
+            $padre->save();
     
             return back()->with(['successMessage' => 'Hijo registrado con  éxito! Seleccione a otro si desea cargarlo.']);
         }

@@ -9,9 +9,11 @@ class EvaluacionComentario extends Model
 {
     protected $table = 'evaluaciones_comentarios';
     protected $fillable = [
+        'comentario',
+    ];
+    protected $guarded = [
         'evaluacion_id',
         'user_id',
-        'comentario',
     ];
 
     public function evaluacion()

@@ -66,11 +66,12 @@ class EvaluacionRespuestaController extends Controller
 
     public function store(StoreRespuesta $request, $institucion_id, $division_id, $evaluacion_id, $comentario_id)
     {
-        EvaluacionRespuesta::create([
-            'comentario_id' => $comentario_id,
-            'user_id' => Auth::id(),
-            'respuesta' => $request->respuesta,
-        ]);
+        $respuesta = new EvaluacionRespuesta();
+        $respuesta->respuesta = $request->respuesta;
+        $respuesta->comentario()->associate($comentario_id);
+        $respuesta->user()->associate(Auth::id());
+        $respuesta->save();
+
         return back()->with(['successMessage' => 'Respuesta guardada con éxito!']);
     }
 

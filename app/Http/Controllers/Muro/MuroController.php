@@ -57,11 +57,12 @@ class MuroController extends Controller
 
     public function store(StorePublicacion $request, $institucion_id, $division_id)
     {
-        Muro::create([
-            'division_id' => $division_id,
-            'user_id' => Auth::id(),
-            'publicacion' => $request->publicacion,
-        ]);
+        $muro = new Muro();
+        $muro->publicacion = $request->publicacion;
+        $muro->division()->associate($division_id);
+        $muro->user()->associate(Auth::id());
+        $muro->save();
+
         return back()->with(['successMessage' => 'Publicación agregada con éxito!']);
     }
 

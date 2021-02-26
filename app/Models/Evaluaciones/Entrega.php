@@ -9,10 +9,12 @@ class Entrega extends Model
 {
     protected $table = 'entregas';
     protected $fillable = [
-        'evaluacion_id',
-        'alumno_id',
         'calificacion',
         'comentario',
+    ];
+    protected $guarded = [
+        'evaluacion_id',
+        'alumno_id',
     ];
 
     public function evaluacion()

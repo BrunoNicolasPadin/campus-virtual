@@ -65,10 +65,12 @@ class AnotadoController extends Controller
     public function store(Request $request, $institucion_id, $division_id, $asignatura_id, $mesa_id)
     {
         $alumno = Alumno::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
-        Anotado::create([
-            'mesa_id' => $mesa_id,
-            'alumno_id' => $alumno['id'],
-        ]);
+
+        $anotado = new Anotado();
+        $anotado->mesa()->associate($mesa_id);
+        $anotado->alumno()->associate($alumno->id);
+        $anotado->save();
+
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
             ->with(['successMessage' => 'Te inscribbiste con éxito!']);
     }

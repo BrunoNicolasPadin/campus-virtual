@@ -8,9 +8,11 @@ class FormaDescripcion extends Model
 {
     protected $table = 'formas_descripcion';
     protected $fillable = [
-        'forma_evaluacion_id',
         'opcion',
         'aprobado',
+    ];
+    protected $guarded = [
+        'forma_evaluacion_id',
     ];
 
     public function formaEvaluacion()

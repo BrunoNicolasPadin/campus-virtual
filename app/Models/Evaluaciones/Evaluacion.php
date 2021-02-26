@@ -10,14 +10,16 @@ class Evaluacion extends Model
 {
     protected $table = 'evaluaciones';
     protected $fillable = [
-        'institucion_id',
-        'division_id',
-        'asignatura_id',
         'titulo',
         'tipo',
         'fechaHoraRealizacion',
         'fechaHoraFinalizacion',
         'comentario',
+    ];
+    protected $guarded = [
+        'institucion_id',
+        'division_id',
+        'asignatura_id',
     ];
 
     public function division()

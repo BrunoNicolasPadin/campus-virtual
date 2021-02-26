@@ -10,9 +10,11 @@ class Muro extends Model
 {
     protected $table = 'muro';
     protected $fillable = [
-        'division_id',
-        'user_id',
         'publicacion',
+    ];
+    protected $guarded = [
+        'division_id',
+        'useer_id',
     ];
 
     public function user()

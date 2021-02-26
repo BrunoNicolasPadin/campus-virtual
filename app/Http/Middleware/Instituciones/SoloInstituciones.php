@@ -22,6 +22,6 @@ class SoloInstituciones
                 return $next($request);
             }
         }
-        return abort(403, 'Usted no es una institución.');
+        abort(403, 'Usted no es una institución.');
     }
 }

@@ -11,10 +11,12 @@ class AlumnoDeudor extends Model
 {
     protected $table = 'alumnos_deudores';
     protected $fillable = [
+        'aprobado',
+    ];
+    protected $guarded = [
         'alumno_id',
         'asignatura_id',
         'ciclo_lectivo_id',
-        'aprobado',
     ];
 
     public function alumno()

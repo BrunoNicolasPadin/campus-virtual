@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 class Libreta extends Model
 {
     protected $table = 'libretas';
-    protected $fillable = [
+    protected $fillable = [];
+    protected $guarded = [
         'alumno_id',
         'ciclo_lectivo_id',
         'division_id',

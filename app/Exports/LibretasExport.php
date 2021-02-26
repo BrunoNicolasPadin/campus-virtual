@@ -18,6 +18,7 @@ class LibretasExport implements FromCollection
     }
     public function collection()
     {
+        $periodos = null;
         $lib = Libreta::where('alumno_id', $this->alumno_id)
             ->where('ciclo_lectivo_id', $this->ciclo_lectivo_id)
             ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso', 'cicloLectivo'])
@@ -83,6 +84,7 @@ class LibretasExport implements FromCollection
             );
         }
 
+        $arreglos = [];
         $arreglos = [$periodos, $deudasCabecera];
 
         $output = [];

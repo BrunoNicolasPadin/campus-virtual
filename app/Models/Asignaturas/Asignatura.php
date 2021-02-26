@@ -9,8 +9,11 @@ class Asignatura extends Model
 {
     protected $table = 'asignaturas';
     protected $fillable = [
-        'division_id',
         'nombre',
+    ];
+
+    protected $guarded = [
+        'division_id',
     ];
 
     public function division()

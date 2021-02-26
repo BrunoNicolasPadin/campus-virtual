@@ -9,6 +9,7 @@ use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Asignaturas\AsignaturaHorario;
 use App\Models\Deudores\Mesa;
+use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Materiales\Grupo;
 use App\Services\Archivos\EliminarEntregasCorrecciones;
@@ -103,27 +104,29 @@ class AsignaturaController extends Controller
 
     public function store(StoreAsignatura $request, $institucion_id, $division_id)
     {
-        $asig = Asignatura::create([
-            'division_id' => $division_id,
-            'nombre' => $request->nombre,
-        ]);
-        
+        $division = Division::select('id')->findOrFail($division_id);
+        $asignatura = new Asignatura();
+        $asignatura->nombre = $request->nombre;
+        $asignatura->division()->associate($division);
+        $asignatura->save();
+
         if (! $request->docente[0]['docente_id'] == null) {
             for ($i=0; $i < count($request->docente); $i++) { 
-                AsignaturaDocente::create([
-                    'asignatura_id' => $asig->id,
-                    'docente_id' => $request->docente[$i]['docente_id'],
-                ]);
+
+                $asignaturaDocente = new AsignaturaDocente();
+                $asignaturaDocente->asignatura()->associate($asignatura);
+                $asignaturaDocente->docente()->associate($request->docente[$i]['docente_id']);
+                $asignaturaDocente->save();
             }
         }
 
         for ($i=0; $i < count($request->diaHorario); $i++) { 
-            AsignaturaHorario::create([
-                'asignatura_id' => $asig->id,
-                'dia' => $request->diaHorario[$i]['dia'],
-                'horaDesde' => $request->diaHorario[$i]['horaDesde']['HH'] . ':' . $request->diaHorario[$i]['horaDesde']['mm'] . ':00',
-                'horaHasta' => $request->diaHorario[$i]['horaHasta']['HH'] . ':' . $request->diaHorario[$i]['horaHasta']['mm'] . ':00',
-            ]);
+            $asignaturaHorario = new AsignaturaHorario();
+            $asignaturaHorario->dia = $request->diaHorario[$i]['dia'];
+            $asignaturaHorario->horaDesde = $request->diaHorario[$i]['horaDesde']['HH'] . ':' . $request->diaHorario[$i]['horaDesde']['mm'] . ':00';
+            $asignaturaHorario->horaHasta = $request->diaHorario[$i]['horaHasta']['HH'] . ':' . $request->diaHorario[$i]['horaHasta']['mm'] . ':00';
+            $asignaturaHorario->asignatura()->associate($asignatura);
+            $asignaturaHorario->save();
         }
         return redirect(route('asignaturas.index', [$institucion_id, $division_id]))
             ->with(['successMessage' => 'Asignatura creada con éxito!']);

@@ -32,6 +32,7 @@ class AlumnoObserver
 
         $asignaturas = Asignatura::where('division_id', $alumno->division_id)->get();
         $division = Division::find($alumno->division_id);
+        $periodos = [];
 
         if ($division->periodo_id == 1) {
             $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];

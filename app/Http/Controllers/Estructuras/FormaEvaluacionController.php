@@ -43,12 +43,13 @@ class FormaEvaluacionController extends Controller
         if ($request->desdeCuando == false) {
             $request->desdeCuando = null;
         }
-        FormaEvaluacion::create([
-            'institucion_id' => $institucion_id,
-            'nombre' => $request->nombre,
-            'tipo' => $request->tipo,
-            'desdeCuando' => $request->desdeCuando,
-        ]);
+
+        $formaEvaluacion = new FormaEvaluacion();
+        $formaEvaluacion->nombre = $request->nombre;
+        $formaEvaluacion->tipo = $request->tipo;
+        $formaEvaluacion->desdeCuando = $request->desdeCuando;
+        $formaEvaluacion->institucion()->associate($institucion_id);
+        $formaEvaluacion->save();
 
         return redirect(route('formas-evaluacion.index', $institucion_id))
             ->with(['successMessage' => 'Forma de evaluación creada con éxito!']);

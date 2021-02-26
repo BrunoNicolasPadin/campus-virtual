@@ -57,15 +57,15 @@ class EntregaArchivoController extends Controller
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
 
-            foreach ($archivos as $archivo) {
+            for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Evaluaciones/Entregas', $nombre);
+                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $archivos[$i]->storeAs('public/Evaluaciones/Entregas', $nombre);
 
-                EntregaArchivo::create([
-                    'entrega_id' => $entrega_id,
-                    'archivo' => $nombre,
-                ]);
+                $entregaArchivo = new EntregaArchivo();
+                $entregaArchivo->archivo = $nombre;
+                $entregaArchivo->entrega()->associate($entrega_id);
+                $entregaArchivo->save();
             }
 
             return redirect(route('entregas.show', [$institucion_id, $division_id, $evaluacion_id, $entrega_id]))

@@ -80,6 +80,7 @@ class AlumnoController extends Controller
     public function store(StoreAlumno $request, $institucion_id)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $request->division_id)) {
+
             $alumno = Alumno::create([
                 'user_id' => Auth::id(),
                 'institucion_id' => $institucion_id,
@@ -87,6 +88,14 @@ class AlumnoController extends Controller
                 'exAlumno' => 0,
                 'activado' => 0,
             ]);
+
+            $alumno = new Alumno();
+            $alumno->activado = '0';
+            $alumno->exAlumno = '0';
+            $alumno->user()->associate(Auth::id());
+            $alumno->institucion()->associate($institucion_id);
+            $alumno->division()->associate($request->division_id);
+            $alumno->save();
 
             session(['tipo' => 'Alumno']);
             session(['tipo_id' => $alumno->id]);

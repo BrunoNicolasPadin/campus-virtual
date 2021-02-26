@@ -64,11 +64,12 @@ class MuroRespuestaController extends Controller
 
     public function store(StoreRespuesta $request, $institucion_id, $division_id, $muro_id)
     {
-        MuroRespuesta::create([
-            'muro_id' => $muro_id,
-            'user_id' => Auth::id(),
-            'respuesta' => $request->respuesta,
-        ]);
+        $respuesta = new MuroRespuesta();
+        $respuesta->respuesta = $request->respuesta;
+        $respuesta->muro()->associate($muro_id);
+        $respuesta->user()->associate(Auth::id());
+        $respuesta->save();
+
         return back()->with(['successMessage' => 'Respuesta agregada con éxito!']);
     }
 

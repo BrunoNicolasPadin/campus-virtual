@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Instituciones\StoreInstitucion;
 use App\Http\Requests\Instituciones\UpdateInstitucion;
 use App\Models\Instituciones\Institucion;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,8 +16,13 @@ use Inertia\Inertia;
 class InstitucionController extends Controller
 {
     protected $claveDeAccesoService;
+    protected $obtenerFechaHoraService;
 
-    public function __construct(VerificarInstitucion $claveDeAccesoService)
+    public function __construct(
+        VerificarInstitucion $claveDeAccesoService,
+        ObtenerFechaHoraService $obtenerFechaHoraService
+    )
+
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente')->except('create', 'store');
@@ -24,6 +30,7 @@ class InstitucionController extends Controller
         $this->middleware('institucionYaCreada')->only('create', 'store');
 
         $this->claveDeAccesoService = $claveDeAccesoService;
+        $this->obtenerFechaHoraService = $obtenerFechaHoraService;
     }
 
     public function create()
@@ -37,19 +44,21 @@ class InstitucionController extends Controller
 
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
-            $fecha = date_create();
-            $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
-            $archivo->storeAs('public/PlanesDeEstudio', $nombre);
+            for ($i=0; $i < count($archivo); $i++) { 
+                $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
+                $nombre = $fechaHora . '-' . $archivo[$i]->getClientOriginalName();
+                $archivo[$i]->storeAs('public/PlanesDeEstudio', $nombre);
+            }
         }
 
-        $institucion = Institucion::create([
-            'user_id' => Auth::id(),
-            'numero' => $request->numero,
-            'fundacion' => $request->fundacion,
-            'historia' => $request->historia,
-            'planDeEstudio' => $nombre,
-            'claveDeAcceso' => Hash::make($request->claveDeAcceso),
-        ]);
+        $institucion = new Institucion();
+        $institucion->numero = $request->numero;
+        $institucion->fundacion = $request->fundacion;
+        $institucion->historia = $request->historia;
+        $institucion->planDeEstudio = $nombre;
+        $institucion->claveDeAcceso = Hash::make($request->claveDeAcceso);
+        $institucion->user()->associate(Auth::id());
+        $institucion->save();
                 
         session(['tipo' => 'Institucion']);
         session(['institucion_id' => $institucion->id]);
@@ -110,9 +119,11 @@ class InstitucionController extends Controller
             Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
 
             $archivo = $request->file('archivo');
-            $fecha = date_create();
-            $nombre = date_timestamp_get($fecha) . '-' . $archivo->getClientOriginalName();
-            $archivo->storeAs('public/PlanesDeEstudio', $nombre);
+            for ($i=0; $i < count($archivo); $i++) { 
+                $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
+                $nombre = $fechaHora . '-' . $archivo[$i]->getClientOriginalName();
+                $archivo[$i]->storeAs('public/PlanesDeEstudio', $nombre);
+            }
 
             $institucion->planDeEstudio = $nombre;
         }

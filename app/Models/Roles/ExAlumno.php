@@ -11,12 +11,14 @@ class ExAlumno extends Model
 {
     protected $table = 'ex_alumnos';
     protected $fillable = [
+        'abandono',
+        'comentario',
+    ];
+    protected $guarded = [
         'alumno_id',
         'institucion_id',
         'ciclo_lectivo_id',
         'division_id',
-        'abandono',
-        'comentario',
     ];
 
     public function institucion()

@@ -20,11 +20,12 @@ class EvaluacionComentarioController extends Controller
 
     public function store(StoreComentario $request, $institucion_id, $division_id, $evaluacion_id)
     {
-        EvaluacionComentario::create([
-            'evaluacion_id' => $evaluacion_id,
-            'user_id' => Auth::id(),
-            'comentario' => $request->comentario,
-        ]);
+        $comentario = new EvaluacionComentario();
+        $comentario->comentario = $request->comentario;
+        $comentario->evaluacion()->associate($evaluacion_id);
+        $comentario->user()->associate(Auth::id());
+        $comentario->save();
+    
         return back()->with(['successMessage' => 'Comentario cargado con éxito!']);
     }
 

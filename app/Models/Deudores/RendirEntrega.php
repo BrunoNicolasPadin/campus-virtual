@@ -8,8 +8,10 @@ class RendirEntrega extends Model
 {
     protected $table = 'rendir_entregas';
     protected $fillable = [
-        'anotado_id',
         'archivo',
+    ];
+    protected $guarded = [
+        'anotado_id',
     ];
 
     public function anotado()

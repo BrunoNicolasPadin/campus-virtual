@@ -21,11 +21,12 @@ class EntregaComentarioController extends Controller
 
     public function store(StoreComentario $request, $institucion_id, $division_id, $evaluacion_id, $entrega_id)
     {
-        EntregaComentario::create([
-            'entrega_id' => $entrega_id,
-            'user_id' => Auth::id(),
-            'comentario' => $request->comentario,
-        ]);
+        $comentario = new EntregaComentario();
+        $comentario->comentario = $request->comentario;
+        $comentario->entrega()->associate($entrega_id);
+        $comentario->user()->associate(Auth::id());
+        $comentario->save();
+                
         return back()->with(['successMessage' => 'Comentario cargado con v!']);
     }
 

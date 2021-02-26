@@ -57,19 +57,17 @@ class MesaArchivoController extends Controller
     {
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
-            $i = 0;
 
-            foreach ($archivos as $archivo) {
+            for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Mesas/Archivos', $nombre);
+                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $archivos[$i]->storeAs('public/Mesas/Archivos', $nombre);
 
-                MesaArchivo::create([
-                    'mesa_id' => $mesa_id,
-                    'archivo' => $nombre,
-                    'visibilidad'  => $request['visibilidad'][$i],
-                ]);
-                $i++;
+                $mesaArchivo = new MesaArchivo();
+                $mesaArchivo->archivo = $nombre;
+                $mesaArchivo->visibilidad = $request['visibilidad'][$i];
+                $mesaArchivo->mesa()->associate($mesa_id);
+                $mesaArchivo->save();
             }
 
             return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))

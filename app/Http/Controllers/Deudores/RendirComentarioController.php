@@ -21,11 +21,12 @@ class RendirComentarioController extends Controller
 
     public function store(StoreComentario $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
     {
-        RendirComentario::create([
-            'anotado_id' => $anotado_id,
-            'user_id' => Auth::id(),
-            'comentario' => $request->comentario,
-        ]);
+        $rendirComentario = new RendirComentario();
+        $rendirComentario->comentario = $request->comentario;
+        $rendirComentario->anotado()->associate($anotado_id);
+        $rendirComentario->user()->associate(Auth::id());
+        $rendirComentario->save();
+
         return back()->with(['successMessage' => 'Comentario subido con éxito!']);
     }
 

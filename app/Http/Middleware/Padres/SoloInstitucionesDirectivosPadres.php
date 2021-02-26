@@ -23,6 +23,6 @@ class SoloInstitucionesDirectivosPadres
             }
         }
         
-        return abort(403, 'Usted no es una institución o un directivo o un padre como para realizar tal acción.');
+        abort(403, 'Usted no es una institución o un directivo o un padre como para realizar tal acción.');
     }
 }

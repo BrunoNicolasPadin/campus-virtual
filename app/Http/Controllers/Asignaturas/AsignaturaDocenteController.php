@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Asignaturas\StoreDocente;
+use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
@@ -46,11 +47,14 @@ class AsignaturaDocenteController extends Controller
 
     public function store(StoreDocente $request, $institucion_id, $division_id, $asignatura_id)
     {
+        $asignatura = Asignatura::findOrFail($asignatura_id);
+
         for ($i=0; $i < count($request->docente); $i++) { 
-            AsignaturaDocente::create([
-                'asignatura_id' => $asignatura_id,
-                'docente_id' => $request->docente[$i]['docente_id'],
-            ]);
+
+            $asignaturaDocente = new AsignaturaDocente();
+            $asignaturaDocente->asignatura()->associate($asignatura);
+            $asignaturaDocente->docente()->associate($request->docente[$i]['docente_id']);
+            $asignaturaDocente->save();
         }
         return redirect(route('asignaturas.index', [$institucion_id, $division_id]))->with(['successMessage' => 'Docente/s agregados con exito!']);
     }

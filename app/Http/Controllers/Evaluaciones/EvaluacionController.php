@@ -88,14 +88,20 @@ class EvaluacionController extends Controller
             'institucion_id' => $institucion_id,
             'division_id' => $division_id,
             'asignatura_id' => $request->asignatura_id,
-            'titulo' => $request->titulo,
-            'tipo' => $request->tipo,
-            'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraRealizacion),
-            'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraFinalizacion),
-            'comentario' => $request->comentario,
         ]);
 
-        return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $eva->id]))
+        $evaluacion = new Evaluacion();
+        $evaluacion->titulo = $request->titulo;
+        $evaluacion->tipo = $request->tipo;
+        $evaluacion->fechaHoraRealizacion = $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraRealizacion);
+        $evaluacion->fechaHoraFinalizacion = $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraFinalizacion);
+        $evaluacion->comentario = $request->comentario;
+        $evaluacion->institucion()->associate($institucion_id);
+        $evaluacion->division()->associate($division_id);
+        $evaluacion->asignatura()->associate($request->asignatura_id);
+        $evaluacion->save();
+
+        return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion->id]))
             ->with(['successMessage' => 'Evaluación registrada con éxito']);
     }
 

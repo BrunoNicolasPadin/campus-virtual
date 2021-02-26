@@ -59,20 +59,18 @@ class MaterialController extends Controller
     {
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
-            $i = 0;
 
-            foreach ($archivos as $archivo) {
+            for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Materiales', $nombre);
+                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $archivos[$i]->storeAs('public/Materiales', $nombre);
 
-                Material::create([
-                    'grupo_id' => $grupo_id,
-                    'nombre' => $request['nombre'][$i],
-                    'archivo' => $nombre,
-                    'visibilidad'  => $request['visibilidad'][$i],
-                ]);
-                $i++;
+                $material = new Material();
+                $material->nombre = $request['nombre'][$i];
+                $material->archivo = $nombre;
+                $material->visibilidad = $request['visibilidad'][$i];
+                $material->grupo()->associate($grupo_id);
+                $material->save();
             }
 
             return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))

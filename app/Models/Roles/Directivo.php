@@ -10,10 +10,13 @@ class Directivo extends Model
 {
     protected $table = 'directivos';
     protected $fillable = [
-        'user_id',
-        'institucion_id',
         'activado',
     ];
+    protected $guarded = [
+        'user_id',
+        'institucion_id',
+    ];
+    
 
     public function user()
     {

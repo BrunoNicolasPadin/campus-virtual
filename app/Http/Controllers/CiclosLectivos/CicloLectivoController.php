@@ -53,12 +53,12 @@ class CicloLectivoController extends Controller
             ]);
         }
 
-        CicloLectivo::create([
-            'institucion_id' => $institucion_id,
-            'comienzo' => $this->formatoService->cambiarFormatoParaGuardar($request->comienzo),
-            'final' => $this->formatoService->cambiarFormatoParaGuardar($request->final),
-            'activado' => $request->activado,
-        ]);
+        $cicloLectivo = new CicloLectivo();
+        $cicloLectivo->comienzo = $this->formatoService->cambiarFormatoParaGuardar($request->comienzo);
+        $cicloLectivo->final = $this->formatoService->cambiarFormatoParaGuardar($request->final);
+        $cicloLectivo->activado = $request->activado;
+        $cicloLectivo->institucion()->associate($institucion_id);
+        $cicloLectivo->save();
 
         return redirect(route('ciclos-lectivos.index', $institucion_id))
             ->with(['successMessage' => 'Ciclo lectivo creado con éxito!']);

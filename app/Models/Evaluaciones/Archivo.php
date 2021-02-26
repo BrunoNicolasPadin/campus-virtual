@@ -8,10 +8,12 @@ class Archivo extends Model
 {
     protected $table = 'evaluaciones_archivos';
     protected $fillable = [
-        'evaluacion_id',
         'nombre',
         'archivo',
         'visibilidad',
+    ];
+    protected $guarded = [
+        'evaluacion_id',
     ];
 
     public function evaluacion()

@@ -62,15 +62,15 @@ class RendirEntregaController extends Controller
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
 
-            foreach ($archivos as $archivo) {
+            for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Deudores/Entregas', $nombre);
+                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $archivos[$i]->storeAs('public/Deudores/Entregas', $nombre);
 
-                RendirEntrega::create([
-                    'anotado_id' => $anotado_id,
-                    'archivo' => $nombre,
-                ]);
+                $rendirEntrega = new RendirEntrega();
+                $rendirEntrega->archivo = $nombre;
+                $rendirEntrega->anotado()->associate($anotado_id);
+                $rendirEntrega->save();
             }
 
             return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id]))

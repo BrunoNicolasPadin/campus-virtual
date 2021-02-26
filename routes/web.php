@@ -5,9 +5,7 @@ use App\Http\Controllers\Asignaturas\AsignaturaDeudorController;
 use App\Http\Controllers\Asignaturas\AsignaturaDocenteController;
 use App\Http\Controllers\Asignaturas\AsignaturaEstadisticaController;
 use App\Http\Controllers\Asignaturas\AsignaturaHorarioController;
-use App\Http\Controllers\Asignaturas\HorarioController;
 use App\Http\Controllers\Calendario\CalendarioAlumnoController;
-use App\Http\Controllers\Calendario\CalendarioController;
 use App\Http\Controllers\Calendario\CalendarioDocenteController;
 use App\Http\Controllers\Calendario\CalendarioInstitucionController;
 use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
@@ -154,8 +152,6 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
             Route::get('estadisticas', [AsignaturaEstadisticaController::class, 'mostrarEstadisticas'])->name('asignaturas.estadisticas');
             Route::get('estadisticas/{ciclo_lectivo_id}', [AsignaturaEstadisticaController::class, 'mostrarPromedios'])->name('asignaturas.mostrarPromedios');
         });
-
-        Route::get('horarios', [HorarioController::class, 'mostrarHorarios'])->name('horarios.mostrar');
 
         Route::get('alumnos', [AlumnoDivisionController::class, 'mostrarAlumnos'])->name('alumnosDivision.mostrar');
         Route::get('{alumno_id}/sacarlo', [AlumnoDivisionController::class, 'sacarloDeLaDivision'])->name('alumnosDivision.sacarlo');

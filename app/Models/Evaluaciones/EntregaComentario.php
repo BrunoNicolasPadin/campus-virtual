@@ -9,9 +9,11 @@ class EntregaComentario extends Model
 {
     protected $table = 'entregas_comentarios';
     protected $fillable = [
+        'comentario',
+    ];
+    protected $guarded = [
         'entrega_id',
         'user_id',
-        'comentario',
     ];
 
     public function user()

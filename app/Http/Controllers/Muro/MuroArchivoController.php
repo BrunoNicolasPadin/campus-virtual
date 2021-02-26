@@ -71,15 +71,15 @@ class MuroArchivoController extends Controller
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
 
-            foreach ($archivos as $archivo) {
+            for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
-                $archivo->storeAs('public/Muro', $nombre);
+                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $archivos[$i]->storeAs('public/Muro', $nombre);
 
-                MuroArchivo::create([
-                    'muro_id' => $muro_id,
-                    'archivo' => $nombre,
-                ]);
+                $archivo = new MuroArchivo();
+                $archivo->archivo = $nombre;
+                $archivo->muro()->associate($muro_id);
+                $archivo->save();
             }
 
             return redirect(route('muro-archivos.index', [$institucion_id, $division_id, $muro_id]))

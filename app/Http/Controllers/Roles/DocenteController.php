@@ -47,11 +47,13 @@ class DocenteController extends Controller
     public function store(StoreDocente $request, $institucion_id)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
-            $docente = Docente::create([
-                'user_id' => Auth::id(),
-                'institucion_id' => $institucion_id,
-                'activado' => 0,
-            ]);
+
+            $docente = new Docente();
+            $docente->activado = '0';
+            $docente->user()->associate(Auth::id());
+            $docente->institucion()->associate($institucion_id);
+            $docente->save();
+
             session(['tipo' => 'Directivo']);
             session(['tipo_id' => $docente->id]);
             session(['institucion_id' => $institucion_id]);

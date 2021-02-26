@@ -46,14 +46,17 @@ class DirectivoController extends Controller
     public function store(StoreDirectivo $request, $institucion_id)
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $institucion_id)) {
-            $directivo = Directivo::create([
-                'user_id' => Auth::id(),
-                'institucion_id' => $institucion_id,
-                'activado' => 0,
-            ]);
+
+            $directivo = new Directivo();
+            $directivo->activado = '0';
+            $directivo->user()->associate(Auth::id());
+            $directivo->institucion()->associate($institucion_id);
+            $directivo->save();
+
             session(['tipo' => 'Directivo']);
             session(['tipo_id' => $directivo->id]);
             session(['institucion_id' => $institucion_id]);
+
             return redirect(route('roles.mostrarCuentas'))
                 ->with(['successMessage' => 'Te registrastee exitosamente como directivo.']);
         }

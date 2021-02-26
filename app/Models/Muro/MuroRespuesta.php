@@ -9,9 +9,11 @@ class MuroRespuesta extends Model
 {
     protected $table = 'muro_respuestas';
     protected $fillable = [
+        'respuesta',
+    ];
+    protected $guarded = [
         'muro_id',
         'user_id',
-        'respuesta',
     ];
 
     public function user()

@@ -8,8 +8,10 @@ class EntregaArchivo extends Model
 {
     protected $table = 'entregas_archivos';
     protected $fillable = [
-        'entrega_id',
         'archivo',
+    ];
+    protected $guarded = [
+        'entrega_id',
     ];
 
     public function entrega()

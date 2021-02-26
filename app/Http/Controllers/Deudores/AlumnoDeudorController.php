@@ -95,12 +95,13 @@ class AlumnoDeudorController extends Controller
     public function store(StoreAlumnoDeudor $request, $institucion_id, $alumno_id)
     {
         for ($i=0; $i < count($request->asignatura_id); $i++) { 
-            AlumnoDeudor::create([
-                'alumno_id' => $alumno_id,
-                'asignatura_id' => $request->asignatura_id[$i],
-                'ciclo_lectivo_id' => $request->ciclo_lectivo_id,
-                'aprobado' => '0',
-            ]);
+
+            $deudor = new AlumnoDeudor();
+            $deudor->aprobado = '0';
+            $deudor->alumno()->associate($alumno_id);
+            $deudor->asignatura()->associate($request->asignatura_id[$i]);
+            $deudor->ciclo_lectivo()->associate($request->ciclo_lectivo_id[$i]);
+            $deudor->save();
         }
 
         return redirect(route('asignaturas-adeudadas.index', [$institucion_id, $alumno_id]))

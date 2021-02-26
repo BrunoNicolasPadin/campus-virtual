@@ -9,10 +9,12 @@ class Anotado extends Model
 {
     protected $table = 'anotados';
     protected $fillable = [
-        'mesa_id',
-        'alumno_id',
         'calificacion',
         'comentario',
+    ];
+    protected $guarded = [
+        'mesa_id',
+        'alumno_id',
     ];
 
     public function mesa()

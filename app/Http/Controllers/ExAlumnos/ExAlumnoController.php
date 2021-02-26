@@ -123,14 +123,14 @@ class ExAlumnoController extends Controller
                 'exAlumno' => '1',
             ]);
 
-        ExAlumno::create([
-            'alumno_id' => $request->alumno_id,
-            'institucion_id' => $institucion_id,
-            'ciclo_lectivo_id' => $request->ciclo_lectivo_id,
-            'division_id' => $request->division_id,
-            'abandono' => $request->abandono,
-            'comentario' => $request->comentario,
-        ]);
+        $exAlumno = new ExAlumno();
+        $exAlumno->comentario = $request->comentario;
+        $exAlumno->abandono = $request->abandono;
+        $exAlumno->institucion()->associate($institucion_id);
+        $exAlumno->alumno()->associate($request->alumno_id);
+        $exAlumno->division()->associate($request->division_id);
+        $exAlumno->ciclo_lectivo()->associate($request->ciclo_lectivo_id);
+        $exAlumno->save();
 
         return redirect(route('exalumnos.index', $institucion_id))
             ->with(['successMessage' => 'Ex alumno agregado con éxito!']);

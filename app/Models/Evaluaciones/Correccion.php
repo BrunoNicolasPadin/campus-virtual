@@ -8,8 +8,10 @@ class Correccion extends Model
 {
     protected $table = 'correcciones';
     protected $fillable = [
-        'entrega_id',
         'archivo',
+    ];
+    protected $guarded = [
+        'entrega_id',
     ];
 
     public function entrega()

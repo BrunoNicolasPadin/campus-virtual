@@ -4,6 +4,7 @@ namespace App\Models\Repitentes;
 
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
+use App\Models\Instituciones\Institucion;
 use App\Models\Roles\Alumno;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,12 +12,19 @@ class Repitente extends Model
 {
     protected $table = 'repitentes';
     protected $fillable = [
+        'comentario',
+    ];
+    protected $guarded = [
         'institucion_id',
         'alumno_id',
         'ciclo_lectivo_id',
         'division_id',
-        'comentario',
     ];
+
+    public function institucion()
+    {
+        return $this->belongsTo(Institucion::class);
+    }
 
     public function alumno()
     {
