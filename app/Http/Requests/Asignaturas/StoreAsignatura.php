@@ -15,12 +15,12 @@ class StoreAsignatura extends FormRequest
     {
         return [
             'nombre' => 'required|string',
-            'docente.*.docente_id' => 'nullable',
-            'diaHorario.*.dia' => 'required',
-            'diaHorario.*.horaDesde.HH' => 'required',
-            'diaHorario.*.horaDesde.mm' => 'required',
-            'diaHorario.*.horaHasta.HH' => 'required',
-            'diaHorario.*.horaHasta.mm' => 'required',
+            'docente.*.docente_id' => 'nullable|integer',
+            'diaHorario.*.dia' => 'required|string',
+            'diaHorario.*.horaDesde.HH' => 'required|string',
+            'diaHorario.*.horaDesde.mm' => 'required|string',
+            'diaHorario.*.horaHasta.HH' => 'required|string',
+            'diaHorario.*.horaHasta.mm' => 'required|string',
         ];
     }
 
@@ -28,11 +28,17 @@ class StoreAsignatura extends FormRequest
     {
         return [
             'nombre.required' => 'Debe ingresar un nombre.',
+            'nombre.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el nombre.',
             'diaHorario.*.dia.required' => 'Debe seleccionar un día.',
+            'diaHorario.*.dia.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el dia.',
             'diaHorario.*.horaDesde.HH.required' => 'Debe seleccionar en la hora desde la/s hora/s.',
+            'diaHorario.*.horaDesde.HH.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en la hora de "Hora desde".',
             'diaHorario.*.horaDesde.mm.required' => 'Debe seleccionar en la hora desde el/los minuto/s.',
+            'diaHorario.*.horaDesde.mm.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en los minutos de "Hora desde".',
             'diaHorario.*.horaHasta.HH.required' => 'Debe seleccionar en la hora hasta la/s hora/s.',
-            'diaHorario.*.horaHasta.HH.required' => 'Debe seleccionar en la hora hasta el/los minuto/s.',
+            'diaHorario.*.horaHasta.HH.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en la hora de "Hora hasta".',
+            'diaHorario.*.horaHasta.mm.required' => 'Debe seleccionar en la hora hasta el/los minuto/s.',
+            'diaHorario.*.horaHasta.mm.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en los minutos de "Hora hasta".',
         ];
     }
 }

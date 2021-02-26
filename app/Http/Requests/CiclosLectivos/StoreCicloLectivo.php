@@ -24,6 +24,8 @@ class StoreCicloLectivo extends FormRequest
         return [
             'comienzo.required' => 'Debe ingresar una fecha de comienzo.',
             'final.required' => 'Debe ingresar una fecha de final.',
+            'comienzo.date' => 'Debe ingresar una fecha de comienzo en formato "DD-MM-AAAA.',
+            'final.date' => 'Debe ingresar una fecha de final en formato "DD-MM-AAAA.',
         ];
     }
 }

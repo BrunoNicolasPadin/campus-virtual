@@ -22,7 +22,7 @@ class UpdateEntrega extends FormRequest
     public function messages()
     {
         return [
-            'comentario.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el comentario, no otra cosa.',
+            'comentario.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el comentario.',
         ];
     }
 }

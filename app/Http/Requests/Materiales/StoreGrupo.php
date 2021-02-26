@@ -14,7 +14,7 @@ class StoreGrupo extends FormRequest
     public function rules()
     {
         return [
-            'asignatura_id' => 'required',
+            'asignatura_id' => 'required|integer',
             'nombre' => 'required|string',
         ];
     }
@@ -24,6 +24,7 @@ class StoreGrupo extends FormRequest
         return [
             'asignatura_id.required' => 'Debe seleccionar una asignatura.',
             'nombre.required' => 'Debe ingresar un nombre.',
+            'nombre.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el nombre.',
         ];
     }
 }

@@ -14,7 +14,7 @@ class StoreAlumnoDeudor extends FormRequest
     public function rules()
     {
         return [
-            'ciclo_lectivo_id' => 'required',
+            'ciclo_lectivo_id' => 'required|integer',
         ];
     }
 

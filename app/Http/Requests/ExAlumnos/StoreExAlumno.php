@@ -14,9 +14,9 @@ class StoreExAlumno extends FormRequest
     public function rules()
     {
         return [
-            'ciclo_lectivo_id' => 'required',
-            'division_id' => 'required',
-            'abandono' => 'required',
+            'ciclo_lectivo_id' => 'required|integer',
+            'division_id' => 'required|integer',
+            'abandono' => 'required|boolean',
             'comentario' => 'nullable|string',
         ];
     }
@@ -26,8 +26,9 @@ class StoreExAlumno extends FormRequest
         return [
             'ciclo_lectivo_id.required' => 'Debe seleccionar un ciclo lectivo.',
             'division_id.required' => 'Debe estar en una división el alumno.',
-            'abandono.required' => 'Debe informar si abandono el colegio (seleccionar) o solo se cambio (Dejar en blanco).',
-            'comentario.string' => 'Si desea ingresar un comentario deberá ser una candena de caracteres.',
+            'abandono.required' => 'Debe informar si abandono el colegio (seleccionar) o solo se cambio (Dejar en blanco)',
+            'abandono.boolean' => 'Debe ser un valor de "verdadero" o "falso" el de abandono.',
+            'comentario.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el comentario.',
         ];
     }
 }

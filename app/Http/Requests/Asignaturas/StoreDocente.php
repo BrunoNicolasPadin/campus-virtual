@@ -14,7 +14,7 @@ class StoreDocente extends FormRequest
     public function rules()
     {
         return [
-            'docente.*.docente_id' => 'required',
+            'docente.*.docente_id' => 'required|integer',
         ];
     }
 

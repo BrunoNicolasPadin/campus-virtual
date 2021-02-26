@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Estructuras;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Estructuras\StoreFormaEvaluacion;
 use App\Models\Estructuras\FormaDescripcion;
 use App\Models\Estructuras\FormaEvaluacion;
 use App\Services\Division\FormaEvaluacionService;
@@ -38,7 +39,7 @@ class FormaEvaluacionController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id)
+    public function store(StoreFormaEvaluacion $request, $institucion_id)
     {
         if ($request->desdeCuando == false) {
             $request->desdeCuando = null;
@@ -72,7 +73,7 @@ class FormaEvaluacionController extends Controller
         ]);
     }
 
-    public function update(Request $request, $institucion_id, $id)
+    public function update(StoreFormaEvaluacion $request, $institucion_id, $id)
     {
         FormaEvaluacion::findOrFail($id)
         ->update([

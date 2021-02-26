@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Estructuras;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Estructuras\StoreFormaDescripcion;
 use App\Models\Estructuras\FormaDescripcion;
 use App\Services\Division\FormaEvaluacionService;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class FormaDescripcionController extends Controller
         ]);
     }
 
-    public function store(Request $request, $institucion_id, $forma_evaluacion_id)
+    public function store(StoreFormaDescripcion $request, $institucion_id, $forma_evaluacion_id)
     {
         $formaDescripcion = new FormaDescripcion();
         $formaDescripcion->opcion = $request->opcion;
@@ -52,7 +53,7 @@ class FormaDescripcionController extends Controller
         ]); 
     }
 
-    public function update(Request $request, $institucion_id, $forma_evaluacion_id, $id)
+    public function update(StoreFormaDescripcion $request, $institucion_id, $forma_evaluacion_id, $id)
     {
         FormaDescripcion::where('id', $id)
         ->update([

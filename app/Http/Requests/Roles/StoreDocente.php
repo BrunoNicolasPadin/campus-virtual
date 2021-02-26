@@ -14,7 +14,7 @@ class StoreDocente extends FormRequest
     public function rules()
     {
         return [
-            'claveDeAcceso' => 'required',
+            'claveDeAcceso' => 'required|integer',
         ];
     }
 

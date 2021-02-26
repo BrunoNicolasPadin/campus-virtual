@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\RolesDivision;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Roles\PasarDeAnioUpdate;
 use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
 use App\Services\Division\DivisionService;
@@ -56,7 +57,7 @@ class AlumnoDivisionController extends Controller
         ]);
     }
 
-    public function cambiarCurso(Request $request, $institucion_id, $division_id)
+    public function cambiarCurso(PasarDeAnioUpdate $request, $institucion_id, $division_id)
     {
         for ($i=0; $i < count($request->alumno_id); $i++) { 
             $alumno = Alumno::findOrFail($request->alumno_id[$i]);

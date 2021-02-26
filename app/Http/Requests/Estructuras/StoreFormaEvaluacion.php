@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Evaluaciones;
+namespace App\Http\Requests\Estructuras;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateEvaluacionArchivo extends FormRequest
+class StoreFormaEvaluacion extends FormRequest
 {
     public function authorize()
     {
@@ -15,7 +15,8 @@ class UpdateEvaluacionArchivo extends FormRequest
     {
         return [
             'nombre' => 'required|string',
-            'visibilidad' => 'required|boolean',
+            'tipo' => 'required|string',
+            'desdeCuando' => 'nullable|string',
         ];
     }
 
@@ -24,7 +25,9 @@ class UpdateEvaluacionArchivo extends FormRequest
         return [
             'nombre.required' => 'Debe ingresar un nombre.',
             'nombre.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el nombre.',
-            'visibilidad.required' => 'Debe seleccionar una visibilidad.',
+            'tipo.required' => 'Debe seleccionar un tipo.',
+            'tipo.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el tipo.',
+            'desdeCuando.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el desde cuando.',
         ];
     }
 }

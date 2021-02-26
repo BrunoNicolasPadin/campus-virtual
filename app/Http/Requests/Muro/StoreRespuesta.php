@@ -22,7 +22,7 @@ class StoreRespuesta extends FormRequest
     {
         return [
             'respuesta.required' => 'Debe ingresar algo.',
-            'respuesta.string' => 'Debe ingresar una cadena de caracteres (letras, números o signos), no otra cosa.',
+            'respuesta.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en la respuesta.',
         ];
     }
 }

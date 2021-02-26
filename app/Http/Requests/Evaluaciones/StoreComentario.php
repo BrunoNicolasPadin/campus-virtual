@@ -22,7 +22,7 @@ class StoreComentario extends FormRequest
     {
         return [
             'comentario.required' => 'Debe ingresar algo.',
-            'comentario.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos), no otra cosa.',
+            'comentario.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el comentario',
         ];
     }
 }

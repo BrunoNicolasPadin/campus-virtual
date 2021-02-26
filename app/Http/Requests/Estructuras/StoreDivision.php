@@ -31,6 +31,7 @@ class StoreDivision extends FormRequest
             'curso_id.required' => 'Debe seleccionar un curso.',
             'periodo_id.required' => 'Debe ingresar un periodo.',
             'divisiones.*.division.required' => 'Debe ingresar una división.',
+            'divisiones.*.division.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el nombre de la division.',
             'divisiones.*.claveDeAcceso.required' => 'Debe ingresar una clave de acceso.',
             'divisiones.*.claveDeAcceso.min' => 'La clave de acceso debe tener como mínimo 8 caracteres.',
             'divisiones.*.claveDeAcceso.max' => 'La clave de acceso debe tener como máximo 32 caracteres.',
