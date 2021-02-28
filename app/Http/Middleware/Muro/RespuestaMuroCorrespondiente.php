@@ -27,8 +27,8 @@ class RespuestaMuroCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $respuesta = MuroRespuesta::select('muro.user_id', 'divisiones.institucion_id')
-            ->join('muro', 'muro.id', 'muro_archivos.muro_id')
+        $respuesta = MuroRespuesta::select('muro_respuestas.user_id', 'divisiones.institucion_id')
+            ->join('muro', 'muro.id', 'muro_respuestas.muro_id')
             ->join('divisiones', 'divisiones.id', 'muro.division_id')
             ->findOrFail($link[10]);
 

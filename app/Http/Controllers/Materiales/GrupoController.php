@@ -41,12 +41,14 @@ class GrupoController extends Controller
     public function index($institucion_id, $division_id)
     {
         $gruposTodos = Grupo::select('id', 'asignatura_id', 'nombre')
+            ->where('division_id', $division_id)
             ->with(array(
                 'asignatura' => function($query){
                     $query->select('id', 'nombre');
                 },
             ))
-            ->paginate(20);
+            ->orderBy('updated_at', 'ASC')
+            ->paginate(10);
 
         return Inertia::render('Materiales/Grupos/Index', [
             'institucion_id' => $institucion_id,
@@ -77,12 +79,6 @@ class GrupoController extends Controller
 
     public function store(StoreGrupo $request, $institucion_id, $division_id)
     {
-        $grupo = Grupo::create([
-            'division_id' => $division_id,
-            'asignatura_id' => $request->asignatura_id,
-            'nombre' => $request->nombre,
-        ]);
-
         $grupo = new Grupo();
         $grupo->nombre = $request->nombre;
         $grupo->division()->associate($division_id);
@@ -128,7 +124,6 @@ class GrupoController extends Controller
     {
         Grupo::where('id', $id)
             ->update([
-                'division_id' => $division_id,
                 'asignatura_id' => $request->asignatura_id,
                 'nombre' => $request->nombre,
             ]);

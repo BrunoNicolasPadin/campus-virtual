@@ -180,7 +180,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         });
 
         Route::resource('materiales', GrupoController::class);
-        Route::post('materiales/filtrar', [BuscarGruposController::class, 'filtrarPorAsignaturas'])->name('materiales.filtrarPorAsignatura');
+        Route::get('materiales/filtrar/{asignatura_id}', [BuscarGruposController::class, 'filtrarPorAsignaturas'])->name('materiales.filtrarPorAsignatura');
         Route::prefix('materiales/{grupo_id}')->group(function () {
         
             Route::resource('materiales-archivos', MaterialController::class);

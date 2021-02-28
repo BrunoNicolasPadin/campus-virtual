@@ -46,7 +46,7 @@
 
             <estructura-form>
                 <template #formulario>
-                    <form method="post" @submit.prevent="submit">
+                    <form method="get">
                         
                         <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-full px-3 mb-6 md:mb-0">
@@ -144,13 +144,10 @@
     import TableHead from '@/Tabla/TableHead'
     import TableBody from '@/Tabla/TableBody'
     import TableData from '@/Tabla/TableData'
-    import Editar from '@/Botones/Editar'
-    import Eliminar from '@/Botones/Eliminar'
     import Primary from '@/Botones/Primary.vue'
     import Pagination from '@/Pagination/Pagination.vue'
     import EstructuraForm from '@/Formulario/EstructuraForm.vue'
     import LabelForm from '@/Formulario/LabelForm.vue'
-    import axios from 'axios'
 
     export default {
         components: {
@@ -160,8 +157,6 @@
             TableHead,
             TableBody,
             TableData,
-            Editar,
-            Eliminar,
             Primary,
             Pagination,
             EstructuraForm,
@@ -195,14 +190,7 @@
             },
 
             onChange() {
-                axios.post(this.route('materiales.filtrarPorAsignatura', [this.institucion_id, this.division.id]), this.form)
-                .then(response => {
-                    this.grupos = response.data;
-                })
-                .catch(e => {
-                    // Podemos mostrar los errores en la consola
-                    console.log(e);
-                })
+                this.$inertia.get(this.route('materiales.filtrarPorAsignatura', [this.institucion_id, this.division.id, this.form.asignatura_id]))
             },
         }
     }
