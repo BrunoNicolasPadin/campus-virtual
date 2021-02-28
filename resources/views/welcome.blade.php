@@ -250,8 +250,8 @@
                     nosotros, nuestros alumnos, amigos, hijos, docentes y etc… <br>
 
                     Luego en la universidad había un “campus virtual” pero tenía (tiene) un diseño espantoso, se caía cuando nos queríamos inscribir 
-                    en alguna materia, demasiados tramites y procesos no estaban digitalizados, sumado a que pocos docentes lo utilizaban y tenía todo lo que, 
-                    en la misma universidad te enseñan que un sistema NO debe tener. <br>
+                    en alguna materia, demasiados tramites y procesos no estaban digitalizados, sumado a que pocos docentes lo utilizaban y tiene todo lo que, 
+                    en la misma universidad te enseñan, un sistema NO debe tener. <br>
                     
                     Teniendo todo esto en mente pensaba en los bien que le haría a los colegios y sus miembros al tener un servicio como Gescol, 
                     un sitio web en el cual podrán ir digitalizando poco a poco los procesos que hoy en día hacen en papel o en tablas Excel y 

@@ -158,11 +158,12 @@
                             Padre/s
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <span v-for="padre in alumno.padres" :key="padre.id">
-                                <inertia-link class="hover:underline" :href="route('padres.show', [institucion_id, padre.id])">
-                                    {{ padre.user.name }}
-                                </inertia-link> <br>
-                            </span>
+                            <inertia-link class="hover:underline" :href="route('padres.show', [institucion_id, alumno.padre_id])">
+                                {{ alumno.padre_name }}
+                            </inertia-link> <br>
+                            <inertia-link v-show="alumno.padre_id !== alumno.madre_id " class="hover:underline" :href="route('padres.show', [institucion_id, alumno.padre_id])">
+                                - {{ alumno.madre_name }}
+                            </inertia-link> <br>
                         </dd>
                     </div> -->
 

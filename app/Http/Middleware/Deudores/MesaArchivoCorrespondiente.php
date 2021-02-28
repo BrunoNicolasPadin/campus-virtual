@@ -28,7 +28,7 @@ class MesaArchivoCorrespondiente
         $link = $this->ruta->obtenerRoute();
         $archivo = MesaArchivo::select('mesas.asignatura_id', 'mesas.institucion_id')
             ->join('mesas', 'mesas.id', 'mesas_archivos.mesa_id')
-            ->first($link[12]);
+            ->findOrFail($link[12]);
 
         if (session('tipo') == 'Docente') {
             if ($this->asignaturaService->verificarDocente($archivo->asignatura_id)) {

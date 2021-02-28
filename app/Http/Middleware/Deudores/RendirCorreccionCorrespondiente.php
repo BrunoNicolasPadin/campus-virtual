@@ -25,7 +25,7 @@ class RendirCorreccionCorrespondiente
         $correccion = RendirCorreccion::select('mesas.asignatura_id', 'mesas.institucion_id')
             ->join('anotados', 'anotados.id', 'rendir_correcciones.anotado_id')
             ->join('mesas', 'mesas.id', 'anotados.mesa_id')
-            ->first($link[14]);
+            ->findOrFail($link[14]);
 
         if (session('tipo') == 'Docente') {
             if ($this->docenteService->verificarDocenteId($correccion->asignatura_id)) {

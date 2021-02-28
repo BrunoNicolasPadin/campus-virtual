@@ -14,7 +14,7 @@ class StoreDirectivo extends FormRequest
     public function rules()
     {
         return [
-            'claveDeAcceso' => 'required|integer',
+            'claveDeAcceso' => 'required',
         ];
     }
 

@@ -80,6 +80,7 @@ class AsignaturaController extends Controller
                     $query->select('asignatura_id','dia', 'horaDesde', 'horaHasta');
                 }
             ))
+            ->orderBy('nombre')
             ->get();
 
             return Inertia::render('Asignaturas/Index', [
@@ -176,7 +177,7 @@ class AsignaturaController extends Controller
                     $query->select('id','name');
                 },
                 'horarios' => function($query){
-                    $query->select('asignatura_id','dia', 'horaDesde', 'horaHasta');
+                    $query->select('id', 'asignatura_id','dia', 'horaDesde', 'horaHasta');
                 }
             ))
             ->findOrFail($id);

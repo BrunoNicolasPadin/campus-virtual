@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Estructuras\StoreFormaDescripcion;
 use App\Models\Estructuras\FormaDescripcion;
 use App\Services\Division\FormaEvaluacionService;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class FormaDescripcionController extends Controller

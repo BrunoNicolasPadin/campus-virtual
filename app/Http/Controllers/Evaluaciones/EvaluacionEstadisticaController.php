@@ -144,7 +144,7 @@ class EvaluacionEstadisticaController extends Controller
 
     public function obtenerAprobados($entrega, $partida, $calificacionesAprobadas, $aprobados, $aprobadosArray)
     {
-        if ($entrega->calificacion >= $partida || in_array($entrega->calificacion, $calificacionesAprobadas)) {
+        if (($partida <> null && $entrega->calificacion >= $partida) || ($entrega->calificacion <> null && in_array($entrega->calificacion, $calificacionesAprobadas))) {
             $aprobados = $aprobados + 1;
             array_push($aprobadosArray, [
                 'nombre' => $entrega->alumno->user->name,
@@ -157,7 +157,8 @@ class EvaluacionEstadisticaController extends Controller
 
     public function obtenerDesaprobados($entrega, $partida, $calificacionesAprobadas, $desaprobados, $desaprobadosArray)
     {
-        if ($entrega->calificacion && $entrega->calificacion < $partida && !(in_array($entrega->calificacion, $calificacionesAprobadas))) {
+        if (($entrega->calificacion <> null && $entrega->calificacion < $partida) || 
+            ($entrega->calificacion <> null && !(in_array($entrega->calificacion, $calificacionesAprobadas)))) {
             $desaprobados = $desaprobados + 1;
             array_push($desaprobadosArray, [
                 'nombre' => $entrega->alumno->user->name,

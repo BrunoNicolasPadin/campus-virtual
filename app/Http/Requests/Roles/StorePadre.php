@@ -14,7 +14,7 @@ class StorePadre extends FormRequest
     public function rules()
     {
         return [
-            'alumno_id' => 'required|integer',
+            'alumno_id' => 'required',
         ];
     }
 

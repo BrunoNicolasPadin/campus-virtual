@@ -14,7 +14,7 @@ class StoreAlumno extends FormRequest
     public function rules()
     {
         return [
-            'division_id' => 'required|integer',
+            'division_id' => 'required',
             'claveDeAcceso' => 'required',
         ];
     }

@@ -83,7 +83,7 @@ class DocenteController extends Controller
         $message = 'Docente eliminado con éxito!';
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            return redirect(route('roles.index'))->with(['successMessage' => $message]);
+            return redirect(route('docentes.index', $institucion_id))->with(['successMessage' => $message]);
         }
 
         if (session('tipo') == 'Docente') {

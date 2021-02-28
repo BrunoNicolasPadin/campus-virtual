@@ -28,10 +28,10 @@ class RendirComentarioCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $comentario = RendirComentario::select('comentario.user_id', 'alumnos.institucion_id')
+        $comentario = RendirComentario::select('rendir_comentarios.user_id', 'alumnos.institucion_id')
             ->join('anotados', 'anotados.id', 'rendir_comentarios.anotado_id')
             ->join('alumnos', 'alumnos.id', 'anotados.alumno_id')
-            ->first($link[14]);
+            ->findOrFail($link[14]);
 
         if ($this->eliminarService->verificarUsuarioParaEliminar($comentario->user_id, $comentario->institucion_id)) {
             return $next($request);

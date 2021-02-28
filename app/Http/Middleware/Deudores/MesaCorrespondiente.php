@@ -30,7 +30,7 @@ class MesaCorrespondiente
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
-        $mesa = Mesa::select('asignatura_id', 'mesas.institucion_id')->first($link[10]);
+        $mesa = Mesa::select('asignatura_id', 'mesas.institucion_id')->find($link[10]);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo' ) {
             if (session('institucion_id') == $mesa->institucion_id) {

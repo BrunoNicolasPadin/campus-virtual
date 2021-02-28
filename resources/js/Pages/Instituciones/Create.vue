@@ -177,12 +177,13 @@
         data() {
             return {
                 form: {
-                    numero: '',
-                    fundacion: '',
-                    historia: '',
-                    planDeEstudio: '',
-                    claveDeAcceso: '',
-                    claveDeAcceso_confirmation: '',
+                    numero: null,
+                    fundacion: null,
+                    historia: null,
+                    boolPlanDeEstudio: null,
+                    planDeEstudio: null,
+                    claveDeAcceso: null,
+                    claveDeAcceso_confirmation: null,
                 },
                 mostrarErrores: true,
             }
@@ -194,6 +195,11 @@
                 data.append('numero', this.form.numero);
                 data.append('fundacion', this.form.fundacion);
                 data.append('historia', this.form.historia);
+                if (this.form.planDeEstudio == null) {
+                    this.form.boolPlanDeEstudio = false;
+                }
+                else { this.form.boolPlanDeEstudio = true; }
+                data.append('boolArchivo', this.form.boolPlanDeEstudio);
                 data.append('archivo', this.form.planDeEstudio);
                 data.append('claveDeAcceso', this.form.claveDeAcceso);
                 data.append('claveDeAcceso_confirmation', this.form.claveDeAcceso_confirmation);

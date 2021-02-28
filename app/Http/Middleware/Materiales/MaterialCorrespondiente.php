@@ -30,7 +30,7 @@ class MaterialCorrespondiente
 
         $material = Material::select('grupos.asignatura_id')
             ->join('grupos', 'grupos.id', 'materiales.grupo_id')
-            ->first($link[10]);
+            ->findOrFail($link[10]);
 
         if (session('tipo') == 'Docente') {
             if ($this->docenteService->verificarDocenteId($material->asignatura_id)) {

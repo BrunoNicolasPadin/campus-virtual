@@ -30,17 +30,17 @@ class CorreccionCorrespondiente
         $correccion = Correccion::select('evaluaciones.institucion_id', 'evaluaciones.asignatura_id')
             ->join('entregas', 'entregas.id', 'correcciones.entrega_id')
             ->join('evaluaciones', 'evaluaciones.id', 'entregas.evaluacion_id')
-            ->first($link[12]);
+            ->findOrFail($link[12]);
 
         if (session('tipo') == 'Docente') {
-            if ($this->docenteService->verificarDocenteId($correccion->entrega->evaluacion->asignatura_id)) {
+            if ($this->docenteService->verificarDocenteId($correccion->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Esta corrección no es tuya.');
         }
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            if ($correccion->entrega->evaluacion->institucion_id == session('institucion_id')) {
+            if ($correccion->institucion_id == session('institucion_id')) {
                 return $next($request);
             }
             abort(403, 'Esta corrección no forma parte de tu institución');

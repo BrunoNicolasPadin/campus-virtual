@@ -20,7 +20,8 @@ class UpdateInstitucion extends FormRequest
             'claveDeAccesoActual' => 'nullable',
             'claveDeAccesoNueva' => 'exclude_if:claveDeAccesoActual,null|nullable|min:8|max:32',
             'claveDeAccesoNuevaConfirmation' => 'exclude_if:claveDeAccesoActual,null|nullable|same:claveDeAccesoNueva',
-            'archivo' => 'required|file|size:20480|mimetypes:application/pdf,application/msword,
+            'boolArchivo' => 'required',
+            'archivo' => 'exclude_if:boolArchivo,false|nullable|file|max:20480|mimetypes:application/pdf,application/msword,
             application/vnd.openxmlformats-officedocument.wordprocessingml.document,
             application/vnd.ms-excel,application/vnd.ms-powerpoint,
             application/vnd.openxmlformats-officedocument.presentationml.slideshow,
@@ -37,10 +38,9 @@ class UpdateInstitucion extends FormRequest
             'claveDeAccesoNueva.min' => 'La clave de acceso debe tener como mínimo 8 caracteres.',
             'claveDeAccesoNueva.max' => 'La clave de acceso debe tener como máximo 32 caracteres.',
             'claveDeAccesoNuevaConfirmation.same' => 'Las claves de acceso no coinciden.',
-            'archivo.required' => 'Debe ingresar un archivo.',
-            'archivo.file' => 'Debe seleccionar un archivo, no otra cosa.',
-            'archivo.size' => 'El archivo no debe superar los 20MB.',
-            'archivo.mimetype' => 'El archivo no esta en el tipo de archivos permitidos.',
+            'archivo.file' => 'Debe ingresar un archivo, no otra cosa.',
+            'archivo.max' => 'El archivo no debe superar los 20MB.',
+            'archivo.mimetypes' => 'El archivo no esta en el tipo de archivos permitidos.',
         ];
     }
 }

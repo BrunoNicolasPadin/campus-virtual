@@ -60,9 +60,9 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
+                                <table-data v-for="inscripcion in mesa.inscripcion" :key="inscripcion.id">
                                     <template #td>
-                                        <span v-if="mesa.calificacion">{{ mesa.calificacion }}</span>
+                                        <span v-if="inscripcion.calificacion">{{ inscripcion.calificacion }}</span>
                                         <span v-else>Sin calificar</span>
                                     </template>
                                 </table-data>

@@ -22,7 +22,7 @@ class RendirEntregaCorrespondiente
         $entrega = RendirEntrega::select('anotados.alumno_id', 'mesas.institucion_id')
             ->join('anotados', 'anotados.id', 'rendir_entregas.anotado_id')
             ->join('mesas', 'mesas.id', 'anotados.mesa_id')
-            ->first($link[14]);
+            ->findOrFail($link[14]);
 
         if (session('tipo') == 'Alumno' ) {
             if (session('tipo_id') == $entrega->alumno_id) {

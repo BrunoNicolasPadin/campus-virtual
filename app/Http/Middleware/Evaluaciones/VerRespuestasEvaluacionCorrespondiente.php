@@ -28,10 +28,9 @@ class VerRespuestasEvaluacionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $comentario = EvaluacionComentario::select('evaluaciones.division_id', 'divisiones.institucion_id', 'evaluaciones.asignatura_id')
+        $comentario = EvaluacionComentario::select('evaluaciones.division_id', 'evaluaciones.institucion_id', 'evaluaciones.asignatura_id')
             ->join('evaluaciones', 'evaluaciones.id', 'evaluaciones_comentarios.evaluacion_id')
-            ->join('divisiones', 'divisiones.id', 'muro.division_id')
-            ->first($link[10]);
+            ->findOrFail($link[10]);
 
         if (session('tipo') == 'Docente') {
             if ($this->docenteService->verificarDocenteId($comentario->asignatura_id)) {

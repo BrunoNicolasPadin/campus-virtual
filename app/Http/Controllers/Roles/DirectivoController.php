@@ -83,7 +83,7 @@ class DirectivoController extends Controller
         $message = 'Directivo eliminado con éxito!';
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            return redirect(route('roles.index'))->with(['successMessage' => $message]);
+            return redirect(route('directivos.index', $institucion_id))->with(['successMessage' => $message]);
         }
 
         if (session('tipo') == 'Directivo') {

@@ -100,7 +100,7 @@ class AlumnoDeudorController extends Controller
             $deudor->aprobado = '0';
             $deudor->alumno()->associate($alumno_id);
             $deudor->asignatura()->associate($request->asignatura_id[$i]);
-            $deudor->ciclo_lectivo()->associate($request->ciclo_lectivo_id[$i]);
+            $deudor->ciclo_lectivo()->associate($request->ciclo_lectivo_id);
             $deudor->save();
         }
 
@@ -118,13 +118,13 @@ class AlumnoDeudorController extends Controller
                 $q->where('alumno_id', $alumno_id);
             })
             ->paginate(20)
-            ->transform(function ($mesa) {
+            ->transform(function ($mesa) use($alumno_id) {
                 return [
                     'id' => $mesa->id,
                     'asignatura_id' => $mesa->asignatura_id,
-                    'asignatura' => $mesa->asignatura,
+                    'asignatura' => $mesa->asignatura->only('nombre', 'division_id'),
                     'fechaHora' => $this->formatoFechaHoraService->cambiarFormatoParaMostrar($mesa->fechaHora),
-                    'comentario' => $mesa->comentario,
+                    'inscripcion' => $mesa->anotados->where('alumno_id', $alumno_id),
                 ];
         });
 

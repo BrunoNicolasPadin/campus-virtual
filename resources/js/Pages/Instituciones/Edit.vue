@@ -203,6 +203,7 @@
                     fundacion: this.institucion.fundacion,
                     historia: this.institucion.historia,
                     planDeEstudio: null,
+                    boolPlanDeEstudio: null,
                     /* claveDeAccesoActual: null, */
                     claveDeAccesoNueva: null,
                     claveDeAccesoNuevaConfirmation: null,
@@ -217,6 +218,11 @@
                 data.append('numero', this.form.numero);
                 data.append('fundacion', this.form.fundacion);
                 data.append('historia', this.form.historia);
+                if (this.form.planDeEstudio == null) {
+                    this.form.boolPlanDeEstudio = false;
+                }
+                else { this.form.boolPlanDeEstudio = true; }
+                data.append('boolArchivo', this.form.boolPlanDeEstudio);
                 data.append('archivo', this.form.planDeEstudio);
                 /* data.append('claveDeAccesoActual', this.form.claveDeAccesoActual); */
                 data.append('claveDeAccesoNueva', this.form.claveDeAccesoNueva);

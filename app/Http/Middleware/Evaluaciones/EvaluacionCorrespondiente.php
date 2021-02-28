@@ -29,13 +29,7 @@ class EvaluacionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $evaluacion = Evaluacion::select('division_id', 'asignatura_id')
-        ->addSelect(
-            ['institucion_id' => Division::select('institucion_id')
-                ->whereColumn('id', 'division_id')
-                ->limit(1)
-            ])
-        ->findOrFail($link[8]);
+        $evaluacion = Evaluacion::select('division_id', 'asignatura_id', 'institucion_id')->findOrFail($link[8]);
 
         if (session('tipo') == 'Docente') {
             if ($this->docenteService->verificarDocenteId($evaluacion->asignatura_id)) {

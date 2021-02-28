@@ -23,8 +23,8 @@ class EntregaArchivoCorrespondiente
         $archivo = EntregaArchivo::select('evaluaciones.institucion_id', 'entregas.alumno_id')
             ->join('entregas', 'entregas.id', 'entregas_archivos.entrega_id')
             ->join('evaluaciones', 'evaluaciones.id', 'entregas.evaluacion_id')
-            ->join('divisiones', 'divisiones.id', 'muro.division_id')
-            ->first($link[12]);
+            ->join('divisiones', 'divisiones.id', 'evaluaciones.division_id')
+            ->findOrFail($link[12]);
 
         if ($archivo->alumno_id == session('tipo_id')) {
             return $next($request);

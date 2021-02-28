@@ -4,6 +4,7 @@ namespace App\Models\Evaluaciones;
 
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Estructuras\Division;
+use App\Models\Instituciones\Institucion;
 use Illuminate\Database\Eloquent\Model;
 
 class Evaluacion extends Model
@@ -21,6 +22,11 @@ class Evaluacion extends Model
         'division_id',
         'asignatura_id',
     ];
+
+    public function institucion()
+    {
+        return $this->belongsTo(Institucion::class);
+    }
 
     public function division()
     {

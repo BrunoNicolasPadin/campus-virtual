@@ -51,7 +51,6 @@
                                 <select
                                 v-if="tipoEvaluacion == 'Escrita'"
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
-                                required
                                 v-model="form.calificacion">
                                     
                                     <option value="">-</option>
@@ -63,7 +62,6 @@
                                 <select
                                 v-else
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
-                                required
                                 v-model="form.calificacion">
                                     
                                     <option value="">-</option>

@@ -111,10 +111,9 @@
                 </div>
 
                 <ul class="my-2 bg-white border border-blue-100 rounded-md divide-y divide-gray-200">
-
                     <li v-for="archivo in archivos" :key="archivo.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                        <div v-if="archivo.visibilidad" class="w-0 flex-1 flex items-center">
-                            <span class="ml-2 flex-1 w-0 truncate">
+                        <div class="w-0 flex-1 flex items-center">
+                            <span v-if="archivo.visibilidad || tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' " class="ml-2 flex-1 w-0 truncate">
                                 <a
                                 :href="'/storage/mesas/archivos/' + archivo.archivo" 
                                 target="_blank" 
@@ -122,12 +121,6 @@
                                 rel="noopener noreferrer">
                                     {{ archivo.archivo }}
                                 </a>
-                            </span>
-                        </div>
-
-                        <div v-else class="w-0 flex-1 flex items-center">
-                            <span class="ml-2 flex-1 w-0 truncate">
-                                Archivo no visible.
                             </span>
                         </div>
                     </li>

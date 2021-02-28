@@ -52,7 +52,7 @@ class EvaluacionRespuestaController extends Controller
                 'comentario' => $comentario->comentario,
                 'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($comentario->updated_at),
             ],
-            'respuestas' => EvaluacionRespuesta::with('user')->where('comentario_id', $comentario_id)->orderBy('created_at', 'DESC')->paginate(20)
+            'respuestas' => EvaluacionRespuesta::with('user')->where('comentario_id', $comentario_id)->orderBy('updated_at', 'DESC')->paginate(20)
                 ->transform(function ($respuesta) {
                     return [
                         'id' => $respuesta->id,

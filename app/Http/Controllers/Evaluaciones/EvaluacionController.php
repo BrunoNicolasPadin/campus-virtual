@@ -84,12 +84,6 @@ class EvaluacionController extends Controller
 
     public function store(StoreEvaluacion $request, $institucion_id, $division_id)
     {
-        $eva = Evaluacion::create([
-            'institucion_id' => $institucion_id,
-            'division_id' => $division_id,
-            'asignatura_id' => $request->asignatura_id,
-        ]);
-
         $evaluacion = new Evaluacion();
         $evaluacion->titulo = $request->titulo;
         $evaluacion->tipo = $request->tipo;
@@ -124,7 +118,7 @@ class EvaluacionController extends Controller
                 'comentario' => $evaluacion->comentario,
             ],
             'archivos' => Archivo::where('evaluacion_id', $id)->orderBy('nombre')->get(),
-            'comentarios' => EvaluacionComentario::where('evaluacion_id', $id)->with('user')->orderBy('created_at', 'DESC')->paginate(10)
+            'comentarios' => EvaluacionComentario::where('evaluacion_id', $id)->with('user')->orderBy('updated_at', 'DESC')->paginate(10)
                 ->transform(function ($comentario) {
                     return [
                         'id' => $comentario->id,

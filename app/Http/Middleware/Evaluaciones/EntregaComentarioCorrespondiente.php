@@ -27,11 +27,10 @@ class EntregaComentarioCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $comentario = EntregaComentario::select('divisiones.institucion_id', 'comentarios.user_id')
-            ->join('entregas', 'entregas.id', 'entregas_archivos.entrega_id')
+        $comentario = EntregaComentario::select('evaluaciones.institucion_id', 'entregas_comentarios.user_id')
+            ->join('entregas', 'entregas.id', 'entregas_comentarios.entrega_id')
             ->join('evaluaciones', 'evaluaciones.id', 'entregas.evaluacion_id')
-            ->join('divisiones', 'divisiones.id', 'muro.division_id')
-            ->first($link[12]);
+            ->findOrFail($link[12]);
 
         if ($this->eliminarService->verificarUsuarioParaEliminar($comentario->user_id, $comentario->institucion_id)) {
             return $next($request);

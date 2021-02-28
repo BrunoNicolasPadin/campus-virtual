@@ -33,6 +33,7 @@ class EstructuraController extends Controller
     {
         $divisiones = Division::select('divisiones.id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
             'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre')
+            ->where('institucion_id', $institucion_id)
             ->join('niveles', 'niveles.id', 'divisiones.nivel_id')
             ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
             ->join('cursos', 'cursos.id', 'divisiones.curso_id')

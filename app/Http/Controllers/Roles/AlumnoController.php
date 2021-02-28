@@ -81,14 +81,6 @@ class AlumnoController extends Controller
     {
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $request->division_id)) {
 
-            $alumno = Alumno::create([
-                'user_id' => Auth::id(),
-                'institucion_id' => $institucion_id,
-                'division_id' => $request->division_id,
-                'exAlumno' => 0,
-                'activado' => 0,
-            ]);
-
             $alumno = new Alumno();
             $alumno->activado = '0';
             $alumno->exAlumno = '0';
@@ -118,7 +110,6 @@ class AlumnoController extends Controller
             ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
             ->leftjoin('cursos', 'cursos.id', 'divisiones.curso_id')
             ->join('users', 'users.id', 'alumnos.user_id')
-            ->leftjoin('padres', 'padres.alumno_id', 'alumnos.id')
             ->first();
 
         return Inertia::render('Alumnos/Show', [
@@ -162,7 +153,7 @@ class AlumnoController extends Controller
         $message = 'Alumno eliminado con éxito!';
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            return redirect(route('roles.index'))->with(['successMessage' => $message]);
+            return redirect(route('alumnos.index', $institucion_id))->with(['successMessage' => $message]);
         }
 
         if (session('tipo') == 'Alumno') {

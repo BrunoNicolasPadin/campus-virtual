@@ -48,19 +48,19 @@ class AlumnoObserver
 
         foreach ($asignaturas as $asignatura) {
 
-            $libreta = Libreta::create([
-                'alumno_id' => $alumno->id,
-                'ciclo_lectivo_id' => $cicloLectivo->id,
-                'division_id' => $division->id,
-                'asignatura_id' => $asignatura->id,
-                'periodo_id' => $division->periodo_id,
-            ]);
+            $libreta = new Libreta();
+            $libreta->alumno()->associate($alumno->id);
+            $libreta->cicloLectivo()->associate($cicloLectivo->id);
+            $libreta->division()->associate($division->id);
+            $libreta->asignatura()->associate($asignatura->id);
+            $libreta->periodo()->associate($division->periodo_id);
+            $libreta->save();
 
             for ($k=0; $k < count($periodos); $k++) { 
-                Calificacion::create([
-                    'libreta_id' => $libreta->id,
-                    'periodo' => $periodos[$k],
-                ]);
+                $calificacion = new Calificacion();
+                $calificacion->libreta()->associate($libreta);
+                $calificacion->periodo = $periodos[$k];
+                $calificacion->save();
             }
         }
     }
@@ -73,19 +73,4 @@ class AlumnoObserver
             Libreta::destroy($libreta->id);
         }
     }
-
-    /* public function deleted(Alumno $alumno)
-    {
-        //
-    }
-
-    public function restored(Alumno $alumno)
-    {
-        //
-    }
-
-    public function forceDeleted(Alumno $alumno)
-    {
-        //
-    } */
 }

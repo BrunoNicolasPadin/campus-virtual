@@ -28,10 +28,10 @@ class EntregaCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $entrega = Entrega::select('entregas.alumno_id', 'evaluaciones.asignatura_id', 'divisiones.institucion_id')
+        $entrega = Entrega::select('entregas.alumno_id', 'evaluaciones.asignatura_id', 'evaluaciones.institucion_id')
             ->join('evaluaciones', 'evaluaciones.id', 'entregas.evaluacion_id')
-            ->join('divisiones', 'divisiones.id', 'muro.division_id')
-            ->first($link[10]);
+            ->join('divisiones', 'divisiones.id', 'evaluaciones.division_id')
+            ->findOrFail($link[10]);
 
         if (session('tipo') == 'Docente') {
             if ($this->docenteService->verificarDocenteId($entrega->asignatura_id)) {

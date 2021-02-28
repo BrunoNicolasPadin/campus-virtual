@@ -29,7 +29,7 @@ class PublicacionCorrespondiente
 
         $publicacion = Muro::select('muro.user_id', 'divisiones.institucion_id')
             ->join('divisiones', 'divisiones.id', 'muro.division_id')
-            ->first($link[8]);
+            ->findOrFail($link[8]);
 
         if ($this->eliminarService->verificarUsuarioParaEliminar($publicacion->user_id, $publicacion->institucion_id)) {
             return $next($request);

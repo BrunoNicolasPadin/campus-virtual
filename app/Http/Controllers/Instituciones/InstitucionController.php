@@ -44,17 +44,15 @@ class InstitucionController extends Controller
 
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
-            for ($i=0; $i < count($archivo); $i++) { 
-                $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivo[$i]->getClientOriginalName();
-                $archivo[$i]->storeAs('public/PlanesDeEstudio', $nombre);
-            }
+            $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
+            $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
+            $archivo->storeAs('public/PlanesDeEstudio', $nombre);
         }
 
         $institucion = new Institucion();
-        $institucion->numero = $request->numero;
-        $institucion->fundacion = $request->fundacion;
-        $institucion->historia = $request->historia;
+        $institucion->numero = $this->verificarNull($request->numero);
+        $institucion->fundacion = $this->verificarNull($request->fundacion);
+        $institucion->historia = $this->verificarNull($request->historia);
         $institucion->planDeEstudio = $nombre;
         $institucion->claveDeAcceso = Hash::make($request->claveDeAcceso);
         $institucion->user()->associate(Auth::id());
@@ -117,14 +115,10 @@ class InstitucionController extends Controller
         if ($request->hasFile('archivo')) {
 
             Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
-
             $archivo = $request->file('archivo');
-            for ($i=0; $i < count($archivo); $i++) { 
-                $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivo[$i]->getClientOriginalName();
-                $archivo[$i]->storeAs('public/PlanesDeEstudio', $nombre);
-            }
-
+            $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
+            $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
+            $archivo->storeAs('public/PlanesDeEstudio', $nombre);
             $institucion->planDeEstudio = $nombre;
         }
 

@@ -88,7 +88,7 @@
                                     </template>
                                 </label-form>
                                 
-                                <input-form required type="text" v-model="form.desdeCuando" />
+                                <input-form type="text" v-model="form.desdeCuando" />
                                 
                                 <info>
                                     <template #info>
@@ -152,7 +152,7 @@
                     this.form.desdeCuando = null;
                     return this.mostrar = true;
                 }
-                this.form.desdeCuando = false;
+                this.form.desdeCuando = null;
                 return this.mostrar = false;
             },
 

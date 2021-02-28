@@ -17,7 +17,7 @@ class SoloInstitucionesDirectivosAlumnos
 
     public function handle(Request $request, Closure $next)
     {
-        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo' || session('tipo') == 'Alumno') {
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo' || session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
             if ($this->rolesService->verificarRol()) {
                 return $next($request);
             }

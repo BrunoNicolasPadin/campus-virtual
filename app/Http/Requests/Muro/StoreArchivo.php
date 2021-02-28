@@ -14,7 +14,7 @@ class StoreArchivo extends FormRequest
     public function rules()
     {
         return [
-            'archivos.*' => 'required|file|size:20480|mimetypes:application/pdf,application/msword,
+            'archivos.*' => 'required|file|max:20480|mimetypes:application/pdf,application/msword,
             application/vnd.openxmlformats-officedocument.wordprocessingml.document,
             application/vnd.ms-excel,application/vnd.ms-powerpoint,
             application/vnd.openxmlformats-officedocument.presentationml.slideshow,
@@ -27,8 +27,8 @@ class StoreArchivo extends FormRequest
         return [
             'archivos.*.required' => 'Debe ingresar un archivo.',
             'archivos.*.file' => 'Debe seleccionar un archivo, no otra cosa.',
-            'archivos.*.size' => 'Cada archivo no debe superar los 20MB.',
-            'archivos.*.mimetype' => 'Hay un archivo que no esta en el tipo de archivo permitido.',
+            'archivos.*.max' => 'Cada archivo no debe superar los 20MB.',
+            'archivos.*.mimetypes' => 'Hay un archivo que no esta en el tipo de archivo permitido.',
         ];
     }
 }

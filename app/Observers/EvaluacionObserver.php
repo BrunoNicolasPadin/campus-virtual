@@ -13,10 +13,11 @@ class EvaluacionObserver
         $alumnos = Alumno::where('division_id', $evaluacion->division_id)->get();
 
         foreach ($alumnos as $alumno) {
-            Entrega::create([
-                'evaluacion_id' => $evaluacion->id,
-                'alumno_id' => $alumno->id,
-            ]);
+
+            $entrega = new Entrega();
+            $entrega->evaluacion_id = $evaluacion->id;
+            $entrega->alumno_id = $alumno->id;
+            $entrega->save();
         }
     }
 }

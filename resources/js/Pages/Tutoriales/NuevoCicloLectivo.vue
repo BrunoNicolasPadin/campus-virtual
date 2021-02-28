@@ -53,9 +53,8 @@
 
                         <template #informacion>
                             En este paso le recomendamos eliminar las evaluaciones y con esto se eliminaran las entregas de los alumnos, las correcciones y 
-                            los comentarios hechos en cada una como así también los archivos que subió cada docente en cada evaluación.
-                            Si quiere conservar esos archivos le recomendamos crearse una cuenta de Gmail e ingresar a "Google drive" y así guardar esos archivos 
-                            en la nube.
+                            los comentarios hechos en cada una, como así también los archivos que subió cada docente en cada evaluación.
+                            También se eliminaran las publicaciones en los muros, sus archivos y respuestas.
                         </template>
 
                         <template #contenido-video>

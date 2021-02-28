@@ -16,7 +16,7 @@ class StoreFormaEvaluacion extends FormRequest
         return [
             'nombre' => 'required|string',
             'tipo' => 'required|string',
-            'desdeCuando' => 'nullable|string',
+            'desdeCuando' => 'exclude_if:tipo,"Escrita"|required|string',
         ];
     }
 
