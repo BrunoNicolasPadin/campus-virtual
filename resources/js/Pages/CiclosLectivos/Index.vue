@@ -82,7 +82,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(cicloLectivo, index) in ciclosLectivos" :key="cicloLectivo.id">
+                            <tr v-for="(cicloLectivo, index) in ciclosLectivos.data" :key="cicloLectivo.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -126,10 +126,11 @@
                             </tr>
                         </template>
                     </table-body>
-                    
-
                 </template>
             </estructura-tabla>
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <pagination :links="ciclosLectivos.links" />
+            </div>
         </div>
     </app-layout>
 </template>
@@ -144,6 +145,7 @@
     import Editar from '@/Botones/Editar'
     import Eliminar from '@/Botones/Eliminar'
     import Primary from '@/Botones/Primary.vue'
+    import Pagination from '@/Pagination/Pagination.vue'
 
     export default {
         components: {
@@ -156,12 +158,13 @@
             Editar,
             Eliminar,
             Primary,
+            Pagination,
         },
 
         props:{ 
             successMessage: String,
             institucion_id: String,
-            ciclosLectivos: Array,
+            ciclosLectivos: Object,
         },
 
         title: 'Ciclos lectivos',

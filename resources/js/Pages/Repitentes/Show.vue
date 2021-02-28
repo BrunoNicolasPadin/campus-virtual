@@ -79,7 +79,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <span v-if="repeticion.division.orientacion">
+                                        <span v-if="repeticion.division.orientacion_id !== null">
                                             <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, repeticion.division_id])">
                                                 {{ repeticion.division.nivel.nombre }} - {{ repeticion.division.orientacion.nombre }} - 
                                                 {{ repeticion.division.curso.nombre }} - {{ repeticion.division.division }}
@@ -88,7 +88,7 @@
 
                                         <span v-else>
                                             <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, repeticion.division_id])">
-                                                {{ repeticion.division.nivel.nombre }} - {{ repeticion.division.orientacion.nombre }} - 
+                                                {{ repeticion.division.nivel.nombre }} - 
                                                 {{ repeticion.division.curso.nombre }} - {{ repeticion.division.division }}
                                             </inertia-link>
                                         </span>

@@ -40,6 +40,7 @@ class ExAlumnoController extends Controller
         $this->cicloLectivoService = $cicloLectivoService;
         $this->alumnoService = $alumnoService;
     }
+
     public function index($institucion_id)
     {
         return Inertia::render('ExAlumnos/Index', [
@@ -90,7 +91,7 @@ class ExAlumnoController extends Controller
                 },
             ))
             ->orderBy('ciclo_lectivo_id')
-            ->paginate(20)
+            ->paginate(1000)
             ->transform(function ($exalumno) {
                 return [
                     'id' => $exalumno->id,
@@ -98,7 +99,7 @@ class ExAlumnoController extends Controller
                     'division_id' => $exalumno->division_id,
                     'name' => $exalumno->alumno->user->name,
                     'fotoDePerfil' => $exalumno->alumno->user->profile_photo_path,
-                    'division' => $exalumno->division->nivel->nombre . ' - ' . $exalumno->division->orientacion->nombre . ' - ' . $exalumno->division->curso->nombre . ' - ' . $exalumno->division->division,
+                    'division' => $exalumno->division,
                     'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($exalumno->ciclo_lectivo->comienzo),
                     'final' => $this->formatoService->cambiarFormatoParaMostrar($exalumno->ciclo_lectivo->final),
                     'abandono' => $exalumno->abandono,

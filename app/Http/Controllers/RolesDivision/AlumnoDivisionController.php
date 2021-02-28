@@ -31,7 +31,7 @@ class AlumnoDivisionController extends Controller
         $alumnos = Alumno::select('users.name', 'users.profile_photo_path', 'alumnos.id')
             ->where('alumnos.division_id', $division_id)
             ->join('users', 'users.id', 'alumnos.user_id')
-            ->paginate(20);
+            ->paginate(10);
 
         return Inertia::render('RolesDivision/Alumnos', [
             'institucion_id' => $institucion_id,

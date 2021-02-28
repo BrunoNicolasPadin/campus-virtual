@@ -186,7 +186,7 @@
 
                                         <span v-else>
                                             <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, repitente.division_id])">
-                                                {{ repitente.division.nivel.nombre }} - {{ repitente.division.orientacion.nombre }} - 
+                                                {{ repitente.division.nivel.nombre }} - 
                                                 {{ repitente.division.curso.nombre }} - {{ repitente.division.division }}
                                             </inertia-link>
                                         </span>

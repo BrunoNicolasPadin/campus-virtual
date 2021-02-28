@@ -33,7 +33,7 @@ class CicloLectivoController extends Controller
     {
         return Inertia::render('CiclosLectivos/Index', [
             'institucion_id' => $institucion_id,
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaIndex($institucion_id),
         ]);
     }
 

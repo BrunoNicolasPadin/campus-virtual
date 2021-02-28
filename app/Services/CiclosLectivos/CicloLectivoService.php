@@ -30,6 +30,21 @@ class CicloLectivoService
             });
     }
 
+    public function obtenerCiclosParaIndex($institucion_id)
+    {
+        return CicloLectivo::where('institucion_id', $institucion_id)
+            ->orderBy('comienzo')
+            ->paginate(10)
+            ->transform(function ($ciclo) {
+                return [
+                    'id' => $ciclo->id,
+                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->comienzo),
+                    'final' => $this->formatoService->cambiarFormatoParaMostrar($ciclo->final),
+                    'activado' => $ciclo->activado,
+                ];
+            });
+    }
+
     public function obtenerCicloLectivoActivad($institucion_id)
     {
         return CicloLectivo::where('institucion_id', $institucion_id)->where('activado', '1')->first();

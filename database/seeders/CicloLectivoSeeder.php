@@ -9,14 +9,11 @@ class CicloLectivoSeeder extends Seeder
 {
     public function run()
     {
-        for ($i=2; $i < 21; $i++) { 
-            
             $cicloLectivo = new CicloLectivo();
-            $cicloLectivo->comienzo = '1996-03-04';
-            $cicloLectivo->final = '1997-03-02';
-            $cicloLectivo->activado = 1;
-            $cicloLectivo->institucion()->associate($i);
+            $cicloLectivo->comienzo = '2021-03-01';
+            $cicloLectivo->final = '2022-02-28';
+            $cicloLectivo->activado = 0;
+            $cicloLectivo->institucion()->associate(1);
             $cicloLectivo->save();
-        }
     }
 }
