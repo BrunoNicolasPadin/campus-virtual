@@ -29,7 +29,7 @@ class GrupoController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
-        $this->middleware('divisionCorrespondiente');
+        $this->middleware('divisionCorrespondiente')->except('show');
         $this->middleware('soloDocentes')->except('index', 'show');
         $this->middleware('grupoCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 

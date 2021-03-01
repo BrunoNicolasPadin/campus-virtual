@@ -83,11 +83,27 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        ¿El alumno abandonó el colegio?
+                                        Seleccionar la condición:
                                     </template>
                                 </label-form>
                                 
-                                <input type="checkbox" v-model="form.abandono">
+                                <select
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="condicion">
+
+                                    <option selected value="" disabled>-</option>
+                                    <option value="abandono">Abandonó el colegio</option>
+                                    <option value="finalizo">Finalizó sus estudios</option>
+                                    <option value="cambio">Se cambió de colegio</option>
+
+                                </select>
+
+                                <info>
+                                    <template #info>
+                                        Es obligatorio.
+                                    </template>
+                                </info>
                             </div>
                         </div>
                         <guardar></guardar>
@@ -129,13 +145,48 @@
                     ciclo_lectivo_id: this.exAlumno.ciclo_lectivo_id,
                     comentario: this.exAlumno.comentario,
                     abandono: this.exAlumno.abandono,
+                    finalizo: this.exAlumno.finalizo,
+                    cambio: this.exAlumno.cambio,
                 },
                 mostrarErrores: true,
+                condicion: null,
+            }
+        },
+
+        created() {
+            if (this.form.abandono) {
+                this.condicion = 'abandono';
+            }
+
+            if (this.form.finalizo) {
+                this.condicion = 'finalizo';
+            }
+
+            if (this.form.cambio) {
+                this.condicion = 'cambio';
             }
         },
 
         methods: {
             submit() {
+                if (this.condicion == 'abandono') {
+                   this.form.abandono = true;
+                   this.form.finalizo = false;
+                   this.form.cambio = false; 
+                }
+
+                if (this.condicion == 'finalizo') {
+                   this.form.abandono = false;
+                   this.form.finalizo = true;
+                   this.form.cambio = false; 
+                }
+
+                if (this.condicion == 'cambio') {
+                   this.form.abandono = false;
+                   this.form.finalizo = false;
+                   this.form.cambio = true; 
+                }
+
                 this.$inertia.put(this.route('exalumnos.update', [this.institucion_id, this.exAlumno.id]), this.form)
             },
 

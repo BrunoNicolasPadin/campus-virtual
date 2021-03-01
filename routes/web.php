@@ -208,7 +208,11 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::get('repitentes-estadisticas', [RepitenteEstadisticaController::class, 'mostrarEstadisticas'])->name('repitentes.estadisticas');
 
     Route::resource('exalumnos', ExAlumnoController::class);
-    Route::post('exalumnos/filtrados', [ExAlumnoController::class, 'filtrarExAlumnos'])->name('exalumnos.filtrar');
+
+    Route::prefix('exalumnos')->group(function () {
+        Route::post('exalumnos/filtrados', [ExAlumnoController::class, 'filtrarExAlumnos'])->name('exalumnos.filtrar');
+    });
+
     Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.createExAlumno');
     Route::get('exalumnos-estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
 

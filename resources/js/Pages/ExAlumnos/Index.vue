@@ -104,11 +104,12 @@
                                 @change="onChange()"
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
                                 required
-                                v-model="form.abandono">
+                                v-model="form.condicion">
 
                                     <option value="" selected>Todos</option>
-                                    <option value="0">No abandonó</option>
-                                    <option value="1">Abandonó</option>
+                                    <option value="abandono">Abandonó</option>
+                                    <option value="cambio">Cambió</option>
+                                    <option value="finalizo">Finalizó</option>
 
                                 </select>
                             </div>
@@ -117,7 +118,7 @@
                 </template>
             </estructura-form>
 
-            <estructura-tabla v-show="mostrar">
+            <estructura-tabla>
                 <template #tabla>
 
                     <table-head-estructura>
@@ -159,6 +160,18 @@
                                 </template>
                             </table-head>
 
+                            <table-head>
+                                <template #th-titulo>
+                                    Finalizó
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Cambió
+                                </template>
+                            </table-head>
+
                             <table-head colspan="2">
                                 <template #th-titulo>
                                     Acciones
@@ -171,7 +184,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(exalumno, index) in exalumnos.data" :key="exalumno.id">
+                            <tr v-for="(exalumno, index) in exAlumnos.data" :key="exalumno.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -229,6 +242,20 @@
 
                                 <table-data>
                                     <template #td>
+                                        <span v-if="exalumno.finalizo">Si</span>
+                                        <span v-else>No</span>
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <span v-if="exalumno.cambio">Si</span>
+                                        <span v-else>No</span>
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
                                         <inertia-link :href="route('exalumnos.edit', [institucion_id, exalumno.id])">
                                             <editar></editar>
                                         </inertia-link>
@@ -249,7 +276,7 @@
             </estructura-tabla>
 
             <div class="container mx-auto px-4 sm:px-8 my-6">
-                <pagination :links="exalumnos.links" />
+                <pagination :links="exAlumnos.links" />
             </div>
         </div>
     </app-layout>
@@ -290,6 +317,7 @@
             institucion_id: String,
             divisiones: Array,
             ciclosLectivos: Array,
+            exAlumnos: Array,
         },
 
         title: 'Ex alumnos',
@@ -299,10 +327,8 @@
                 form: {
                     ciclo_lectivo_id: null,
                     division_id: null,
-                    abandono: null,
+                    condicion: null,
                 },
-                mostrar: false,
-                exalumnos: [],
             }
         },
 
@@ -316,8 +342,7 @@
             onChange() {
                 axios.post(this.route('exalumnos.filtrar', this.institucion_id), this.form)
                 .then(response => {
-                    this.mostrar = true;
-                    this.exalumnos = response.data;
+                    this.exAlumnos = response.data;
                 })
                 .catch(e => {
                     // Podemos mostrar los errores en la consola

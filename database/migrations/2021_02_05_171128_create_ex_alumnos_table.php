@@ -20,6 +20,8 @@ class CreateExAlumnosTable extends Migration
             $table->foreignId('ciclo_lectivo_id')->constrained('ciclos_lectivos')->onDelete('cascade');
             $table->foreignId('division_id')->constrained('divisiones')->onDelete('cascade');
             $table->boolean('abandono');
+            $table->boolean('finalizo');
+            $table->boolean('cambio');
             $table->text('comentario')->nullable();
             $table->timestamps();
         });

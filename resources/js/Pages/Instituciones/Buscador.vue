@@ -176,7 +176,7 @@
 
         data() {
             return {
-                nombre: ''
+                nombre: null
             }
         },
 

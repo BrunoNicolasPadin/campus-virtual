@@ -12,6 +12,8 @@ class ExAlumno extends Model
     protected $table = 'ex_alumnos';
     protected $fillable = [
         'abandono',
+        'finalizo',
+        'cambio',
         'comentario',
     ];
     protected $guarded = [

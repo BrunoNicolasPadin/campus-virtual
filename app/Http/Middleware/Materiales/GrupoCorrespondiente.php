@@ -5,6 +5,7 @@ namespace App\Http\Middleware\Materiales;
 use App\Models\Estructuras\Division;
 use App\Models\Materiales\Grupo;
 use App\Services\Asignaturas\VerificarAsignatura;
+use App\Services\Mesas\DeudorService;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
@@ -13,15 +14,18 @@ class GrupoCorrespondiente
 {
     protected $ruta;
     protected $asignaturaService;
+    protected $deudorService;
 
     public function __construct(
         RutaService $ruta,
         VerificarAsignatura $asignaturaService,
+        DeudorService $deudorService,
     )
 
     {
         $this->ruta = $ruta;
         $this->asignaturaService = $asignaturaService;
+        $this->deudorService = $deudorService;
     }
 
     public function handle(Request $request, Closure $next)
@@ -52,6 +56,9 @@ class GrupoCorrespondiente
 
         if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
             if ($grupo->division_id == session('division_id')) {
+                return $next($request);
+            }
+            if ($this->deudorService->verificarGeneral($grupo->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Este grupo no forma parte de tu división.');

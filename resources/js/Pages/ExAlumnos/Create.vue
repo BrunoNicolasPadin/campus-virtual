@@ -54,6 +54,12 @@
                                     </option>
 
                                 </select>
+
+                                <info>
+                                    <template #info>
+                                        Es obligatorio.
+                                    </template>
+                                </info>
                             </div>
                         </div>
                         
@@ -83,13 +89,30 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        ¿El alumno abandonó el colegio?
+                                        Seleccionar la condición:
                                     </template>
                                 </label-form>
                                 
-                                <input type="checkbox" v-model="form.abandono">
+                                <select
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="condicion">
+
+                                    <option selected value="" disabled>-</option>
+                                    <option value="abandono">Abandonó el colegio</option>
+                                    <option value="finalizo">Finalizó sus estudios</option>
+                                    <option value="cambio">Se cambió de colegio</option>
+
+                                </select>
+
+                                <info>
+                                    <template #info>
+                                        Es obligatorio.
+                                    </template>
+                                </info>
                             </div>
                         </div>
+
                         <guardar></guardar>
                     </form>
                 </template>
@@ -130,14 +153,34 @@
                     division_id: this.alumno.division_id,
                     ciclo_lectivo_id: null,
                     comentario: null,
-                    abandono: false,
+                    abandono: null,
+                    finalizo: null,
+                    cambio: null,
                 },
+                condicion: null,
                 mostrarErrores: true,
             }
         },
 
         methods: {
             submit() {
+                if (this.condicion == 'abandono') {
+                   this.form.abandono = true;
+                   this.form.finalizo = false;
+                   this.form.cambio = false; 
+                }
+
+                if (this.condicion == 'finalizo') {
+                   this.form.abandono = false;
+                   this.form.finalizo = true;
+                   this.form.cambio = false; 
+                }
+
+                if (this.condicion == 'cambio') {
+                   this.form.abandono = false;
+                   this.form.finalizo = false;
+                   this.form.cambio = true; 
+                }
                 this.$inertia.post(this.route('exalumnos.store', this.institucion_id), this.form)
             },
 
