@@ -54,6 +54,7 @@ class PadreController extends Controller
         return Inertia::render('Padres/Index', [
             'institucion_id' => $institucion_id,
             'padres' => $padres,
+            'nombreProp' => '',
         ]);
     }
 

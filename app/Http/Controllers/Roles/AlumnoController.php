@@ -59,6 +59,7 @@ class AlumnoController extends Controller
                         'foto' => $alumno->profile_photo_path,
                     ];
                 }),
+            'nombreProp' => '',
         ]);
     }
 

@@ -51,6 +51,10 @@ use App\Http\Controllers\Repitentes\RepitenteController;
 use App\Http\Controllers\Repitentes\RepitenteEstadisticaController;
 use App\Http\Controllers\Roles\ActivarCuentaController;
 use App\Http\Controllers\Roles\AlumnoController;
+use App\Http\Controllers\Roles\Buscadores\BuscadorAlumnoController;
+use App\Http\Controllers\Roles\Buscadores\BuscadorDirectivoController;
+use App\Http\Controllers\Roles\Buscadores\BuscadorDocenteController;
+use App\Http\Controllers\Roles\Buscadores\BuscadorPadreController;
 use App\Http\Controllers\Roles\DirectivoController;
 use App\Http\Controllers\Roles\DocenteController;
 use App\Http\Controllers\Roles\PadreController;
@@ -107,6 +111,11 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::resource('directivos', DirectivoController::class);
     Route::resource('docentes', DocenteController::class);
     Route::resource('alumnos', AlumnoController::class);
+
+    Route::get('directivos/buscador/{nombre}', [BuscadorDirectivoController::class, 'buscar'])->name('buscador-de-directivos');
+    Route::get('docentes/buscador/{nombre}', [BuscadorDocenteController::class, 'buscar'])->name('buscador-de-docentes');
+    Route::get('alumnos/buscador/{nombre}', [BuscadorAlumnoController::class, 'buscar'])->name('buscador-de-alumnos');
+    Route::get('padres/buscador/{nombre}', [BuscadorPadreController::class, 'buscar'])->name('buscador-de-padres');
     
     Route::get('verificar-clave-institucion', [AlumnoController::class, 'verificarClave'])->name('alumnos.verificarClaveInstitucion');
     Route::resource('padres', PadreController::class);

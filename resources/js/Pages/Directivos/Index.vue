@@ -23,6 +23,16 @@
                 </div>
             </div>
         </transition>
+        
+        <buscador>
+            <template #input-buscador>
+                <input placeholder="Search"
+                    class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" 
+                    v-model="nombre"
+                    @keyup="buscar()"
+                />
+            </template>
+        </buscador>
 
         <div class="py-6">
 
@@ -114,6 +124,7 @@
     import TableData from '@/Tabla/TableData'
     import Eliminar from '@/Botones/Eliminar'
     import Pagination from '@/Pagination/Pagination.vue'
+    import Buscador from '@/Buscador/Buscador.vue'
 
     export default {
         components: {
@@ -125,15 +136,27 @@
             TableData,
             Eliminar,
             Pagination,
+            Buscador,
         },
 
         props:{ 
             successMessage: String,
             institucion_id: String,
-            directivos: Array,
+            directivos: Object,
+            nombreProp: String,
         },
 
         title: 'Directivos',
+
+        data() {
+            return {
+                nombre: this.nombreProp,
+            }
+        },
+
+        created() {
+            this.nombre = this.nombreProp;
+        },
 
         methods: {
             destroy(id) {
@@ -145,6 +168,14 @@
             cerrarAlerta() {
                 this.successMessage = false;
             },
+
+            buscar() {
+                if (this.nombre == '') {
+                    this.$inertia.get(this.route('directivos.index', this.institucion_id))
+                } else {
+                    this.$inertia.replace(this.route('buscador-de-directivos', {institucion_id: this.institucion_id, nombre: this.nombre}))
+                }
+            }
         }
     }
 </script>

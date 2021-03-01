@@ -317,7 +317,7 @@
             institucion_id: String,
             divisiones: Array,
             ciclosLectivos: Array,
-            exAlumnos: Array,
+            exAlumnos: Object,
         },
 
         title: 'Ex alumnos',

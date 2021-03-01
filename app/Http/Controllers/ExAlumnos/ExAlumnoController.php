@@ -69,7 +69,7 @@ class ExAlumnoController extends Controller
                 },
             ))
             ->orderBy('ciclo_lectivo_id')
-            ->paginate(1)
+            ->paginate(1000)
             ->transform(function ($exalumno) {
                 return [
                     'id' => $exalumno->id,
@@ -136,7 +136,7 @@ class ExAlumnoController extends Controller
                 },
             ))
             ->orderBy('ciclo_lectivo_id')
-            ->paginate(1)
+            ->paginate(1000)
             ->transform(function ($exalumno) {
                 return [
                     'id' => $exalumno->id,

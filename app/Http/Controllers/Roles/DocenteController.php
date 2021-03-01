@@ -41,6 +41,7 @@ class DocenteController extends Controller
                         'foto' => $docente->profile_photo_path,
                     ];
                 }),
+            'nombreProp' => '',
         ]);
     }
 

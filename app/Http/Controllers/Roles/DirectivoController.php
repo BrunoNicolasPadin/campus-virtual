@@ -32,7 +32,7 @@ class DirectivoController extends Controller
                 ->where('institucion_id', $institucion_id)
                 ->join('users', 'users.id', 'directivos.user_id')
                 ->orderBy('users.name')
-                ->paginate(20)
+                ->paginate(10)
                 ->transform(function ($directivo) {
                     return [
                         'id' => $directivo->id,
@@ -40,6 +40,7 @@ class DirectivoController extends Controller
                         'foto' => $directivo->profile_photo_path,
                     ];
                 }),
+            'nombreProp' => '',
         ]);
     }
 
