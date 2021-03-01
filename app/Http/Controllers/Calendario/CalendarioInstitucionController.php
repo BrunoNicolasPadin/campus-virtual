@@ -32,18 +32,18 @@ class CalendarioInstitucionController extends Controller
         $this->calendarioService = $calendarioService;
     }
 
-    public function mostrarCalendario($institucion_id, $year)
+    public function mostrarCalendario($institucion_id, $year, $mes)
     {
-        $anios = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
 
-        return $this->filtrarCalendario($institucion_id, $year, $anios);
+        return $this->filtrarCalendario($institucion_id, $year, $mes);
     }
 
-    public function filtrarCalendario($institucion_id, $year, $anios)
+    public function filtrarCalendario($institucion_id, $year, $mes)
     {
-        $evaluaciones = $this->obtenerEvaEloquent($institucion_id, $year);
+        $anios = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
+        $evaluaciones = $this->obtenerEvaEloquent($institucion_id, $year, $mes);
         
-        $mesas = $this->obtenerMesasEloquent($institucion_id, $year);
+        $mesas = $this->obtenerMesasEloquent($institucion_id, $year, $mes);
 
         $evasMesas = [];
 
@@ -64,13 +64,18 @@ class CalendarioInstitucionController extends Controller
             'meses' => $this->calendarioService->obtenerMeses(),
             'evasMesas' => $evasMesas,
             'anios' => $anios,
+            'mesesParaBuscar' => $this->calendarioService->obtenerMesesParaBuscar(),
+            'tipo' => session('tipo'),
+            'anioSeleccionado' => $year,
+            'mesSeleccionado' => $this->calendarioService->obtenerMesSeleccionado($mes),
         ]);
     }
 
-    public function obtenerEvaEloquent($institucion_id, $year)
+    public function obtenerEvaEloquent($institucion_id, $year, $mes)
     {
         return Evaluacion::where('institucion_id', $institucion_id)
             ->whereYear('fechaHoraRealizacion', $year)
+            ->whereMonth('fechaHoraRealizacion', $mes)
             ->with(['division', 'division.nivel', 'division.orientacion', 'division.curso', 'asignatura'])
             ->get()
             ->map(function ($evaluacion) {
@@ -88,10 +93,11 @@ class CalendarioInstitucionController extends Controller
             });
     }
 
-    public function obtenerMesasEloquent($institucion_id, $year)
+    public function obtenerMesasEloquent($institucion_id, $year, $mes)
     {
         return Mesa::where('institucion_id', $institucion_id)
         ->whereYear('fechaHora', $year)
+        ->whereMonth('fechaHora', $mes)
         ->with(['asignatura.division', 'asignatura.division.nivel', 'asignatura.division.orientacion', 'asignatura.division.curso', 'asignatura'])
         ->get()
         ->map(function ($mesa) {

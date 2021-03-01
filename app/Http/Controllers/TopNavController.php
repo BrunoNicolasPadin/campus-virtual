@@ -23,15 +23,16 @@ class TopNavController extends Controller
         }
 
         $year = 2021;
+        $mes = 1;
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            return redirect(route('calendario-instituciones.mostrar', [$institucion_id, $year]));
+            return redirect(route('calendario-instituciones.mostrar', [$institucion_id, $year, $mes]));
         }
         if (session('tipo') == 'Docente') {
-            return redirect(route('calendario-docentes.mostrar', [$institucion_id, $year]));
+            return redirect(route('calendario-docentes.mostrar', [$institucion_id, $year, $mes]));
         }
         if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
-            return redirect(route('calendario-alumnos.mostrar', [$institucion_id, $year]));
+            return redirect(route('calendario-alumnos.mostrar', [$institucion_id, $year, $mes]));
         }
         return redirect('inicio');
         

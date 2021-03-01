@@ -212,9 +212,9 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.createExAlumno');
     Route::get('exalumnos-estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
 
-    Route::get('calendario/instituciones/{year}', [CalendarioInstitucionController::class, 'mostrarCalendario'])->name('calendario-instituciones.mostrar');
-    Route::get('calendario/docentes/{year}', [CalendarioDocenteController::class, 'mostrarCalendario'])->name('calendario-docentes.mostrar');
-    Route::get('calendario/alumnos/{year}', [CalendarioAlumnoController::class, 'mostrarCalendario'])->name('calendario-alumnos.mostrar');
+    Route::get('calendario/instituciones/{year}/{mes}', [CalendarioInstitucionController::class, 'mostrarCalendario'])->name('calendario-instituciones.mostrar');
+    Route::get('calendario/docentes/{year}/{mes}', [CalendarioDocenteController::class, 'mostrarCalendario'])->name('calendario-docentes.mostrar');
+    Route::get('calendario/alumnos/{year}/{mes}', [CalendarioAlumnoController::class, 'mostrarCalendario'])->name('calendario-alumnos.mostrar');
 });
 
 Route::inertia('/tutoriales', 'Tutoriales/Principal')->name('tutoriales');

@@ -50,4 +50,28 @@ class CalendarioService
         }
         return $evasMesas;
     }
+
+    public function obtenerMesesParaBuscar()
+    {
+        return [
+            array('Nombre' => 'Enero', 'Numero' => 1),
+            array('Nombre' => 'Febrero', 'Numero' => 2),
+            array('Nombre' => 'Marzo', 'Numero' => 3),
+            array('Nombre' => 'Abril', 'Numero' => 4),
+            array('Nombre' => 'Mayo', 'Numero' => 5),
+            array('Nombre' => 'Junio', 'Numero' => 6),
+            array('Nombre' => 'Julio', 'Numero' => 7),
+            array('Nombre' => 'Agosto', 'Numero' => 8),
+            array('Nombre' => 'Septiembre', 'Numero' => 9),
+            array('Nombre' => 'Octubre', 'Numero' => 10),
+            array('Nombre' => 'Noviembre', 'Numero' => 11),
+            array('Nombre' => 'Diciembre', 'Numero' => 12),
+        ];
+    }
+
+    public function obtenerMesSeleccionado($mes)
+    {
+        $meses = $this->obtenerMeses();
+        return $meses[$mes-1];
+    }
 }
