@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreAlumno;
 use App\Http\Requests\Roles\StoreDirectivo;
 use App\Models\Roles\Alumno;
+use App\Models\Roles\Padre;
 use App\Services\Alumnos\AlumnoService;
 use App\Services\ClaveDeAcceso\VerificarDivision;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
@@ -112,10 +113,19 @@ class AlumnoController extends Controller
             ->join('users', 'users.id', 'alumnos.user_id')
             ->first();
 
+        $padres = Padre::where('alumno_id', $alumno->id)
+            ->with(array(
+                'user' => function($query){
+                    $query->select('id', 'name');
+                },
+            ))
+            ->get();
+
         return Inertia::render('Alumnos/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'alumno' => $alumno,
+            'padres' => $padres,
         ]);
     }
 

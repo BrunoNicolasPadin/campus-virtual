@@ -68,7 +68,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('alumnos.index', institucion_id)" class="hover:underline">Alumnos</inertia-link>
+                                        <inertia-link :href="route('padres.index', institucion_id)" class="hover:underline">Padres</inertia-link>
                                     </template>
                                 </table-data>
                             </tr>
@@ -82,7 +82,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('exalumnos.index', institucion_id)" class="hover:underline">Ex Alumnos</inertia-link>
+                                        <inertia-link :href="route('alumnos.index', institucion_id)" class="hover:underline">Alumnos</inertia-link>
                                     </template>
                                 </table-data>
                             </tr>
@@ -91,6 +91,20 @@
                                 <table-data>
                                     <template #td>
                                         5
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <inertia-link :href="route('exalumnos.index', institucion_id)" class="hover:underline">Ex Alumnos</inertia-link>
+                                    </template>
+                                </table-data>
+                            </tr>
+
+                            <tr>
+                                <table-data>
+                                    <template #td>
+                                        6
                                     </template>
                                 </table-data>
 
