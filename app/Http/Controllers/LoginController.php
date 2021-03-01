@@ -6,16 +6,28 @@ use App\Models\Instituciones\Institucion;
 use App\Models\Roles\Alumno;
 use App\Models\Roles\Directivo;
 use App\Models\Roles\Docente;
-use App\Models\Roles\ExAlumno;
 use App\Models\Roles\Padre;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class LoginController extends Controller
 {
+    public function mostrarFormulario()
+    {
+        if (Auth::check()) {
+            return redirect(route('inicio'));
+        }
+
+        return Inertia::render('Auth/Login');
+    }
     public function authenticate(Request $request)
     {
+        if (Auth::check()) {
+            return redirect(route('inicio'));
+        }
+
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {

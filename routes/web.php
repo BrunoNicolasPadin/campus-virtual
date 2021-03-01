@@ -34,6 +34,7 @@ use App\Http\Controllers\Evaluaciones\EvaluacionEstadisticaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionRespuestaController;
 use App\Http\Controllers\ExAlumnos\ExAlumnoController;
 use App\Http\Controllers\ExAlumnos\ExAlumnoEstadisticaController;
+use App\Http\Controllers\InicioController;
 use App\Http\Controllers\Instituciones\BuscadorDeInstitucionesController;
 use App\Http\Controllers\Instituciones\InstitucionController;
 use App\Http\Controllers\Libretas\ExportarLibretaController;
@@ -45,6 +46,7 @@ use App\Http\Controllers\Materiales\MaterialController;
 use App\Http\Controllers\Muro\MuroArchivoController;
 use App\Http\Controllers\Muro\MuroController;
 use App\Http\Controllers\Muro\MuroRespuestaController;
+use App\Http\Controllers\RegistrarUsuarioController;
 use App\Http\Controllers\Repitentes\RepitenteController;
 use App\Http\Controllers\Repitentes\RepitenteEstadisticaController;
 use App\Http\Controllers\Roles\ActivarCuentaController;
@@ -70,13 +72,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('inicio');
+Route::get('', [InicioController::class, 'mostrarInicio'])->name('inicio');
 
 Route::post('/enviar-email', [ContactoController::class, 'enviarEmail'])->name('contacto.enviarEmail');
 
-Route::post('/login', [LoginController::class, 'authenticate'])->name('loginNuevo');
+Route::get('/ingresar', [LoginController::class, 'mostrarFormulario'])->name('login.formulario');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.autenticarse');
+
+Route::get('/registrarse', [RegistrarUsuarioController::class, 'mostrarFormulario'])->name('registrarse.formulario');
 
 Route::inertia('detalles', 'Suscripciones/Detalles')->name('suscripciones.detalles');
 
