@@ -59,7 +59,7 @@ class RepitenteController extends Controller
                 return $query->where('division_id', $division_id);
             })
             ->with('alumno', 'alumno.user', 'ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
-            ->paginate(20)
+            ->paginate(1000)
             ->transform(function ($repitente) {
                 return [
                     'id' => $repitente->id,
@@ -79,7 +79,7 @@ class RepitenteController extends Controller
         return Inertia::render('Repitentes/Create', [
             'institucion_id' => $institucion_id,
             'alumno' => $this->alumnoService->find($alumno_id),
-            'cicloLectivo' => $this->cicloLectivoService->obtenerCicloLectivoActivad($institucion_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 

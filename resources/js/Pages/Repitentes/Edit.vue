@@ -72,7 +72,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccionar ciclo lectivo que acaba de cursar (o sea, en el que repitió)
+                                        Seleccionar ciclo lectivo en el que repitió
                                     </template>
                                 </label-form>
                                 

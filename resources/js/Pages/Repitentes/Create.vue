@@ -33,6 +33,35 @@
             <estructura-form>
                 <template #formulario>
                     <form method="post" @submit.prevent="submit">
+
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3 mb-6 md:mb-0">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Seleccione un ciclo lectivo:
+                                    </template>
+                                </label-form>
+                                
+                                <select
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.ciclo_lectivo_id">
+
+                                    <option selected value="" disabled>-</option>
+                                    <option v-for="cicloLectivo in ciclosLectivos" :key="cicloLectivo.id" :value="cicloLectivo.id">
+                                        {{ cicloLectivo.comienzo }} - {{ cicloLectivo.final }}
+                                    </option>
+
+                                </select>
+
+                                <info>
+                                    <template #info>
+                                        Es obligatorio.
+                                    </template>
+                                </info>
+                            </div>
+                        </div>
                         
                         <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-full px-3 mb-6 md:mb-0">
@@ -49,7 +78,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        No es obligatorio
+                                        No es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -82,7 +111,7 @@
             errors: Object,
             institucion_id: String,
             alumno: Object,
-            cicloLectivo: Object,
+            ciclosLectivos: Array,
         },
 
         title: 'Hacer repetir a un alumno',
@@ -92,7 +121,7 @@
                 form: {
                     alumno_id: this.alumno.id,
                     division_id: this.alumno.division_id,
-                    ciclo_lectivo_id: this.cicloLectivo.id,
+                    ciclo_lectivo_id: null,
                     comentario: null,
                 },
                 mostrarErrores: true,
