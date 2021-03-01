@@ -9,6 +9,11 @@ class CalendarioService
         return ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     }
 
+    public function obtenerMesesValidar()
+    {
+        return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    }
+
     public function obtenerEvaluaciones($evaluacion)
     {
         return [

@@ -36,7 +36,13 @@ class CalendarioDocenteController extends Controller
     public function mostrarCalendario($institucion_id, $year, $mes)
     {
 
-        return $this->filtrarCalendario($institucion_id, $year, $mes);
+        $anios = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
+        $meses = $this->calendarioService->obtenerMesesValidar();
+
+        if (in_array($year, $anios) && in_array($mes, $meses)) {
+            return $this->filtrarCalendario($institucion_id, $year, $mes);
+        }
+        return redirect(route('inicio'));
     }
 
     public function filtrarCalendario($institucion_id, $year, $mes)
