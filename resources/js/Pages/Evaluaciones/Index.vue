@@ -11,7 +11,7 @@
                         </inertia-link> / Evaluaciones
                     </span>
                 </div>
-                <div class="w-4/12" v-show="tipo == 'Docente' ">
+                <div class="w-4/12" v-show="tipo == 'Docente' || tipo == 'Directivo' || tipo == 'Institucion'">
                     <primary class="float-right">
                         <template #boton-primary>
                             <inertia-link :href="route('evaluaciones.create', [institucion_id, division.id])">Agregar</inertia-link>
@@ -43,6 +43,37 @@
                     </div>
                 </div>
             </transition>
+
+            <estructura-form>
+                <template #formulario>
+                    <form method="get">
+                        
+                        <div class="-mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3 mb-6 md:mb-0">
+                                
+                                <label-form>
+                                    <template #label-value>
+                                        Seleccionar asignatura:
+                                    </template>
+                                </label-form>
+                                
+                                <select
+                                @change="onChange()"
+                                class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                required
+                                v-model="form.asignatura_id">
+
+                                    <option selected value="">Todas</option>
+                                    <option v-for="asignatura in asignaturas" :key="asignatura.id" :value="asignatura.id">
+                                        {{ asignatura.nombre }}
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </template>
+            </estructura-form>
 
             <estructura-tabla>
                 <template #tabla>
@@ -153,6 +184,8 @@
     import Eliminar from '@/Botones/Eliminar'
     import Primary from '@/Botones/Primary.vue'
     import Pagination from '@/Pagination/Pagination.vue'
+    import EstructuraForm from '@/Formulario/EstructuraForm.vue'
+    import LabelForm from '@/Formulario/LabelForm.vue'
 
     export default {
         components: {
@@ -166,6 +199,8 @@
             Eliminar,
             Primary,
             Pagination,
+            EstructuraForm,
+            LabelForm,
         },
 
         props:{ 
@@ -174,9 +209,19 @@
             tipo: String,
             division: Object,
             evaluaciones: Object,
+            asignatura_id_seleccionada: String,
+            asignaturas: Array,
         },
 
         title: 'Evaluaciones',
+
+        data() {
+            return {
+                form: {
+                    asignatura_id: this.asignatura_id_seleccionada,
+                },
+            }
+        },
 
         methods: {
             destroy(id) {
@@ -187,7 +232,16 @@
 
             cerrarAlerta() {
                 this.successMessage = false;
-            }
+            },
+
+            onChange() {
+                if (this.form.asignatura_id == '') {
+                    this.$inertia.get(this.route('evaluaciones.index', [this.institucion_id, this.division.id]))
+                } else {
+                    this.$inertia.get(this.route('evaluaciones.filtrarPorAsignatura', [this.institucion_id, this.division.id, this.form.asignatura_id]))
+                }
+                
+            },
         }
     }
 </script>

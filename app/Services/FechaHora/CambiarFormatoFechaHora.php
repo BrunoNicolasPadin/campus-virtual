@@ -28,7 +28,7 @@ class CambiarFormatoFechaHora
     {
         if (! $fechaHora == '') {
             $date = new DateTime($fechaHora);
-            return $date->format('d-m-Y H:i:s');
+            return $date->format('Y-m-d\TH:i:s.vP');
         }
         return $fechaHora;
     }

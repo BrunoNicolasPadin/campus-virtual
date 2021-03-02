@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\StoreEvaluacion;
+use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Roles\Docente;
 use App\Services\Archivos\EliminarEntregasCorrecciones;
+use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
@@ -20,24 +22,26 @@ class EvaluacionController extends Controller
     protected $formatoService;
     protected $archivosServices;
     protected $divisionService;
+    protected $asignaturaService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         EliminarEntregasCorrecciones $archivosServices,
-        DivisionService $divisionService
+        DivisionService $divisionService,
+        AsignaturaService $asignaturaService,
     )
 
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
-        $this->middleware('soloDocentes')->only('create', 'store', 'edit', 'update');
         $this->middleware('soloInstitucionesDirectivosDocentes')->except('index', 'show');
         $this->middleware('evaluacionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
         $this->archivosServices = $archivosServices;
         $this->divisionService = $divisionService;
+        $this->asignaturaService = $asignaturaService;
     }
 
     public function index($institucion_id, $division_id)
@@ -46,6 +50,8 @@ class EvaluacionController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'division' => $this->divisionService->find($division_id),
+            'asignatura_id_seleccionada' => '',
+            'asignaturas' => $this->asignaturaService->get($division_id),
             'evaluaciones' => Evaluacion::where('division_id', $division_id)
                 ->with('asignatura')
                 ->orderBy('fechaHoraRealizacion')
@@ -65,15 +71,18 @@ class EvaluacionController extends Controller
 
     public function create($institucion_id, $division_id)
     {
-        $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
-        $asignaturas = AsignaturaDocente::where('docente_id', $docente['id'])
-            ->with('asignatura')
-            ->whereHas('asignatura', function($q) use ($division_id)
-            {
-                $q->where('division_id', $division_id);
-
-            })
-            ->get();
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            $asignaturas = Asignatura::select('nombre', 'id')
+                ->where('division_id', $division_id)->get();
+        }
+        if (session('tipo') == 'Docente') {
+            $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+            $asignaturas = AsignaturaDocente::select('asignaturas.nombre', 'asignaturas.id')
+                ->where('docente_id', $docente['id'])
+                ->join('asignaturas', 'asignaturas.id', 'asignaturas_docentes.asignatura_id')
+                ->where('asignaturas.division_id', $division_id)
+                ->get();
+        }
     
         return Inertia::render('Evaluaciones/Create', [
             'institucion_id' => $institucion_id,
@@ -132,20 +141,25 @@ class EvaluacionController extends Controller
 
     public function edit($institucion_id, $division_id, $id)
     {
-        $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            $asignaturas = Asignatura::select('nombre', 'id')
+                ->where('division_id', $division_id)->get();
+        }
+        if (session('tipo') == 'Docente') {
+            $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+            $asignaturas = AsignaturaDocente::select('asignaturas.nombre', 'asignaturas.id')
+                ->where('docente_id', $docente['id'])
+                ->join('asignaturas', 'asignaturas.id', 'asignaturas_docentes.asignatura_id')
+                ->where('asignaturas.division_id', $division_id)
+                ->get();
+        }
+    
         $evaluacion = Evaluacion::findOrFail($id);
     
         return Inertia::render('Evaluaciones/Edit', [
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
-            'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
-                ->with('asignatura')
-                ->whereHas('asignatura', function($q) use ($division_id)
-                {
-                    $q->where('division_id', $division_id);
-
-                })
-                ->get(),
+            'asignaturasDocentes' => $asignaturas,
             'evaluacion' => [
                     'id' => $evaluacion->id,
                     'asignatura_id' => $evaluacion->asignatura_id,

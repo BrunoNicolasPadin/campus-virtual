@@ -68,7 +68,7 @@
                                 v-model="form.asignatura_id">
                                     
                                     <option value="" disabled selected>-</option>
-                                    <option v-for="asignaturaDocente in asignaturasDocentes" :key="asignaturaDocente.id" :value="asignaturaDocente.asignatura_id">{{ asignaturaDocente.asignatura.nombre }}</option>
+                                    <option v-for="asignaturaDocente in asignaturasDocentes" :key="asignaturaDocente.id" :value="asignaturaDocente.id">{{ asignaturaDocente.nombre }}</option>
 
                                 </select>
                                 
@@ -115,13 +115,15 @@
                                         Fecha y hora de realización
                                     </template>
                                 </label-form>
+
+                                <datetime type="datetime" value-zone="UTC-3" required v-model="form.fechaHoraRealizacion"></datetime>
                                 
-                                <datetime
+                                <!-- <datetime
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
                                 required
                                 format="DD-MM-YYYY H:i:s"
                                 language=es
-                                v-model="form.fechaHoraRealizacion"></datetime>
+                                v-model="form.fechaHoraRealizacion"></datetime> -->
                                 
                                 <info>
                                     <template #info>
@@ -136,12 +138,14 @@
                                         Fecha y hora de realización
                                     </template>
                                 </label-form>
+
+                                <datetime type="datetime" value-zone="UTC-3" required v-model="form.fechaHoraFinalizacion"></datetime>
                                 
-                                <datetime
+                                <!-- <datetime
                                 class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
                                 required
                                 format="DD-MM-YYYY H:i:s"
-                                v-model="form.fechaHoraFinalizacion"></datetime>
+                                v-model="form.fechaHoraFinalizacion"></datetime> -->
                                 
                                 <info>
                                     <template #info>
@@ -187,7 +191,8 @@
     import InputForm from '@/Formulario/InputForm.vue'
     import Info from '@/Formulario/Info.vue'
     import Guardar from '@/Botones/Guardar.vue'
-    import datetime from 'vuejs-datetimepicker';
+    /* import datetime from 'vuejs-datetimepicker'; */
+    import { Datetime } from 'vue-datetime'
 
     export default {
         components: {
@@ -197,7 +202,8 @@
             InputForm,
             Info,
             Guardar,
-            datetime,
+            /* datetime, */
+            datetime: Datetime
         },
 
         props: {

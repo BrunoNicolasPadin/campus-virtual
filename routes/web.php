@@ -32,6 +32,7 @@ use App\Http\Controllers\Evaluaciones\EvaluacionComentarioController;
 use App\Http\Controllers\Evaluaciones\EvaluacionController;
 use App\Http\Controllers\Evaluaciones\EvaluacionEstadisticaController;
 use App\Http\Controllers\Evaluaciones\EvaluacionRespuestaController;
+use App\Http\Controllers\Evaluaciones\FiltrarEvasPorAsignaturaController;
 use App\Http\Controllers\ExAlumnos\ExAlumnoController;
 use App\Http\Controllers\ExAlumnos\ExAlumnoEstadisticaController;
 use App\Http\Controllers\InicioController;
@@ -173,6 +174,7 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         Route::get('docentes', [DocenteDivisionController::class, 'mostrarDocentes'])->name('docentesDivision.mostrar');
 
         Route::resource('evaluaciones', EvaluacionController::class);
+        Route::get('evaluaciones/filtrar/{asignatura_id}', [FiltrarEvasPorAsignaturaController::class, 'filtrarPorAsignaturas'])->name('evaluaciones.filtrarPorAsignatura');
         Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
         
             Route::get('estadisticas', [EvaluacionEstadisticaController::class, 'mostrarEstadisticas'])->name('evaluaciones.estadisticas');
