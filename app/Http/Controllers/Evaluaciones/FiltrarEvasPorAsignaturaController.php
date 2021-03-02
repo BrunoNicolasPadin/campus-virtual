@@ -28,6 +28,7 @@ class FiltrarEvasPorAsignaturaController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
+        $this->middleware('asignaturaFiltradaCorrespondiente');
 
         $this->formatoService = $formatoService;
         $this->archivosServices = $archivosServices;
@@ -43,12 +44,11 @@ class FiltrarEvasPorAsignaturaController extends Controller
             'division' => $this->divisionService->find($division_id),
             'asignatura_id_seleccionada' => $asignatura_id,
             'asignaturas' => $this->asignaturaService->get($division_id),
-            /* 'asignatura' => $this->asignaturaService->find($asignatura_id), */
             'evaluaciones' => Evaluacion::where('division_id', $division_id)
                 ->where('asignatura_id', $asignatura_id)
                 ->with('asignatura')
                 ->orderBy('fechaHoraRealizacion')
-                ->paginate(1)
+                ->paginate(10)
                 ->transform(function ($evaluacion) {
                     return [
                         'id' => $evaluacion->id,

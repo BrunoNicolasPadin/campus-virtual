@@ -134,7 +134,7 @@
                     <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Archivos</h2>
                     </div>
-                    <div class="w-1/2" v-show="tipo == 'Docente' ">
+                    <div class="w-1/2" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                         <primary class="float-right">
                             <template #boton-primary>
                                 <inertia-link :href="route('evaluaciones-archivos.create', [institucion_id, division.id, evaluacion.id])">Agregar</inertia-link>
@@ -149,21 +149,31 @@
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
                                 <a 
-                                v-if="archivo.visibilidad || tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' " 
+                                v-if="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' " 
                                 :href="'/storage/evaluaciones/archivos/' + archivo.archivo" 
                                 target="_blank" 
                                 class="text-blue-500 hover:underline"
                                 rel="noopener noreferrer">
                                     <span v-if="archivo.visibilidad">
-                                        (Es visible) - 
+                                        Es visible 
                                     </span>
                                     <span v-else>
-                                        (No es visible) - 
+                                        No es visible 
                                     </span>
-                                    {{ archivo.nombre }}
+                                    | {{ archivo.nombre }}
                                 </a>
-                                <span v-else class="text-gray-500">
-                                    {{ archivo.nombre }}
+                                <span v-else>
+                                    <a 
+                                    v-if="archivo.visibilidad" 
+                                    :href="'/storage/evaluaciones/archivos/' + archivo.archivo" 
+                                    target="_blank" 
+                                    class="text-blue-500 hover:underline"
+                                    rel="noopener noreferrer">
+                                        {{ archivo.nombre }}
+                                    </a>
+                                    <span v-else>
+                                        {{ archivo.nombre }}
+                                    </span>
                                 </span>
                             </span>
                         </div>

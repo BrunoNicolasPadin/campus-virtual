@@ -55,7 +55,7 @@ class EvaluacionController extends Controller
             'evaluaciones' => Evaluacion::where('division_id', $division_id)
                 ->with('asignatura')
                 ->orderBy('fechaHoraRealizacion')
-                ->paginate(20)
+                ->paginate(10)
                 ->transform(function ($evaluacion) {
                     return [
                         'id' => $evaluacion->id,
