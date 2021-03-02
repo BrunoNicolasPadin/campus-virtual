@@ -9,6 +9,8 @@ class EntregaArchivo extends Model
     protected $table = 'entregas_archivos';
     protected $fillable = [
         'archivo',
+        'created_at',
+        'updated_at'
     ];
     protected $guarded = [
         'entrega_id',

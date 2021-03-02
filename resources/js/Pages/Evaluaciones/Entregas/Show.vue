@@ -148,7 +148,7 @@
                     <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Correcciones</h2>
                     </div>
-                    <div class="w-1/2" v-show="tipo == 'Docente' ">
+                    <div class="w-1/2" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                         <primary class="float-right">
                             <template #boton-primary>
                                 <inertia-link :href="route('correcciones.create', [institucion_id, division.id, evaluacion.id, entrega.id])">
@@ -170,7 +170,7 @@
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Docente' || tipo == 'Institucion' || tipo == 'Directivo' ">
+                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                             <span @click="destroyCorreccion(correccion.id)" class="font-medium text-red-600 hover:text-red-500 cursor-pointer" type="submit">
                                 Eliminar
                             </span>

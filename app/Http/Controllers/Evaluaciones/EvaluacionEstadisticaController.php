@@ -85,15 +85,16 @@ class EvaluacionEstadisticaController extends Controller
             
             $i = 0;
 
-            foreach ($entrega->archivos as $archivo) {
+            foreach ($entrega->archivos->groupBy('entrega_id') as $archivo) {
+                $archivo = $archivo->unique('entrega_id');
                 $i++;
                 $entregados = $entregados + 1;
 
-                $arrayTemporal = $this->obtenerEntregadosATiempo($entrega, $archivo, $evaluacion, $entregadosTiempo, $entregadosArray);
+                $arrayTemporal = $this->obtenerEntregadosATiempo($entrega, $archivo[0], $evaluacion, $entregadosTiempo, $entregadosArray);
                 $entregadosTiempo = $arrayTemporal[0];
                 $entregadosArray = $arrayTemporal[1];
 
-                $arrayTemporal = $this->obtenerEntregadosADestiempo($entrega, $archivo, $evaluacion, $entregasDestiempo, $entregadosArray);
+                $arrayTemporal = $this->obtenerEntregadosADestiempo($entrega, $archivo[0], $evaluacion, $entregasDestiempo, $entregadosArray);
                 $entregasDestiempo = $arrayTemporal[0];
                 $entregadosArray = $arrayTemporal[1];
             }
@@ -196,7 +197,7 @@ class EvaluacionEstadisticaController extends Controller
 
     public function obtenerEntregadosADestiempo($entrega, $archivo, $evaluacion, $entregasDestiempo, $entregadosArray)
     {
-        if ($archivo->created_at > $evaluacion->fechaHoraFinalizacion) {
+        if (!($archivo) || $archivo->created_at > $evaluacion->fechaHoraFinalizacion) {
             $entregasDestiempo = $entregasDestiempo + 1;
             array_push($entregadosArray, [
                 'nombre' => $entrega->alumno->user->name,

@@ -32,8 +32,7 @@ class CorreccionController extends Controller
         $this->middleware('divisionCorrespondiente');
         $this->middleware('evaluacionCorrespondiente');
         $this->middleware('entregaCorrespondiente');
-        $this->middleware('soloDocentes')->except('destroy');
-        $this->middleware('soloInstitucionesDirectivosDocentes')->only('destroy');
+        $this->middleware('soloInstitucionesDirectivosDocentes');
         $this->middleware('correccionCorrespondiente')->only('destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
@@ -59,7 +58,8 @@ class CorreccionController extends Controller
 
             for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $unique = substr(base64_encode(mt_rand()), 0, 15);
+                $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
                 $archivos[$i]->storeAs('public/Evaluaciones/Correcciones', $nombre);
 
                 $correccion = new Correccion();

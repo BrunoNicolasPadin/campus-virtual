@@ -53,7 +53,8 @@ class EvaluacionArchivoController extends Controller
 
             for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $unique = substr(base64_encode(mt_rand()), 0, 15);
+                $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
                 $archivos[$i]->storeAs('public/Evaluaciones/Archivos', $nombre);
 
                 $evaluacionArchivo = new Archivo();
