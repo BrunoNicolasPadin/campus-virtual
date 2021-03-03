@@ -8,6 +8,7 @@ use App\Models\Deudores\RendirCorreccion;
 use App\Services\Archivos\ObtenerFechaHoraService;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
 use App\Services\Mesas\InscriptoService;
 use App\Services\Mesas\MesaService;
 use Illuminate\Support\Facades\Storage;
@@ -20,13 +21,15 @@ class RendirCorreccionController extends Controller
     protected $asignaturaService;
     protected $mesaService;
     protected $inscripcionService;
+    protected $formatoFechaHoraService;
 
     public function __construct(
         ObtenerFechaHoraService $obtenerFechaHoraService,
         DivisionService $divisionService,
         AsignaturaService $asignaturaService,
         MesaService $mesaService,
-        InscriptoService $inscripcionService
+        InscriptoService $inscripcionService,
+        CambiarFormatoFechaHora $formatoFechaHoraService,
     )
     {
         $this->middleware('auth');
@@ -42,6 +45,7 @@ class RendirCorreccionController extends Controller
         $this->asignaturaService = $asignaturaService;
         $this->mesaService = $mesaService;
         $this->inscripcionService = $inscripcionService;
+        $this->formatoFechaHoraService = $formatoFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
@@ -68,6 +72,8 @@ class RendirCorreccionController extends Controller
 
                 $rendirCorreccion = new RendirCorreccion();
                 $rendirCorreccion->archivo = $nombre;
+                $rendirCorreccion->created_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
+                $rendirCorreccion->updated_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
                 $rendirCorreccion->anotado()->associate($anotado_id);
                 $rendirCorreccion->save();
             }

@@ -9,6 +9,8 @@ class Correccion extends Model
     protected $table = 'correcciones';
     protected $fillable = [
         'archivo',
+        'created_at',
+        'updated_at',
     ];
     protected $guarded = [
         'entrega_id',

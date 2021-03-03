@@ -10,6 +10,8 @@ class RendirComentario extends Model
     protected $table = 'rendir_comentarios';
     protected $fillable = [
         'comentario',
+        'created_at',
+        'updated_at',
     ];
     protected $guarded = [
         'anotado_id',

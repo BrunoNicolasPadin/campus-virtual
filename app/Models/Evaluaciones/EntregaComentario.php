@@ -10,6 +10,8 @@ class EntregaComentario extends Model
     protected $table = 'entregas_comentarios';
     protected $fillable = [
         'comentario',
+        'created_at',
+        'updated_at',
     ];
     protected $guarded = [
         'entrega_id',

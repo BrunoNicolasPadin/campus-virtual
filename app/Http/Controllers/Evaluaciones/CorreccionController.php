@@ -9,6 +9,7 @@ use App\Services\Archivos\ObtenerFechaHoraService;
 use App\Services\Division\DivisionService;
 use App\Services\Evaluaciones\EntregaService;
 use App\Services\Evaluaciones\EvaluacionService;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -18,12 +19,14 @@ class CorreccionController extends Controller
     protected $divisionService;
     protected $evaluacionService;
     protected $entregaService;
+    protected $formatoFechaHoraService;
 
     public function __construct(
         ObtenerFechaHoraService $obtenerFechaHoraService,
         DivisionService $divisionService,
         EvaluacionService $evaluacionService,
-        EntregaService $entregaService
+        EntregaService $entregaService,
+        CambiarFormatoFechaHora $formatoFechaHoraService,
     )
 
     {
@@ -39,6 +42,7 @@ class CorreccionController extends Controller
         $this->divisionService = $divisionService;
         $this->evaluacionService = $evaluacionService;
         $this->entregaService = $entregaService;
+        $this->formatoFechaHoraService = $formatoFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $evaluacion_id, $entrega_id)
@@ -64,6 +68,8 @@ class CorreccionController extends Controller
 
                 $correccion = new Correccion();
                 $correccion->archivo = $nombre;
+                $correccion->created_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
+                $correccion->updated_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
                 $correccion->entrega()->associate($entrega_id);
                 $correccion->save();
             }

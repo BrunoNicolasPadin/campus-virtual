@@ -10,6 +10,8 @@ class EvaluacionRespuesta extends Model
     protected $table = 'evaluaciones_respuestas';
     protected $fillable = [
         'respuesta',
+        'created_at',
+        'updated_at',
     ];
     protected $guarded = [
         'comentario_id',

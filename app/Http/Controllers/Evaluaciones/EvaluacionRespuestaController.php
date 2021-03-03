@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreRespuesta;
 use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Evaluaciones\EvaluacionRespuesta;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use App\Services\Division\DivisionService;
 use App\Services\Evaluaciones\EvaluacionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
@@ -14,14 +15,16 @@ use Inertia\Inertia;
 
 class EvaluacionRespuestaController extends Controller
 {
-    protected $formatoService;
+    protected $formatoFechaHoraService;
     protected $divisionService;
     protected $evaluacionService;
+    protected $obtenerFechaHoraService;
 
     public function __construct(
-        CambiarFormatoFechaHora $formatoService,
+        CambiarFormatoFechaHora $formatoFechaHoraService,
         DivisionService $divisionService,
-        EvaluacionService $evaluacionService
+        EvaluacionService $evaluacionService,
+        ObtenerFechaHoraService $obtenerFechaHoraService
     )
 
     {
@@ -32,9 +35,10 @@ class EvaluacionRespuestaController extends Controller
         $this->middleware('verRespuestasEvaluacionCorrespondiente');
         $this->middleware('respuestaEvaluacionCorrespondiente')->only('update', 'destroy');
 
-        $this->formatoService = $formatoService;
+        $this->formatoFechaHoraService = $formatoFechaHoraService;
         $this->divisionService = $divisionService;
         $this->evaluacionService = $evaluacionService;
+        $this->obtenerFechaHoraService = $obtenerFechaHoraService;
     }
 
     public function index($institucion_id, $division_id, $evaluacion_id, $comentario_id)
@@ -50,7 +54,7 @@ class EvaluacionRespuestaController extends Controller
                 'id' => $comentario->id,
                 'user' => $comentario->user->only('name'),
                 'comentario' => $comentario->comentario,
-                'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($comentario->updated_at),
+                'updated_at' => $this->formatoFechaHoraService->cambiarFormatoParaMostrar($comentario->updated_at),
             ],
             'respuestas' => EvaluacionRespuesta::with('user')->where('comentario_id', $comentario_id)->orderBy('updated_at', 'DESC')->paginate(20)
                 ->transform(function ($respuesta) {
@@ -58,7 +62,7 @@ class EvaluacionRespuestaController extends Controller
                         'id' => $respuesta->id,
                         'user' => $respuesta->user->only('id', 'name'),
                         'respuesta' => $respuesta->respuesta,
-                        'updated_at' => $this->formatoService->cambiarFormatoParaMostrar($respuesta->updated_at),
+                        'updated_at' => $this->formatoFechaHoraService->cambiarFormatoParaMostrar($respuesta->updated_at),
                     ];
                 }),
         ]);
@@ -68,6 +72,9 @@ class EvaluacionRespuestaController extends Controller
     {
         $respuesta = new EvaluacionRespuesta();
         $respuesta->respuesta = $request->respuesta;
+        $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
+        $respuesta->created_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
+        $respuesta->updated_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
         $respuesta->comentario()->associate($comentario_id);
         $respuesta->user()->associate(Auth::id());
         $respuesta->save();
@@ -77,9 +84,13 @@ class EvaluacionRespuestaController extends Controller
 
     public function update(StoreRespuesta $request, $institucion_id, $division_id, $evaluacion_id, $comentario_id, $id)
     {
+        $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
+
         EvaluacionRespuesta::where('id', $id)
             ->update([
                 'respuesta' => $request->respuesta,
+                'updated_at' => $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora),
+
             ]);
             return back()->with(['successMessage' => 'Respuesta actualizada con éxito!']);
     }

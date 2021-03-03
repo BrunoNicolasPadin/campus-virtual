@@ -8,6 +8,7 @@ use App\Models\Deudores\RendirEntrega;
 use App\Services\Archivos\ObtenerFechaHoraService;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
+use App\Services\FechaHora\CambiarFormatoFechaHora;
 use App\Services\Mesas\InscriptoService;
 use App\Services\Mesas\MesaService;
 use Illuminate\Support\Facades\Storage;
@@ -20,13 +21,15 @@ class RendirEntregaController extends Controller
     protected $asignaturaService;
     protected $mesaService;
     protected $inscripcionService;
+    protected $formatoFechaHoraService;
 
     public function __construct(
         ObtenerFechaHoraService $obtenerFechaHoraService,
         DivisionService $divisionService, 
         AsignaturaService $asignaturaService,
         MesaService $mesaService,
-        InscriptoService $inscripcionService
+        InscriptoService $inscripcionService,
+        CambiarFormatoFechaHora $formatoFechaHoraService,
     )
 
     {
@@ -44,6 +47,7 @@ class RendirEntregaController extends Controller
         $this->asignaturaService = $asignaturaService;
         $this->mesaService = $mesaService;
         $this->inscripcionService = $inscripcionService;
+        $this->formatoFechaHoraService = $formatoFechaHoraService;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
@@ -69,6 +73,8 @@ class RendirEntregaController extends Controller
 
                 $rendirEntrega = new RendirEntrega();
                 $rendirEntrega->archivo = $nombre;
+                $rendirEntrega->created_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
+                $rendirEntrega->updated_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
                 $rendirEntrega->anotado()->associate($anotado_id);
                 $rendirEntrega->save();
             }
