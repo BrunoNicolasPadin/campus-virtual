@@ -64,7 +64,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Sino aparece seleccionada no se haga problema y continue ;).
+                                        Es obligatorio.
                                     </template>
                                 </info>
                             </div>
@@ -107,11 +107,11 @@
                     <table-head-estructura>
                         <template #th>
 
-                            <table-head>
+                            <!-- <table-head>
                                 <template #th-titulo>
                                     #
                                 </template>
-                            </table-head>
+                            </table-head> -->
 
                             <table-head>
                                 <template #th-titulo>
@@ -131,12 +131,12 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(asignatura, index) in asignaturas" :key="asignatura.id">
-                                <table-data>
+                            <tr v-for="asignatura in asignaturas" :key="asignatura.id">
+                                <!-- <table-data>
                                     <template #td>
                                         {{ index + 1 }}
                                     </template>
-                                </table-data>
+                                </table-data> -->
 
                                 <table-data>
                                     <template #td>
@@ -191,6 +191,7 @@
             errors: Object,
             institucion_id: String,
             alumno: Object,
+            division_id_seleccionada: String,
             divisiones: Array,
             asignaturas: Array,
             ciclosLectivos: Array,
@@ -202,6 +203,7 @@
             return {
                 form: {
                     asignatura_id: [],
+                    division_id: this.division_id_seleccionada,
                     ciclo_lectivo_id: null,
                 },
                 mostrarErrores: true,

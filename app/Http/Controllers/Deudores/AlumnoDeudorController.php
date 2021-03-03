@@ -83,11 +83,22 @@ class AlumnoDeudorController extends Controller
 
     public function createAsignatura($institucion_id, $alumno_id, $division_id)
     {
+        $asignaturas = $this->asignaturaService->get($division_id);
+        $asignaturasYaAdeudadas = AlumnoDeudor::select('asignatura_id')->where('alumno_id', $alumno_id)->get();
+        
+        foreach ($asignaturasYaAdeudadas as $asignaturaYaAdeudada) {
+            $key = $asignaturas->search(function($item) use ($asignaturaYaAdeudada) {
+                return $item->id == $asignaturaYaAdeudada->asignatura_id;
+            });
+            $asignaturas->pull($key);
+        }
+
         return Inertia::render('Deudores/CreateAsignatura', [
             'institucion_id' => $institucion_id,
+            'division_id_seleccionada' => $division_id,
             'alumno' => $this->alumnoService->find($alumno_id),
             'divisiones' => $this->divisionService->get($institucion_id),
-            'asignaturas'  => $this->asignaturaService->get($division_id),
+            'asignaturas'  => $asignaturas,
             'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
