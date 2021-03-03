@@ -12,7 +12,7 @@
                         Grupos de materiales
                     </span>
                 </div>
-                <div class="w-4/12" v-show="tipo == 'Docente' ">
+                <div class="w-4/12" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                     <primary class="float-right">
                         <template #boton-primary>
                             <inertia-link :href="route('materiales.create', [institucion_id, division.id])">Agregar</inertia-link>

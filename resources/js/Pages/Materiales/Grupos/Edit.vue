@@ -67,7 +67,7 @@
                                 v-model="form.asignatura_id">
                                     
                                     <option value="" disabled selected>-</option>
-                                    <option v-for="asignaturaDocente in asignaturasDocentes" :key="asignaturaDocente.id" :value="asignaturaDocente.asignatura_id">{{ asignaturaDocente.asignatura.nombre }}</option>
+                                    <option v-for="asignaturaDocente in asignaturasDocentes" :key="asignaturaDocente.id" :value="asignaturaDocente.id">{{ asignaturaDocente.nombre }}</option>
 
                                 </select>
                                 

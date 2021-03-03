@@ -13,7 +13,7 @@
                         {{ grupo.nombre }}
                     </span>
                 </div>
-                <div class="w-4/12" v-show="tipo == 'Docente' ">
+                <div class="w-4/12" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                     <primary class="float-right">
                         <template #boton-primary>
                             <inertia-link :href="route('materiales-archivos.create', [institucion_id, division.id, grupo.id])">Agregar</inertia-link>
@@ -131,7 +131,7 @@
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Docente' ">
+                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                             <inertia-link
                             :href="route('materiales-archivos.edit', [institucion_id, division.id, grupo.id, archivo.id])"
                             class="font-medium text-indigo-600 hover:text-indigo-500">

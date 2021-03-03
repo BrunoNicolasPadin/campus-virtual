@@ -26,7 +26,7 @@ class MaterialController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente')->except('index');
-        $this->middleware('soloDocentes')->except('index');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->except('index');
         $this->middleware('grupoCorrespondiente')->except('index');
         $this->middleware('grupoAdeudadoCorrespondiente')->only('index');
         $this->middleware('materialCorrespondiente')->only('edit', 'update', 'destroy');

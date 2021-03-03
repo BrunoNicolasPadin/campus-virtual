@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Materiales;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Materiales\StoreGrupo;
+use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
@@ -30,7 +31,7 @@ class GrupoController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente')->except('show');
-        $this->middleware('soloDocentes')->except('index', 'show');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->except('index', 'show');
         $this->middleware('grupoCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
         $this->archivosServices = $archivosServices;
@@ -61,19 +62,23 @@ class GrupoController extends Controller
 
     public function create($institucion_id, $division_id)
     {
-        $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            $asignaturas = Asignatura::select('nombre', 'id')
+                ->where('division_id', $division_id)->get();
+        }
+        if (session('tipo') == 'Docente') {
+            $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+            $asignaturas = AsignaturaDocente::select('asignaturas.nombre', 'asignaturas.id')
+                ->where('docente_id', $docente['id'])
+                ->join('asignaturas', 'asignaturas.id', 'asignaturas_docentes.asignatura_id')
+                ->where('asignaturas.division_id', $division_id)
+                ->get();
+        }
 
         return Inertia::render('Materiales/Grupos/Create', [
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
-            'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
-                ->with('asignatura')
-                ->whereHas('asignatura', function($q) use ($division_id)
-                {
-                    $q->where('division_id', $division_id);
-
-                })
-                ->get(),
+            'asignaturasDocentes' => $asignaturas,
         ]);
     }
 
@@ -103,19 +108,23 @@ class GrupoController extends Controller
 
     public function edit($institucion_id, $division_id, $id)
     {
-        $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+        if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            $asignaturas = Asignatura::select('nombre', 'id')
+                ->where('division_id', $division_id)->get();
+        }
+        if (session('tipo') == 'Docente') {
+            $docente = Docente::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
+            $asignaturas = AsignaturaDocente::select('asignaturas.nombre', 'asignaturas.id')
+                ->where('docente_id', $docente['id'])
+                ->join('asignaturas', 'asignaturas.id', 'asignaturas_docentes.asignatura_id')
+                ->where('asignaturas.division_id', $division_id)
+                ->get();
+        }
 
         return Inertia::render('Materiales/Grupos/Edit', [
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
-            'asignaturasDocentes' => AsignaturaDocente::where('docente_id', $docente['id'])
-                ->with('asignatura')
-                ->whereHas('asignatura', function($q) use ($division_id)
-                {
-                    $q->where('division_id', $division_id);
-
-                })
-                ->get(),
+            'asignaturasDocentes' => $asignaturas,
             'grupo' => Grupo::findOrFail($id),
         ]);
     }
@@ -127,7 +136,7 @@ class GrupoController extends Controller
                 'asignatura_id' => $request->asignatura_id,
                 'nombre' => $request->nombre,
             ]);
-        return redirect(route('materiales.index', [$institucion_id, $division_id]))
+        return redirect(route('materiales.show', [$institucion_id, $division_id, $id]))
             ->with(['successMessage' => 'Grupo actualizado con éxito!']);
     }
 
