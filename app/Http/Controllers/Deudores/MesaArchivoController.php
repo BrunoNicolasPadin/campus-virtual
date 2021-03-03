@@ -28,8 +28,7 @@ class MesaArchivoController extends Controller
         $this->middleware('divisionCorrespondiente');
         $this->middleware('asignaturaAdeudadaCorrespondiente');
         $this->middleware('mesaCorrespondiente');
-        $this->middleware('soloDocentes')->except('destroy');
-        $this->middleware('soloInstitucionesDirectivosDocentes')->only('destroy');
+        $this->middleware('soloInstitucionesDirectivosDocentes');
         $this->middleware('mesaArchivoCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;

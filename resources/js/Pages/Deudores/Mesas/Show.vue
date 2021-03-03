@@ -89,7 +89,7 @@
                     <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Archivos</h2>
                     </div>
-                    <div class="w-1/2" v-show="tipo == 'Docente' ">
+                    <div class="w-1/2">
                         <primary class="float-right">
                             <template #boton-primary>
                                 <inertia-link :href="route('mesas-archivos.create', [institucion_id, division.id, asignatura.id, mesa.id])">Agregar</inertia-link>
@@ -113,7 +113,7 @@
                             </span>
                         </div>
 
-                        <div class="ml-4 flex-shrink-0" v-show="tipo == 'Docente' ">
+                        <div class="ml-4 flex-shrink-0">
                             <inertia-link
                             :href="route('mesas-archivos.edit', [institucion_id, division.id, asignatura.id, mesa.id, archivo.id])"
                             class="font-medium text-indigo-600 hover:text-indigo-500 hover:underline">
