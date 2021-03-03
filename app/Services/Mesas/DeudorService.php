@@ -20,7 +20,7 @@ class DeudorService
 
     public function verificarDeudor($alumno_id, $asignatura_id)
     {
-        if (AlumnoDeudor::where('alumno_id', $alumno_id)->where('asignatura_id', $asignatura_id)->where('aprobado', '0')->exists()) {
+        if (AlumnoDeudor::where('alumno_id', $alumno_id)->where('asignatura_id', $asignatura_id)->exists()) {
             return true;
         }
         return false;

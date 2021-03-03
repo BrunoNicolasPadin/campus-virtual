@@ -45,9 +45,7 @@
         <div class="py-6">
             <estructura-informacion v-for="asignatura in asignaturas" :key="asignatura.id">
                 <template #cabecera-info>
-                    <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">
-                        {{ asignatura.nombre }}
-                    </inertia-link>
+                    {{ asignatura.nombre }}
                 </template>
 
                 <template #dl-contenido>
@@ -74,12 +72,12 @@
                         </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Docente' || tipo == 'Institucion' || tipo == 'Directivo' ">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Estadísticas
+                            Mesas de examen
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <inertia-link class="hover:underline" :href="route('asignaturas.estadisticas', [institucion_id, division.id, asignatura.id])">
+                            <inertia-link class="hover:underline" :href="route('mesas.index', [institucion_id, division.id, asignatura.id])">
                                 Ver
                             </inertia-link>
                         </dd>
@@ -96,7 +94,18 @@
                         </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Docente' || tipo == 'Institucion' || tipo == 'Directivo' ">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Estadísticas
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <inertia-link class="hover:underline" :href="route('asignaturas.estadisticas', [institucion_id, division.id, asignatura.id])">
+                                Ver
+                            </inertia-link>
+                        </dd>
+                    </div>
+
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones con la asignatura
                         </dt>
@@ -111,7 +120,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones con los horarios
                         </dt>
@@ -124,7 +133,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones con los docentes
                         </dt>

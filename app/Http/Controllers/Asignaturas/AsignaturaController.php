@@ -48,9 +48,8 @@ class AsignaturaController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente')->except('show');
-        $this->middleware('soloInstitucionesDirectivos')->except('index', 'show');
+        $this->middleware('soloInstitucionesDirectivos')->except('index');
         $this->middleware('asignaturaCorrespondiente')->only('edit', 'update', 'destroy');
-        $this->middleware('asignaturaAdeudadaCorrespondiente')->only('show');
 
         $this->formatoService = $formatoService;
         $this->formatoFechaService = $formatoFechaService;
@@ -131,34 +130,6 @@ class AsignaturaController extends Controller
         }
         return redirect(route('asignaturas.index', [$institucion_id, $division_id]))
             ->with(['successMessage' => 'Asignatura creada con éxito!']);
-    }
-
-    public function show($institucion_id, $division_id, $id)
-    {
-        return Inertia::render('Asignaturas/Show', [
-            'institucion_id' => $institucion_id,
-            'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($id),
-            'mesas' => Mesa::where('asignatura_id', $id)->with('asignatura')->orderBy('fechaHora')->paginate(10)
-                ->transform(function ($mesa) {
-                    return [
-                        'id' => $mesa->id,
-                        'asignatura_id' => $mesa->asignatura_id,
-                        'asignatura' => $mesa->asignatura,
-                        'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
-                        'comentario' => $mesa->comentario,
-                    ];
-                }),
-            'grupos' => Grupo::where('asignatura_id', $id)->orderBy('created_at')->get()
-                ->map(function ($grupo) {
-                    return [
-                        'id' => $grupo->id,
-                        'asignatura_id' => $grupo->asignatura_id,
-                        'nombre' => $grupo->nombre,
-                    ];
-                }),
-        ]);
     }
 
     public function edit($institucion_id, $division_id, $id)

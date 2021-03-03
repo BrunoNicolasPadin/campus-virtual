@@ -91,7 +91,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link :href="route('asignaturas.show', [institucion_id, deuda.asignatura.division_id, deuda.asignatura_id])" class="hover:underline">
+                                        <inertia-link :href="route('mesas.index', [institucion_id, deuda.asignatura.division_id, deuda.asignatura_id])" class="hover:underline">
                                             {{ deuda.asignatura.nombre }}
                                         </inertia-link>
                                     </template>

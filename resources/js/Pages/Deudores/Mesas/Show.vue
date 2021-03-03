@@ -8,7 +8,7 @@
                     <span v-else>{{ division.nivel_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
                 </inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
-                <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">{{ asignatura.nombre }}</inertia-link> / 
+                <inertia-link class="hover:underline" :href="route('mesas.index', [institucion_id, division.id, asignatura.id])">Mesas de {{ asignatura.nombre }}</inertia-link> / 
                 Mesa {{ mesa.fechaHora }}
             </span>
         </template>
@@ -67,7 +67,7 @@
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2 whitespace-pre-wrap">{{ mesa.comentario }}</dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Docente' ">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones
                         </dt>
@@ -76,7 +76,7 @@
                                 <editar></editar>
                             </inertia-link>
 
-                            <form method="post" @submit.prevent="destroy(mesa.id)">
+                            <form method="post" @submit.prevent="destroyMesa(mesa.id)">
                                 <eliminar></eliminar>
                             </form>
                         </dd>
@@ -108,7 +108,7 @@
                                 target="_blank" 
                                 class="text-blue-500 hover:underline"
                                 rel="noopener noreferrer">
-                                    {{ archivo.archivo }} - <span v-if="archivo.visibilidad">Visible</span> <span v-else>No visible</span>
+                                    {{ archivo.archivo }} | <span v-if="archivo.visibilidad">Visible</span> <span v-else>No visible</span>
                                 </a>
                             </span>
                         </div>
@@ -273,6 +273,12 @@
         title: 'Mesa de examen',
 
         methods: {
+            destroyMesa(mesa_id) {
+                if (confirm('Estas seguro de que desea eliminar esta mesa de examen?')) {
+                    this.$inertia.delete(this.route('mesas.destroy', [this.institucion_id, this.division.id, this.asignatura.id, mesa_id]))
+                }
+            },
+    
             destroy(anotado_id) {
                 if (confirm('Estas seguro de que desea eliminar esta inscripcion?')) {
                     this.$inertia.delete(this.route('anotados.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, anotado_id]))

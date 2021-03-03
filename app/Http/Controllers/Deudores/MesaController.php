@@ -7,6 +7,7 @@ use App\Http\Requests\Deudores\StoreMesa;
 use App\Models\Deudores\Anotado;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
+use App\Models\Materiales\Grupo;
 use App\Services\Archivos\EliminarMesas;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
@@ -31,14 +32,42 @@ class MesaController extends Controller
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('asignaturaAdeudadaCorrespondiente');
-        $this->middleware('soloInstitucionesDirectivosDocentes')->except('show');
-        $this->middleware('divisionCorrespondiente')->except('show');
-        $this->middleware('mesaCorrespondiente')->except('create', 'store');
+        $this->middleware('soloInstitucionesDirectivosDocentes')->except('index', 'show');
+        $this->middleware('divisionCorrespondiente')->except('index', 'show');
+        $this->middleware('mesaCorrespondiente')->except('index', 'create', 'store');
 
         $this->formatoService = $formatoService;
         $this->mesasService = $mesasService;
         $this->divisionService = $divisionService;
         $this->asignaturaService = $asignaturaService;
+    }
+
+    public function index($institucion_id, $division_id, $asignatura_id)
+    {
+        return Inertia::render('Deudores/Mesas/Index', [
+            'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'mesas' => Mesa::where('asignatura_id', $asignatura_id)->with('asignatura')->orderBy('fechaHora')->paginate(10)
+                ->transform(function ($mesa) {
+                    return [
+                        'id' => $mesa->id,
+                        'asignatura_id' => $mesa->asignatura_id,
+                        'asignatura' => $mesa->asignatura,
+                        'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                        'comentario' => $mesa->comentario,
+                    ];
+                }),
+            'grupos' => Grupo::where('asignatura_id', $asignatura_id)->orderBy('created_at')->get()
+                ->map(function ($grupo) {
+                    return [
+                        'id' => $grupo->id,
+                        'asignatura_id' => $grupo->asignatura_id,
+                        'nombre' => $grupo->nombre,
+                    ];
+                }),
+        ]);
     }
 
     public function create($institucion_id, $division_id, $asignatura_id)
@@ -59,7 +88,7 @@ class MesaController extends Controller
         $mesa->asignatura()->associate($asignatura_id);
         $mesa->save();
 
-        return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
+        return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa->id]))
             ->with(['successMessage' => 'Mesa agregada con éxito!']);
     }
 
@@ -91,6 +120,7 @@ class MesaController extends Controller
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
             'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'mesaFechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
             'mesa' => [
                 'id' => $mesa->id,
                 'fechaHora' => $this->formatoService->cambiarFormatoParaEditar($mesa->fechaHora),
@@ -115,7 +145,7 @@ class MesaController extends Controller
         $this->mesasService->eliminarMesas($id);
 
         Mesa::destroy($id);
-        return redirect(route('asignaturas.show', [$institucion_id, $division_id, $asignatura_id]))
+        return redirect(route('mesas.index', [$institucion_id, $division_id, $asignatura_id]))
             ->with(['successMessage' => 'Mesa eliminada con éxito!']);
     }
 }

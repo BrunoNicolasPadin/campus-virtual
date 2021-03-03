@@ -8,7 +8,7 @@
                     <span v-else>{{ division.nivel_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
                 </inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
-                <inertia-link class="hover:underline" :href="route('asignaturas.show', [institucion_id, division.id, asignatura.id])">{{ asignatura.nombre }}</inertia-link> / 
+                <inertia-link class="hover:underline" :href="route('mesas.index', [institucion_id, division.id, asignatura.id])">Mesas de {{ asignatura.nombre }}</inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa {{ mesa.fechaHora }}</inertia-link> / 
                 Entrega de {{ anotado.alumno.user.name }}
             </span>
@@ -121,6 +121,9 @@
                                 rel="noopener noreferrer">
                                     {{ archivo.archivo }}
                                 </a>
+                            </span>
+                            <span v-else class="ml-2 flex-1 w-0 truncate">
+                                Archivo no visible por el momento.
                             </span>
                         </div>
                     </li>
