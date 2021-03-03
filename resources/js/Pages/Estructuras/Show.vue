@@ -111,17 +111,6 @@
 
                     <div v-show="tipo == 'Institucion' || tipo == 'Directivo' " class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Limpiar división
-                        </dt>
-                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <button @click="limpiar(division.id)" type="button" class="border border-blue-500 bg-blue-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-blue-700 focus:outline-none focus:shadow-outline">
-                                Procesar
-                            </button>
-                        </dd>
-                    </div>
-
-                    <div v-show="tipo == 'Institucion' || tipo == 'Directivo' " class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
                             Forma de evaluación
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
@@ -157,12 +146,6 @@
         title: 'Ver division',
 
         methods: {
-            limpiar(id) {
-                if (confirm('Estas seguro de que desea limpiar esta division?')) {
-                    this.$inertia.get(this.route('divisiones.limpiar', [this.institucion_id, id]))
-                }
-            },
-
             cerrarAlerta() {
                 this.successMessage = false;
             },

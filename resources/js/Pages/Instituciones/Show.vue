@@ -95,7 +95,20 @@
                         </dd>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' ">
+                    <div v-show="tipo == 'Institucion' || tipo == 'Directivo' " class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Limpiar divisiones
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <button type="button" class="border border-blue-500 bg-blue-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-blue-700 focus:outline-none focus:shadow-outline">
+                                <inertia-link :href="route('mostrar-divisiones', institucion.id)">
+                                    Procesar
+                                </inertia-link>
+                            </button>
+                        </dd>
+                    </div>
+
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones
                         </dt>

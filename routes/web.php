@@ -209,9 +209,10 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
 
         Route::get('estadisticas', [EstructuraEstadisticaController::class, 'mostrarCiclosLectivos'])->name('divisiones.mostrarCiclosLectivos');
         Route::get('estadisticas/{ciclo_lectivo_id}', [EstructuraEstadisticaController::class, 'mostrarEstadisticas'])->name('divisiones.mostrarEstadisticas');
-   
-        Route::get('limpiar', [LimpiarDivisionController::class, 'limpiarDivision'])->name('divisiones.limpiar');
     });
+
+    Route::get('mostrar-divisiones', [LimpiarDivisionController::class, 'mostrarDivisiones'])->name('mostrar-divisiones');
+    Route::post('limpiar-divisiones', [LimpiarDivisionController::class, 'limpiarDivisiones'])->name('limpiar-divisiones');
 
     Route::resource('repitentes', RepitenteController::class);
     Route::get('repitentes/{alumno_id}/create', [RepitenteController::class, 'createRepitente'])->name('repitentes.createRepitente');

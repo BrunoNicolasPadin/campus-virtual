@@ -31,4 +31,14 @@ class VerificarAsignatura
         }
         return false;
     }
+
+    public function verificarAlumno($asignatura_id)
+    {
+        $asignatura = Asignatura::select('division_id')->findOrFail($asignatura_id);
+
+        if ($asignatura->division_id == session('division_id')) {
+            return true;
+        }
+        return false;
+    }
 }

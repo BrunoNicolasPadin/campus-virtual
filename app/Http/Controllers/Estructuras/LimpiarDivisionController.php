@@ -3,30 +3,54 @@
 namespace App\Http\Controllers\Estructuras;
 
 use App\Http\Controllers\Controller;
-use App\Models\Evaluaciones\Evaluacion;
-use App\Models\Muro\Muro;
-use App\Models\Muro\MuroArchivo;
+use App\Http\Requests\Estructuras\LimpiezaValidation;
+use App\Jobs\Estructuras\LimpiarDivisiones;
+use App\Models\Estructuras\Division;
 use App\Services\Archivos\EliminarEntregasCorrecciones;
-use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class LimpiarDivisionController extends Controller
 {
-    protected $archivosEvaServices;
+    public function __construct()
 
-    public function __construct(EliminarEntregasCorrecciones $archivosEvaServices)
     {
-        $this->archivosEvaServices = $archivosEvaServices;
+        $this->middleware('auth');
+        $this->middleware('institucionCorrespondiente');
+        $this->middleware('soloInstitucionesDirectivos');
     }
 
-    public function limpiarDivision($institucion_id, $division_id)
+    public function mostrarDivisiones($institucion_id)
     {
-        $this->limpiarMuro($division_id);
-        $this->limpiarEvaluaciones($division_id);
+        $divisiones = Division::select('divisiones.id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+            'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre')
+            ->where('institucion_id', $institucion_id)
+            ->join('niveles', 'niveles.id', 'divisiones.nivel_id')
+            ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
+            ->join('cursos', 'cursos.id', 'divisiones.curso_id')
+            ->orderBy('divisiones.nivel_id')
+            ->orderBy('divisiones.curso_id')
+            ->orderBy('divisiones.division')
+            ->orderBy('divisiones.orientacion_id')
+            ->get();
 
-        return back()->with(['successMessage' => 'División limpiada con éxito!']);
+        return Inertia::render('Estructuras/LimpiarDivisiones', [
+            'institucion_id' => $institucion_id,
+            'divisiones' => $divisiones,
+        ]);
     }
 
-    public function limpiarMuro($division_id)
+    public function limpiarDivisiones($institucion_id, LimpiezaValidation $request)
+    {
+        /* for ($i=0; $i < count($request->division_id); $i++) { 
+            $this->limpiarMuro($request->division_id[$i]);
+            $this->limpiarEvaluaciones($request->division_id[$i]);
+        } */
+
+        LimpiarDivisiones::dispatch($institucion_id, $request->all());
+        return back()->with(['successMessage' => 'Divisiones limpiadas con éxito!']);
+    }
+
+    /* public function limpiarMuro($division_id)
     {
         $publicaciones = Muro::where('division_id', $division_id)->get();
         foreach ($publicaciones as $publicacion) {
@@ -50,5 +74,5 @@ class LimpiarDivisionController extends Controller
             $this->archivosEvaServices->eliminarEntregasCorrecciones($evaluacion->id);
             Evaluacion::destroy($evaluacion->id);
         }
-    }
+    } */
 }
