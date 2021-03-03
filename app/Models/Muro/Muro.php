@@ -11,6 +11,8 @@ class Muro extends Model
     protected $table = 'muro';
     protected $fillable = [
         'publicacion',
+        'created_at',
+        'updated_at',
     ];
     protected $guarded = [
         'division_id',

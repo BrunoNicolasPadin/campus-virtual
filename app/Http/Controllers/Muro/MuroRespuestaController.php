@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreRespuesta;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroRespuesta;
+use App\Services\Archivos\ObtenerFechaHoraService;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
@@ -15,10 +16,12 @@ class MuroRespuestaController extends Controller
 {
     protected $divisionService;
     protected $formatoService;
+    protected $obtenerFechaHoraService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        DivisionService $divisionService
+        DivisionService $divisionService,
+        ObtenerFechaHoraService $obtenerFechaHoraService,
     )
 
     {
@@ -28,6 +31,7 @@ class MuroRespuestaController extends Controller
         $this->middleware('verArchivosMuroCorrespondiente');
         $this->middleware('respuestaMuroCorrespondiente')->only('update', 'destroy');
 
+        $this->obtenerFechaHoraService = $obtenerFechaHoraService;
         $this->formatoService = $formatoService;
         $this->divisionService = $divisionService;
     }
@@ -66,6 +70,9 @@ class MuroRespuestaController extends Controller
     {
         $respuesta = new MuroRespuesta();
         $respuesta->respuesta = $request->respuesta;
+        $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
+        $respuesta->created_at = $this->formatoService->cambiarFormatoParaGuardar($fechaHora);
+        $respuesta->updated_at = $this->formatoService->cambiarFormatoParaGuardar($fechaHora);
         $respuesta->muro()->associate($muro_id);
         $respuesta->user()->associate(Auth::id());
         $respuesta->save();
@@ -75,9 +82,12 @@ class MuroRespuestaController extends Controller
 
     public function update(StoreRespuesta $request, $institucion_id, $division_id, $muro_id, $id)
     {
+        $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
+
         MuroRespuesta::where('id', $id)
             ->update([
                 'respuesta' => $request->respuesta,
+                'updated_at' => $this->formatoService->cambiarFormatoParaGuardar($fechaHora),
             ]);
         return back()->with(['successMessage' => 'Respuesta actualizada con éxito!']);
     }

@@ -45,7 +45,8 @@ class InstitucionController extends Controller
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
             $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-            $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
+            $unique = substr(base64_encode(mt_rand()), 0, 15);
+            $nombre = $fechaHora . '-' . $unique . '-' . $archivo->getClientOriginalName();
             $archivo->storeAs('public/PlanesDeEstudio', $nombre);
         }
 
@@ -117,7 +118,8 @@ class InstitucionController extends Controller
             Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
             $archivo = $request->file('archivo');
             $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-            $nombre = $fechaHora . '-' . $archivo->getClientOriginalName();
+            $unique = substr(base64_encode(mt_rand()), 0, 15);
+            $nombre = $fechaHora . '-' . $unique . '-' . $archivo->getClientOriginalName();
             $archivo->storeAs('public/PlanesDeEstudio', $nombre);
             $institucion->planDeEstudio = $nombre;
         }
