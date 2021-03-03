@@ -34,8 +34,7 @@ class RendirCorreccionController extends Controller
         $this->middleware('asignaturaAdeudadaCorrespondiente');
         $this->middleware('mesaCorrespondiente');
         $this->middleware('inscripcionCorrespondiente');
-        $this->middleware('soloDocentes')->except('destroy');
-        $this->middleware('soloInstitucionesDirectivosDocentes')->only('destroy');
+        $this->middleware('soloInstitucionesDirectivosDocentes');
         $this->middleware('rendirCorreccionCorrespondiente')->only('destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
@@ -63,7 +62,8 @@ class RendirCorreccionController extends Controller
 
             for ($i=0; $i < count($archivos); $i++) { 
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
-                $nombre = $fechaHora . '-' . $archivos[$i]->getClientOriginalName();
+                $unique = substr(base64_encode(mt_rand()), 0, 15);
+                $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
                 $archivos[$i]->storeAs('public/Deudores/Correcciones', $nombre);
 
                 $rendirCorreccion = new RendirCorreccion();
