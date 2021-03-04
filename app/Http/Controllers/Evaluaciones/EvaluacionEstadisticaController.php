@@ -50,7 +50,7 @@ class EvaluacionEstadisticaController extends Controller
 
         $evaluacion = Evaluacion::findOrFail($evaluacion_id);
         $entregas = Entrega::where('evaluacion_id', $evaluacion_id)
-            ->with(['archivos', 'alumno', 'alumno.user'])
+            ->with(['archivos', 'alumno', 'alumno.user', 'correcciones'])
             ->orderBy('calificacion')
             ->get();
         
@@ -61,6 +61,8 @@ class EvaluacionEstadisticaController extends Controller
         $noEntregados = 0;
         $entregadosTiempo = 0;
         $entregasDestiempo = 0;
+        $conCorreccion = 0;
+        $sinCorreccion = 0;
         $mejorNota = '0';
 
         $aprobadosArray = [];
@@ -68,6 +70,8 @@ class EvaluacionEstadisticaController extends Controller
         $sinCalificarArray = [];
         $entregadosArray = [];
         $noEntregadosArray = [];
+        $conCorreccionArray = [];
+        $sinCorreccionArray = [];
         
         foreach ($entregas as $entrega) {
 
@@ -106,9 +110,27 @@ class EvaluacionEstadisticaController extends Controller
                     'id' => $entrega->id,
                 ]);
             }
+            $i = 0;
 
             if (!($tipo == 'Escrita')) {
                 $mejorNota = $this->obtenerMejorCalificacion($entrega, $mejorNota);
+            }
+
+            foreach ($entrega->correcciones->groupBy('entrega_id') as $correccion) {
+                $correccion = $correccion->unique('entrega_id');
+                $i++;
+
+                $arrayTemporal = $this->obtenerConCorreccion($entrega, $conCorreccion, $conCorreccionArray);
+                $conCorreccion = $arrayTemporal[0];
+                $conCorreccionArray = $arrayTemporal[1];
+            }
+
+            if ($i == 0) {
+                $sinCorreccion = $sinCorreccion + 1;
+                array_push($sinCorreccionArray, [
+                    'nombre' => $entrega->alumno->user->name,
+                    'id' => $entrega->id,
+                ]);
             }
             $i = 0;
         }
@@ -119,6 +141,8 @@ class EvaluacionEstadisticaController extends Controller
             'sinCalificar' => $sinCalificarArray,
             'entregados' => $entregadosArray,
             'noEntregados' => $noEntregadosArray,
+            'conCorrecciones' => $conCorreccionArray,
+            'sinCorrecciones' => $sinCorreccionArray,
         ];
 
         $numeros = [
@@ -129,6 +153,8 @@ class EvaluacionEstadisticaController extends Controller
             'noEntregados' => $noEntregados,
             'entregadosTiempo' => $entregadosTiempo,
             'entregasDestiempo' => $entregasDestiempo,
+            'conCorreccion' => $conCorreccion,
+            'sinCorreccion' => $sinCorreccion,
             'mejorNota' => $mejorNota,
         ];
 
@@ -216,5 +242,16 @@ class EvaluacionEstadisticaController extends Controller
             }
         }
         return $mejorNota;
+    }
+
+    public function obtenerConCorreccion($entrega, $conCorreccion, $conCorreccionArray)
+    {
+            $conCorreccion = $conCorreccion + 1;
+            array_push($conCorreccionArray, [
+                'nombre' => $entrega->alumno->user->name,
+                'id' => $entrega->id,
+                'tiempo' => true,
+            ]);
+        return [$conCorreccion, $conCorreccionArray];
     }
 }

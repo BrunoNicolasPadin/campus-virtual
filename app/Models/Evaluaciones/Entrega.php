@@ -31,4 +31,9 @@ class Entrega extends Model
     {
         return $this->hasMany(EntregaArchivo::class);
     }
+
+    public function correcciones()
+    {
+        return $this->hasMany(Correccion::class);
+    }
 }

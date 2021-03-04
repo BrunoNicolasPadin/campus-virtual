@@ -84,7 +84,34 @@
                         </dd>
                     </div>
 
-                    <div v-show="tipoEvaluacion !== 'Escrita' " class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Con correcciones
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            {{ numeros.conCorreccion }}
+                        </dd>
+                    </div>
+
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Sin correcciones
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            {{ numeros.sinCorreccion }}
+                        </dd>
+                    </div>
+
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            No entregados
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            {{ numeros.noEntregados }}
+                        </dd>
+                    </div>
+
+                    <div v-show="tipoEvaluacion !== 'Escrita' " class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Mejor nota
                         </dt>
