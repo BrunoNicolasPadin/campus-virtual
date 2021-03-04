@@ -203,7 +203,7 @@
 
         methods: {
             destroy(alumno_id, id) {
-                if (confirm('Estas seguro de que desea eliminar esta asignatura de la lista de asignaturas que se llevo el alumno?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar a este alumno de la lista de deudores de la asignatura?')) {
                     this.$inertia.delete(this.route('asignaturas-adeudadas.destroy', [this.institucion_id, alumno_id, id]))
                 }
             },

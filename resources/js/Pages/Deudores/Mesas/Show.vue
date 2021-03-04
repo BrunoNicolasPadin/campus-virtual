@@ -253,13 +253,13 @@
 
         methods: {
             destroyMesa(mesa_id) {
-                if (confirm('Estas seguro de que desea eliminar esta mesa de examen?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta mesa de examen?')) {
                     this.$inertia.delete(this.route('mesas.destroy', [this.institucion_id, this.division.id, this.asignatura.id, mesa_id]))
                 }
             },
     
             destroy(anotado_id) {
-                if (confirm('Estas seguro de que desea eliminar esta inscripcion?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta inscripción?')) {
                     this.$inertia.delete(this.route('anotados.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, anotado_id]))
                 }
             },
@@ -271,7 +271,7 @@
             },
 
             destroyArchivo(archivo_id) {
-                if (confirm('Estas seguro de que desea eliminar este archivo?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
                     this.$inertia.delete(this.route('mesas-archivos.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, archivo_id]))
                 }
             },

@@ -136,7 +136,7 @@
 
         methods: {
             destroy(alumno_id) {
-                if (confirm('Estas seguro de que desea sacar de la division a este alumno?')) {
+                if (confirm('¿Estás seguro de que desea sacar de la división a este alumno?')) {
                     this.$inertia.get(this.route('alumnosDivision.sacarlo', [this.institucion_id, this.division.id, alumno_id]))
                 }
             },

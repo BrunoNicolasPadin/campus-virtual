@@ -191,7 +191,7 @@
 
         methods: {
             destroy(mesa_id) {
-                if (confirm('Estas seguro de que desea eliminar esta mesa?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta mesa?')) {
                     this.$inertia.delete(this.route('mesas.destroy', [this.institucion_id, this.division.id, this.asignatura.id, mesa_id]))
                 }
             },

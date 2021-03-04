@@ -142,7 +142,7 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que dese eliminar esta forma de evaluación?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta forma de evaluación?')) {
                     this.$inertia.delete(this.route('formas-evaluacion.destroy', [this.institucion_id, id]))
                 }
             },

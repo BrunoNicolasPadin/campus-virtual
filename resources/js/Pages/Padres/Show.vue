@@ -63,7 +63,7 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que desea eliminar a este padre?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este cuenta-padre?')) {
                     this.$inertia.delete(this.route('padres.destroy', [this.institucion_id, id]))
                 }
             },

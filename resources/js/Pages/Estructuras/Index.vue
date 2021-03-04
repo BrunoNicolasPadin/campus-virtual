@@ -171,7 +171,7 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que dese eliminar esta division?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta división?')) {
                     this.$inertia.delete(this.route('divisiones.destroy', [this.institucion_id, id]))
                 }
             },

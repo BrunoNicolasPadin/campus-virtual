@@ -141,7 +141,7 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que desea eliminar a este directivo?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este directivo?')) {
                     this.$inertia.delete(this.route('directivos.destroy', [this.institucion_id, id]))
                 }
             },

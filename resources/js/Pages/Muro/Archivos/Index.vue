@@ -96,7 +96,7 @@
 
         methods: {
             destroyArchivo(archivo_id) {
-                if (confirm('Estas seguro de que desea eliminar este archivo?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
                     this.$inertia.delete(this.route('muro-archivos.destroy', [this.institucion_id, this.division.id, this.publicacion.id, archivo_id]))
                 }
             },

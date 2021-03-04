@@ -161,13 +161,13 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que desea eliminar este grupo?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este grupo de archivos?')) {
                     this.$inertia.delete(this.route('materiales.destroy', [this.institucion_id, this.division.id, id]))
                 }
             },
 
             destroyArchivo(id) {
-                if (confirm('Estas seguro de que desea eliminar este archivo?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
                     this.$inertia.delete(this.route('materiales-archivos.destroy', [this.institucion_id, this.division.id, this.grupo.id, id]))
                 }
             },

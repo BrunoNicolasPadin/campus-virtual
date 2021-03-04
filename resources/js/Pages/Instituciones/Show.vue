@@ -131,7 +131,7 @@
 
         methods: {
             destroy() {
-                if (confirm('Estas seguro de que desea eliminar la institucion?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta institución?')) {
                     this.$inertia.delete(this.route('instituciones.destroy', this.institucion.id))
                 }
             },

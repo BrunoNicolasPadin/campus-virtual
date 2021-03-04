@@ -130,7 +130,7 @@
                                     <table-data>
                                         <template #td>
                                             <inertia-link class="hover:underline" :href="route('docentes.show', [docente.institucion_id, docente.id])">
-                                                Ver perfil
+                                                Ver tu perfil
                                             </inertia-link>
                                         </template>
                                     </table-data>
@@ -207,7 +207,7 @@
                                     <table-data>
                                         <template #td>
                                             <inertia-link class="hover:underline" :href="route('alumnos.show', [alumno.institucion_id, alumno.id])">
-                                                Ver perfil
+                                                Ver tu perfil
                                             </inertia-link>
                                         </template>
                                     </table-data>
@@ -277,8 +277,8 @@
 
                                     <table-data>
                                         <template #td>
-                                            <inertia-link :href="route('alumnos.show', [padre.hijos.institucion_id, padre.hijos.id])">
-                                                {{ padre.hijos.user.name }}
+                                            <inertia-link class="hover:underline" :href="route('alumnos.show', [padre.hijos.institucion_id, padre.hijos.id])">
+                                                Ver perfil de {{ padre.hijos.user.name }}
                                             </inertia-link>
                                         </template>
                                     </table-data>
@@ -286,7 +286,7 @@
                                     <table-data>
                                         <template #td>
                                             <inertia-link class="hover:underline" :href="route('padres.show', [padre.hijos.institucion_id, padre.id])">
-                                                Ver perfil
+                                                Ver tu perfil
                                             </inertia-link>
                                         </template>
                                     </table-data>
@@ -363,25 +363,25 @@
             },
             
             destroyDirectivo(institucion_id, id) {
-                if (confirm('Estas seguro de que desea eliminar tu cuenta de directivo?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar tu cuenta como directivo?')) {
                     this.$inertia.delete(this.route('directivos.destroy', [institucion_id, id]))
                 }
             },
 
             destroyDocente(institucion_id, id) {
-                if (confirm('Estas seguro de que desea eliminar tu cuenta de docente?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar tu cuenta como docente?')) {
                     this.$inertia.delete(this.route('docentes.destroy', [institucion_id, id]))
                 }
             },
 
             destroyAlumno(institucion_id, id) {
-                if (confirm('Estas seguro de que desea eliminar tu cuenta de alumno?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar tu cuenta como alumno?')) {
                     this.$inertia.delete(this.route('alumnos.destroy', [institucion_id, id]))
                 }
             },
 
             destroyPadre(institucion_id, id) {
-                if (confirm('Estas seguro de que desea eliminar tu cuenta de padre?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar tu cuenta como directivo?')) {
                     this.$inertia.delete(this.route('padres.destroy', [institucion_id, id]))
                 }
             },

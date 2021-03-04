@@ -162,7 +162,7 @@
             },
 
             destroyRespuesta(respuesta_id) {
-                if (confirm('Estas seguro de que desea eliminar esta respuesta?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta respuesta?')) {
                     this.cancelarEdicion();
                     this.$inertia.delete(this.route('evaluaciones-respuestas.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, , this.comentario.id, respuesta_id]))
                 }

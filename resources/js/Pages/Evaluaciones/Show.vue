@@ -298,13 +298,13 @@
 
         methods: {
             destroy(evaluacion_id) {
-                if (confirm('Estas seguro de que desea eliminar esta evaluacion?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta evaluacion?')) {
                     this.$inertia.delete(this.route('evaluaciones.destroy', [this.institucion_id, this.division.id, this.evaluacion.id]))
                 }
             },
 
             destroyArchivo(archivo_id) {
-                if (confirm('Estas seguro de que desea eliminar este archivo?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
                     this.$inertia.delete(this.route('evaluaciones-archivos.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, archivo_id]))
                 }
             },
@@ -330,7 +330,7 @@
             },
 
             destroyComentario(comentario_id) {
-                if (confirm('Estas seguro de que desea eliminar este comentario?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este comentario?')) {
                     this.cancelarEdicion();
                     this.$inertia.delete(this.route('evaluaciones-comentarios.destroy', [this.institucion_id, this.division.id, this.evaluacion.id, comentario_id]))
                 }

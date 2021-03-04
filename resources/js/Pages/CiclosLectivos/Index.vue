@@ -149,7 +149,7 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que dese eliminar este ciclo lectivo?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este ciclo lectivo?')) {
                     this.$inertia.delete(this.route('ciclos-lectivos.destroy', [this.institucion_id, id]))
                 }
             },

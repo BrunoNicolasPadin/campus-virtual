@@ -314,7 +314,7 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que desea eliminar a este ex alumno?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este ex alumno?')) {
                     this.$inertia.delete(this.route('exalumnos.destroy', [this.institucion_id, id]))
                 }
             },

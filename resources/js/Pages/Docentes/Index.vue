@@ -141,7 +141,7 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que desea eliminar a este docente?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este docente?')) {
                     this.$inertia.delete(this.route('docentes.destroy', [this.institucion_id, id]))
                 }
             },

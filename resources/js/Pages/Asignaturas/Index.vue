@@ -159,7 +159,7 @@
 
         methods: {
             destroy(asignatura_id) {
-                if (confirm('Estas seguro de que desea eliminar esta asignatura?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta asignatura?')) {
                     this.$inertia.delete(this.route('asignaturas.destroy', [this.institucion_id, this.division.id, asignatura_id]))
                 }
             },

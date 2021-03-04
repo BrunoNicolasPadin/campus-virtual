@@ -152,7 +152,7 @@
             },
 
             destroyPublicacion(publicacion_id) {
-                if (confirm('Estas seguro de que desea eliminar esta publicacion?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta publicación?')) {
                     this.cancelarEdicion();
                     this.$inertia.delete(this.route('muro.destroy', [this.institucion_id, this.division.id, publicacion_id]))
                 }

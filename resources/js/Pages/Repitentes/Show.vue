@@ -147,7 +147,7 @@
 
         methods: {
             destroy(id) {
-                if (confirm('Estas seguro de que desea eliminar a este repitente?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar a este repitente?')) {
                     this.$inertia.delete(this.route('repitentes.destroy', [this.institucion_id, id]))
                 }
             },

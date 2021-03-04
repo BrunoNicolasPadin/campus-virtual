@@ -284,13 +284,13 @@
         methods: {
             
             destroyArchivo(archivo_id) {
-                if (confirm('Estas seguro de que desea eliminar este archivo?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
                     this.$inertia.delete(this.route('rendir-entregas.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.anotado.id, archivo_id]))
                 }
             },
 
             destroyCorreccion(archivo_id) {
-                if (confirm('Estas seguro de que desea eliminar esta correccion?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar esta correccición?')) {
                     this.$inertia.delete(this.route('rendir-correcciones.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.anotado.id, archivo_id]))
                 }
             },
@@ -316,7 +316,7 @@
             },
 
             destroyComentario(comentario_id) {
-                if (confirm('Estas seguro de que desea eliminar este comentario?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este comentario?')) {
                     this.cancelarEdicion();
                     this.$inertia.delete(this.route('rendir-comentarios.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.anotado.id, comentario_id]))
                 }

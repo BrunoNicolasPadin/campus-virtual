@@ -195,14 +195,14 @@
             },
 
             destroyDocente(asignaturas_docente, index) {
-                if (confirm('Estas seguro de que dese eliminar este docente?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar a este docente?')) {
                     this.form.docente.splice(index, 1);
                     this.$inertia.delete(this.route('asignaturas-docentes.destroy', [this.institucion_id, this.division.id, this.asignatura.id, asignaturas_docente]))
                 }
             },
 
             destroyHorario(asignaturas_horario, index) {
-                if (confirm('Estas seguro de que dese eliminar este horario?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este horario?')) {
                     this.form.diaHorario.splice(index, 1);
                     this.$inertia.delete(this.route('asignaturas-horarios.destroy', [this.institucion_id, this.division.id, this.asignatura.id, asignaturas_horario]))
                 }
