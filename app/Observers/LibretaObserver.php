@@ -7,8 +7,8 @@ use App\Models\Libretas\Calificacion;
 
 class LibretaObserver
 {
-    /* public function updated(Calificacion $calificacion)
+    public function updated(Calificacion $calificacion)
     {
         event(new LibretaActualizada($calificacion));
-    } */
+    }
 }

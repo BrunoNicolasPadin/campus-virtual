@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Deudores\Anotado;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Libretas\Calificacion;
@@ -10,6 +11,7 @@ use App\Models\Roles\Alumno;
 use App\Observers\AlumnoObserver;
 use App\Observers\EntregaObserver;
 use App\Observers\EvaluacionObserver;
+use App\Observers\InscripcionObserver;
 use App\Observers\LibretaObserver;
 use App\Observers\RepitenteObserver;
 use Illuminate\Auth\Events\Registered;
@@ -33,6 +35,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\LibretaActualizada::class => [
             \App\Listeners\EnviarEmailLibreta::class,
         ],
+        \App\Events\InscripcionActualizada::class => [
+            \App\Listeners\EnviarEmailInscripcion::class,
+        ],
     ];
 
     /**
@@ -47,5 +52,6 @@ class EventServiceProvider extends ServiceProvider
         Repitente::observe(RepitenteObserver::class);
         Entrega::observe(EntregaObserver::class);
         Calificacion::observe(LibretaObserver::class);
+        Anotado::observe(InscripcionObserver::class);
     }
 }
