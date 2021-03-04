@@ -23,6 +23,7 @@ use App\Http\Controllers\Estructuras\EstructuraEstadisticaController;
 use App\Http\Controllers\Estructuras\FormaDescripcionController;
 use App\Http\Controllers\Estructuras\FormaEvaluacionController;
 use App\Http\Controllers\Estructuras\LimpiarDivisionController;
+use App\Http\Controllers\Estructuras\ListarDivisionesController;
 use App\Http\Controllers\Evaluaciones\CorreccionController;
 use App\Http\Controllers\Evaluaciones\EntregaArchivoController;
 use App\Http\Controllers\Evaluaciones\EntregaComentarioController;
@@ -138,6 +139,9 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
         
         Route::resource('formas-descripcion', FormaDescripcionController::class);
     });
+
+    Route::get('listar-divisiones-alumnos', [ListarDivisionesController::class, 'paraAlumnos'])->name('listar-divisiones-alumnos');
+    Route::get('listar-divisiones-docentes', [ListarDivisionesController::class, 'paraDocentes'])->name('listar-divisiones-docentes');
 
     Route::resource('divisiones', EstructuraController::class);
     Route::prefix('divisiones/{division_id}')->group(function () {
