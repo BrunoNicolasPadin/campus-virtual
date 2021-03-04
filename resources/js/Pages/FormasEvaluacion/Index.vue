@@ -78,10 +78,9 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link v-if="formaEvaluacion.tipo == 'Escrita'" :href="route('formas-evaluacion.show', [institucion_id, formaEvaluacion.id])" class="hover:underline">
+                                        <inertia-link :href="route('formas-evaluacion.show', [institucion_id, formaEvaluacion.id])" class="hover:underline">
                                             Ingresar
                                         </inertia-link>
-                                        <span v-else>-</span>
                                     </template>
                                 </table-data>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Estructuras;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Estructuras\StoreFormaEvaluacion;
+use App\Models\Estructuras\Division;
 use App\Models\Estructuras\FormaDescripcion;
 use App\Models\Estructuras\FormaEvaluacion;
 use App\Services\Division\FormaEvaluacionService;
@@ -58,10 +59,30 @@ class FormaEvaluacionController extends Controller
 
     public function show($institucion_id, $id)
     {
+        $formaEvaluacion = $this->formaEvaluacionService->find($id);
+        $formaDescripcion = [];
+        if ($formaEvaluacion->tipo == 'Escrita') {
+            $formaDescripcion = FormaDescripcion::where('forma_evaluacion_id', $id)->get();
+        }
+
+        $divisiones = Division::select('divisiones.id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+            'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre')
+            ->where('divisiones.institucion_id', $institucion_id)
+            ->where('divisiones.forma_evaluacion_id', $id)
+            ->join('niveles', 'niveles.id', 'divisiones.nivel_id')
+            ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
+            ->join('cursos', 'cursos.id', 'divisiones.curso_id')
+            ->orderBy('divisiones.nivel_id')
+            ->orderBy('divisiones.curso_id')
+            ->orderBy('divisiones.division')
+            ->orderBy('divisiones.orientacion_id')
+            ->paginate(10);
+
         return Inertia::render('FormasEvaluacion/Show', [
             'institucion_id' => $institucion_id,
-            'formaEvaluacion' => $this->formaEvaluacionService->find($id),
-            'formasDescripcion' => FormaDescripcion::where('forma_evaluacion_id', $id)->get(),
+            'formaEvaluacion' => $formaEvaluacion,
+            'formasDescripcion' => $formaDescripcion,
+            'divisiones' => $divisiones,
         ]);
     }
 

@@ -125,7 +125,6 @@
                             </primary>
                         </dd>
                     </div>
-
                 </template>
             </estructura-informacion>
         </div>
