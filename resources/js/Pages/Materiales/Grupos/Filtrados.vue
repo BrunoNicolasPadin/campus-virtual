@@ -140,7 +140,6 @@
         },
 
         props:{ 
-            successMessage: String,
             institucion_id: String,
             tipo: String,
             division: Object,
@@ -156,16 +155,11 @@
                 form: {
                     asignatura_id: this.asignatura.id,
                 },
-                mostrarErrores: true,
                 grupos: this.gruposTodos,
             }
         },
 
         methods: {
-            cerrarAlerta() {
-                this.successMessage = false;
-            },
-
             onChange() {
                 if (this.form.asignatura_id == 'Todas') {
                     this.$inertia.get(this.route('materiales.index', [this.institucion_id, this.division.id]));

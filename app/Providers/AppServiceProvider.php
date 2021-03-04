@@ -6,6 +6,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\UrlWindow;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
@@ -19,12 +20,13 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Inertia::share('app.name', config('app.name'));
-        Inertia::share('errors', function() {
-            return session()->get('errors') ? session()->get('errors')->getBag('default')->getMessages() : (object) [];
+        Inertia::share('flash', function () {
+            return [
+                'successMessage' => Session::get('successMessage'),
+            ];
         });
-
-        Inertia::share('successMessage', function() {
-            return session()->get('successMessage') ? session()->get('successMessage') : null;
+        Inertia::share('errors', function () {
+            return Session::get('errors') ? Session::get('errors')->getBag('default')->getMessages() : (object) [];
         });
 
         $this->registerLengthAwarePaginator();

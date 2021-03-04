@@ -108,7 +108,6 @@
         },
 
         props:{ 
-            successMessage: String,
             institucion_id: String,
             mesas: Object,
             alumno: Object,

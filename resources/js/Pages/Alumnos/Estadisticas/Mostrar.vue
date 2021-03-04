@@ -10,7 +10,6 @@
         </template>
 
         <div class="py-6">
-
             <estructura-form>
                 <template #formulario>
                     <form method="post" @submit.prevent="submit">

@@ -272,6 +272,7 @@
 
         <!-- Page Content -->
         <main class="h-auto">
+            <flash-messages></flash-messages>
             <slot></slot>
         </main>
 
@@ -429,6 +430,7 @@
     import JetDropdownLink from '@/Jetstream/DropdownLink'
     import JetNavLink from '@/Jetstream/NavLink'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
+    import FlashMessages from '@/Shared/FlashMessages.vue'
 
     export default {
         components: {
@@ -437,6 +439,7 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
+            FlashMessages,
         },
 
         data() {
