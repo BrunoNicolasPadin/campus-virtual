@@ -38,6 +38,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\InscripcionActualizada::class => [
             \App\Listeners\EnviarEmailInscripcion::class,
         ],
+        \App\Events\EvaluacionCreada::class => [
+            \App\Listeners\EnviarEmailEvaluacionCreada::class,
+        ],
     ];
 
     /**
