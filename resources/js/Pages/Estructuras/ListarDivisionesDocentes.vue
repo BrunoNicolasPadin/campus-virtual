@@ -112,6 +112,10 @@
                     </table-body>
                 </template>
             </estructura-tabla>
+
+            <div class="container mx-auto px-4 sm:px-8 my-6">
+                <pagination :links="divisiones.links" />
+            </div>
         </div>
     </app-layout>
 </template>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreDocente;
+use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Roles\Docente;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +68,20 @@ class DocenteController extends Controller
 
     public function show($institucion_id, $id)
     {
+        $divisiones = AsignaturaDocente::select('divisiones.id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+        'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'asignaturas.nombre')
+            ->where('asignaturas_docentes.docente_id', $id)
+            ->join('asignaturas', 'asignaturas.id', 'asignaturas_docentes.asignatura_id')
+            ->join('divisiones', 'divisiones.id', 'asignaturas.division_id')
+            ->join('niveles', 'niveles.id', 'divisiones.nivel_id')
+            ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
+            ->join('cursos', 'cursos.id', 'divisiones.curso_id')
+            ->orderBy('divisiones.nivel_id')
+            ->orderBy('divisiones.curso_id')
+            ->orderBy('divisiones.division')
+            ->orderBy('divisiones.orientacion_id')
+            ->paginate(10);
+
         $docente = Docente::select('users.name', 'users.profile_photo_path')
             ->where('docentes.id', $id)
             ->join('users', 'users.id', 'docentes.user_id')
@@ -75,6 +90,7 @@ class DocenteController extends Controller
         return Inertia::render('Docentes/Show', [
             'institucion_id' => $institucion_id,
             'docente' => $docente,
+            'divisiones' => $divisiones,
         ]);
     }
 
