@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Alumnos\AlumnoController;
 use App\Http\Controllers\Alumnos\AlumnoEstadisticaController;
 use App\Http\Controllers\Asignaturas\AsignaturaController;
 use App\Http\Controllers\Asignaturas\AsignaturaDeudorController;
@@ -18,6 +20,8 @@ use App\Http\Controllers\Deudores\MesaController;
 use App\Http\Controllers\Deudores\RendirComentarioController;
 use App\Http\Controllers\Deudores\RendirCorreccionController;
 use App\Http\Controllers\Deudores\RendirEntregaController;
+use App\Http\Controllers\Docentes\AgregarDocenteController;
+use App\Http\Controllers\Docentes\DocenteController;
 use App\Http\Controllers\Estructuras\EstructuraController;
 use App\Http\Controllers\Estructuras\EstructuraEstadisticaController;
 use App\Http\Controllers\Estructuras\FormaDescripcionController;
@@ -52,13 +56,11 @@ use App\Http\Controllers\RegistrarUsuarioController;
 use App\Http\Controllers\Repitentes\RepitenteController;
 use App\Http\Controllers\Repitentes\RepitenteEstadisticaController;
 use App\Http\Controllers\Roles\ActivarCuentaController;
-use App\Http\Controllers\Roles\AlumnoController;
 use App\Http\Controllers\Roles\Buscadores\BuscadorAlumnoController;
 use App\Http\Controllers\Roles\Buscadores\BuscadorDirectivoController;
 use App\Http\Controllers\Roles\Buscadores\BuscadorDocenteController;
 use App\Http\Controllers\Roles\Buscadores\BuscadorPadreController;
 use App\Http\Controllers\Roles\DirectivoController;
-use App\Http\Controllers\Roles\DocenteController;
 use App\Http\Controllers\Roles\PadreController;
 use App\Http\Controllers\Roles\RolController;
 use App\Http\Controllers\Roles\TipoCuentaController;
@@ -111,7 +113,14 @@ Route::prefix('instituciones/{institucion_id}')->group(function () {
     Route::get('anotarse', [RolController::class, 'anotarse'])->name('roles.anotarse');
     Route::resource('roles', RolController::class);
     Route::resource('directivos', DirectivoController::class);
+
     Route::resource('docentes', DocenteController::class);
+    Route::prefix('docentes/{docente_id}')->group(function () {
+        Route::get('agregar-asignaturas', [AgregarDocenteController::class, 'createAsignaturaDocente'])->name('docentes.createAsignaturaDocente');
+        Route::get('listar-asignaturas/{division_id}', [AgregarDocenteController::class, 'listarAsignaturas'])->name('docentes.listarAsignaturas');
+        Route::post('agregar-docente', [AgregarDocenteController::class, 'agregarDocente'])->name('docentes.agregarDocente');
+    });
+
     Route::resource('alumnos', AlumnoController::class);
 
     Route::get('directivos/buscador/{nombre}', [BuscadorDirectivoController::class, 'buscar'])->name('buscador-de-directivos');

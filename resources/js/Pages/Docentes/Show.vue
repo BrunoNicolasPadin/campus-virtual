@@ -9,7 +9,7 @@
         </template>
 
         <div class="py-6">
-            <estructura-informacion>
+            <!-- <estructura-informacion>
                 <template #cabecera-info>
                     Datos
                 </template>
@@ -28,12 +28,17 @@
                     </div>
 
                 </template>
-            </estructura-informacion>
+            </estructura-informacion> -->
 
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="flex">
-                    <div class="w-full">
+                    <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Asignaturas y  divisiones</h2>
+                    </div>
+                    <div class="w-1/2">
+                        <button @click="agregarAsignaturas()" type="button" class="float-right border border-blue-500 bg-blue-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 select-none hover:bg-blue-700 focus:outline-none focus:shadow-outline">
+                            Agregar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -179,7 +184,13 @@
         },
 
         created() {
-            title: 'Perfil docente - ' + this.docente.name;
+            title: 'Perfil docente';
+        },
+
+        methods: {
+            agregarAsignaturas() {
+                this.$inertia.get(this.route('docentes.createAsignaturaDocente', [this.institucion_id, this.docente.id]))
+            },
         }
 
     }

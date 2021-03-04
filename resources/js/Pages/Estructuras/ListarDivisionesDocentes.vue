@@ -1,21 +1,9 @@
 <template>
     <app-layout>
         <template #header>
-            <div class="flex">
-                <div class="w-1/2">
-                    <span class="font-semibold text-md text-gray-800 leading-tight">
-                        Estructura
-                    </span>
-                </div>
-                <div class="w-1/2" v-show="tipo == 'Docente' ">
-                    <primary class="float-right">
-                        <template #boton-primary>
-                            Agregarte en otra asignatura
-                        </template>
-                    </primary>
-                </div>
-            </div>
-            
+            <span class="font-semibold text-md text-gray-800 leading-tight">
+                Tus divisiones
+            </span>
         </template>
 
         <div class="py-6">
