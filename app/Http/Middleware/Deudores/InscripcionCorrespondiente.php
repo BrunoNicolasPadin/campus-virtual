@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware\Deudores;
 
-use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Inscripcion;
 use App\Models\Deudores\Mesa;
 use App\Models\Roles\Alumno;
 use App\Services\Asignaturas\VerificarAsignatura;
@@ -29,7 +29,7 @@ class InscripcionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
 
-        $anotado = Anotado::select('alumno_id')
+        $inscripcion = Inscripcion::select('alumno_id')
             ->addSelect(
                 ['institucion_id' => Alumno::select('institucion_id')
                     ->whereColumn('id', 'alumno_id')
@@ -41,14 +41,14 @@ class InscripcionCorrespondiente
             ->findOrFail($link[12]);
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo' ) {
-            if (session('institucion_id') == $anotado->institucion_id) {
+            if (session('institucion_id') == $inscripcion->institucion_id) {
                 return $next($request);
             }
             abort(403, 'Esta inscripción es de un alumno que no forma parte de tu institución.');
         }
 
         if (session('tipo') == 'Docente') {
-            if ($this->asignaturaService->verificarDocente($anotado->asignatura_id)) {
+            if ($this->asignaturaService->verificarDocente($inscripcion->asignatura_id)) {
                 return $next($request);
             }
             abort(403, 'Usted no es docente de la asignatura en la que se inscribió este alumno.');
@@ -56,14 +56,14 @@ class InscripcionCorrespondiente
 
         if (session('tipo') == 'Alumno' ) {
             
-            if (session('tipo_id') == $anotado->alumno_id) {
+            if (session('tipo_id') == $inscripcion->alumno_id) {
                 return $next($request);
             }
             abort(403, 'Esta no es tu inscripción.');
         }
 
         if (session('tipo') == 'Padre' ) {
-            if (session('alumno_id') == $anotado->alumno_id) {
+            if (session('alumno_id') == $inscripcion->alumno_id) {
                 return $next($request);
             }
             abort(403, 'Esta no es la inscripción de su hijo/a.');

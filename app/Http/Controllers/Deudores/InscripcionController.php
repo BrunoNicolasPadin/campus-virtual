@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\UpdateEntrega;
-use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Inscripcion;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
 use App\Models\Deudores\RendirComentario;
@@ -22,7 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class AnotadoController extends Controller
+class InscripcionController extends Controller
 {
     protected $formatoService;
     protected $mesasService;
@@ -66,10 +66,10 @@ class AnotadoController extends Controller
     {
         $alumno = Alumno::where('user_id', Auth::id())->where('institucion_id', $institucion_id)->first();
 
-        $anotado = new Anotado();
-        $anotado->mesa()->associate($mesa_id);
-        $anotado->alumno()->associate($alumno->id);
-        $anotado->save();
+        $inscripcion = new Inscripcion();
+        $inscripcion->mesa()->associate($mesa_id);
+        $inscripcion->alumno()->associate($alumno->id);
+        $inscripcion->save();
 
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
             ->with(['successMessage' => 'Te inscribiste con éxito!']);
@@ -79,7 +79,7 @@ class AnotadoController extends Controller
     {
         $mesa = Mesa::select('id', 'fechaHoraRealizacion', 'fechaHoraFinalizacion')->findOrFail($mesa_id);
 
-        return Inertia::render('Deudores/Anotados/Show', [
+        return Inertia::render('Deudores/Inscripciones/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
@@ -90,11 +90,11 @@ class AnotadoController extends Controller
                 'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
                 'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
             ],
-            'anotado' => Anotado::with(['alumno', 'alumno.user'])->findOrFail($id),
+            'inscripcion' => Inscripcion::with(['alumno', 'alumno.user'])->findOrFail($id),
             'archivos' => MesaArchivo::where('mesa_id', $mesa_id)->get(),
-            'entregas' => RendirEntrega::where('anotado_id', $id)->get(),
-            'correcciones' => RendirCorreccion::where('anotado_id', $id)->get(),
-            'comentarios' => RendirComentario::where('anotado_id', $id)
+            'entregas' => RendirEntrega::where('inscripcion_id', $id)->get(),
+            'correcciones' => RendirCorreccion::where('inscripcion_id', $id)->get(),
+            'comentarios' => RendirComentario::where('inscripcion_id', $id)
                 ->with('user')
                 ->orderBy('updated_at', 'DESC')
                 ->paginate(20)
@@ -115,7 +115,7 @@ class AnotadoController extends Controller
         $mesa = Mesa::select('id', 'fechaHoraRealizacion', 'fechaHoraFinalizacion')->findOrFail($mesa_id);
         $arrayTemporal = $this->formaEvaluacionService->obtenerFormaEvaluacion($division_id);
 
-        return Inertia::render('Deudores/Anotados/Edit', [
+        return Inertia::render('Deudores/Inscripciones/Edit', [
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
             'asignatura' => $this->asignaturaService->find($asignatura_id),
@@ -124,7 +124,7 @@ class AnotadoController extends Controller
                 'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
                 'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
             ],
-            'anotado' => Anotado::with(['alumno', 'alumno.user'])->findOrFail($id),
+            'inscripcion' => Inscripcion::with(['alumno', 'alumno.user'])->findOrFail($id),
             'formasDescripcion' => $arrayTemporal[0],
             'tipoEvaluacion' => $arrayTemporal[1],
         ]);
@@ -132,15 +132,15 @@ class AnotadoController extends Controller
 
     public function update(UpdateEntrega $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        $anotado = Anotado::findOrFail($id);
+        $inscripcion = Inscripcion::findOrFail($id);
 
-        $anotado->calificacion = $request->calificacion;
-        $anotado->comentario = $request->comentario;
-        $anotado->save();
+        $inscripcion->calificacion = $request->calificacion;
+        $inscripcion->comentario = $request->comentario;
+        $inscripcion->save();
 
-        $this->evaluarAprobacionService->actualizacionDeInscripcion($division_id, $request, $anotado, $asignatura_id);
+        $this->evaluarAprobacionService->actualizacionDeInscripcion($division_id, $request, $inscripcion, $asignatura_id);
 
-        return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $id]))
+        return redirect(route('inscripciones.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $id]))
             ->with(['successMessage' => 'Alumno calificado con éxito!']);
     }
 
@@ -148,7 +148,7 @@ class AnotadoController extends Controller
     {
         $this->mesasService->eliminarInscripciones($id);
         
-        Anotado::destroy($id);
+        Inscripcion::destroy($id);
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
             ->with(['successMessage' => 'Inscripción eliminada con éxito!']);
 

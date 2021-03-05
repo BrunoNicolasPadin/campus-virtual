@@ -50,18 +50,18 @@ class RendirEntregaController extends Controller
         $this->formatoFechaHoraService = $formatoFechaHoraService;
     }
 
-    public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
+    public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id)
     {
         return Inertia::render('Deudores/Entregas/Create', [
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
             'asignatura' => $this->asignaturaService->find($asignatura_id),
             'mesa' => $this->mesaService->find($mesa_id),
-            'anotado' => $this->inscripcionService->find($anotado_id),
+            'inscripcion' => $this->inscripcionService->find($inscripcion_id),
         ]);
     }
 
-    public function store(StoreArchivo $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
+    public function store(StoreArchivo $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id)
     {
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
@@ -76,18 +76,18 @@ class RendirEntregaController extends Controller
                 $rendirEntrega->archivo = $nombre;
                 $rendirEntrega->created_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
                 $rendirEntrega->updated_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
-                $rendirEntrega->anotado()->associate($anotado_id);
+                $rendirEntrega->inscripcion()->associate($inscripcion_id);
                 $rendirEntrega->save();
             }
 
-            return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id]))
+            return redirect(route('inscripciones.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id]))
                 ->with(['successMessage' => 'Tu entrega ha sido cargada con éxito!']);
         }
 
         return back()->withErrors('No hay ningún archivo seleccionado');
     }
 
-    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id, $id)
     {
         $entrega = RendirEntrega::findOrFail($id);
         Storage::delete('public/Deudores/Entregas/' . $entrega->archivo);

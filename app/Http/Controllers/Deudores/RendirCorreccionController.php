@@ -48,18 +48,18 @@ class RendirCorreccionController extends Controller
         $this->formatoFechaHoraService = $formatoFechaHoraService;
     }
 
-    public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
+    public function create($institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id)
     {
         return Inertia::render('Deudores/Correcciones/Create', [
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
             'asignatura' => $this->asignaturaService->find($asignatura_id),
             'mesa' => $this->mesaService->find($mesa_id),
-            'anotado' => $this->inscripcionService->find($anotado_id),
+            'inscripcion' => $this->inscripcionService->find($inscripcion_id),
         ]);
     }
 
-    public function store(StoreArchivo $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
+    public function store(StoreArchivo $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id)
     {
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
@@ -74,18 +74,18 @@ class RendirCorreccionController extends Controller
                 $rendirCorreccion->archivo = $nombre;
                 $rendirCorreccion->created_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
                 $rendirCorreccion->updated_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
-                $rendirCorreccion->anotado()->associate($anotado_id);
+                $rendirCorreccion->inscripcion()->associate($inscripcion_id);
                 $rendirCorreccion->save();
             }
 
-            return redirect(route('anotados.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id]))
+            return redirect(route('inscripciones.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id]))
                 ->with(['successMessage' => 'Tus correcciones han sido subidas con éxito!']);
         }
 
         return back()->withErrors('No hay ningun archivo seleccionado');
     }
 
-    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id, $id)
     {
         $correccion = RendirCorreccion::findOrFail($id);
         Storage::delete('public/Deudores/Correcciones/' . $correccion->archivo);

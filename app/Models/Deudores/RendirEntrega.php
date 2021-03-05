@@ -13,11 +13,11 @@ class RendirEntrega extends Model
         'updated_at',
     ];
     protected $guarded = [
-        'anotado_id',
+        'inscripcion_id',
     ];
 
-    public function anotado()
+    public function inscripcion()
     {
-        return $this->belongsTo(Anotado::class);
+        return $this->belongsTo(Inscripcion::class);
     }
 }

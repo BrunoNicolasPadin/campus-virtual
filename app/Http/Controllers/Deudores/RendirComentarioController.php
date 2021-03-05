@@ -31,21 +31,21 @@ class RendirComentarioController extends Controller
         $this->formatoFechaHoraService = $formatoFechaHoraService;
     }
 
-    public function store(StoreComentario $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id)
+    public function store(StoreComentario $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id)
     {
         $rendirComentario = new RendirComentario();
         $rendirComentario->comentario = $request->comentario;
         $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
         $rendirComentario->created_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
         $rendirComentario->updated_at = $this->formatoFechaHoraService->cambiarFormatoParaGuardar($fechaHora);
-        $rendirComentario->anotado()->associate($anotado_id);
+        $rendirComentario->inscripcion()->associate($inscripcion_id);
         $rendirComentario->user()->associate(Auth::id());
         $rendirComentario->save();
 
         return back()->with(['successMessage' => 'Comentario subido con éxito!']);
     }
 
-    public function update(StoreComentario $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
+    public function update(StoreComentario $request, $institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id, $id)
     {
         $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
     
@@ -57,7 +57,7 @@ class RendirComentarioController extends Controller
         return back()->with(['successMessage' => 'Comentario actualizado con éxito!']);
     }
 
-    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $anotado_id, $id)
+    public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id, $id)
     {
         RendirComentario::destroy($id);
         return back()->with(['successMessage' => 'Comentario eliminado con éxito!']);

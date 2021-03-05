@@ -3,12 +3,12 @@
 namespace App\Observers;
 
 use App\Jobs\Deudores\EnviarEmailActualizacionInscripcion;
-use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Inscripcion;
 
 class InscripcionObserver
 {
-    public function updated(Anotado $inscripcion)
+    public function updated(Inscripcion $inscripcion)
     {
-        /* EnviarEmailActualizacionInscripcion::dispatch($inscripcion); */
+        EnviarEmailActualizacionInscripcion::dispatch($inscripcion);
     }
 }

@@ -172,7 +172,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, aprobado.id])">
+                                        <inertia-link class="hover:underline" :href="route('inscripciones.show', [institucion_id, division.id, asignatura.id, mesa.id, aprobado.id])">
                                             Ingresar
                                         </inertia-link>
                                     </template>
@@ -241,7 +241,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, desaprobado.id])">
+                                        <inertia-link class="hover:underline" :href="route('inscripciones.show', [institucion_id, division.id, asignatura.id, mesa.id, desaprobado.id])">
                                             Ingresar
                                         </inertia-link>
                                     </template>
@@ -298,7 +298,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, sinCalificar.id])">
+                                        <inertia-link class="hover:underline" :href="route('inscripciones.show', [institucion_id, division.id, asignatura.id, mesa.id, sinCalificar.id])">
                                             Ingresar
                                         </inertia-link>
                                     </template>
@@ -368,7 +368,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, entregado.id])">
+                                        <inertia-link class="hover:underline" :href="route('inscripciones.show', [institucion_id, division.id, asignatura.id, mesa.id, entregado.id])">
                                             Ingresar
                                         </inertia-link>
                                     </template>
@@ -425,7 +425,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, noEntregado.id])">
+                                        <inertia-link class="hover:underline" :href="route('inscripciones.show', [institucion_id, division.id, asignatura.id, mesa.id, noEntregado.id])">
                                             Ingresar
                                         </inertia-link>
                                     </template>

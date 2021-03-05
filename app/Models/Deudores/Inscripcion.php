@@ -5,9 +5,9 @@ namespace App\Models\Deudores;
 use App\Models\Roles\Alumno;
 use Illuminate\Database\Eloquent\Model;
 
-class Anotado extends Model
+class Inscripcion extends Model
 {
-    protected $table = 'anotados';
+    protected $table = 'inscripciones';
     protected $fillable = [
         'calificacion',
         'comentario',

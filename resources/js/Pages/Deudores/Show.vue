@@ -5,7 +5,7 @@
                 <inertia-link class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">{{ alumno.name }}</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('asignaturas-adeudadas.index', [institucion_id, alumno.id])">
                     Asignatura adeudadas y/o ya rendidas
-                </inertia-link> / Mesas anotados en {{ asignatura.nombre }}
+                </inertia-link> / Mesas inscriptas en {{ asignatura.nombre }}
             </span>
         </template>
 

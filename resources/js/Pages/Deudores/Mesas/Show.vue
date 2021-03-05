@@ -125,7 +125,7 @@
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="flex">
                     <div class="w-1/2">
-                        <h2 class="text-2xl font-semibold leading-tight">Anotados</h2>
+                        <h2 class="text-2xl font-semibold leading-tight">Inscripciones</h2>
                     </div>
                     <div class="w-1/2" v-show="tipo == 'Alumno' ">
                         <span @click="submit()">
@@ -174,7 +174,7 @@
                     <table-body>
                         <template #tr>
                             
-                            <tr v-for="(anotado, index) in anotados.data" :key="anotado.id">
+                            <tr v-for="(inscripcion, index) in inscripciones.data" :key="inscripcion.id">
                                 <table-data>
                                     <template #td>
                                         {{ index + 1 }}
@@ -183,20 +183,20 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ anotado.alumno.user.name }}
+                                        {{ inscripcion.alumno.user.name }}
                                     </template>
                                 </table-data>
 
                                 <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                                     <template #td>
-                                        <span v-if="anotado.calificacion">{{ anotado.calificacion }}</span>
+                                        <span v-if="inscripcion.calificacion">{{ inscripcion.calificacion }}</span>
                                         <span v-else>Sin  calificar</span>
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, anotado.id])">
+                                        <inertia-link class="hover:underline" :href="route('inscripciones.show', [institucion_id, division.id, asignatura.id, mesa.id, inscripcion.id])">
                                             Ingresar
                                         </inertia-link>
                                     </template>
@@ -204,7 +204,7 @@
 
                                 <table-data v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                                     <template #td>
-                                        <button @click="destroy(anotado.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
+                                        <button @click="destroy(inscripcion.id)" type="submit" class="border border-red-500 bg-red-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-700 focus:outline-none focus:shadow-outline">
                                             Eliminar
                                         </button>
                                     </template>
@@ -216,7 +216,7 @@
             </estructura-tabla>
 
             <div class="container mx-auto px-4 sm:px-8 my-6">
-                <pagination :links="anotados.links" />
+                <pagination :links="inscripciones.links" />
             </div>
         </div>
     </app-layout>
@@ -256,7 +256,7 @@
             division: Object,
             asignatura: Object,
             mesa: Object,
-            anotados: Object,
+            inscripciones: Object,
             archivos: Array,
         },
 
@@ -269,15 +269,15 @@
                 }
             },
     
-            destroy(anotado_id) {
+            destroy(inscripcion_id) {
                 if (confirm('¿Estás seguro de que deseas eliminar esta inscripción?')) {
-                    this.$inertia.delete(this.route('anotados.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, anotado_id]))
+                    this.$inertia.delete(this.route('inscripciones.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, inscripcion_id]))
                 }
             },
 
             submit() {
                 if (confirm('Estas seguro de que desea inscribirse en esta mesa de examen?')) {
-                    this.$inertia.post(this.route('anotados.store', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id]))
+                    this.$inertia.post(this.route('inscripciones.store', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id]))
                 }
             },
 

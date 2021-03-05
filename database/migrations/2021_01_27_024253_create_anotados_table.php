@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnotadosTable extends Migration
+class CreateInscripcionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAnotadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('anotados', function (Blueprint $table) {
+        Schema::create('inscripciones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mesa_id')->constrained('mesas')->onDelete('cascade');
             $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');

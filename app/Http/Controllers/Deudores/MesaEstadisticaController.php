@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
-use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Inscripcion;
 use App\Models\Deudores\Mesa;
 use App\Models\Estructuras\FormaDescripcion;
 use App\Models\Estructuras\FormaEvaluacion;
@@ -61,7 +61,7 @@ class MesaEstadisticaController extends Controller
 
 
         $mesa = Mesa::with('asignatura')->findOrFail($id);
-        $inscripciones = Anotado::where('mesa_id', $id)
+        $inscripciones = Inscripcion::where('mesa_id', $id)
             ->with(['entregas', 'alumno', 'alumno.user', 'correcciones'])
             ->orderBy('calificacion')
             ->get();
@@ -101,8 +101,8 @@ class MesaEstadisticaController extends Controller
             
             $i = 0;
 
-            foreach ($inscripcion->entregas->groupBy('anotado_id') as $entrega) {
-                $entrega = $entrega->unique('anotado_id');
+            foreach ($inscripcion->entregas->groupBy('inscripcion_id') as $entrega) {
+                $entrega = $entrega->unique('inscripcion_id');
                 $i++;
                 $entregados = $entregados + 1;
 
@@ -128,8 +128,8 @@ class MesaEstadisticaController extends Controller
                 $mejorNota = $this->obtenerMejorCalificacion($inscripcion, $mejorNota);
             }
 
-            foreach ($inscripcion->correcciones->groupBy('anotado_id') as $correccion) {
-                $correccion = $correccion->unique('anotado_id');
+            foreach ($inscripcion->correcciones->groupBy('inscripcion_id') as $correccion) {
+                $correccion = $correccion->unique('inscripcion_id');
                 $i++;
 
                 $arrayTemporal = $this->obtenerConCorreccion($inscripcion, $conCorreccion, $conCorreccionArray);

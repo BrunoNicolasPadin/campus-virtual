@@ -123,8 +123,8 @@ class AlumnoDeudorController extends Controller
     public function show($institucion_id, $alumno_id, $id)
     {
         $deuda = AlumnoDeudor::select('asignatura_id')->findOrFail($id);
-        $mesas = Mesa::where('asignatura_id', $deuda->asignatura_id)->with('anotados', 'asignatura')
-            ->whereHas('anotados', function($q) use($alumno_id)
+        $mesas = Mesa::where('asignatura_id', $deuda->asignatura_id)->with('inscripciones', 'asignatura')
+            ->whereHas('inscripciones', function($q) use($alumno_id)
             {
                 $q->where('alumno_id', $alumno_id);
             })
@@ -136,7 +136,7 @@ class AlumnoDeudorController extends Controller
                     'asignatura' => $mesa->asignatura->only('nombre', 'division_id'),
                     'fechaHoraRealizacion' => $this->formatoFechaHoraService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
                     'fechaHoraFinalizacion' => $this->formatoFechaHoraService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
-                    'inscripcion' => $mesa->anotados->where('alumno_id', $alumno_id),
+                    'inscripcion' => $mesa->inscripciones->where('alumno_id', $alumno_id),
                 ];
         });
 

@@ -15,7 +15,7 @@ class CreateRendirComentariosTable extends Migration
     {
         Schema::create('rendir_comentarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anotado_id')->constrained('anotados')->onDelete('cascade');
+            $table->foreignId('inscripcion_id')->constrained('inscripciones')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->text('comentario');
             $table->timestamps();

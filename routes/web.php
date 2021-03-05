@@ -14,7 +14,7 @@ use App\Http\Controllers\CiclosLectivos\CicloLectivoController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Deudores\AlumnoDeudorController;
-use App\Http\Controllers\Deudores\AnotadoController;
+use App\Http\Controllers\Deudores\InscripcionController;
 use App\Http\Controllers\Deudores\MesaArchivoController;
 use App\Http\Controllers\Deudores\MesaController;
 use App\Http\Controllers\Deudores\MesaEstadisticaController;
@@ -185,8 +185,8 @@ Route::group(['prefix' => 'instituciones/{institucion_id}', 'middleware' => 'aut
                 
                 Route::get('estadisticas', [MesaEstadisticaController::class, 'mostrarEstadisticas'])->name('mesas.estadisticas');
                 Route::resource('mesas-archivos', MesaArchivoController::class);
-                Route::resource('anotados', AnotadoController::class);
-                Route::prefix('anotados/{anotado_id}')->group(function () {
+                Route::resource('inscripciones', InscripcionController::class);
+                Route::prefix('inscripciones/{inscripcion_id}')->group(function () {
                 
                     Route::resource('rendir-entregas', RendirEntregaController::class);
                     Route::resource('rendir-correcciones', RendirCorreccionController::class);

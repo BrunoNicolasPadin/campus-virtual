@@ -10,7 +10,7 @@
                 <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('mesas.index', [institucion_id, division.id, asignatura.id])">Mesas de {{ asignatura.nombre }}</inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa {{ mesa.fechaHoraRealizacion }} - {{ mesa.fechaHoraFinalizacion }}</inertia-link> / 
-                Entrega de {{ anotado.alumno.user.name }}
+                Entrega de {{ inscripcion.alumno.user.name }}
             </span>
         </template>
 
@@ -27,7 +27,7 @@
                             Alumno
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            {{ anotado.alumno.user.name }}
+                            {{ inscripcion.alumno.user.name }}
                         </dd>
                     </div>
 
@@ -36,7 +36,7 @@
                             Calificación
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <span v-if="anotado.calificacion">{{ anotado.calificacion }}</span>
+                            <span v-if="inscripcion.calificacion">{{ inscripcion.calificacion }}</span>
                             <span v-else>Sin  calificar</span>
                         </dd>
                     </div>
@@ -46,7 +46,7 @@
                             Comentario
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <span v-if="anotado.comentario">{{ anotado.comentario }}</span>
+                            <span v-if="inscripcion.comentario">{{ inscripcion.comentario }}</span>
                             <span v-else>Sin  comentarios</span>
                         </dd>
                     </div>
@@ -56,7 +56,7 @@
                             Calificar y comentar
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <inertia-link :href="route('anotados.edit', [institucion_id, division.id, asignatura.id, mesa.id, anotado.id])">
+                            <inertia-link :href="route('inscripciones.edit', [institucion_id, division.id, asignatura.id, mesa.id, inscripcion.id])">
                                 <editar></editar>
                             </inertia-link>
                         </dd>
@@ -99,7 +99,7 @@
                     <div class="w-1/2" v-show="tipo == 'Alumno' ">
                         <primary class="float-right">
                             <template #boton-primary>
-                                <inertia-link :href="route('rendir-entregas.create', [institucion_id, division.id, asignatura.id, mesa.id, anotado.id])">
+                                <inertia-link :href="route('rendir-entregas.create', [institucion_id, division.id, asignatura.id, mesa.id, inscripcion.id])">
                                     Agregar
                                 </inertia-link>
                             </template>
@@ -135,7 +135,7 @@
                     <div class="w-1/2" v-show="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' ">
                         <primary class="float-right">
                             <template #boton-primary>
-                                <inertia-link :href="route('rendir-correcciones.create', [institucion_id, division.id, asignatura.id, mesa.id, anotado.id])">
+                                <inertia-link :href="route('rendir-correcciones.create', [institucion_id, division.id, asignatura.id, mesa.id, inscripcion.id])">
                                     Agregar
                                 </inertia-link>
                             </template>
@@ -259,7 +259,7 @@
             division: Object,
             asignatura: Object,
             mesa: Object,
-            anotado: Object,
+            inscripcion: Object,
             archivos: Array,
             entregas: Array,
             correcciones: Array,
@@ -285,18 +285,18 @@
             
             destroyArchivo(archivo_id) {
                 if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
-                    this.$inertia.delete(this.route('rendir-entregas.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.anotado.id, archivo_id]))
+                    this.$inertia.delete(this.route('rendir-entregas.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.inscripcion.id, archivo_id]))
                 }
             },
 
             destroyCorreccion(archivo_id) {
                 if (confirm('¿Estás seguro de que deseas eliminar esta correccición?')) {
-                    this.$inertia.delete(this.route('rendir-correcciones.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.anotado.id, archivo_id]))
+                    this.$inertia.delete(this.route('rendir-correcciones.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.inscripcion.id, archivo_id]))
                 }
             },
 
             submit() {
-                this.$inertia.post(this.route('rendir-comentarios.store', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.anotado.id]), this.form)
+                this.$inertia.post(this.route('rendir-comentarios.store', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.inscripcion.id]), this.form)
             },
 
             editar(comentario) {
@@ -308,7 +308,7 @@
             updateComentario() {
                 this.cancelarEdicion();
                 var entregas_comentario = this.updateForm.id;
-                this.$inertia.put(this.route('rendir-comentarios.update', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.anotado.id, entregas_comentario]), this.updateForm)
+                this.$inertia.put(this.route('rendir-comentarios.update', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.inscripcion.id, entregas_comentario]), this.updateForm)
             },
 
             cancelarEdicion() {
@@ -318,7 +318,7 @@
             destroyComentario(comentario_id) {
                 if (confirm('¿Estás seguro de que deseas eliminar este comentario?')) {
                     this.cancelarEdicion();
-                    this.$inertia.delete(this.route('rendir-comentarios.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.anotado.id, comentario_id]))
+                    this.$inertia.delete(this.route('rendir-comentarios.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.inscripcion.id, comentario_id]))
                 }
             },
         },

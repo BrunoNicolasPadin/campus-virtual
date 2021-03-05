@@ -23,8 +23,8 @@ class RendirCorreccionCorrespondiente
     {
         $link = $this->ruta->obtenerRoute();
         $correccion = RendirCorreccion::select('mesas.asignatura_id', 'mesas.institucion_id')
-            ->join('anotados', 'anotados.id', 'rendir_correcciones.anotado_id')
-            ->join('mesas', 'mesas.id', 'anotados.mesa_id')
+            ->join('inscripciones', 'inscripciones.id', 'rendir_correcciones.inscripcion_id')
+            ->join('mesas', 'mesas.id', 'inscripciones.mesa_id')
             ->findOrFail($link[14]);
 
         if (session('tipo') == 'Docente') {

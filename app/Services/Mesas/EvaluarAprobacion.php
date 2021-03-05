@@ -9,20 +9,20 @@ use App\Models\Estructuras\FormaEvaluacion;
 
 class EvaluarAprobacion
 {
-    public function actualizacionDeInscripcion($division_id, $request, $anotado, $asignatura_id)
+    public function actualizacionDeInscripcion($division_id, $request, $inscripcion, $asignatura_id)
     {
         $division = Division::findOrFail($division_id);
         $formaEvaluacion = FormaEvaluacion::findOrFail($division->forma_evaluacion_id);
 
         if ($formaEvaluacion->tipo == 'Escrita') {
-            $this->evaluarAprobacionEscrita($formaEvaluacion, $request, $anotado, $asignatura_id);
+            $this->evaluarAprobacionEscrita($formaEvaluacion, $request, $inscripcion, $asignatura_id);
         }
         else {
-            $this->evaluarAprobacionNumericaPorcentual($formaEvaluacion, $request, $anotado, $asignatura_id);
+            $this->evaluarAprobacionNumericaPorcentual($formaEvaluacion, $request, $inscripcion, $asignatura_id);
         }
     }
 
-    public function evaluarAprobacionEscrita($formaEvaluacion, $request, $anotado, $asignatura_id)
+    public function evaluarAprobacionEscrita($formaEvaluacion, $request, $inscripcion, $asignatura_id)
     {
         $formasDescripcion = FormaDescripcion::where('forma_evaluacion_id', $formaEvaluacion->id)->get();
 
@@ -31,12 +31,12 @@ class EvaluarAprobacion
             if ($formaDescripcion->opcion == $request->calificacion) {
                 
                 if ($formaDescripcion->aprobado) {
-                    AlumnoDeudor::where('alumno_id', $anotado->alumno_id)->where('asignatura_id', $asignatura_id)->update([
+                    AlumnoDeudor::where('alumno_id', $inscripcion->alumno_id)->where('asignatura_id', $asignatura_id)->update([
                         'aprobado' => '1',
                     ]);
                 }
                 else {
-                    AlumnoDeudor::where('alumno_id', $anotado->alumno_id)->where('asignatura_id', $asignatura_id)->update([
+                    AlumnoDeudor::where('alumno_id', $inscripcion->alumno_id)->where('asignatura_id', $asignatura_id)->update([
                         'aprobado' => '0',
                     ]);
                 }
@@ -44,16 +44,16 @@ class EvaluarAprobacion
         }
     }
 
-    public function evaluarAprobacionNumericaPorcentual($formaEvaluacion, $request, $anotado, $asignatura_id)
+    public function evaluarAprobacionNumericaPorcentual($formaEvaluacion, $request, $inscripcion, $asignatura_id)
     {
         if ($formaEvaluacion->desdeCuando >= $request->calificacion) {
                     
-            AlumnoDeudor::where('alumno_id', $anotado->alumno_id)->where('asignatura_id', $asignatura_id)->update([
+            AlumnoDeudor::where('alumno_id', $inscripcion->alumno_id)->where('asignatura_id', $asignatura_id)->update([
                 'aprobado' => '1',
             ]);
         }
         else {
-            AlumnoDeudor::where('alumno_id', $anotado->alumno_id)->where('asignatura_id', $asignatura_id)->update([
+            AlumnoDeudor::where('alumno_id', $inscripcion->alumno_id)->where('asignatura_id', $asignatura_id)->update([
                 'aprobado' => '0',
             ]);
         }

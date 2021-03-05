@@ -19,9 +19,9 @@ class RendirEntregaCorrespondiente
     public function handle(Request $request, Closure $next)
     {
         $link = $this->ruta->obtenerRoute();
-        $entrega = RendirEntrega::select('anotados.alumno_id', 'mesas.institucion_id')
-            ->join('anotados', 'anotados.id', 'rendir_entregas.anotado_id')
-            ->join('mesas', 'mesas.id', 'anotados.mesa_id')
+        $entrega = RendirEntrega::select('inscripciones.alumno_id', 'mesas.institucion_id')
+            ->join('inscripciones', 'inscripciones.id', 'rendir_entregas.inscripcion_id')
+            ->join('mesas', 'mesas.id', 'inscripciones.mesa_id')
             ->findOrFail($link[14]);
 
         if (session('tipo') == 'Alumno' ) {

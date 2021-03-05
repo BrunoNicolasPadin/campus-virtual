@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Deudores\StoreMesa;
-use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Inscripcion;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
 use App\Models\Materiales\Grupo;
@@ -111,7 +111,7 @@ class MesaController extends Controller
                 'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
                 'comentario'  => $mesa->comentario,
             ],
-            'anotados' => Anotado::where('mesa_id', $id)->with('alumno', 'alumno.user')->paginate(20),
+            'inscripciones' => Inscripcion::where('mesa_id', $id)->with('alumno', 'alumno.user')->paginate(20),
             'archivos' => MesaArchivo::where('mesa_id', $id)->get(),
         ]);
     }

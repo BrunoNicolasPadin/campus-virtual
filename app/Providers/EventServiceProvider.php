@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Inscripcion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Libretas\Calificacion;
@@ -55,6 +55,6 @@ class EventServiceProvider extends ServiceProvider
         Repitente::observe(RepitenteObserver::class);
         Entrega::observe(EntregaObserver::class);
         Calificacion::observe(LibretaObserver::class);
-        Anotado::observe(InscripcionObserver::class);
+        Inscripcion::observe(InscripcionObserver::class);
     }
 }

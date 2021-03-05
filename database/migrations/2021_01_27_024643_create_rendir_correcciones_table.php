@@ -15,7 +15,7 @@ class CreateRendirCorreccionesTable extends Migration
     {
         Schema::create('rendir_correcciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anotado_id')->constrained('anotados')->onDelete('cascade');
+            $table->foreignId('inscripcion_id')->constrained('inscripciones')->onDelete('cascade');
             $table->binary('archivo');
             $table->timestamps();
         });

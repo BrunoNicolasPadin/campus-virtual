@@ -10,7 +10,7 @@
                 <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('mesas.index', [institucion_id, division.id, asignatura.id])">Mesas de {{ asignatura.nombre }}</inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa {{ mesa.fechaHoraRealizacion }} - {{ mesa.fechaHoraFinalizacion }}</inertia-link> / 
-                <inertia-link class="hover:underline" :href="route('anotados.show', [institucion_id, division.id, asignatura.id, mesa.id, anotado.id])">Entrega de {{ anotado.name }}</inertia-link> /
+                <inertia-link class="hover:underline" :href="route('inscripciones.show', [institucion_id, division.id, asignatura.id, mesa.id, inscripcion.id])">Entrega de {{ inscripcion.name }}</inertia-link> /
                 Agregar corrección
             </span>
         </template>
@@ -93,7 +93,7 @@
             division: Object,
             asignatura: Object,
             mesa: Object,
-            anotado: Object,
+            inscripcion: Object,
         },
 
         title: 'Agregar correcciones',
@@ -117,7 +117,7 @@
                     data.append('archivos[]', this.form.archivos[i].archivo);
                 }
 
-                this.$inertia.post(this.route('rendir-correcciones.store', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.anotado.id]), data)
+                this.$inertia.post(this.route('rendir-correcciones.store', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.inscripcion.id]), data)
             },
 
             agregarOtroArchivo() {
