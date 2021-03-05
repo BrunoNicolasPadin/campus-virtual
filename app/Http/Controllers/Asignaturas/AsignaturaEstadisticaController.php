@@ -70,13 +70,17 @@ class AsignaturaEstadisticaController extends Controller
             $calificacionAlumno[$i] = 0;
         }
 
-        $formaEvaluacion = FormaEvaluacion::select('tipo')->findOrFail($division->forma_evaluacion_id);
-
+        $formaEvaluacion = FormaEvaluacion::with('formaDescripcion')->findOrFail($division->forma_evaluacion_id);
         $libretas = $this->obtenerNotasDeLaLibreta($asignatura_id, $ciclo_lectivo_id);
+
+        if ($formaEvaluacion->tipo == 'Escrita') {
+            $arrayTemporal = $this->obtenerCantidadDeVecesPorCalificacion($libretas, $formaEvaluacion, $periodos, $calificacionAlumno, $calificacionesAlumnos);
+            return ['Escrita', $periodos, $arrayTemporal[0], $arrayTemporal[1], $arrayTemporal[2]];
+        }
         $arrayTemporal = $this->recorrerLibreta($libretas, $totalPeriodo, $cantidadPeriodo, $calificacionAlumno, $calificacionesAlumnos, $formaEvaluacion);
         $promedios = $this->obtenerPromedios($arrayTemporal[0], $arrayTemporal[1], $promedios);
 
-        return [$promedios, $periodos, $arrayTemporal[2]];
+        return ['No escrita', $promedios, $periodos, $arrayTemporal[2]];
     }
 
     public function obtenerNotasDeLaLibreta($asignatura_id, $ciclo_lectivo_id)
@@ -87,8 +91,8 @@ class AsignaturaEstadisticaController extends Controller
             ->get();
     }
 
-    public function recorrerLibreta($libretas, $totalPeriodo, $cantidadPeriodo, $calificacionAlumno, $calificacionesAlumnos, $formaEvaluacion) {
-        
+    public function recorrerLibreta($libretas, $totalPeriodo, $cantidadPeriodo, $calificacionAlumno, $calificacionesAlumnos, $formaEvaluacion) 
+    {
         $i = 0;
         $a = 0;
 
@@ -117,10 +121,8 @@ class AsignaturaEstadisticaController extends Controller
                 $calificacionAlumno[$i] = 0;
             }
             $i = 0;
-
             $a++;
         }
-
         return [$totalPeriodo, $cantidadPeriodo, $calificacionesAlumnos];
     }
 
@@ -133,5 +135,50 @@ class AsignaturaEstadisticaController extends Controller
             $promedios[$i] = \round($totalPeriodo[$i] / $cantidadPeriodo[$i], 2, PHP_ROUND_HALF_UP);
         }
         return $promedios;
+    }
+
+    public function obtenerCantidadDeVecesPorCalificacion($libretas, $formaEvaluacion, $periodos, $calificacionAlumno, $calificacionesAlumnos)
+    {
+        $periodosArray = [];
+        $opciones = [];
+        $a = 0;
+
+        foreach ($formaEvaluacion->formaDescripcion as $descripcion) {
+            array_push($opciones, $descripcion->opcion);
+        }
+
+        for ($i=0; $i < count($periodos); $i++) { 
+            $periodosArray[$periodos[$i]] = array();
+            foreach ($formaEvaluacion->formaDescripcion as $descripcion) {
+                $periodosArray[$periodos[$i]][$descripcion->opcion] = 0;
+            }
+        }
+        $i = 0;
+        
+        foreach ($libretas as $libreta) {
+
+            foreach ($libreta->calificaciones as $libreCali) {
+
+                if (!($libreCali->calificacion === null)) {
+
+                    $periodosArray[$libreCali->periodo][$libreCali->calificacion]++;
+                    $calificacionAlumno[$i] = $libreCali->calificacion;
+                }
+                $i++;
+            }
+            $i = 0;
+
+            $calificacionesAlumnos[$a] = [
+                'nombre' => $libreta->alumno->user->name,
+                'calificaciones' => $calificacionAlumno,
+            ];
+
+            for ($i=0; $i < count($calificacionAlumno); $i++) { 
+                $calificacionAlumno[$i] = 0;
+            }
+            $i = 0;
+            $a++;
+        }
+        return [$opciones, $periodosArray, $calificacionesAlumnos];
     }
 }
