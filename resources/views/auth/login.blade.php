@@ -11,7 +11,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('loginNuevo') }}">
+        <form method="POST" action="{{ route('login.autenticarse') }}">
             @csrf
 
             <div>

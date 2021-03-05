@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full bg-blue-50 py-5">
+    <div class="h-screen bg-blue-50 py-5">
         <div class="text-center">
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                 Registrarse

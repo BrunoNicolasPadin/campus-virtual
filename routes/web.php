@@ -67,7 +67,10 @@ use App\Http\Controllers\Roles\TipoCuentaController;
 use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
 use App\Http\Controllers\RolesDivision\DocenteDivisionController;
 use App\Http\Controllers\TopNavController;
+use Composer\DependencyResolver\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +92,22 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('login.aut
 
 Route::get('/registrarse', [RegistrarUsuarioController::class, 'mostrarFormulario'])->name('registrarse.formulario');
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect(route('inicio'));
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Email de verificación enviado!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 Route::inertia('detalles', 'Suscripciones/Detalles')->name('suscripciones.detalles');
 
 Route::get('/dashboard', [DashboardController::class, 'mostrarDashboard'])->name('dashboard');
@@ -107,7 +126,7 @@ Route::get('activar-padre/{id}', [ActivarCuentaController::class, 'activarPadre'
 
 Route::get('buscador-de-instituciones', [BuscadorDeInstitucionesController::class, 'buscar'])->name('buscador-de-instituciones');
 Route::resource('instituciones', InstitucionController::class);
-Route::prefix('instituciones/{institucion_id}')->group(function () {
+Route::group(['prefix' => 'instituciones/{institucion_id}', 'middleware' => 'auth'], function() {
     
     Route::resource('ciclos-lectivos', CicloLectivoController::class);
     Route::get('anotarse', [RolController::class, 'anotarse'])->name('roles.anotarse');
