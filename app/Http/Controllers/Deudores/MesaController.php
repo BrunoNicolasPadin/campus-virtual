@@ -97,6 +97,18 @@ class MesaController extends Controller
     public function show($institucion_id, $division_id, $asignatura_id, $id)
     {
         $mesa = Mesa::with('asignatura')->findOrFail($id);
+        $puedeAnotarse = false;
+        $inscripcion_id = null;
+
+        if (session('tipo') == 'Alumno') {
+            if (!(Inscripcion::where('alumno_id', session('tipo_id'))->where('mesa_id', $id)->exists())) {
+                $puedeAnotarse = true;
+            }
+            else {
+                $inscripcion = Inscripcion::select('id')->where('alumno_id', session('tipo_id'))->where('mesa_id', $id)->first();
+                $inscripcion_id = $inscripcion->id;
+            }
+        }
 
         return Inertia::render('Deudores/Mesas/Show', [
             'institucion_id' => $institucion_id,
@@ -113,6 +125,8 @@ class MesaController extends Controller
             ],
             'inscripciones' => Inscripcion::where('mesa_id', $id)->with('alumno', 'alumno.user')->paginate(20),
             'archivos' => MesaArchivo::where('mesa_id', $id)->get(),
+            'puedeAnotarse' => $puedeAnotarse,
+            'inscripcion_id' => $inscripcion_id,
         ]);
     }
 

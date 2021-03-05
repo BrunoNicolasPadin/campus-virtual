@@ -127,11 +127,20 @@
                     <div class="w-1/2">
                         <h2 class="text-2xl font-semibold leading-tight">Inscripciones</h2>
                     </div>
-                    <div class="w-1/2" v-show="tipo == 'Alumno' ">
+                    <div class="w-1/2" v-show="tipo == 'Alumno' && puedeAnotarse == true ">
                         <span @click="submit()">
                             <primary class="float-right">
                                 <template #boton-primary>
-                                    Anotarse
+                                    inscribirse
+                                </template>
+                            </primary>
+                        </span>
+                    </div>
+                    <div class="w-1/2" v-show="tipo == 'Alumno' && puedeAnotarse == false ">
+                        <span @click="desinscribirse()">
+                            <primary class="float-right">
+                                <template #boton-primary>
+                                    Desinscribirse
                                 </template>
                             </primary>
                         </span>
@@ -258,6 +267,8 @@
             mesa: Object,
             inscripciones: Object,
             archivos: Array,
+            puedeAnotarse: Boolean,
+            inscripcion_id: Number,
         },
 
         title: 'Mesa de examen',
@@ -278,6 +289,12 @@
             submit() {
                 if (confirm('Estas seguro de que desea inscribirse en esta mesa de examen?')) {
                     this.$inertia.post(this.route('inscripciones.store', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id]))
+                }
+            },
+
+            desinscribirse() {
+                if (confirm('¿Estás seguro de que deseas desinscribirte de esta mesa de examen?')) {
+                    this.$inertia.delete(this.route('inscripciones.destroy', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id, this.inscripcion_id]))
                 }
             },
 

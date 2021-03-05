@@ -52,6 +52,7 @@ class InscripcionController extends Controller
         $this->middleware('soloInstitucionesDirectivosDocentes')->except('store', 'show');
         $this->middleware('inscripcionCorrespondiente')->except('store');
         $this->middleware('verificarInscripcion')->only('store');
+        $this->middleware('verificarDesinscripcion')->only('destroy');
 
         $this->formatoService = $formatoService;
         $this->mesasService = $mesasService;

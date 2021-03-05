@@ -111,6 +111,7 @@ class Kernel extends HttpKernel
         'mesaCorrespondiente' => \App\Http\Middleware\Deudores\MesaCorrespondiente::class,
         'inscripcionCorrespondiente' => \App\Http\Middleware\Deudores\InscripcionCorrespondiente::class,
         'verificarInscripcion' => \App\Http\Middleware\Deudores\VerificarInscripcion::class,
+        'verificarDesinscripcion' => \App\Http\Middleware\Deudores\VerificarDesinscripcion::class,
         'rendirEntregaCorrespondiente' => \App\Http\Middleware\Deudores\RendirEntregaCorrespondiente::class,
         'rendirCorreccionCorrespondiente' => \App\Http\Middleware\Deudores\RendirCorreccionCorrespondiente::class,
         'rendirComentarioCorrespondiente' => \App\Http\Middleware\Deudores\RendirComentarioCorrespondiente::class,
