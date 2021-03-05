@@ -14,7 +14,8 @@ class StoreMesa extends FormRequest
     public function rules()
     {
         return [
-            'fechaHora' => 'required',
+            'fechaHoraRealizacion' => 'required',
+            'fechaHoraFinalizacion' => 'required',
             'comentario' => 'nullable|string',
         ];
     }
@@ -22,7 +23,8 @@ class StoreMesa extends FormRequest
     public function messages()
     {
         return [
-            'fechaHora.required' => 'Debe ingresar una fecha y hora de realización.',
+            'fechaHoraRealizacion.required' => 'Debe ingresar una fecha y hora de realización.',
+            'fechaHoraFinalizacion.required' => 'Debe ingresar una fecha y hora de finalización.',
             'comentario.string' => 'Debe ingresar una cadena de caracteres (letras, numeros o signos) en el comentario',
         ];
     }

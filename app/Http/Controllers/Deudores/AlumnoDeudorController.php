@@ -134,7 +134,8 @@ class AlumnoDeudorController extends Controller
                     'id' => $mesa->id,
                     'asignatura_id' => $mesa->asignatura_id,
                     'asignatura' => $mesa->asignatura->only('nombre', 'division_id'),
-                    'fechaHora' => $this->formatoFechaHoraService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                    'fechaHoraRealizacion' => $this->formatoFechaHoraService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                    'fechaHoraFinalizacion' => $this->formatoFechaHoraService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
                     'inscripcion' => $mesa->anotados->where('alumno_id', $alumno_id),
                 ];
         });

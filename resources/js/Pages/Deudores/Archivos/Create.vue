@@ -2,11 +2,8 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-md text-gray-800 leading-tight">
-                <inertia-link 
-                    class="hover:underline"
-                    :href="route('mesas.show', [institucion_id, division_id, asignatura_id, mesa.id])">
-                        Mesa {{ mesa.fechaHora }}
-                </inertia-link> / Agregar archivos
+                <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa {{ mesa.fechaHoraRealizacion }} - {{ mesa.fechaHoraFinalizacion }}</inertia-link> / 
+                Agregar archivos
             </h2>
         </template>
 

@@ -25,7 +25,7 @@
 
                             <table-head>
                                 <template #th-titulo>
-                                    Fecha
+                                    Fecha y hora
                                 </template>
                             </table-head>
 
@@ -56,7 +56,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ mesa.fechaHora }}
+                                        {{ mesa.fechaHoraRealizacion }} - {{ mesa.fechaHoraFinalizacion }}
                                     </template>
                                 </table-data>
 

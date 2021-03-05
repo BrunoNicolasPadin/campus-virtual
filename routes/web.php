@@ -17,6 +17,7 @@ use App\Http\Controllers\Deudores\AlumnoDeudorController;
 use App\Http\Controllers\Deudores\AnotadoController;
 use App\Http\Controllers\Deudores\MesaArchivoController;
 use App\Http\Controllers\Deudores\MesaController;
+use App\Http\Controllers\Deudores\MesaEstadisticaController;
 use App\Http\Controllers\Deudores\RendirComentarioController;
 use App\Http\Controllers\Deudores\RendirCorreccionController;
 use App\Http\Controllers\Deudores\RendirEntregaController;
@@ -103,7 +104,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
+    $request->user->sendEmailVerificationNotification();
 
     return back()->with('message', 'Email de verificación enviado!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
@@ -182,6 +183,7 @@ Route::group(['prefix' => 'instituciones/{institucion_id}', 'middleware' => 'aut
             Route::resource('mesas', MesaController::class);
             Route::prefix('mesas/{mesa_id}')->group(function () {
                 
+                Route::get('estadisticas', [MesaEstadisticaController::class, 'mostrarEstadisticas'])->name('mesas.estadisticas');
                 Route::resource('mesas-archivos', MesaArchivoController::class);
                 Route::resource('anotados', AnotadoController::class);
                 Route::prefix('anotados/{anotado_id}')->group(function () {

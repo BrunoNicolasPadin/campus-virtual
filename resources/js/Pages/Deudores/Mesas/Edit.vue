@@ -9,7 +9,7 @@
                 </inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('asignaturas.index', [institucion_id, division.id])">Asignaturas</inertia-link> /
                 <inertia-link class="hover:underline" :href="route('mesas.index', [institucion_id, division.id, asignatura.id])">Mesas de {{ asignatura.nombre }}</inertia-link> / 
-                <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa {{ mesaFechaHora }}</inertia-link> / 
+                <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, division.id, asignatura.id, mesa.id])">Mesa {{ fechaHoraRealizacion }} - {{ fechaHoraFinalizacion }}</inertia-link> / 
                 Editar
             </span>
         </template>
@@ -20,14 +20,30 @@
                     <form method="post" @submit.prevent="submit">
                         
                         <div class="-mx-3 md:flex mb-6">
-                            <div class="md:w-full px-3 mb-6 md:mb-0">
+                            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label-form>
                                     <template #label-value>
-                                        Fecha y hora
+                                        Fecha y hora de realización
                                     </template>
                                 </label-form>
                                 
-                                <datetime type="datetime" value-zone="UTC-3" required v-model="form.fechaHora"></datetime>
+                                <datetime type="datetime" value-zone="UTC-3" required v-model="form.fechaHoraRealizacion"></datetime>
+                                
+                                <info>
+                                    <template #info>
+                                        Es obligatorio.
+                                    </template>
+                                </info>
+                            </div>
+
+                            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label-form>
+                                    <template #label-value>
+                                        Fecha y hora de finalización
+                                    </template>
+                                </label-form>
+                                
+                                <datetime type="datetime" value-zone="UTC-3" required v-model="form.fechaHoraFinalizacion"></datetime>
                                 
                                 <info>
                                     <template #info>
@@ -89,7 +105,8 @@
             division: Object,
             asignatura: Object,
             mesa: Object,
-            mesaFechaHora: String,
+            fechaHoraRealizacion: String,
+            fechaHoraFinalizacion: String,
         },
 
         title: 'Editar mesa de examen',
@@ -97,7 +114,8 @@
         data() {
             return {
                 form: {
-                    fechaHora: this.mesa.fechaHora,
+                    fechaHoraRealizacion: this.mesa.fechaHoraRealizacion,
+                    fechaHoraFinalizacion: this.mesa.fechaHoraFinalizacion,
                     comentario: this.mesa.comentario,
                 },
             }

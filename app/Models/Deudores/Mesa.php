@@ -10,7 +10,8 @@ class Mesa extends Model
 {
     protected $table = 'mesas';
     protected $fillable = [
-        'fechaHora',
+        'fechaHoraRealizacion',
+        'fechaHoraFinalizacion',
         'comentario',
     ];
     protected $guarded = [

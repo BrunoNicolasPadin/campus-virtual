@@ -22,6 +22,16 @@ class Anotado extends Model
         return $this->belongsTo(Mesa::class);
     }
 
+    public function entregas()
+    {
+        return $this->hasMany(RendirEntrega::class);
+    }
+
+    public function correcciones()
+    {
+        return $this->hasMany(RendirCorreccion::class);
+    }
+
     public function alumno()
     {
         return $this->belongsTo(Alumno::class);

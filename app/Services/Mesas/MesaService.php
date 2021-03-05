@@ -17,11 +17,12 @@ class MesaService
 
     public function find($id)
     {
-        $mesa = Mesa::select('id', 'fechaHora')->findOrFail($id);
+        $mesa = Mesa::select('id', 'fechaHoraRealizacion', 'fechaHoraFinalizacion')->with('asignatura')->findOrFail($id);
 
         return [
             'id' => $mesa->id,
-            'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+            'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
         ];
     }
 }

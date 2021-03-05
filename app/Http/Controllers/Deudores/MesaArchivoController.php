@@ -37,7 +37,7 @@ class MesaArchivoController extends Controller
 
     public function create($institucion_id, $division_id, $asignatura_id, $mesa_id)
     {
-        $mesa = Mesa::with('asignatura')->findOrFail($mesa_id);
+        $mesa = Mesa::select('id', 'fechaHoraRealizacion', 'fechaHoraFinalizacion')->with('asignatura')->findOrFail($mesa_id);
 
         return Inertia::render('Deudores/Archivos/Create', [
             'institucion_id' => $institucion_id,
@@ -46,7 +46,8 @@ class MesaArchivoController extends Controller
             'mesa' => [
                 'id' => $mesa->id,
                 'asignatura' => $mesa->asignatura,
-                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
                 'comentario'  => $mesa->comentario,
             ],
         ]);
@@ -78,7 +79,7 @@ class MesaArchivoController extends Controller
 
     public function edit($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        $mesa = Mesa::with('asignatura')->findOrFail($mesa_id);
+        $mesa = Mesa::select('id', 'fechaHoraRealizacion', 'fechaHoraFinalizacion')->with('asignatura')->findOrFail($mesa_id);
 
         return Inertia::render('Deudores/Archivos/Edit', [
             'institucion_id' => $institucion_id,
@@ -87,7 +88,8 @@ class MesaArchivoController extends Controller
             'mesa' => [
                 'id' => $mesa->id,
                 'asignatura' => $mesa->asignatura,
-                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
                 'comentario'  => $mesa->comentario,
             ],
             'archivo' => MesaArchivo::findOrFail($id),

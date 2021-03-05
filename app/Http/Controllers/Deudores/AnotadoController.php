@@ -72,12 +72,12 @@ class AnotadoController extends Controller
         $anotado->save();
 
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
-            ->with(['successMessage' => 'Te inscribbiste con éxito!']);
+            ->with(['successMessage' => 'Te inscribiste con éxito!']);
     }
 
     public function show($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        $mesa = Mesa::select('id', 'fechaHora')->findOrFail($mesa_id);
+        $mesa = Mesa::select('id', 'fechaHoraRealizacion', 'fechaHoraFinalizacion')->findOrFail($mesa_id);
 
         return Inertia::render('Deudores/Anotados/Show', [
             'institucion_id' => $institucion_id,
@@ -87,7 +87,8 @@ class AnotadoController extends Controller
             'asignatura' => $this->asignaturaService->find($asignatura_id),
             'mesa' => [
                 'id' => $mesa->id,
-                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
             ],
             'anotado' => Anotado::with(['alumno', 'alumno.user'])->findOrFail($id),
             'archivos' => MesaArchivo::where('mesa_id', $mesa_id)->get(),
@@ -111,7 +112,7 @@ class AnotadoController extends Controller
 
     public function edit($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        $mesa = Mesa::select('id', 'fechaHora')->findOrFail($mesa_id);
+        $mesa = Mesa::select('id', 'fechaHoraRealizacion', 'fechaHoraFinalizacion')->findOrFail($mesa_id);
         $arrayTemporal = $this->formaEvaluacionService->obtenerFormaEvaluacion($division_id);
 
         return Inertia::render('Deudores/Anotados/Edit', [
@@ -120,7 +121,8 @@ class AnotadoController extends Controller
             'asignatura' => $this->asignaturaService->find($asignatura_id),
             'mesa' => [
                 'id' => $mesa->id,
-                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
             ],
             'anotado' => Anotado::with(['alumno', 'alumno.user'])->findOrFail($id),
             'formasDescripcion' => $arrayTemporal[0],

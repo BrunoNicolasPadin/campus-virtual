@@ -66,7 +66,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ mesa.fechaHora }}
+                                        {{ mesa.fechaHoraRealizacion }} - {{ mesa.fechaHoraFinalizacion }}
                                     </template>
                                 </table-data>
 

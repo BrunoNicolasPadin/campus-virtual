@@ -49,13 +49,14 @@ class MesaController extends Controller
             'tipo' => session('tipo'),
             'division' => $this->divisionService->find($division_id),
             'asignatura' => $this->asignaturaService->find($asignatura_id),
-            'mesas' => Mesa::where('asignatura_id', $asignatura_id)->with('asignatura')->orderBy('fechaHora')->paginate(10)
+            'mesas' => Mesa::where('asignatura_id', $asignatura_id)->with('asignatura')->orderBy('fechaHoraRealizacion')->paginate(10)
                 ->transform(function ($mesa) {
                     return [
                         'id' => $mesa->id,
                         'asignatura_id' => $mesa->asignatura_id,
                         'asignatura' => $mesa->asignatura,
-                        'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                        'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                        'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
                         'comentario' => $mesa->comentario,
                     ];
                 }),
@@ -82,7 +83,8 @@ class MesaController extends Controller
     public function store(StoreMesa $request, $institucion_id, $division_id, $asignatura_id)
     {
         $mesa = new Mesa();
-        $mesa->fechaHora = $this->formatoService->cambiarFormatoParaGuardar($request->fechaHora);
+        $mesa->fechaHoraRealizacion = $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraRealizacion);
+        $mesa->fechaHoraFinalizacion = $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraFinalizacion);
         $mesa->comentario = $request->comentario;
         $mesa->institucion()->associate($institucion_id);
         $mesa->asignatura()->associate($asignatura_id);
@@ -101,10 +103,12 @@ class MesaController extends Controller
             'tipo' => session('tipo'),
             'division' => $this->divisionService->find($division_id),
             'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'mesa_id' => $id,
             'mesa' => [
                 'id' => $mesa->id,
                 'asignatura' => $mesa->asignatura,
-                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
                 'comentario'  => $mesa->comentario,
             ],
             'anotados' => Anotado::where('mesa_id', $id)->with('alumno', 'alumno.user')->paginate(20),
@@ -120,10 +124,12 @@ class MesaController extends Controller
             'institucion_id' => $institucion_id,
             'division' => $this->divisionService->find($division_id),
             'asignatura' => $this->asignaturaService->find($asignatura_id),
-            'mesaFechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+            'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+            'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
             'mesa' => [
                 'id' => $mesa->id,
-                'fechaHora' => $this->formatoService->cambiarFormatoParaEditar($mesa->fechaHora),
+                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaEditar($mesa->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaEditar($mesa->fechaHoraFinalizacion),
                 'comentario'  => $mesa->comentario,
             ],
         ]);
@@ -133,7 +139,8 @@ class MesaController extends Controller
     {
         Mesa::where('id', $id)
             ->update([
-                'fechaHora' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHora),
+                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraFinalizacion),
                 'comentario' => $request->comentario,
             ]);
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $id]))
