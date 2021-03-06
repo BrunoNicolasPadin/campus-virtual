@@ -79,6 +79,8 @@
             return {
                 promedios: [],
                 periodos: [],
+                calificacionesPorPeriodos: [],
+                opciones: [],
                 division: null,
                 mostrar: false,
                 form: {
@@ -93,27 +95,64 @@
                 axios.get(this.route('alumnos.mostrarEstadisticas', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id]))
                 .then(response => {
                     this.mostrar = true;
-                    this.promedios = response.data[0];
-                    this.periodos = response.data[1];
-                    this.division = response.data[2];
+                    if (response.data[0] == 'No escrita') {
 
-                    this.chartOptions = {
-                        xAxis: {
-                            categories: this.periodos
-                        },
-                        yAxis: {
+                        this.promedios = response.data[1];
+                        this.periodos = response.data[2];
+                        this.division = response.data[3];
+
+                        this.chartOptions = {
+                            chart: {
+                                type: 'column'
+                            },
+                            xAxis: {
+                                categories: this.periodos
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Calificaciones'
+                                }
+                            },
+                            series: [{
+                                data: this.promedios,
+                                dataLabels: {
+                                    enabled: true
+                                }
+                            }],
                             title: {
-                                text: 'Calificaciones'
+                                text: 'Promedios'
                             }
-                        },
-                        series: [{
-                            data: this.promedios,
-                            dataLabels: {
-                                enabled: true
+                        }
+                    }
+                    else {
+                        this.periodos = response.data[1];
+                        this.opciones = response.data[2];
+                        this.calificacionesPorPeriodos = response.data[3];
+                        this.calificacionesAlumnos = response.data[4];
+                            
+                        this.chartOptions = {
+                            chart: {
+                                type: 'bar'
+                            },
+                            xAxis: {
+                                categories: this.opciones,
+                                title: {
+                                    text: null
+                                }
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    align: 'high'
+                                },
+                                labels: {
+                                    overflow: 'justify'
+                                }
+                            },
+                            series: this.generateSeries(this.opciones, this.periodos, this.calificacionesPorPeriodos),
+                            title: {
+                                text: 'Cantidad de veces que el alumno obtuvo cada calificación por periodo'
                             }
-                        }],
-                        title: {
-                            text: 'Promedios'
                         }
                     }
                 })
@@ -122,6 +161,31 @@
                     console.log(e);
                 })
             },
+
+            generateSeries(opciones, periodos, calificacionesPorPeriodos) {
+                var series = [];
+                var k = 0;
+
+                for (let index = 0; index < periodos.length; index++) {
+                        
+                    series.push({
+                        name: periodos[index],
+                        data: this.generateData(opciones, periodos[index], calificacionesPorPeriodos),
+                    })
+                }
+                return series;
+            },
+
+            generateData(opciones, periodo, calificacionesPorPeriodos)
+            {
+                var data = [];
+
+                for (let index = 0; index < opciones.length; index++) {
+                    
+                    data.push(calificacionesPorPeriodos[periodo][opciones[index]]);
+                }
+                return data;
+            }
         }
     }
 </script>

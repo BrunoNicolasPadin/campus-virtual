@@ -9,6 +9,6 @@ class LibretaObserver
 {
     public function updated(Calificacion $calificacion)
     {
-        /* EnviarEmailActualizacionLibreta::dispatch($calificacion); */
+        EnviarEmailActualizacionLibreta::dispatch($calificacion);
     }
 }

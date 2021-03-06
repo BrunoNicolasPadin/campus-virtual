@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Alumnos;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Libretas\Libreta;
 use App\Services\Alumnos\AlumnoService;
 use App\Services\CiclosLectivos\CicloLectivoService;
@@ -44,7 +45,7 @@ class AlumnoEstadisticaController extends Controller
     public function mostrarEstadisticas($institucion_id, $alumno_id, $ciclo_lectivo_id)
     {
         $libreta = Libreta::select('libretas.periodo_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
-            'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'formas_evaluacion.tipo')
+            'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'formas_evaluacion.tipo', 'formas_evaluacion.id')
             ->where('libretas.alumno_id', $alumno_id)
             ->where('libretas.ciclo_lectivo_id', $ciclo_lectivo_id)
             ->join('divisiones', 'libretas.division_id', 'divisiones.id')
@@ -56,11 +57,6 @@ class AlumnoEstadisticaController extends Controller
 
 
         $division = $this->obtenerDivision($libreta);
-
-        if ($libreta->tipo == 'Escrita') {
-            return [null, null, $division];
-        }
-
         $periodos = $this->divisionService->obtenerPeriodos($libreta);
 
         $totalPeriodo = [];
@@ -76,11 +72,17 @@ class AlumnoEstadisticaController extends Controller
 
         $libretas = $this->obtenerNotasDeLaLibreta($alumno_id, $ciclo_lectivo_id);
 
+        if ($libreta->tipo == 'Escrita') {
+            $formaEvaluacion = FormaEvaluacion::findOrFail($libreta->id);
+            $arrayTemporal = $this->obtenerCantidadDeVecesPorCalificacion($libretas, $formaEvaluacion, $periodos);
+            return ['Escrita', $periodos, $arrayTemporal[0], $arrayTemporal[1]];
+        }
+
         $arrayTemporal = $this->recorrerLasNotas($libretas, $totalPeriodo, $cantidadPeriodo);
 
         $promedios = $this->obtenerPromedio($promedios, $arrayTemporal[1], $arrayTemporal[0]);
 
-        return [$promedios, $periodos, $division];
+        return ['No escrita', $promedios, $periodos, $division];
     }
 
     public function obtenerDivision($libreta)
@@ -135,5 +137,34 @@ class AlumnoEstadisticaController extends Controller
             $promedios[$i] = \round($totalPeriodo[$i] / $cantidadPeriodo[$i], 2, PHP_ROUND_HALF_UP);
         }
         return $promedios;
+    }
+
+    public function obtenerCantidadDeVecesPorCalificacion($libretas, $formaEvaluacion, $periodos)
+    {
+        $periodosArray = [];
+        $opciones = [];
+        $a = 0;
+
+        foreach ($formaEvaluacion->formaDescripcion as $descripcion) {
+            array_push($opciones, $descripcion->opcion);
+        }
+
+        for ($i=0; $i < count($periodos); $i++) { 
+            $periodosArray[$periodos[$i]] = array();
+            foreach ($formaEvaluacion->formaDescripcion as $descripcion) {
+                $periodosArray[$periodos[$i]][$descripcion->opcion] = 0;
+            }
+        }
+        
+        foreach ($libretas as $libreta) {
+
+            foreach ($libreta->calificaciones as $libreCali) {
+
+                if (!($libreCali->calificacion === null)) {
+                    $periodosArray[$libreCali->periodo][$libreCali->calificacion]++;
+                }
+            }
+        }
+        return [$opciones, $periodosArray];
     }
 }
