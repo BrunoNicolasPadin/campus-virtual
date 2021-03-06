@@ -123,7 +123,7 @@ class MesaController extends Controller
                 'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
                 'comentario'  => $mesa->comentario,
             ],
-            'inscripciones' => Inscripcion::where('mesa_id', $id)->with('alumno', 'alumno.user')->paginate(20),
+            'inscripciones' => Inscripcion::where('mesa_id', $id)->with('alumno', 'alumno.user')->paginate(10),
             'archivos' => MesaArchivo::where('mesa_id', $id)->get(),
             'puedeAnotarse' => $puedeAnotarse,
             'inscripcion_id' => $inscripcion_id,

@@ -98,7 +98,7 @@ class InscripcionController extends Controller
             'comentarios' => RendirComentario::where('inscripcion_id', $id)
                 ->with('user')
                 ->orderBy('updated_at', 'DESC')
-                ->paginate(20)
+                ->paginate(10)
                 ->transform(function ($comentario) {
                     return [
                         'id' => $comentario->id,

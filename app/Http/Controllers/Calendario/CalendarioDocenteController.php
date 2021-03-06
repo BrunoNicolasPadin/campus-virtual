@@ -69,7 +69,7 @@ class CalendarioDocenteController extends Controller
 
         foreach ($mesas as $mesa) {
             foreach ($mesa as $m) {
-                $fecha = explode("/", $m['fechaHora']);
+                $fecha = explode("/", $m['fechaHoraRealizacion']);
                 $evasMesas[$fecha[1] - 1][] = $this->calendarioService->obtenerMesas($m);
             }
         }

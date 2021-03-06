@@ -14,6 +14,7 @@ use App\Services\Archivos\EliminarEntregasCorrecciones;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -44,15 +45,18 @@ class EvaluacionController extends Controller
         $this->asignaturaService = $asignaturaService;
     }
 
-    public function index($institucion_id, $division_id)
+    public function index($institucion_id, $division_id, Request $filtros)
     {
         return Inertia::render('Evaluaciones/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'division' => $this->divisionService->find($division_id),
-            'asignatura_id_seleccionada' => '',
+            'asignatura_id_index' => $filtros->asignatura_id,
             'asignaturas' => $this->asignaturaService->get($division_id),
             'evaluaciones' => Evaluacion::where('division_id', $division_id)
+                ->when($filtros->asignatura_id, function ($query, $asignatura_id) {
+                    return $query->where('asignatura_id', $asignatura_id);
+                })
                 ->with('asignatura')
                 ->orderBy('fechaHoraRealizacion')
                 ->paginate(10)

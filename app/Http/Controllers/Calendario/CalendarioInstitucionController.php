@@ -59,7 +59,7 @@ class CalendarioInstitucionController extends Controller
         }
 
         foreach ($mesas as $mesa) {
-            $fecha = explode("/", $mesa['fechaHora']);
+            $fecha = explode("/", $mesa['fechaHoraRealizacion']);
             $evasMesas[$fecha[1] - 1][] = $this->calendarioService->obtenerMesas($mesa);
         }
 
@@ -102,15 +102,16 @@ class CalendarioInstitucionController extends Controller
     public function obtenerMesasEloquent($institucion_id, $year, $mes)
     {
         return Mesa::where('institucion_id', $institucion_id)
-        ->whereYear('fechaHora', $year)
-        ->whereMonth('fechaHora', $mes)
+        ->whereYear('fechaHoraRealizacion', $year)
+        ->whereMonth('fechaHoraRealizacion', $mes)
         ->with(['asignatura.division', 'asignatura.division.nivel', 'asignatura.division.orientacion', 'asignatura.division.curso', 'asignatura'])
         ->get()
         ->map(function ($mesa) {
             return [
                 'id' => $mesa->id,
                 'institucion_id' => $mesa->institucion_id,
-                'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
                 'asignatura' => $mesa->asignatura->only('id', 'division_id', 'nombre'),
                 'division' => $mesa->asignatura->division,
             ];

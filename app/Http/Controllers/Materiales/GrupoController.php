@@ -52,7 +52,7 @@ class GrupoController extends Controller
                     $query->select('id', 'nombre');
                 },
             ))
-            ->paginate(1);
+            ->paginate(10);
 
         return Inertia::render('Materiales/Grupos/Index', [
             'institucion_id' => $institucion_id,

@@ -52,7 +52,7 @@ class AsignaturaDeudorController extends Controller
             })
             ->with('alumno', 'alumno.user')
             ->orderBy('ciclo_lectivo_id')
-            ->paginate(1)
+            ->paginate(10)
             ->transform(function ($deuda) {
                 return [
                     'id' => $deuda->id,

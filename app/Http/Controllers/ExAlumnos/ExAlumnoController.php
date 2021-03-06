@@ -12,6 +12,7 @@ use App\Services\CiclosLectivos\CicloLectivoService;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
 
@@ -44,8 +45,19 @@ class ExAlumnoController extends Controller
 
     public function index($institucion_id, Request $filtros)
     {
-        $exAlumnos = ExAlumno::select('id', 'alumno_id', 'ciclo_lectivo_id', 'division_id', 'abandono', 'finalizo', 'cambio')
-            ->where('institucion_id', $institucion_id)
+        $exAlumnos = DB::table('ex_alumnos')
+            ->select('ex_alumnos.id', 'ex_alumnos.alumno_id', 'ex_alumnos.division_id', 'ex_alumnos.abandono', 'ex_alumnos.finalizo', 'ex_alumnos.cambio', 
+            'divisiones.id AS division_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+            'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'users.name', 'users.profile_photo_path',
+            'ciclos_lectivos.comienzo', 'ciclos_lectivos.final')
+            ->where('ex_alumnos.institucion_id', $institucion_id)
+            ->leftjoin('divisiones', 'ex_alumnos.division_id', 'divisiones.id')
+            ->leftjoin('niveles', 'niveles.id', 'divisiones.nivel_id')
+            ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
+            ->leftjoin('cursos', 'cursos.id', 'divisiones.curso_id')
+            ->join('alumnos', 'alumnos.id', 'ex_alumnos.alumno_id')
+            ->join('users', 'users.id', 'alumnos.user_id')
+            ->join('ciclos_lectivos', 'ciclos_lectivos.id', 'ex_alumnos.ciclo_lectivo_id')
             ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
                 return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
             })
@@ -61,29 +73,6 @@ class ExAlumnoController extends Controller
             ->when($filtros->condicion == 'cambio', function ($query, $cambio) {
                 return $query->where('cambio', true);
             })
-            ->with(array(
-                'alumno' => function($query){
-                    $query->select('id', 'user_id');
-                },
-                'alumno.user' => function($query){
-                    $query->select('id', 'name', 'profile_photo_path');
-                },
-                'division' => function($query){
-                    $query->select('id', 'nivel_id', 'orientacion_id', 'curso_id', 'division');
-                },
-                'division.nivel' => function($query){
-                    $query->select('id', 'nombre');
-                },
-                'division.orientacion' => function($query){
-                    $query->select('id', 'nombre');
-                },
-                'division.curso' => function($query){
-                    $query->select('id', 'nombre');
-                },
-                'ciclo_lectivo' => function($query){
-                    $query->select('id', 'comienzo', 'final');
-                },
-            ))
             ->orderBy('ciclo_lectivo_id')
             ->paginate(10)
             ->withQueryString()
@@ -92,11 +81,10 @@ class ExAlumnoController extends Controller
                     'id' => $exalumno->id,
                     'alumno_id' => $exalumno->alumno_id,
                     'division_id' => $exalumno->division_id,
-                    'name' => $exalumno->alumno->user->name,
-                    'fotoDePerfil' => $exalumno->alumno->user->profile_photo_path,
-                    'division' => $exalumno->division,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($exalumno->ciclo_lectivo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($exalumno->ciclo_lectivo->final),
+                    'name' => $exalumno->name,
+                    'fotoDePerfil' => $exalumno->profile_photo_path,
+                    'division' => $exalumno->nivel_nombre . ' - ' . $exalumno->orientacion_nombre . ' - ' . $exalumno->curso_nombre . ' - ' . $exalumno->division,
+                    'ciclo_lectivo' => $this->formatoService->cambiarFormatoParaMostrar($exalumno->comienzo) . ' - ' . $this->formatoService->cambiarFormatoParaMostrar($exalumno->final),
                     'abandono' => $exalumno->abandono,
                     'cambio' => $exalumno->cambio,
                     'finalizo' => $exalumno->finalizo,

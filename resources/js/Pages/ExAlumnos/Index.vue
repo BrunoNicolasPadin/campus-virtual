@@ -192,25 +192,15 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ exalumno.comienzo }} - {{ exalumno.final }}
+                                        {{ exalumno.ciclo_lectivo }}
                                     </template>
                                 </table-data>
 
                                 <table-data>
                                     <template #td>
-                                        <span v-if="exalumno.division.orientacion_id">
                                             <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, exalumno.division_id])">
-                                                {{ exalumno.division.nivel.nombre }} - {{ exalumno.division.orientacion.nombre }} - 
-                                                {{ exalumno.division.curso.nombre }} - {{ exalumno.division.division }}
+                                                {{ exalumno.division }}
                                             </inertia-link>
-                                        </span>
-
-                                        <span v-else>
-                                            <inertia-link class="hover:underline" :href="route('divisiones.show', [institucion_id, exalumno.division_id])">
-                                                {{ exalumno.division.nivel.nombre }} - 
-                                                {{ exalumno.division.curso.nombre }} - {{ exalumno.division.division }}
-                                            </inertia-link>
-                                        </span>
                                     </template>
                                 </table-data>
 

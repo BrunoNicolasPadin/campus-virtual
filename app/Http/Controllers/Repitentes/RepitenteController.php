@@ -10,6 +10,7 @@ use App\Services\CiclosLectivos\CicloLectivoService;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class RepitenteController extends Controller
@@ -42,25 +43,37 @@ class RepitenteController extends Controller
 
     public function index($institucion_id, Request $filtros)
     {
-        $repitentes = Repitente::where('institucion_id', $institucion_id)
+        $repitentes = DB::table('repitentes')
+
+        ->select('repitentes.id', 'repitentes.alumno_id', 'repitentes.division_id', 'repitentes.comentario', 
+        'divisiones.id AS division_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+        'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'users.name', 'users.profile_photo_path',
+        'ciclos_lectivos.comienzo', 'ciclos_lectivos.final')
+        ->where('repitentes.institucion_id', $institucion_id)
+        ->leftjoin('divisiones', 'repitentes.division_id', 'divisiones.id')
+        ->leftjoin('niveles', 'niveles.id', 'divisiones.nivel_id')
+        ->leftjoin('orientaciones', 'orientaciones.id', 'divisiones.orientacion_id')
+        ->leftjoin('cursos', 'cursos.id', 'divisiones.curso_id')
+        ->join('alumnos', 'alumnos.id', 'repitentes.alumno_id')
+        ->join('users', 'users.id', 'alumnos.user_id')
+        ->join('ciclos_lectivos', 'ciclos_lectivos.id', 'repitentes.ciclo_lectivo_id')
         ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
             return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
         })
         ->when($filtros->division_id, function ($query, $division_id) {
             return $query->where('division_id', $division_id);
         })
-        ->with('alumno', 'alumno.user', 'ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
-        ->paginate(1)
+        ->paginate(10)
         ->through(function ($repitente) {
             return [
                 'id' => $repitente->id,
                 'alumno_id' => $repitente->alumno_id,
                 'division_id' => $repitente->division_id,
-                'division' => $repitente->division,
-                'alumno' => $repitente->alumno,
-                'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->comienzo),
-                'final' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->final),
-                'comentario'  => $repitente->comentario,
+                'name' => $repitente->name,
+                'fotoDePerfil' => $repitente->profile_photo_path,
+                'division' => $repitente->nivel_nombre . ' - ' . $repitente->orientacion_nombre . ' - ' . $repitente->curso_nombre . ' - ' . $repitente->division,
+                'ciclo_lectivo' => $this->formatoService->cambiarFormatoParaMostrar($repitente->comienzo) . ' - ' . $this->formatoService->cambiarFormatoParaMostrar($repitente->final),
+                'comentario' => $repitente->comentario,
             ];
         });
 

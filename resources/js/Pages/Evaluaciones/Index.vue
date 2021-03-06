@@ -187,7 +187,7 @@
             tipo: String,
             division: Object,
             evaluaciones: Object,
-            asignatura_id_seleccionada: String,
+            asignatura_id_index: String,
             asignaturas: Array,
         },
 
@@ -196,7 +196,7 @@
         data() {
             return {
                 form: {
-                    asignatura_id: this.asignatura_id_seleccionada,
+                    asignatura_id: this.asignatura_id_index,
                 },
             }
         },
@@ -209,11 +209,7 @@
             },
 
             onChange() {
-                if (this.form.asignatura_id == '') {
-                    this.$inertia.get(this.route('evaluaciones.index', [this.institucion_id, this.division.id]))
-                } else {
-                    this.$inertia.get(this.route('evaluaciones.filtrarPorAsignatura', [this.institucion_id, this.division.id, this.form.asignatura_id]))
-                }
+                this.$inertia.replace(this.route('evaluaciones.index', {institucion_id: this.institucion_id, division_id: this.division.id, asignatura_id: this.form.asignatura_id}))
                 
             },
         }

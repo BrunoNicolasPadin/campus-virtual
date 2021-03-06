@@ -8,6 +8,7 @@ use App\Models\Libretas\Libreta;
 use App\Services\Alumnos\AlumnoService;
 use App\Services\CiclosLectivos\CicloLectivoService;
 use App\Services\Division\ObtenerPeriodosEvaluacion;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class AlumnoEstadisticaController extends Controller
@@ -44,7 +45,7 @@ class AlumnoEstadisticaController extends Controller
 
     public function mostrarEstadisticas($institucion_id, $alumno_id, $ciclo_lectivo_id)
     {
-        $libreta = Libreta::select('libretas.periodo_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+        $libreta = DB::table('libretas')->select('libretas.periodo_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
             'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'formas_evaluacion.tipo', 'formas_evaluacion.id')
             ->where('libretas.alumno_id', $alumno_id)
             ->where('libretas.ciclo_lectivo_id', $ciclo_lectivo_id)
@@ -78,7 +79,7 @@ class AlumnoEstadisticaController extends Controller
             return ['Escrita', $periodos, $arrayTemporal[0], $arrayTemporal[1]];
         }
 
-        $arrayTemporal = $this->recorrerLasNotas($libretas, $totalPeriodo, $cantidadPeriodo);
+        $arrayTemporal = $this->recorrerLasNotas($libretas, $totalPeriodo, $cantidadPeriodo, $periodos);
 
         $promedios = $this->obtenerPromedio($promedios, $arrayTemporal[1], $arrayTemporal[0]);
 
@@ -103,26 +104,29 @@ class AlumnoEstadisticaController extends Controller
 
     public function obtenerNotasDeLaLibreta($alumno_id, $ciclo_lectivo_id)
     {
-        return Libreta::where('alumno_id', $alumno_id)
+        return DB::table('libretas')
+            ->select('calificaciones.calificacion', 'calificaciones.periodo')
+            ->where('alumno_id', $alumno_id)
             ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-            ->with('calificaciones')
+            ->join('calificaciones', 'calificaciones.libreta_id', 'libretas.id')
             ->get();
     }
 
-    public function recorrerLasNotas($libretas, $totalPeriodo, $cantidadPeriodo)
+    public function recorrerLasNotas($libretas, $totalPeriodo, $cantidadPeriodo, $periodos)
     {
         $i = 0;
         foreach ($libretas as $libreta) {
 
-            foreach ($libreta->calificaciones as $libreCali) {
-
-                if (!($libreCali->calificacion === null)) {
-                    $totalPeriodo[$i] = $totalPeriodo[$i] + $libreCali->calificacion;
-                    $cantidadPeriodo[$i]++;
-                }
-                $i++;
+            if (!($libreta->calificacion === null)) {
+                $totalPeriodo[$i] = $totalPeriodo[$i] + $libreta->calificacion;
+                $cantidadPeriodo[$i]++;
             }
-            $i = 0;
+
+            $i++;
+
+            if ($i == count($periodos)) {
+                $i = 0;
+            }
         }
 
         return [$totalPeriodo, $cantidadPeriodo];
@@ -158,11 +162,14 @@ class AlumnoEstadisticaController extends Controller
         
         foreach ($libretas as $libreta) {
 
-            foreach ($libreta->calificaciones as $libreCali) {
+            if (!($libreta->calificacion === null)) {
+                $periodosArray[$libreta->periodo][$libreta->calificacion]++;
+            }
+            
+            $i++;
 
-                if (!($libreCali->calificacion === null)) {
-                    $periodosArray[$libreCali->periodo][$libreCali->calificacion]++;
-                }
+            if ($i == count($periodos)) {
+                $i = 0;
             }
         }
         return [$opciones, $periodosArray];

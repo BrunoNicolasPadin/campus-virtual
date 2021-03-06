@@ -7,6 +7,7 @@ use App\Models\Repitentes\Repitente;
 use App\Models\Roles\ExAlumno;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFecha;
+use Illuminate\Support\Facades\DB;
 
 class ExAlumnosRepitentesService
 {
@@ -30,10 +31,10 @@ class ExAlumnosRepitentesService
         $divisiones = $this->divisionService->get($institucion_id);
 
         if ($tipo == 'Ex Alumnos') {
-            $arreglo = ExAlumno::where('institucion_id', $institucion_id)->where('abandono', 1)->get();
+            $arreglo = DB::table('exAlumnos')->where('institucion_id', $institucion_id)->where('abandono', 1)->get();
         }
         else {
-            $arreglo = Repitente::where('institucion_id', $institucion_id)->get();
+            $arreglo = DB::table('repitentes')->where('institucion_id', $institucion_id)->get();
         }
         $ciclos = [];
         $ciclosCategorias = [];

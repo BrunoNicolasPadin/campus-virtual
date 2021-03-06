@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Calendario;
 
 use App\Http\Controllers\Controller;
-use App\Models\Deudores\Anotado;
+use App\Models\Deudores\Inscripcion;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Services\Calendario\CalendarioService;
 use App\Services\FechaHora\CambiarFormatoFecha;
@@ -59,7 +59,7 @@ class CalendarioAlumnoController extends Controller
         }
 
         foreach ($mesas as $mesa) {
-            $fecha = explode("/", $mesa['fechaHora']);
+            $fecha = explode("/", $mesa['fechaHoraRealizacion']);
             $evasMesas[$fecha[1] - 1][] = $this->calendarioService->obtenerMesas($mesa);
         }
 
@@ -101,7 +101,7 @@ class CalendarioAlumnoController extends Controller
 
     public function obtenerMesasEloquent($year, $mes)
     {
-        return Anotado::where('alumno_id', session('tipo_id'))
+        return Inscripcion::where('alumno_id', session('tipo_id'))
             ->where('calificacion', null)
             ->with(['mesa', 'mesa.asignatura.division', 'mesa.asignatura.division.nivel', 
                 'mesa.asignatura.division.orientacion', 'mesa.asignatura.division.curso', 'mesa.asignatura'])
@@ -112,13 +112,13 @@ class CalendarioAlumnoController extends Controller
 
             })
             ->get()
-            ->map(function ($anotado) {
+            ->map(function ($inscripcion) {
                 return [
-                    'id' => $anotado->mesa->id,
-                    'institucion_id' => $anotado->mesa->institucion_id,
-                    'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($anotado->mesa->fechaHora),
-                    'asignatura' => $anotado->mesa->asignatura->only('id', 'division_id', 'nombre'),
-                    'division' => $anotado->mesa->asignatura->division,
+                    'id' => $inscripcion->mesa->id,
+                    'institucion_id' => $inscripcion->mesa->institucion_id,
+                    'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($inscripcion->mesa->fechaHora),
+                    'asignatura' => $inscripcion->mesa->asignatura->only('id', 'division_id', 'nombre'),
+                    'division' => $inscripcion->mesa->asignatura->division,
                 ];
             });
     }

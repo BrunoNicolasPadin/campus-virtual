@@ -11,6 +11,7 @@ use App\Models\Libretas\Libreta;
 use App\Services\Division\DivisionService;
 use App\Services\Division\ObtenerPeriodosEvaluacion;
 use App\Services\FechaHora\CambiarFormatoFecha;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class EstructuraEstadisticaController extends Controller
@@ -62,7 +63,7 @@ class EstructuraEstadisticaController extends Controller
         $cantidadAsignaturas = Asignatura::where('division_id', $division_id)->count();
 
         if ($cantidadAsignaturas == 0) {
-            return [null, null, null];
+            return ['No escrita', null, null, null];
         }
 
         $periodos = $this->periodoService->obtenerPeriodos($libreta);
@@ -101,20 +102,20 @@ class EstructuraEstadisticaController extends Controller
         
         foreach ($libretas as $libreta) {
 
-            foreach ($libreta->calificaciones as $libreCali) {
+            if (!($libreta->calificacion === null)) {
+                $totalPeriodo[$i] = $totalPeriodo[$i] + $libreta->calificacion;
+                $cantidadPeriodo[$i]++;
 
-                if (!($libreCali->calificacion === null)) {
-                    $totalPeriodo[$i] = $totalPeriodo[$i] + $libreCali->calificacion;
-                    $cantidadPeriodo[$i]++;
-
-                    $totalPeriodoAlumno[$i] = $totalPeriodoAlumno[$i] + $libreCali->calificacion;
-                    $cantidadPeriodoAlumno[$i]++;
-                }
-                $i++;
-                $recorrido++;
+                $totalPeriodoAlumno[$i] = $totalPeriodoAlumno[$i] + $libreta->calificacion;
+                $cantidadPeriodoAlumno[$i]++;
             }
 
-            $i = 0;
+            $i++;
+            $recorrido++;
+
+            if ($i == count($periodos)) {
+                $i = 0;
+            }
 
             if ($recorrido == $totalRecorrido) {
 
@@ -138,9 +139,13 @@ class EstructuraEstadisticaController extends Controller
 
     public function obtenerNotasDeLaLibreta($division_id, $ciclo_lectivo_id)
     {
-        return Libreta::where('division_id', $division_id)
-        ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-        ->with('calificaciones', 'alumno', 'alumno.user')
+        return DB::table('libretas')
+        ->select('calificaciones.calificacion', 'calificaciones.periodo', 'users.name')
+        ->where('libretas.division_id', $division_id)
+        ->where('libretas.ciclo_lectivo_id', $ciclo_lectivo_id)
+        ->join('calificaciones', 'calificaciones.libreta_id', 'libretas.id')
+        ->join('alumnos', 'alumnos.id', 'libretas.alumno_id')
+        ->join('users', 'users.id', 'alumnos.user_id')
         ->get();
     }
 
@@ -157,7 +162,7 @@ class EstructuraEstadisticaController extends Controller
         }
 
         return [
-            'nombre' => $libreta->alumno->user->name,
+            'nombre' => $libreta->name,
             'promedios' => $promediosMomentaneos,
         ];
 
@@ -194,16 +199,16 @@ class EstructuraEstadisticaController extends Controller
         
         foreach ($libretas as $libreta) {
 
-            foreach ($libreta->calificaciones as $libreCali) {
+            if (!($libreta->calificacion === null)) {
 
-                if (!($libreCali->calificacion === null)) {
-
-                    $periodosArray[$libreCali->periodo][$libreCali->calificacion]++;
-                    $calificacionAlumno[$i] = $libreCali->calificacion;
-                }
-                $i++;
+                $periodosArray[$libreta->periodo][$libreta->calificacion]++;
+                $calificacionAlumno[$i] = $libreta->calificacion;
             }
-            $i = 0;
+            $i++;
+
+            if ($i == count($periodos)) {
+                $i = 0;
+            }
         }
         return [$opciones, $periodosArray];
     }

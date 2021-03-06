@@ -22,7 +22,7 @@ class CalendarioService
             'division_id' => $evaluacion['division_id'],
             'titulo' => $evaluacion['titulo'],
             'tipo' => $evaluacion['tipo'],
-            'fechaHora' => $evaluacion['fechaHoraRealizacion'],
+            'fechaHoraRealizacion' => $evaluacion['fechaHoraRealizacion'],
             'fechaHoraFinalizacion' => $evaluacion['fechaHoraFinalizacion'],
             'asignatura' => $evaluacion['asignatura'],
             'division' => $evaluacion['division'],
@@ -37,8 +37,8 @@ class CalendarioService
             'division_id' => $mesa['asignatura']['division_id'],
             'titulo' => '-',
             'tipo' => 'Mesa de examen',
-            'fechaHora' => $mesa['fechaHora'],
-            'fechaHoraFinalizacion' => '',
+            'fechaHoraRealizacion' => $mesa['fechaHoraRealizacion'],
+            'fechaHoraFinalizacion' => $mesa['fechaHoraFinalizacion'],
             'asignatura' => $mesa['asignatura'],
             'division' => $mesa['division'],
         ];
@@ -50,7 +50,7 @@ class CalendarioService
         
         for ($i=0; $i < count($keys); $i++) { 
             usort($evasMesas[$keys[$i]], function($a, $b) {
-                return $a['fechaHora'] <=> $b['fechaHora'];
+                return $a['fechaHoraRealizacion'] <=> $b['fechaHoraRealizacion'];
             });
         }
         return $evasMesas;

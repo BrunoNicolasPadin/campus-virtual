@@ -57,7 +57,7 @@ class AlumnoDeudorController extends Controller
             'deudas' => AlumnoDeudor::where('alumno_id', $alumno_id)
                 ->with(['asignatura', 'ciclo_lectivo'])
                 ->orderBy('ciclo_lectivo_id')
-                ->paginate(20)
+                ->paginate(10)
                 ->transform(function ($deuda) {
                     return [
                         'id' => $deuda->id,
@@ -128,7 +128,7 @@ class AlumnoDeudorController extends Controller
             {
                 $q->where('alumno_id', $alumno_id);
             })
-            ->paginate(20)
+            ->paginate(10)
             ->transform(function ($mesa) use($alumno_id) {
                 return [
                     'id' => $mesa->id,

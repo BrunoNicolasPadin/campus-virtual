@@ -147,7 +147,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        {{ eva.fechaHora }}<span v-show="eva.fechaHoraFinalizacion !== '' "> - {{ eva.fechaHoraFinalizacion }}</span>
+                                        {{ eva.fechaHoraRealizacion }} - {{ eva.fechaHoraFinalizacion }}
                                     </template>
                                 </table-data>
 

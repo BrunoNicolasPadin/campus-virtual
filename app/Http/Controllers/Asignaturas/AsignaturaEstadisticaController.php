@@ -10,6 +10,7 @@ use App\Services\Asignaturas\AsignaturaService;
 use App\Services\CiclosLectivos\CicloLectivoService;
 use App\Services\Division\DivisionService;
 use App\Services\Division\ObtenerPeriodosEvaluacion;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class AsignaturaEstadisticaController extends Controller
@@ -77,7 +78,7 @@ class AsignaturaEstadisticaController extends Controller
             $arrayTemporal = $this->obtenerCantidadDeVecesPorCalificacion($libretas, $formaEvaluacion, $periodos, $calificacionAlumno, $calificacionesAlumnos);
             return ['Escrita', $periodos, $arrayTemporal[0], $arrayTemporal[1], $arrayTemporal[2]];
         }
-        $arrayTemporal = $this->recorrerLibreta($libretas, $totalPeriodo, $cantidadPeriodo, $calificacionAlumno, $calificacionesAlumnos, $formaEvaluacion);
+        $arrayTemporal = $this->recorrerLibreta($libretas, $totalPeriodo, $cantidadPeriodo, $calificacionAlumno, $calificacionesAlumnos, $formaEvaluacion, $periodos);
         $promedios = $this->obtenerPromedios($arrayTemporal[0], $arrayTemporal[1], $promedios);
 
         return ['No escrita', $promedios, $periodos, $arrayTemporal[2]];
@@ -85,35 +86,41 @@ class AsignaturaEstadisticaController extends Controller
 
     public function obtenerNotasDeLaLibreta($asignatura_id, $ciclo_lectivo_id)
     {
-        return Libreta::where('asignatura_id', $asignatura_id)
+        return DB::table('libretas')
+            ->select('calificaciones.calificacion', 'calificaciones.periodo', 'users.name')
+            ->where('asignatura_id', $asignatura_id)
             ->where('ciclo_lectivo_id', $ciclo_lectivo_id)
-            ->with('calificaciones')
+            ->join('calificaciones', 'calificaciones.libreta_id', 'libretas.id')
+            ->join('alumnos', 'alumnos.id', 'libretas.alumno_id')
+            ->join('users', 'users.id', 'alumnos.user_id')
             ->get();
     }
 
-    public function recorrerLibreta($libretas, $totalPeriodo, $cantidadPeriodo, $calificacionAlumno, $calificacionesAlumnos, $formaEvaluacion) 
+    public function recorrerLibreta($libretas, $totalPeriodo, $cantidadPeriodo, $calificacionAlumno, $calificacionesAlumnos, $formaEvaluacion, $periodos) 
     {
         $i = 0;
         $a = 0;
 
         foreach ($libretas as $libreta) {
 
-            foreach ($libreta->calificaciones as $libreCali) {
+            if (!($libreta->calificacion === null)) {
 
-                if (!($libreCali->calificacion === null)) {
-                    if (!($formaEvaluacion->tipo == 'Escrita')) {
-                        $totalPeriodo[$i] = $totalPeriodo[$i] + $libreCali->calificacion;
-                        $cantidadPeriodo[$i]++;
-                    }
-
-                    $calificacionAlumno[$i] = $libreCali->calificacion;
+                if (!($formaEvaluacion->tipo == 'Escrita')) {
+                    $totalPeriodo[$i] = $totalPeriodo[$i] + $libreta->calificacion;
+                    $cantidadPeriodo[$i]++;
                 }
-                $i++;
+
+                $calificacionAlumno[$i] = $libreta->calificacion;
             }
-            $i = 0;
+
+            $i++;
+
+            if ($i == count($periodos)) {
+                $i = 0;
+            }
 
             $calificacionesAlumnos[$a] = [
-                'nombre' => $libreta->alumno->user->name,
+                'nombre' => $libreta->name,
                 'calificaciones' => $calificacionAlumno,
             ];
 
@@ -157,27 +164,28 @@ class AsignaturaEstadisticaController extends Controller
         
         foreach ($libretas as $libreta) {
 
-            foreach ($libreta->calificaciones as $libreCali) {
+            if (!($libreta->calificacion === null)) {
 
-                if (!($libreCali->calificacion === null)) {
+                $periodosArray[$libreta->periodo][$libreta->calificacion]++;
+                $calificacionAlumno[$i] = $libreta->calificacion;
+            }
 
-                    $periodosArray[$libreCali->periodo][$libreCali->calificacion]++;
-                    $calificacionAlumno[$i] = $libreCali->calificacion;
+            $i++;
+
+            if ($i == count($periodos)) {
+                $i = 0;
+
+                $calificacionesAlumnos[$a] = [
+                    'nombre' => $libreta->name,
+                    'calificaciones' => $calificacionAlumno,
+                ];
+    
+                for ($i=0; $i < count($calificacionAlumno); $i++) { 
+                    $calificacionAlumno[$i] = 0;
                 }
-                $i++;
+                $i = 0;
+                $a++;
             }
-            $i = 0;
-
-            $calificacionesAlumnos[$a] = [
-                'nombre' => $libreta->alumno->user->name,
-                'calificaciones' => $calificacionAlumno,
-            ];
-
-            for ($i=0; $i < count($calificacionAlumno); $i++) { 
-                $calificacionAlumno[$i] = 0;
-            }
-            $i = 0;
-            $a++;
         }
         return [$opciones, $periodosArray, $calificacionesAlumnos];
     }
