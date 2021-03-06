@@ -38,20 +38,9 @@ class AsignaturaDeudorController extends Controller
         $this->cicloLectivoService = $cicloLectivoService;
     }
 
-    public function mostrarDeudores($institucion_id, $division_id, $asignatura_id)
+    public function mostrarDeudores($institucion_id, $division_id, $asignatura_id, Request $filtros)
     {
-        return Inertia::render('Asignaturas/Deudores', [
-            'institucion_id' => $institucion_id,
-            'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
-            'asignatura'  => $this->asignaturaService->find($asignatura_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
-        ]);
-    }
-
-    public function filtrarDeudores($institucion_id, $division_id, $asignatura_id, Request $filtros)
-    {
-        return AlumnoDeudor::where('asignatura_id', $asignatura_id)
+        $deudores = AlumnoDeudor::where('asignatura_id', $asignatura_id)
             ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
                 return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
             })
@@ -63,7 +52,7 @@ class AsignaturaDeudorController extends Controller
             })
             ->with('alumno', 'alumno.user')
             ->orderBy('ciclo_lectivo_id')
-            ->paginate(1000)
+            ->paginate(1)
             ->transform(function ($deuda) {
                 return [
                     'id' => $deuda->id,
@@ -74,5 +63,16 @@ class AsignaturaDeudorController extends Controller
                     'aprobado' => $deuda->aprobado,
                 ];
             });
+
+        return Inertia::render('Asignaturas/Deudores', [
+            'institucion_id' => $institucion_id,
+            'tipo' => session('tipo'),
+            'division' => $this->divisionService->find($division_id),
+            'asignatura'  => $this->asignaturaService->find($asignatura_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'deudores' => $deudores,
+            'ciclo_lectivo_id_index' => $filtros->ciclo_lectivo_id,
+            'aprobado_index' => $filtros->aprobado,
+        ]);
     }
 }

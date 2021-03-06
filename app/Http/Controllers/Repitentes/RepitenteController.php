@@ -50,8 +50,7 @@ class RepitenteController extends Controller
             return $query->where('division_id', $division_id);
         })
         ->with('alumno', 'alumno.user', 'ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
-        ->paginate(10)
-        ->withQueryString()
+        ->paginate(1)
         ->through(function ($repitente) {
             return [
                 'id' => $repitente->id,
@@ -64,6 +63,7 @@ class RepitenteController extends Controller
                 'comentario'  => $repitente->comentario,
             ];
         });
+
         return Inertia::render('Repitentes/Index', [
             'institucion_id' => $institucion_id,
             'divisiones' => $this->divisionService->get($institucion_id),

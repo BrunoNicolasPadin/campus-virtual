@@ -12,6 +12,7 @@ use App\Models\Roles\Docente;
 use App\Services\Archivos\EliminarGruposMateriales;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -39,24 +40,27 @@ class GrupoController extends Controller
         $this->asignaturaService = $asignaturaService;
     }
 
-    public function index($institucion_id, $division_id)
+    public function index($institucion_id, $division_id, Request $filtros)
     {
-        $gruposTodos = Grupo::select('id', 'asignatura_id', 'nombre')
+        $grupos = Grupo::select('id', 'asignatura_id', 'nombre')
             ->where('division_id', $division_id)
+            ->when($filtros->asignatura_id, function ($query, $asignatura_id) {
+                return $query->where('asignatura_id', $asignatura_id);
+            })
             ->with(array(
                 'asignatura' => function($query){
                     $query->select('id', 'nombre');
                 },
             ))
-            ->orderBy('updated_at', 'ASC')
-            ->paginate(10);
+            ->paginate(1);
 
         return Inertia::render('Materiales/Grupos/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'division' => $this->divisionService->find($division_id),
             'asignaturas' => $this->asignaturaService->get($division_id),
-            'gruposTodos' => $gruposTodos,
+            'grupos' => $grupos,
+            'asignatura_id_index' => $filtros->asignatura_id,
         ]);
     }
 

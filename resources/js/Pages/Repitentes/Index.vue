@@ -78,7 +78,7 @@
                 </template>
             </estructura-form>
 
-            <estructura-tabla v-show="mostrar">
+            <estructura-tabla>
                 <template #tabla>
 
                     <table-head-estructura>
@@ -263,7 +263,6 @@
                     ciclo_lectivo_id: this.ciclo_lectivo_id_index,
                     division_id: this.division_id_index,
                 },
-                mostrar: false,
             }
         },
 

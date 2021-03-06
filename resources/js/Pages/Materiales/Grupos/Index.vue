@@ -148,7 +148,8 @@
             tipo: String,
             division: Object,
             asignaturas: Array,
-            gruposTodos: Object,
+            grupos: Object,
+            asignatura_id_index: String,
         },
 
         title: 'Grupos',
@@ -156,15 +157,14 @@
         data() {
             return {
                 form: {
-                    asignatura_id: null,
+                    asignatura_id: this.asignatura_id_index,
                 },
-                grupos: this.gruposTodos,
             }
         },
 
         methods: {
             onChange() {
-                this.$inertia.get(this.route('materiales.filtrarPorAsignatura', [this.institucion_id, this.division.id, this.form.asignatura_id]))
+                this.$inertia.replace(this.route('materiales.index', {institucion_id: this.institucion_id, division_id: this.division.id, asignatura_id: this.form.asignatura_id}))
             },
         }
     }

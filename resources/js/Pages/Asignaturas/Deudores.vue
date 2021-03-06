@@ -64,7 +64,7 @@
                 </template>
             </estructura-form>
 
-            <estructura-tabla v-show="mostrar">
+            <estructura-tabla>
                 <template #tabla>
 
                     <table-head-estructura>
@@ -186,6 +186,9 @@
             division: Object,
             asignatura: Object,
             ciclosLectivos: Array,
+            deudores: Object,
+            ciclo_lectivo_id_index: String,
+            aprobado_index: String,
         },
 
         title: 'Alumnos que se llevaron la asignatura',
@@ -193,11 +196,9 @@
         data() {
             return {
                 form: {
-                    ciclo_lectivo_id: null,
-                    aprobado: null,
+                    ciclo_lectivo_id: this.ciclo_lectivo_id_index,
+                    aprobado: this.aprobado_index,
                 },
-                mostrar: false,
-                deudores: [],
             }
         },
 
@@ -209,15 +210,7 @@
             },
 
             onChange() {
-                axios.post(this.route('asignaturas.deudores-filtrados', [this.institucion_id, this.division.id, this.asignatura.id]), this.form)
-                .then(response => {
-                    this.mostrar = true;
-                    this.deudores = response.data;
-                })
-                .catch(e => {
-                    // Podemos mostrar los errores en la consola
-                    console.log(e);
-                })
+                this.$inertia.replace(this.route('asignaturas.deudores', {institucion_id: this.institucion_id, division_id: this.division.id, asignatura_id: this.asignatura.id, ciclo_lectivo_id: this.form.ciclo_lectivo_id, aprobado: this.form.aprobado}))
             },
         }
     }
