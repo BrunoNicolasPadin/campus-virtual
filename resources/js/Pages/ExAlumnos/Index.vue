@@ -298,6 +298,9 @@
             divisiones: Array,
             ciclosLectivos: Array,
             exAlumnos: Object,
+            ciclo_lectivo_id_index: String,
+            division_id_index: String,
+            condicion_index: String,
         },
 
         title: 'Ex alumnos',
@@ -305,9 +308,9 @@
         data() {
             return {
                 form: {
-                    ciclo_lectivo_id: null,
-                    division_id: null,
-                    condicion: null,
+                    ciclo_lectivo_id: this.ciclo_lectivo_id_index,
+                    division_id: this.division_id_index,
+                    condicion: this.condicion_index,
                 },
             }
         },
@@ -320,14 +323,16 @@
             },
 
             onChange() {
-                axios.post(this.route('exalumnos.filtrar', this.institucion_id), this.form)
+                /* axios.get(this.route('exalumnos.filtrar', this.institucion_id), this.form)
                 .then(response => {
                     this.exAlumnos = response.data;
                 })
                 .catch(e => {
                     // Podemos mostrar los errores en la consola
                     console.log(e);
-                })
+                }) */
+
+                this.$inertia.replace(this.route('exalumnos.index', {institucion_id: this.institucion_id, ciclo_lectivo_id: this.form.ciclo_lectivo_id, division_id: this.form.division_id, condicion: this.form.condicion}))
             },
         }
     }

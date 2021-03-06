@@ -250,6 +250,9 @@
             institucion_id: String,
             ciclosLectivos: Array,
             divisiones: Array,
+            repitentes: Object,
+            ciclo_lectivo_id_index: String,
+            division_id_index: String,
         },
 
         title: 'Repitentes',
@@ -257,11 +260,10 @@
         data() {
             return {
                 form: {
-                    ciclo_lectivo_id: null,
-                    division_id: null,
+                    ciclo_lectivo_id: this.ciclo_lectivo_id_index,
+                    division_id: this.division_id_index,
                 },
                 mostrar: false,
-                repitentes: [],
             }
         },
 
@@ -273,15 +275,7 @@
             },
 
             onChange() {
-                axios.post(this.route('repitentes.filtrar', this.institucion_id), this.form)
-                .then(response => {
-                    this.mostrar = true;
-                    this.repitentes = response.data;
-                })
-                .catch(e => {
-                    // Podemos mostrar los errores en la consola
-                    console.log(e);
-                })
+                this.$inertia.replace(this.route('repitentes.index', {institucion_id: this.institucion_id, ciclo_lectivo_id: this.form.ciclo_lectivo_id, division_id: this.form.division_id}))
             },
             
         }

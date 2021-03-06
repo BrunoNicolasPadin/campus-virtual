@@ -40,38 +40,38 @@ class RepitenteController extends Controller
         $this->alumnoService = $alumnoService;
     }
 
-    public function index($institucion_id)
+    public function index($institucion_id, Request $filtros)
     {
+        $repitentes = Repitente::where('institucion_id', $institucion_id)
+        ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
+            return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
+        })
+        ->when($filtros->division_id, function ($query, $division_id) {
+            return $query->where('division_id', $division_id);
+        })
+        ->with('alumno', 'alumno.user', 'ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
+        ->paginate(10)
+        ->withQueryString()
+        ->through(function ($repitente) {
+            return [
+                'id' => $repitente->id,
+                'alumno_id' => $repitente->alumno_id,
+                'division_id' => $repitente->division_id,
+                'division' => $repitente->division,
+                'alumno' => $repitente->alumno,
+                'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->comienzo),
+                'final' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->final),
+                'comentario'  => $repitente->comentario,
+            ];
+        });
         return Inertia::render('Repitentes/Index', [
             'institucion_id' => $institucion_id,
             'divisiones' => $this->divisionService->get($institucion_id),
             'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'repitentes' => $repitentes,
+            'ciclo_lectivo_id_index' => $filtros->ciclo_lectivo_id,
+            'division_id_index' => $filtros->division_id,
         ]);
-    }
-
-    public function filtrarRepitentes($institucion_id, Request $filtros)
-    {
-        return Repitente::where('institucion_id', $institucion_id)
-            ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
-                return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
-            })
-            ->when($filtros->division_id, function ($query, $division_id) {
-                return $query->where('division_id', $division_id);
-            })
-            ->with('alumno', 'alumno.user', 'ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
-            ->paginate(1000)
-            ->transform(function ($repitente) {
-                return [
-                    'id' => $repitente->id,
-                    'alumno_id' => $repitente->alumno_id,
-                    'division_id' => $repitente->division_id,
-                    'division' => $repitente->division,
-                    'alumno' => $repitente->alumno,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($repitente->ciclo_lectivo->final),
-                    'comentario'  => $repitente->comentario,
-                ];
-            });
     }
 
     public function createRepitente($institucion_id, $alumno_id)

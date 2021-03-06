@@ -12,6 +12,7 @@ use App\Services\CiclosLectivos\CicloLectivoService;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
 
 class ExAlumnoController extends Controller
@@ -41,61 +42,9 @@ class ExAlumnoController extends Controller
         $this->alumnoService = $alumnoService;
     }
 
-    public function index($institucion_id)
+    public function index($institucion_id, Request $filtros)
     {
         $exAlumnos = ExAlumno::select('id', 'alumno_id', 'ciclo_lectivo_id', 'division_id', 'abandono', 'finalizo', 'cambio')
-            ->where('institucion_id', $institucion_id)
-            ->with(array(
-                'alumno' => function($query){
-                    $query->select('id', 'user_id');
-                },
-                'alumno.user' => function($query){
-                    $query->select('id', 'name', 'profile_photo_path');
-                },
-                'division' => function($query){
-                    $query->select('id', 'nivel_id', 'orientacion_id', 'curso_id', 'division');
-                },
-                'division.nivel' => function($query){
-                    $query->select('id', 'nombre');
-                },
-                'division.orientacion' => function($query){
-                    $query->select('id', 'nombre');
-                },
-                'division.curso' => function($query){
-                    $query->select('id', 'nombre');
-                },
-                'ciclo_lectivo' => function($query){
-                    $query->select('id', 'comienzo', 'final');
-                },
-            ))
-            ->orderBy('ciclo_lectivo_id')
-            ->paginate(1000)
-            ->transform(function ($exalumno) {
-                return [
-                    'id' => $exalumno->id,
-                    'alumno_id' => $exalumno->alumno_id,
-                    'division_id' => $exalumno->division_id,
-                    'name' => $exalumno->alumno->user->name,
-                    'fotoDePerfil' => $exalumno->alumno->user->profile_photo_path,
-                    'division' => $exalumno->division,
-                    'comienzo' => $this->formatoService->cambiarFormatoParaMostrar($exalumno->ciclo_lectivo->comienzo),
-                    'final' => $this->formatoService->cambiarFormatoParaMostrar($exalumno->ciclo_lectivo->final),
-                    'abandono' => $exalumno->abandono,
-                    'cambio' => $exalumno->cambio,
-                    'finalizo' => $exalumno->finalizo,
-                ];
-            });
-        return Inertia::render('ExAlumnos/Index', [
-            'institucion_id' => $institucion_id,
-            'exAlumnos' => $exAlumnos,
-            'divisiones' => $this->divisionService->get($institucion_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
-        ]);
-    }
-
-    public function filtrarExAlumnos($institucion_id, Request $filtros)
-    {
-        return ExAlumno::select('id', 'alumno_id', 'ciclo_lectivo_id', 'division_id', 'abandono', 'finalizo', 'cambio')
             ->where('institucion_id', $institucion_id)
             ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
                 return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
@@ -136,8 +85,9 @@ class ExAlumnoController extends Controller
                 },
             ))
             ->orderBy('ciclo_lectivo_id')
-            ->paginate(1000)
-            ->transform(function ($exalumno) {
+            ->paginate(10)
+            ->withQueryString()
+            ->through(function ($exalumno) {
                 return [
                     'id' => $exalumno->id,
                     'alumno_id' => $exalumno->alumno_id,
@@ -152,6 +102,15 @@ class ExAlumnoController extends Controller
                     'finalizo' => $exalumno->finalizo,
                 ];
             });
+        return Inertia::render('ExAlumnos/Index', [
+            'institucion_id' => $institucion_id,
+            'exAlumnos' => $exAlumnos,
+            'divisiones' => $this->divisionService->get($institucion_id),
+            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'ciclo_lectivo_id_index' => $filtros->ciclo_lectivo_id,
+            'division_id_index' => $filtros->division_id,
+            'condicion_index' => $filtros->condicion,
+        ]);
     }
 
     public function createExAlumno($institucion_id, $alumno_id)
