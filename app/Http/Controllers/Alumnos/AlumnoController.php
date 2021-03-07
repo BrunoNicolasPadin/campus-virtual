@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Alumnos;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreAlumno;
 use App\Http\Requests\Roles\StoreDirectivo;
+use App\Jobs\Alumnos\AlumnoDestroyJob;
 use App\Models\Roles\Alumno;
 use App\Models\Roles\Padre;
 use App\Services\Alumnos\AlumnoService;
@@ -154,7 +155,7 @@ class AlumnoController extends Controller
 
     public function destroy($institucion_id, $id)
     {
-        Alumno::destroy($id);
+        AlumnoDestroyJob::dispatch($id);
 
         $message = 'Alumno eliminado con éxito!';
 

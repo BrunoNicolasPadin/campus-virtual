@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Deudores\StoreMesa;
+use App\Jobs\Deudores\MesaDestroyJob;
 use App\Models\Deudores\Inscripcion;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
 use App\Models\Materiales\Grupo;
-use App\Services\Archivos\EliminarMesas;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
@@ -17,13 +17,11 @@ use Inertia\Inertia;
 class MesaController extends Controller
 {
     protected $formatoService;
-    protected $mesasService;
     protected $divisionService;
     protected $asignaturaService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        EliminarMesas $mesasService,
         DivisionService $divisionService, 
         AsignaturaService $asignaturaService,
     )
@@ -37,7 +35,6 @@ class MesaController extends Controller
         $this->middleware('mesaCorrespondiente')->except('index', 'create', 'store');
 
         $this->formatoService = $formatoService;
-        $this->mesasService = $mesasService;
         $this->divisionService = $divisionService;
         $this->asignaturaService = $asignaturaService;
     }
@@ -163,9 +160,8 @@ class MesaController extends Controller
 
     public function destroy($institucion_id, $division_id, $asignatura_id, $id)
     {
-        $this->mesasService->eliminarMesas($id);
+        MesaDestroyJob::dispatch($id);
 
-        Mesa::destroy($id);
         return redirect(route('mesas.index', [$institucion_id, $division_id, $asignatura_id]))
             ->with(['successMessage' => 'Mesa eliminada con éxito!']);
     }

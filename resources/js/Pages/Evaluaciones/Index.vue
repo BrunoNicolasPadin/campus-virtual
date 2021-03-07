@@ -95,6 +95,12 @@
                                     Finalización
                                 </template>
                             </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Acción
+                                </template>
+                            </table-head>
                         </template>
                     </table-head-estructura>
 
@@ -110,9 +116,7 @@
 
                                 <table-data>
                                     <template #td>
-                                        <inertia-link class="hover:underline" :href="route('evaluaciones.show', [institucion_id, division.id, evaluacion.id])">
-                                            {{ evaluacion.titulo }}
-                                        </inertia-link>
+                                        {{ evaluacion.titulo }}
                                     </template>
                                 </table-data>
 
@@ -137,6 +141,14 @@
                                 <table-data>
                                     <template #td>
                                         {{ evaluacion.fechaHoraFinalizacion }}
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <inertia-link class="hover:underline" :href="route('evaluaciones.show', [institucion_id, division.id, evaluacion.id])">
+                                            Ingresar
+                                        </inertia-link>
                                     </template>
                                 </table-data>
                             </tr>

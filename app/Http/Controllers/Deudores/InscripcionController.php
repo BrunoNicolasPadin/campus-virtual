@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Deudores;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\UpdateEntrega;
+use App\Jobs\Deudores\InscripcionDestroyJob;
 use App\Models\Deudores\Inscripcion;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
@@ -11,13 +12,11 @@ use App\Models\Deudores\RendirComentario;
 use App\Models\Deudores\RendirCorreccion;
 use App\Models\Deudores\RendirEntrega;
 use App\Models\Roles\Alumno;
-use App\Services\Archivos\EliminarMesas;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
 use App\Services\Division\ObtenerFormaEvaluacion;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use App\Services\Mesas\EvaluarAprobacion;
-use App\Services\Mesas\InscriptoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -25,21 +24,17 @@ use Inertia\Inertia;
 class InscripcionController extends Controller
 {
     protected $formatoService;
-    protected $mesasService;
     protected $evaluarAprobacionService;
     protected $formaEvaluacionService;
     protected $divisionService;
     protected $asignaturaService;
-    protected $inscripcionService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        EliminarMesas $mesasService,
         EvaluarAprobacion $evaluarAprobacionService,
         ObtenerFormaEvaluacion $formaEvaluacionService,
         DivisionService $divisionService,
         AsignaturaService $asignaturaService,
-        InscriptoService $inscripcionService
     )
 
     {
@@ -55,12 +50,10 @@ class InscripcionController extends Controller
         $this->middleware('verificarDesinscripcion')->only('destroy');
 
         $this->formatoService = $formatoService;
-        $this->mesasService = $mesasService;
         $this->evaluarAprobacionService = $evaluarAprobacionService;
         $this->formaEvaluacionService = $formaEvaluacionService;
         $this->divisionService = $divisionService;
         $this->asignaturaService = $asignaturaService;
-        $this->inscripcionService = $inscripcionService;
     }
 
     public function store(Request $request, $institucion_id, $division_id, $asignatura_id, $mesa_id)
@@ -147,9 +140,8 @@ class InscripcionController extends Controller
 
     public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
-        $this->mesasService->eliminarInscripciones($id);
+        InscripcionDestroyJob::dispatch($id);
         
-        Inscripcion::destroy($id);
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))
             ->with(['successMessage' => 'Inscripción eliminada con éxito!']);
 

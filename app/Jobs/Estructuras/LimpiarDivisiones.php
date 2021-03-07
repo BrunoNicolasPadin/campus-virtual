@@ -2,6 +2,8 @@
 
 namespace App\Jobs\Estructuras;
 
+use App\Jobs\Evaluaciones\EvaluacionDestroyJob;
+use App\Jobs\Muro\PublicacionDestroyJob;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroArchivo;
@@ -33,35 +35,11 @@ class LimpiarDivisiones implements ShouldQueue
     public function handle()
     {
         for ($i=0; $i < count($this->request['division_id']); $i++) { 
-            $this->limpiarMuro($this->request['division_id'][$i]);
-            $this->limpiarEvaluaciones($this->request['division_id'][$i]);
-        }
-    }
-
-    public function limpiarMuro($division_id)
-    {
-        $publicaciones = Muro::where('division_id', $division_id)->get();
-        foreach ($publicaciones as $publicacion) {
-
-            $archivos = MuroArchivo::where('muro_id', $publicacion->id)->get();
-            foreach ($archivos as $archivo) {
-                
-                Storage::delete('public/Muro/' . $archivo->archivo);
+            $this->dispatch(new EvaluacionDestroyJob($this->request['division_id']));
+            $publicaciones = Muro::where('division_id', $this->request['division_id'])->get();
+            foreach ($publicaciones as $publicacion) {
+                $this->dispatch(new PublicacionDestroyJob($publicacion->id));
             }
-
-            Muro::destroy($publicacion->id);
-        }
-    }
-
-    public function limpiarEvaluaciones($division_id)
-    {
-        $archivosEvaServices = new EliminarEntregasCorrecciones();
-        $evaluaciones = Evaluacion::where('division_id', $division_id)->get();
-
-        foreach ($evaluaciones as $evaluacion) {
-
-            $archivosEvaServices->eliminarEntregasCorrecciones($evaluacion->id);
-            Evaluacion::destroy($evaluacion->id);
         }
     }
 }

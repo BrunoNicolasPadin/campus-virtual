@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Muro;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StorePublicacion;
+use App\Jobs\Muro\PublicacionDestroyJob;
 use App\Models\Muro\Muro;
-use App\Models\Muro\MuroArchivo;
 use App\Services\Archivos\ObtenerFechaHoraService;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class MuroController extends Controller
@@ -87,11 +86,8 @@ class MuroController extends Controller
 
     public function destroy($institucion_id, $division_id, $id)
     {
-        $archivos = MuroArchivo::where('muro_id', $id)->get();
-        foreach ($archivos as $archivo) {
-            Storage::delete('public/Muro/' . $archivo->archivo);
-        }
-        Muro::destroy($id);
+        PublicacionDestroyJob::dispatch($id);
+
         return back()->with(['successMessage' => 'Publicación eliminada con éxito!']);
     }
 }

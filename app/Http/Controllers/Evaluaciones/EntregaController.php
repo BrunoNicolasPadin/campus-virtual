@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\UpdateEntrega;
+use App\Jobs\Evaluaciones\EntregaDestroyJob;
 use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
@@ -13,7 +14,6 @@ use App\Services\Division\ObtenerFormaEvaluacion;
 use App\Services\Evaluaciones\EvaluacionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EntregaController extends Controller
@@ -122,18 +122,7 @@ class EntregaController extends Controller
 
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
     {
-        $entregasArchivos = EntregaArchivo::where('entrega_id', $id)->get();
-        $correcciones = Correccion::where('entrega_id', $id)->get();
-
-        foreach ($entregasArchivos as $entrega) {
-            Storage::delete('public/Evaluaciones/Entregas/' . $entrega->archivo);
-        }
-
-        foreach ($correcciones as $correccion) {
-            Storage::delete('public/Evaluaciones/Correcciones/' . $correccion->archivo);
-        }
-
-        Entrega::destroy($id);
+        EntregaDestroyJob::dispatch($id);
         return redirect(route('entregas.index', [$institucion_id, $division_id, $evaluacion_id]))
             ->with(['successMessage' => 'Entrega eliminada con éxito!']);
     }

@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Evaluaciones;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\StoreEvaluacion;
+use App\Jobs\Evaluaciones\EvaluacionDestroyJob;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Roles\Docente;
-use App\Services\Archivos\EliminarEntregasCorrecciones;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
@@ -21,13 +21,11 @@ use Inertia\Inertia;
 class EvaluacionController extends Controller
 {
     protected $formatoService;
-    protected $archivosServices;
     protected $divisionService;
     protected $asignaturaService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        EliminarEntregasCorrecciones $archivosServices,
         DivisionService $divisionService,
         AsignaturaService $asignaturaService,
     )
@@ -40,7 +38,6 @@ class EvaluacionController extends Controller
         $this->middleware('evaluacionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
-        $this->archivosServices = $archivosServices;
         $this->divisionService = $divisionService;
         $this->asignaturaService = $asignaturaService;
     }
@@ -194,9 +191,7 @@ class EvaluacionController extends Controller
 
     public function destroy($institucion_id, $division_id, $id)
     {
-        $this->archivosServices->eliminarEntregasCorrecciones($id);
-
-        Evaluacion::destroy($id);
+        EvaluacionDestroyJob::dispatch($id);
         return redirect(route('evaluaciones.index', [$institucion_id, $division_id]))
             ->with(['successMessage' => 'Evaluación eliminada con éxito!']);
     }

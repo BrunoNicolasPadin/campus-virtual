@@ -5,16 +5,11 @@ namespace App\Http\Controllers\Asignaturas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Asignaturas\StoreAsignatura;
 use App\Http\Requests\Asignaturas\UpdateAsignatura;
+use App\Jobs\Asignaturas\AsignaturaDestroyJob;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Asignaturas\AsignaturaHorario;
-use App\Models\Deudores\Mesa;
 use App\Models\Estructuras\Division;
-use App\Models\Evaluaciones\Evaluacion;
-use App\Models\Materiales\Grupo;
-use App\Services\Archivos\EliminarEntregasCorrecciones;
-use App\Services\Archivos\EliminarGruposMateriales;
-use App\Services\Archivos\EliminarMesas;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
 use App\Services\Docentes\DocenteService;
@@ -26,9 +21,6 @@ class AsignaturaController extends Controller
 {
     protected $formatoService;
     protected $formatoFechaService;
-    protected $archivosGruposServices;
-    protected $archivosEvaServices;
-    protected $mesasService;
     protected $divisionService;
     protected $asignaturaService;
     protected $docenteService;
@@ -36,9 +28,6 @@ class AsignaturaController extends Controller
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         CambiarFormatoFecha $formatoFechaService,
-        EliminarGruposMateriales $archivosGruposServices,
-        EliminarEntregasCorrecciones $archivosEvaServices,
-        EliminarMesas $mesasService,
         DivisionService $divisionService, 
         AsignaturaService $asignaturaService,
         DocenteService $docenteService,
@@ -53,9 +42,6 @@ class AsignaturaController extends Controller
 
         $this->formatoService = $formatoService;
         $this->formatoFechaService = $formatoFechaService;
-        $this->archivosGruposServices = $archivosGruposServices;
-        $this->archivosEvaServices = $archivosEvaServices;
-        $this->mesasService = $mesasService;
         $this->divisionService = $divisionService;
         $this->asignaturaService = $asignaturaService;
         $this->docenteService = $docenteService;
@@ -190,25 +176,8 @@ class AsignaturaController extends Controller
 
     public function destroy($institucion_id, $division_id, $id)
     {
-        $grupos = Grupo::where('asignatura_id', $id)->get();
-        foreach ($grupos as $grupo) {
-            $this->archivosGruposServices->eliminarGruposMateriales($grupo->id);
-        }
-
-        $evaluaciones = Evaluacion::where('asignatura_id', $id)->get();
-        foreach ($evaluaciones as $evaluacion) {
-
-            $this->archivosEvaServices->eliminarEntregasCorrecciones($evaluacion->id);
-        }
-
-        $mesas = Mesa::where('asignatura_id', $id)->get();
-        foreach ($mesas as $mesa) {
-            
-            $this->mesasService->eliminarMesas($mesa->id);
-        }
-        
+        AsignaturaDestroyJob::dispatch($id);
     
-        Asignatura::destroy($id);
         return redirect(route('asignaturas.index', [$institucion_id, $division_id]))
             ->with(['successMessage' => 'Asignatura eliminada con éxito!']);
     }

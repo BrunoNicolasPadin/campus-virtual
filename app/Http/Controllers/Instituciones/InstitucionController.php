@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Instituciones;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Instituciones\StoreInstitucion;
 use App\Http\Requests\Instituciones\UpdateInstitucion;
+use App\Jobs\Instituciones\InstitucionDestroyJob;
 use App\Models\Instituciones\Institucion;
 use App\Services\Archivos\ObtenerFechaHoraService;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
@@ -135,10 +136,8 @@ class InstitucionController extends Controller
 
     public function destroy($id)
     {
-        $institucion = Institucion::findOrFail($id);
-        Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
+        InstitucionDestroyJob::dispatch($id);
 
-        Institucion::destroy($id);
         return redirect(route('instituciones.create'))
             ->with(['successMessage' => 'Institución eliminada con éxito']);
     }

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Materiales;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Materiales\StoreGrupo;
+use App\Jobs\Materiales\GrupoDestroyJob;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
 use App\Models\Roles\Docente;
-use App\Services\Archivos\EliminarGruposMateriales;
 use App\Services\Asignaturas\AsignaturaService;
 use App\Services\Division\DivisionService;
 use Illuminate\Http\Request;
@@ -18,12 +18,10 @@ use Inertia\Inertia;
 
 class GrupoController extends Controller
 {
-    protected $archivosServices;
     protected $divisionService;
     protected $asignaturaService;
 
     public function __construct(
-        EliminarGruposMateriales $archivosServices,
         DivisionService $divisionService, 
         AsignaturaService $asignaturaService,
     )
@@ -35,7 +33,6 @@ class GrupoController extends Controller
         $this->middleware('soloInstitucionesDirectivosDocentes')->except('index', 'show');
         $this->middleware('grupoCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
-        $this->archivosServices = $archivosServices;
         $this->divisionService = $divisionService;
         $this->asignaturaService = $asignaturaService;
     }
@@ -146,9 +143,8 @@ class GrupoController extends Controller
 
     public function destroy($institucion_id, $division_id, $id)
     {
-        $this->archivosServices->eliminarGruposMateriales($id);
+        GrupoDestroyJob::dispatch($id);
 
-        Grupo::destroy($id);
         return redirect(route('materiales.index', [$institucion_id, $division_id]))
             ->with(['successMessage' => 'Grupo eliminado con éxito!']);
     }
