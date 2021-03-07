@@ -91,13 +91,8 @@ class AlumnoController extends Controller
             $alumno->division()->associate($request->division_id);
             $alumno->save();
 
-            session(['tipo' => 'Alumno']);
-            session(['tipo_id' => $alumno->id]);
-            session(['institucion_id' => $institucion_id]);
-            session(['division_id' => $request->division_id]);
-
             return redirect(route('roles.mostrarCuentas'))
-                ->with(['successMessage' => 'Te registraste exitosamente como alumno.']);
+                ->with(['successMessage' => 'Te registraste exitosamente como alumno, ahora activa tu cuenta.']);
         }
         return redirect(route('alumnos.create', $institucion_id))->withErrors('Clave de acceso incorrecta.');
     }

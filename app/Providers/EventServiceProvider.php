@@ -29,18 +29,6 @@ class EventServiceProvider extends ServiceProvider
         /* Registered::class => [
             SendEmailVerificationNotification::class,
         ], */
-        \App\Events\EntregaActualizada::class => [
-            \App\Listeners\EnviarEmailEntrega::class,
-        ],
-        \App\Events\LibretaActualizada::class => [
-            \App\Listeners\EnviarEmailLibreta::class,
-        ],
-        \App\Events\InscripcionActualizada::class => [
-            \App\Listeners\EnviarEmailInscripcion::class,
-        ],
-        \App\Events\EvaluacionCreada::class => [
-            \App\Listeners\EnviarEmailEvaluacionCreada::class,
-        ],
     ];
 
     /**

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Jobs\Deudores;
+namespace App\Jobs\Alumnos;
 
-use App\Events\InscripcionActualizada;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,19 +9,17 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class EnviarEmailActualizacionInscripcion implements ShouldQueue
+class AlumnoDestroyJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $inscripcion;
-
-    public function __construct($inscripcion)
+    public function __construct()
     {
-        $this->inscripcion = $inscripcion;
+        //
     }
 
     public function handle()
     {
-        event(new InscripcionActualizada($this->inscripcion));
+        //
     }
 }

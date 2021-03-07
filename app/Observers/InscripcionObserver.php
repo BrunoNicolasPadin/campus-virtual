@@ -2,13 +2,13 @@
 
 namespace App\Observers;
 
-use App\Jobs\Deudores\EnviarEmailActualizacionInscripcion;
+use App\Jobs\Deudores\EnviarEmailActualizacionInscripcionJob;
 use App\Models\Deudores\Inscripcion;
 
 class InscripcionObserver
 {
     public function updated(Inscripcion $inscripcion)
     {
-        /* EnviarEmailActualizacionInscripcion::dispatch($inscripcion); */
+        EnviarEmailActualizacionInscripcionJob::dispatch($inscripcion);
     }
 }

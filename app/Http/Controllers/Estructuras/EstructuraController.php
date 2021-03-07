@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Estructuras;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Estructuras\StoreDivision;
 use App\Http\Requests\Estructuras\UpdateDivision;
+use App\Models\Asignaturas\Asignatura;
 use App\Models\Estructuras\Curso;
 use App\Models\Estructuras\Division;
 use App\Models\Estructuras\FormaEvaluacion;
@@ -128,6 +129,26 @@ class EstructuraController extends Controller
 
     public function destroy($institucion_id, $id)
     {
+        /* $asignaturas = Asignatura::where('division_id', $id)->get();
+
+        foreach ($asignaturas as $asignatura) {
+            $grupos = Grupo::where('asignatura_id', $asignatura->id)->get();
+            foreach ($grupos as $grupo) {
+                $this->archivosGruposServices->eliminarGruposMateriales($grupo->id);
+            }
+
+            $evaluaciones = Evaluacion::where('asignatura_id', $asignatura->id)->get();
+            foreach ($evaluaciones as $evaluacion) {
+
+                $this->archivosEvaServices->eliminarEntregasCorrecciones($evaluacion->id);
+            }
+
+            $mesas = Mesa::where('asignatura_id', $asignatura->id)->get();
+            foreach ($mesas as $mesa) {
+                
+                $this->mesasService->eliminarMesas($mesa->id);
+            }
+        } */
         Division::destroy($id);
         return redirect(route('divisiones.index', $institucion_id))
             ->with(['successMessage' => 'División eliminada con éxito!']); 
