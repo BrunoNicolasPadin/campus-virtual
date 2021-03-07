@@ -3,8 +3,6 @@
 namespace App\Services\Estadisticas;
 
 use App\Models\CiclosLectivos\CicloLectivo;
-use App\Models\Repitentes\Repitente;
-use App\Models\Roles\ExAlumno;
 use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +29,7 @@ class ExAlumnosRepitentesService
         $divisiones = $this->divisionService->get($institucion_id);
 
         if ($tipo == 'Ex Alumnos') {
-            $arreglo = DB::table('exAlumnos')->where('institucion_id', $institucion_id)->where('abandono', 1)->get();
+            $arreglo = DB::table('ex_alumnos')->where('institucion_id', $institucion_id)->where('abandono', 1)->get();
         }
         else {
             $arreglo = DB::table('repitentes')->where('institucion_id', $institucion_id)->get();

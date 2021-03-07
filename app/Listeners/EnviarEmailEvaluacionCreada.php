@@ -18,7 +18,7 @@ class EnviarEmailEvaluacionCreada
 
     public function handle(EvaluacionCreada $event)
     {
-        $alumno = Alumno::with('padres', 'padres.user')->findOrFail($event->alumno->id);
+        /* $alumno = Alumno::with('padres', 'padres.user')->findOrFail($event->alumno->id);
         $to_email = $alumno->user->email;
 
         $detalles = [
@@ -40,6 +40,6 @@ class EnviarEmailEvaluacionCreada
                 'asunto' => 'Nueva evaluación',
             ];
             Mail::to($to_email)->send(new CreacionEvaluacion($detalles));
-        }
+        } */
     }
 }

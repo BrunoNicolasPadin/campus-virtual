@@ -24,6 +24,15 @@ class CambiarFormatoFechaHora
         return $fechaHora;
     }
 
+    public function cambiarFormatoParaComparar($fechaHora)
+    {
+        if (! $fechaHora == '') {
+            $date = new DateTime($fechaHora);
+            return $date->format('d-m-Y H:i:s');
+        }
+        return $fechaHora;
+    }
+
     public function cambiarFormatoParaEditar($fechaHora)
     {
         if (! $fechaHora == '') {

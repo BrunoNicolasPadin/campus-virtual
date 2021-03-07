@@ -113,15 +113,16 @@ class CalendarioDocenteController extends Controller
     public function obtenerMesasEloquent($asignatura_id, $year, $mes)
     {
         return Mesa::where('asignatura_id', $asignatura_id)
-            ->whereYear('fechaHora', $year)
-            ->whereMonth('fechaHora', $mes)
+            ->whereYear('fechaHoraRealizacion', $year)
+            ->whereMonth('fechaHoraRealizacion', $mes)
             ->with(['asignatura.division', 'asignatura.division.nivel', 'asignatura.division.orientacion', 'asignatura.division.curso', 'asignatura'])
             ->get()
             ->map(function ($mesa) {
                 return [
                     'id' => $mesa->id,
                     'institucion_id' => $mesa->institucion_id,
-                    'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHora),
+                    'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
+                    'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
                     'asignatura' => $mesa->asignatura->only('id', 'division_id', 'nombre'),
                     'division' => $mesa->asignatura->division,
                 ];

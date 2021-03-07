@@ -239,7 +239,7 @@
             </div>
 
             <div v-if="padres">   
-                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Padres</h2>
+                <h2 class="container mx-auto px-4 sm:px-8 text-2xl font-semibold leading-tight">Padres (Activar para ver lo mismo que su hijo/a)</h2>
                 <estructura-tabla>
                     <template #tabla>
                         <table-head-estructura>

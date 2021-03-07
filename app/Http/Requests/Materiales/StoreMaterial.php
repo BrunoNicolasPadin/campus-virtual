@@ -31,7 +31,7 @@ class StoreMaterial extends FormRequest
             'archivos.*.required' => 'Debe ingresar un archivo.',
             'archivos.*.file' => 'Debe seleccionar un archivo, no otra cosa.',
             'archivos.*.max' => 'Cada archivo no debe superar los 20MB.',
-            'archivos.*.mimetypes' => 'Hay un archivo que no esta en el tipo de archivo permitido.',
+            'archivos.*.mimetypes' => 'Hay un archivo que no esta en el tipo de archivo permitido: pd, doc, docx, powerpoint, excel, ppsx, avi, mpeg, quicktime, mp4, jpg, jpeg, png',
         ];
     }
 }

@@ -67,9 +67,9 @@
                                     </template>
                                 </table-data>
 
-                                <table-data>
+                                <table-data v-for="inscripcion in mesa.inscripcion" :key="inscripcion.id">
                                     <template #td>
-                                        <inertia-link class="hover:underline" :href="route('mesas.show', [institucion_id, mesa.asignatura.division_id, mesa.asignatura_id, mesa.id])">
+                                        <inertia-link class="hover:underline" :href="route('inscripciones.show', [institucion_id, mesa.asignatura.division_id, mesa.asignatura_id, mesa.id, inscripcion.id])">
                                             Ingresar
                                         </inertia-link>
                                     </template>

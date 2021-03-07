@@ -20,7 +20,7 @@ class ContactoController extends Controller
         ];
 
         Mail::to($to_email)->send(new Contacto($details));
-        return back();
+        return back()->with(['successMessage' => 'Email enviado con éxito!']);
 
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Jobs\Evaluaciones;
 
-use App\Events\EvaluacionCreada;
+use App\Models\Evaluaciones\Entrega;
 use App\Models\Roles\Alumno;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class EnviarEmailNuevaEvaluacion implements ShouldQueue
+class CrearEntregaJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -28,7 +28,10 @@ class EnviarEmailNuevaEvaluacion implements ShouldQueue
 
         foreach ($alumnos as $alumno) {
 
-            event(new EvaluacionCreada($this->evaluacion, $alumno));
+            $entrega = new Entrega();
+            $entrega->evaluacion_id = $this->evaluacion->id;
+            $entrega->alumno_id = $alumno->id;
+            $entrega->save();
         }
     }
 }

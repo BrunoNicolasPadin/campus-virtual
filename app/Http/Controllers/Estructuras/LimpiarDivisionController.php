@@ -41,38 +41,7 @@ class LimpiarDivisionController extends Controller
 
     public function limpiarDivisiones($institucion_id, LimpiezaValidation $request)
     {
-        /* for ($i=0; $i < count($request->division_id); $i++) { 
-            $this->limpiarMuro($request->division_id[$i]);
-            $this->limpiarEvaluaciones($request->division_id[$i]);
-        } */
-
         LimpiarDivisiones::dispatch($institucion_id, $request->all());
         return back()->with(['successMessage' => 'Divisiones limpiadas con éxito!']);
     }
-
-    /* public function limpiarMuro($division_id)
-    {
-        $publicaciones = Muro::where('division_id', $division_id)->get();
-        foreach ($publicaciones as $publicacion) {
-
-            $archivos = MuroArchivo::where('muro_id', $publicacion->id)->get();
-            foreach ($archivos as $archivo) {
-                
-                Storage::delete('public/Muro/' . $archivo->archivo);
-            }
-
-            Muro::destroy($publicacion->id);
-        }
-    }
-
-    public function limpiarEvaluaciones($division_id)
-    {
-        $evaluaciones = Evaluacion::where('division_id', $division_id)->get();
-
-        foreach ($evaluaciones as $evaluacion) {
-
-            $this->archivosEvaServices->eliminarEntregasCorrecciones($evaluacion->id);
-            Evaluacion::destroy($evaluacion->id);
-        }
-    } */
 }

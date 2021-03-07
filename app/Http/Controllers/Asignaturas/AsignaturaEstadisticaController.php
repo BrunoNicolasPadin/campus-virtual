@@ -116,19 +116,18 @@ class AsignaturaEstadisticaController extends Controller
             $i++;
 
             if ($i == count($periodos)) {
+
+                $calificacionesAlumnos[$a] = [
+                    'nombre' => $libreta->name,
+                    'calificaciones' => $calificacionAlumno,
+                ];
+
+                for ($i=0; $i < count($calificacionAlumno); $i++) { 
+                    $calificacionAlumno[$i] = 0;
+                }
                 $i = 0;
+                $a++;
             }
-
-            $calificacionesAlumnos[$a] = [
-                'nombre' => $libreta->name,
-                'calificaciones' => $calificacionAlumno,
-            ];
-
-            for ($i=0; $i < count($calificacionAlumno); $i++) { 
-                $calificacionAlumno[$i] = 0;
-            }
-            $i = 0;
-            $a++;
         }
         return [$totalPeriodo, $cantidadPeriodo, $calificacionesAlumnos];
     }

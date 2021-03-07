@@ -17,7 +17,8 @@ class CreateMesasTable extends Migration
             $table->id();
             $table->foreignId('institucion_id')->constrained('instituciones')->onDelete('cascade');
             $table->foreignId('asignatura_id')->constrained('asignaturas')->onDelete('cascade');
-            $table->dateTime('fechaHora');
+            $table->dateTime('fechaHoraRealizacion');
+            $table->dateTime('fechaHoraFinalizacion');
             $table->text('comentario')->nullable();
             $table->timestamps();
         });

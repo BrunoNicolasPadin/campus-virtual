@@ -60,7 +60,7 @@
                             </div>
                         </div>
 
-                        <div v-show="mostrar" class="-mx-3 md:flex mb-6">
+                        <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-full px-3 mb-6 md:mb-0">
                                 
                                 <label-form>
@@ -68,14 +68,27 @@
                                         ¿Desde que valor un alumno esta aprobado? EJ: 60, 6 o 7, etc...
                                     </template>
                                 </label-form>
+
+                                <div v-if="mostrar">
+                                    <input-form required type="text" v-model="form.desdeCuando" />
+                                    <info>
+                                        <template #info>
+                                            Es obligatorio.
+                                        </template>
+                                    </info>
+                                </div>
+
+                                <div v-else>
+                                    <input-form disabled type="text" v-model="form.desdeCuando" />
+                                    <info>
+                                        <template #info>
+                                            No debe ingresar nada.
+                                        </template>
+                                    </info>
+                                </div>
                                 
-                                <input-form required type="text" v-model="form.desdeCuando" />
                                 
-                                <info>
-                                    <template #info>
-                                        Es obligatorio.
-                                    </template>
-                                </info>
+                                
                             </div>
                         </div>
                         <guardar></guardar>

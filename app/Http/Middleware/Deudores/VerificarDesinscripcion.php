@@ -34,7 +34,7 @@ class VerificarDesinscripcion
             $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
             $mesa = Mesa::select('fechaHoraRealizacion')->findOrFail($link[10]);
 
-            if ($fechaHora >= $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion)) {
+            if ($fechaHora >= $this->formatoService->cambiarFormatoParaComparar($mesa->fechaHoraRealizacion)) {
                 abort(403, 'No puedes desinscribirte despues de la fecha y hora de la mesa.');
             }
             return $next($request);

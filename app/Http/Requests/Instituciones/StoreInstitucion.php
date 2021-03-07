@@ -20,11 +20,7 @@ class StoreInstitucion extends FormRequest
             'claveDeAcceso' => 'required|min:8|max:32',
             'claveDeAcceso_confirmation' => 'required|min:8|max:32|same:claveDeAcceso',
             'boolArchivo' => 'required',
-            'archivo' => 'exclude_if:boolArchivo,false|nullable|file|max:20480|mimetypes:application/pdf,application/msword,
-            application/vnd.openxmlformats-officedocument.wordprocessingml.document,
-            application/vnd.ms-excel,application/vnd.ms-powerpoint,
-            application/vnd.openxmlformats-officedocument.presentationml.slideshow,
-            video/avi,video/mpeg,video/quicktime,video/mp4,video/MP2T,video/x-ms-wmv,application/x-mpegURL,image/jpeg,image/png',
+            'archivo' => 'exclude_if:boolArchivo,false|nullable|file|max:20480|mimetypes:application/pdf',
         ];
     }
 
@@ -40,7 +36,7 @@ class StoreInstitucion extends FormRequest
             'claveDeAcceso_confirmation.same' => 'Las claves de acceso no coinciden.',
             'archivo.file' => 'Debe ingresar un archivo, no otra cosa.',
             'archivo.max' => 'El archivo no debe superar los 20MB.',
-            'archivo.mimetypes' => 'El archivo no esta en el tipo de archivos permitidos.',
+            'archivo.mimetypes' => 'El archivo no esta en el tipo de archivos permitidos: PDF.',
         ];
     }
 }

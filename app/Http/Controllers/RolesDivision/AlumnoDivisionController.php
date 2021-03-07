@@ -4,10 +4,8 @@ namespace App\Http\Controllers\RolesDivision;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\PasarDeAnioUpdate;
-use App\Models\Estructuras\Division;
 use App\Models\Roles\Alumno;
 use App\Services\Division\DivisionService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 

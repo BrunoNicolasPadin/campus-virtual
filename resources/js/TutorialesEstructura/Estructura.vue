@@ -32,12 +32,6 @@
                     </li>
                     <li>
                         <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
-                            :href="route('tutoriales.nuevo-ciclo-lectivo')">
-                            ¿Está por comenzar un ciclo lectivo nuevo? Sigue estos pasos
-                        </inertia-link>
-                    </li>
-                    <li>
-                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
                             :href="route('tutoriales.soporte')">
                             Soporte
                         </inertia-link>

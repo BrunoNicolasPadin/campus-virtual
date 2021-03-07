@@ -101,14 +101,18 @@ class CalendarioAlumnoController extends Controller
 
     public function obtenerMesasEloquent($year, $mes)
     {
-        return Inscripcion::where('alumno_id', session('tipo_id'))
+        $alumno_id = session('tipo_id');
+        if (session('tipo') == 'Padre') {
+            $alumno_id = session('alumno_id');
+        }
+        return Inscripcion::where('alumno_id', $alumno_id)
             ->where('calificacion', null)
             ->with(['mesa', 'mesa.asignatura.division', 'mesa.asignatura.division.nivel', 
                 'mesa.asignatura.division.orientacion', 'mesa.asignatura.division.curso', 'mesa.asignatura'])
             ->whereHas('mesa', function($q) use ($year, $mes)
             {
-                $q->whereYear('fechaHora', $year);
-                $q->whereMonth('fechaHora', $mes);
+                $q->whereYear('fechaHoraRealizacion', $year);
+                $q->whereMonth('fechaHoraRealizacion', $mes);
 
             })
             ->get()
@@ -116,7 +120,8 @@ class CalendarioAlumnoController extends Controller
                 return [
                     'id' => $inscripcion->mesa->id,
                     'institucion_id' => $inscripcion->mesa->institucion_id,
-                    'fechaHora' => $this->formatoService->cambiarFormatoParaMostrar($inscripcion->mesa->fechaHora),
+                    'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($inscripcion->mesa->fechaHoraRealizacion),
+                    'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($inscripcion->mesa->fechaHoraFinalizacion),
                     'asignatura' => $inscripcion->mesa->asignatura->only('id', 'division_id', 'nombre'),
                     'division' => $inscripcion->mesa->asignatura->division,
                 ];

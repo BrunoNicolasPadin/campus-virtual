@@ -8,7 +8,8 @@
                     <span v-else>{{ division.nivel_nombre }} - {{ division.curso_nombre }} - {{ division.division }}</span>
                 </inertia-link> / 
                 <inertia-link class="hover:underline" :href="route('materiales.index', [institucion_id, division.id])">Grupos de materiales</inertia-link> / 
-                {{ grupo.nombre }} / Editar
+                <inertia-link class="hover:underline" :href="route('materiales.show', [institucion_id, division.id, grupo.id])">{{ grupo.nombre }}</inertia-link> / 
+                Editar
             </span>
         </template>
 

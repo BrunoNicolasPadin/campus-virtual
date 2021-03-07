@@ -20,12 +20,12 @@
                     <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-5 sm:px-6 md:mt-5 lg:mt-5 lg:px-8 xl:mt-5">
                         <div class="text-center">
                             <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                                <span class="block xl:inline">Moderniza tu colegio</span>
+                                <span class="block xl:inline">Modernizá tu colegio</span>
                                 <span class="block text-indigo-600 xl:inline">con Gescol</span>
                             </h1>
                             <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
-                                Conecta a tus directivos, docentes, alumnos, padres y madres en un solo lugar y permite que accedan a la información relacionada a 
-                                los exámenes, tareas, trabajos prácticos, libretas de calificaciones, estadísticas y mas cuando lo deseen.
+                                Conectá a tus directivos, docentes, alumnos, padres y madres en un solo lugar y permití que accedan a la información relacionada a 
+                                los exámenes, tareas, trabajos prácticos, libretas de calificaciones, estadísticas y más, todo cuando ellos lo deseen.
                             </p>
                         </div>
                     </main>
@@ -184,6 +184,7 @@
                         Contacto
                     </p>
                 </div>
+                <flash-messages></flash-messages>
                 <div class="pt-6 pb-8 px-4 sm:px-8 my-2 mb-4">
                     <estructura-form>
                         <template #formulario>
@@ -198,7 +199,7 @@
                                             </template>
                                         </label-form>
                                         
-                                        <input-form type="email" v-model="form.email" />
+                                        <input-form required type="email" v-model="form.email" />
                                         
                                         <info>
                                             <template #info>
@@ -307,6 +308,7 @@
     import InputForm from '@/Formulario/InputForm.vue'
     import Info from '@/Formulario/Info.vue'
     import Guardar from '@/Botones/Guardar.vue'
+    import FlashMessages from '@/Shared/FlashMessages.vue'
 
     export default {
         components: {
@@ -315,11 +317,11 @@
             InputForm,
             Info,
             Guardar,
+            FlashMessages,
         },
 
         props: {
             autenticado: Boolean,
-            successMessage: String,
         },
 
         title: 'Gescol - Inicio',
@@ -331,7 +333,6 @@
                     asunto: null,
                     mensaje: null,
                 },
-                mostrarErrores: true,
             }
         },
 
@@ -339,10 +340,6 @@
             submit() {
                 this.$inertia.post(this.route('contacto.enviarEmail'), this.form)
             },
-
-            cerrarAlerta() {
-                this.mostrarErrores = false;
-            }
         },
     }
 </script>

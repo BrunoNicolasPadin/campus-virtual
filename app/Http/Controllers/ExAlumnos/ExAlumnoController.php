@@ -59,21 +59,21 @@ class ExAlumnoController extends Controller
             ->join('users', 'users.id', 'alumnos.user_id')
             ->join('ciclos_lectivos', 'ciclos_lectivos.id', 'ex_alumnos.ciclo_lectivo_id')
             ->when($filtros->ciclo_lectivo_id, function ($query, $ciclo_lectivo_id) {
-                return $query->where('ciclo_lectivo_id', $ciclo_lectivo_id);
+                return $query->where('ex_alumnos.ciclo_lectivo_id', $ciclo_lectivo_id);
             })
             ->when($filtros->division_id, function ($query, $division_id) {
-                return $query->where('division_id', $division_id);
+                return $query->where('ex_alumnos.division_id', $division_id);
             })
             ->when($filtros->condicion == 'abandono', function ($query, $abandono) {
-                return $query->where('abandono', true);
+                return $query->where('ex_alumnos.abandono', true);
             })
             ->when($filtros->condicion == 'finalizo', function ($query, $finalizo) {
-                return $query->where('finalizo', true);
+                return $query->where('ex_alumnos.finalizo', true);
             })
             ->when($filtros->condicion == 'cambio', function ($query, $cambio) {
-                return $query->where('cambio', true);
+                return $query->where('ex_alumnos.cambio', true);
             })
-            ->orderBy('ciclo_lectivo_id')
+            ->orderBy('users.name')
             ->paginate(10)
             ->withQueryString()
             ->through(function ($exalumno) {

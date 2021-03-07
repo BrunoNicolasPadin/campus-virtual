@@ -9,6 +9,6 @@ class InscripcionObserver
 {
     public function updated(Inscripcion $inscripcion)
     {
-        EnviarEmailActualizacionInscripcion::dispatch($inscripcion);
+        /* EnviarEmailActualizacionInscripcion::dispatch($inscripcion); */
     }
 }

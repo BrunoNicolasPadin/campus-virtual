@@ -9,6 +9,6 @@ class EntregaObserver
 {
     public function updated(Entrega $entrega)
     {
-        EnviarEmailActualizacionEntrega::dispatch($entrega);
+        /* EnviarEmailActualizacionEntrega::dispatch($entrega); */
     }
 }

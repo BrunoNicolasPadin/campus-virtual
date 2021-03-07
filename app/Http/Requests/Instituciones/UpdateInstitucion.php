@@ -36,7 +36,7 @@ class UpdateInstitucion extends FormRequest
             'claveDeAccesoNuevaConfirmation.same' => 'Las claves de acceso no coinciden.',
             'archivo.file' => 'Debe ingresar un archivo, no otra cosa.',
             'archivo.max' => 'El archivo no debe superar los 20MB.',
-            'archivo.mimetypes' => 'El archivo no está dentro de la lista de tipo de archivos permitidos.',
+            'archivo.mimetypes' => 'El archivo no está dentro de la lista de tipo de archivos permitidos: PDF.',
         ];
     }
 }

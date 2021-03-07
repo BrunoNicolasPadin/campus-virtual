@@ -48,6 +48,7 @@ class EvaluacionRespuestaController extends Controller
         return Inertia::render('Evaluaciones/Respuestas/Index', [
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
+            'tipo' => session('tipo'),
             'division' => $this->divisionService->find($division_id),
             'evaluacion' => $this->evaluacionService->find($evaluacion_id),
             'comentario' => [

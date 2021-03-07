@@ -90,7 +90,7 @@
 
                                 <table-data >
                                     <template #td v-if="alumno.profile_photo_path">
-                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../storage/' + alumno.profile_photo_path "  alt="Foto de perfil" />
+                                        <img class="block m-auto p-auto h-20 w-20 object-cover" :src="'../../../../../storage/' + alumno.profile_photo_path "  alt="Foto de perfil" />
                                     </template>
 
                                     <template #td v-else>
@@ -100,9 +100,9 @@
 
                                 <table-data>
                                     <template #td>
-                                        <a class="hover:underline" :href="route('alumnos.show', [institucion_id, alumno.id])">
+                                        <inertia-link :href="route('alumnos.show', [institucion_id, alumno.id])" class="hover:underline">
                                             {{ alumno.name }}
-                                        </a>
+                                        </inertia-link>
                                     </template>
                                 </table-data>
 

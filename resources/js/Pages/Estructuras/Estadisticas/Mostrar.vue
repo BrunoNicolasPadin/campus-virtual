@@ -154,9 +154,9 @@
                 .then(response => {
                     this.mostrar = true;
                     if (response.data[0] == 'No escrita') {
-                        this.promedios = response.data[0];
-                        this.periodos = response.data[1];
-                        this.promediosAlumnos = response.data[2];
+                        this.promedios = response.data[1];
+                        this.periodos = response.data[2];
+                        this.promediosAlumnos = response.data[3];
 
                         this.chartOptions = {
                             xAxis: {

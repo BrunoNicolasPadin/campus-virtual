@@ -30,6 +30,6 @@ class CreateInscripcionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anotados');
+        Schema::dropIfExists('inscripciones');
     }
 }
