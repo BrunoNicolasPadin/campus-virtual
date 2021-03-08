@@ -15,7 +15,7 @@
                 <div v-show="tipo == 'Institucion' || tipo == 'Directivo' " class="w-4/12">
                     <primary class="float-right">
                         <template #boton-primary>
-                            <inertia-link :href="route('alumnosDivision.hacerlosPasar', [institucion_id, division.id])">Pasar de año</inertia-link>
+                            <inertia-link :href="route('alumnosDivision.hacerlos_pasar', [institucion_id, division.id])">Pasar de año</inertia-link>
                         </template>
                     </primary>
                 </div>

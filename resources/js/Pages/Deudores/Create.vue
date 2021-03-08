@@ -89,7 +89,7 @@
 
         methods: {
             onChange() {
-                this.$inertia.get(this.route('asignaturas-adeudadas.createAsignatura', [this.institucion_id, this.alumno.id, this.form.division_id]))
+                this.$inertia.get(this.route('asignaturas_adeudadas.create_asignatura', [this.institucion_id, this.alumno.id, this.form.division_id]))
             },
         },
     }

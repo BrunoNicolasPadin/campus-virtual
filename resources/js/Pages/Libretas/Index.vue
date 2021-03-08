@@ -12,7 +12,7 @@
                 </div>
                 <div v-show="mostrar" class="w-4/12">
                     <button type="button" class="float-right border border-indigo-500 bg-indigo-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-700 focus:outline-none focus:shadow-outline">
-                        <a :href="route('libretas.exportarUna', [institucion_id, alumno.id, ciclo_lectivo_id])" target="_blank" rel="noopener noreferrer">Exportar</a>
+                        <a :href="route('libretas.exportar_una', [institucion_id, alumno.id, ciclo_lectivo_id])" target="_blank" rel="noopener noreferrer">Exportar</a>
                     </button>
                 </div>
             </div>

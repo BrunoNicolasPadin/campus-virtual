@@ -85,7 +85,7 @@
                             Estadísticas
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <inertia-link class="hover:underline" :href="route('divisiones.mostrarCiclosLectivos', [institucion_id, division.id])">
+                            <inertia-link class="hover:underline" :href="route('divisiones.mostrar_ciclos_lectivos', [institucion_id, division.id])">
                                 Ver
                             </inertia-link>
                         </dd>

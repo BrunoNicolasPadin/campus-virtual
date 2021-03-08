@@ -169,7 +169,7 @@
 
         methods: {
             submit() {
-                this.$inertia.post(this.route('alumnosDivision.cambiarCurso', [this.institucion_id, this.division.id]), this.form)
+                this.$inertia.post(this.route('alumnosDivision.cambiar_curso', [this.institucion_id, this.division.id]), this.form)
             },
         },
     }

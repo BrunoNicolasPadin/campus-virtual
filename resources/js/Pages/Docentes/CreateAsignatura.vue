@@ -160,7 +160,7 @@
 
         methods: {
             onChange() {
-                axios.get(this.route('docentes.listarAsignaturas', [this.institucion_id, this.docente.id, this.form.division_id]))
+                axios.get(this.route('docentes.listar_asignaturas', [this.institucion_id, this.docente.id, this.form.division_id]))
                     .then(response => {
                         this.mostrar = true;
                         this.asignaturas = response.data;

@@ -92,7 +92,7 @@
 
         methods: {
             onChange() {
-                axios.get(this.route('alumnos.mostrarEstadisticas', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id]))
+                axios.get(this.route('alumnos.mostrar_estadisticas', [this.institucion_id, this.alumno.id, this.form.ciclo_lectivo_id]))
                 .then(response => {
                     this.mostrar = true;
                     if (response.data[0] == 'No escrita') {

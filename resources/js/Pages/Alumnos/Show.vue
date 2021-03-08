@@ -90,7 +90,7 @@
                             Estadísticas
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
-                            <inertia-link class="hover:underline" :href="route('alumnos.mostrarCiclosLectivos', [institucion_id, alumno.id])">
+                            <inertia-link class="hover:underline" :href="route('alumnos.mostrar_ciclos_lectivos', [institucion_id, alumno.id])">
                                 Ver
                             </inertia-link>
                         </dd>
@@ -114,7 +114,7 @@
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <primary>
                                 <template #boton-primary>
-                                    <inertia-link :href="route('repitentes.createRepitente', [institucion_id, alumno.id])">Procesar</inertia-link>
+                                    <inertia-link :href="route('repitentes.create_repitente', [institucion_id, alumno.id])">Procesar</inertia-link>
                                 </template>
                             </primary>
                         </dd>
@@ -127,7 +127,7 @@
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <primary v-if="alumno.exAlumno == 0">
                                 <template #boton-primary>
-                                    <inertia-link :href="route('exalumnos.createExAlumno', [institucion_id, alumno.id])">Procesar</inertia-link>
+                                    <inertia-link :href="route('exalumnos.create_ex_alumno', [institucion_id, alumno.id])">Procesar</inertia-link>
                                 </template>
                             </primary>
 

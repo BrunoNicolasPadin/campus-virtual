@@ -150,7 +150,7 @@
                 if (this.nombre == '') {
                     this.$inertia.get(this.route('directivos.index', this.institucion_id))
                 } else {
-                    this.$inertia.replace(this.route('buscador-de-directivos', {institucion_id: this.institucion_id, nombre: this.nombre}))
+                    this.$inertia.replace(this.route('buscador_de_directivos', {institucion_id: this.institucion_id, nombre: this.nombre}))
                 }
             }
         }

@@ -338,7 +338,7 @@
 
         methods: {
             submit() {
-                this.$inertia.post(this.route('contacto.enviarEmail'), this.form)
+                this.$inertia.post(this.route('contacto.enviar_email'), this.form)
             },
         },
     }

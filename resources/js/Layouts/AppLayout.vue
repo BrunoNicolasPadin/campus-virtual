@@ -24,7 +24,7 @@
                             <jet-nav-link :href="route('roles.mostrarCuentas')" :active="route().current('roles.mostrarCuentas')">
                                 Cuentas
                             </jet-nav-link>
-                            <jet-nav-link :href="route('buscador-de-instituciones')" :active="route().current('buscador-de-instituciones')">
+                            <jet-nav-link :href="route('buscador_de_instituciones')" :active="route().current('buscador_de_instituciones')">
                                 Buscador de colegios
                             </jet-nav-link>
                             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -46,7 +46,7 @@
                                              <jet-dropdown-link :href="route('topNav.calendario')" :active="route().current('calendario.mostrar')">
                                                 Calendario
                                             </jet-dropdown-link>
-                                            <jet-dropdown-link :href="route('topNav.ciclos-lectivos')" :active="route().current('ciclos-lectivos.index')">
+                                            <jet-dropdown-link :href="route('topNav.ciclos_lectivos')" :active="route().current('ciclos-lectivos.index')">
                                                 Ciclos lectivos
                                             </jet-dropdown-link>
                                             <jet-dropdown-link :href="route('topNav.roles')" :active="route().current('roles.index')">
@@ -166,7 +166,7 @@
                     <jet-responsive-nav-link :href="route('topNav.divisiones')" :active="route().current('divisiones.index')">
                         Divisiones
                     </jet-responsive-nav-link>
-                    <jet-responsive-nav-link :href="route('buscador-de-instituciones')" :active="route().current('buscador-de-instituciones')">
+                    <jet-responsive-nav-link :href="route('buscador_de_instituciones')" :active="route().current('buscador_de_instituciones')">
                         Buscador de colegios
                     </jet-responsive-nav-link>
                     <jet-responsive-nav-link :href="route('roles.mostrarCuentas')" :active="route().current('roles.mostrarCuentas')">
@@ -182,7 +182,7 @@
                         <jet-responsive-nav-link :href="route('topNav.calendario')" :active="route().current('calendario.mostrar')">
                             Calendario
                         </jet-responsive-nav-link>
-                        <jet-responsive-nav-link :href="route('topNav.ciclos-lectivos')" :active="route().current('ciclos-lectivos.index')">
+                        <jet-responsive-nav-link :href="route('topNav.ciclos_lectivos')" :active="route().current('ciclos-lectivos.index')">
                             Ciclos lectivos
                         </jet-responsive-nav-link>
                         <jet-responsive-nav-link :href="route('topNav.roles')" :active="route().current('roles.index')">

@@ -155,7 +155,7 @@
 
         methods: {
             submit() {
-                this.$inertia.post(this.route('limpiar-divisiones', this.institucion_id), this.form)
+                this.$inertia.post(this.route('limpiar_divisiones', this.institucion_id), this.form)
             },
 
             seleccionarATodos() {

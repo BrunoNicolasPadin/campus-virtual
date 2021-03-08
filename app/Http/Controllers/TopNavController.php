@@ -15,11 +15,11 @@ class TopNavController extends Controller
         }
 
         if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
-            return redirect(route('listar-divisiones-alumnos', $institucion_id));
+            return redirect(route('listar_divisiones_alumnos', $institucion_id));
         }
 
         if (session('tipo') == 'Docente') {
-            return redirect(route('listar-divisiones-docentes', $institucion_id));
+            return redirect(route('listar_divisiones_docentes', $institucion_id));
         }
         return redirect(route('inicio'));
     }
@@ -34,13 +34,13 @@ class TopNavController extends Controller
         $mes = 1;
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
-            return redirect(route('calendario-instituciones.mostrar', [$institucion_id, $year, $mes]));
+            return redirect(route('calendarioInstituciones.mostrar', [$institucion_id, $year, $mes]));
         }
         if (session('tipo') == 'Docente') {
-            return redirect(route('calendario-docentes.mostrar', [$institucion_id, $year, $mes]));
+            return redirect(route('calendarioDocentes.mostrar', [$institucion_id, $year, $mes]));
         }
         if (session('tipo') == 'Alumno' || session('tipo') == 'Padre') {
-            return redirect(route('calendario-alumnos.mostrar', [$institucion_id, $year, $mes]));
+            return redirect(route('calendarioAlumnos.mostrar', [$institucion_id, $year, $mes]));
         }
         return redirect(route('inicio'));
         

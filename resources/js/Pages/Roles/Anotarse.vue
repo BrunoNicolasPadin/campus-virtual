@@ -203,10 +203,10 @@
                     this.$inertia.post(this.route('docentes.store', this.institucion_id), this.form)
                 }
                 if (this.form.tipo == 'Alumno') {
-                    this.$inertia.get(this.route('alumnos.verificarClaveInstitucion', this.institucion_id), this.form)
+                    this.$inertia.get(this.route('alumnos.verificar_clave_institucion', this.institucion_id), this.form)
                 }
                 if (this.form.tipo == 'Padre') {
-                    this.$inertia.get(this.route('padres.verificarClave', this.institucion_id), this.form)
+                    this.$inertia.get(this.route('padres.verificar_clave_para_padres', this.institucion_id), this.form)
                 }
             },
         },

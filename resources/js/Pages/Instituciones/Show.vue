@@ -81,7 +81,7 @@
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <button type="button" class="border border-blue-500 bg-blue-500 text-white rounded-full px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-blue-700 focus:outline-none focus:shadow-outline">
-                                <inertia-link :href="route('mostrar-divisiones', institucion.id)">
+                                <inertia-link :href="route('mostrar_divisiones', institucion.id)">
                                     Procesar
                                 </inertia-link>
                             </button>

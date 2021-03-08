@@ -150,7 +150,7 @@
                 if (this.nombre == '') {
                     this.$inertia.get(this.route('docentes.index', this.institucion_id))
                 } else {
-                    this.$inertia.replace(this.route('buscador-de-docentes', {institucion_id: this.institucion_id, nombre: this.nombre}))
+                    this.$inertia.replace(this.route('buscador_de_docentes', {institucion_id: this.institucion_id, nombre: this.nombre}))
                 }
             }
         }

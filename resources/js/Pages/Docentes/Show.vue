@@ -189,7 +189,7 @@
 
         methods: {
             agregarAsignaturas() {
-                this.$inertia.get(this.route('docentes.createAsignaturaDocente', [this.institucion_id, this.docente.id]))
+                this.$inertia.get(this.route('docentes.create_asignatura_docente', [this.institucion_id, this.docente.id]))
             },
         }
 
