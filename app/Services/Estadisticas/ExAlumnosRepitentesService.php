@@ -3,30 +3,30 @@
 namespace App\Services\Estadisticas;
 
 use App\Models\CiclosLectivos\CicloLectivo;
-use App\Services\Division\DivisionService;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Support\Facades\DB;
 
 class ExAlumnosRepitentesService
 {
     protected $formatoService;
-    protected $divisionService;
+    protected $divisionRepository;
     protected $estadisticasService;
 
     public function __construct(
         CambiarFormatoFecha $formatoService,
-        DivisionService $divisionService,
+        DivisionRepository $divisionRepository,
     )
 
     {
         $this->formatoService = $formatoService;
-        $this->divisionService = $divisionService;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function realizarEstadistica($institucion_id, $tipo)
     {
         $ciclosLectivos = CicloLectivo::select('id', 'comienzo', 'final')->where('institucion_id', $institucion_id)->get();
-        $divisiones = $this->divisionService->get($institucion_id);
+        $divisiones = $this->divisionRepository->get($institucion_id);
 
         if ($tipo == 'Ex Alumnos') {
             $arreglo = DB::table('ex_alumnos')->where('institucion_id', $institucion_id)->where('abandono', 1)->get();
