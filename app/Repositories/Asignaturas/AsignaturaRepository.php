@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Asignaturas;
+namespace App\Repositories\Asignaturas;
 
 use App\Models\Asignaturas\Asignatura;
 
-class AsignaturaService
+class AsignaturaRepository
 {
     public function find($id)
     {

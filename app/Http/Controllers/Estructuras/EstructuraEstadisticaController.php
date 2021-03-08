@@ -8,8 +8,8 @@ use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
 use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Libretas\Libreta;
-use App\Services\Division\DivisionService;
-use App\Services\Division\ObtenerPeriodosEvaluacion;
+use App\Repositories\Estructuras\DivisionRepository;
+use App\Repositories\Libretas\LibretaRepository;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -17,13 +17,13 @@ use Inertia\Inertia;
 class EstructuraEstadisticaController extends Controller
 {
     protected $formatoService;
-    protected $periodoService;
-    protected $divisionService;
+    protected $libretaRepository;
+    protected $divisionRepository;
 
     public function __construct(
         CambiarFormatoFecha $formatoService,
-        ObtenerPeriodosEvaluacion $periodoService,
-        DivisionService $divisionService,
+        LibretaRepository $libretaRepository,
+        DivisionRepository $divisionRepository,
     )
 
     {
@@ -32,17 +32,16 @@ class EstructuraEstadisticaController extends Controller
         $this->middleware('soloInstitucionesDirectivos');
         $this->middleware('divisionCorrespondiente');
 
-        $this->periodoService = $periodoService;
-        $this->periodoService = $periodoService;
         $this->formatoService = $formatoService;
-        $this->divisionService = $divisionService;
+        $this->libretaRepository = $libretaRepository;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function mostrarCiclosLectivos($institucion_id, $division_id)
     {
         return Inertia::render('Estructuras/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'ciclosLectivos' => CicloLectivo::select('id', 'comienzo', 'final')->where('institucion_id', $institucion_id)
             ->orderBy('comienzo')
             ->get()
@@ -66,7 +65,7 @@ class EstructuraEstadisticaController extends Controller
             return ['No escrita', null, null, null];
         }
 
-        $periodos = $this->periodoService->obtenerPeriodos($libreta);
+        $periodos = $this->libretaRepository->obtenerPeriodos($libreta);
 
         $totalRecorrido = $cantidadAsignaturas * count($periodos);
         $recorrido = 0;

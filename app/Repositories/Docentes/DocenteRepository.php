@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Docentes;
+namespace App\Repositories\Docentes;
 
 use App\Models\Roles\Docente;
 use App\Models\User;
 
-class DocenteService
+class DocenteRepository
 {
     public function get($institucion_id)
     {

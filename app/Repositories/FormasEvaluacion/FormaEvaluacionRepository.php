@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Division;
+namespace App\Repositories\FormasEvaluacion;
 
 use App\Models\Estructuras\FormaEvaluacion;
 
-class FormaEvaluacionService
+class FormaEvaluacionRepository
 {
     public function find($id)
     {

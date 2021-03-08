@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Asignaturas;
 
 use App\Http\Controllers\Controller;
 use App\Models\Deudores\AlumnoDeudor;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\CiclosLectivos\CicloLectivoService;
-use App\Services\Division\DivisionService;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\CiclosLectivos\CicloLectivoRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,15 +14,15 @@ use Inertia\Inertia;
 class AsignaturaDeudorController extends Controller
 {
     protected $formatoFechaService;
-    protected $divisionService;
-    protected $asignaturaService;
-    protected $cicloLectivoService;
+    protected $divisionRepository;
+    protected $asignaturaRepository;
+    protected $cicloLectivoRepository;
 
     public function __construct(
         CambiarFormatoFecha $formatoFechaService,
-        DivisionService $divisionService,
-        AsignaturaService $asignaturaService,
-        CicloLectivoService $cicloLectivoService
+        DivisionRepository $divisionRepository,
+        AsignaturaRepository $asignaturaRepository,
+        CicloLectivoRepository $cicloLectivoRepository
     )
 
     {
@@ -33,9 +33,9 @@ class AsignaturaDeudorController extends Controller
         $this->middleware('asignaturaCorrespondiente');
 
         $this->formatoFechaService = $formatoFechaService;
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
-        $this->cicloLectivoService = $cicloLectivoService;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
+        $this->cicloLectivoRepository = $cicloLectivoRepository;
     }
 
     public function mostrarDeudores($institucion_id, $division_id, $asignatura_id, Request $filtros)
@@ -67,9 +67,9 @@ class AsignaturaDeudorController extends Controller
         return Inertia::render('Asignaturas/Deudores', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
-            'asignatura'  => $this->asignaturaService->find($asignatura_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura'  => $this->asignaturaRepository->find($asignatura_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
             'deudores' => $deudores,
             'ciclo_lectivo_id_index' => $filtros->ciclo_lectivo_id,
             'aprobado_index' => $filtros->aprobado,

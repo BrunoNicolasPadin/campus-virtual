@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Services\Mesas;
+namespace App\Repositories\Deudores;
 
 use App\Models\Deudores\Mesa;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 
-class MesaService
+class MesaRepository
 {
     protected $formatoService;
-    protected $obtenerFechaHoraService;
 
     public function __construct(CambiarFormatoFechaHora $formatoService)
     {

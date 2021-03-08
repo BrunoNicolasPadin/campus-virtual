@@ -6,21 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreRespuesta;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroRespuesta;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\Archivos\ObtenerFechaHoraService;
-use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class MuroRespuestaController extends Controller
 {
-    protected $divisionService;
+    protected $divisionRepository;
     protected $formatoService;
     protected $obtenerFechaHoraService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        DivisionService $divisionService,
+        DivisionRepository $divisionRepository,
         ObtenerFechaHoraService $obtenerFechaHoraService,
     )
 
@@ -33,7 +33,7 @@ class MuroRespuestaController extends Controller
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
         $this->formatoService = $formatoService;
-        $this->divisionService = $divisionService;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function index($institucion_id, $division_id, $muro_id)
@@ -44,7 +44,7 @@ class MuroRespuestaController extends Controller
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'publicacion' => [
                 'id' => $muro->id,
                 'publicacion' => $muro->publicacion,

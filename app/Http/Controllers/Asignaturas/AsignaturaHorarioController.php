@@ -6,18 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Asignaturas\StoreHorario;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaHorario;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\Division\DivisionService;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use Inertia\Inertia;
 
 class AsignaturaHorarioController extends Controller
 {
     protected $divisionService;
-    protected $asignaturaService;
+    protected $asignaturaRepository;
 
     public function __construct(
-        DivisionService $divisionService, 
-        AsignaturaService $asignaturaService
+        DivisionRepository $divisionRepository, 
+        AsignaturaRepository $asignaturaRepository
     )
     {
         $this->middleware('auth');
@@ -26,8 +26,8 @@ class AsignaturaHorarioController extends Controller
         $this->middleware('soloInstitucionesDirectivos');
         $this->middleware('asignaturaCorrespondiente');
 
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id)
@@ -37,8 +37,8 @@ class AsignaturaHorarioController extends Controller
         return Inertia::render('Asignaturas/Horarios/Create', [
             'institucion_id' => $institucion_id,
             'dias' => $dias,
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura' => $this->asignaturaRepository->find($asignatura_id),
         ]);
     }
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware\Materiales;
 
-use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Materiales\Material;
 use App\Services\Roles\DocenteService;
 use App\Services\Ruta\RutaService;

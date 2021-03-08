@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Services\CiclosLectivos;
+namespace App\Repositories\CiclosLectivos;
 
 use App\Models\CiclosLectivos\CicloLectivo;
 use App\Services\FechaHora\CambiarFormatoFecha;
 
-class CicloLectivoService
+class CicloLectivoRepository
 {
     protected $formatoService;
-    protected $divisionService;
 
     public function __construct(CambiarFormatoFecha $formatoService)
     {

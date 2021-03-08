@@ -5,30 +5,30 @@ namespace App\Http\Controllers\Deudores;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreArchivo;
 use App\Models\Deudores\RendirEntrega;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\Deudores\InscripcionRepository;
+use App\Repositories\Deudores\MesaRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\Archivos\ObtenerFechaHoraService;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
-use App\Services\Mesas\InscriptoService;
-use App\Services\Mesas\MesaService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class RendirEntregaController extends Controller
 {
     protected $obtenerFechaHoraService;
-    protected $divisionService;
-    protected $asignaturaService;
-    protected $mesaService;
-    protected $inscripcionService;
+    protected $divisionRepository;
+    protected $asignaturaRepository;
+    protected $mesaRepository;
+    protected $inscripcionRepository;
     protected $formatoFechaHoraService;
 
     public function __construct(
         ObtenerFechaHoraService $obtenerFechaHoraService,
-        DivisionService $divisionService, 
-        AsignaturaService $asignaturaService,
-        MesaService $mesaService,
-        InscriptoService $inscripcionService,
+        DivisionRepository $divisionRepository, 
+        AsignaturaRepository $asignaturaRepository,
+        MesaRepository $mesaRepository,
+        InscripcionRepository $inscripcionRepository,
         CambiarFormatoFechaHora $formatoFechaHoraService,
     )
 
@@ -43,10 +43,10 @@ class RendirEntregaController extends Controller
         $this->middleware('rendirEntregaCorrespondiente')->only('destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
-        $this->mesaService = $mesaService;
-        $this->inscripcionService = $inscripcionService;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
+        $this->mesaRepository = $mesaRepository;
+        $this->inscripcionRepository = $inscripcionRepository;
         $this->formatoFechaHoraService = $formatoFechaHoraService;
     }
 
@@ -54,10 +54,10 @@ class RendirEntregaController extends Controller
     {
         return Inertia::render('Deudores/Entregas/Create', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($asignatura_id),
-            'mesa' => $this->mesaService->find($mesa_id),
-            'inscripcion' => $this->inscripcionService->find($inscripcion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura' => $this->asignaturaRepository->find($asignatura_id),
+            'mesa' => $this->mesaRepository->find($mesa_id),
+            'inscripcion' => $this->inscripcionRepository->find($inscripcion_id),
         ]);
     }
 

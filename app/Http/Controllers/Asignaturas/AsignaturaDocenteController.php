@@ -6,21 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Asignaturas\StoreDocente;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\Division\DivisionService;
-use App\Services\Docentes\DocenteService;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\Docentes\DocenteRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use Inertia\Inertia;
 
 class AsignaturaDocenteController extends Controller
 {
-    protected $divisionService;
-    protected $asignaturaService;
-    protected $docenteService;
+    protected $divisionRepository;
+    protected $asignaturaRepository;
+    protected $docenteRepository;
 
     public function __construct(
-        DivisionService $divisionService, 
-        AsignaturaService $asignaturaService,
-        DocenteService $docenteService,
+        DivisionRepository $divisionRepository,
+        AsignaturaRepository $asignaturaRepository,
+        DocenteRepository $docenteRepository,
     )
 
     {
@@ -30,18 +30,18 @@ class AsignaturaDocenteController extends Controller
         $this->middleware('soloInstitucionesDirectivos');
         $this->middleware('asignaturaCorrespondiente');
 
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
-        $this->docenteService = $docenteService;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
+        $this->docenteRepository = $docenteRepository;
     }
 
     public function create($institucion_id, $division_id, $asignatura_id)
     {
         return Inertia::render('Asignaturas/Docentes/Create', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'asignatura'  => $this->asignaturaService->find($asignatura_id),
-            'docentes' => $this->docenteService->get($institucion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura'  => $this->asignaturaRepository->find($asignatura_id),
+            'docentes' => $this->docenteRepository->get($institucion_id),
         ]);
     }
 

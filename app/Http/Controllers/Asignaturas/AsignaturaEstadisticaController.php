@@ -5,26 +5,25 @@ namespace App\Http\Controllers\Asignaturas;
 use App\Http\Controllers\Controller;
 use App\Models\Estructuras\Division;
 use App\Models\Estructuras\FormaEvaluacion;
-use App\Models\Libretas\Libreta;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\CiclosLectivos\CicloLectivoService;
-use App\Services\Division\DivisionService;
-use App\Services\Division\ObtenerPeriodosEvaluacion;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\CiclosLectivos\CicloLectivoRepository;
+use App\Repositories\Estructuras\DivisionRepository;
+use App\Repositories\Libretas\LibretaRepository;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class AsignaturaEstadisticaController extends Controller
 {
-    protected $periodoService;
-    protected $divisionService;
-    protected $asignaturaService;
-    protected $cicloLectivoService;
+    protected $libretaRepository;
+    protected $divisionRepository;
+    protected $asignaturaRepository;
+    protected $cicloLectivoRepository;
 
     public function __construct(
-        ObtenerPeriodosEvaluacion $periodoService,
-        DivisionService $divisionService,
-        AsignaturaService $asignaturaService,
-        CicloLectivoService $cicloLectivoService
+        LibretaRepository $libretaRepository,
+        DivisionRepository $divisionRepository,
+        AsignaturaRepository $asignaturaRepository,
+        CicloLectivoRepository $cicloLectivoRepository
     )
 
     {
@@ -34,19 +33,19 @@ class AsignaturaEstadisticaController extends Controller
         $this->middleware('divisionCorrespondiente');
         $this->middleware('asignaturaCorrespondiente');
 
-        $this->periodoService = $periodoService;
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
-        $this->cicloLectivoService = $cicloLectivoService;
+        $this->libretaRepository = $libretaRepository;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
+        $this->cicloLectivoRepository = $cicloLectivoRepository;
     }
 
     public function mostrarEstadisticas($institucion_id, $division_id, $asignatura_id)
     {
         return Inertia::render('Asignaturas/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'asignatura'  => $this->asignaturaService->find($asignatura_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura'  => $this->asignaturaRepository->find($asignatura_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 
@@ -54,7 +53,7 @@ class AsignaturaEstadisticaController extends Controller
     {
         $division = Division::select('forma_evaluacion_id', 'periodo_id')->findOrFail($division_id);
 
-        $periodos = $this->periodoService->obtenerPeriodos($division);
+        $periodos = $this->libretaRepository->obtenerPeriodos($division);
 
         $totalPeriodo = [];
         $cantidadPeriodo = [];

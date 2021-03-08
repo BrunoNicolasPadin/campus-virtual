@@ -4,28 +4,27 @@ namespace App\Http\Controllers\Estructuras;
 
 use App\Http\Controllers\Controller;
 use App\Models\Asignaturas\AsignaturaDocente;
-use App\Models\Estructuras\Division;
-use App\Services\Division\DivisionService;
+use App\Repositories\Estructuras\DivisionRepository;
 use Inertia\Inertia;
 
 class ListarDivisionesController extends Controller
 {
-    protected $divisionService;
+    protected $divisionRepository;
 
-    public function __construct(DivisionService $divisionService)
+    public function __construct(DivisionRepository $divisionRepository)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos')->only('index');
 
-        $this->divisionService = $divisionService;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function paraAlumnos($institucion_id)
     {
         return Inertia::render('Estructuras/Show', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find(session('division_id')),
+            'division' => $this->divisionRepository->find(session('division_id')),
             'tipo' => session('tipo'),
         ]);
     }

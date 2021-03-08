@@ -6,22 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluaciones\StoreEvaluacionArchivo;
 use App\Http\Requests\Evaluaciones\UpdateEvaluacionArchivo;
 use App\Models\Evaluaciones\Archivo;
+use App\Repositories\Estructuras\DivisionRepository;
+use App\Repositories\Evaluaciones\EvaluacionRepository;
 use App\Services\Archivos\ObtenerFechaHoraService;
-use App\Services\Division\DivisionService;
-use App\Services\Evaluaciones\EvaluacionService;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EvaluacionArchivoController extends Controller
 {
     protected $obtenerFechaHoraService;
-    protected $divisionService;
-    protected $evaluacionService;
+    protected $divisionRepository;
+    protected $evaluacionRepository;
 
     public function __construct(
         ObtenerFechaHoraService $obtenerFechaHoraService,
-        DivisionService $divisionService,
-        EvaluacionService $evaluacionService
+        DivisionRepository $divisionRepository,
+        EvaluacionRepository $evaluacionRepository
     )
 
     {
@@ -33,16 +33,16 @@ class EvaluacionArchivoController extends Controller
         $this->middleware('archivoCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
-        $this->divisionService = $divisionService;
-        $this->evaluacionService = $evaluacionService;
+        $this->divisionRepository = $divisionRepository;
+        $this->evaluacionRepository = $evaluacionRepository;
     }
 
     public function create($institucion_id, $division_id, $evaluacion_id)
     {
         return Inertia::render('Evaluaciones/Archivos/Create', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'evaluacion' => $this->evaluacionRepository->find($evaluacion_id),
         ]);
     }
 
@@ -76,8 +76,8 @@ class EvaluacionArchivoController extends Controller
     {
         return Inertia::render('Evaluaciones/Archivos/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'evaluacion' => $this->evaluacionRepository->find($evaluacion_id),
             'archivo' => Archivo::findOrFail($id),
         ]);
     }

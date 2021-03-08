@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Estructuras;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Estructuras\StoreFormaDescripcion;
 use App\Models\Estructuras\FormaDescripcion;
-use App\Services\Division\FormaEvaluacionService;
+use App\Repositories\FormasEvaluacion\FormaEvaluacionRepository;
 use Inertia\Inertia;
 
 class FormaDescripcionController extends Controller
 {
-    protected $formaEvaluacionService;
+    protected $formaEvaluacionRepository;
 
-    public function __construct(FormaEvaluacionService $formaEvaluacionService)
+    public function __construct(FormaEvaluacionRepository $formaEvaluacionRepository)
     {
         $this->middleware('auth');
         $this->middleware('soloInstitucionesDirectivos');
@@ -20,14 +20,14 @@ class FormaDescripcionController extends Controller
         $this->middleware('formaEvaluacionCorrespondiente');
         $this->middleware('formaDescripcionCorrespondiente')->only('edit', 'update', 'destroy');
 
-        $this->formaEvaluacionService = $formaEvaluacionService;
+        $this->formaEvaluacionRepository = $formaEvaluacionRepository;
     }
 
     public function create($institucion_id, $forma_evaluacion_id)
     {
         return Inertia::render('FormasEvaluacion/FormasDescripcion/Create', [
             'institucion_id' => $institucion_id,
-            'formaEvaluacion' => $this->formaEvaluacionService->find($forma_evaluacion_id),
+            'formaEvaluacion' => $this->formaEvaluacionRepository->find($forma_evaluacion_id),
         ]);
     }
 
@@ -47,7 +47,7 @@ class FormaDescripcionController extends Controller
     {
         return Inertia::render('FormasEvaluacion/FormasDescripcion/Edit', [
             'institucion_id' => $institucion_id,
-            'formaEvaluacion' => $this->formaEvaluacionService->find($forma_evaluacion_id),
+            'formaEvaluacion' => $this->formaEvaluacionRepository->find($forma_evaluacion_id),
             'formaDescripcion' => FormaDescripcion::findOrFail($id),
         ]); 
     }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware\Muro;
 
-use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Estructuras\Division;
 use App\Models\Muro\Muro;
 use App\Services\Roles\DocenteService;

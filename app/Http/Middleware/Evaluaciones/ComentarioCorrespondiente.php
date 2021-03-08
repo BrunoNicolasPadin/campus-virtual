@@ -7,7 +7,6 @@ use App\Services\Muro\EliminarService;
 use App\Services\Ruta\RutaService;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ComentarioCorrespondiente
 {

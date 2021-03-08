@@ -7,18 +7,16 @@ use App\Http\Requests\Roles\StoreDocente;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Roles\Docente;
-use App\Services\ClaveDeAcceso\VerificarInstitucion;
-use App\Services\Division\DivisionService;
+use App\Repositories\Estructuras\DivisionRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AgregarDocenteController extends Controller
 {
-    protected $divisionService;
+    protected $divisionRepository;
 
     public function __construct(
-        DivisionService $divisionService,
+        DivisionRepository $divisionRepository,
     )
 
     {
@@ -28,7 +26,7 @@ class AgregarDocenteController extends Controller
         $this->middleware('soloInstitucionesDirectivosDocentes');
         $this->middleware('docenteCorrespondiente');
 
-        $this->divisionService = $divisionService;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function createAsignaturaDocente($institucion_id, $docente_id)
@@ -39,7 +37,7 @@ class AgregarDocenteController extends Controller
                 ->join('users', 'users.id', 'docentes.user_id')
                 ->orderBy('users.name')
                 ->findOrFail($docente_id),
-            'divisiones' => $this->divisionService->get($institucion_id),
+            'divisiones' => $this->divisionRepository->get($institucion_id),
         ]);
     }
 

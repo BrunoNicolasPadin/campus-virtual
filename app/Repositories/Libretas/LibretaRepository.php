@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Division;
+namespace App\Repositories\Libretas;
 
-class ObtenerPeriodosEvaluacion
+class LibretaRepository
 {
     public function obtenerPeriodos($libreta)
     {

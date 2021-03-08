@@ -10,20 +10,20 @@ use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
 use App\Models\Roles\Docente;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\Division\DivisionService;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class GrupoController extends Controller
 {
-    protected $divisionService;
-    protected $asignaturaService;
+    protected $divisionRepository;
+    protected $asignaturaRepository;
 
     public function __construct(
-        DivisionService $divisionService, 
-        AsignaturaService $asignaturaService,
+        DivisionRepository $divisionRepository, 
+        AsignaturaRepository $asignaturaRepository,
     )
 
     {
@@ -33,8 +33,8 @@ class GrupoController extends Controller
         $this->middleware('soloInstitucionesDirectivosDocentes')->except('index', 'show');
         $this->middleware('grupoCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
     }
 
     public function index($institucion_id, $division_id, Request $filtros)
@@ -54,8 +54,8 @@ class GrupoController extends Controller
         return Inertia::render('Materiales/Grupos/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
-            'asignaturas' => $this->asignaturaService->get($division_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignaturas' => $this->asignaturaRepository->get($division_id),
             'grupos' => $grupos,
             'asignatura_id_index' => $filtros->asignatura_id,
         ]);
@@ -78,7 +78,7 @@ class GrupoController extends Controller
 
         return Inertia::render('Materiales/Grupos/Create', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'asignaturasDocentes' => $asignaturas,
         ]);
     }
@@ -100,7 +100,7 @@ class GrupoController extends Controller
         return Inertia::render('Materiales/Grupos/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'grupo' => Grupo::with('asignatura')->findOrFail($id),
             'archivos' => Material::where('grupo_id', $id)->get(),
             'cantidad' => Material::where('grupo_id', $id)->count(),
@@ -124,7 +124,7 @@ class GrupoController extends Controller
 
         return Inertia::render('Materiales/Grupos/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'asignaturasDocentes' => $asignaturas,
             'grupo' => Grupo::findOrFail($id),
         ]);

@@ -24,10 +24,6 @@ class ExAlumnoEstadisticaController extends Controller
 
     public function mostrarEstadisticas($institucion_id)
     {
-        $ciclos = null;
-        $ciclosCategorias = null;
-        $divArray = null;
-        $divisionCategorias = null;
         $tipo = 'Ex Alumnos';
         
         $arregloTemporal = $this->estadisticasService->realizarEstadistica($institucion_id, $tipo);

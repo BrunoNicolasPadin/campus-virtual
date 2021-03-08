@@ -2,8 +2,6 @@
 
 namespace App\Http\Middleware\Evaluaciones;
 
-use App\Models\Asignaturas\AsignaturaDocente;
-use App\Models\Estructuras\Division;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Services\Roles\DocenteService;
 use App\Services\Ruta\RutaService;

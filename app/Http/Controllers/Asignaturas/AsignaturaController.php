@@ -10,9 +10,8 @@ use App\Models\Asignaturas\Asignatura;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Asignaturas\AsignaturaHorario;
 use App\Models\Estructuras\Division;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\Division\DivisionService;
-use App\Services\Docentes\DocenteService;
+use App\Repositories\Docentes\DocenteRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
@@ -21,16 +20,14 @@ class AsignaturaController extends Controller
 {
     protected $formatoService;
     protected $formatoFechaService;
-    protected $divisionService;
-    protected $asignaturaService;
-    protected $docenteService;
+    protected $divisionRepository;
+    protected $docenteRepository;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         CambiarFormatoFecha $formatoFechaService,
-        DivisionService $divisionService, 
-        AsignaturaService $asignaturaService,
-        DocenteService $docenteService,
+        DivisionRepository $divisionRepository, 
+        DocenteRepository $docenteRepository,
     )
 
     {
@@ -42,9 +39,8 @@ class AsignaturaController extends Controller
 
         $this->formatoService = $formatoService;
         $this->formatoFechaService = $formatoFechaService;
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
-        $this->docenteService = $docenteService;
+        $this->divisionRepository = $divisionRepository;
+        $this->docenteRepository = $docenteRepository;
     }
 
     public function index($institucion_id, $division_id)
@@ -71,7 +67,7 @@ class AsignaturaController extends Controller
             return Inertia::render('Asignaturas/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'asignaturas' => $asignaturas,
         ]);
     }
@@ -82,9 +78,9 @@ class AsignaturaController extends Controller
 
         return Inertia::render('Asignaturas/Create', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'dias' => $dias,
-            'docentes' => $this->docenteService->get($institucion_id),
+            'docentes' => $this->docenteRepository->get($institucion_id),
         ]);
     }
 
@@ -141,9 +137,9 @@ class AsignaturaController extends Controller
 
         return Inertia::render('Asignaturas/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'dias' => $dias,
-            'docentes' => $this->docenteService->get($institucion_id),
+            'docentes' => $this->docenteRepository->get($institucion_id),
             'asignatura' => $asignatura,
         ]);
     }

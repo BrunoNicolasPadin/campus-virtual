@@ -8,10 +8,10 @@ use App\Http\Requests\Roles\StoreDirectivo;
 use App\Jobs\Alumnos\AlumnoDestroyJob;
 use App\Models\Roles\Alumno;
 use App\Models\Roles\Padre;
-use App\Services\Alumnos\AlumnoService;
+use App\Repositories\Alumnos\AlumnoRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\ClaveDeAcceso\VerificarDivision;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
-use App\Services\Division\DivisionService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -19,14 +19,14 @@ class AlumnoController extends Controller
 {
     protected $claveDeAccesoService;
     protected $claveInstitucion;
-    protected $divisionService;
-    protected $alumnoService;
+    protected $divisionRepository;
+    protected $alumnoRepository;
 
     public function __construct(
         VerificarDivision $claveDeAccesoService,
         VerificarInstitucion $claveInstitucion,
-        DivisionService $divisionService,
-        AlumnoService $alumnoService
+        DivisionRepository $divisionRepository,
+        AlumnoRepository $alumnoRepository
     )
 
     {
@@ -39,8 +39,8 @@ class AlumnoController extends Controller
 
         $this->claveDeAccesoService = $claveDeAccesoService;
         $this->claveInstitucion = $claveInstitucion;
-        $this->divisionService = $divisionService;
-        $this->alumnoService = $alumnoService;
+        $this->divisionRepository = $divisionRepository;
+        $this->alumnoRepository = $alumnoRepository;
     }
 
     public function index($institucion_id)
@@ -76,7 +76,7 @@ class AlumnoController extends Controller
     {
         return Inertia::render('Alumnos/Create', [
             'institucion_id' => $institucion_id,
-            'divisiones' => $this->divisionService->get($institucion_id),
+            'divisiones' => $this->divisionRepository->get($institucion_id),
         ]);
     }
 
@@ -130,8 +130,8 @@ class AlumnoController extends Controller
     {
         return Inertia::render('Alumnos/Edit', [
             'institucion_id' => $institucion_id,
-            'divisiones' => $this->divisionService->get($institucion_id),
-            'alumno' => $this->alumnoService->find($id),
+            'divisiones' => $this->divisionRepository->get($institucion_id),
+            'alumno' => $this->alumnoRepository->find($id),
         ]);
     }
 

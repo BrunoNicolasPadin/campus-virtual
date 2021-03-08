@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Evaluaciones;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreArchivo;
 use App\Models\Evaluaciones\Correccion;
+use App\Repositories\Estructuras\DivisionRepository;
+use App\Repositories\Evaluaciones\EntregaRepository;
+use App\Repositories\Evaluaciones\EvaluacionRepository;
 use App\Services\Archivos\ObtenerFechaHoraService;
-use App\Services\Division\DivisionService;
-use App\Services\Evaluaciones\EntregaService;
-use App\Services\Evaluaciones\EvaluacionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -16,16 +16,16 @@ use Inertia\Inertia;
 class CorreccionController extends Controller
 {
     protected $obtenerFechaHoraService;
-    protected $divisionService;
-    protected $evaluacionService;
-    protected $entregaService;
+    protected $divisionRepository;
+    protected $evaluacionRepository;
+    protected $entregaRepository;
     protected $formatoFechaHoraService;
 
     public function __construct(
         ObtenerFechaHoraService $obtenerFechaHoraService,
-        DivisionService $divisionService,
-        EvaluacionService $evaluacionService,
-        EntregaService $entregaService,
+        DivisionRepository $divisionRepository,
+        EvaluacionRepository $evaluacionRepository,
+        EntregaRepository $entregaRepository,
         CambiarFormatoFechaHora $formatoFechaHoraService,
     )
 
@@ -39,9 +39,9 @@ class CorreccionController extends Controller
         $this->middleware('correccionCorrespondiente')->only('destroy');
 
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
-        $this->divisionService = $divisionService;
-        $this->evaluacionService = $evaluacionService;
-        $this->entregaService = $entregaService;
+        $this->divisionRepository = $divisionRepository;
+        $this->evaluacionRepository = $evaluacionRepository;
+        $this->entregaRepository = $entregaRepository;
         $this->formatoFechaHoraService = $formatoFechaHoraService;
     }
 
@@ -49,9 +49,9 @@ class CorreccionController extends Controller
     {
         return Inertia::render('Evaluaciones/Correcciones/Create', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
-            'entrega' => $this->entregaService->find($entrega_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'evaluacion' => $this->evaluacionRepository->find($evaluacion_id),
+            'entrega' => $this->entregaRepository->find($entrega_id),
         ]);
     }
 

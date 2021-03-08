@@ -7,27 +7,26 @@ use App\Http\Requests\ExAlumnos\StoreExAlumno;
 use App\Http\Requests\ExAlumnos\UpdateExAlumno;
 use App\Models\Roles\ExAlumno;
 use App\Models\Roles\Alumno;
-use App\Services\Alumnos\AlumnoService;
-use App\Services\CiclosLectivos\CicloLectivoService;
-use App\Services\Division\DivisionService;
+use App\Repositories\Alumnos\AlumnoRepository;
+use App\Repositories\CiclosLectivos\CicloLectivoRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
 
 class ExAlumnoController extends Controller
 {
     protected $formatoService;
-    protected $divisionService;
-    protected $cicloLectivoService;
-    protected $alumnoService;
+    protected $divisionRepository;
+    protected $cicloLectivoRepository;
+    protected $alumnoRepository;
 
     public function __construct(
         CambiarFormatoFecha $formatoService,
-        DivisionService $divisionService,
-        CicloLectivoService $cicloLectivoService,
-        AlumnoService $alumnoService
+        DivisionRepository $divisionRepository,
+        CicloLectivoRepository $cicloLectivoRepository,
+        AlumnoRepository $alumnoRepository
     )
 
     {
@@ -38,9 +37,9 @@ class ExAlumnoController extends Controller
         $this->middleware('exAlumnoCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
-        $this->divisionService = $divisionService;
-        $this->cicloLectivoService = $cicloLectivoService;
-        $this->alumnoService = $alumnoService;
+        $this->divisionRepository = $divisionRepository;
+        $this->cicloLectivoRepository = $cicloLectivoRepository;
+        $this->alumnoRepository = $alumnoRepository;
     }
 
     public function index($institucion_id, Request $filtros)
@@ -93,8 +92,8 @@ class ExAlumnoController extends Controller
         return Inertia::render('ExAlumnos/Index', [
             'institucion_id' => $institucion_id,
             'exAlumnos' => $exAlumnos,
-            'divisiones' => $this->divisionService->get($institucion_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'divisiones' => $this->divisionRepository->get($institucion_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
             'ciclo_lectivo_id_index' => $filtros->ciclo_lectivo_id,
             'division_id_index' => $filtros->division_id,
             'condicion_index' => $filtros->condicion,
@@ -105,8 +104,8 @@ class ExAlumnoController extends Controller
     {
         return Inertia::render('ExAlumnos/Create', [
             'institucion_id' => $institucion_id,
-            'alumno' => $this->alumnoService->find($alumno_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'alumno' => $this->alumnoRepository->find($alumno_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 
@@ -150,7 +149,7 @@ class ExAlumnoController extends Controller
         return Inertia::render('ExAlumnos/Edit', [
             'institucion_id' => $institucion_id,
             'exAlumno' => $exAlumno,
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 

@@ -11,8 +11,8 @@ use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Roles\Docente;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\Division\DivisionService;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,13 +21,13 @@ use Inertia\Inertia;
 class EvaluacionController extends Controller
 {
     protected $formatoService;
-    protected $divisionService;
-    protected $asignaturaService;
+    protected $divisionRepository;
+    protected $asignaturaRepository;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        DivisionService $divisionService,
-        AsignaturaService $asignaturaService,
+        DivisionRepository $divisionRepository,
+        AsignaturaRepository $asignaturaRepository,
     )
 
     {
@@ -38,8 +38,8 @@ class EvaluacionController extends Controller
         $this->middleware('evaluacionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
     }
 
     public function index($institucion_id, $division_id, Request $filtros)
@@ -47,9 +47,9 @@ class EvaluacionController extends Controller
         return Inertia::render('Evaluaciones/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'asignatura_id_index' => $filtros->asignatura_id,
-            'asignaturas' => $this->asignaturaService->get($division_id),
+            'asignaturas' => $this->asignaturaRepository->get($division_id),
             'evaluaciones' => Evaluacion::where('division_id', $division_id)
                 ->when($filtros->asignatura_id, function ($query, $asignatura_id) {
                     return $query->where('asignatura_id', $asignatura_id);
@@ -87,7 +87,7 @@ class EvaluacionController extends Controller
     
         return Inertia::render('Evaluaciones/Create', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'asignaturasDocentes' => $asignaturas
         ]);
     }
@@ -117,7 +117,7 @@ class EvaluacionController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'evaluacion' => [
                 'id' => $evaluacion->id,
                 'asignatura' => $evaluacion->asignatura->only('nombre'),
@@ -159,7 +159,7 @@ class EvaluacionController extends Controller
     
         return Inertia::render('Evaluaciones/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'asignaturasDocentes' => $asignaturas,
             'evaluacion' => [
                     'id' => $evaluacion->id,

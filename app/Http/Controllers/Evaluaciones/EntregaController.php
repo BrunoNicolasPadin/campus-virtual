@@ -9,25 +9,22 @@ use App\Models\Evaluaciones\Correccion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\EntregaArchivo;
 use App\Models\Evaluaciones\EntregaComentario;
-use App\Services\Division\DivisionService;
-use App\Services\Division\ObtenerFormaEvaluacion;
-use App\Services\Evaluaciones\EvaluacionService;
+use App\Repositories\Estructuras\DivisionRepository;
+use App\Repositories\Evaluaciones\EvaluacionRepository;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class EntregaController extends Controller
 {
-    protected $formaEvaluacionService;
     protected $formatoService;
-    protected $divisionService;
-    protected $evaluacionService;
+    protected $divisionRepository;
+    protected $evaluacionRepository;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        ObtenerFormaEvaluacion $formaEvaluacionService,
-        DivisionService $divisionService,
-        EvaluacionService $evaluacionService
+        DivisionRepository $divisionRepository,
+        EvaluacionRepository $evaluacionRepository
     )
 
     {
@@ -39,17 +36,16 @@ class EntregaController extends Controller
         $this->middleware('entregaCorrespondiente')->only('show', 'edit', 'update');
 
         $this->formatoService = $formatoService;
-        $this->formaEvaluacionService = $formaEvaluacionService;
-        $this->divisionService = $divisionService;
-        $this->evaluacionService = $evaluacionService;
+        $this->divisionRepository = $divisionRepository;
+        $this->evaluacionRepository = $evaluacionRepository;
     }
 
     public function index($institucion_id, $division_id, $evaluacion_id)
     {
         return Inertia::render('Evaluaciones/Entregas/Index', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'evaluacion' => $this->evaluacionRepository->find($evaluacion_id),
             'entregas' => Entrega::where('evaluacion_id', $evaluacion_id)->with(['alumno', 'alumno.user'])->paginate(20),
             'tipo' => session('tipo'),
         ]);
@@ -61,8 +57,8 @@ class EntregaController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
-            'division' => $this->divisionService->find($division_id),
-            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'evaluacion' => $this->evaluacionRepository->find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->findOrFail($id),
             'archivos' => EntregaArchivo::where('entrega_id', $id)->orderBy('created_at', 'DESC')->get()
                 ->map(function ($archivo) {
@@ -97,12 +93,12 @@ class EntregaController extends Controller
 
     public function edit($institucion_id, $division_id, $evaluacion_id, $id)
     {
-        $arrayTemporal = $this->formaEvaluacionService->obtenerFormaEvaluacion($division_id);
+        $arrayTemporal = $this->divisionRepository->obtenerFormaEvaluacion($division_id);
 
         return Inertia::render('Evaluaciones/Entregas/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'evaluacion' => $this->evaluacionRepository->find($evaluacion_id),
             'entrega' => Entrega::with(['alumno', 'alumno.user'])->findOrFail($id),
             'formasDescripcion' => $arrayTemporal[0],
             'tipoEvaluacion' => $arrayTemporal[1],

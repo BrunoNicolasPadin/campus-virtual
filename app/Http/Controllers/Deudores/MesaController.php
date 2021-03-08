@@ -9,21 +9,21 @@ use App\Models\Deudores\Inscripcion;
 use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
 use App\Models\Materiales\Grupo;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\Division\DivisionService;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
 
 class MesaController extends Controller
 {
     protected $formatoService;
-    protected $divisionService;
-    protected $asignaturaService;
+    protected $divisionRepository;
+    protected $asignaturaRepository;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        DivisionService $divisionService, 
-        AsignaturaService $asignaturaService,
+        DivisionRepository $divisionRepository, 
+        AsignaturaRepository $asignaturaRepository,
     )
 
     {
@@ -35,8 +35,8 @@ class MesaController extends Controller
         $this->middleware('mesaCorrespondiente')->except('index', 'create', 'store');
 
         $this->formatoService = $formatoService;
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
     }
 
     public function index($institucion_id, $division_id, $asignatura_id)
@@ -44,8 +44,8 @@ class MesaController extends Controller
         return Inertia::render('Deudores/Mesas/Index', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura' => $this->asignaturaRepository->find($asignatura_id),
             'mesas' => Mesa::where('asignatura_id', $asignatura_id)->with('asignatura')->orderBy('fechaHoraRealizacion')->paginate(10)
                 ->transform(function ($mesa) {
                     return [
@@ -72,8 +72,8 @@ class MesaController extends Controller
     {
         return Inertia::render('Deudores/Mesas/Create', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura' => $this->asignaturaRepository->find($asignatura_id),
         ]);
     }
 
@@ -110,8 +110,8 @@ class MesaController extends Controller
         return Inertia::render('Deudores/Mesas/Show', [
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura' => $this->asignaturaRepository->find($asignatura_id),
             'mesa_id' => $id,
             'mesa' => [
                 'id' => $mesa->id,
@@ -133,8 +133,8 @@ class MesaController extends Controller
 
         return Inertia::render('Deudores/Mesas/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura' => $this->asignaturaRepository->find($asignatura_id),
             'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
             'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraFinalizacion),
             'mesa' => [

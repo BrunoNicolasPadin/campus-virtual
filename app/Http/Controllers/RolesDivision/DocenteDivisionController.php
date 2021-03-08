@@ -5,20 +5,20 @@ namespace App\Http\Controllers\RolesDivision;
 use App\Http\Controllers\Controller;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Estructuras\Division;
-use App\Services\Division\DivisionService;
+use App\Repositories\Estructuras\DivisionRepository;
 use Inertia\Inertia;
 
 class DocenteDivisionController extends Controller
 {
-    protected $divisionService;
+    protected $divisionRepository;
 
-    public function __construct(DivisionService $divisionService)
+    public function __construct(DivisionRepository $divisionRepository)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('divisionCorrespondiente');
 
-        $this->divisionService = $divisionService;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function mostrarDocentes($institucion_id, $division_id)
@@ -33,7 +33,7 @@ class DocenteDivisionController extends Controller
 
         return Inertia::render('RolesDivision/Docentes', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'docentes' => $docentes,
         ]);
     }

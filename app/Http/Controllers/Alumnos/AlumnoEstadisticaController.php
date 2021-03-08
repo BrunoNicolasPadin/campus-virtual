@@ -4,23 +4,22 @@ namespace App\Http\Controllers\Alumnos;
 
 use App\Http\Controllers\Controller;
 use App\Models\Estructuras\FormaEvaluacion;
-use App\Models\Libretas\Libreta;
-use App\Services\Alumnos\AlumnoService;
-use App\Services\CiclosLectivos\CicloLectivoService;
-use App\Services\Division\ObtenerPeriodosEvaluacion;
+use App\Repositories\Alumnos\AlumnoRepository;
+use App\Repositories\CiclosLectivos\CicloLectivoRepository;
+use App\Repositories\Libretas\LibretaRepository;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class AlumnoEstadisticaController extends Controller
 {
-    protected $alumnoService;
-    protected $divisionService;
-    protected $cicloLectivoService;
+    protected $alumnoRepository;
+    protected $libretaRepository;
+    protected $cicloLectivoRepository;
 
     public function __construct(
-        ObtenerPeriodosEvaluacion $divisionService,
-        CicloLectivoService $cicloLectivoService,
-        AlumnoService $alumnoService,
+        LibretaRepository $libretaRepository,
+        CicloLectivoRepository $cicloLectivoRepository,
+        AlumnoRepository $alumnoRepository,
     )
 
     {
@@ -29,17 +28,17 @@ class AlumnoEstadisticaController extends Controller
         $this->middleware('alumnoCorrespondiente');
         $this->middleware('soloInstitucionesDirectivosAlumnos');
 
-        $this->alumnoService = $alumnoService;
-        $this->divisionService = $divisionService;
-        $this->cicloLectivoService = $cicloLectivoService;
+        $this->alumnoRepository = $alumnoRepository;
+        $this->libretaRepository = $libretaRepository;
+        $this->cicloLectivoRepository = $cicloLectivoRepository;
     }
 
     public function mostrarCiclosLectivos($institucion_id, $alumno_id)
     {
         return Inertia::render('Alumnos/Estadisticas/Mostrar', [
             'institucion_id' => $institucion_id,
-            'alumno' => $this->alumnoService->find($alumno_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'alumno' => $this->alumnoRepository->find($alumno_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 
@@ -58,7 +57,7 @@ class AlumnoEstadisticaController extends Controller
 
 
         $division = $this->obtenerDivision($libreta);
-        $periodos = $this->divisionService->obtenerPeriodos($libreta);
+        $periodos = $this->libretaRepository->obtenerPeriodos($libreta);
 
         $totalPeriodo = [];
         $cantidadPeriodo = [];

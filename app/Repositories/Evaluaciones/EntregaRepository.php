@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Evaluaciones;
+namespace App\Repositories\Evaluaciones;
 
 use App\Models\Evaluaciones\Entrega;
 
-class EntregaService
+class EntregaRepository
 {
     public function find($id)
     {

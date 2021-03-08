@@ -12,9 +12,8 @@ use App\Models\Deudores\RendirComentario;
 use App\Models\Deudores\RendirCorreccion;
 use App\Models\Deudores\RendirEntrega;
 use App\Models\Roles\Alumno;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\Division\DivisionService;
-use App\Services\Division\ObtenerFormaEvaluacion;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use App\Services\Mesas\EvaluarAprobacion;
 use Illuminate\Http\Request;
@@ -25,16 +24,14 @@ class InscripcionController extends Controller
 {
     protected $formatoService;
     protected $evaluarAprobacionService;
-    protected $formaEvaluacionService;
-    protected $divisionService;
-    protected $asignaturaService;
+    protected $divisionRepository;
+    protected $asignaturaRepository;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         EvaluarAprobacion $evaluarAprobacionService,
-        ObtenerFormaEvaluacion $formaEvaluacionService,
-        DivisionService $divisionService,
-        AsignaturaService $asignaturaService,
+        DivisionRepository $divisionRepository, 
+        AsignaturaRepository $asignaturaRepository,
     )
 
     {
@@ -51,9 +48,8 @@ class InscripcionController extends Controller
 
         $this->formatoService = $formatoService;
         $this->evaluarAprobacionService = $evaluarAprobacionService;
-        $this->formaEvaluacionService = $formaEvaluacionService;
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
     }
 
     public function store(Request $request, $institucion_id, $division_id, $asignatura_id, $mesa_id)
@@ -77,8 +73,8 @@ class InscripcionController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura' => $this->asignaturaRepository->find($asignatura_id),
             'mesa' => [
                 'id' => $mesa->id,
                 'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),
@@ -107,12 +103,12 @@ class InscripcionController extends Controller
     public function edit($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
         $mesa = Mesa::select('id', 'fechaHoraRealizacion', 'fechaHoraFinalizacion')->findOrFail($mesa_id);
-        $arrayTemporal = $this->formaEvaluacionService->obtenerFormaEvaluacion($division_id);
+        $arrayTemporal = $this->divisionRepository->obtenerFormaEvaluacion($division_id);
 
         return Inertia::render('Deudores/Inscripciones/Edit', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura' => $this->asignaturaRepository->find($asignatura_id),
             'mesa' => [
                 'id' => $mesa->id,
                 'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),

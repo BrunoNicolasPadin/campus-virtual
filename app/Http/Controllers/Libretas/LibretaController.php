@@ -7,10 +7,10 @@ use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Deudores\AlumnoDeudor;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
-use App\Services\Alumnos\AlumnoService;
-use App\Services\CiclosLectivos\CicloLectivoService;
-use App\Services\Division\ObtenerFormaEvaluacion;
-use App\Services\Division\ObtenerPeriodosEvaluacion;
+use App\Repositories\Alumnos\AlumnoRepository;
+use App\Repositories\CiclosLectivos\CicloLectivoRepository;
+use App\Repositories\Estructuras\DivisionRepository;
+use App\Repositories\Libretas\LibretaRepository;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,17 +18,17 @@ use Inertia\Inertia;
 class LibretaController extends Controller
 {
     protected $formatoService;
-    protected $formaEvaluacionService;
-    protected $divisionService;
-    protected $cicloLectivoService;
-    protected $alumnoService;
+    protected $divisionRepository;
+    protected $cicloLectivoRepository;
+    protected $alumnoRepository;
+    protected $libretaRepository;
 
     public function __construct(
         CambiarFormatoFecha $formatoService, 
-        ObtenerFormaEvaluacion $formaEvaluacionService,
-        ObtenerPeriodosEvaluacion $divisionService,
-        CicloLectivoService $cicloLectivoService,
-        AlumnoService $alumnoService
+        DivisionRepository $divisionRepository,
+        CicloLectivoRepository $cicloLectivoRepository,
+        AlumnoRepository $alumnoRepository,
+        LibretaRepository $libretaRepository,
     )
 
     {
@@ -40,10 +40,10 @@ class LibretaController extends Controller
         $this->middleware('libretaCorrespondiente')->only('edit', 'update');
 
         $this->formatoService = $formatoService;
-        $this->formaEvaluacionService = $formaEvaluacionService;
-        $this->divisionService = $divisionService;
-        $this->cicloLectivoService = $cicloLectivoService;
-        $this->alumnoService = $alumnoService;
+        $this->divisionRepository = $divisionRepository;
+        $this->cicloLectivoRepository = $cicloLectivoRepository;
+        $this->alumnoRepository = $alumnoRepository;
+        $this->libretaRepository = $libretaRepository;
     }
 
     public function index($institucion_id, $alumno_id)
@@ -59,8 +59,8 @@ class LibretaController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'ciclo_lectivo_id' => $cicloLectivo->id,
-            'alumno' => $this->alumnoService->find($alumno_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'alumno' => $this->alumnoRepository->find($alumno_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
             'periodos' => $periodos,
             'libreta' => $libreta,
             'libretas' => $libretas,
@@ -77,7 +77,7 @@ class LibretaController extends Controller
         $deudas = [];
 
         if (! $libreta == null) {
-            $periodos = $this->divisionService->obtenerPeriodos($libreta);
+            $periodos = $this->libretaRepository->obtenerPeriodos($libreta);
             $libretas = $this->obtenerLibretas($alumno_id, $ciclo_lectivo_id);
             $deudas = $this->obtenerDeudas($alumno_id, $ciclo_lectivo_id);
         }
@@ -88,7 +88,7 @@ class LibretaController extends Controller
     public function edit($institucion_id, $alumno_id, $id)
     {
         $libreta = Libreta::select('division_id')->findOrFail($id);
-        $arrayTemporal = $this->formaEvaluacionService->obtenerFormaEvaluacion($libreta->division_id);
+        $arrayTemporal = $this->divisionRepository->obtenerFormaEvaluacion($libreta->division_id);
 
         $libretas = Libreta::select('id', 'asignatura_id')
             ->where('id', $id)
@@ -104,7 +104,7 @@ class LibretaController extends Controller
 
         return Inertia::render('Libretas/Edit', [
             'institucion_id' => $institucion_id,
-            'alumno' => $this->alumnoService->find($alumno_id),
+            'alumno' => $this->alumnoRepository->find($alumno_id),
             'libretas' => $libretas,
             'formasDescripcion' => $arrayTemporal[0],
             'tipoEvaluacion' => $arrayTemporal[1],

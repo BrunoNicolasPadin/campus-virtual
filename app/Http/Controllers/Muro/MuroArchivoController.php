@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreArchivo;
 use App\Models\Muro\Muro;
 use App\Models\Muro\MuroArchivo;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\Archivos\ObtenerFechaHoraService;
-use App\Services\Division\DivisionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -17,12 +17,12 @@ class MuroArchivoController extends Controller
 {
     protected $formatoService;
     protected $obtenerFechaHoraService;
-    protected $divisionService;
+    protected $divisionRepository;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
         ObtenerFechaHoraService $obtenerFechaHoraService,
-        DivisionService $divisionService
+        DivisionRepository $divisionRepository
     )
 
     {
@@ -35,7 +35,7 @@ class MuroArchivoController extends Controller
 
         $this->formatoService = $formatoService;
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
-        $this->divisionService = $divisionService;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function index($institucion_id, $division_id, $muro_id)
@@ -46,7 +46,7 @@ class MuroArchivoController extends Controller
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'publicacion' => [
                 'id' => $muro->id,
                 'publicacion' => $muro->publicacion,
@@ -61,7 +61,7 @@ class MuroArchivoController extends Controller
     {
         return Inertia::render('Muro/Archivos/Create', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'publicacion' => Muro::select('id')->findOrFail($muro_id),
         ]);
     }

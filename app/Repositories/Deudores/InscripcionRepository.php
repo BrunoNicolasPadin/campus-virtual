@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Services\Mesas;
+namespace App\Repositories\Deudores;
 
 use App\Models\Deudores\Inscripcion;
-use App\Models\Roles\Alumno;
-use App\Models\User;
 
-class InscriptoService
+class InscripcionRepository
 {
     public function find($id)
     {

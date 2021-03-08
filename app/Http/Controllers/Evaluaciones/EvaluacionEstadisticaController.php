@@ -7,14 +7,14 @@ use App\Models\Estructuras\FormaDescripcion;
 use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Evaluaciones\Entrega;
 use App\Models\Evaluaciones\Evaluacion;
-use App\Services\Division\DivisionService;
+use App\Repositories\Estructuras\DivisionRepository;
 use Inertia\Inertia;
 
 class EvaluacionEstadisticaController extends Controller
 {
-    protected $divisionService;
+    protected $divisionRepository;
 
-    public function __construct(DivisionService $divisionService)
+    public function __construct(DivisionRepository $divisionRepository)
 
     {
         $this->middleware('auth');
@@ -23,12 +23,12 @@ class EvaluacionEstadisticaController extends Controller
         $this->middleware('soloInstitucionesDirectivosDocentes');
         $this->middleware('evaluacionCorrespondiente');
 
-        $this->divisionService = $divisionService;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function mostrarEstadisticas($institucion_id, $division_id, $evaluacion_id)
     {
-        $division = $this->divisionService->find($division_id);
+        $division = $this->divisionRepository->find($division_id);
         $formaEvaluacion = FormaEvaluacion::findOrFail($division->forma_evaluacion_id);
         $partida = null;
         $calificacionesAprobadas = [];

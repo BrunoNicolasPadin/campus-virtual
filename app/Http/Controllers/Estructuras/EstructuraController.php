@@ -13,22 +13,22 @@ use App\Models\Estructuras\FormaEvaluacion;
 use App\Models\Estructuras\Nivel;
 use App\Models\Estructuras\Orientacion;
 use App\Models\Estructuras\Periodo;
-use App\Services\Division\DivisionService;
+use App\Repositories\Estructuras\DivisionRepository;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class EstructuraController extends Controller
 {
-    protected $divisionService;
+    protected $divisionRepository;
 
-    public function __construct(DivisionService $divisionService)
+    public function __construct(DivisionRepository $divisionRepository)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos')->except('index', 'show');
         $this->middleware('divisionCorrespondiente')->only('show', 'edit', 'update', 'destroy');
 
-        $this->divisionService = $divisionService;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function index($institucion_id)
@@ -87,7 +87,7 @@ class EstructuraController extends Controller
     {
         return Inertia::render('Estructuras/Show', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($id),
+            'division' => $this->divisionRepository->find($id),
             'tipo' => session('tipo'),
         ]);
     }

@@ -7,22 +7,21 @@ use App\Models\Deudores\Inscripcion;
 use App\Models\Deudores\Mesa;
 use App\Models\Estructuras\FormaDescripcion;
 use App\Models\Estructuras\FormaEvaluacion;
-use App\Services\Asignaturas\AsignaturaService;
-use App\Services\Division\DivisionService;
+use App\Repositories\Asignaturas\AsignaturaRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Inertia\Inertia;
 
 class MesaEstadisticaController extends Controller
 {
     protected $formatoService;
-    protected $mesasService;
-    protected $divisionService;
-    protected $asignaturaService;
+    protected $divisionRepository;
+    protected $asignaturaRepository;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoService,
-        DivisionService $divisionService, 
-        AsignaturaService $asignaturaService,
+        DivisionRepository $divisionRepository, 
+        AsignaturaRepository $asignaturaRepository,
     )
 
     {
@@ -34,13 +33,13 @@ class MesaEstadisticaController extends Controller
         $this->middleware('mesaCorrespondiente');
 
         $this->formatoService = $formatoService;
-        $this->divisionService = $divisionService;
-        $this->asignaturaService = $asignaturaService;
+        $this->divisionRepository = $divisionRepository;
+        $this->asignaturaRepository = $asignaturaRepository;
     }
 
     public function mostrarEstadisticas($institucion_id, $division_id, $asignatura_id, $id)
     {
-        $division = $this->divisionService->find($division_id);
+        $division = $this->divisionRepository->find($division_id);
         $formaEvaluacion = FormaEvaluacion::findOrFail($division->forma_evaluacion_id);
         $partida = null;
         $calificacionesAprobadas = [];
@@ -172,8 +171,8 @@ class MesaEstadisticaController extends Controller
 
         return Inertia::render('Deudores/Mesas/Estadisticas', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'asignatura' => $this->asignaturaService->find($asignatura_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'asignatura' => $this->asignaturaRepository->find($asignatura_id),
             'mesa' => [
                 'id' => $mesa->id,
                 'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaMostrar($mesa->fechaHoraRealizacion),

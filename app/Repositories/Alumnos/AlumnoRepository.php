@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Alumnos;
+namespace App\Repositories\Alumnos;
 
 use App\Models\Roles\Alumno;
 use App\Models\User;
 
-class AlumnoService
+class AlumnoRepository
 {
     public function find($id)
     {

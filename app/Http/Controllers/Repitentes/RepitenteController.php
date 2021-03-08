@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Repitentes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Repitentes\StoreRepitente;
 use App\Models\Repitentes\Repitente;
-use App\Services\Alumnos\AlumnoService;
-use App\Services\CiclosLectivos\CicloLectivoService;
-use App\Services\Division\DivisionService;
+use App\Repositories\Alumnos\AlumnoRepository;
+use App\Repositories\CiclosLectivos\CicloLectivoRepository;
+use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\FechaHora\CambiarFormatoFecha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,15 +16,15 @@ use Inertia\Inertia;
 class RepitenteController extends Controller
 {
     protected $formatoService;
-    protected $divisionService;
-    protected $cicloLectivoService;
-    protected $alumnoService;
+    protected $divisionRepository;
+    protected $cicloLectivoRepository;
+    protected $alumnoRepository;
 
     public function __construct(
         CambiarFormatoFecha $formatoService,
-        DivisionService $divisionService,
-        CicloLectivoService $cicloLectivoService,
-        AlumnoService $alumnoService
+        DivisionRepository $divisionRepository,
+        CicloLectivoRepository $cicloLectivoRepository,
+        AlumnoRepository $alumnoRepository
     )
 
     {
@@ -36,9 +36,9 @@ class RepitenteController extends Controller
         $this->middleware('repitenteCorrespondiente')->only('edit', 'update', 'destroy');
 
         $this->formatoService = $formatoService;
-        $this->divisionService = $divisionService;
-        $this->cicloLectivoService = $cicloLectivoService;
-        $this->alumnoService = $alumnoService;
+        $this->divisionRepository = $divisionRepository;
+        $this->cicloLectivoRepository = $cicloLectivoRepository;
+        $this->alumnoRepository = $alumnoRepository;
     }
 
     public function index($institucion_id, Request $filtros)
@@ -80,8 +80,8 @@ class RepitenteController extends Controller
 
         return Inertia::render('Repitentes/Index', [
             'institucion_id' => $institucion_id,
-            'divisiones' => $this->divisionService->get($institucion_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'divisiones' => $this->divisionRepository->get($institucion_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
             'repitentes' => $repitentes,
             'ciclo_lectivo_id_index' => $filtros->ciclo_lectivo_id,
             'division_id_index' => $filtros->division_id,
@@ -92,8 +92,8 @@ class RepitenteController extends Controller
     {
         return Inertia::render('Repitentes/Create', [
             'institucion_id' => $institucion_id,
-            'alumno' => $this->alumnoService->find($alumno_id),
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
+            'alumno' => $this->alumnoRepository->find($alumno_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
         ]);
     }
 
@@ -115,7 +115,7 @@ class RepitenteController extends Controller
     {
         return Inertia::render('Repitentes/Show', [
             'institucion_id' => $institucion_id,
-            'alumno' => $this->alumnoService->find($alumno_id),
+            'alumno' => $this->alumnoRepository->find($alumno_id),
             'tipo' => session('tipo'),
             'repeticiones' => Repitente::where('alumno_id', $alumno_id)
                 ->with('ciclo_lectivo', 'division', 'division.nivel', 'division.curso', 'division.orientacion')
@@ -151,8 +151,8 @@ class RepitenteController extends Controller
         return Inertia::render('Repitentes/Edit', [
             'institucion_id' => $institucion_id,
             'repitente' => $repitente,
-            'ciclosLectivos' => $this->cicloLectivoService->obtenerCiclosParaMostrar($institucion_id),
-            'divisiones' => $this->divisionService->get($institucion_id),
+            'ciclosLectivos' => $this->cicloLectivoRepository->obtenerCiclosParaMostrar($institucion_id),
+            'divisiones' => $this->divisionRepository->get($institucion_id),
         ]);
     }
 

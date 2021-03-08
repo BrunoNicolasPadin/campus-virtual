@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Muro\StoreRespuesta;
 use App\Models\Evaluaciones\EvaluacionComentario;
 use App\Models\Evaluaciones\EvaluacionRespuesta;
+use App\Repositories\Estructuras\DivisionRepository;
+use App\Repositories\Evaluaciones\EvaluacionRepository;
 use App\Services\Archivos\ObtenerFechaHoraService;
-use App\Services\Division\DivisionService;
-use App\Services\Evaluaciones\EvaluacionService;
 use App\Services\FechaHora\CambiarFormatoFechaHora;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -16,14 +16,14 @@ use Inertia\Inertia;
 class EvaluacionRespuestaController extends Controller
 {
     protected $formatoFechaHoraService;
-    protected $divisionService;
-    protected $evaluacionService;
+    protected $divisionRepository;
+    protected $evaluacionRepository;
     protected $obtenerFechaHoraService;
 
     public function __construct(
         CambiarFormatoFechaHora $formatoFechaHoraService,
-        DivisionService $divisionService,
-        EvaluacionService $evaluacionService,
+        DivisionRepository $divisionRepository,
+        EvaluacionRepository $evaluacionRepository,
         ObtenerFechaHoraService $obtenerFechaHoraService
     )
 
@@ -36,8 +36,8 @@ class EvaluacionRespuestaController extends Controller
         $this->middleware('respuestaEvaluacionCorrespondiente')->only('update', 'destroy');
 
         $this->formatoFechaHoraService = $formatoFechaHoraService;
-        $this->divisionService = $divisionService;
-        $this->evaluacionService = $evaluacionService;
+        $this->divisionRepository = $divisionRepository;
+        $this->evaluacionRepository = $evaluacionRepository;
         $this->obtenerFechaHoraService = $obtenerFechaHoraService;
     }
 
@@ -49,8 +49,8 @@ class EvaluacionRespuestaController extends Controller
             'institucion_id' => $institucion_id,
             'user_id' => Auth::id(),
             'tipo' => session('tipo'),
-            'division' => $this->divisionService->find($division_id),
-            'evaluacion' => $this->evaluacionService->find($evaluacion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'evaluacion' => $this->evaluacionRepository->find($evaluacion_id),
             'comentario' => [
                 'id' => $comentario->id,
                 'user' => $comentario->user->only('name'),

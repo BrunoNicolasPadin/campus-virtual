@@ -5,15 +5,15 @@ namespace App\Http\Controllers\RolesDivision;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\PasarDeAnioUpdate;
 use App\Models\Roles\Alumno;
-use App\Services\Division\DivisionService;
+use App\Repositories\Estructuras\DivisionRepository;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AlumnoDivisionController extends Controller
 {
-    protected $divisionService;
+    protected $divisionRepository;
 
-    public function __construct(DivisionService $divisionService)
+    public function __construct(DivisionRepository $divisionRepository)
     {
         $this->middleware('auth');
         $this->middleware('institucionCorrespondiente');
@@ -21,7 +21,7 @@ class AlumnoDivisionController extends Controller
         $this->middleware('soloInstitucionesDirectivos')->only('sacarloDeLaDivision');
         $this->middleware('alumnoDivisionCorrespondiente')->only('sacarloDeLaDivision');
 
-        $this->divisionService = $divisionService;
+        $this->divisionRepository = $divisionRepository;
     }
 
     public function mostrarAlumnos($institucion_id, $division_id)
@@ -35,7 +35,7 @@ class AlumnoDivisionController extends Controller
             'institucion_id' => $institucion_id,
             'tipo' => session('tipo'),
             'user_id' => Auth::id(),
-            'division' => $this->divisionService->find($division_id),
+            'division' => $this->divisionRepository->find($division_id),
             'alumnos' => $alumnos,
         ]);
     }
@@ -49,8 +49,8 @@ class AlumnoDivisionController extends Controller
 
         return Inertia::render('RolesDivision/HacerlosPasar', [
             'institucion_id' => $institucion_id,
-            'division' => $this->divisionService->find($division_id),
-            'divisiones' => $this->divisionService->get($institucion_id),
+            'division' => $this->divisionRepository->find($division_id),
+            'divisiones' => $this->divisionRepository->get($institucion_id),
             'alumnos' => $alumnos,
         ]);
     }

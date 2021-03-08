@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Evaluaciones;
+namespace App\Repositories\Evaluaciones;
 
 use App\Models\Evaluaciones\Evaluacion;
 
-class EvaluacionService
+class EvaluacionRepository
 {
     public function find($id)
     {
