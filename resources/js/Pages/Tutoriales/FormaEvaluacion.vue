@@ -2,7 +2,7 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Ciclos lectivos</template>
+                <template #titulo-tutorial>Formas de evaluación</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#agregar">Agregar</a></li>
@@ -17,16 +17,20 @@
                         </template>
 
                         <template #informacion>
-                            -Ingresamos desde "Institucional -> Ciclos lectivos". <br>
-                            
-                            -Al crear un ciclo lectivo activado, hará que el resto se desactive. <br>
+                            -Ingresamos desde "Institucional -> Perfil institucional". <br>
 
-                            -Si es el segundo ciclo lectivo que creará, antes de crearlo verifique que haya cumplido los pasos de "<inertia-link class="hover:underline" :href="route('tutoriales.nuevo_ciclo_lectivo')">¿Está por comenzar un ciclo lectivo nuevo? Sigue estos pasos</inertia-link>".
+                            -Al crear una división deberá seleccionar una forma de evaluación, que contendrá las distintas calificaciones que podrán utilizar los docentes para evaluar a sus alumnos. <br>
+
+                            -Dentro de cada forma de evaluación podrá ver las divisiones en las cuales esta aplicada y las opciones de calificación que tiene (en el caso de las "Escritas") y poder editarlas o eliminarlas.
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../storage/Tutoriales/CicloLectivo/Ingresar.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/CicloLectivo/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
+                            <a :href="'../storage/Tutoriales/Institucion/Editar_1.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Institucion/Editar_1.png'" class="border" alt="Editar_1" title="Editar_1" />
+                            </a> <br>
+
+                            <a :href="'../storage/Tutoriales/FormaEvaluacion/Ingresar.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/FormaEvaluacion/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
                             </a> <br>
 
                             <video-embed src="https://youtu.be/26YEJA_QXD4"></video-embed>
@@ -39,7 +43,8 @@
                         </template>
 
                         <template #informacion>
-                            Si al editar un ciclo lectivo lo coloca como "activado" se desactivarán los otros.
+                            -Recomendación: no cambie una forma de evaluación de tipo "Escrita" a una "Numérica" o "Porcentual" y viceversa, 
+                            ya que afectara a las estadísticas, salvo que no haya cargado ninguna calificación todavía.
                         </template>
                     </detalles-tutorial>
 
@@ -49,8 +54,9 @@
                         </template>
 
                         <template #informacion>
-                            -Si elimina el ciclo lectivo se eliminarán las libretas creadas para este ciclo (lo cual afectaría a las estadísticas), 
-                            las asignaturas adeudadas que tienen los alumnos en el ciclo lectivo eliminado, registros de la lista de ex alumnos y repetidores.
+                            -Antes de eliminar una "Forma de evaluación" (no una calificación/opción) deberá asignarles otra a las divisiones 
+                            que poseen esta forma de evaluación, de lo contrario deberá revisar división por división para ver cual tiene en 
+                            blanco su forma de evaluación.
                         </template>
                     </detalles-tutorial>
                 </template>
@@ -71,6 +77,6 @@
             DetallesTutorial,
         },
 
-        title: 'Gescol - Tutorial - Ciclos lectivos',
+        title: 'Gescol - Tutorial - Formas de evaluación',
     }
 </script>

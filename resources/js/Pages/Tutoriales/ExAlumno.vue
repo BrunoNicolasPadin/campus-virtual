@@ -5,10 +5,8 @@
                 <template #titulo-tutorial>Ex alumnos</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#agregar">Transformar a ex alumno</a></li>
-                    <li>2) <a class="hover:underline" href="#editar">Editar ex alumno</a></li>
-                    <li>3) <a class="hover:underline" href="#eliminar">Eliminar</a></li>
-                    <li>4) <a class="hover:underline" href="#numeros">Números</a></li>
+                    <li>1) <a class="hover:underline" href="#agregar">Transformar a ex alumno y ver números</a></li>
+                    <li>2) <a class="hover:underline" href="#eliminar">Eliminar</a></li>
                 </template>
 
                 <template #detalles>
@@ -18,22 +16,15 @@
                         </template>
 
                         <template #informacion>
-                            Pasará a no desinscribirse de la división en la que este actualmente con lo cual no podrá ingresar a la división nunca mas, 
-                            solo podrá ingresar a todo lo que se encuentre en su perfil.
+                            -Pasará a desinscribirse de la división en la que este actualmente con lo cual no podrá ingresar a la división nunca mas. <br> 
+                            
+                            -Solo podrá ingresar a todo lo que se encuentre en su perfil y a las mesas de las asignaturas que debe rendir. <br>
+
+                            -Números: solo se tiene en cuenta a los alumnos que abandonaron el colegio. <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="editar">
-                        <template #titulo-sub-tutorial>
-                            Editar ex alumno
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/mEr8WG6JChc"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -43,29 +34,15 @@
                         </template>
 
                         <template #informacion>
-                            Solo saldrá de la lista. Si se equivocó de alumno tendrá un problema: al volver a anotarlo en la división correspondiente 
-                            se creará una nueva libreta con todas las asignaturas de esa división, si el alumno ya tiene una libreta en la base de datos
-                            con el ciclo lectivo que esta actualmente activado, se borrara la ya existente y aparecerá una nueva en blanco.
-                            Recomendación: antes de volver a anotarlo en la división correspondiente, anote o saque una captura de pantalla de la libreta para 
-                            luego pasar las calificaciones nuevamente, no perderá nada más que tiempo. 
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="numeros">
-                        <template #titulo-sub-tutorial>
-                            Números
-                        </template>
-
-                        <template #informacion>
-                            Se basa en los alumnos que abandonaron la institución nada más, no en los que cambiaron de institución.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
+                            -Si se equivocó de alumno tendrá un problema: <br>
+                            
+                            -Al volver a anotarlo en la división correspondiente se creará una nueva libreta con todas las asignaturas de esa división, 
+                            si el alumno ya tiene una libreta en la base de datos con el ciclo lectivo que esta actualmente activado, se borrara la 
+                            libreta ya existente y aparecerá una nueva en blanco. <br>
+                            
+                            -Recomendación: antes de volver a anotarlo en la división correspondiente, anote o saque una captura de pantalla de la libreta  
+                            correspondiente al ciclo lectivo actualmente activad para así luego pasar las calificaciones nuevamente, no perderá nada más 
+                            que tiempo. Eso sí, le llegara un email por cada calificación ingresada al alumno y sus padres.
                         </template>
                     </detalles-tutorial>
                 </template>

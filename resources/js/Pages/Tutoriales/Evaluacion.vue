@@ -2,15 +2,15 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Evaluaciones</template>
+                <template #titulo-tutorial>Evaluaciones, archivos, entregas, correcciones y comentarios</template>
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#agregar-evaluacion">Agregar evaluación</a></li>
-                    <li>2) <a class="hover:underline" href="#editar-evaluacion">Editar evaluación</a></li>
-                    <li>3) <a class="hover:underline" href="#eliminar-evaluacion">Eliminar evaluación</a></li>
-                    <li>4) <a class="hover:underline" href="#agregar-archivo">Agregar archivo</a></li>
-                    <li>5) <a class="hover:underline" href="#editar-archivo">Editar archivo</a></li>
-                    <li>6) <a class="hover:underline" href="#eliminar-archivo">Eliminar archivo</a></li>
+                    <li>2) <a class="hover:underline" href="#agregar-archivo">Agregar archivo</a></li>
+                    <li>3) <a class="hover:underline" href="#agregar-correccion">Agregar corrección</a></li>
+                    <li>4) <a class="hover:underline" href="#agregar-entrega">Agregar entrega</a></li>
+                    <li>5) <a class="hover:underline" href="#ver-numeros">Números</a></li>
+                    <li>6) <a class="hover:underline" href="#responder">Responder comentarios</a></li>
                 </template>
 
                 <template #detalles>
@@ -20,41 +20,21 @@
                         </template>
 
                         <template #informacion>
-                            Al crear una evaluación, se le cargará en la base de datos una entrega correspondiente a cada alumno que esté anotado en ese 
-                            momento en la división. Si ingresa un alumno nuevo luego de crear la evaluación, no tendrá ninguna entrega para realizar. <br>
-                            Debe apretar en "OK" luego de seleccionar la fecha y hora deseada.
+                            -Al crear una evaluación, se le cargará en la base de datos una entrega correspondiente a cada alumno que esté anotado en 
+                            ESE MOMENTO en la división. <br>
+
+                            -Los alumnos y padres de estos serán avisados por medio de un email de la creación de la evaluación. <br>
+                            
+                            -Si ingresa un alumno nuevo luego de crear la evaluación, no tendrá ninguna entrega para realizar. <br>
+
+                            -La lista de asignaturas a seleccionar depende de quien cree la evaluación: si lo hace un directivo/institución aparecerán 
+                            todas las de la división, si lo hace un docente solo aparecerán en las que es docente en esa división. <br>
+
+                            -Eliminar evaluación: se eliminan los archivos, comentarios, respuestas, entregas y correcciones. <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="editar-evaluacion">
-                        <template #titulo-sub-tutorial>
-                            Editar evaluación
-                        </template>
-
-                        <template #informacion>
-                            Debe apretar en "OK" luego de CAMBIAR la fecha y hora deseada para que se actualice.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/mEr8WG6JChc"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="eliminar-evaluacion">
-                        <template #titulo-sub-tutorial>
-                            Eliminar evaluación
-                        </template>
-
-                        <template #informacion>
-                            Se eliminarán los archivos entregados por los alumnos, tus correcciones y los archivos cargados a la evaluación.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -64,36 +44,80 @@
                         </template>
 
                         <template #informacion>
-                            Se puede agregar uno o mas archivos. También se puede cambiar de archivo si se equivocó al subirlo o si se equivocó y en realidad 
-                            no quiere agregar otro puede "eliminar el formulario" de ese nuevo archivo.
+                            -Visibilidad: los docentes de la asignatura, la institución y los directivos podrán verlo sin importar la visibilidad, 
+                            solo afecta a los alumnos y padres. <br>
+
+                            -Cada archivo no podrá superar los 20MB. <br>
+
+                            -Archivos permitidos: pdf, doc, docx, powerpoint, excel, ppsx, avi, mpeg, quicktime, mp4, jpg, jpeg, png. <br>
+
+                            -En la imagen se muestra cómo verán los alumnos un archivo "no visible" y un archivo "visible". <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed> <br>
+
+                            <a :href="'../storage/Tutoriales/Evaluacion/VistaAlumno.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Evaluacion/VistaAlumno.png'" class="border" alt="VistaAlumno" title="VistaAlumno" />
+                            </a> <br>
                         </template>
                     </detalles-tutorial>
 
-                    <detalles-tutorial id="editar-archivo">
+                    <detalles-tutorial id="agregar-correccion">
                         <template #titulo-sub-tutorial>
-                            Editar archivo
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/mEr8WG6JChc"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="eliminar-archivo">
-                        <template #titulo-sub-tutorial>
-                            Eliminar archivo
+                            Agregar corrección
                         </template>
 
                         <template #informacion>
-                            Se eliminará para siempre y no podra ser recueperado.
+                            -Se muestran las calificaciones cargadas en la forma de evaluación seleccionada. <br>
+
+                            -El alumno y los padres de estos serán avisados por medio de un email de la calificación, comentario y corrección/es. <br>
+                            
+                            -Cada corrección no podrá superar los 20MB. <br>
+
+                            -Archivos permitidos: pdf, doc, docx, powerpoint, excel, ppsx, avi, mpeg, quicktime, mp4, jpg, jpeg, png. <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                        </template>
+                    </detalles-tutorial>
+
+                    <detalles-tutorial id="agregar-entrega">
+                        <template #titulo-sub-tutorial>
+                            Agregar entrega
+                        </template>
+
+                        <template #informacion>
+                            -Cada entrega no podrá superar los 20MB. <br>
+
+                            -Solo los alumnos pueden realizar entregas, no los padres pero si comentar. <br>
+
+                            -Archivos permitidos: pdf, doc, docx, powerpoint, excel, ppsx, avi, mpeg, quicktime, mp4, jpg, jpeg, png. <br>
+                        </template>
+
+                        <template #contenido-video>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                        </template>
+                    </detalles-tutorial>
+
+                    <detalles-tutorial id="ver-numeros">
+                        <template #titulo-sub-tutorial>
+                            Números
+                        </template>
+
+                        <template #contenido-video>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                        </template>
+                    </detalles-tutorial>
+
+                    <detalles-tutorial id="responder">
+                        <template #titulo-sub-tutorial>
+                            Responder comentarios
+                        </template>
+
+                        <template #contenido-video>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
                     </detalles-tutorial>
                 </template>
@@ -114,6 +138,6 @@
             DetallesTutorial,
         },
 
-        title: 'Gescol - Tutorial - Evaluaciones',
+        title: 'Gescol - Tutorial - Evaluaciones, archivos, entregas y correcciones',
     }
 </script>

@@ -2,26 +2,20 @@
     <estructura>
         <template #contenido>
             <titulo-lista>
-                <template #titulo-tutorial>Calendario</template>
+                <template #titulo-tutorial>Pasar de año</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#mostrar">Mostrar</a></li>
+                    <li>1) <a class="hover:underline" href="#pasar">Hacer pasar de año masivamente</a></li>
                 </template>
 
                 <template #detalles>
-                    <detalles-tutorial id="mostrar">
+                    <detalles-tutorial id="pasar">
                         <template #titulo-sub-tutorial>
-                            Mostrar
+                            Hacer pasar de año masivamente
                         </template>
 
                         <template #informacion>
-                            -La institución y los directivos pueden ver todo. <br>
-
-                            -Los alumnos solo las evaluaciones de la división de la que forman parte y las mesas en las que están anotados. <br>
-                            
-                            -Los padres lo mismo que el hijo que tengan activado. <br>
-
-                            -Los docentes las evaluaciones y mesas de las asignaturas en las que son docente. <br>
+                            -Seleccionar la división a la que pasarán y luego a los alumnos que lo harán. <br>
                         </template>
 
                         <template #contenido-video>
@@ -46,6 +40,6 @@
             DetallesTutorial,
         },
 
-        title: 'Gescol - Tutorial - Calendario',
+        title: 'Gescol - Tutorial - Pasar de año',
     }
 </script>

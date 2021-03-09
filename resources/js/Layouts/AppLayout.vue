@@ -354,12 +354,12 @@
                     <inertia-link :href="route('tutoriales.evaluacion')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
                         Evaluaciones
                     </inertia-link>
-                    <inertia-link :href="route('tutoriales.correccion')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                    <!-- <inertia-link :href="route('tutoriales.correccion')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
                         Correcciones
                     </inertia-link>
                     <inertia-link :href="route('tutoriales.entrega')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
                         Entregas
-                    </inertia-link>
+                    </inertia-link> -->
                     <inertia-link :href="route('tutoriales.material')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
                         Materiales
                     </inertia-link>

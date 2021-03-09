@@ -8,12 +8,8 @@
                     <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
                     <li>2) <a class="hover:underline" href="#eliminarte">Eliminarte como alumno</a></li>
                     <li>3) <a class="hover:underline" href="#anotarte">Anotarte en una institución</a></li>
-                    <li>4) <a class="hover:underline" href="#eliminar">Eliminar alumno de mi institución</a></li>
-                    <li>5) <a class="hover:underline" href="#cambiar-curso">Cambiar de curso</a></li>
-                    <li>6) <a class="hover:underline" href="#agregar-asignatura-adeudada">Agregar asignaturas que adeuda</a></li>
-                    <li>7) <a class="hover:underline" href="#repetir">Hacerlo repetir</a></li>
-                    <li>8) <a class="hover:underline" href="#eliminar-division">Eliminar alumno de la división</a></li>
-                    <li>9) <a class="hover:underline" href="#ex-alumno">Abandono el institución o cambio de institución</a></li>
+                    <li>4) <a class="hover:underline" href="#eliminar-division">Eliminar alumno de la división</a></li>
+                    <li>5) <a class="hover:underline" href="#eliminar">Eliminar alumno de mi institución</a></li>
                 </template>
 
                 <template #detalles>
@@ -23,12 +19,13 @@
                         </template>
 
                         <template #informacion>
-                            No podrá registrarse como alumno nuevamente en la misma institución pero si con otro rol. 
-                            Si podrá registrarse en otra institución con el rol de alumno sin ningún problema.
+                            -No podrá registrarse como alumno nuevamente en la misma institución pero si con otro rol. <br>
+
+                            -Si podrá registrarse en otra institución con el rol de alumno sin ningún problema.
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/uDqlFfPjuHY"></video-embed>
+                            <video-embed src="https://youtu.be/uDqlFfPjuHY"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -38,11 +35,15 @@
                         </template>
 
                         <template #informacion>
-                            Para hacerlo deberás tener la cuenta activada que deseas eliminar.
+                            -Ingresar en "Cuentas". <br>
+                            
+                            -Deberás tener la cuenta activada que desee eliminar.
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/2nBAGrqSKM8"></video-embed>
+                            <a :href="'../storage/Tutoriales/Alumno/Eliminar.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Alumno/Eliminar.png'" class="border" alt="Eliminar" title="Eliminar" />
+                            </a> <br>
                         </template>
                     </detalles-tutorial>
 
@@ -51,65 +52,20 @@
                             Anotarte en una institución
                         </template>
 
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/o-gpXJyPwhc"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="eliminar">
-                        <template #titulo-sub-tutorial>
-                            Eliminar alumno de mi institución
-                        </template>
-
                         <template #informacion>
-                            Se eliminara todo de este alumno: entregas, inscripciones a mesas, libreta y deja de contar en las estadísticas.
+                            -Ingresar en "Buscador de colegios". <br>
+
+                            -Escriba el nombre del colegio en el cual quiera anotarse y luego apriete en "Anotarse".
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/eXv_ncBxlsY"></video-embed>
-                        </template>
-                    </detalles-tutorial>
+                            <a :href="'../storage/Tutoriales/Directivo/Anotarse.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Directivo/Anotarse.png'" class="border" alt="Anotarse" title="Anotarse" />
+                            </a> <br>
 
-                    <detalles-tutorial id="cambiar-curso">
-                        <template #titulo-sub-tutorial>
-                            Cambiar de curso
-                        </template>
-
-                        <template #informacion>
-                            Si quiere hacerlo pasar de año verifique que haya creado un nuevo ciclo lectivo y que esté activado.
-                            Si quiere hacerlo repetir no hace falta hacer nada, solo agregarlo en la lista de repitentes como se explica en "Hacerlo repetir".
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/uDqlFfPjuHY"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="agregar-asignatura-adeudada">
-                        <template #titulo-sub-tutorial>
-                            Agregar asignaturas que adeuda
-                        </template>
-
-                        <template #informacion>
-                            Debe hacerlo para que el alumno pueda inscribirse en las mesas.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/2nBAGrqSKM8"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="repetir">
-                        <template #titulo-sub-tutorial>
-                            Hacerlo repetir
-                        </template>
-
-                        <template #informacion>
-                            Esto sirve mas que nada para la estadística, no debe volver a ingresar la división en la que cursara.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/o-gpXJyPwhc"></video-embed>
+                            <a :href="'../storage/Tutoriales/Directivo/Anotarse_2.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Directivo/Anotarse_2.png'" class="border" alt="Anotarse_2" title="Anotarse_2" />
+                            </a> <br>
                         </template>
                     </detalles-tutorial>
 
@@ -119,8 +75,7 @@
                         </template>
 
                         <template #informacion>
-                            Al eliminar al alumno de la división solo le prohibes su ingreso a esta, salvo que el alumno vuelva a anotarse y 
-                            para eso deberá saber la clave de acceso de la división, cámbiela si quiere evitar esto. 
+                            -No podrá ingresar en la división a menos que sepa la clave de acceso y si la sabe usted debe cambiarla en "Divisiones -> Editar".
                         </template>
 
                         <template #contenido-video>
@@ -128,13 +83,18 @@
                         </template>
                     </detalles-tutorial>
 
-                    <detalles-tutorial id="ex-alumno">
+                    <detalles-tutorial id="eliminar">
                         <template #titulo-sub-tutorial>
-                            Transformarlo en un ex alumno
+                            Eliminar alumno de mi institución
                         </template>
 
                         <template #informacion>
-                            Esto tambien sirve mas que nada para la estadística. Pasará a no estar anotado en ninguna división automáticamente.
+                            -Se eliminara todo de este alumno: entregas, inscripciones a mesas, libreta y deja de contar en las estadísticas. <br>
+
+                            -Si solo desea eliminarlo como alumno de una división vea el video del anterior punto. <br>
+                            
+                            -Si el alumno tiene la clave de acceso y la sabe, podrá ingresar cuantas veces quiera a menos que cambie la clave de acceso.
+                            No sucederá nada con todos los usuarios que ya están inscriptos en su institución al cambiar la clave.
                         </template>
 
                         <template #contenido-video>

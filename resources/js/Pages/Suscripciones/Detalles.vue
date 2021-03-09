@@ -1,11 +1,11 @@
 <template>
-    <div class="min-h-screen bg-blue-50">
+    <div class="min-h-screen bg-blue-50 py-2">
         <nav class="bg-blue-50 border-b border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 my-2">
                     <div class="space-x-8 sm:my-5 sm:ml-10 sm:flex">
-                        <inertia-link target="_blank" :href="route('inicio')" class="text-sm text-indigo-800 font-bold hover:underline">Inicio</inertia-link>
-                        <inertia-link target="_blank" :href="route('tutoriales')" class="text-sm text-indigo-800 font-bold hover:underline">Tutoriales</inertia-link>
+                        <inertia-link target="_blank" :href="route('inicio')" class="text-lg text-indigo-800 font-bold hover:underline">Inicio</inertia-link>
+                        <inertia-link target="_blank" :href="route('tutoriales')" class="text-lg text-indigo-800 font-bold hover:underline">Tutoriales</inertia-link>
                     </div>
                 </div>
             </div>

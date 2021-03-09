@@ -9,10 +9,6 @@
                     <li>2) <a class="hover:underline" href="#editar-asignatura">Editar asignatura</a></li>
                     <li>3) <a class="hover:underline" href="#eliminar-asignatura">Eliminar asignatura</a></li>
                     <li>4) <a class="hover:underline" href="#agregar-docente">Agregar docente</a></li>
-                    <li>5) <a class="hover:underline" href="#cambiar-docente">Cambiar docente</a></li>
-                    <li>6) <a class="hover:underline" href="#eliminar-docente">Eliminar docente</a></li>
-                    <li>7) <a class="hover:underline" href="#agregar-horario">Agregar horario</a></li>
-                    <li>8) <a class="hover:underline" href="#eliminar-horario">Eliminar horario</a></li>
                 </template>
 
                 <template #detalles>
@@ -22,12 +18,12 @@
                         </template>
 
                         <template #informacion>
-                            Puede hacerlo sin tener docentes anotados en su institución, luego los podra agregar y así estos podran ingresar a 
+                            -Puede hacerlo sin tener docentes inscriptos en su institución, luego los podrá agregar (o ellos mismos lo podrán hacer) y así estos podrán ingresar a 
                             la/s división/es en las que son docentes de una o mas asignaturas.
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -37,11 +33,15 @@
                         </template>
 
                         <template #informacion>
-                            Desde aquí también podra eliminar horarios y docentes.
+                            -Desde aquí podrá eliminar horarios y docentes, no permitiéndoles a estos ingresar a esta división a menos que sean docente en otra asignatura. <br>
+                            
+                            -Si no desea eliminar nada y solo cambiarlos también puede hacerlo desde allí pero recuerde apretar el botón "Guardar". <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/mEr8WG6JChc"></video-embed>
+                            <a :href="'../storage/Tutoriales/Asignatura/Editar.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Asignatura/Editar.png'" class="border" alt="Editar" title="Editar" />
+                            </a> <br>
                         </template>
                     </detalles-tutorial>
 
@@ -51,12 +51,8 @@
                         </template>
 
                         <template #informacion>
-                            Se eliminará todo lo relacionado a la asignatura: horarios, materiales, mesas de examen, evaluaciones, entregas, correcciones, 
-                            desaparecerá de las libretas, deja de contar en la estadística.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
+                            -Se eliminará todo lo relacionado a la asignatura: horarios, materiales, mesas de examen, evaluaciones, entregas, correcciones, 
+                            desaparecerá de las libretas, dejará de contar en la estadística.
                         </template>
                     </detalles-tutorial>
 
@@ -66,55 +62,11 @@
                         </template>
 
                         <template #informacion>
-                            Le permitirá a los docentes ingresar a la división.
+                            -Le permitirá a los docentes ingresar a la división.
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="cambiar-docente">
-                        <template #titulo-sub-tutorial>
-                            Cambiar docente
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/mEr8WG6JChc"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="eliminar-docente">
-                        <template #titulo-sub-tutorial>
-                            Eliminar docente
-                        </template>
-
-                        <template #informacion>
-                            El docente no podrá volver a ingresar a la división salvo que esté anotado como docente en otra asignatura.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="agregar-horario">
-                        <template #titulo-sub-tutorial>
-                            Agregar horario
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="eliminar-horario">
-                        <template #titulo-sub-tutorial>
-                            Eliminar horario
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
                     </detalles-tutorial>
                 </template>

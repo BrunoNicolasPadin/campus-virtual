@@ -6,7 +6,7 @@
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#calificar">Calificar</a></li>
-                    <li>1) <a class="hover:underline" href="#exportar">Exportar la libreta</a></li>
+                    <!-- <li>2) <a class="hover:underline" href="#exportar">Exportar la libreta</a></li> -->
                 </template>
 
                 <template #detalles>
@@ -15,12 +15,18 @@
                             Calificar
                         </template>
 
+                        <template #informacion>
+                            -El alumno y sus padres recibirán un email por cada calificación ingresada o actualizada. <br>
+
+                            -Podrá seleccionar entre las calificaciones que posee la forma de evaluación que existe ACTUALMENTE en la división. <br>
+                        </template>
+
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
                     </detalles-tutorial>
 
-                    <detalles-tutorial id="exportar">
+                    <!-- <detalles-tutorial id="exportar">
                         <template #titulo-sub-tutorial>
                             Exportar la libreta
                         </template>
@@ -31,9 +37,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
-                    </detalles-tutorial>
+                    </detalles-tutorial> -->
                 </template>
             </titulo-lista>
         </template>

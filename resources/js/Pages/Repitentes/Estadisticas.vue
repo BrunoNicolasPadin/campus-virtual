@@ -71,7 +71,7 @@
                         type: 'bar'
                     },
                     title: {
-                        text: 'Repitentes por division'
+                        text: 'Repitentes por división'
                     },
                     xAxis: {
                         categories: this.divisionCategorias
@@ -85,7 +85,7 @@
                         dataLabels: {
                             enabled: true
                         },
-                        name: 'Division',
+                        name: 'División',
                         data: this.divisiones
                     }]
                 }

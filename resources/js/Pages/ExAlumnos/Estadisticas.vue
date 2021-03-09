@@ -68,7 +68,7 @@
                         type: 'bar'
                     },
                     title: {
-                        text: 'Abandonos por division'
+                        text: 'Abandonos por división'
                     },
                     xAxis: {
                         categories: this.divisionCategorias
@@ -79,7 +79,7 @@
                         }
                     },
                     series: [{
-                        name: 'Division',
+                        name: 'División',
                         data: this.divisiones
                     }]
                 }

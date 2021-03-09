@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Jobs\Libretas\CrearLibretaJob;
 use App\Models\Roles\Alumno;
-use App\Models\Roles\ExAlumno;
+/* use App\Models\Roles\ExAlumno; */
 
 class AlumnoObserver
 {
@@ -16,7 +16,7 @@ class AlumnoObserver
     public function updated(Alumno $alumno)
     {
         if ($alumno->isDirty('division_id')) {
-            ExAlumno::where('alumno_id', $alumno->id)->delete();
+            /* ExAlumno::where('alumno_id', $alumno->id)->delete(); */
             CrearLibretaJob::dispatch($alumno);
         }
     }

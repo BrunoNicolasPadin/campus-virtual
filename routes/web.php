@@ -249,9 +249,13 @@ Route::group(['prefix' => 'instituciones/{institucion_id}', 'middleware' => 'aut
 Route::inertia('/tutoriales', 'Tutoriales/Principal')->name('tutoriales');
 Route::prefix('tutoriales')->group(function () {
 
+    Route::inertia('como-empezar', 'Tutoriales/ComoEmpezar')->name('tutoriales.como_empezar');
+    Route::inertia('nueveo-ciclo-lectivo', 'Tutoriales/NuevoCicloLectivo')->name('tutoriales.nuevo_ciclo_lectivo');
+    Route::inertia('soporte', 'Tutoriales/Soporte')->name('tutoriales.soporte');
     Route::inertia('institucion', 'Tutoriales/Institucion')->name('tutoriales.institucion');
     Route::inertia('ciclo-lectivo', 'Tutoriales/CicloLectivo')->name('tutoriales.ciclo_lectivo');
     Route::inertia('estructura', 'Tutoriales/Estructura')->name('tutoriales.estructura');
+    Route::inertia('forma-evaluacion', 'Tutoriales/FormaEvaluacion')->name('tutoriales.forma_evaluacion');
     Route::inertia('asignatura', 'Tutoriales/Asignatura')->name('tutoriales.asignatura');
     Route::inertia('usuario', 'Tutoriales/PerfilUsuario')->name('tutoriales.usuario');
     Route::inertia('directivo', 'Tutoriales/Directivo')->name('tutoriales.directivo');
@@ -259,17 +263,17 @@ Route::prefix('tutoriales')->group(function () {
     Route::inertia('alumno', 'Tutoriales/Alumno')->name('tutoriales.alumno');
     Route::inertia('padre', 'Tutoriales/Padre')->name('tutoriales.padre');
     Route::inertia('evaluacion', 'Tutoriales/Evaluacion')->name('tutoriales.evaluacion');
-    Route::inertia('correccion', 'Tutoriales/Correccion')->name('tutoriales.correccion');
-    Route::inertia('entrega', 'Tutoriales/Entrega')->name('tutoriales.entrega');
-    Route::inertia('material', 'Tutoriales/Material')->name('tutoriales.material');
-    Route::inertia('libreta', 'Tutoriales/Libreta')->name('tutoriales.libreta');
-    Route::inertia('muro', 'Tutoriales/Muro')->name('tutoriales.muro');
+    /* Route::inertia('correccion', 'Tutoriales/Correccion')->name('tutoriales.correccion');
+    Route::inertia('entrega', 'Tutoriales/Entrega')->name('tutoriales.entrega'); */
     Route::inertia('mesa', 'Tutoriales/Mesa')->name('tutoriales.mesa');
+    Route::inertia('calendario', 'Tutoriales/Calendario')->name('tutoriales.calendario');
+    Route::inertia('libreta', 'Tutoriales/Libreta')->name('tutoriales.libreta');
+    Route::inertia('material', 'Tutoriales/Material')->name('tutoriales.material');
+    Route::inertia('muro', 'Tutoriales/Muro')->name('tutoriales.muro');
     Route::inertia('estadistica', 'Tutoriales/Estadistica')->name('tutoriales.estadistica');
     Route::inertia('repitente', 'Tutoriales/Repitente')->name('tutoriales.repitente');
     Route::inertia('exalumno', 'Tutoriales/ExAlumno')->name('tutoriales.exalumno');
-    Route::inertia('calendario', 'Tutoriales/Calendario')->name('tutoriales.calendario');
-    Route::inertia('soporte', 'Tutoriales/Soporte')->name('tutoriales.soporte');
-    Route::inertia('como-empezar', 'Tutoriales/ComoEmpezar')->name('tutoriales.como_empezar');
-    Route::inertia('nueveo-ciclo-lectivo', 'Tutoriales/NuevoCicloLectivo')->name('tutoriales.nuevo_ciclo_lectivo');
+    Route::inertia('pasar-de-anio', 'Tutoriales/PasarDeAnio')->name('tutoriales.pasar_de_anio');
+    
+
 });

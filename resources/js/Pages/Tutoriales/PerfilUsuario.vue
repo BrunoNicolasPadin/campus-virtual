@@ -5,7 +5,7 @@
                 <template #titulo-tutorial>Perfil de usuario</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#editar">Editar</a></li>
+                    <li>1) <a class="hover:underline" href="#editar">Editar nombre y agregar datos</a></li>
                     <li>2) <a class="hover:underline" href="#eliminar">Eliminar</a></li>
                 </template>
 
@@ -26,7 +26,7 @@
                         </template>
 
                         <template #informacion>
-                            Se elimina complemtamente el usuario y se deberá crear otro nuevamente.
+                            -Se elimina complemtamente el usuario y se deberá crear otro nuevamente.
                         </template>
 
                         <template #contenido-video>

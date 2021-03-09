@@ -182,7 +182,7 @@
 
         methods: {
             buscar() {
-                this.$inertia.replace(this.route('buscador-de-instituciones', {nombre: this.nombre}))
+                this.$inertia.replace(this.route('buscador_de_instituciones', {nombre: this.nombre}))
             }
         }
     }

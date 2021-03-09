@@ -6,13 +6,12 @@
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#asignaturas">Verificar asignaturas</a></li>
-                    <li>2) <a class="hover:underline" href="#exportar">Exportar números, libretas y estadísticas</a></li>
-                    <li>3) <a class="hover:underline" href="#limpiar">Limpiar estructura</a></li>
+                    <li>2) <a class="hover:underline" href="#limpiar">Limpiar estructura</a></li>
+                    <li>3) <a class="hover:underline" href="#adeudadas">Asignaturas adeudadas</a></li>
                     <li>4) <a class="hover:underline" href="#exalumnos">Ex alumnos</a></li>
-                    <li>5) <a class="hover:underline" href="#adeudadas">Asignaturas adeudadas</a></li>
-                    <li>6) <a class="hover:underline" href="#ciclo-lectivo-nuevo">Ciclo lectivo nuevo</a></li>
-                    <li>7) <a class="hover:underline" href="#repitentes">Repitentes</a></li>
-                    <li>8) <a class="hover:underline" href="#nuevo-curso">Pasar de año</a></li>
+                    <li>5) <a class="hover:underline" href="#ciclo-lectivo-nuevo">Ciclo lectivo nuevo</a></li>
+                    <li>6) <a class="hover:underline" href="#repitentes">Repitentes</a></li>
+                    <li>7) <a class="hover:underline" href="#nuevo-curso">Pasar de año</a></li>
                 </template>
 
                 <template #detalles>
@@ -22,27 +21,7 @@
                         </template>
 
                         <template #informacion>
-                            Si piensa en agregar o eliminar una asignatura, debería hacerlo antes de hacer repetir y hacer pasar de año a algun alumno.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
-                        </template>
-                    </detalles-tutorial>
-
-                    <detalles-tutorial id="exportar">
-                        <template #titulo-sub-tutorial>
-                            Exportar números y estadísticas
-                        </template>
-
-                        <template #informacion>
-                            Le recomendamos exportar los gráficos y tablas que hay en cada tipo de estadísticas del ciclo lectivo que esta por terminar.
-                            Desde Gescol no borramos nada salvo que usted desee eliminar su cuenta, pero tal vez quiera tenerlos en su computadora e imprimirlo 
-                            para verlo mejor o darle cualquier otro uso.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
+                            -Si piensa en agregar o eliminar una asignatura, debería hacerlo antes de hacer repetir y hacer pasar de año a algun alumno. <br>
                         </template>
                     </detalles-tutorial>
 
@@ -52,28 +31,20 @@
                         </template>
 
                         <template #informacion>
-                            En este paso le recomendamos eliminar las evaluaciones y con esto se eliminaran las entregas de los alumnos, las correcciones y 
-                            los comentarios hechos en cada una, como así también los archivos que subió cada docente en cada evaluación.
-                            También se eliminaran las publicaciones en los muros, sus archivos y respuestas.
+                            -Ingresar desde "Perfil institucional". <br>
+
+                            -Se eliminarán las evaluaciones, archivos de evaluaciones, comentarios y respuestas de evaluaciones, entregas, correcciones, 
+                            comentarios de entregas, publicaciones, respuestas y archivos del muro. <br>
+                            
+                            -El resto se mantiene: materiales, asignaturas, docentes, alumnos, repitentes, forma de evaluación y estadísticas.
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
-                        </template>
-                    </detalles-tutorial>
+                            <a :href="'../storage/Tutoriales/Estructura/LimpiarDivision.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Estructura/LimpiarDivision.png'" class="border" alt="Limpiar Division" title="Limpiar Division" />
+                            </a> <br>
 
-                    <detalles-tutorial id="exalumnos">
-                        <template #titulo-sub-tutorial>
-                            Ex alumnos
-                        </template>
-
-                        <template #informacion>
-                            Ingresar a la lista de alumnos de cada división, ingresar al perfil de los alumnos que cambian de institución, terminaron sus estudios 
-                            o han abandonado y hacer el proceso para guardarlos en la lista de ex alumnos.
-                        </template>
-
-                        <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
+                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -83,12 +54,28 @@
                         </template>
 
                         <template #informacion>
-                            Ingresar a la lista de alumnos de cada división, ingresar al perfil de los alumnos que adeuden asignaturas y agregar las correspondientes 
-                            para que el alumno pueda inscribirse a las mesas de examen y así rendir la asignatura que adeuda.
+                            -Ingresar al perfil de los alumnos que adeuden asignaturas y agregar las correspondientes para que el alumno pueda inscribirse 
+                            a las mesas de examen y así rendir la asignatura que adeuda.
+                        </template>
+                    </detalles-tutorial>
+
+                    <detalles-tutorial id="exalumnos">
+                        <template #titulo-sub-tutorial>
+                            Ex alumnos
+                        </template>
+
+                        <template #informacion>
+                            -Ingresar al perfil de cada alumno que haya cambiado de colegio, abandonado o finalizado sus estudios y agregarlo a la lista.
+
+                            -Pasará a desinscribirse de la división en la que este actualmente con lo cual no podrá ingresar a la división nunca mas. <br> 
+                            
+                            -Solo podrá ingresar a todo lo que se encuentre en su perfil y a las mesas de las asignaturas que debe rendir. <br>
+
+                            -Números: solo se tiene en cuenta a los alumnos que abandonaron el colegio. <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -98,13 +85,21 @@
                         </template>
 
                         <template #informacion>
-                            Este paso debe hacerlo si o si antes de los dos pasos que le siguen porque sino puede llegar a cometer un error que no tiene 
+                            -Este paso debe hacerlo si o si antes de los dos pasos que le siguen porque sino puede llegar a cometer un error que no tiene 
                             vuelta atrás y es eliminar accidentalmente la ultima libreta de un alumno o de muchos, depende cuantos alumnos estuvieron haciendo 
                             repetir y haciendo pasar de año.
+
+                            -Ingresamos desde "Institucional -> Ciclos lectivos". <br>
+                            
+                            -Al crear un ciclo lectivo activado, hará que el resto se desactive. <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
+                            <a :href="'../storage/Tutoriales/CicloLectivo/Ingresar.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/CicloLectivo/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
+                            </a> <br>
+
+                            <video-embed src="https://youtu.be/26YEJA_QXD4"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -114,11 +109,21 @@
                         </template>
 
                         <template #informacion>
-                            Ingresar a la lista de alumnos de cada división, ingresar al perfil de los alumnos y hacer el proceso para hacerlos repetir.
+                            -Ingresar al perfil de cada alumno que haya cambiado de colegio, abandonado o finalizado sus estudios y agregarlo a la lista. <br>
+
+                            -Esto sirve más que nada para la estadística. <br>
+
+                             -La división en la que estará anotado será la misma que acaba de repetir, si desea que sea otra, desde el perfil del alumno 
+                             vaya a "Cambiar de curso" y seleccione la división e ingrese la clave correspondiente. En el caso de no acordarse la clave, 
+                             vaya a la división del alumno, en el apartado "Alumnos - Ver" encontrara un botón que dice "Hacerlos pasar", seleccione 
+                             solo a ese alumno y listo.<br>
+
+                            -Debe hacerlo una vez activado el nuevo ciclo lectivo en el que cursara, no antes. En el caso de haberlo hecho contáctese 
+                            con nosotros para solucionar el problema. <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
+                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -128,11 +133,13 @@
                         </template>
 
                         <template #informacion>
-                            Ingresar a la lista de alumnos de cada división, ingresar al perfil de los alumnos e ir a la parte de "cambiar de curso".
+                            -Ingresar a la lista de alumnos de cada división y apriete en "Hacerlos pasar". <br>
+
+                            -Seleccionar la división a la que pasarán y luego a los alumnos que lo harán. <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
+                            <video-embed src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
                         </template>
                     </detalles-tutorial>
                 </template>

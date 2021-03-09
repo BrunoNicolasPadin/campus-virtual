@@ -19,7 +19,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <a :href="'../storage/Tutoriales/Soporte.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Soporte.png'" class="border" alt="Soporte" title="Soporte" />
+                            </a>
                         </template>
                     </detalles-tutorial>
                 </template>

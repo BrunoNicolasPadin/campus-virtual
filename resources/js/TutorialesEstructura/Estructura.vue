@@ -1,12 +1,12 @@
 <template>
 <div>
-    <div class="h-auto bg-blue-50">
+    <div class="h-auto bg-blue-50 py-2">
         <nav class="bg-blue-50 border-b border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 my-2">
                     <div class="space-x-8 sm:my-5 sm:ml-10 sm:flex">
-                        <inertia-link target="_blank" :href="route('inicio')" class="text-sm text-indigo-800 font-bold hover:underline">Inicio</inertia-link>
-                        <inertia-link :href="route('suscripciones.detalles')" class="text-sm text-indigo-800 font-bold hover:underline">Servicios</inertia-link>
+                        <inertia-link target="_blank" :href="route('inicio')" class="text-lg text-indigo-800 font-bold hover:underline">Inicio</inertia-link>
+                        <inertia-link :href="route('suscripciones.detalles')" class="text-lg text-indigo-800 font-bold hover:underline">Servicios</inertia-link>
                     </div>
                 </div>
             </div>
@@ -46,6 +46,12 @@
                         <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
                             :href="route('tutoriales.ciclo_lectivo')">
                             Ciclos lectivos
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.forma_evaluacion')">
+                            Formas de evaluación
                         </inertia-link>
                     </li>
                     <li>
@@ -98,6 +104,18 @@
                     </li>
                     <li>
                         <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.mesa')">
+                            Mesas/Rendir y asignaturas adeudadas
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.calendario')">
+                            Calendario
+                        </inertia-link>
+                    </li>
+                    <!-- <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
                             :href="route('tutoriales.correccion')">
                             Correcciones
                         </inertia-link>
@@ -107,17 +125,11 @@
                             :href="route('tutoriales.entrega')">
                             Entregas
                         </inertia-link>
-                    </li>
+                    </li> -->
                     <li>
                         <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
                             :href="route('tutoriales.material')">
                             Materiales
-                        </inertia-link>
-                    </li>
-                    <li>
-                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
-                            :href="route('tutoriales.libreta')">
-                            Libretas
                         </inertia-link>
                     </li>
                     <li>
@@ -128,8 +140,14 @@
                     </li>
                     <li>
                         <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
-                            :href="route('tutoriales.mesa')">
-                            Mesas/Rendir
+                            :href="route('tutoriales.libreta')">
+                            Libretas
+                        </inertia-link>
+                    </li>
+                    <li>
+                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
+                            :href="route('tutoriales.estadistica')">
+                            Estadísticas y números
                         </inertia-link>
                     </li>
                     <li>
@@ -146,14 +164,8 @@
                     </li>
                     <li>
                         <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
-                            :href="route('tutoriales.estadistica')">
-                            Estadísticas y números
-                        </inertia-link>
-                    </li>
-                    <li>
-                        <inertia-link class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-100 focus:shadow-outline" 
-                            :href="route('tutoriales.calendario')">
-                            Calendario
+                            :href="route('tutoriales.pasar_de_anio')">
+                            Pasar de año
                         </inertia-link>
                     </li>
                 </ul>

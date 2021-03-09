@@ -5,7 +5,7 @@
                 <template #titulo-tutorial>Instituciones</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
+                    <li>1) <a class="hover:underline" href="#registrarse">Crear institución</a></li>
                     <li>2) <a class="hover:underline" href="#editar">Editar</a></li>
                     <li>3) <a class="hover:underline" href="#eliminar">Eliminar</a></li>
                 </template>
@@ -13,15 +13,15 @@
                 <template #detalles>
                     <detalles-tutorial id="registrarse">
                         <template #titulo-sub-tutorial>
-                            Registrarse
+                            Crear institución
                         </template>
 
                         <template #informacion>
-                            Anotar la clave de acceso.
+                            Recomendación: anotar la clave de acceso para no olvidarsela.
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
+                            <video-embed src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -30,8 +30,22 @@
                             Editar
                         </template>
 
+                        <template #informacion>
+                            En "Perfil institucional".
+                        </template>
+
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/a9DMyHHs270"></video-embed>
+                            <a :href="'../storage/Tutoriales/Institucion/Editar_1.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Institucion/Editar_1.png'" class="border" alt="Editar 1" title="Editar 1" />
+                            </a> <br>
+
+                            <a :href="'../storage/Tutoriales/Institucion/Editar_2.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Institucion/Editar_2.png'" class="border" alt="Editar 2" title="Editar 2" />
+                            </a> <br>
+
+                            <a :href="'../storage/Tutoriales/Institucion/Editar_3.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Institucion/Editar_3.png'" class="border" alt="Editar 3" title="Editar 3" />
+                            </a> <br>
                         </template>
                     </detalles-tutorial>
 
@@ -41,7 +55,7 @@
                         </template>
 
                         <template #informacion>
-                            Topnav -> Institucional -> Perfil institucional -> Boton eliminar.
+                            En "Perfil institucional". <br>
                             Si lo hace se borrara absolutamente todo y no se podrá recuperar.
                         </template>
 

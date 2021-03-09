@@ -20,7 +20,7 @@
                                 
                                 <label-form>
                                     <template #label-value>
-                                        Seleccione un ciclo lectivo:
+                                        Seleccione ciclo lectivo:
                                     </template>
                                 </label-form>
                                 

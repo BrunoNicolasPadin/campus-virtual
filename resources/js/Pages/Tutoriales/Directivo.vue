@@ -18,12 +18,13 @@
                         </template>
 
                         <template #informacion>
-                            No podrá registrarse como directivo nuevamente en la misma institución pero si con otro rol. 
-                            Si podrá registrarse en otra institución con el rol de directivo sin ningún problema.
+                            -No podrá registrarse como directivo nuevamente en la misma institución pero si con otro rol. <br>
+
+                            -Si podrá registrarse en otra institución con el rol de directivo sin ningún problema.
                         </template>
 
                         <template #contenido-video>
-                            <video-embed class="w-screen" src="https://youtu.be/uDqlFfPjuHY"></video-embed>
+                            <video-embed src="https://youtu.be/uDqlFfPjuHY"></video-embed>
                         </template>
                     </detalles-tutorial>
 
@@ -33,11 +34,15 @@
                         </template>
 
                         <template #informacion>
-                            Para hacerlo deberás tener la cuenta activada que desee eliminar.
+                            -Ingresar en "Cuentas". <br>
+                            
+                            -Deberás tener la cuenta activada que desee eliminar.
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/2nBAGrqSKM8"></video-embed>
+                            <a :href="'../storage/Tutoriales/Directivo/Eliminar.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Directivo/Eliminar.png'" class="border" alt="Eliminar" title="Eliminar" />
+                            </a> <br>
                         </template>
                     </detalles-tutorial>
 
@@ -47,11 +52,19 @@
                         </template>
 
                         <template #informacion>
-                            Deberá saber la clave de acceso.
+                            -Ingresar en "Buscador de colegios". <br>
+
+                            -Escriba el nombre del colegio en el cual quiera anotarse y luego apriete en "Anotarse".
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/o-gpXJyPwhc"></video-embed>
+                            <a :href="'../storage/Tutoriales/Directivo/Anotarse.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Directivo/Anotarse.png'" class="border" alt="Anotarse" title="Anotarse" />
+                            </a> <br>
+
+                            <a :href="'../storage/Tutoriales/Directivo/Anotarse_2.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Directivo/Anotarse_2.png'" class="border" alt="Anotarse_2" title="Anotarse_2" />
+                            </a> <br>
                         </template>
                     </detalles-tutorial>
 
@@ -61,8 +74,8 @@
                         </template>
 
                         <template #informacion>
-                            Si el directivo tiene la clave de acceso y la sabe, podrá ingresar cuantas veces quiera a menos que cambie la clave de acceso.
-                            No sucederá nada con todos los usuarios que ya están inscriptos en su institución.
+                            Si el directivo tiene la clave de acceso y la sabe, podrá ingresar cuantas veces quiera a menos que usted cambie la clave de acceso. <br>
+                            No sucederá nada con todos los usuarios que ya están inscriptos en su institución si la cambia.
                         </template>
 
                         <template #contenido-video>
