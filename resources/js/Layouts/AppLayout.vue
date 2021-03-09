@@ -292,16 +292,16 @@
                     </div>
 
                     <!-- Links -->
-                    <inertia-link :href="route('tutoriales.como-empezar')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                    <inertia-link :href="route('tutoriales.como_empezar')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
                         ¿Cómo empezar?
                     </inertia-link>
-                    <inertia-link :href="route('tutoriales.nuevo-ciclo-lectivo')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                    <inertia-link :href="route('tutoriales.nuevo_ciclo_lectivo')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
                         ¿Está por comenzar un ciclo lectivo nuevo? Sigue estos pasos
                     </inertia-link>
                     <inertia-link :href="route('tutoriales.institucion')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
                         Institución
                     </inertia-link>
-                    <inertia-link :href="route('tutoriales.ciclo-lectivo')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                    <inertia-link :href="route('tutoriales.ciclo_lectivo')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
                         Ciclos lectivos
                     </inertia-link>
                     <inertia-link :href="route('tutoriales.estructura')" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">

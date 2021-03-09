@@ -2,9 +2,9 @@
 
 namespace App\Jobs\Evaluaciones;
 
+use App\Jobs\Eliminaciones\EliminarEva;
 use App\Models\Evaluaciones\Archivo;
 use App\Models\Evaluaciones\Entrega;
-use App\Models\Evaluaciones\Evaluacion;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -34,9 +34,9 @@ class EvaluacionDestroyJob implements ShouldQueue
         $entregas = Entrega::where('evaluacion_id', $this->evaluacion_id)->get();
         foreach ($entregas as $entrega) {
 
-            $this->dispatch(new EntregaDestroyJob($entrega->id));
+            EntregaDestroyJob::dispatch($entrega->id);
         }
 
-        Evaluacion::destroy($this->evaluacion_id);
+        EliminarEva::dispatch($this->evaluacion_id);
     }
 }

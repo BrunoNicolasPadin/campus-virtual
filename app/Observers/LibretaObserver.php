@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Jobs\EnviarEmailActualizacionLibretaJob;
+use App\Jobs\Libretas\EnviarEmailActualizacionLibretaJob;
 use App\Models\Libretas\Calificacion;
 
 class LibretaObserver

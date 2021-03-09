@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Estructuras;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Estructuras\LimpiezaValidation;
-use App\Jobs\Estructuras\LimpiarDivisiones;
+use App\Jobs\Estructuras\LimpiarDivisionesJob;
 use App\Models\Estructuras\Division;
 use Inertia\Inertia;
 
@@ -40,7 +40,10 @@ class LimpiarDivisionController extends Controller
 
     public function limpiarDivisiones($institucion_id, LimpiezaValidation $request)
     {
-        LimpiarDivisiones::dispatch($institucion_id, $request->all());
+        for ($i=0; $i < count($request['division_id']); $i++) { 
+            LimpiarDivisionesJob::dispatch($request['division_id'][$i]);
+        }
+        
         return back()->with(['successMessage' => 'Divisiones limpiadas con éxito!']);
     }
 }

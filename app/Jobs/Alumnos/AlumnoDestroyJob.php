@@ -3,6 +3,7 @@
 namespace App\Jobs\Alumnos;
 
 use App\Jobs\Deudores\InscripcionDestroyJob;
+use App\Jobs\Eliminaciones\EliminarAlumno;
 use App\Jobs\Evaluaciones\EntregaDestroyJob;
 use App\Jobs\Muro\PublicacionDestroyJob;
 use App\Models\Deudores\Inscripcion;
@@ -33,19 +34,19 @@ class AlumnoDestroyJob implements ShouldQueue
 
         $publicaciones = Muro::where('user_id', $alumno->user_id)->get();
         foreach ($publicaciones as $publicacion) {
-            $this->dispatch(new PublicacionDestroyJob($publicacion->id));
+            PublicacionDestroyJob::dispatch($publicacion->id);
         }
 
         $entregas = Entrega::where('alumno_id', $this->alumno_id)->get();
         foreach ($entregas as $entrega) {
-            $this->dispatch(new EntregaDestroyJob($entrega->id));
+            EntregaDestroyJob::dispatch($entrega->id);
         }
 
         $inscripciones = Inscripcion::where('alumno_id', $this->alumno_id)->get();
         foreach ($inscripciones as $inscripcion) {
-            $this->dispatch(new InscripcionDestroyJob($inscripcion->id));
+            InscripcionDestroyJob::dispatch($inscripcion->id);
         }
 
-        Alumno::destroy($this->alumno_id);
+        EliminarAlumno::dispatch($this->alumno_id);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Jobs\Deudores;
 
 use App\Models\Deudores\Inscripcion;
-use App\Models\Deudores\Mesa;
 use App\Models\Deudores\MesaArchivo;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -36,9 +35,9 @@ class MesaDestroyJob implements ShouldQueue
 
         foreach ($inscripciones as $inscripcion) {
             
-            $this->dispatch(new InscripcionDestroyJob($inscripcion->id));
+            InscripcionDestroyJob::dispatch($inscripcion->id);
         }
 
-        Mesa::destroy($this->mesa_id);
+        EliminarMesa::dispatch($this->mesa_id);
     }
 }

@@ -121,7 +121,7 @@ class AsignaturaController extends Controller
         $asignatura = Asignatura::select('asignaturas.id', 'asignaturas.nombre')
             ->with(array(
                 'docentes' => function($query){
-                    $query->select('asignatura_id', 'docente_id');
+                    $query->select('id', 'asignatura_id', 'docente_id');
                 },
                 'docentes.docente' => function($query){
                     $query->select('id', 'user_id');

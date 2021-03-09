@@ -3,6 +3,7 @@
 namespace App\Jobs\Estructuras;
 
 use App\Jobs\Asignaturas\AsignaturaDestroyJob;
+use App\Jobs\Eliminaciones\EliminarDivision;
 use App\Jobs\Muro\PublicacionDestroyJob;
 use App\Models\Asignaturas\Asignatura;
 use App\Models\Estructuras\Division;
@@ -29,14 +30,14 @@ class DivisionDestroyJob implements ShouldQueue
     {
         $asignaturas = Asignatura::where('division_id', $this->division_id)->get();
         foreach ($asignaturas as $asignatura) {
-            $this->dispatch(new AsignaturaDestroyJob($asignatura->id));
+            AsignaturaDestroyJob::dispatch($asignatura->id);
         }
 
         $publicaciones = Muro::where('division_id', $this->division_id)->get();
         foreach ($publicaciones as $publicacion) {
-            $this->dispatch(new PublicacionDestroyJob($publicacion->id));
+            PublicacionDestroyJob::dispatch($publicacion->id);
         }
 
-        Division::destroy($this->division_id);
+        EliminarDivision::dispatch($this->division_id);
     }
 }

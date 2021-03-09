@@ -3,9 +3,9 @@
 namespace App\Jobs\Asignaturas;
 
 use App\Jobs\Deudores\MesaDestroyJob;
+use App\Jobs\Eliminaciones\EliminarAsignatura;
 use App\Jobs\Evaluaciones\EvaluacionDestroyJob;
 use App\Jobs\Materiales\GrupoDestroyJob;
-use App\Models\Asignaturas\Asignatura;
 use App\Models\Deudores\Mesa;
 use App\Models\Evaluaciones\Evaluacion;
 use App\Models\Materiales\Grupo;
@@ -31,19 +31,19 @@ class AsignaturaDestroyJob implements ShouldQueue
     {
         $grupos = Grupo::where('asignatura_id', $this->asignatura_id)->get();
         foreach ($grupos as $grupo) {
-            $this->dispatch(new GrupoDestroyJob($grupo->id));
+            GrupoDestroyJob::dispatch($grupo->id);
         }
 
         $evaluaciones = Evaluacion::where('asignatura_id', $this->asignatura_id)->get();
         foreach ($evaluaciones as $evaluacion) {
-            $this->dispatch(new EvaluacionDestroyJob($evaluacion->id));
+            EvaluacionDestroyJob::dispatch($evaluacion->id);
         }
 
         $mesas = Mesa::where('asignatura_id', $this->asignatura_id)->get();
         foreach ($mesas as $mesa) {
-            $this->dispatch(new MesaDestroyJob($mesa->id));
+            MesaDestroyJob::dispatch($mesa->id);
         }
 
-        Asignatura::destroy($this->asignatura_id);
+        EliminarAsignatura::dispatch($this->asignatura_id);
     }
 }

@@ -232,13 +232,13 @@
         methods: {
             submit() {
                 if (this.tipo == 'Institucion' || this.tipo == 'Directivo') {
-                    this.$inertia.get(this.route('calendario-instituciones.mostrar', [this.institucion_id, this.form.year, this.form.mes]));
+                    this.$inertia.get(this.route('calendarioInstituciones.mostrar', [this.institucion_id, this.form.year, this.form.mes]));
                 }
                 if (this.tipo == 'Alumno' || this.tipo == 'Padre') {
-                    this.$inertia.get(this.route('calendario-alumnos.mostrar', [this.institucion_id, this.form.year, this.form.mes]));
+                    this.$inertia.get(this.route('calendarioAlumnos.mostrar', [this.institucion_id, this.form.year, this.form.mes]));
                 }
                 if (this.tipo == 'Docente') {
-                    this.$inertia.get(this.route('calendario-docentes.mostrar', [this.institucion_id, this.form.year, this.form.mes]));
+                    this.$inertia.get(this.route('calendarioDocentes.mostrar', [this.institucion_id, this.form.year, this.form.mes]));
                 }
             },
         }

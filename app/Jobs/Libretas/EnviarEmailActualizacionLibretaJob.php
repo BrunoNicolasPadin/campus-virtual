@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Libretas;
 
 use App\Mail\ActualizacionLibreta;
 use App\Models\Libretas\Libreta;
