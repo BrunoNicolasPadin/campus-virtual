@@ -34,7 +34,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -55,7 +57,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed> <br>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div> <br>
 
                             <a :href="'../storage/Tutoriales/Evaluacion/VistaAlumno.png'" target="_blank">
                                 <img :src="'../storage/Tutoriales/Evaluacion/VistaAlumno.png'" class="border" alt="VistaAlumno" title="VistaAlumno" />
@@ -79,7 +83,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -97,7 +103,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -107,7 +115,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -117,7 +127,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
                 </template>

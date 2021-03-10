@@ -34,7 +34,9 @@
                                 <img :src="'../storage/Tutoriales/Estructura/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
                             </a> <br>
 
-                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/Yma0YJCYPUc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -70,7 +72,9 @@
                                 <img :src="'../storage/Tutoriales/Estructura/LimpiarDivision.png'" class="border" alt="Limpiar Division" title="Limpiar Division" />
                             </a> <br>
 
-                            <video-embed src="https://youtu.be/Gfgdj-kD8YY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/mQQ7QpKHbFQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
                 </template>

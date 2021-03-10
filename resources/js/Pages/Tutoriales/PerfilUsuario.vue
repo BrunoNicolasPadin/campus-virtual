@@ -16,7 +16,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/IBedbTi6AW8"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/bPLz8uX7XA4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -26,11 +28,15 @@
                         </template>
 
                         <template #informacion>
-                            -Se elimina complemtamente el usuario y se deberá crear otro nuevamente.
+                            -Está debajo de todo en "Perfil". <br>
+
+                            -Se elimina complemtamente el usuario y se deberá crear otro nuevamente. <br>
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/YGcI1Gb_UPQ"></video-embed>
+                            <a :href="'../storage/Tutoriales/Usuario/Eliminar.png'" target="_blank">
+                                <img :src="'../storage/Tutoriales/Usuario/Eliminar.png'" class="border" alt="Eliminar" title="Eliminar" />
+                            </a> <br>
                         </template>
                     </detalles-tutorial>
                 </template>

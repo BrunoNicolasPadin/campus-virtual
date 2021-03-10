@@ -5,7 +5,7 @@
                 <template #titulo-tutorial>Asignaturas</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#agregar-asignatura">Agregar asignatura</a></li>
+                    <li>1) <a class="hover:underline" href="#agregar-asignatura">Agregar asignaturas</a></li>
                     <li>2) <a class="hover:underline" href="#editar-asignatura">Editar asignatura</a></li>
                     <li>3) <a class="hover:underline" href="#eliminar-asignatura">Eliminar asignatura</a></li>
                     <li>4) <a class="hover:underline" href="#agregar-docente">Agregar docente</a></li>
@@ -14,7 +14,7 @@
                 <template #detalles>
                     <detalles-tutorial id="agregar-asignatura">
                         <template #titulo-sub-tutorial>
-                            Agregar asignatura
+                            Agregar asignaturas
                         </template>
 
                         <template #informacion>
@@ -23,7 +23,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/EMYcLxJjZek" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -66,7 +68,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/HjrH6M4yjHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
                 </template>

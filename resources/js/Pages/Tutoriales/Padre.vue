@@ -5,7 +5,7 @@
                 <template #titulo-tutorial>Padres</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
+                    <li>1) <a class="hover:underline" href="#registrarse">Registrarse como padre</a></li>
                     <li>2) <a class="hover:underline" href="#eliminarte">Eliminarte como padre</a></li>
                     <li>3) <a class="hover:underline" href="#anotarte">Anotarte en una institución</a></li>
                     <li>4) <a class="hover:underline" href="#eliminar">Eliminar padre de mi institución</a></li>
@@ -14,7 +14,7 @@
                 <template #detalles>
                     <detalles-tutorial id="registrarse">
                         <template #titulo-sub-tutorial>
-                            Registrarse
+                            Registrarse como padre
                         </template>
 
                         <template #informacion>
@@ -24,7 +24,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/uDqlFfPjuHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/EMYcLxJjZek" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -81,7 +83,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/eXv_ncBxlsY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/z4Hxg4ynSss" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
                 </template>

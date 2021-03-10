@@ -29,7 +29,9 @@
                                 <img :src="'../storage/Tutoriales/CicloLectivo/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
                             </a> <br>
 
-                            <video-embed src="https://youtu.be/26YEJA_QXD4"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/bGRRzjsqfVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 

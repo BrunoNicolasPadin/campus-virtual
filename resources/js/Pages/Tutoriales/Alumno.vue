@@ -5,17 +5,17 @@
                 <template #titulo-tutorial>Alumnos</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#registrarse">Registrarse</a></li>
+                    <li>1) <a class="hover:underline" href="#registrarse">Registrarse como alumno</a></li>
                     <li>2) <a class="hover:underline" href="#eliminarte">Eliminarte como alumno</a></li>
                     <li>3) <a class="hover:underline" href="#anotarte">Anotarte en una institución</a></li>
-                    <li>4) <a class="hover:underline" href="#eliminar-division">Eliminar alumno de la división</a></li>
+                    <li>4) <a class="hover:underline" href="#eliminar-division">Eliminar alumno de una división</a></li>
                     <li>5) <a class="hover:underline" href="#eliminar">Eliminar alumno de mi institución</a></li>
                 </template>
 
                 <template #detalles>
                     <detalles-tutorial id="registrarse">
                         <template #titulo-sub-tutorial>
-                            Registrarse
+                            Registrarse como alumno
                         </template>
 
                         <template #informacion>
@@ -25,7 +25,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/uDqlFfPjuHY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/lqtRVHzrX7A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -71,7 +73,7 @@
 
                     <detalles-tutorial id="eliminar-division">
                         <template #titulo-sub-tutorial>
-                            Eliminar alumno de la división
+                            Eliminar alumno de una división
                         </template>
 
                         <template #informacion>
@@ -79,7 +81,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/eXv_ncBxlsY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/0b7nMYhLnm8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
@@ -98,7 +102,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/eXv_ncBxlsY"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/trQvSxgJab8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
                 </template>

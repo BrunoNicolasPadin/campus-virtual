@@ -21,7 +21,9 @@
                         </template>
 
                         <template #contenido-video>
-                            <video-embed src="https://youtu.be/ZIgNB9Rs6Ss"></video-embed>
+                            <div class="text-center relative" style="padding-top: 56.25%">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/zSnPtw3crIM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                         </template>
                     </detalles-tutorial>
 
