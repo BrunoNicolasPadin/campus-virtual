@@ -14,6 +14,7 @@ class ExAlumno extends Model
         'abandono',
         'finalizo',
         'cambio',
+        'debeRendir',
         'comentario',
     ];
     protected $guarded = [

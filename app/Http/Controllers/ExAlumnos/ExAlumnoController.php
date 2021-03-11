@@ -46,7 +46,7 @@ class ExAlumnoController extends Controller
     {
         $exAlumnos = DB::table('ex_alumnos')
             ->select('ex_alumnos.id', 'ex_alumnos.alumno_id', 'ex_alumnos.division_id', 'ex_alumnos.abandono', 'ex_alumnos.finalizo', 'ex_alumnos.cambio', 
-            'divisiones.id AS division_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
+            'ex_alumnos.debeRendir', 'divisiones.id AS division_id', 'divisiones.division', 'niveles.nombre AS nivel_nombre', 
             'orientaciones.nombre AS orientacion_nombre', 'cursos.nombre AS curso_nombre', 'users.name', 'users.profile_photo_path',
             'ciclos_lectivos.comienzo', 'ciclos_lectivos.final')
             ->where('ex_alumnos.institucion_id', $institucion_id)
@@ -72,6 +72,9 @@ class ExAlumnoController extends Controller
             ->when($filtros->condicion == 'cambio', function ($query, $cambio) {
                 return $query->where('ex_alumnos.cambio', true);
             })
+            ->when($filtros->condicion == 'debeRendir', function ($query, $cambio) {
+                return $query->where('ex_alumnos.debeRendir', true);
+            })
             ->orderBy('users.name')
             ->paginate(10)
             ->withQueryString()
@@ -87,6 +90,7 @@ class ExAlumnoController extends Controller
                     'abandono' => $exalumno->abandono,
                     'cambio' => $exalumno->cambio,
                     'finalizo' => $exalumno->finalizo,
+                    'debeRendir' => $exalumno->debeRendir,
                 ];
             });
         return Inertia::render('ExAlumnos/Index', [
@@ -122,6 +126,7 @@ class ExAlumnoController extends Controller
         $exAlumno->abandono = $request->abandono;
         $exAlumno->finalizo = $request->finalizo;
         $exAlumno->cambio = $request->cambio;
+        $exAlumno->debeRendir = $request->debeRendir;
         $exAlumno->institucion()->associate($institucion_id);
         $exAlumno->alumno()->associate($request->alumno_id);
         $exAlumno->division()->associate($request->division_id);
@@ -134,7 +139,7 @@ class ExAlumnoController extends Controller
 
     public function edit($institucion_id, $id)
     {
-        $exAlumno = ExAlumno::select('id', 'alumno_id', 'ciclo_lectivo_id', 'comentario', 'abandono', 'finalizo', 'cambio')
+        $exAlumno = ExAlumno::select('id', 'alumno_id', 'ciclo_lectivo_id', 'comentario', 'abandono', 'finalizo', 'cambio', 'debeRendir')
             ->where('id', $id)
             ->with(array(
                 'alumno' => function($query){
@@ -161,6 +166,7 @@ class ExAlumnoController extends Controller
             'abandono' => $request->abandono,
             'finalizo' => $request->finalizo,
             'cambio' => $request->cambio,
+            'debeRendir' => $request->debeRendir,
             'comentario' => $request->comentario,
         ]);
 

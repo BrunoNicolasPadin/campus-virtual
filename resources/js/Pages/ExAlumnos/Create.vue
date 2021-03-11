@@ -82,6 +82,7 @@
                                     <option value="abandono">Abandonó el colegio</option>
                                     <option value="finalizo">Finalizó sus estudios</option>
                                     <option value="cambio">Se cambió de colegio</option>
+                                    <option value="debeRendir">Le quedan asignaturas por rendir</option>
 
                                 </select>
 
@@ -132,9 +133,10 @@
                     division_id: this.alumno.division_id,
                     ciclo_lectivo_id: null,
                     comentario: null,
-                    abandono: null,
-                    finalizo: null,
-                    cambio: null,
+                    abandono: false,
+                    finalizo: false,
+                    cambio: false,
+                    debeRendir: false,
                 },
                 condicion: null,
             }
@@ -145,19 +147,29 @@
                 if (this.condicion == 'abandono') {
                    this.form.abandono = true;
                    this.form.finalizo = false;
-                   this.form.cambio = false; 
+                   this.form.cambio = false;
+                   this.form.debeRendir = false;
                 }
 
                 if (this.condicion == 'finalizo') {
                    this.form.abandono = false;
                    this.form.finalizo = true;
-                   this.form.cambio = false; 
+                   this.form.cambio = false;
+                   this.form.debeRendir = false;
                 }
 
                 if (this.condicion == 'cambio') {
                    this.form.abandono = false;
                    this.form.finalizo = false;
-                   this.form.cambio = true; 
+                   this.form.cambio = true;
+                   this.form.debeRendir = false;
+                }
+
+                if (this.condicion == 'debeRendir') {
+                   this.form.abandono = false;
+                   this.form.finalizo = false;
+                   this.form.cambio = true;
+                   this.form.debeRendir = false;
                 }
                 this.$inertia.post(this.route('exalumnos.store', this.institucion_id), this.form)
             },

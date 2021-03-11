@@ -35,6 +35,16 @@
                 <hr class="my-5">
             </div>
 
+            <div class="my-2 container mx-auto px-4 sm:px-8 text-center">
+                <p class="mt-3 my-2 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
+                    ¿Quiere adquirirlo? Vaya al formulario de contacto que se encuentra debajo y seleccione como asunto ‘Adquirir servicio’ y 
+                    escriba de que desea ponerse en contacto con nosotros para poder obtener el servicio y también escrita las preguntas que tiene sobre 
+                    el producto.
+                </p>
+
+                <hr class="my-5">
+            </div>
+
             <div class="my-2 container mx-auto px-4 sm:px-8 text-left">
                 <h1 class="text-2xl tracking-tight font-bold text-gray-900">
                     <span class="text-black" id="ciclos-lectivos">Ciclos lectivos:</span>
@@ -201,13 +211,146 @@
                 <hr class="my-5">
             </div>
         </div>
+
+        <div class="my-2 container mx-auto px-4 sm:px-8 text-center">
+            <p class="mt-3 my-2 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
+                ¿Quiere adquirirlo? Vaya al formulario de contacto que se encuentra debajo y seleccione como asunto ‘Adquirir servicio’ y 
+                escriba de que desea ponerse en contacto con nosotros para poder obtener el servicio y también escrita las preguntas que tiene sobre 
+                el producto.
+            </p>
+
+            <hr class="my-5">
+        </div>
+
+        <div class="py-5">
+                <div class="lg:text-center">
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                        Contacto
+                    </p>
+                </div>
+                <flash-messages></flash-messages>
+                <div class="pt-6 pb-8 px-4 sm:px-8 my-2 mb-4">
+                    <estructura-form>
+                        <template #formulario>
+                            <form method="post" @submit.prevent="submit">
+                                
+                                <div class="-mx-3 md:flex mb-6">
+                                    <div class="md:w-full px-3 mb-6 md:mb-0">
+                                        
+                                        <label-form>
+                                            <template #label-value>
+                                                Email
+                                            </template>
+                                        </label-form>
+                                        
+                                        <input-form required type="email" v-model="form.email" />
+                                        
+                                        <info>
+                                            <template #info>
+                                                Es obligatorio.
+                                            </template>
+                                        </info>
+                                    </div>
+                                </div>
+                                <div class="-mx-3 md:flex mb-6">
+                                    <div class="md:w-full px-3">
+                                        
+                                        <label-form>
+                                            <template #label-value>
+                                                Motivo
+                                            </template>
+                                        </label-form>
+                                        
+                                        <select 
+                                        required
+                                        v-model="form.asunto"
+                                        class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3">
+                                            <option disabled value="">-</option>
+                                            <option value="Queja">Queja</option>
+                                            <option value="Error">Reportar error</option>
+                                            <option value="Nueva idea">Nueva idea</option>
+                                            <option value="Adquirir servicio">Adquirir servicio</option>
+                                            <option value="Otro motivo">Otro motivo</option>
+                                        </select>
+                                        
+                                        <info>
+                                            <template #info>
+                                                Es obligatorio.
+                                            </template>
+                                        </info>
+                                    </div>
+                                </div>
+
+                                <div class="-mx-3 md:flex mb-6">
+                                    <div class="md:w-full px-3">
+                                        <label-form>
+                                            <template #label-value>
+                                                Mensaje
+                                            </template>
+                                        </label-form>
+                                        
+                                        <textarea
+                                            required
+                                            class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
+                                            cols="30" 
+                                            rows="5" v-model="form.mensaje"></textarea>
+                                        
+                                        <info>
+                                            <template #info>
+                                                Es obligatorio.
+                                            </template>
+                                        </info>
+                                    </div>
+                                </div>
+
+                                <guardar></guardar>
+                                <span class="text-black text-md">
+                                    o enviar un mensaje a <span class="underline">3413154714</span>.
+                                </span>
+                            </form>
+                        </template>
+                    </estructura-form>
+
+                    <hr class="my-5">
+                </div>
+            </div>
     </div>
 </template>
 
 <script>
+    import EstructuraForm from '@/Formulario/EstructuraForm.vue'
+    import LabelForm from '@/Formulario/LabelForm.vue'
+    import InputForm from '@/Formulario/InputForm.vue'
+    import Info from '@/Formulario/Info.vue'
+    import Guardar from '@/Botones/Guardar.vue'
+    import FlashMessages from '@/Shared/FlashMessages.vue'
 
     export default {
+        components: {
+            EstructuraForm,
+            LabelForm,
+            InputForm,
+            Info,
+            Guardar,
+            FlashMessages,
+        },
 
         title: 'Gescol - Detalles de los servicios',
+
+        data() {
+            return {
+                form: {
+                    email: null,
+                    asunto: null,
+                    mensaje: null,
+                },
+            }
+        },
+
+        methods: {
+            submit() {
+                this.$inertia.post(this.route('contacto.enviar_email'), this.form)
+            },
+        },
     }
 </script>

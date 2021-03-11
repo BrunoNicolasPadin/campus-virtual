@@ -91,7 +91,7 @@
                                     <option value="abandono">Abandonó</option>
                                     <option value="cambio">Cambió</option>
                                     <option value="finalizo">Finalizó</option>
-
+                                    <option value="debeRendir">Le quedan asignaturas por rendir</option>
                                 </select>
                             </div>
                         </div>
@@ -150,6 +150,12 @@
                             <table-head>
                                 <template #th-titulo>
                                     Cambió
+                                </template>
+                            </table-head>
+
+                            <table-head>
+                                <template #th-titulo>
+                                    Debe rendir
                                 </template>
                             </table-head>
 
@@ -221,6 +227,13 @@
                                 <table-data>
                                     <template #td>
                                         <span v-if="exalumno.cambio">Si</span>
+                                        <span v-else>No</span>
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <span v-if="exalumno.debeRendir">Si</span>
                                         <span v-else>No</span>
                                     </template>
                                 </table-data>

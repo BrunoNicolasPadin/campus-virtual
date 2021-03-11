@@ -76,7 +76,7 @@
                                     <option value="abandono">Abandonó el colegio</option>
                                     <option value="finalizo">Finalizó sus estudios</option>
                                     <option value="cambio">Se cambió de colegio</option>
-
+                                    <option value="debeRendir">Le quedan asignaturas por rendir</option>
                                 </select>
 
                                 <info>
@@ -126,6 +126,7 @@
                     abandono: this.exAlumno.abandono,
                     finalizo: this.exAlumno.finalizo,
                     cambio: this.exAlumno.cambio,
+                    debeRendir: this.exAlumno.debeRendir,
                 },
                 condicion: null,
             }
@@ -143,6 +144,10 @@
             if (this.form.cambio) {
                 this.condicion = 'cambio';
             }
+
+            if (this.form.debeRendir) {
+                this.condicion = 'debeRendir';
+            }
         },
 
         methods: {
@@ -150,19 +155,29 @@
                 if (this.condicion == 'abandono') {
                    this.form.abandono = true;
                    this.form.finalizo = false;
-                   this.form.cambio = false; 
+                   this.form.cambio = false;
+                   this.form.debeRendir = false;
                 }
 
                 if (this.condicion == 'finalizo') {
                    this.form.abandono = false;
                    this.form.finalizo = true;
-                   this.form.cambio = false; 
+                   this.form.cambio = false;
+                   this.form.debeRendir = false;
                 }
 
                 if (this.condicion == 'cambio') {
                    this.form.abandono = false;
                    this.form.finalizo = false;
-                   this.form.cambio = true; 
+                   this.form.cambio = true;
+                   this.form.debeRendir = false;
+                }
+
+                if (this.condicion == 'debeRendir') {
+                   this.form.abandono = false;
+                   this.form.finalizo = false;
+                   this.form.cambio = true;
+                   this.form.debeRendir = false;
                 }
 
                 this.$inertia.put(this.route('exalumnos.update', [this.institucion_id, this.exAlumno.id]), this.form)

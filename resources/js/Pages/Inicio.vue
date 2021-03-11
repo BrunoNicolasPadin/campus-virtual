@@ -36,7 +36,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="lg:text-center">
                         <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                            Servicios
+                            Servicios a $10 por alumno
                         </p>
                     </div>
             
@@ -168,12 +168,29 @@
             </div>
 
             <div class="my-2 container mx-auto px-4 sm:px-8 text-center">
+                <!-- <div class="rounded-full px-4 py-2 border border-indigo-500">
+                    <span class="text-2xl font-bold text-indigo-500">Precio: $10 por alumno</span>
+                </div> <br> -->
+
                 <button type="button" class="border border-indigo-500 bg-indigo-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-700 focus:outline-none focus:shadow-outline">
-                    <inertia-link :href="route('suscripciones.detalles')">Ver con mas detalle</inertia-link>
+                    <inertia-link :href="route('suscripciones.detalles')">¿Quiere ver imágenes de lo descripto? Apriete aquí</inertia-link>
                 </button>
-                <button type="button" class="border border-green-500 bg-green-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-green-700 focus:outline-none focus:shadow-outline">
+                <!-- <button type="button" class="border border-green-500 bg-green-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-green-700 focus:outline-none focus:shadow-outline">
                     <inertia-link :href="route('tutoriales')">Tutoriales</inertia-link>
-                </button>
+                </button> -->
+
+                <hr class="my-5">
+            </div>
+
+            <div class="my-2 container mx-auto px-4 sm:px-8 text-center">
+                <!-- <div class="rounded-full px-4 py-2 border border-indigo-500">
+                    <span class="text-2xl font-bold text-indigo-500">Precio: $10 por alumno</span>
+                </div> <br> -->
+
+                <p class="mt-3 my-2 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
+                    ¿Quiere adquirirlo? Vaya al formulario de contacto que se encuentra debajo y seleccione como asunto ‘Adquirir servicio’ y 
+                    escriba de que desea ponerse en contacto con nosotros para poder obtener el servicio.
+                </p>
 
                 <hr class="my-5">
             </div>
@@ -246,6 +263,7 @@
                                         </label-form>
                                         
                                         <textarea
+                                            required
                                             class="appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3"
                                             cols="30" 
                                             rows="5" v-model="form.mensaje"></textarea>

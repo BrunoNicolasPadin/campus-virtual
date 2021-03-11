@@ -22,6 +22,7 @@ class CreateExAlumnosTable extends Migration
             $table->boolean('abandono');
             $table->boolean('finalizo');
             $table->boolean('cambio');
+            $table->boolean('debeRendir');
             $table->text('comentario')->nullable();
             $table->timestamps();
         });
