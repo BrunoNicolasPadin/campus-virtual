@@ -114,7 +114,7 @@ Route::get('activar-padre/{id}', [ActivarCuentaController::class, 'activarPadre'
 
 Route::get('buscador-de-instituciones', [BuscadorDeInstitucionesController::class, 'buscar'])->name('buscador_de_instituciones');
 Route::resource('instituciones', InstitucionController::class);
-Route::group(['prefix' => 'instituciones/{institucion_id}', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'instituciones/{institucion_id}', 'middleware' => 'verificarSuscripcion'], function() {
     
     Route::resource('ciclos-lectivos', CicloLectivoController::class);
     Route::get('anotarse', [RolController::class, 'anotarse'])->name('roles.anotarse');
@@ -274,6 +274,4 @@ Route::prefix('tutoriales')->group(function () {
     Route::inertia('repitente', 'Tutoriales/Repitente')->name('tutoriales.repitente');
     Route::inertia('exalumno', 'Tutoriales/ExAlumno')->name('tutoriales.exalumno');
     Route::inertia('pasar-de-anio', 'Tutoriales/PasarDeAnio')->name('tutoriales.pasar_de_anio');
-    
-
 });

@@ -26,13 +26,10 @@ class GrupoDestroyJob implements ShouldQueue
 
     public function handle()
     {
-        /* $gruposMaterialesService = new EliminarGruposMateriales(); */
-        
         $materiales = Material::where('grupo_id', $this->grupo_id)->get();
         foreach ($materiales as $material) {
             Storage::delete('public/Materiales/' . $material->archivo);
         }
-        /* $gruposMaterialesService->eliminarGruposMateriales($this->grupo_id); */
         Grupo::destroy($this->grupo_id);
         
     }

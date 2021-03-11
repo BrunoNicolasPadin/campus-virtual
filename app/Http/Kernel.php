@@ -118,5 +118,7 @@ class Kernel extends HttpKernel
         'mesaArchivoCorrespondiente' => \App\Http\Middleware\Deudores\MesaArchivoCorrespondiente::class,
         'prohibidoInstituciones' => \App\Http\Middleware\Instituciones\ProhibidoInstituciones::class,
         'asignaturaFiltradaCorrespondiente' => \App\Http\Middleware\Evaluaciones\AsignaturaFiltradaCorrespondiente::class,
+        'verificarSuscripcion' => \App\Http\Middleware\Suscripciones\VerificarSuscripcion::class,
+        'verificarCantidadDeAlumnos' => \App\Http\Middleware\Alumnos\VerificarCantidadDeAlumnos::class,
     ];
 }

@@ -7,6 +7,7 @@ use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
+use App\Repositories\Libretas\LibretaRepository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -27,24 +28,14 @@ class CrearLibretaJob implements ShouldQueue
 
     public function handle()
     {
+        $libretaRepository = new LibretaRepository();
         $cicloLectivo = CicloLectivo::where('institucion_id', $this->alumno->institucion_id)->where('activado', '1')->first();
         $this->eliminarLibretas($cicloLectivo->id, $this->alumno->id);
 
         $asignaturas = Asignatura::where('division_id', $this->alumno->division_id)->get();
         $division = Division::find($this->alumno->division_id);
         $periodos = [];
-
-        if ($division->periodo_id == 1) {
-            $periodos = ['1er bimestre', '2do bimestre', '3er bimestre', '4to bimestre', 'Nota final'];
-        }
-
-        if ($division->periodo_id == 2) {
-            $periodos = ['1er trimestre', '2do trimestre', '3er trimestre', 'Nota final'];
-        }
-
-        if ($division->periodo_id == 3) {
-            $periodos = ['1er cuatrimestre', '2do cuatrimestre', 'Nota final'];
-        }
+        $periodos = $libretaRepository->obtenerPeriodos($division);
 
         foreach ($asignaturas as $asignatura) {
 

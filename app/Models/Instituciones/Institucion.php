@@ -16,7 +16,9 @@ class Institucion extends Model
         'claveDeAcceso',
     ];
     protected $guarded = [
-        'useer_id',
+        'user_id',
+        'cantidadAlumnos',
+        'pago',
     ];
 
     public function user()

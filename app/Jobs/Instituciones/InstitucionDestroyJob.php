@@ -2,6 +2,7 @@
 
 namespace App\Jobs\Instituciones;
 
+use App\Jobs\Deudores\EliminarInstitucion;
 use App\Jobs\Estructuras\DivisionDestroyJob;
 use App\Models\Estructuras\Division;
 use App\Models\Instituciones\Institucion;
@@ -33,6 +34,6 @@ class InstitucionDestroyJob implements ShouldQueue
         $institucion = Institucion::findOrFail($this->institucion_id);
         Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
 
-        Institucion::destroy($this->institucion_id);
+        EliminarInstitucion::dispatch($this->institucion_id);
     }
 }

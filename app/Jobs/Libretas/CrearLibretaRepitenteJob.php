@@ -7,7 +7,7 @@ use App\Models\CiclosLectivos\CicloLectivo;
 use App\Models\Estructuras\Division;
 use App\Models\Libretas\Calificacion;
 use App\Models\Libretas\Libreta;
-use App\Services\Division\ObtenerPeriodosEvaluacion;
+use App\Repositories\Libretas\LibretaRepository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,7 +28,7 @@ class CrearLibretaRepitenteJob implements ShouldQueue
 
     public function handle()
     {
-        $periodosService = new ObtenerPeriodosEvaluacion();
+        $libretaRepository = new LibretaRepository();
 
         $cicloLectivo = CicloLectivo::where('institucion_id', $this->repitente->institucion_id)->where('activado', '1')->first();
         $this->eliminarLibretas($cicloLectivo->id, $this->repitente->alumno_id);
@@ -36,7 +36,7 @@ class CrearLibretaRepitenteJob implements ShouldQueue
         $asignaturas = Asignatura::where('division_id', $this->repitente->division_id)->get();
         $division = Division::find($this->repitente->division_id);
         $periodos = [];
-        $periodos = $periodosService->obtenerPeriodos($division);
+        $periodos = $libretaRepository->obtenerPeriodos($division);
 
         foreach ($asignaturas as $asignatura) {
 

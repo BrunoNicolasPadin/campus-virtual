@@ -69,7 +69,7 @@ class InstitucionController extends Controller
 
     public function show($id)
     {
-        $institucion = Institucion::select('id', 'user_id', 'numero', 'fundacion', 'historia', 'planDeEstudio')
+        $institucion = Institucion::select('id', 'user_id', 'cantidadAlumnos', 'pago', 'numero', 'fundacion', 'historia', 'planDeEstudio')
             ->where('id', $id)
             ->with(array(
                 'user' => function($query){

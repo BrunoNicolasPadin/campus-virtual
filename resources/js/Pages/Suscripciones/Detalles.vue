@@ -37,9 +37,8 @@
 
             <div class="my-2 container mx-auto px-4 sm:px-8 text-center">
                 <p class="mt-3 my-2 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
-                    ¿Quiere adquirirlo? Vaya al formulario de contacto que se encuentra debajo y seleccione como asunto ‘Adquirir servicio’ y 
-                    escriba de que desea ponerse en contacto con nosotros para poder obtener el servicio y también escrita las preguntas que tiene sobre 
-                    el producto.
+                    ¿Quiere adquirirlo? Vaya al formulario de contacto que se encuentra debajo y seleccione como asunto Quiero adquirir el servicio’ y 
+                    escribanos para obtener el servicio, puede escribirnos también sus dudas que nosotros con gusto se la responderemos.
                 </p>
 
                 <hr class="my-5">
@@ -266,11 +265,14 @@
                                         v-model="form.asunto"
                                         class="form-select appearance-none block w-full bg-grey-lighter text-black border border-red rounded py-3 px-4 mb-3">
                                             <option disabled value="">-</option>
-                                            <option value="Queja">Queja</option>
-                                            <option value="Error">Reportar error</option>
-                                            <option value="Nueva idea">Nueva idea</option>
-                                            <option value="Adquirir servicio">Adquirir servicio</option>
-                                            <option value="Otro motivo">Otro motivo</option>
+                                            <option value="Adquirir servicio">Quiero adquirir el servicio</option>
+                                            <option value="Problema">Tengo un problema</option>
+                                            <option value="Error">Encontré un error</option>
+                                            <option value="Nueva idea">Tengo una idea para el sitio</option>
+                                            <option value="Cambiar forma de pago">Quiero cambiar la forma/metodo de pago</option>
+                                            <option value="Problema para pagar">No tengo dinero ahora mismo</option>
+                                            <option value="Cambios en la cantidad de alumnos">Aumento/Reducción en cantidad de alumnos</option>
+                                            <option value="Otro">Otro</option>
                                         </select>
                                         
                                         <info>

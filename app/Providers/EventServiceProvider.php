@@ -26,9 +26,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        /* Registered::class => [
+        Registered::class => [
             SendEmailVerificationNotification::class,
-        ], */
+        ],
     ];
 
     /**
@@ -38,11 +38,11 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Evaluacion::observe(EvaluacionObserver::class);
         Alumno::observe(AlumnoObserver::class);
-        Repitente::observe(RepitenteObserver::class);
+        Evaluacion::observe(EvaluacionObserver::class);
         Entrega::observe(EntregaObserver::class);
         Calificacion::observe(LibretaObserver::class);
         Inscripcion::observe(InscripcionObserver::class);
+        Repitente::observe(RepitenteObserver::class);
     }
 }
