@@ -23,6 +23,11 @@ class EliminarAlumno implements ShouldQueue
 
     public function handle()
     {
-        Alumno::destroy($this->alumno_id);
+        Alumno::where('id', $this->alumno_id)
+            ->update([
+                'eliminada' => 1,
+            ]);
+
+        /* Alumno::destroy($this->alumno_id); */
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreDirectivo;
 use App\Models\Roles\Directivo;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -24,13 +25,16 @@ class DirectivoController extends Controller
         $this->claveDeAccesoService = $claveDeAccesoService;
     }
 
-    public function index($institucion_id)
+    public function index($institucion_id, Request $request)
     {
         return Inertia::render('Directivos/Index', [
             'institucion_id' => $institucion_id,
             'directivos' => Directivo::select('directivos.id', 'users.name', 'users.profile_photo_path')
                 ->where('institucion_id', $institucion_id)
                 ->join('users', 'users.id', 'directivos.user_id')
+                ->when($request->nombre, function($query, $nombre) {
+                    $query->where('users.name', 'LIKE', '%'.$nombre.'%');
+                })
                 ->orderBy('users.name')
                 ->paginate(10)
                 ->transform(function ($directivo) {
@@ -40,7 +44,7 @@ class DirectivoController extends Controller
                         'foto' => $directivo->profile_photo_path,
                     ];
                 }),
-            'nombreProp' => '',
+            'nombreProp' => $request->nombre,
         ]);
     }
 

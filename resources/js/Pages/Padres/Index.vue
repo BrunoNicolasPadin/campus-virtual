@@ -163,11 +163,7 @@
             },
 
             buscar() {
-                if (this.nombre == '') {
-                    this.$inertia.get(this.route('padres.index', this.institucion_id))
-                } else {
-                    this.$inertia.replace(this.route('buscador_de_padres', {institucion_id: this.institucion_id, nombre: this.nombre}))
-                }
+                this.$inertia.replace(this.route('padres.index', {institucion_id: this.institucion_id, nombre: this.nombre}))
             }
         }
     }

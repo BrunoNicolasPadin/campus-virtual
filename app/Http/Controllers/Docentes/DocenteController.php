@@ -7,6 +7,7 @@ use App\Http\Requests\Roles\StoreDocente;
 use App\Models\Asignaturas\AsignaturaDocente;
 use App\Models\Roles\Docente;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -26,13 +27,16 @@ class DocenteController extends Controller
         $this->claveDeAccesoService = $claveDeAccesoService;
     }
 
-    public function index($institucion_id)
+    public function index($institucion_id, Request $request)
     {
         return Inertia::render('Docentes/Index', [
             'institucion_id' => $institucion_id,
             'docentes' => Docente::select('docentes.id', 'users.name', 'users.profile_photo_path')
                 ->where('institucion_id', $institucion_id)
                 ->join('users', 'users.id', 'docentes.user_id')
+                ->when($request->nombre, function($query, $nombre) {
+                    $query->where('users.name', 'LIKE', '%'.$nombre.'%');
+                })
                 ->orderBy('users.name')
                 ->paginate(20)
                 ->transform(function ($docente) {
@@ -42,7 +46,7 @@ class DocenteController extends Controller
                         'foto' => $docente->profile_photo_path,
                     ];
                 }),
-            'nombreProp' => '',
+            'nombreProp' => $request->nombre,
         ]);
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Alumnos\AlumnoController;
+use App\Http\Controllers\Alumnos\AlumnoEliminadoController;
 use App\Http\Controllers\Alumnos\AlumnoEstadisticaController;
 use App\Http\Controllers\Asignaturas\AsignaturaController;
 use App\Http\Controllers\Asignaturas\AsignaturaDeudorController;
@@ -130,10 +131,8 @@ Route::group(['prefix' => 'instituciones/{institucion_id}', 'middleware' => 'ver
 
     Route::resource('alumnos', AlumnoController::class);
 
-    Route::get('directivos/buscador/{nombre}', [BuscadorDirectivoController::class, 'buscar'])->name('buscador_de_directivos');
-    Route::get('docentes/buscador/{nombre}', [BuscadorDocenteController::class, 'buscar'])->name('buscador_de_docentes');
-    Route::get('alumnos/buscador/{nombre}', [BuscadorAlumnoController::class, 'buscar'])->name('buscador_de_alumnos');
-    Route::get('padres/buscador/{nombre}', [BuscadorPadreController::class, 'buscar'])->name('buscador_de_padres');
+    Route::get('alumnos-eliminados', [AlumnoEliminadoController::class, 'index'])->name('alumnoEliminado.index');
+    Route::get('alumnos-eliminados/{alumno_id}', [AlumnoEliminadoController::class, 'destroy'])->name('alumnoEliminado.destroy');
     
     Route::get('verificar-clave-institucion', [AlumnoController::class, 'verificarClave'])->name('alumnos.verificar_clave_institucion');
     Route::resource('padres', PadreController::class);

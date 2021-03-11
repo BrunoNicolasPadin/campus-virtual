@@ -8,6 +8,7 @@ use App\Http\Requests\Roles\StorePadre;
 use App\Models\Roles\Alumno;
 use App\Models\Roles\Padre;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -26,13 +27,16 @@ class PadreController extends Controller
         $this->claveDeAccesoService = $claveDeAccesoService;
     }
 
-    public function index($institucion_id)
+    public function index($institucion_id, Request $request)
     {
         $padres = Padre::select('padres.id AS padre_id', 'users.name', 'alumnos.id AS alumno_id', 'users.profile_photo_path AS foto')
             ->join('alumnos', 'alumnos.id', 'padres.alumno_id')
             ->where('alumnos.institucion_id', $institucion_id)
             ->where('alumnos.exAlumno', 0)
             ->join('users', 'users.id', 'padres.user_id')
+            ->when($request->nombre, function($query, $nombre) {
+                $query->where('users.name', 'LIKE', '%'.$nombre.'%');
+            })
             ->orderBy('users.name')
             ->with(array(
                 'hijos' => function($query){
@@ -54,7 +58,7 @@ class PadreController extends Controller
         return Inertia::render('Padres/Index', [
             'institucion_id' => $institucion_id,
             'padres' => $padres,
-            'nombreProp' => '',
+            'nombreProp' => $request->nombre,
         ]);
     }
 

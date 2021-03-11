@@ -114,6 +114,20 @@
                                     </template>
                                 </table-data>
                             </tr>
+
+                            <tr>
+                                <table-data>
+                                    <template #td>
+                                        7
+                                    </template>
+                                </table-data>
+
+                                <table-data>
+                                    <template #td>
+                                        <inertia-link :href="route('alumnoEliminado.index', institucion_id)" class="hover:underline">Alumnos eliminados</inertia-link>
+                                    </template>
+                                </table-data>
+                            </tr>
                         </template>
                     </table-body>
                 </template>

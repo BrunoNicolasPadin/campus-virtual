@@ -18,8 +18,9 @@ class CreateAlumnosTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('institucion_id')->constrained('instituciones')->onDelete('cascade');
             $table->foreignId('division_id')->nullable()->constrained('divisiones')->onDelete('cascade');
-            $table->boolean('exAlumno');
-            $table->boolean('activado');
+            $table->boolean('exAlumno')->default(0);
+            $table->boolean('activado')->default(0);
+            $table->boolean('eliminado')->default(0);
             $table->timestamps();
         });
     }

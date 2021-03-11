@@ -13,6 +13,7 @@ class Alumno extends Model
     protected $fillable = [
         'exAlumno',
         'activado',
+        'eliminado',
     ];
     protected $guarded = [
         'user_id',

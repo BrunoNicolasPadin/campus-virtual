@@ -12,6 +12,7 @@ use App\Repositories\Alumnos\AlumnoRepository;
 use App\Repositories\Estructuras\DivisionRepository;
 use App\Services\ClaveDeAcceso\VerificarDivision;
 use App\Services\ClaveDeAcceso\VerificarInstitucion;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -43,14 +44,18 @@ class AlumnoController extends Controller
         $this->alumnoRepository = $alumnoRepository;
     }
 
-    public function index($institucion_id)
+    public function index($institucion_id, Request $request)
     {
         return Inertia::render('Alumnos/Index', [
             'institucion_id' => $institucion_id,
             'alumnos' => Alumno::select('alumnos.id', 'users.name', 'users.profile_photo_path')
                 ->where('institucion_id', $institucion_id)
                 ->where('alumnos.exAlumno', '0')
+                ->where('alumnos.eliminado', '0')
                 ->join('users', 'users.id', 'alumnos.user_id')
+                ->when($request->nombre, function($query, $nombre) {
+                    $query->where('users.name', 'LIKE', '%'.$nombre.'%');
+                })
                 ->orderBy('users.name')
                 ->paginate(20)
                 ->transform(function ($alumno) {
@@ -60,7 +65,7 @@ class AlumnoController extends Controller
                         'foto' => $alumno->profile_photo_path,
                     ];
                 }),
-            'nombreProp' => '',
+            'nombreProp' => $request->nombre,
         ]);
     }
 
@@ -85,8 +90,9 @@ class AlumnoController extends Controller
         if ($this->claveDeAccesoService->verificarClaveDeAcceso($request->claveDeAcceso, $request->division_id)) {
 
             $alumno = new Alumno();
-            $alumno->activado = '0';
-            $alumno->exAlumno = '0';
+            $alumno->activado = 0;
+            $alumno->exAlumno = 0;
+            /* $alumno->eliminado = 0; */
             $alumno->user()->associate(Auth::id());
             $alumno->institucion()->associate($institucion_id);
             $alumno->division()->associate($request->division_id);
@@ -155,15 +161,15 @@ class AlumnoController extends Controller
 
     public function destroy($institucion_id, $id)
     {
-        AlumnoDestroyJob::dispatch($id);
-
         $message = 'Alumno eliminado con éxito!';
 
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
+            AlumnoDestroyJob::dispatch($id);
             return redirect(route('alumnos.index', $institucion_id))->with(['successMessage' => $message]);
         }
 
         if (session('tipo') == 'Alumno') {
+            AlumnoDestroyJob::dispatch($id);
             $message = 'Te eliminaste con éxito!';
             session()->forget(['tipo', 'alumno_id', 'division_id', 'institucion_id']);
             return redirect(route('roles.mostrarCuentas'))->with(['successMessage' => $message]);
@@ -171,5 +177,11 @@ class AlumnoController extends Controller
         else {
             return back()->withErrors('Debe tener activado la cuenta que desea eliminar.');
         }
+    }
+
+    public function eliminacionDefinitiva($institucion_id, $id)
+    {
+        Alumno::destroy($id);
+        return redirect(route('alumnos.index', $institucion_id))->with(['successMessage' => 'Eliminación definitiva realizada con éxito!']);
     }
 }
