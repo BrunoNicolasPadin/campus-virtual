@@ -23,7 +23,7 @@
 
                         <template #contenido-video>
                             <div class="text-center relative" style="padding-top: 56.25%">
-                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/Pj-6xj8AkcI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </template>
                     </detalles-tutorial>
@@ -35,12 +35,6 @@
 
                         <template #informacion>
                             -Al eliminar la publicación se eliminarán los archivos y las respuestas para siempre. <br>
-                        </template>
-
-                        <template #contenido-video>
-                            <div class="text-center relative" style="padding-top: 56.25%">
-                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
                         </template>
                     </detalles-tutorial>
                 </template>

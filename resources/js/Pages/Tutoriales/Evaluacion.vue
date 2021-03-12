@@ -6,9 +6,9 @@
 
                 <template #lista-tutorial>
                     <li>1) <a class="hover:underline" href="#agregar-evaluacion">Agregar evaluación</a></li>
-                    <li>2) <a class="hover:underline" href="#agregar-archivo">Agregar archivo</a></li>
-                    <li>3) <a class="hover:underline" href="#agregar-correccion">Agregar corrección</a></li>
-                    <li>4) <a class="hover:underline" href="#agregar-entrega">Agregar entrega</a></li>
+                    <li>2) <a class="hover:underline" href="#agregar-archivo">Subir archivos</a></li>
+                    <li>3) <a class="hover:underline" href="#agregar-correccion">Calificar y subir corrección</a></li>
+                    <li>4) <a class="hover:underline" href="#agregar-entrega">Subir entrega</a></li>
                     <li>5) <a class="hover:underline" href="#ver-numeros">Números</a></li>
                     <li>6) <a class="hover:underline" href="#responder">Responder comentarios</a></li>
                 </template>
@@ -35,14 +35,14 @@
 
                         <template #contenido-video>
                             <div class="text-center relative" style="padding-top: 56.25%">
-                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/bChvZZgAT9o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </template>
                     </detalles-tutorial>
 
                     <detalles-tutorial id="agregar-archivo">
                         <template #titulo-sub-tutorial>
-                            Agregar archivo
+                            Subir archivos
                         </template>
 
                         <template #informacion>
@@ -58,7 +58,7 @@
 
                         <template #contenido-video>
                             <div class="text-center relative" style="padding-top: 56.25%">
-                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/m-rRdPhxadI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div> <br>
 
                             <a :href="'../storage/Tutoriales/Evaluacion/VistaAlumno.png'" target="_blank">
@@ -69,7 +69,7 @@
 
                     <detalles-tutorial id="agregar-correccion">
                         <template #titulo-sub-tutorial>
-                            Agregar corrección
+                            Calificar y subir corrección
                         </template>
 
                         <template #informacion>
@@ -84,14 +84,14 @@
 
                         <template #contenido-video>
                             <div class="text-center relative" style="padding-top: 56.25%">
-                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/PohNrm4XSK8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </template>
                     </detalles-tutorial>
 
                     <detalles-tutorial id="agregar-entrega">
                         <template #titulo-sub-tutorial>
-                            Agregar entrega
+                            Subir entrega
                         </template>
 
                         <template #informacion>
@@ -104,7 +104,7 @@
 
                         <template #contenido-video>
                             <div class="text-center relative" style="padding-top: 56.25%">
-                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/u1_foenvhz0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </template>
                     </detalles-tutorial>
@@ -116,7 +116,7 @@
 
                         <template #contenido-video>
                             <div class="text-center relative" style="padding-top: 56.25%">
-                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/-SEm9jTfrA4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </template>
                     </detalles-tutorial>
@@ -128,7 +128,7 @@
 
                         <template #contenido-video>
                             <div class="text-center relative" style="padding-top: 56.25%">
-                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/yAqEes3qjXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/foXT-sw2NEw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </template>
                     </detalles-tutorial>

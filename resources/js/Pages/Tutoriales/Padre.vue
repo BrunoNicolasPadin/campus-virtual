@@ -25,7 +25,7 @@
 
                         <template #contenido-video>
                             <div class="text-center relative" style="padding-top: 56.25%">
-                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/EMYcLxJjZek" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/eCj1Cd8n4HU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </template>
                     </detalles-tutorial>
