@@ -10,7 +10,7 @@ class EvaluacionObserver
 {
     public function created(Evaluacion $evaluacion)
     {
-        CrearEntregaJob::dispatch($evaluacion);
-        EnviarEmailNuevaEvaluacionJob::dispatch($evaluacion);
+        CrearEntregaJob::dispatch($evaluacion)->onQueue('entregas');
+        EnviarEmailNuevaEvaluacionJob::dispatch($evaluacion)->onQueue('entregas');
     }
 }

@@ -9,6 +9,6 @@ class InscripcionObserver
 {
     public function updated(Inscripcion $inscripcion)
     {
-        EnviarEmailActualizacionInscripcionJob::dispatch($inscripcion);
+        EnviarEmailActualizacionInscripcionJob::dispatch($inscripcion)->onQueue('inscripciones');
     }
 }

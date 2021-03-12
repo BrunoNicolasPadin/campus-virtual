@@ -9,6 +9,6 @@ class EntregaObserver
 {
     public function updated(Entrega $entrega)
     {
-        EnviarEmailActualizacionEntregaJob::dispatch($entrega);
+        EnviarEmailActualizacionEntregaJob::dispatch($entrega)->onQueue('entregas');
     }
 }

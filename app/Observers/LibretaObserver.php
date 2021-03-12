@@ -9,6 +9,6 @@ class LibretaObserver
 {
     public function updated(Calificacion $calificacion)
     {
-        EnviarEmailActualizacionLibretaJob::dispatch($calificacion);
+        EnviarEmailActualizacionLibretaJob::dispatch($calificacion)->onQueue('libretas');
     }
 }

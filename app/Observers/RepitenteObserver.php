@@ -9,13 +9,13 @@ class RepitenteObserver
 {
     public function created(Repitente $repitente)
     {
-        CrearLibretaRepitenteJob::dispatch($repitente);
+        CrearLibretaRepitenteJob::dispatch($repitente)->onQueue('libretas');
     }
 
     public function updated(Repitente $repitente)
     {
         if ($repitente->isDirty('division_id')) {
-            CrearLibretaRepitenteJob::dispatch($repitente);
+            CrearLibretaRepitenteJob::dispatch($repitente)->onQueue('libretas');
         }
     }
 }
