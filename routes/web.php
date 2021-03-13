@@ -52,6 +52,7 @@ use App\Http\Controllers\Materiales\MaterialController;
 use App\Http\Controllers\Muro\MuroArchivoController;
 use App\Http\Controllers\Muro\MuroController;
 use App\Http\Controllers\Muro\MuroRespuestaController;
+use App\Http\Controllers\Notificaciones\NotificacionController;
 use App\Http\Controllers\RegistrarUsuarioController;
 use App\Http\Controllers\Repitentes\RepitenteController;
 use App\Http\Controllers\Repitentes\RepitenteEstadisticaController;
@@ -112,6 +113,8 @@ Route::get('activar-docente/{id}', [ActivarCuentaController::class, 'activarDoce
 Route::get('activar-alumno/{id}', [ActivarCuentaController::class, 'activarAlumno'])->name('roles.activarAlumno');
 Route::get('activar-directivo/{id}', [ActivarCuentaController::class, 'activarDirectivo'])->name('roles.activarDirectivo');
 Route::get('activar-padre/{id}', [ActivarCuentaController::class, 'activarPadre'])->name('roles.activarPadre');
+
+Route::resource('notificaciones', NotificacionController::class);
 
 Route::get('buscador-de-instituciones', [BuscadorDeInstitucionesController::class, 'buscar'])->name('buscador_de_instituciones');
 Route::resource('instituciones', InstitucionController::class);

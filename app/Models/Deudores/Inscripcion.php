@@ -4,9 +4,12 @@ namespace App\Models\Deudores;
 
 use App\Models\Roles\Alumno;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Inscripcion extends Model
 {
+    use Notifiable;
+
     protected $table = 'inscripciones';
     protected $fillable = [
         'calificacion',

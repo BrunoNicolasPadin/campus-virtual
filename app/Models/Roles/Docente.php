@@ -5,9 +5,11 @@ namespace App\Models\Roles;
 use App\Models\Instituciones\Institucion;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Docente extends Model
 {
+    use Notifiable;
     protected $table = 'docentes';
     protected $fillable = [
         'activado',

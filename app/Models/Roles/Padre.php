@@ -4,9 +4,12 @@ namespace App\Models\Roles;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Padre extends Model
 {
+    use Notifiable;
+
     protected $table = 'padres';
     protected $fillable = [
         'activado',

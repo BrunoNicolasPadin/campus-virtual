@@ -148,12 +148,12 @@ class MesaController extends Controller
 
     public function update(StoreMesa $request, $institucion_id, $division_id, $asignatura_id, $id)
     {
-        Mesa::where('id', $id)
-            ->update([
-                'fechaHoraRealizacion' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraRealizacion),
-                'fechaHoraFinalizacion' => $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraFinalizacion),
-                'comentario' => $request->comentario,
-            ]);
+        $mesa = Mesa::findOrFail($id);
+        $mesa->fechaHoraRealizacion = $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraRealizacion);
+        $mesa->fechaHoraFinalizacion = $this->formatoService->cambiarFormatoParaGuardar($request->fechaHoraFinalizacion);
+        $mesa->comentario = $request->comentario;
+        $mesa->save();
+
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $id]))
             ->with(['successMessage' => 'Mesa actualizada con éxito!']);
     }

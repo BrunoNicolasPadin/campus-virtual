@@ -5,9 +5,12 @@ namespace App\Models\Roles;
 use App\Models\Instituciones\Institucion;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Directivo extends Model
 {
+    use Notifiable;
+
     protected $table = 'directivos';
     protected $fillable = [
         'activado',

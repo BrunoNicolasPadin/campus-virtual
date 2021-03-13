@@ -6,9 +6,12 @@ use App\Models\Asignaturas\Asignatura;
 use App\Models\Estructuras\Division;
 use App\Models\Instituciones\Institucion;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Evaluacion extends Model
 {
+    use Notifiable;
+
     protected $table = 'evaluaciones';
     protected $fillable = [
         'titulo',
