@@ -85,12 +85,14 @@ class AlumnoDeudorController extends Controller
     {
         $asignaturas = $this->asignaturaRepository->get($division_id);
         $asignaturasYaAdeudadas = AlumnoDeudor::select('asignatura_id')->where('alumno_id', $alumno_id)->get();
-        
+
         foreach ($asignaturasYaAdeudadas as $asignaturaYaAdeudada) {
             $key = $asignaturas->search(function($item) use ($asignaturaYaAdeudada) {
                 return $item->id == $asignaturaYaAdeudada->asignatura_id;
             });
-            $asignaturas->pull($key);
+            if (!($key  == null)) {
+                $asignaturas->pull($key);
+            }
         }
 
         return Inertia::render('Deudores/CreateAsignatura', [

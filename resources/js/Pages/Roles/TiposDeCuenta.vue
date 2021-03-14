@@ -26,7 +26,7 @@
                                     </template>
                                 </table-head>
 
-                                <table-head colspan="3">
+                                <table-head colspan="4">
                                     <template #th-titulo>
                                         Acciones
                                     </template>
@@ -50,10 +50,18 @@
                                         </template>
                                     </table-data>
 
-                                    <table-data>
+                                    <table-data v-if="directivo.activado">
                                         <template #td>
                                             <inertia-link class="hover:underline" :href="route('directivos.show', [directivo.institucion_id, directivo.id])">
                                                 Ver perfil
+                                            </inertia-link>
+                                        </template>
+                                    </table-data>
+
+                                    <table-data v-if="directivo.activado">
+                                        <template #td>
+                                            <inertia-link class="hover:underline" :href="route('notificaciones.index')">
+                                                Ver notificaciones
                                             </inertia-link>
                                         </template>
                                     </table-data>
@@ -103,7 +111,7 @@
                                     </template>
                                 </table-head>
 
-                                <table-head colspan="3">
+                                <table-head colspan="4">
                                     <template #th-titulo>
                                         Acciones
                                     </template>
@@ -127,10 +135,18 @@
                                         </template>
                                     </table-data>
 
-                                    <table-data>
+                                    <table-data v-if="docente.activado">
                                         <template #td>
                                             <inertia-link class="hover:underline" :href="route('docentes.show', [docente.institucion_id, docente.id])">
                                                 Ver tu perfil
+                                            </inertia-link>
+                                        </template>
+                                    </table-data>
+
+                                    <table-data v-if="docente.activado">
+                                        <template #td>
+                                            <inertia-link class="hover:underline" :href="route('notificaciones.index')">
+                                                Ver notificaciones
                                             </inertia-link>
                                         </template>
                                     </table-data>
@@ -180,7 +196,7 @@
                                     </template>
                                 </table-head>
 
-                                <table-head colspan="3">
+                                <table-head colspan="4">
                                     <template #th-titulo>
                                         Acciones
                                     </template>
@@ -204,10 +220,18 @@
                                         </template>
                                     </table-data>
 
-                                    <table-data>
+                                    <table-data v-if="alumno.activado">
                                         <template #td>
                                             <inertia-link class="hover:underline" :href="route('alumnos.show', [alumno.institucion_id, alumno.id])">
                                                 Ver tu perfil
+                                            </inertia-link>
+                                        </template>
+                                    </table-data>
+
+                                    <table-data v-if="alumno.activado">
+                                        <template #td>
+                                            <inertia-link class="hover:underline" :href="route('notificaciones.index')">
+                                                Ver notificaciones
                                             </inertia-link>
                                         </template>
                                     </table-data>
@@ -257,7 +281,7 @@
                                     </template>
                                 </table-head>
 
-                                <table-head colspan="3">
+                                <table-head colspan="4">
                                     <template #th-titulo>
                                         Acciones
                                     </template>
@@ -275,7 +299,7 @@
                                         </template>
                                     </table-data>
 
-                                    <table-data>
+                                    <table-data v-if="padre.activado">
                                         <template #td>
                                             <inertia-link class="hover:underline" :href="route('alumnos.show', [padre.hijos.institucion_id, padre.hijos.id])">
                                                 Ver perfil de {{ padre.hijos.user.name }}
@@ -283,10 +307,10 @@
                                         </template>
                                     </table-data>
 
-                                    <table-data>
+                                    <table-data v-if="padre.activado">
                                         <template #td>
-                                            <inertia-link class="hover:underline" :href="route('padres.show', [padre.hijos.institucion_id, padre.id])">
-                                                Ver tu perfil
+                                            <inertia-link class="hover:underline" :href="route('notificaciones.index')">
+                                                Ver notificaciones
                                             </inertia-link>
                                         </template>
                                     </table-data>

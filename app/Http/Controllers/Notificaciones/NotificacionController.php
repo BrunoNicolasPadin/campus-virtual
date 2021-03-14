@@ -3,81 +3,85 @@
 namespace App\Http\Controllers\Notificaciones;
 
 use App\Http\Controllers\Controller;
+use App\Models\Instituciones\Institucion;
 use App\Models\Roles\Alumno;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Roles\Directivo;
+use App\Models\Roles\Docente;
+use App\Models\Roles\Padre;
 use Inertia\Inertia;
 
 class NotificacionController extends Controller
 {
     public function index()
     {
-        $alumno = Alumno::where('user_id', 1)->first();
+        if (session('tipo') == 'Institucion') {
+            return $this->notificacionesInstituciones();
+        }
+        if (session('tipo') == 'Directivo') {
+            return $this->notificacionesDirectivos();
+        }
+        if (session('tipo') == 'Docente') {
+            return $this->notificacionesDocentes();
+        }
+        if (session('tipo') == 'Alumno') {
+            return $this->notificacionesAlumnos();
+        }
+        if (session('tipo') == 'Padre') {
+            return $this->notificacionesPadres();
+        }
+        redirect(route('inicio'));
+    }
+
+    public function notificacionesInstituciones()
+    {
+        $institucion = Institucion::findOrFail(session('institucion_id'));
 
         return Inertia::render('Notificaciones/Index', [
-            'notificaciones' => $alumno->notifications,
+            'notificaciones' => $institucion->unreadNotifications()->paginate(10),
         ]);
     }
 
-    public function create()
+    public function notificacionesDirectivos()
     {
-        //
+        $directivo = Directivo::findOrFail(session('tipo_id'));
+
+        return Inertia::render('Notificaciones/Index', [
+            'notificaciones' => $directivo->unreadNotifications()->paginate(10),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function notificacionesDocentes()
     {
-        //
+        $docente = Docente::findOrFail(session('tipo_id'));
+
+        return Inertia::render('Notificaciones/Index', [
+            'notificaciones' => $docente->unreadNotifications()->paginate(10),
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function notificacionesAlumnos()
     {
-        //
+        $alumno = Alumno::findOrFail(session('tipo_id'));
+
+        return Inertia::render('Notificaciones/Index', [
+            'notificaciones' => $alumno->unreadNotifications()->paginate(10),
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function notificacionesPadres()
     {
-        //
+        $padre = Padre::findOrFail(session('tipo_id'));
+
+        return Inertia::render('Notificaciones/Index', [
+            'notificaciones' => $padre->unreadNotifications()->paginate(10),
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function marcarComoLeida($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $alumno = Alumno::findOrFail(session('tipo_id'));
+        $alumno->unreadNotifications()->where('id', $id)->update(['read_at' => now()]);
+        return redirect(route('notificaciones.index'))
+        ->with(['successMessage' => 'Notificación marcada como leída con éxito!']);
     }
 }

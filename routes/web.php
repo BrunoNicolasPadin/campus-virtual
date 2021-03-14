@@ -114,7 +114,8 @@ Route::get('activar-alumno/{id}', [ActivarCuentaController::class, 'activarAlumn
 Route::get('activar-directivo/{id}', [ActivarCuentaController::class, 'activarDirectivo'])->name('roles.activarDirectivo');
 Route::get('activar-padre/{id}', [ActivarCuentaController::class, 'activarPadre'])->name('roles.activarPadre');
 
-Route::resource('notificaciones', NotificacionController::class);
+Route::get('notificaciones', [NotificacionController::class, 'index'])->name('notificaciones.index');
+Route::get('notificaciones/marcar-como-leida{id}', [NotificacionController::class, 'marcarComoLeida'])->name('notificaciones.marcar_como_leida');
 
 Route::get('buscador-de-instituciones', [BuscadorDeInstitucionesController::class, 'buscar'])->name('buscador_de_instituciones');
 Route::resource('instituciones', InstitucionController::class);

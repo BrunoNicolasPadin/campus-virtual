@@ -287,7 +287,7 @@
             },
 
             submit() {
-                if (confirm('Estas seguro de que desea inscribirse en esta mesa de examen?')) {
+                if (confirm('¿Estás seguro de que desea inscribirse en esta mesa de examen?')) {
                     this.$inertia.post(this.route('inscripciones.store', [this.institucion_id, this.division.id, this.asignatura.id, this.mesa.id]))
                 }
             },
