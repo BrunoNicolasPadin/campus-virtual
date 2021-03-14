@@ -41,7 +41,7 @@
                         </template>
 
                         <template #informacion>
-                            Si al editar un ciclo lectivo lo coloca como "activado" se desactivarán los otros.
+                            -Si al editar un ciclo lectivo lo coloca como "activado" se desactivarán los otros.
                         </template>
                     </detalles-tutorial>
 

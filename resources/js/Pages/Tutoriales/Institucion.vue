@@ -17,7 +17,7 @@
                         </template>
 
                         <template #informacion>
-                            Recomendación: anotar la clave de acceso para no olvidarsela.
+                            -Recomendación: anotar la clave de acceso para no olvidarsela. <br>
                         </template>
 
                         <template #contenido-video>
@@ -33,7 +33,7 @@
                         </template>
 
                         <template #informacion>
-                            En "Perfil institucional".
+                            -En "Perfil institucional". <br>
                         </template>
 
                         <template #contenido-video>
@@ -57,8 +57,9 @@
                         </template>
 
                         <template #informacion>
-                            En "Perfil institucional". <br>
-                            Si lo hace se borrara absolutamente todo y no se podrá recuperar.
+                            -En "Perfil institucional". <br>
+
+                            -Si lo hace se borrara absolutamente todo y no se podrá recuperar. <br>
                         </template>
 
                         <template #contenido-video>

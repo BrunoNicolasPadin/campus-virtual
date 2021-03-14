@@ -5,13 +5,13 @@
                 <template #titulo-tutorial>Soporte</template>
 
                 <template #lista-tutorial>
-                    <li>1) <a class="hover:underline" href="#contactarse">¿Como contactarte con nosotros si tienes un problema?</a></li>
+                    <li>1) <a class="hover:underline" href="#contactarse">¿Cómo contactarte con nosotros si tienes un problema?</a></li>
                 </template>
 
                 <template #detalles>
                     <detalles-tutorial id="contactarse">
                         <template #titulo-sub-tutorial>
-                            ¿Como contactarte con nosotros si tienes un problema?
+                            ¿Cómo contactarte con nosotros si tienes un problema?
                         </template>
 
                         <template #informacion>
