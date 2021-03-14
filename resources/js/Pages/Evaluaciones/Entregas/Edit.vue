@@ -53,7 +53,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Se puede dejar vacío (primera opción). Puede tardar ya que al calificarlo se envía un email al alumno y a sus padres de la calificación y el comentario.
+                                        Se puede dejar vacío (primera opción)
                                     </template>
                                 </info>
                             </div>
@@ -73,7 +73,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        No es obligatorio. Puede tardar ya que al calificarlo se envía un email al alumno y a sus padres de la calificación y el comentario.
+                                        No es obligatorio.
                                     </template>
                                 </info>
                             </div>

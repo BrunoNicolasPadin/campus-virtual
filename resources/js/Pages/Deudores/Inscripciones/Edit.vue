@@ -53,7 +53,7 @@
                                 
                                 <info>
                                     <template #info>
-                                        Se puede dejar vacío, poner cualquier numero con coma (ponga un punto en vez de la coma) o con 'Aprobado' y 'Desaprobado'.
+                                        Se puede dejar vacío.
                                     </template>
                                 </info>
                             </div>

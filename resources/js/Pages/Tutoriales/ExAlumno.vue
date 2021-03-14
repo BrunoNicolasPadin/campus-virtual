@@ -44,7 +44,7 @@
                             
                             -Recomendación: antes de volver a anotarlo en la división correspondiente, anote o saque una captura de pantalla de la libreta  
                             correspondiente al ciclo lectivo actualmente activad para así luego pasar las calificaciones nuevamente, no perderá nada más 
-                            que tiempo. Eso sí, le llegara un email por cada calificación ingresada al alumno y sus padres.
+                            que tiempo. Eso sí, le llegara una notificación por cada calificación ingresada al alumno y sus padres.
                         </template>
                     </detalles-tutorial>
                 </template>

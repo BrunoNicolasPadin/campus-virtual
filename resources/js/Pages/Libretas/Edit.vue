@@ -53,12 +53,6 @@
                                 </info>
                             </div>
                         </div>
-
-                        <info>
-                            <template #info>
-                                Puede tardar ya que al calificar se envía un email al alumno y a sus padres de la calificación.
-                            </template>
-                        </info>
                         <guardar></guardar>
 
                     </form>

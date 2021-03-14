@@ -57,10 +57,6 @@ use App\Http\Controllers\RegistrarUsuarioController;
 use App\Http\Controllers\Repitentes\RepitenteController;
 use App\Http\Controllers\Repitentes\RepitenteEstadisticaController;
 use App\Http\Controllers\Roles\ActivarCuentaController;
-use App\Http\Controllers\Roles\Buscadores\BuscadorAlumnoController;
-use App\Http\Controllers\Roles\Buscadores\BuscadorDirectivoController;
-use App\Http\Controllers\Roles\Buscadores\BuscadorDocenteController;
-use App\Http\Controllers\Roles\Buscadores\BuscadorPadreController;
 use App\Http\Controllers\Roles\DirectivoController;
 use App\Http\Controllers\Roles\PadreController;
 use App\Http\Controllers\Roles\RolController;
@@ -116,6 +112,7 @@ Route::get('activar-padre/{id}', [ActivarCuentaController::class, 'activarPadre'
 
 Route::get('notificaciones', [NotificacionController::class, 'index'])->name('notificaciones.index');
 Route::get('notificaciones/marcar-como-leida{id}', [NotificacionController::class, 'marcarComoLeida'])->name('notificaciones.marcar_como_leida');
+Route::get('notificaciones-para-padres', [NotificacionController::class, 'notificacionesParaPadres'])->name('notificaciones.para_padres');
 
 Route::get('buscador-de-instituciones', [BuscadorDeInstitucionesController::class, 'buscar'])->name('buscador_de_instituciones');
 Route::resource('instituciones', InstitucionController::class);

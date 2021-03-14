@@ -281,7 +281,7 @@
                                     </template>
                                 </table-head>
 
-                                <table-head colspan="4">
+                                <table-head colspan="5">
                                     <template #th-titulo>
                                         Acciones
                                     </template>
@@ -307,11 +307,31 @@
                                         </template>
                                     </table-data>
 
-                                    <table-data v-if="padre.activado">
+                                    <table-data v-else>
+                                        <template #td>
+                                            {{ padre.hijos.user.name }}
+                                        </template>
+                                    </table-data>
+
+                                    <table-data>
                                         <template #td>
                                             <inertia-link class="hover:underline" :href="route('notificaciones.index')">
-                                                Ver notificaciones
+                                                Ver tus notificaciones
                                             </inertia-link>
+                                        </template>
+                                    </table-data>
+
+                                    <table-data v-if="padre.activado">
+                                        <template #td>
+                                            <inertia-link class="hover:underline" :href="route('notificaciones.para_padres')">
+                                                Ver notificaciones de tu hijo/a
+                                            </inertia-link>
+                                        </template>
+                                    </table-data>
+
+                                    <table-data v-else>
+                                        <template #td>
+                                            Active esta cuenta si quiere ver sus notificaciones y su perfil
                                         </template>
                                     </table-data>
 

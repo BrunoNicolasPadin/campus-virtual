@@ -12,6 +12,11 @@ use Inertia\Inertia;
 
 class NotificacionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         if (session('tipo') == 'Institucion') {
@@ -74,6 +79,15 @@ class NotificacionController extends Controller
 
         return Inertia::render('Notificaciones/Index', [
             'notificaciones' => $padre->unreadNotifications()->paginate(10),
+        ]);
+    }
+
+    public function notificacionesParaPadres()
+    {
+        $alumno = Alumno::findOrFail(session('alumno_id'));
+
+        return Inertia::render('Notificaciones/ParaPadres', [
+            'notificaciones' => $alumno->notifications()->paginate(10),
         ]);
     }
 
