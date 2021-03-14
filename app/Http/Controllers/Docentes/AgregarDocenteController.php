@@ -20,7 +20,7 @@ class AgregarDocenteController extends Controller
     )
 
     {
-        $this->middleware('auth');
+        $this->middleware('auth'); 
         $this->middleware('institucionCorrespondiente');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivosDocentes');
