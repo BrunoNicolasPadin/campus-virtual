@@ -12,6 +12,8 @@ class CustomResetPasswordNotification extends Notification
 {
     use Queueable;
 
+    protected $token;
+
     public function __construct($token)
     {
         $this->token = $token;

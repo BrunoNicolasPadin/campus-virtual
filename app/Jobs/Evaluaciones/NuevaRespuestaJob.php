@@ -40,6 +40,7 @@ class NuevaRespuestaJob implements ShouldQueue
             ->join('users', 'users.id', 'evaluaciones_respuestas.user_id')
             ->findOrFail($this->respuesta->id);
 
+        $usuarioTipo = '';
         if (!($evaluacionRespuesta->user_id == $this->respuesta->user_id)) {
             if (Institucion::where('user_id', $evaluacionRespuesta->user_id)->exists()) {
                 $usuarioTipo = Institucion::where('user_id', $evaluacionRespuesta->user_id)->first();

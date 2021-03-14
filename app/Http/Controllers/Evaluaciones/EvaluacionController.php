@@ -72,6 +72,7 @@ class EvaluacionController extends Controller
 
     public function create($institucion_id, $division_id)
     {
+        $asignaturas = '';
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             $asignaturas = Asignatura::select('nombre', 'id')
                 ->where('division_id', $division_id)->get();
@@ -142,6 +143,7 @@ class EvaluacionController extends Controller
 
     public function edit($institucion_id, $division_id, $id)
     {
+        $asignaturas = '';
         if (session('tipo') == 'Institucion' || session('tipo') == 'Directivo') {
             $asignaturas = Asignatura::select('nombre', 'id')
                 ->where('division_id', $division_id)->get();

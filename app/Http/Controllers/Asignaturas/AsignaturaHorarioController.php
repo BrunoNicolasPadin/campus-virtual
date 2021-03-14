@@ -12,7 +12,7 @@ use Inertia\Inertia;
 
 class AsignaturaHorarioController extends Controller
 {
-    protected $divisionService;
+    protected $divisionRepository;
     protected $asignaturaRepository;
 
     public function __construct(

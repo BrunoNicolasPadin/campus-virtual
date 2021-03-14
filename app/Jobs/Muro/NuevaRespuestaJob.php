@@ -37,6 +37,7 @@ class NuevaRespuestaJob implements ShouldQueue
             ->join('divisiones', 'divisiones.id', 'muro.division_id')
             ->join('users', 'users.id', 'muro_respuestas.user_id')
             ->findOrFail($this->respuesta->id);
+        $usuarioTipo = '';
 
         if (!($muroRespuesta->user_id == $this->respuesta->user_id)) {
             if (Institucion::where('user_id', $muroRespuesta->user_id)->exists()) {
@@ -60,6 +61,5 @@ class NuevaRespuestaJob implements ShouldQueue
             }
             Notification::send($usuarioTipo, new NuevaRespuestaNotification($muroRespuesta));
         }
-        //Faltaria avisarles a todos los que estan en las respuestas que no sean ni el de la respuesta ni el del comentario pero que se jodan por metidos.
     }
 }

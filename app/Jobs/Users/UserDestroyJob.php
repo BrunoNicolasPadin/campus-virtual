@@ -58,7 +58,7 @@ class UserDestroyJob implements ShouldQueue
         if (Institucion::where('user_id', $this->user_id)->exists()) {
             $instituciones = Institucion::select('id')->where('user_id', $this->user_id)->get();
             foreach ($instituciones as $institucion) {
-                InstitucionDestroyJob::dispatch($inscripcion->id);
+                InstitucionDestroyJob::dispatch($institucion->id);
             }
         }
     }
