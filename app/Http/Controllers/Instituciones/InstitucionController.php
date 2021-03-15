@@ -116,7 +116,7 @@ class InstitucionController extends Controller
 
         if ($request->hasFile('archivo')) {
 
-            Storage::delete('public/PlanesDeEstudio/' . $institucion->planDeEstudio);
+            Storage::delete('PlanesDeEstudio/' . $institucion->planDeEstudio);
             $archivo = $request->file('archivo');
             $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
             $unique = substr(base64_encode(mt_rand()), 0, 15);

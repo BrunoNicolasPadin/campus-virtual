@@ -74,7 +74,7 @@
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <a 
-                            :href="'/storage/planesDeEstudio/' + institucion.planDeEstudio" 
+                            :href="'/planesDeEstudio/' + institucion.planDeEstudio" 
                             target="_blank" 
                             class="hover:underline hover:text-blue-500"
                             rel="noopener noreferrer">
