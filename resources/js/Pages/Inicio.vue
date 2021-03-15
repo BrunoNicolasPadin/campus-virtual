@@ -39,10 +39,6 @@
                                         Perfil
                                     </jet-dropdown-link>
 
-                                    <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
-                                        API Tokens
-                                    </jet-dropdown-link>
-
                                     <div class="border-t border-gray-100"></div>
 
                                     <!-- Authentication -->
@@ -87,10 +83,6 @@
                             Perfil
                         </jet-responsive-nav-link>
 
-                        <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
-                            API Tokens
-                        </jet-responsive-nav-link>
-
                         <!-- Authentication -->
                         <form method="POST" @submit.prevent="logout">
                             <jet-responsive-nav-link as="button">
@@ -124,7 +116,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="lg:text-center">
                         <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                            Servicios a $10 + IVA por alumno
+                            Servicios a $10 por alumno
                         </p>
                     </div>
             
