@@ -67,6 +67,7 @@ use App\Http\Controllers\TopNavController;
 use Composer\DependencyResolver\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::get('', [InicioController::class, 'mostrarInicio'])->name('inicio');
 
