@@ -14,10 +14,12 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.2.4",
+        "josiasmontag/laravel-recaptchav3": "^0.6.0",
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^1.6",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
+        "lukeraymonddowning/honey": "^0.3.1",
         "maatwebsite/excel": "^3.1",
         "tightenco/ziggy": "^0.9.4"
     },
