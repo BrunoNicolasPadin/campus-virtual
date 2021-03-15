@@ -49,13 +49,14 @@ class InstitucionController extends Controller
             $unique = substr(base64_encode(mt_rand()), 0, 15);
             $nombre = $fechaHora . '-' . $unique . '-' . $archivo->getClientOriginalName();
             $archivo->storeAs('public/PlanesDeEstudio', $nombre);
+            $path = $request->file('archivo')->storeAs('planesDeEstudio', $nombre, 's3');
         }
 
         $institucion = new Institucion();
         $institucion->numero = $this->verificarNull($request->numero);
         $institucion->fundacion = $this->verificarNull($request->fundacion);
         $institucion->historia = $this->verificarNull($request->historia);
-        $institucion->planDeEstudio = $nombre;
+        $institucion->planDeEstudio = $path;
         $institucion->claveDeAcceso = Hash::make($request->claveDeAcceso);
         $institucion->user()->associate(Auth::id());
         $institucion->save();
