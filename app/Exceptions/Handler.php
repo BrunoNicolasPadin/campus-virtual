@@ -7,14 +7,14 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    public function report(\Throwable $exception)
+    /* public function report(\Throwable $exception)
     {
         if (app()->bound('honeybadger') && $this->shouldReport($exception)) {
             app('honeybadger')->notify($exception, app('request'));
         }
 
         parent::report($exception);
-    }
+    } */
     /**
      * A list of the exception types that are not reported.
      *
