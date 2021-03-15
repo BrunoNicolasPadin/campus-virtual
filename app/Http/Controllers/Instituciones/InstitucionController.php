@@ -48,15 +48,14 @@ class InstitucionController extends Controller
             $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
             $unique = substr(base64_encode(mt_rand()), 0, 15);
             $nombre = $fechaHora . '-' . $unique . '-' . $archivo->getClientOriginalName();
-            $archivo->storeAs('public/PlanesDeEstudio', $nombre);
-            $path = $request->file('archivo')->store('planesDeEstudio', $nombre, 's3');
+            $archivo->storeAs('PlanesDeEstudio', $nombre, 's3');
         }
 
         $institucion = new Institucion();
         $institucion->numero = $this->verificarNull($request->numero);
         $institucion->fundacion = $this->verificarNull($request->fundacion);
         $institucion->historia = $this->verificarNull($request->historia);
-        $institucion->planDeEstudio = $path;
+        $institucion->planDeEstudio = $nombre;
         $institucion->claveDeAcceso = Hash::make($request->claveDeAcceso);
         $institucion->user()->associate(Auth::id());
         $institucion->save();
@@ -122,7 +121,7 @@ class InstitucionController extends Controller
             $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
             $unique = substr(base64_encode(mt_rand()), 0, 15);
             $nombre = $fechaHora . '-' . $unique . '-' . $archivo->getClientOriginalName();
-            $archivo->storeAs('public/PlanesDeEstudio', $nombre);
+            $archivo->storeAs('PlanesDeEstudio', $nombre, 's3');
             $institucion->planDeEstudio = $nombre;
         }
 
