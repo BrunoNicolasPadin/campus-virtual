@@ -61,6 +61,8 @@ class LoginController extends Controller
 
     public function desactivarCuentas($user)
     {
+        session(['tipo' => 'Persona']);
+
         Directivo::where('user_id', $user['id'])
         ->update([
             'activado' => 0,
