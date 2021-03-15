@@ -18,7 +18,8 @@ class VerificarSuscripcion
 
     public function handle(Request $request, Closure $next)
     {
-        $institucion = Institucion::select('pago')->findOrFail(session('institucion_id'));
+        $link = $this->ruta->obtenerRoute();
+        $institucion = Institucion::select('pago')->findOrFail($link[4]);
         if ($institucion->pago) {
             return $next($request);
         }
