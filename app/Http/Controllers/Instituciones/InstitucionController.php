@@ -49,7 +49,7 @@ class InstitucionController extends Controller
             $unique = substr(base64_encode(mt_rand()), 0, 15);
             $nombre = $fechaHora . '-' . $unique . '-' . $archivo->getClientOriginalName();
             $archivo->storeAs('public/PlanesDeEstudio', $nombre);
-            $path = $request->file('archivo')->storeAs('planesDeEstudio', $nombre, 's3');
+            $path = $request->file('archivo')->store('planesDeEstudio', $nombre, 's3');
         }
 
         $institucion = new Institucion();
