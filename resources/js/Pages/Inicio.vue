@@ -8,7 +8,7 @@
                     </div>
                     <div v-else>
                         <inertia-link :href="route('login.formulario')" class="text-lg text-indigo-800 font-bold hover:underline">Ingresar</inertia-link>
-                        <inertia-link :href="route('registrarse.formulario')" class="ml-4 text-lg text-indigo-800 font-bold hover:underline">Registrarse</inertia-link>
+                        <inertia-link :href="route('register')" class="ml-4 text-lg text-indigo-800 font-bold hover:underline">Registrarse</inertia-link>
                     </div>
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <div class="ml-3 relative">
