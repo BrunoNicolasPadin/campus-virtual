@@ -24,7 +24,6 @@ class RolController extends Controller
 
     public function anotarse($institucion_id)
     {
-        return dd($institucion_id);
         return Inertia::render('Roles/Anotarse', [
             'institucion_id' => $institucion_id,
         ]);
