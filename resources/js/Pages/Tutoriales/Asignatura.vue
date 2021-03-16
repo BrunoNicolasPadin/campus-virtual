@@ -41,8 +41,8 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Asignatura/Editar.png'" target="_blank">
-                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Asignatura/Editar.png'" class="border" alt="Editar" title="Editar" />
+                            <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Asignatura/Editar.png'" target="_blank">
+                                <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Asignatura/Editar.png'" class="border" alt="Editar" title="Editar" />
                             </a> <br>
                         </template>
                     </detalles-tutorial>

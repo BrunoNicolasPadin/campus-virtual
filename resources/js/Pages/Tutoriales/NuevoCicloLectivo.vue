@@ -40,8 +40,8 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Estructura/LimpiarDivision.png'" target="_blank">
-                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Estructura/LimpiarDivision.png'" class="border" alt="Limpiar Division" title="Limpiar Division" />
+                            <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Estructura/LimpiarDivision.png'" target="_blank">
+                                <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Estructura/LimpiarDivision.png'" class="border" alt="Limpiar Division" title="Limpiar Division" />
                             </a> <br>
 
                             <div class="text-center relative" style="padding-top: 56.25%">
@@ -99,8 +99,8 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/CicloLectivo/Ingresar.png'" target="_blank">
-                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/CicloLectivo/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
+                            <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/CicloLectivo/Ingresar.png'" target="_blank">
+                                <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/CicloLectivo/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
                             </a> <br>
 
                             <div class="text-center relative" style="padding-top: 56.25%">

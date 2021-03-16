@@ -42,8 +42,8 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Padre/Eliminar.png'" target="_blank">
-                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Padre/Eliminar.png'" class="border" alt="Eliminar" title="Eliminar" />
+                            <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Padre/Eliminar.png'" target="_blank">
+                                <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Padre/Eliminar.png'" class="border" alt="Eliminar" title="Eliminar" />
                             </a> <br>
                         </template>
                     </detalles-tutorial>
@@ -60,12 +60,12 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Directivo/Anotarse.png'" target="_blank">
-                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Directivo/Anotarse.png'" class="border" alt="Anotarse" title="Anotarse" />
+                            <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Directivo/Anotarse.png'" target="_blank">
+                                <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Directivo/Anotarse.png'" class="border" alt="Anotarse" title="Anotarse" />
                             </a> <br>
 
-                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Directivo/Anotarse_2.png'" target="_blank">
-                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Directivo/Anotarse_2.png'" class="border" alt="Anotarse_2" title="Anotarse_2" />
+                            <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Directivo/Anotarse_2.png'" target="_blank">
+                                <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Directivo/Anotarse_2.png'" class="border" alt="Anotarse_2" title="Anotarse_2" />
                             </a> <br>
                         </template>
                     </detalles-tutorial>
