@@ -63,8 +63,8 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'institucion/Eliminar.png'" target="_blank">
-                                <img :src="'institucion/Eliminar.png'" class="border" alt="Eliminar institucion" title="Eliminar institucion" />
+                            <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Eliminar.png'" target="_blank">
+                                <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Eliminar.png'" class="border" alt="Eliminar institucion" title="Eliminar institucion" />
                             </a>
                         </template>
                     </detalles-tutorial>
