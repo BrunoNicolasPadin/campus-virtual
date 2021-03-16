@@ -95,7 +95,7 @@
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
                                 <a
-                                :href="'/storage/mesas/archivos/' + archivo.archivo" 
+                                :href="'https://gescol.s3-sa-east-1.amazonaws.com/Mesas/Archivos/' + archivo.archivo" 
                                 target="_blank" 
                                 class="text-blue-500 hover:underline"
                                 rel="noopener noreferrer">

@@ -85,7 +85,7 @@
                             <span class="ml-2 flex-1 w-0 truncate">
                                 <a 
                                 v-if="tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' " 
-                                :href="'/storage/materiales/' + archivo.archivo" 
+                                :href="'/https://gescol.s3-sa-east-1.amazonaws.com/Materiales/' + archivo.archivo" 
                                 target="_blank" 
                                 class="text-blue-500 hover:underline"
                                 rel="noopener noreferrer">
@@ -101,7 +101,7 @@
                                 <span v-else class="text-gray-500">
                                     <a 
                                     v-if="archivo.visibilidad" 
-                                    :href="'/storage/materiales/' + archivo.archivo" 
+                                    :href="'/https://gescol.s3-sa-east-1.amazonaws.com/Materiales/' + archivo.archivo" 
                                     target="_blank" 
                                     class="text-blue-500 hover:underline"
                                     rel="noopener noreferrer">

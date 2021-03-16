@@ -45,8 +45,8 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../storage/Tutoriales/CicloLectivo/Ingresar.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/CicloLectivo/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/CicloLectivo/Ingresar.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/CicloLectivo/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
                             </a> <br>
 
                             <div class="text-center relative" style="padding-top: 56.25%">
@@ -69,12 +69,12 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../storage/Tutoriales/Institucion/Editar_1.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/Institucion/Editar_1.png'" class="border" alt="Editar_1" title="Editar_1" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Editar_1.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Editar_1.png'" class="border" alt="Editar_1" title="Editar_1" />
                             </a> <br>
 
-                            <a :href="'../storage/Tutoriales/FormaEvaluacion/Ingresar.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/FormaEvaluacion/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/FormaEvaluacion/Ingresar.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/FormaEvaluacion/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
                             </a> <br>
 
                             <div class="text-center relative" style="padding-top: 56.25%">
@@ -102,8 +102,8 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../storage/Tutoriales/Estructura/Ingresar.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/Estructura/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Estructura/Ingresar.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Estructura/Ingresar.png'" class="border" alt="Ingresar" title="Ingresar" />
                             </a> <br>
 
                             <div class="text-center relative" style="padding-top: 56.25%">

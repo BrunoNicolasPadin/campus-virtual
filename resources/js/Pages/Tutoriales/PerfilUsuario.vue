@@ -34,8 +34,8 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../storage/Tutoriales/Usuario/Eliminar.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/Usuario/Eliminar.png'" class="border" alt="Eliminar" title="Eliminar" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Usuario/Eliminar.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Usuario/Eliminar.png'" class="border" alt="Eliminar" title="Eliminar" />
                             </a> <br>
                         </template>
                     </detalles-tutorial>

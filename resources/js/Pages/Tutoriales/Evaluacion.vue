@@ -61,8 +61,8 @@
                                 <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/m-rRdPhxadI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div> <br>
 
-                            <a :href="'../storage/Tutoriales/Evaluacion/VistaAlumno.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/Evaluacion/VistaAlumno.png'" class="border" alt="VistaAlumno" title="VistaAlumno" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Evaluacion/VistaAlumno.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Evaluacion/VistaAlumno.png'" class="border" alt="VistaAlumno" title="VistaAlumno" />
                             </a> <br>
                         </template>
                     </detalles-tutorial>

@@ -76,7 +76,7 @@
                         <div class="w-0 flex-1 flex items-center">
                             <span v-if="archivo.visibilidad || tipo == 'Institucion' || tipo == 'Directivo' || tipo == 'Docente' " class="ml-2 flex-1 w-0 truncate">
                                 <a
-                                :href="'/storage/mesas/archivos/' + archivo.archivo" 
+                                :href="'/https://gescol.s3-sa-east-1.amazonaws.com/Mesas/Archivos/' + archivo.archivo" 
                                 target="_blank" 
                                 class="text-blue-500 hover:underline"
                                 rel="noopener noreferrer">
@@ -112,7 +112,7 @@
                     <li v-for="entrega in entregas" :key="entrega.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
-                                <a :href="'/storage/deudores/entregas/' + entrega.archivo" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline" rel="noopener noreferrer">
+                                <a :href="'/https://gescol.s3-sa-east-1.amazonaws.com/Deudores/Entregas/' + entrega.archivo" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline" rel="noopener noreferrer">
                                     {{ entrega.archivo }}
                                 </a>
                             </span>
@@ -148,7 +148,7 @@
                     <li v-for="correccion in correcciones" :key="correccion.id" class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                         <div class="w-0 flex-1 flex items-center">
                             <span class="ml-2 flex-1 w-0 truncate">
-                                <a :href="'/storage/deudores/correcciones/' + correccion.archivo" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline" rel="noopener noreferrer">
+                                <a :href="'/https://gescol.s3-sa-east-1.amazonaws.com/Deudores/Correcciones/' + correccion.archivo" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline" rel="noopener noreferrer">
                                     {{ correccion.archivo }}
                                 </a>
                             </span>

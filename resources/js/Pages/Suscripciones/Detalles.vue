@@ -49,8 +49,8 @@
                     <span class="text-black" id="ciclos-lectivos">Ciclos lectivos:</span>
                 </h1>
 
-                <a :href="'storage/detalles/cicloLectivo.png'" target="_blank">
-                    <img :src="'storage/detalles/CicloLectivo.png'" class="border" alt="Ciclo lectivo" title="Ciclo lectivo" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/cicloLectivo.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/CicloLectivo.png'" class="border" alt="Ciclo lectivo" title="Ciclo lectivo" />
                 </a>
 
                 <hr class="my-5">
@@ -61,12 +61,12 @@
                     <span class="text-black" id="estructura">Estructura:</span>
                 </h1>
 
-                <a :href="'storage/detalles/Estructura.png'" target="_blank">
-                    <img :src="'storage/detalles/Estructura.png'" class="border" alt="Estructura" title="Estructura" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Estructura.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Estructura.png'" class="border" alt="Estructura" title="Estructura" />
                 </a>
 
-                <a :href="'storage/detalles/EstructuraShow.png'" target="_blank">
-                    <img :src="'storage/detalles/EstructuraShow.png'" class="border" alt="Estructura" title="Estructura" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstructuraShow.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstructuraShow.png'" class="border" alt="Estructura" title="Estructura" />
                 </a>
 
                 <hr class="my-5">
@@ -77,28 +77,28 @@
                     <span id="evaluaciones-entregas-numeros">Evaluaciones, entregas y números:</span>
                 </h1>
 
-                <a :href="'storage/detalles/Evaluaciones.png'" target="_blank">
-                    <img :src="'storage/detalles/Evaluaciones.png'" class="border" alt="Evaluaciones" title="Evaluaciones" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Evaluaciones.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Evaluaciones.png'" class="border" alt="Evaluaciones" title="Evaluaciones" />
                 </a>
 
-                <a :href="'storage/detalles/EvaluacionesShow.png'" target="_blank">
-                    <img :src="'storage/detalles/EvaluacionesShow.png'" class="border" alt="Evaluaciones" title="Evaluaciones" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EvaluacionesShow.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EvaluacionesShow.png'" class="border" alt="Evaluaciones" title="Evaluaciones" />
                 </a>
 
-                <a :href="'storage/detalles/Entregas.png'" target="_blank">
-                    <img :src="'storage/detalles/Entregas.png'" class="border" alt="Entregas" title="Entregas" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Entregas.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Entregas.png'" class="border" alt="Entregas" title="Entregas" />
                 </a>
 
-                <a :href="'storage/detalles/EntregasShow.png'" target="_blank">
-                    <img :src="'storage/detalles/EntregasShow.png'" class="border" alt="Entregas" title="Entregas" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EntregasShow.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EntregasShow.png'" class="border" alt="Entregas" title="Entregas" />
                 </a>
 
-                <a :href="'storage/detalles/Numeros1.png'" target="_blank">
-                    <img :src="'storage/detalles/Numeros1.png'" class="border" alt="Numeros" title="Numeros" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Numeros1.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Numeros1.png'" class="border" alt="Numeros" title="Numeros" />
                 </a>
 
-                <a :href="'storage/detalles/Numeros2.png'" target="_blank">
-                    <img :src="'storage/detalles/Numeros2.png'" class="border" alt="Numeros" title="Numeros" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Numeros2.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Numeros2.png'" class="border" alt="Numeros" title="Numeros" />
                 </a>
 
                 <hr class="my-5">
@@ -109,12 +109,12 @@
                     <span class="text-black" id="materiales">Materiales:</span>
                 </h1>
 
-                <a :href="'storage/detalles/Grupos.png'" target="_blank">
-                    <img :src="'storage/detalles/Grupos.png'" class="border" alt="Grupos" title="Grupos" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Grupos.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Grupos.png'" class="border" alt="Grupos" title="Grupos" />
                 </a>
 
-                <a :href="'storage/detalles/GruposShow.png'" target="_blank">
-                    <img :src="'storage/detalles/GruposShow.png'" class="border" alt="Grupos" title="Grupos" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/GruposShow.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/GruposShow.png'" class="border" alt="Grupos" title="Grupos" />
                 </a>
 
                 <hr class="my-5">
@@ -125,8 +125,8 @@
                     <span class="text-black" id="libreta">Libreta:</span>
                 </h1>
 
-                <a :href="'storage/detalles/Libreta.png'" target="_blank">
-                    <img :src="'storage/detalles/Libreta.png'" class="border" alt="Libreta" title="Libreta" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Libreta.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Libreta.png'" class="border" alt="Libreta" title="Libreta" />
                 </a>
                 <hr class="my-5">
             </div>
@@ -136,24 +136,24 @@
                     <span class="text-black" id="estadisticas">Estadísticas división, asignatura, alumno, abandonos y repeticiones:</span>
                 </h1>
 
-                <a :href="'storage/detalles/EstadisticasDivision.png'" target="_blank">
-                    <img :src="'storage/detalles/EstadisticasDivision.png'" class="border" alt="Estadisticas Division" title="Estadisticas Division" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasDivision.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasDivision.png'" class="border" alt="Estadisticas Division" title="Estadisticas Division" />
                 </a>
 
-                <a :href="'storage/detalles/EstadisticasAsignatura.png'" target="_blank">
-                    <img :src="'storage/detalles/EstadisticasAsignatura.png'" class="border" alt="Estadisticas Asignatura" title="Estadisticas Asignatura" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAsignatura.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAsignatura.png'" class="border" alt="Estadisticas Asignatura" title="Estadisticas Asignatura" />
                 </a>
 
-                <a :href="'storage/detalles/EstadisticasAlumno.png'" target="_blank">
-                    <img :src="'storage/detalles/EstadisticasAlumno.png'" class="border" alt="Estadisticas Alumno" title="Estadisticas Alumno" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAlumno.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAlumno.png'" class="border" alt="Estadisticas Alumno" title="Estadisticas Alumno" />
                 </a>
 
-                <a :href="'storage/detalles/EstadisticasAbandonos.png'" target="_blank">
-                    <img :src="'storage/detalles/EstadisticasAbandonos.png'" class="border" alt="Estadisticas Abandonos" title="Estadisticas Abandonos" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAbandonos.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAbandonos.png'" class="border" alt="Estadisticas Abandonos" title="Estadisticas Abandonos" />
                 </a>
 
-                <a :href="'storage/detalles/EstadisticasRepetidores.png'" target="_blank">
-                    <img :src="'storage/detalles/EstadisticasRepetidores.png'" class="border" alt="Estadisticas Repetidores" title="Estadisticas Repetidores" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasRepetidores.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasRepetidores.png'" class="border" alt="Estadisticas Repetidores" title="Estadisticas Repetidores" />
                 </a>
 
                 <hr class="my-5">
@@ -164,8 +164,8 @@
                     <span class="text-black" id="calendario">Calendario:</span>
                 </h1>
 
-                <a :href="'storage/detalles/Calendario.png'" target="_blank">
-                    <img :src="'storage/detalles/Calendario.png'" class="border" alt="Calendario" title="Calendario" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Calendario.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Calendario.png'" class="border" alt="Calendario" title="Calendario" />
                 </a>
                 <hr class="my-5">
             </div>
@@ -175,16 +175,16 @@
                     <span class="text-black" id="asignaturas">Asignaturas y mesas para rendir:</span>
                 </h1>
 
-                <a :href="'storage/detalles/Asignaturas.png'" target="_blank">
-                    <img :src="'storage/detalles/Asignaturas.png'" class="border" alt="Asignaturas" title="Asignaturas" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Asignaturas.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Asignaturas.png'" class="border" alt="Asignaturas" title="Asignaturas" />
                 </a>
 
-                <a :href="'storage/detalles/Mesas.png'" target="_blank">
-                    <img :src="'storage/detalles/Mesas.png'" class="border" alt="Mesas" title="Mesas" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Mesas.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Mesas.png'" class="border" alt="Mesas" title="Mesas" />
                 </a>
 
-                <a :href="'storage/detalles/MesasShow.png'" target="_blank">
-                    <img :src="'storage/detalles/MesasShow.png'" class="border" alt="Mesas" title="Mesas" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MesasShow.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MesasShow.png'" class="border" alt="Mesas" title="Mesas" />
                 </a>
 
                 <hr class="my-5">
@@ -195,16 +195,16 @@
                     <span class="text-black" id="muro">Muro de la división, respuestas y archivos:</span>
                 </h1>
 
-                <a :href="'storage/detalles/Muro.png'" target="_blank">
-                    <img :src="'storage/detalles/Muro.png'" class="border" alt="Muro" title="Muro" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Muro.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Muro.png'" class="border" alt="Muro" title="Muro" />
                 </a>
 
-                <a :href="'storage/detalles/MuroArchivos.png'" target="_blank">
-                    <img :src="'storage/detalles/MuroArchivos.png'" class="border" alt="Muro Archivos" title="Muro Archivos" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MuroArchivos.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MuroArchivos.png'" class="border" alt="Muro Archivos" title="Muro Archivos" />
                 </a>
 
-                <a :href="'storage/detalles/MesasShow.png'" target="_blank">
-                    <img :src="'storage/detalles/MuroRespuestas.png'" class="border" alt="Muro Respuestas" title="Muro Respuestas" />
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MesasShow.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MuroRespuestas.png'" class="border" alt="Muro Respuestas" title="Muro Respuestas" />
                 </a>
 
                 <hr class="my-5">

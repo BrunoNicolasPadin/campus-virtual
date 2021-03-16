@@ -37,16 +37,16 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../storage/Tutoriales/Institucion/Editar_1.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/Institucion/Editar_1.png'" class="border" alt="Editar 1" title="Editar 1" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Editar_1.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Editar_1.png'" class="border" alt="Editar 1" title="Editar 1" />
                             </a> <br>
 
-                            <a :href="'../storage/Tutoriales/Institucion/Editar_2.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/Institucion/Editar_2.png'" class="border" alt="Editar 2" title="Editar 2" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Editar_2.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Editar_2.png'" class="border" alt="Editar 2" title="Editar 2" />
                             </a> <br>
 
-                            <a :href="'../storage/Tutoriales/Institucion/Editar_3.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/Institucion/Editar_3.png'" class="border" alt="Editar 3" title="Editar 3" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Editar_3.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Institucion/Editar_3.png'" class="border" alt="Editar 3" title="Editar 3" />
                             </a> <br>
                         </template>
                     </detalles-tutorial>

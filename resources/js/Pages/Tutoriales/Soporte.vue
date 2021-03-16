@@ -19,8 +19,8 @@
                         </template>
 
                         <template #contenido-video>
-                            <a :href="'../storage/Tutoriales/Soporte.png'" target="_blank">
-                                <img :src="'../storage/Tutoriales/Soporte.png'" class="border" alt="Soporte" title="Soporte" />
+                            <a :href="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Soporte.png'" target="_blank">
+                                <img :src="'../https://gescol.s3-sa-east-1.amazonaws.com/Tutoriales/Soporte.png'" class="border" alt="Soporte" title="Soporte" />
                             </a>
                         </template>
                     </detalles-tutorial>

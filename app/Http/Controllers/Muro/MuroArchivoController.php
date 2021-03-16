@@ -93,7 +93,7 @@ class MuroArchivoController extends Controller
     public function destroy($institucion_id, $division_id, $muro_id, $id)
     {
         $muroArchivo = MuroArchivo::findOrFail($id);
-        Storage::disk('s3')->delete('Muro/' . $muroArchivo->planDeEstudio);
+        Storage::disk('s3')->delete('Muro/' . $muroArchivo->archivo);
 
         MuroArchivo::destroy($id);
         return back()->with(['successMessage' => 'Archivo eliminado con éxito!']);
