@@ -74,7 +74,7 @@
                         </dt>
                         <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
                             <a 
-                            :href="'/planesDeEstudio/' + institucion.planDeEstudio" 
+                            :href="'https://gescol.s3-sa-east-1.amazonaws.com/PlanesDeEstudio/' + institucion.planDeEstudio" 
                             target="_blank" 
                             class="hover:underline hover:text-blue-500"
                             rel="noopener noreferrer">

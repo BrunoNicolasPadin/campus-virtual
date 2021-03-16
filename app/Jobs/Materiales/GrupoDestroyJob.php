@@ -4,7 +4,6 @@ namespace App\Jobs\Materiales;
 
 use App\Models\Materiales\Grupo;
 use App\Models\Materiales\Material;
-use App\Services\Archivos\EliminarGruposMateriales;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,7 +27,7 @@ class GrupoDestroyJob implements ShouldQueue
     {
         $materiales = Material::where('grupo_id', $this->grupo_id)->get();
         foreach ($materiales as $material) {
-            Storage::delete('public/Materiales/' . $material->archivo);
+            Storage::disk('s3')->delete('Materiales/' . $material->archivo);
         }
         Grupo::destroy($this->grupo_id);
         

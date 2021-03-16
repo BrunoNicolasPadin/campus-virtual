@@ -30,11 +30,11 @@ class EntregaDestroyJob implements ShouldQueue
         $correcciones = Correccion::where('entrega_id', $this->entrega_id)->get();
 
         foreach ($entregasArchivos as $entrega) {
-            Storage::delete('public/Evaluaciones/Entregas/' . $entrega->archivo);
+            Storage::disk('s3')->delete('Evaluaciones/Entregas/' . $entrega->archivo);
         }
 
         foreach ($correcciones as $correccion) {
-            Storage::delete('public/Evaluaciones/Correcciones/' . $correccion->archivo);
+            Storage::disk('s3')->delete('Evaluaciones/Correcciones/' . $correccion->archivo);
         }
 
         Entrega::destroy($this->entrega_id);

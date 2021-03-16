@@ -64,7 +64,7 @@ class MaterialController extends Controller
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $unique = substr(base64_encode(mt_rand()), 0, 15);
                 $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
-                $archivos[$i]->storeAs('public/Materiales', $nombre);
+                $archivos[$i]->storeAs('Materiales', $nombre, 's3');
 
                 $material = new Material();
                 $material->nombre = $request['nombre'][$i];
@@ -106,7 +106,7 @@ class MaterialController extends Controller
     public function destroy($institucion_id, $division_id, $grupo_id, $id)
     {
         $material = Material::findOrFail($id);
-        Storage::delete('public/Materiales/' . $material->archivo);
+        Storage::disk('s3')->delete('Materiales/' . $material->archivo);
 
         Material::destroy($id);
         return redirect(route('materiales.show', [$institucion_id, $division_id, $grupo_id]))

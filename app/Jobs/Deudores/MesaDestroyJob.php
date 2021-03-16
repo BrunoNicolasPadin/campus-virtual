@@ -28,7 +28,7 @@ class MesaDestroyJob implements ShouldQueue
         $archivos = MesaArchivo::where('mesa_id', $this->mesa_id)->get();
 
         foreach ($archivos as $archivo) {
-            Storage::delete('public/Mesas/Archivos/' . $archivo->archivo);
+            Storage::disk('s3')->delete('Mesas/Archivos/' . $archivo->archivo);
         }
 
         $inscripciones = Inscripcion::where('mesa_id', $this->mesa_id)->get();

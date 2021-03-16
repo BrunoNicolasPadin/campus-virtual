@@ -62,7 +62,7 @@ class MesaArchivoController extends Controller
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $unique = substr(base64_encode(mt_rand()), 0, 15);
                 $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
-                $archivos[$i]->storeAs('public/Mesas/Archivos', $nombre);
+                $archivos[$i]->storeAs('Mesas/Archivos', $nombre, 's3');
 
                 $mesaArchivo = new MesaArchivo();
                 $mesaArchivo->archivo = $nombre;
@@ -110,7 +110,7 @@ class MesaArchivoController extends Controller
     public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $id)
     {
         $mesaArchivo = MesaArchivo::findOrFail($id);
-        Storage::delete('public/Mesas/Archivos/' . $mesaArchivo->archivo);
+        Storage::disk('s3')->delete('Mesas/Archivos/' . $mesaArchivo->archivo);
 
         MesaArchivo::destroy($id);
         return redirect(route('mesas.show', [$institucion_id, $division_id, $asignatura_id, $mesa_id]))

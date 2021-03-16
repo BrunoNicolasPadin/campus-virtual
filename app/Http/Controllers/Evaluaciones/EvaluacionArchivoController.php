@@ -55,7 +55,7 @@ class EvaluacionArchivoController extends Controller
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $unique = substr(base64_encode(mt_rand()), 0, 15);
                 $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
-                $archivos[$i]->storeAs('public/Evaluaciones/Archivos', $nombre);
+                $archivos[$i]->storeAs('Evaluaciones/Archivos', $nombre, 's3');
 
                 $evaluacionArchivo = new Archivo();
                 $evaluacionArchivo->nombre = $request['nombre'][$i];
@@ -97,7 +97,7 @@ class EvaluacionArchivoController extends Controller
     public function destroy($institucion_id, $division_id, $evaluacion_id, $id)
     {
         $evaluacionArchivo = Archivo::findOrFail($id);
-        Storage::delete('public/Evaluaciones/Archivos/' . $evaluacionArchivo->archivo);
+        Storage::disk('s3')->delete('Evaluaciones/Archivos/' . $evaluacionArchivo->archivo);
 
         Archivo::destroy($id);
         return redirect(route('evaluaciones.show', [$institucion_id, $division_id, $evaluacion_id]))

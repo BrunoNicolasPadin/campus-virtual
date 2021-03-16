@@ -75,7 +75,7 @@ class MuroArchivoController extends Controller
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $unique = substr(base64_encode(mt_rand()), 0, 15);
                 $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
-                $archivos[$i]->storeAs('public/Muro', $nombre);
+                $archivos[$i]->storeAs('Muro', $nombre, 's3');
 
                 $archivo = new MuroArchivo();
                 $archivo->archivo = $nombre;
@@ -93,7 +93,7 @@ class MuroArchivoController extends Controller
     public function destroy($institucion_id, $division_id, $muro_id, $id)
     {
         $muroArchivo = MuroArchivo::findOrFail($id);
-        Storage::delete('public/Muro/' . $muroArchivo->archivo);
+        Storage::disk('s3')->delete('Muro/' . $muroArchivo->planDeEstudio);
 
         MuroArchivo::destroy($id);
         return back()->with(['successMessage' => 'Archivo eliminado con éxito!']);

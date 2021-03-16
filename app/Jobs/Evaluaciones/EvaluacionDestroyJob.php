@@ -28,7 +28,7 @@ class EvaluacionDestroyJob implements ShouldQueue
     {
         $archivos = Archivo::where('evaluacion_id', $this->evaluacion_id)->get();
         foreach ($archivos as $archivo) {
-            Storage::delete('public/Evaluaciones/Archivos/' . $archivo->archivo);
+            Storage::disk('s3')->delete('Evaluaciones/Archivos/' . $archivo->archivo);
         }
 
         $entregas = Entrega::where('evaluacion_id', $this->evaluacion_id)->get();

@@ -68,7 +68,7 @@ class RendirCorreccionController extends Controller
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $unique = substr(base64_encode(mt_rand()), 0, 15);
                 $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
-                $archivos[$i]->storeAs('public/Deudores/Correcciones', $nombre);
+                $archivos[$i]->storeAs('Deudores/Correcciones', $nombre, 's3');
 
                 $rendirCorreccion = new RendirCorreccion();
                 $rendirCorreccion->archivo = $nombre;
@@ -88,7 +88,7 @@ class RendirCorreccionController extends Controller
     public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id, $id)
     {
         $correccion = RendirCorreccion::findOrFail($id);
-        Storage::delete('public/Deudores/Correcciones/' . $correccion->archivo);
+        Storage::disk('s3')->delete('Deudores/Correcciones/' . $correccion->archivo);
 
         RendirCorreccion::destroy($id);
         return back()->with(['successMessage' => 'Archivo eliminado con éxito!']);

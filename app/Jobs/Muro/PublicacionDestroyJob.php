@@ -27,7 +27,7 @@ class PublicacionDestroyJob implements ShouldQueue
     {
         $archivos = MuroArchivo::where('muro_id', $this->publicacion_id)->get();
         foreach ($archivos as $archivo) {
-            Storage::delete('public/Muro/' . $archivo->archivo);
+            Storage::disk('s3')->delete('Muro/' . $archivo->archivo);
         }
         Muro::destroy($this->publicacion_id);
     }

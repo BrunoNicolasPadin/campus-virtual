@@ -30,11 +30,11 @@ class InscripcionDestroyJob implements ShouldQueue
         $correcciones = RendirCorreccion::where('inscripcion_id', $this->inscripcion_id)->get();
 
         foreach ($entregas as $entrega) {
-            Storage::delete('public/Deudores/Entregas/' . $entrega->archivo);
+            Storage::disk('s3')->delete('Deudores/Entregas/' . $entrega->archivo);
         }
 
         foreach ($correcciones as $correccion) {
-            Storage::delete('public/Deudores/Correcciones/' . $correccion->archivo);
+            Storage::disk('s3')->delete('Deudores/Correcciones/' . $correccion->archivo);
         }
 
         Inscripcion::destroy($this->inscripcion_id);

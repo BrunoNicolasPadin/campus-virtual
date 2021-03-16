@@ -70,7 +70,7 @@ class RendirEntregaController extends Controller
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $unique = substr(base64_encode(mt_rand()), 0, 15);
                 $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
-                $archivos[$i]->storeAs('public/Deudores/Entregas', $nombre);
+                $archivos[$i]->storeAs('Deudores/Entregas', $nombre, 's3');
 
                 $rendirEntrega = new RendirEntrega();
                 $rendirEntrega->archivo = $nombre;
@@ -90,7 +90,7 @@ class RendirEntregaController extends Controller
     public function destroy($institucion_id, $division_id, $asignatura_id, $mesa_id, $inscripcion_id, $id)
     {
         $entrega = RendirEntrega::findOrFail($id);
-        Storage::delete('public/Deudores/Entregas/' . $entrega->archivo);
+        Storage::disk('s3')->delete('Deudores/Entregas/' . $entrega->archivo);
 
         RendirEntrega::destroy($id);
         return back()->with(['successMessage' => 'Archivo eliminado con éxito!']);

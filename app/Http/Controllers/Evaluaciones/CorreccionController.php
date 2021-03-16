@@ -64,7 +64,7 @@ class CorreccionController extends Controller
                 $fechaHora = $this->obtenerFechaHoraService->obtenerFechaHora();
                 $unique = substr(base64_encode(mt_rand()), 0, 15);
                 $nombre = $fechaHora . '-' . $unique . '-' . $archivos[$i]->getClientOriginalName();
-                $archivos[$i]->storeAs('public/Evaluaciones/Correcciones', $nombre);
+                $archivos[$i]->storeAs('Evaluaciones/Correcciones', $nombre, 's3');
 
                 $correccion = new Correccion();
                 $correccion->archivo = $nombre;
@@ -84,7 +84,7 @@ class CorreccionController extends Controller
     public function destroy($institucion_id, $division_id, $evaluacion_id, $entrega_id, $id)
     {
         $correccion = Correccion::findOrFail($id);
-        Storage::delete('public/Evaluaciones/Correcciones/' . $correccion->archivo);
+        Storage::disk('s3')->delete('Evaluaciones/Correcciones/' . $correccion->archivo);
 
         Correccion::destroy($id);
         return back()->with(['successMessage' => 'Correccion eliminada con éxito!']);
