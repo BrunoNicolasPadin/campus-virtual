@@ -66,7 +66,7 @@
                             </span>
 
                             <span v-if="notificacion.type == 'App\\Notifications\\Deudores\\NuevaAsignaturaAdeudadaNotification'">
-                                Debes rendir <strong>{{ notificacion.data.asignatura }}</strong>. <br><br>
+                                Nueva asignatura adeudada: <strong>{{ notificacion.data.asignatura }}</strong>. <br><br>
                             </span>
 
                             <span v-if="notificacion.type == 'App\\Notifications\\Evaluaciones\\NuevoComentarioNotification'">
@@ -75,7 +75,11 @@
                             </span>
 
                             <span v-if="notificacion.type == 'App\\Notifications\\Muro\\NuevaRespuestaNotification'">
-                                <strong>{{ notificacion.data.usuario }}</strong> respondió tu publicación. <br><br>
+                                <strong>{{ notificacion.data.usuario }}</strong> respondió tu publicación - 
+                                <inertia-link 
+                                :href="route('muro-respuestas.index', [notificacion.data.institucion_id, notificacion.data.division_id, notificacion.data.muro_id])">
+                                    Ver
+                                </inertia-link> <br><br>
                             </span>
                         </div>
                         <div class="w-2/12 mt-2 sm:mt-0 sm:ml-4 justify-end">

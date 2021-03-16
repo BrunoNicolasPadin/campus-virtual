@@ -93,8 +93,63 @@ class NotificacionController extends Controller
 
     public function marcarComoLeida($id)
     {
+        if (session('tipo') == 'Institucion') {
+            return $this->marcarComoLeidaInstitucion($id);
+        }
+
+        if (session('tipo') == 'Directivo') {
+            return $this->marcarComoLeidaDirectivo($id);
+        }
+
+        if (session('tipo') == 'Docente') {
+            return $this->marcarComoLeidaDocente($id);
+        }
+
+        if (session('tipo') == 'Alumno') {
+            return $this->marcarComoLeidaAlumno($id);
+        }
+
+        if (session('tipo') == 'Padre') {
+            return $this->marcarComoLeidaPadre($id);
+        }
+    }
+
+    public function marcarComoLeidaInstitucion($id)
+    {
+        $institucion = Institucion::findOrFail(session('institucion_id'));
+        $institucion->unreadNotifications()->where('id', $id)->update(['read_at' => now()]);
+        return redirect(route('notificaciones.index'))
+        ->with(['successMessage' => 'Notificación marcada como leída con éxito!']);
+    }
+
+    public function marcarComoLeidaDirectivo($id)
+    {
+        $directivo = Directivo::findOrFail(session('tipo_id'));
+        $directivo->unreadNotifications()->where('id', $id)->update(['read_at' => now()]);
+        return redirect(route('notificaciones.index'))
+        ->with(['successMessage' => 'Notificación marcada como leída con éxito!']);
+    }
+
+    public function marcarComoLeidaDocente($id)
+    {
+        $docente = Docente::findOrFail(session('tipo_id'));
+        $docente->unreadNotifications()->where('id', $id)->update(['read_at' => now()]);
+        return redirect(route('notificaciones.index'))
+        ->with(['successMessage' => 'Notificación marcada como leída con éxito!']);
+    }
+
+    public function marcarComoLeidaAlumno($id)
+    {
         $alumno = Alumno::findOrFail(session('tipo_id'));
         $alumno->unreadNotifications()->where('id', $id)->update(['read_at' => now()]);
+        return redirect(route('notificaciones.index'))
+        ->with(['successMessage' => 'Notificación marcada como leída con éxito!']);
+    }
+
+    public function marcarComoLeidaPadre($id)
+    {
+        $padre = Padre::findOrFail(session('tipo_id'));
+        $padre->unreadNotifications()->where('id', $id)->update(['read_at' => now()]);
         return redirect(route('notificaciones.index'))
         ->with(['successMessage' => 'Notificación marcada como leída con éxito!']);
     }

@@ -32,7 +32,7 @@ class NuevaRespuestaJob implements ShouldQueue
 
     public function handle()
     {
-        $muroRespuesta = MuroRespuesta::select('muro.user_id', 'users.name', 'muro_respuestas.muro_id', 'divisiones.institucion_id')
+        $muroRespuesta = MuroRespuesta::select('muro.user_id', 'users.name', 'muro_respuestas.muro_id', 'muro.division_id', 'divisiones.institucion_id')
             ->join('muro', 'muro.id', 'muro_respuestas.muro_id')
             ->join('divisiones', 'divisiones.id', 'muro.division_id')
             ->join('users', 'users.id', 'muro_respuestas.user_id')

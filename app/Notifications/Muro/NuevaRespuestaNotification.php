@@ -28,6 +28,8 @@ class NuevaRespuestaNotification extends Notification
         return [
             'usuario' => $this->respuesta->name,
             'muro_id' => $this->respuesta->muro_id,
+            'division_id' => $this->respuesta->division_id,
+            'institucion_id' => $this->respuesta->institucion_id,
         ];
     }
 }

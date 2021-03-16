@@ -4,9 +4,12 @@ namespace App\Models\Instituciones;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Institucion extends Model
 {
+    use Notifiable;
+
     protected $table = 'instituciones';
     protected $fillable = [
         'numero',
