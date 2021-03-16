@@ -31,10 +31,9 @@ class NuevaPublicacionJob implements ShouldQueue
             ->findOrFail($this->muro->id);
         
         $alumnos = Alumno::where('division_id', $this->muro->division_id)->get();
-        $key = $alumnos->search(function($alumno) use($muro) {
-            return $alumno->user_id == $muro->user_id;
+        $alumnos = $alumnos->filter(function($item) use($muro) {
+            return $item->user_id != $muro->user_id;
         });
-        $alumnos->pull($key);
         Notification::send($alumnos, new NuevaPublicacionNotification($muro));
     }
 }
