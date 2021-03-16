@@ -1047,16 +1047,16 @@
         },
         {
             "name": "enlightn/enlightn",
-            "version": "v1.18.0",
+            "version": "v1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/enlightn/enlightn.git",
-                "reference": "4e2eff5b60a47a522e8a16204024266031be7513"
+                "reference": "c0d1c773af0a4bf6321e108f23eb0b0c153e80c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/enlightn/enlightn/zipball/4e2eff5b60a47a522e8a16204024266031be7513",
-                "reference": "4e2eff5b60a47a522e8a16204024266031be7513",
+                "url": "https://api.github.com/repos/enlightn/enlightn/zipball/c0d1c773af0a4bf6321e108f23eb0b0c153e80c4",
+                "reference": "c0d1c773af0a4bf6321e108f23eb0b0c153e80c4",
                 "shasum": ""
             },
             "require": {
@@ -1124,9 +1124,9 @@
             "support": {
                 "docs": "https://www.laravel-enlightn.com/docs/",
                 "issues": "https://github.com/enlightn/enlightn/issues",
-                "source": "https://github.com/enlightn/enlightn/tree/v1.18.0"
+                "source": "https://github.com/enlightn/enlightn/tree/v1.19.0"
             },
-            "time": "2021-03-10T20:18:14+00:00"
+            "time": "2021-03-16T08:10:35+00:00"
         },
         {
             "name": "enlightn/security-checker",
@@ -1805,16 +1805,16 @@
         },
         {
             "name": "honeybadger-io/honeybadger-php",
-            "version": "v2.7.0",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybadger-io/honeybadger-php.git",
-                "reference": "142a3be374dc7d1653325fe2a3633e2f3600db90"
+                "reference": "e1384ac0ebcd7cb54742ba4a8ba4dabc4e168ee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybadger-io/honeybadger-php/zipball/142a3be374dc7d1653325fe2a3633e2f3600db90",
-                "reference": "142a3be374dc7d1653325fe2a3633e2f3600db90",
+                "url": "https://api.github.com/repos/honeybadger-io/honeybadger-php/zipball/e1384ac0ebcd7cb54742ba4a8ba4dabc4e168ee1",
+                "reference": "e1384ac0ebcd7cb54742ba4a8ba4dabc4e168ee1",
                 "shasum": ""
             },
             "require": {
@@ -1866,9 +1866,9 @@
             ],
             "support": {
                 "issues": "https://github.com/honeybadger-io/honeybadger-php/issues",
-                "source": "https://github.com/honeybadger-io/honeybadger-php/tree/v2.7.0"
+                "source": "https://github.com/honeybadger-io/honeybadger-php/tree/v2.8.0"
             },
-            "time": "2021-03-09T16:33:18+00:00"
+            "time": "2021-03-15T23:12:15+00:00"
         },
         {
             "name": "inertiajs/inertia-laravel",
@@ -2270,16 +2270,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.32.1",
+            "version": "v8.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "7c37b64f8153c16b6406f5c28cf37828ebbe8846"
+                "reference": "03efea900247ed7b9fe0056311ad555033c6e854"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/7c37b64f8153c16b6406f5c28cf37828ebbe8846",
-                "reference": "7c37b64f8153c16b6406f5c28cf37828ebbe8846",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/03efea900247ed7b9fe0056311ad555033c6e854",
+                "reference": "03efea900247ed7b9fe0056311ad555033c6e854",
                 "shasum": ""
             },
             "require": {
@@ -2434,7 +2434,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-03-09T15:37:45+00:00"
+            "time": "2021-03-16T14:21:03+00:00"
         },
         {
             "name": "laravel/jetstream",
@@ -3001,16 +3001,16 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "3.1.28",
+            "version": "3.1.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "71f27435091a78906276d00133f287ed67dd390e"
+                "reference": "1e567e6e19a04fd65b5876d5bc92f4015f09fab4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/71f27435091a78906276d00133f287ed67dd390e",
-                "reference": "71f27435091a78906276d00133f287ed67dd390e",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/1e567e6e19a04fd65b5876d5bc92f4015f09fab4",
+                "reference": "1e567e6e19a04fd65b5876d5bc92f4015f09fab4",
                 "shasum": ""
             },
             "require": {
@@ -3063,7 +3063,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Maatwebsite/Laravel-Excel/issues",
-                "source": "https://github.com/Maatwebsite/Laravel-Excel/tree/3.1.28"
+                "source": "https://github.com/Maatwebsite/Laravel-Excel/tree/3.1.29"
             },
             "funding": [
                 {
@@ -3075,7 +3075,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-10T16:36:04+00:00"
+            "time": "2021-03-16T11:56:39+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -8367,16 +8367,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.9.2",
+            "version": "2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536"
+                "reference": "6ecda5217bf048088b891f7403b262906be5a957"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/df7933820090489623ce0be5e85c7e693638e536",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/6ecda5217bf048088b891f7403b262906be5a957",
+                "reference": "6ecda5217bf048088b891f7403b262906be5a957",
                 "shasum": ""
             },
             "require": {
@@ -8426,7 +8426,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.9.2"
+                "source": "https://github.com/filp/whoops/tree/2.10.0"
             },
             "funding": [
                 {
@@ -8434,7 +8434,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-24T12:00:00+00:00"
+            "time": "2021-03-16T12:00:00+00:00"
         },
         {
             "name": "laravel/sail",
