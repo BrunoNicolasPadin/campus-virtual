@@ -26,9 +26,10 @@
                         <li><a href="#materiales">4) Materiales</a></li>
                         <li><a href="#libreta">5) Libreta</a></li>
                         <li><a href="#estadisticas">6) Estadísticas</a></li>
-                        <li><a href="#calendario">7) Calendario</a></li>
-                        <li><a href="#asignaturas">8) Asignaturas y mesas</a></li>
-                        <li><a href="#muro">9) Muro</a></li>
+                        <li><a href="#repitentes-exalumnos">7) Repitentes y ex alumnos</a></li>
+                        <li><a href="#calendario">8) Calendario</a></li>
+                        <li><a href="#asignaturas">9) Asignaturas y mesas</a></li>
+                        <li><a href="#muro">10) Muro</a></li>
                     </ul>
                 </span>
 
@@ -45,11 +46,15 @@
             </div>
 
             <div class="my-2 container mx-auto px-4 sm:px-8 text-left">
-                <h1 class="text-2xl tracking-tight font-bold text-gray-900">
+                <h1 class="text-2xl tracking-tight font-semibold text-gray-900">
                     <span class="text-black" id="ciclos-lectivos">Ciclos lectivos:</span>
                 </h1>
 
-                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/cicloLectivo.png'" target="_blank">
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Puedes crear cuantos ciclos lectivos desees.
+                </p>
+
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/CicloLectivo.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/CicloLectivo.png'" class="border" alt="Ciclo lectivo" title="Ciclo lectivo" />
                 </a>
 
@@ -61,9 +66,17 @@
                     <span class="text-black" id="estructura">Estructura:</span>
                 </h1>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Puedes crear las divisiones que desees.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Estructura.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Estructura.png'" class="border" alt="Estructura" title="Estructura" />
                 </a>
+
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Este es el menu principal de cada división desde el cual podrás acceder a todos lados.
+                </p>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstructuraShow.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstructuraShow.png'" class="border" alt="Estructura" title="Estructura" />
@@ -77,25 +90,46 @@
                     <span id="evaluaciones-entregas-numeros">Evaluaciones, entregas y números:</span>
                 </h1>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Cada docente podrá agregar las evaluaciones (examen, trabajo practico o tarea) que desee.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Evaluaciones.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Evaluaciones.png'" class="border" alt="Evaluaciones" title="Evaluaciones" />
                 </a>
+
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Este es el menu dentro de cada evaluación.
+                </p>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EvaluacionesShow.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EvaluacionesShow.png'" class="border" alt="Evaluaciones" title="Evaluaciones" />
                 </a>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -El listado de entregas de los alumnos.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Entregas.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Entregas.png'" class="border" alt="Entregas" title="Entregas" />
                 </a>
+
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Dentro de cada entrega se podrá calificar, subir entregas, correcciones y realizar comentarios.
+                </p>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EntregasShow.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EntregasShow.png'" class="border" alt="Entregas" title="Entregas" />
                 </a>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -En cada evaluación, el docente y los directivos podrán acceder al apartado "números" y verán distintos listados que resumen el estado 
+                    de las entregas y correcciones.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Numeros1.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Numeros1.png'" class="border" alt="Numeros" title="Numeros" />
-                </a>
+                </a><br><br>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Numeros2.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Numeros2.png'" class="border" alt="Numeros" title="Numeros" />
@@ -109,9 +143,13 @@
                     <span class="text-black" id="materiales">Materiales:</span>
                 </h1>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Podrá crear grupos de materiales y subir archivos (max. 20MB por archivo) para que los alumnos los puedan ver y descargar.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Grupos.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Grupos.png'" class="border" alt="Grupos" title="Grupos" />
-                </a>
+                </a><br><br>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/GruposShow.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/GruposShow.png'" class="border" alt="Grupos" title="Grupos" />
@@ -125,6 +163,10 @@
                     <span class="text-black" id="libreta">Libreta:</span>
                 </h1>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Cada alumno tiene una libreta por ciclo lectivo en el cual podras cargar las calificaciones.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Libreta.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Libreta.png'" class="border" alt="Libreta" title="Libreta" />
                 </a>
@@ -136,21 +178,83 @@
                     <span class="text-black" id="estadisticas">Estadísticas división, asignatura, alumno, abandonos y repeticiones:</span>
                 </h1>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Cada división tiene su apartado para ver las estadísticas, en la cual se promedian todas las calificaciones de los alumnos, 
+                    separadas por periodo (bimestre, trimestre, cuatrimestre) del ciclo lectivo seleccionado.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasDivision.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasDivision.png'" class="border" alt="Estadisticas Division" title="Estadisticas Division" />
                 </a>
+
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Para las divisiones que se califican con "palabras" como: excelente, muy bien, no satisfactorio, aprobado, desaprobado, etc...
+                </p>
+
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/PalabrasDivision.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/PalabrasDivision.png'" class="border" alt="Estadisticas Division" title="Estadisticas Division" />
+                </a>
+
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Sucede lo mismo que para las estadísticas de la división pero solo con una asignatura y accedible nada mas para el/los docentes de 
+                    la materia. También podrá ver las calificaciones de sus alumnos en su materia.
+                </p>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAsignatura.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAsignatura.png'" class="border" alt="Estadisticas Asignatura" title="Estadisticas Asignatura" />
                 </a>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Para las asignaturas que se califican con "palabras"
+                </p>
+
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/PalabrasAsignatura.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/PalabrasAsignatura.png'" class="border" alt="Estadisticas Asignatura" title="Estadisticas Asignatura" />
+                </a>
+
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Los alumnos podrán ver su promedio por periodo.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAlumno.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAlumno.png'" class="border" alt="Estadisticas Alumno" title="Estadisticas Alumno" />
                 </a>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Para los alumnos que las calificaciones en la libreta son con palabras
+                </p>
+
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/PalabrasAlumno.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/PalabrasAlumno.png'" class="border" alt="Estadisticas Alumno" title="Estadisticas Alumno" />
+                </a>
+
+                <hr class="my-5">
+            </div>
+
+            <div class="my-2 container mx-auto px-4 sm:px-8 text-left">
+                <h1 class="text-2xl tracking-tight font-bold text-gray-900">
+                    <span class="text-black" id="repitentes-exalumnos">Repitentes y ex alumnos:</span>
+                </h1>
+
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Podrás cargar en una lista los alumnos que repitieron, terminaron el colegio, se cambiaron de escuela o se graduaron. <br><br>
+                </p>
+
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Repitentes.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Repitentes.png'" class="border" alt="Repitentes" title="Repitentes" />
+                </a><br><br>
+
+                <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/ExAlumnos.png'" target="_blank">
+                    <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/ExAlumnos.png'" class="border" alt="Ex Alumnos" title="Ex Alumnos" />
+                </a>
+
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Tendrás acceso a estadísticas para ex alumnos que abandonaron el colegio y de repitentes.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAbandonos.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasAbandonos.png'" class="border" alt="Estadisticas Abandonos" title="Estadisticas Abandonos" />
-                </a>
+                </a><br><br>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasRepetidores.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/EstadisticasRepetidores.png'" class="border" alt="Estadisticas Repetidores" title="Estadisticas Repetidores" />
@@ -164,6 +268,10 @@
                     <span class="text-black" id="calendario">Calendario:</span>
                 </h1>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Todos contarán con un calendario especial para cada tipo de cuenta.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Calendario.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Calendario.png'" class="border" alt="Calendario" title="Calendario" />
                 </a>
@@ -175,17 +283,22 @@
                     <span class="text-black" id="asignaturas">Asignaturas y mesas para rendir:</span>
                 </h1>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Le podrás informar a tus alumnos que materias se llevan, las mesas que hay para que puedan inscribirse y lo mismo que en cada 
+                    evaluación: subir su entrega, recibir correcciones, comentarios y la calificación.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Asignaturas.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Asignaturas.png'" class="border" alt="Asignaturas" title="Asignaturas" />
-                </a>
+                </a><br><br>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Mesas.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Mesas.png'" class="border" alt="Mesas" title="Mesas" />
-                </a>
+                </a><br><br>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MesasShow.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MesasShow.png'" class="border" alt="Mesas" title="Mesas" />
-                </a>
+                </a><br><br>
 
                 <hr class="my-5">
             </div>
@@ -195,17 +308,21 @@
                     <span class="text-black" id="muro">Muro de la división, respuestas y archivos:</span>
                 </h1>
 
+                <p class="my-4 text-gray-500 font-semibold text-lg">
+                    -Cada división contará con un muro en el cual podrán publicar todos lo que desean y asi agilizar la comunicación.
+                </p>
+
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Muro.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/Muro.png'" class="border" alt="Muro" title="Muro" />
-                </a>
+                </a><br><br>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MuroArchivos.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MuroArchivos.png'" class="border" alt="Muro Archivos" title="Muro Archivos" />
-                </a>
+                </a><br><br>
 
                 <a :href="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MesasShow.png'" target="_blank">
                     <img :src="'https://gescol.s3-sa-east-1.amazonaws.com/Detalles/MuroRespuestas.png'" class="border" alt="Muro Respuestas" title="Muro Respuestas" />
-                </a>
+                </a><br><br>
 
                 <hr class="my-5">
             </div>
