@@ -12,7 +12,6 @@ class Handler extends ExceptionHandler
         if (app()->bound('honeybadger') && $this->shouldReport($exception)) {
             app('honeybadger')->notify($exception, app('request'));
         }
-
         parent::report($exception);
     }
     /**

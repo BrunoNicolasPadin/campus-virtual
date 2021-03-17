@@ -64,10 +64,9 @@ use App\Http\Controllers\Roles\TipoCuentaController;
 use App\Http\Controllers\RolesDivision\AlumnoDivisionController;
 use App\Http\Controllers\RolesDivision\DocenteDivisionController;
 use App\Http\Controllers\TopNavController;
-use Composer\DependencyResolver\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('', [InicioController::class, 'mostrarInicio'])->name('inicio');
 
@@ -78,7 +77,7 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('login.aut
 
 Route::get('/registrarse', [RegistrarUsuarioController::class, 'mostrarFormulario'])->name('registrarse.formulario');
 
-Route::get('/email/verify', function () {
+/* Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
@@ -89,12 +88,13 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
-    $request->user->sendEmailVerificationNotification();
+    $request->user()->sendEmailVerificationNotification();
 
-    return back()->with('message', 'Email de verificación enviado!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+    return back()->with('message', 'Link de verificacion enviado');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send'); */
 
 Route::inertia('detalles', 'Suscripciones/Detalles')->name('suscripciones.detalles');
+
 
 Route::get('/dashboard', [DashboardController::class, 'mostrarDashboard'])->name('dashboard');
 
