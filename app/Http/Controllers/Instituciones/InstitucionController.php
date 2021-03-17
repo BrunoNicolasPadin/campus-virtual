@@ -64,7 +64,7 @@ class InstitucionController extends Controller
         session(['institucion_id' => $institucion->id]);
 
         return redirect(route('ciclos-lectivos.index', $institucion->id))
-            ->with(['successMessage' => 'Institución creada con éxito!']);
+            ->with(['successMessage' => 'Institución creada con éxito! Ahora espere la habilitación de su cuenta y su pago para continuar.']);
     }
 
     public function show($id)

@@ -21,6 +21,7 @@ class CicloLectivoController extends Controller
 
     {
         $this->middleware('auth');
+        $this->middleware('verificarSuscripcion')->except('index');
         $this->middleware('institucionCorrespondiente');
         $this->middleware('soloInstitucionesDirectivos');
         $this->middleware('cicloCorrespondiente')->only('edit', 'update', 'destroy');

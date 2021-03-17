@@ -98,134 +98,138 @@ Route::get('notificaciones-para-padres', [NotificacionController::class, 'notifi
 
 Route::get('buscador-de-instituciones', [BuscadorDeInstitucionesController::class, 'buscar'])->name('buscador_de_instituciones');
 Route::resource('instituciones', InstitucionController::class);
-Route::group(['prefix' => 'instituciones/{institucion_id}', 'middleware' => 'verificarSuscripcion'], function() {
+
+Route::prefix('instituciones/{institucion_id}')->group(function () {
     
     Route::resource('ciclos-lectivos', CicloLectivoController::class);
-    Route::get('anotarse', [RolController::class, 'anotarse'])->name('roles.anotarse');
-    Route::resource('roles', RolController::class);
-    Route::resource('directivos', DirectivoController::class);
-
-    Route::resource('docentes', DocenteController::class);
-    Route::prefix('docentes/{docente_id}')->group(function () {
-        Route::get('agregar-asignaturas', [AgregarDocenteController::class, 'createAsignaturaDocente'])->name('docentes.create_asignatura_docente');
-        Route::get('listar-asignaturas/{division_id}', [AgregarDocenteController::class, 'listarAsignaturas'])->name('docentes.listar_asignaturas');
-        Route::post('agregar-docente', [AgregarDocenteController::class, 'agregarDocente'])->name('docentes.agregarDocente');
-    });
-
-    Route::resource('alumnos', AlumnoController::class);
-
-    Route::get('alumnos-eliminados', [AlumnoEliminadoController::class, 'index'])->name('alumnoEliminado.index');
-    Route::get('alumnos-eliminados/{alumno_id}', [AlumnoEliminadoController::class, 'destroy'])->name('alumnoEliminado.destroy');
     
-    Route::get('verificar-clave-institucion', [AlumnoController::class, 'verificarClave'])->name('alumnos.verificar_clave_institucion');
-    Route::resource('padres', PadreController::class);
-    Route::get('verificar-clave', [PadreController::class, 'verificarClave'])->name('padres.verificar_clave_para_padres');
-    Route::prefix('alumnos/{alumno_id}')->group(function () {
-            
-        Route::resource('libretas', LibretaController::class);
-        Route::get('libretas/exportar/{ciclo_lectivo_id}', [ExportarLibretaController::class, 'exportarLibreta'])->name('libretas.exportar_una');
-
-        Route::resource('asignaturas-adeudadas', AlumnoDeudorController::class);
-        Route::get('asignaturas-adeudadas/{division_id}/create', [AlumnoDeudorController::class, 'createAsignatura'])->name('asignaturas_adeudadas.create_asignatura');
-
-        Route::get('estadisticas', [AlumnoEstadisticaController::class, 'mostrarCiclosLectivos'])->name('alumnos.mostrar_ciclos_lectivos');
-        Route::get('estadisticas/{ciclo_lectivo_id}', [AlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('alumnos.mostrar_estadisticas');
-    });
-
-    Route::resource('formas-evaluacion', FormaEvaluacionController::class);
-    Route::prefix('formas-evaluacion/{forma_evaluacion_id}')->group(function () {
+    Route::middleware('verificarSuscripcion')->group(function () {
         
-        Route::resource('formas-descripcion', FormaDescripcionController::class);
-    });
-
-    Route::get('listar-divisiones-alumnos', [ListarDivisionesController::class, 'paraAlumnos'])->name('listar_divisiones_alumnos');
-    Route::get('listar-divisiones-docentes', [ListarDivisionesController::class, 'paraDocentes'])->name('listar_divisiones_docentes');
-
-    Route::resource('divisiones', EstructuraController::class);
-    Route::prefix('divisiones/{division_id}')->group(function () {
-        
-        Route::resource('asignaturas', AsignaturaController::class);
-        Route::prefix('asignaturas/{asignatura_id}')->group(function () {
+        Route::resource('formas-evaluacion', FormaEvaluacionController::class);
+        Route::prefix('formas-evaluacion/{forma_evaluacion_id}')->group(function () {
             
-            Route::resource('asignaturas-docentes', AsignaturaDocenteController::class);
-            Route::resource('asignaturas-horarios', AsignaturaHorarioController::class);
-            Route::resource('mesas', MesaController::class);
-            Route::prefix('mesas/{mesa_id}')->group(function () {
+            Route::resource('formas-descripcion', FormaDescripcionController::class);
+        });
+        Route::get('anotarse', [RolController::class, 'anotarse'])->name('roles.anotarse');
+        Route::resource('roles', RolController::class);
+        Route::resource('directivos', DirectivoController::class);
+
+        Route::resource('docentes', DocenteController::class);
+        Route::prefix('docentes/{docente_id}')->group(function () {
+            Route::get('agregar-asignaturas', [AgregarDocenteController::class, 'createAsignaturaDocente'])->name('docentes.create_asignatura_docente');
+            Route::get('listar-asignaturas/{division_id}', [AgregarDocenteController::class, 'listarAsignaturas'])->name('docentes.listar_asignaturas');
+            Route::post('agregar-docente', [AgregarDocenteController::class, 'agregarDocente'])->name('docentes.agregarDocente');
+        });
+
+        Route::resource('alumnos', AlumnoController::class);
+
+        Route::get('alumnos-eliminados', [AlumnoEliminadoController::class, 'index'])->name('alumnoEliminado.index');
+        Route::get('alumnos-eliminados/{alumno_id}', [AlumnoEliminadoController::class, 'destroy'])->name('alumnoEliminado.destroy');
+        
+        Route::get('verificar-clave-institucion', [AlumnoController::class, 'verificarClave'])->name('alumnos.verificar_clave_institucion');
+        Route::resource('padres', PadreController::class);
+        Route::get('verificar-clave', [PadreController::class, 'verificarClave'])->name('padres.verificar_clave_para_padres');
+        Route::prefix('alumnos/{alumno_id}')->group(function () {
                 
-                Route::get('estadisticas', [MesaEstadisticaController::class, 'mostrarEstadisticas'])->name('mesas.estadisticas');
-                Route::resource('mesas-archivos', MesaArchivoController::class);
-                Route::resource('inscripciones', InscripcionController::class);
-                Route::prefix('inscripciones/{inscripcion_id}')->group(function () {
+            Route::resource('libretas', LibretaController::class);
+            Route::get('libretas/exportar/{ciclo_lectivo_id}', [ExportarLibretaController::class, 'exportarLibreta'])->name('libretas.exportar_una');
+
+            Route::resource('asignaturas-adeudadas', AlumnoDeudorController::class);
+            Route::get('asignaturas-adeudadas/{division_id}/create', [AlumnoDeudorController::class, 'createAsignatura'])->name('asignaturas_adeudadas.create_asignatura');
+
+            Route::get('estadisticas', [AlumnoEstadisticaController::class, 'mostrarCiclosLectivos'])->name('alumnos.mostrar_ciclos_lectivos');
+            Route::get('estadisticas/{ciclo_lectivo_id}', [AlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('alumnos.mostrar_estadisticas');
+        });
+
+        Route::get('listar-divisiones-alumnos', [ListarDivisionesController::class, 'paraAlumnos'])->name('listar_divisiones_alumnos');
+        Route::get('listar-divisiones-docentes', [ListarDivisionesController::class, 'paraDocentes'])->name('listar_divisiones_docentes');
+
+        Route::resource('divisiones', EstructuraController::class);
+        Route::prefix('divisiones/{division_id}')->group(function () {
+            
+            Route::resource('asignaturas', AsignaturaController::class);
+            Route::prefix('asignaturas/{asignatura_id}')->group(function () {
                 
-                    Route::resource('rendir-entregas', RendirEntregaController::class);
-                    Route::resource('rendir-correcciones', RendirCorreccionController::class);
-                    Route::resource('rendir-comentarios', RendirComentarioController::class);
+                Route::resource('asignaturas-docentes', AsignaturaDocenteController::class);
+                Route::resource('asignaturas-horarios', AsignaturaHorarioController::class);
+                Route::resource('mesas', MesaController::class);
+                Route::prefix('mesas/{mesa_id}')->group(function () {
+                    
+                    Route::get('estadisticas', [MesaEstadisticaController::class, 'mostrarEstadisticas'])->name('mesas.estadisticas');
+                    Route::resource('mesas-archivos', MesaArchivoController::class);
+                    Route::resource('inscripciones', InscripcionController::class);
+                    Route::prefix('inscripciones/{inscripcion_id}')->group(function () {
+                    
+                        Route::resource('rendir-entregas', RendirEntregaController::class);
+                        Route::resource('rendir-correcciones', RendirCorreccionController::class);
+                        Route::resource('rendir-comentarios', RendirComentarioController::class);
+                    });
+                });
+                Route::get('deudores', [AsignaturaDeudorController::class, 'mostrarDeudores'])->name('asignaturas.deudores');
+
+                Route::get('estadisticas', [AsignaturaEstadisticaController::class, 'mostrarEstadisticas'])->name('asignaturas.estadisticas');
+                Route::get('estadisticas/{ciclo_lectivo_id}', [AsignaturaEstadisticaController::class, 'mostrarPromedios'])->name('asignaturas.mostrar_promedios');
+            });
+
+            Route::get('alumnos', [AlumnoDivisionController::class, 'mostrarAlumnos'])->name('alumnosDivision.mostrar');
+            Route::get('{alumno_id}/sacarlo', [AlumnoDivisionController::class, 'sacarloDeLaDivision'])->name('alumnosDivision.sacarlo');
+            Route::get('alumnos/hacerlos-pasar', [AlumnoDivisionController::class, 'hacerlosPasar'])->name('alumnosDivision.hacerlos_pasar');
+            Route::post('alumnos/cambiarCurso', [AlumnoDivisionController::class, 'cambiarCurso'])->name('alumnosDivision.cambiar_curso');
+
+            Route::get('docentes', [DocenteDivisionController::class, 'mostrarDocentes'])->name('docentesDivision.mostrar');
+
+            Route::resource('evaluaciones', EvaluacionController::class);
+            Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
+            
+                Route::get('estadisticas', [EvaluacionEstadisticaController::class, 'mostrarEstadisticas'])->name('evaluaciones.estadisticas');
+                Route::resource('evaluaciones-archivos', EvaluacionArchivoController::class);
+                Route::resource('entregas', EntregaController::class);
+                Route::prefix('entregas/{entrega_id}')->group(function () {
+            
+                    Route::resource('entregas-archivos', EntregaArchivoController::class);
+                    Route::resource('correcciones', CorreccionController::class);
+                    Route::resource('entregas-comentarios', EntregaComentarioController::class);
+                });
+
+                Route::resource('evaluaciones-comentarios', EvaluacionComentarioController::class);
+                Route::prefix('evaluaciones-comentarios/{comentario_id}')->group(function () {
+                    Route::resource('evaluaciones-respuestas', EvaluacionRespuestaController::class);
                 });
             });
-            Route::get('deudores', [AsignaturaDeudorController::class, 'mostrarDeudores'])->name('asignaturas.deudores');
 
-            Route::get('estadisticas', [AsignaturaEstadisticaController::class, 'mostrarEstadisticas'])->name('asignaturas.estadisticas');
-            Route::get('estadisticas/{ciclo_lectivo_id}', [AsignaturaEstadisticaController::class, 'mostrarPromedios'])->name('asignaturas.mostrar_promedios');
-        });
-
-        Route::get('alumnos', [AlumnoDivisionController::class, 'mostrarAlumnos'])->name('alumnosDivision.mostrar');
-        Route::get('{alumno_id}/sacarlo', [AlumnoDivisionController::class, 'sacarloDeLaDivision'])->name('alumnosDivision.sacarlo');
-        Route::get('alumnos/hacerlos-pasar', [AlumnoDivisionController::class, 'hacerlosPasar'])->name('alumnosDivision.hacerlos_pasar');
-        Route::post('alumnos/cambiarCurso', [AlumnoDivisionController::class, 'cambiarCurso'])->name('alumnosDivision.cambiar_curso');
-
-        Route::get('docentes', [DocenteDivisionController::class, 'mostrarDocentes'])->name('docentesDivision.mostrar');
-
-        Route::resource('evaluaciones', EvaluacionController::class);
-        Route::prefix('evaluaciones/{evaluacion_id}')->group(function () {
-        
-            Route::get('estadisticas', [EvaluacionEstadisticaController::class, 'mostrarEstadisticas'])->name('evaluaciones.estadisticas');
-            Route::resource('evaluaciones-archivos', EvaluacionArchivoController::class);
-            Route::resource('entregas', EntregaController::class);
-            Route::prefix('entregas/{entrega_id}')->group(function () {
-        
-                Route::resource('entregas-archivos', EntregaArchivoController::class);
-                Route::resource('correcciones', CorreccionController::class);
-                Route::resource('entregas-comentarios', EntregaComentarioController::class);
+            Route::resource('materiales', GrupoController::class);
+            Route::prefix('materiales/{grupo_id}')->group(function () {
+            
+                Route::resource('materiales-archivos', MaterialController::class);
             });
 
-            Route::resource('evaluaciones-comentarios', EvaluacionComentarioController::class);
-            Route::prefix('evaluaciones-comentarios/{comentario_id}')->group(function () {
-                Route::resource('evaluaciones-respuestas', EvaluacionRespuestaController::class);
+            Route::resource('muro', MuroController::class);
+            Route::prefix('muro/{publicacion_id}')->group(function () {
+            
+                Route::resource('muro-archivos', MuroArchivoController::class);
+                Route::resource('muro-respuestas', MuroRespuestaController::class);
             });
+
+            Route::get('estadisticas', [EstructuraEstadisticaController::class, 'mostrarCiclosLectivos'])->name('divisiones.mostrar_ciclos_lectivos');
+            Route::get('estadisticas/{ciclo_lectivo_id}', [EstructuraEstadisticaController::class, 'mostrarEstadisticas'])->name('divisiones.mostrar_estadisticas');
         });
 
-        Route::resource('materiales', GrupoController::class);
-        Route::prefix('materiales/{grupo_id}')->group(function () {
-        
-            Route::resource('materiales-archivos', MaterialController::class);
-        });
+        Route::get('mostrar-divisiones', [LimpiarDivisionController::class, 'mostrarDivisiones'])->name('mostrar_divisiones');
+        Route::post('limpiar-divisiones', [LimpiarDivisionController::class, 'limpiarDivisiones'])->name('limpiar_divisiones');
 
-        Route::resource('muro', MuroController::class);
-        Route::prefix('muro/{publicacion_id}')->group(function () {
-        
-            Route::resource('muro-archivos', MuroArchivoController::class);
-            Route::resource('muro-respuestas', MuroRespuestaController::class);
-        });
+        Route::resource('repitentes', RepitenteController::class);
+        Route::get('repitentes/{alumno_id}/create', [RepitenteController::class, 'createRepitente'])->name('repitentes.create_repitente');
+        Route::get('repitentes-estadisticas', [RepitenteEstadisticaController::class, 'mostrarEstadisticas'])->name('repitentes.estadisticas');
 
-        Route::get('estadisticas', [EstructuraEstadisticaController::class, 'mostrarCiclosLectivos'])->name('divisiones.mostrar_ciclos_lectivos');
-        Route::get('estadisticas/{ciclo_lectivo_id}', [EstructuraEstadisticaController::class, 'mostrarEstadisticas'])->name('divisiones.mostrar_estadisticas');
+        Route::resource('exalumnos', ExAlumnoController::class);
+
+        Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.create_ex_alumno');
+        Route::get('exalumnos-estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
+
+        Route::get('calendario/instituciones/{year}/{mes}', [CalendarioInstitucionController::class, 'mostrarCalendario'])->name('calendarioInstituciones.mostrar');
+        Route::get('calendario/docentes/{year}/{mes}', [CalendarioDocenteController::class, 'mostrarCalendario'])->name('calendarioDocentes.mostrar');
+        Route::get('calendario/alumnos/{year}/{mes}', [CalendarioAlumnoController::class, 'mostrarCalendario'])->name('calendarioAlumnos.mostrar');
     });
-
-    Route::get('mostrar-divisiones', [LimpiarDivisionController::class, 'mostrarDivisiones'])->name('mostrar_divisiones');
-    Route::post('limpiar-divisiones', [LimpiarDivisionController::class, 'limpiarDivisiones'])->name('limpiar_divisiones');
-
-    Route::resource('repitentes', RepitenteController::class);
-    Route::get('repitentes/{alumno_id}/create', [RepitenteController::class, 'createRepitente'])->name('repitentes.create_repitente');
-    Route::get('repitentes-estadisticas', [RepitenteEstadisticaController::class, 'mostrarEstadisticas'])->name('repitentes.estadisticas');
-
-    Route::resource('exalumnos', ExAlumnoController::class);
-
-    Route::get('exalumnos/{alumno_id}/create', [ExAlumnoController::class, 'createExAlumno'])->name('exalumnos.create_ex_alumno');
-    Route::get('exalumnos-estadisticas', [ExAlumnoEstadisticaController::class, 'mostrarEstadisticas'])->name('exalumnos.estadisticas');
-
-    Route::get('calendario/instituciones/{year}/{mes}', [CalendarioInstitucionController::class, 'mostrarCalendario'])->name('calendarioInstituciones.mostrar');
-    Route::get('calendario/docentes/{year}/{mes}', [CalendarioDocenteController::class, 'mostrarCalendario'])->name('calendarioDocentes.mostrar');
-    Route::get('calendario/alumnos/{year}/{mes}', [CalendarioAlumnoController::class, 'mostrarCalendario'])->name('calendarioAlumnos.mostrar');
 });
 
 Route::inertia('/tutoriales', 'Tutoriales/Principal')->name('tutoriales');
