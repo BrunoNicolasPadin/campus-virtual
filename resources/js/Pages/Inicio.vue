@@ -116,7 +116,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="lg:text-center">
                         <p class="mt-2 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl">
-                            Servicios a $10 por alumno
+                            Servicios a $15 por alumno
                         </p>
                     </div>
             
@@ -248,10 +248,6 @@
             </div>
 
             <div class="my-2 container mx-auto px-4 sm:px-8 text-center">
-                <!-- <div class="rounded-full px-4 py-2 border border-indigo-500">
-                    <span class="text-2xl font-bold text-indigo-500">Precio: $10 por alumno</span>
-                </div> <br> -->
-
                 <button type="button" class="border border-indigo-500 bg-indigo-500 text-white rounded-full px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-700 focus:outline-none focus:shadow-outline">
                     <inertia-link :href="route('suscripciones.detalles')">¿Quiere ver imágenes de lo descripto? Apriete aquí</inertia-link>
                 </button>
@@ -263,10 +259,6 @@
             </div>
 
             <div class="my-2 container mx-auto px-4 sm:px-8 text-center">
-                <!-- <div class="rounded-full px-4 py-2 border border-indigo-500">
-                    <span class="text-2xl font-bold text-indigo-500">Precio: $10 por alumno</span>
-                </div> <br> -->
-
                 <p class="mt-3 my-2 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
                     ¿Quiere adquirirlo? Vaya al formulario de contacto que se encuentra debajo y seleccione como asunto Quiero adquirir el servicio’ y 
                     escribanos para obtener el servicio, puede escribirnos también sus dudas que nosotros con gusto se la responderemos.
