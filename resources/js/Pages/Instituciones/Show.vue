@@ -94,7 +94,18 @@
                         </dd>
                     </div>
 
-                    <div v-show="tipo == 'Institucion' || tipo == 'Directivo' " class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' ">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Notificaciones
+                        </dt>
+                        <dd class="text-center mt-1 text-sm text-gray-500 sm:mt-0 sm:col-span-2">
+                            <inertia-link :href="route('notificaciones.index')" class="hover:underline hover:text-blue-500">
+                                Ver
+                            </inertia-link>
+                        </dd>
+                    </div>
+
+                    <div v-show="tipo == 'Institucion' || tipo == 'Directivo' " class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                             Limpiar divisiones
                         </dt>
@@ -107,7 +118,7 @@
                         </dd>
                     </div>
 
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' ">
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-show="tipo == 'Institucion' ">
                         <dt class="text-sm font-medium text-gray-500">
                             Acciones
                         </dt>

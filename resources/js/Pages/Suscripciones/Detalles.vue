@@ -385,6 +385,7 @@
                                             <option value="Adquirir servicio">Quiero adquirir el servicio</option>
                                             <option value="Problema">Tengo un problema</option>
                                             <option value="Error">Encontré un error</option>
+                                            <option value="Tengo una pregunta">Tengo una pregunta</option>
                                             <option value="Nueva idea">Tengo una idea para el sitio</option>
                                             <option value="Cambiar forma de pago">Quiero cambiar la forma/metodo de pago</option>
                                             <option value="Problema para pagar">No tengo dinero ahora mismo</option>
